@@ -3,6 +3,9 @@ FROM php:7.0-fpm
 
 MAINTAINER Maxence POUTORD <maxence.poutord@gmail.com>
 
+RUN usermod -u 1000 www-data
+RUN usermod -G staff www-data
+
 RUN apt-get update && apt-get install -y \
     git \
     unzip
