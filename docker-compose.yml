@@ -6,8 +6,8 @@ services:
         ports:
             - 3306:3306
         volumes:
-            - "./.data/db:/var/lib/mysql:rw"
-            - "./script:/stack:rw"
+            - "./.data/db:/var/lib/mysql"
+            - "./script:/stack"
         environment:
             MYSQL_ROOT_PASSWORD: root
         command:
@@ -42,11 +42,8 @@ services:
             - php
             - nginx
     phpmyadmin:
-        image: corbinu/docker-phpmyadmin
+        image: phpmyadmin/phpmyadmin
         ports:
             - "8080:80"
-        environment:
-            - MYSQL_USERNAME=root
-            - MYSQL_PASSWORD=root
         links:
-            - db:mysql
+            - db
