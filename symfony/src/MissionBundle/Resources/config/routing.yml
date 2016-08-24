@@ -1,0 +1,13 @@
+mission_test:
+    path:      /new
+    defaults:  { _controller: MissionBundle:Mission:new }
+
+mission_view:
+    path:      /view/{id}
+    defaults:
+        _controller: MissionBundle:Mission:view
+
+mission_edit:
+    path:      /edit/{id}
+    defaults:
+        _controller: MissionBundle:Mission:edit

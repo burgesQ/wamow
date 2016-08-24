@@ -1,0 +1,18 @@
+<h2>Mission editing</h2>
+
+{{ include("MissionBundle:Mission:form.html.twig") }}
+
+<form action="{{ path('mission_edit', {'id': mission.id}) }}" method="post">
+  {{ form(form) }}
+</form>
+
+
+<p>
+  You are editing a mission which already exist.
+</p>
+
+<p>
+  <a href="{{ path('mission_view', {'id': mission.id}) }}">
+    Retour à l'annonce
+  </a>
+</p>

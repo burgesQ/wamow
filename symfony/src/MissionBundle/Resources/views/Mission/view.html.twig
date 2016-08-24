@@ -1,0 +1,35 @@
+<h2>{{ mission.title }}</h2>
+
+{% if mission.image is not null %}
+  <img src="{{ mission.image }}">
+{% endif %}
+
+<div class="well">
+  <p>
+      <h4><br>Adress :</h4>
+      {{ mission.adress }}, {{ mission.city }}, <br>{{ mission.country }}
+      {% if mission.state is not null %}
+        , {{ mission.state }}<br>
+       {% endif %}
+      <h4><br>Daily Fees :</h4>
+      {{ mission.dailyFeesMin }} - {{ mission.dailyFeesMax }} / days
+      <h4><br>Duration :</h4>
+      {{ mission.duration }} mounth(s)
+      <h4><br>Beginning :</h4>
+      {{ mission.beginning|date('d/m/Y') }}
+
+
+
+      <h4><br>Language required :</h4>
+      <ul>
+        {% for language in listLanguage %}
+          <li>{{ language.name }}</li>
+        {% endfor %}
+      </ul>
+
+
+      <h4><br>Resume :</h4>
+      {{ mission.resume }}
+
+  </p>
+</div>
