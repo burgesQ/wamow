@@ -1,6 +1,6 @@
 <h2>Mission editing</h2>
 
-{{ include("MissionBundle:Mission:form.html.twig") }}
+{{ include("MissionBundle:Mission:new.html.twig") }}
 
 <form action="{{ path('mission_edit', {'id': mission.id}) }}" method="post">
   {{ form(form) }}

@@ -19,34 +19,35 @@ class MissionType extends AbstractType
         $builder
             ->add('title')
             ->add('resume')
-            ->add('adress')
+            ->add('address')
             ->add('city')
-            ->add('country', 'country')
+            ->add('country',          'country')
+            ->add('state')
             ->add('zipcode')
             ->add('minNumberUser')
             ->add('maxNumberUser')
-            ->add('confidentiality', 'checkbox', array(
+            ->add('confidentiality',  'checkbox', array(
                 'label'    => 'Does this mission has to be confidential?',
                 'required' => false,
               ))
             ->add('numberStep')
-            ->add('state')
-            ->add('language', 'entity', array(
+            ->add('language',         'entity', array(
                 'class' => 'MissionBundle:Language',
                 'property' => 'name',
+                'label'=>'Language(s) required:',
                 'multiple' => true,
-                'expanded' => true
+                'expanded' => true,
               ))
-            ->add('telecommuting', 'checkbox', array(
+            ->add('telecommuting',    'checkbox', array(
                 'label'    => 'Does this mission propose telecommuting?',
                 'required' => false,
               ))
-            ->add('dailyFeesMin')
             ->add('dailyFeesMax')
+            ->add('dailyFeesMin')
             ->add('duration')
-            ->add('beginning', 'date')
+            ->add('beginning',        'date')
             ->add('image')
-            ->add('save',      'submit')
+            ->add('save',             'submit')
         ;
     }
 

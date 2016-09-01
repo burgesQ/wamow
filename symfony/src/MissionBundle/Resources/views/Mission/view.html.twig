@@ -6,17 +6,18 @@
 
 <div class="well">
   <p>
-      <h4><br>Adress :</h4>
-      {{ mission.adress }}, {{ mission.city }}, <br>{{ mission.country }}
-      {% if mission.state is not null %}
-        , {{ mission.state }}<br>
-       {% endif %}
+      <h4><br>Address :</h4>
+      {{ mission.address }}, {{ mission.city }}, <br>{{ mission.country }}
+        {% if mission.state is not null %}
+          , {{ mission.state }}<br>
+        {% endif %}
       <h4><br>Daily Fees :</h4>
-      {{ mission.dailyFeesMin }} - {{ mission.dailyFeesMax }} / days
+        {{ mission.dailyFeesMin }} $/days min <br>
+        {{ mission.dailyFeesMax }} $/days max
       <h4><br>Duration :</h4>
-      {{ mission.duration }} mounth(s)
+        {{ mission.duration }} mounth(s)
       <h4><br>Beginning :</h4>
-      {{ mission.beginning|date('d/m/Y') }}
+        {{ mission.beginning|date('d/m/Y') }}
 
 
 

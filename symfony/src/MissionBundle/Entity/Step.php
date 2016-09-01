@@ -31,9 +31,9 @@ class Step
     /**
      * @var int
      *
-     * @ORM\Column(name="ID_position", type="smallint")
+     * @ORM\Column(name="position", type="smallint")
      */
-    private $iDPosition;
+    private $position;
 
     /**
      * @var \DateTime
@@ -117,7 +117,7 @@ class Step
      * @param integer $iDPosition
      * @return Step
      */
-    public function setIDPosition($iDPosition)
+    public function setPosition($iDPosition)
     {
         $this->iDPosition = $iDPosition;
 
@@ -129,7 +129,7 @@ class Step
      *
      * @return integer
      */
-    public function getIDPosition()
+    public function getPosition()
     {
         return $this->iDPosition;
     }

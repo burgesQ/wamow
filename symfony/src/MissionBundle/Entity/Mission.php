@@ -4,6 +4,8 @@ namespace MissionBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+
 
 
 /**
@@ -44,13 +46,13 @@ class Mission
     /**
      * @var string
      *
-     * @ORM\Column(name="adress", type="string", length=255)
+     * @ORM\Column(name="address", type="string", length=255)
      * @Assert\Regex(
      *     pattern="#^[0-9a-zA-Zéèêëçîïíàáâñńœôö]+(?:[\s-][a-zA-Zéèêëçîïíàáâñńœôö]+)*$#",
      *     match=true,
-     *     message="The adress must contain only letters numbers, point, comma or dash.")
+     *     message="The address must contain only letters numbers, point, comma or dash.")
      */
-    private $adress;
+    private $address;
 
     /**
      * @var string
@@ -169,7 +171,7 @@ class Mission
     /**
      * @var array
      *
-     * @ORM\Column(name="language", type="array")
+     * @ORM\ManyToMany(targetEntity="MissionBundle\Entity\Language", cascade={"persist"})
      */
     private $language;
 
@@ -186,7 +188,9 @@ class Mission
      * @ORM\Column(name="daily_fees_min", type="integer")
      * @Assert\Range(
      *      min = 1,
-     *      minMessage = "You need to fill this section",)
+     *      max = 99999,
+     *      minMessage = "You need to fill this field.",
+     * )
      */
     private $dailyFeesMin;
 
@@ -195,8 +199,10 @@ class Mission
      *
      * @ORM\Column(name="daily_fees_max", type="integer")
      * @Assert\Range(
-     *      min = 2,
-     *      minMessage = "You need to fill this section",)
+     *      min = 1,
+     *      max = 9999,
+     *      minMessage = "You need to fill this field.",
+     * )
      */
     private $dailyFeesMax;
 
@@ -241,6 +247,7 @@ class Mission
     public function __construct()
       {
         $this->creationDate = new \Datetime();
+        $this->language = new ArrayCollection();
       }
 
     /**
@@ -300,26 +307,26 @@ class Mission
     }
 
     /**
-     * Set adress
+     * Set address
      *
-     * @param string $adress
+     * @param string $address
      * @return Mission
      */
-    public function setAdress($adress)
+    public function setAddress($address)
     {
-        $this->adress = $adress;
+        $this->address = $address;
 
         return $this;
     }
 
     /**
-     * Get adress
+     * Get address
      *
      * @return string
      */
-    public function getAdress()
+    public function getAddress()
     {
-        return $this->adress;
+        return $this->address;
     }
 
     /**
@@ -610,6 +617,18 @@ class Mission
 
         return $this;
     }
+
+    public function addLanguage(Category $language)
+     {
+       $this->categories[] = $language;
+
+       return $this;
+     }
+
+     public function removeLanguage(Category $language)
+     {
+       $this->categories->removeElement($language);
+     }
 
     /**
      * Get language

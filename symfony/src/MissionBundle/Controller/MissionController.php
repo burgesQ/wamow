@@ -23,6 +23,17 @@ class MissionController extends Controller
     {
         $mission = new Mission();
         $mission->setCreationDate(new \DateTime());
+
+        $repository = $this
+          ->getDoctrine()
+          ->getManager()
+          ->getRepository('MissionBundle:Language')
+          ;
+        $listLanguage = $repository->findAll();
+        foreach ($listLanguage as $language) {
+          $mission->getLanguage()->add($language);
+        }
+
         $form = $this->get('form.factory')->create(new MissionType(), $mission);
         if ($form->handleRequest($request)->isValid())
         {
@@ -59,34 +70,35 @@ class MissionController extends Controller
       $form = $this->createFormBuilder($mission)
           ->add('title')
           ->add('resume')
-          ->add('adress')
+          ->add('address')
           ->add('city')
-          ->add('country', 'country')
+          ->add('country',          'country')
           ->add('zipcode')
           ->add('minNumberUser')
           ->add('maxNumberUser')
-          ->add('confidentiality', 'checkbox', array(
+          ->add('confidentiality',  'checkbox', array(
             'label'    => 'Does this mission has to be confidential?',
             'required' => false,
           ))
           ->add('numberStep')
           ->add('state')
-          /*->add('language', 'entity', array(
+          ->add('language',         'entity',   array(
             'class' => 'MissionBundle:Language',
             'property' => 'name',
+            'label'=>'Language(s) required:',
             'multiple' => true,
             'expanded' => true
-          ))*/
-          ->add('telecommuting', 'checkbox', array(
-          'label'    => 'Does this mission propose telecommuting?',
-          'required' => false,
+          ))
+          ->add('telecommuting',    'checkbox', array(
+            'label'    => 'Does this mission propose telecommuting?',
+            'required' => false,
           ))
           ->add('dailyFeesMin')
           ->add('dailyFeesMax')
           ->add('duration')
-          ->add('beginning', 'date')
+          ->add('beginning',        'date')
           ->add('image')
-          ->add('save',      'submit')
+          ->add('save',             'submit')
           ->getForm();
 
           $form->handleRequest($request);
@@ -120,7 +132,6 @@ class MissionController extends Controller
           }
 
       $listLanguage = $mission->getLanguage();
-
       return $this->render('MissionBundle:Mission:view.html.twig', array(
         'mission'           => $mission,
         'listLanguage'      => $listLanguage,
