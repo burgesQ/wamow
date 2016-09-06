@@ -1,0 +1,17 @@
+<p>
+	Mission nº
+	{{ mission.id}}
+
+
+	{% if step.position == 1 %}
+		<p>
+			MISSION BEGINNING
+		</p>
+	{% endif %}
+
+	<p>
+		Step {{ step.position }}	/	{{ mission.numberStep}}
+
+		<br><a href="{{ path('mission_step', {'id': mission.id}) }}"> next</a>
+	</p>
+</p>

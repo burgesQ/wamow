@@ -3,6 +3,8 @@
 namespace MissionBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Step
@@ -22,11 +24,10 @@ class Step
     private $id;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="ID_mission", type="integer")
+     * @ORM\ManyToOne(targetEntity="MissionBundle\Entity\Mission")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $iDMission;
+    private $mission;
 
     /**
      * @var int
@@ -77,6 +78,16 @@ class Step
      */
     private $status;
 
+    public function __construct()
+      {
+        $this->creationDate = new \Datetime();
+        $this->UpdateDate = new \DateTime();
+        $this->startDate = new \DateTime();
+        $this->endDate = new \DateTime();
+        $this->maxNumberTeam = 4;
+        $this->status = 0;
+        $this->position = 1;
+      }
 
     /**
      * Get id
@@ -88,50 +99,39 @@ class Step
         return $this->id;
     }
 
+    public function setMission($mission)
+    {
+        $this->mission = $mission;
+
+        return $this;
+    }
+
+    public function getMisison()
+    {
+        return $this->Mission;
+    }
+
     /**
-     * Set iDMission
+     * Set Position
      *
-     * @param integer $iDMission
+     * @param integer $Position
      * @return Step
      */
-    public function setIDMission($iDMission)
+    public function setPosition($position)
     {
-        $this->iDMission = $iDMission;
+        $this->position = $position;
 
         return $this;
     }
 
     /**
-     * Get iDMission
-     *
-     * @return integer
-     */
-    public function getIDMission()
-    {
-        return $this->iDMission;
-    }
-
-    /**
-     * Set iDPosition
-     *
-     * @param integer $iDPosition
-     * @return Step
-     */
-    public function setPosition($iDPosition)
-    {
-        $this->iDPosition = $iDPosition;
-
-        return $this;
-    }
-
-    /**
-     * Get iDPosition
+     * Get Position
      *
      * @return integer
      */
     public function getPosition()
     {
-        return $this->iDPosition;
+        return $this->position;
     }
 
     /**

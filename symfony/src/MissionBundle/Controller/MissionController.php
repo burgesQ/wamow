@@ -4,14 +4,13 @@ namespace MissionBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Response;
-use MissionBundle\Entity\Mission;
-use MissionBundle\Form\MissionType;
-use MissionBundle\Form\MissionEditType;
-use MissionBundle\Entity\Language;
-use MissionBundle\Form\LanguageType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpFoundation\Response;
+use MissionBundle\Entity\Language;
+use MissionBundle\Entity\Step;
+use MissionBundle\Entity\Mission;
+use MissionBundle\Form\MissionType;
 
 
 class MissionController extends Controller
@@ -42,8 +41,6 @@ class MissionController extends Controller
           $em->flush();
 
           $id = $mission->getid();
-
-          $request->getSession()->getFlashBag()->add('notice', 'Mission save');
           return $this->render('MissionBundle:Mission:registered.html.twig', array(
           'mission'  =>   $mission,
           'id'       =>   $id,
@@ -53,7 +50,7 @@ class MissionController extends Controller
 
       return $this->render('MissionBundle:Mission:new.html.twig', array(
       'form' => $form->createView(),
-    ));
+      ));
     }
 
     /*
@@ -136,5 +133,54 @@ class MissionController extends Controller
         'mission'           => $mission,
         'listLanguage'      => $listLanguage,
       ));
+    }
+
+    /*
+      Add step to a mission
+    */
+    public function stepAction($id)
+    {
+      $em = $this->getDoctrine()->getManager();
+      $mission = $em->getRepository('MissionBundle:Mission')->find($id);
+      $step = new Step();
+      $step->setMission($mission);
+      if (null === $mission) {
+        throw new NotFoundHttpException("The mission ".$id." doesn't exist.");
+      }
+
+      $listStep = $em
+      ->getRepository('MissionBundle:Step')
+      ->findBy(array('mission' => $mission))
+      ;
+      $nbStep = 0;
+      foreach ($listStep as $step) {
+        ++$nbStep;
+      }
+
+      if (!$listStep) {                 //If there's no step yet
+        $em->persist($step);
+        $em->flush($step);
+        return $this->render('MissionBundle:Mission:step.html.twig', array(
+          'mission'         => $mission,
+          'step'            => $step,
+        ));
+      }
+
+      else if ($mission->getNumberStep() == $nbStep) {  //If it's the last step
+        return new Response("Last step");
+      }
+
+      else {                            //Creation of new step
+        $step = new Step();
+        $step->setMission($mission);
+        $step->setPosition($nbStep + 1);
+        $em->persist($step);
+        $em->flush($step);
+        return $this->render('MissionBundle:Mission:step.html.twig', array(
+          'mission'         => $mission,
+          'step'            => $step,
+          'nbStep'          => $nbStep
+        ));
+      }
     }
 }

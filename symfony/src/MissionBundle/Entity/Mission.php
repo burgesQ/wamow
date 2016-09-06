@@ -7,7 +7,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 
 
-
 /**
  * Mission
  *
@@ -69,10 +68,6 @@ class Mission
      * @var string
      *
      * @ORM\Column(name="country", type="string", length=255)
-     * @Assert\Regex(
-     *     pattern="#[^a-zA-Zéèêëçîïíàáâ-]#",
-     *     match=false,
-     *     message="The country must contain only letters or dash.")
      */
     private $country;
 
@@ -150,7 +145,7 @@ class Mission
     /**
      * @var int
      *
-     * @ORM\Column(name="status", type="smallint", nullable=true)
+     * @ORM\Column(name="status", type="smallint")
      */
     private $status;
 
@@ -235,21 +230,19 @@ class Mission
     private $image;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="zipcode", type="integer")
-     * @Assert\Range(
-     *      min = 100,
-     *      max = 99999,)
+     * @ORM\Column(name="zipcode", type="string", length=255)
      */
     private $zipcode;
 
     public function __construct()
       {
         $this->creationDate = new \Datetime();
+        $this->UpdateDate = new \DateTime();
         $this->language = new ArrayCollection();
+        $this->status = 0;
       }
-
     /**
      * Get id
      *
@@ -617,18 +610,6 @@ class Mission
 
         return $this;
     }
-
-    public function addLanguage(Category $language)
-     {
-       $this->categories[] = $language;
-
-       return $this;
-     }
-
-     public function removeLanguage(Category $language)
-     {
-       $this->categories->removeElement($language);
-     }
 
     /**
      * Get language
