@@ -14,7 +14,17 @@ class RegistrationType extends AbstractType
         $builder->add('firstName');
         $builder->add('lastName');
         $builder->add('gender');
-        $builder->add('birthdate');
+        $builder->add('birthdate', 'birthday', array(
+            'widget' => 'choice',
+            'placeholder' => array(
+                'month' => 'Month',
+                'day' => 'Day',
+                'year' => 'Year',
+            ),
+            'format' => 'dMMMMy',
+            'pattern' => "{{ month }}/{{ day }}/{{ year }}",
+            'years' => range(date('Y') - 12, date('Y') - 110),
+            ));
         $builder->add('dailyFees');
         $builder->add('address');
         $builder->add('zipcode');
