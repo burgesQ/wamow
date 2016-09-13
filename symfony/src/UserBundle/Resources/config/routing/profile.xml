@@ -4,8 +4,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="fos_user_profile_show" path="/" methods="GET">
-        <default key="_controller">FOSUserBundle:Profile:show</default>
+    <route id="user_profile_show" path="/" methods="GET">
+        <default key="_controller">UserBundle:Profile:show</default>
     </route>
 
     <route id="fos_user_profile_edit" path="/edit" methods="GET POST">
