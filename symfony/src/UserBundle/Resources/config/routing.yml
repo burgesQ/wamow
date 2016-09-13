@@ -7,7 +7,7 @@ fos_user_profile:
 
 fos_user_register:
     resource: "@UserBundle/Resources/config/routing/registration.xml"
-    prefix: /register
+    prefix: /
 
 fos_user_resetting:
     resource: "@UserBundle/Resources/config/routing/resetting.xml"

@@ -11,7 +11,7 @@
         prefix="/profile" />
     <import
         resource="@FOSUserBundle/Resources/config/routing/registration.xml"
-        prefix="/register" />
+        prefix="/" />
     <import
         resource="@FOSUserBundle/Resources/config/routing/resetting.xml"
         prefix="/resetting" />

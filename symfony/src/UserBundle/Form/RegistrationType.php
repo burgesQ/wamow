@@ -4,18 +4,29 @@ namespace UserBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class RegistrationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('confidentiality');
-        $builder->add('status');
+        parent::buildForm($builder, $options);
+        $builder->remove('username');
         $builder->add('firstName');
         $builder->add('lastName');
-        $builder->add('gender');
-        $builder->add('birthdate', 'birthday', array(
+        /*$builder->add('gender', ChoiceType::class, array(
+            'choices' => array(
+                '0' => 'Female',
+                '1' => 'Male',
+                '2' => 'I don\'t know',
+            ),
+            'required'    => false,
+            'placeholder' => 'Choose your gender',
+            'empty_data'  => null
+        ));*/
+        /*$builder->add('birthdate', 'birthday', array(
             'widget' => 'choice',
+            'required'    => false,
             'placeholder' => array(
                 'month' => 'Month',
                 'day' => 'Day',
@@ -24,15 +35,18 @@ class RegistrationType extends AbstractType
             'format' => 'dMMMMy',
             'pattern' => "{{ month }}/{{ day }}/{{ year }}",
             'years' => range(date('Y') - 12, date('Y') - 110),
+        ));*/
+        //$builder->add('dailyFees');
+        //$builder->add('address');
+        //$builder->add('zipcode');
+        //$builder->add('city');
+        $builder->add('country', 'country', array(
+            'placeholder' => 'Choose a country',
+            'required' => true,
             ));
-        $builder->add('dailyFees');
-        $builder->add('address');
-        $builder->add('zipcode');
-        $builder->add('city');
-        $builder->add('state');
-        $builder->add('country');
-        $builder->add('phone');
-        $builder->add('image');
+        //$builder->add('state');
+        //$builder->add('phone');
+        //$builder->add('image');
     }
 
     public function getParent()

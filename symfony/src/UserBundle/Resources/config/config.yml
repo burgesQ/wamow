@@ -1,0 +1,12 @@
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: UserBundle\Entity\User
+    registration:
+        form:
+            type: user_registration
+            validation_groups: [Registration]
+    profile:
+        form:
+            type: user_profile
+            validation_groups: [Profile]
