@@ -21,87 +21,89 @@ UserBundle\Entity\User:
 #
 # As you can see, we are only applying the UniqueEntity constraint to
 # the email field and not the username field.
-FOS\UserBundle\Model\User:
+UserBundle\Model\User:
     constraints:
         - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
              fields: email
              errorPath: email
-             message: fos_user.email.already_used
+             message: user.email.already_used
              groups: [ "Registration", "Profile" ]
 
     properties:
         email:
             - NotBlank:
-                message: fos_user.email.blank
+                message: user.email.blank
                 groups: [ "Registration", "Profile" ]
             - Length:
                 min: 2
-                minMessage: fos_user.email.short
+                minMessage: user.email.short
                 max: 255
-                maxMessage: fos_user.email.long
+                maxMessage: user.email.long
                 groups: [ "Registration", "ResetPassword" ]
             - Email:
-                message: fos_user.email.invalid
+                message: user.email.invalid
                 groups: [ "Registration", "Profile" ]
         plainPassword:
             - NotBlank:
-                message: fos_user.password.blank
+                message: user.password.blank
                 groups: [ "Registration", "ResetPassword", "ChangePassword" ]
             - Length:
-                min: 2
-                max: 4096
-                minMessage: fos_user.password.short
+                min: 6
+                max: 80
+                minMessage: user.password.short
+                maxMessage: user.password.long
                 groups: [ "Registration", "Profile", "ResetPassword", "ChangePassword"]
 
-FOS\UserBundle\Model\Group:
+UserBundle\Model\Group:
     properties:
         name:
             - NotBlank:
-                message: fos_user.group.blank
+                message: user.group.blank
                 groups: [ "Registration" ]
             - Length:
                 min: 2
-                minMessage: fos_user.group.short
+                minMessage: user.group.short
                 max: 255
-                maxMessage: fos_user.group.long
+                maxMessage: user.group.long
                 groups: [ "Registration" ]
 
-FOS\UserBundle\Propel\User:
+UserBundle\Propel\User:
     properties:
         email:
             - NotBlank:
-                message: fos_user.email.blank
+                message: user.email.blank
                 groups: [ "Registration", "Profile" ]
             - Length:
                 min: 2
-                minMessage: fos_user.email.short
+                minMessage: user.email.short
                 max: 255
-                maxMessage: fos_user.email.long
+                maxMessage: user.email.long
                 groups: [ "Registration", "ResetPassword" ]
             - Email:
-                message: fos_user.email.invalid
+                message: user.email.invalid
                 groups: [ "Registration", "Profile" ]
 
         plainPassword:
             - NotBlank:
-                message: fos_user.password.blank
+                message: fser.password.blank
                 groups: [ "Registration", "ResetPassword", "ChangePassword" ]
             - Length:
-                min: 2
-                max: 4096
-                minMessage: fos_user.password.short
+                min: 6
+                max: 80
+                minMessage: user.password.short
+                maxMessage: user.password.long
                 groups: [ "Registration", "Profile", "ResetPassword", "ChangePassword"]
 
 
-FOS\UserBundle\Propel\Group:
+UserBundle\Propel\Group:
     properties:
         name:
             - NotBlank:
-                message: fos_user.group.blank
+                message: user.group.blank
                 groups: [ "Registration" ]
             - Length:
                 min: 2
-                minMessage: fos_user.group.short
+                minMessage: user.group.short
                 max: 255
-                maxMessage: fos_user.group.long
+                maxMessage: user.group.long
                 groups: [ "Registration" ]
