@@ -1,10 +1,10 @@
 <?php
 
-namespace MissionBundle\DataFixtures\ORM;
+namespace ToolsBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use MissionBundle\Entity\Language;
+use ToolsBundle\Entity\Language;
 
 class LoadCategory implements FixtureInterface
 {

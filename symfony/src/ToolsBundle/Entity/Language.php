@@ -1,16 +1,18 @@
 <?php
 
-namespace MissionBundle\Entity;
+namespace ToolsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Language
  *
  * @ORM\Table(name="language")
- * @ORM\Entity(repositoryClass="MissionBundle\Repository\LanguageRepository")
+ * @ORM\Entity(repositoryClass="ToolsBundle\Repository\LanguageRepository")
  */
-class Language
+class Language implements ArrayAccess
 {
     /**
      * @var int
@@ -24,7 +26,7 @@ class Language
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, unique=true)
      */
     private $name;
 

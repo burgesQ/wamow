@@ -1,0 +1,3 @@
+tools_test:
+    path:      /tools/test
+    defaults:  { _controller: ToolsBundle:Tools:index }

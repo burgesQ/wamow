@@ -9,9 +9,12 @@
 		</p>
 	{% endif %}
 
+
+	<div class="well">
+	  {{ form(form) }}
+	</div>
+
 	<p>
 		Step {{ step.position }}	/	{{ mission.numberStep}}
-
-		<br><a href="{{ path('mission_step', {'id': mission.id}) }}"> next</a>
 	</p>
 </p>
