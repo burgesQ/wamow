@@ -19,92 +19,98 @@ class RegistrationController extends BaseController
 {
     public function registerAdvisorAction(Request $request)
     {
-        /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
-        $formFactory = $this->get('fos_user.registration.form.factory');
-        /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
-        $userManager = $this->get('fos_user.user_manager');
-        /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
-        $dispatcher = $this->get('event_dispatcher');
+        if (!$this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
 
-        $user = $userManager->createUser();
-        $user->setEnabled(true);
-        $user->setRoles(array("ROLE_ADVISOR"));
+            /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
+            $formFactory = $this->get('fos_user.registration.form.factory');
+            /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
+            $userManager = $this->get('fos_user.user_manager');
+            /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
+            $dispatcher = $this->get('event_dispatcher');
 
-        $event = new GetResponseUserEvent($user, $request);
-        $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
+            $user = $userManager->createUser();
+            $user->setEnabled(true);
+            $user->setRoles(array("ROLE_ADVISOR"));
 
-        if (null !== $event->getResponse()) {
+            $event = new GetResponseUserEvent($user, $request);
+            $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
+
+            if (null !== $event->getResponse()) {
             return $event->getResponse();
-        }
-
-        $form = $formFactory->createForm();
-        $form->setData($user);
-
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $event = new FormEvent($form, $request);
-            $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
-
-            $userManager->updateUser($user);
-
-            if (null === $response = $event->getResponse()) {
-                $url = $this->generateUrl('fos_user_registration_confirmed');
-                $response = new RedirectResponse($url);
             }
 
-            $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
+            $form = $formFactory->createForm();
+            $form->setData($user);
 
-            return $response;
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $event = new FormEvent($form, $request);
+                $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
+
+                $userManager->updateUser($user);
+
+                if (null === $response = $event->getResponse()) {
+                    $url = $this->generateUrl('fos_user_registration_confirmed');
+                    $response = new RedirectResponse($url);
+                }
+
+                $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
+
+                return $response;
+            }
+            return $this->render('UserBundle:Registration:registeradvisor.html.twig', array(
+                'form' => $form->createView(),
+            ));
         }
-
-        return $this->render('UserBundle:Registration:registeradvisor.html.twig', array(
-            'form' => $form->createView(),
-        ));
+        return $this->redirectToRoute('user_profile_show');
     }
 
     public function registerContractorAction(Request $request)
     {
-        /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
-        $formFactory = $this->get('fos_user.registration.form.factory');
-        /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
-        $userManager = $this->get('fos_user.user_manager');
-        /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
-        $dispatcher = $this->get('event_dispatcher');
+        if (!$this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
+            $formFactory = $this->get('fos_user.registration.form.factory');
+            /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
+            $userManager = $this->get('fos_user.user_manager');
+            /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
+            $dispatcher = $this->get('event_dispatcher');
 
-        $user = $userManager->createUser();
-        $user->setEnabled(true);
-        $user->setRoles(array("ROLE_CONTRACTOR"));
+            $user = $userManager->createUser();
+            $user->setEnabled(true);
+            $user->setRoles(array("ROLE_CONTRACTOR"));
 
-        $event = new GetResponseUserEvent($user, $request);
-        $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
+            $event = new GetResponseUserEvent($user, $request);
+            $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
 
-        if (null !== $event->getResponse()) {
-            return $event->getResponse();
-        }
-
-        $form = $formFactory->createForm();
-        $form->setData($user);
-
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $event = new FormEvent($form, $request);
-            $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
-            $userManager->updateUser($user);
-
-            if (null === $response = $event->getResponse()) {
-                $url = $this->generateUrl('fos_user_registration_confirmed');
-                $response = new RedirectResponse($url);
+            if (null !== $event->getResponse()) {
+                return $event->getResponse();
             }
 
-            $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
+            $form = $formFactory->createForm();
+            $form->setData($user);
 
-            return $response;
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $event = new FormEvent($form, $request);
+                $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
+                $userManager->updateUser($user);
+
+                if (null === $response = $event->getResponse()) {
+                    $url = $this->generateUrl('fos_user_registration_confirmed');
+                    $response = new RedirectResponse($url);
+                }
+
+                $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
+
+                return $response;
+            }
+
+            return $this->render('UserBundle:Registration:registercontractor.html.twig', array(
+                'form' => $form->createView(),
+            ));
         }
-
-        return $this->render('UserBundle:Registration:registercontractor.html.twig', array(
-            'form' => $form->createView(),
-        ));
+        return $this->redirectToRoute('user_profile_show');
     }
 }
