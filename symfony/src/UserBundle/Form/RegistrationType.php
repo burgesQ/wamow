@@ -40,10 +40,10 @@ class RegistrationType extends AbstractType
         //$builder->add('address');
         //$builder->add('zipcode');
         //$builder->add('city');
-        $builder->add('country', 'country', array(
+        /*$builder->add('country', 'country', array(
             'placeholder' => 'Choose a country',
             'required' => true,
-            ));
+        ));*/
         //$builder->add('state');
         //$builder->add('phone');
         //$builder->add('image');

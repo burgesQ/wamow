@@ -26,21 +26,21 @@ class User extends BaseUser
     /**
      * @var int
      *
-     * @ORM\Column(name="status", type="smallint")
+     * @ORM\Column(name="status", type="smallint", nullable=false)
      */
     private $status;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="confidentiality", type="boolean")
+     * @ORM\Column(name="confidentiality", type="boolean", nullable=false)
      */
     private $confidentiality;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="first_name", type="string", length=255, nullable=true)
+     * @ORM\Column(name="first_name", type="string", length=255, nullable=false)
      *
      * @Assert\NotBlank(message="Please enter your first name.", groups={"Registration", "Profile"})
      * @Assert\Length(
@@ -56,7 +56,7 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="last_name", type="string", length=255, nullable=true)
+     * @ORM\Column(name="last_name", type="string", length=255, nullable=false)
      *
      * @Assert\NotBlank(message="Please enter your last name.", groups={"Registration", "Profile"})
      * @Assert\Length(
@@ -165,14 +165,14 @@ class User extends BaseUser
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="creation_date", type="datetime")
+     * @ORM\Column(name="creation_date", type="datetime", nullable=false)
      */
     private $creationDate;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="update_date", type="datetime")
+     * @ORM\Column(name="update_date", type="datetime", nullable=false)
      */
     private $updateDate;
 
