@@ -6,7 +6,7 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use ToolsBundle\Entity\Language;
 
-class LoadCategory implements FixtureInterface
+class LoadLanguage implements FixtureInterface
 {
 
   public function load(ObjectManager $manager)
