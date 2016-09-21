@@ -8,8 +8,8 @@
         <default key="_controller">UserBundle:Profile:show</default>
     </route>
 
-    <route id="fos_user_profile_edit" path="/edit" methods="GET POST">
-        <default key="_controller">FOSUserBundle:Profile:edit</default>
+    <route id="user_profile_edit" path="/edit" methods="GET POST">
+        <default key="_controller">UserBundle:Profile:edit</default>
     </route>
 
 </routes>
