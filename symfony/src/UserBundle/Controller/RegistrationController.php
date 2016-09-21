@@ -48,6 +48,8 @@ class RegistrationController extends BaseController
                 $event = new FormEvent($form, $request);
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
 
+                $user->setFirstName(ucwords($user->getFirstName()));
+                $user->setLastName(ucwords($user->getLastName()));
                 $userManager->updateUser($user);
 
                 if (null === $response = $event->getResponse()) {
@@ -95,6 +97,9 @@ class RegistrationController extends BaseController
             if ($form->isValid()) {
                 $event = new FormEvent($form, $request);
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
+
+                $user->setFirstName(ucwords($user->getFirstName()));
+                $user->setLastName(ucwords($user->getLastName()));
                 $userManager->updateUser($user);
 
                 if (null === $response = $event->getResponse()) {

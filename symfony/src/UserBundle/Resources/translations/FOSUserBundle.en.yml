@@ -16,6 +16,7 @@ security:
         password: Password
         remember_me: 'Remember me'
         submit: 'Log in'
+        email: Email
 
 profile:
     show:
@@ -88,7 +89,7 @@ layout:
     logout: 'Log out'
     login: 'Log in'
     register: Register
-    logged_in_as: 'Logged in as %username%'
+    logged_in_as: 'Hello %first_name% %last_name%'
 
 form:
     group_name: 'Group name'
