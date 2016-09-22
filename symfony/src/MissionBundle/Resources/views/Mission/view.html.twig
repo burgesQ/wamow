@@ -1,36 +1,54 @@
+<html>
+<body>
 <h2>{{ mission.title }}</h2>
-
 {% if mission.image is not null %}
   <img src="{{ mission.image }}">
 {% endif %}
 
 <div class="well">
   <p>
-      <h4><br>Address :</h4>
-      {{ mission.address }}, {{ mission.city }}, <br>{{ mission.country }}
-        {% if mission.state is not null %}
-          , {{ mission.state }}<br>
-        {% endif %}
-      <h4><br>Daily Fees :</h4>
-        {{ mission.dailyFeesMin }} $/days min <br>
-        {{ mission.dailyFeesMax }} $/days max
-      <h4><br>Duration :</h4>
-        {{ mission.duration }} mounth(s)
-      <h4><br>Beginning :</h4>
-        {{ mission.beginning|date('d/m/Y') }}
-
-
-
-      <h4><br>Language required :</h4>
-      <ul>
-        {% for language in listLanguage %}
-          <li>{{ language.name }}</li>
-        {% endfor %}
-      </ul>
-
-
       <h4><br>Resume :</h4>
       {{ mission.resume }}
 
+      <h5>details :</h5>
+      {{ mission.professionalExpertise.name }}, {{ mission.missionKind.name }}
+  </p>
+  <p>
+      <h4><br>Address :</h4>
+      {{ mission.address }}, {{ mission.city }},{{ mission.zipcode }} <br>{{ mission.country }}
+        {% if mission.state is not null %}
+          , {{ mission.state }}<br>
+        {% endif %}
+  </p>
+  <p>
+      <h4><br>Daily Fees :</h4>
+        {{ mission.dailyFeesMin }} $/days min <br>
+        {{ mission.dailyFeesMax }} $/days max
+  </p>
+  <p>
+      You have until {{ mission.applicationEnding|date('d/m/Y') }} to apply. <br>
+      From {{ mission.missionBeginning|date('d/m/Y') }} to {{ mission.missionEnding|date('d/m/Y') }}
+  </p>
+
+        {% if listLanguage is not null %}
+          <h4><br>Language required :</h4>
+          <ul>
+            {% for language in listLanguage %}
+              <li>{{ language.name }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+  <p>
+        {% if mission.confidentiality == 1 %}
+          This mission is confidential.
+        {% endif %}
+        {% if mission.telecommuting == 1 %}
+          This mission require physical presence.
+        {% endif %}
+        {% if mission.international == 1 %}
+          This mission is international.
+        {% endif %}
   </p>
 </div>
+</body>
+</html>
