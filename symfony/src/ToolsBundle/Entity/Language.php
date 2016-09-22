@@ -12,7 +12,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Table(name="language")
  * @ORM\Entity(repositoryClass="ToolsBundle\Repository\LanguageRepository")
  */
-class Language implements ArrayAccess
+class Language
 {
     /**
      * @var int

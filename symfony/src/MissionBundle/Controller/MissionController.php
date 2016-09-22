@@ -5,13 +5,16 @@ namespace MissionBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Response;
-use MissionBundle\Entity\Language;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use MissionBundle\Entity\Step;
 use MissionBundle\Entity\Mission;
 use MissionBundle\Form\MissionType;
-
+use MissionBundle\Form\StepType;
+use ToolsBundle\Entity\Language;
+use ToolsBundle\Form\LanguageType;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class MissionController extends Controller
 {
@@ -21,36 +24,23 @@ class MissionController extends Controller
     public function newAction(Request $request)
     {
         $mission = new Mission();
-        $mission->setCreationDate(new \DateTime());
-
-        $repository = $this
-          ->getDoctrine()
-          ->getManager()
-          ->getRepository('MissionBundle:Language')
-          ;
-        $listLanguage = $repository->findAll();
-        foreach ($listLanguage as $language) {
-          $mission->getLanguage()->add($language);
-        }
-
         $form = $this->get('form.factory')->create(new MissionType(), $mission);
-        if ($form->handleRequest($request)->isValid())
+        $form->handleRequest($request);
+        if ($form->isValid())
         {
           $em = $this->getDoctrine()->getManager();
           $em->persist($mission);
           $em->flush();
-
-          $id = $mission->getid();
+          $id = $mission->getId();
           return $this->render('MissionBundle:Mission:registered.html.twig', array(
-          'mission'  =>   $mission,
-          'id'       =>   $id,
-          'form'     =>   $form,
-          ));
+            'mission'  =>   $mission,
+            'id'       =>   $id,
+            'form'     =>   $form,
+            ));
         }
-
       return $this->render('MissionBundle:Mission:new.html.twig', array(
-      'form' => $form->createView(),
-      ));
+        'form' => $form->createView(),
+        ));
     }
 
     /*
@@ -69,31 +59,53 @@ class MissionController extends Controller
           ->add('resume')
           ->add('address')
           ->add('city')
-          ->add('country',          'country')
           ->add('zipcode')
-          ->add('minNumberUser')
-          ->add('maxNumberUser')
+          ->add('country',          'country')
+          ->add('state')
+          ->add('language',   'entity', array(
+              'class' => 'ToolsBundle:Language',
+              'property' => 'name',
+              'multiple' => true,
+              'expanded' => true,
+              'label' => 'Choose language(s) required',
+            ))
           ->add('confidentiality',  'checkbox', array(
             'label'    => 'Does this mission has to be confidential?',
             'required' => false,
           ))
-          ->add('numberStep')
-          ->add('state')
-          ->add('language',         'entity',   array(
-            'class' => 'MissionBundle:Language',
-            'property' => 'name',
-            'label'=>'Language(s) required:',
-            'multiple' => true,
-            'expanded' => true
-          ))
           ->add('telecommuting',    'checkbox', array(
-            'label'    => 'Does this mission propose telecommuting?',
-            'required' => false,
-          ))
+              'label'    => 'Requiere physical presence?',
+              'required' => false,
+            ))
+          ->add('international',  'checkbox', array(
+              'label'    => 'Is this mission international?',
+              'required' => false,
+            ))
           ->add('dailyFeesMin')
           ->add('dailyFeesMax')
-          ->add('duration')
-          ->add('beginning',        'date')
+          ->add('missionBeginning',         'date', array(
+              'label'    => 'Start of mission :',
+            ))
+          ->add('missionEnding',            'date', array(
+              'label'    => 'End of mission :',
+            ))
+          ->add('applicationEnding',        'date', array(
+              'label'    => 'Application deadline :',
+            ))
+          ->add('professionalExpertise',   'entity', array(
+              'class' => 'MissionBundle:professionalExpertise',
+              'property' => 'name',
+              'multiple' => false,
+              'label' => 'Choose your expertise',
+              'placeholder' => 'Choose an expertise',
+            ))
+          ->add('missionKind',   'entity', array(
+              'class' => 'MissionBundle:missionKind',
+              'property' => 'name',
+              'multiple' => false,
+              'label' => 'Mission kind',
+              'placeholder' => 'Choose a kind',
+              ))
           ->add('image')
           ->add('save',             'submit')
           ->getForm();
@@ -138,7 +150,7 @@ class MissionController extends Controller
     /*
       Add step to a mission
     */
-    public function stepAction($id)
+    public function stepAction($id, Request $request)
     {
       $em = $this->getDoctrine()->getManager();
       $mission = $em->getRepository('MissionBundle:Mission')->find($id);
@@ -148,6 +160,7 @@ class MissionController extends Controller
         throw new NotFoundHttpException("The mission ".$id." doesn't exist.");
       }
 
+      $form = $this->get('form.factory')->create(new StepType(), $step);
       $listStep = $em
       ->getRepository('MissionBundle:Step')
       ->findBy(array('mission' => $mission))
@@ -157,12 +170,26 @@ class MissionController extends Controller
         ++$nbStep;
       }
 
-      if (!$listStep) {                 //If there's no step yet
-        $em->persist($step);
-        $em->flush($step);
+      if (!$listStep)    //If there's no step yet
+      {
+        if ($form->handleRequest($request)->isValid())
+        {
+          $em = $this->getDoctrine()->getManager();
+          $em->persist($step);
+          $em->flush();
+
+          $id = $mission->getid();
+          return $this->render('MissionBundle:Mission:stepdone.html.twig', array(
+          'mission'  =>   $mission,
+          'id'       =>   $id,
+          'form'     =>   $form,
+          'step'     =>   $step
+          ));
+        }
         return $this->render('MissionBundle:Mission:step.html.twig', array(
-          'mission'         => $mission,
-          'step'            => $step,
+          'mission'  => $mission,
+          'step'     => $step,
+          'form'     => $form->createView()
         ));
       }
 
@@ -174,12 +201,25 @@ class MissionController extends Controller
         $step = new Step();
         $step->setMission($mission);
         $step->setPosition($nbStep + 1);
-        $em->persist($step);
-        $em->flush($step);
+        if ($form->handleRequest($request)->isValid())
+        {
+          $em = $this->getDoctrine()->getManager();
+          $em->persist($step);
+          $em->flush();
+
+          $id = $mission->getid();
+          return $this->render('MissionBundle:Mission:stepdone.html.twig', array(
+          'mission'  =>   $mission,
+          'id'       =>   $id,
+          'form'     =>   $form,
+          'step'     =>   $step
+          ));
+        }
         return $this->render('MissionBundle:Mission:step.html.twig', array(
-          'mission'         => $mission,
-          'step'            => $step,
-          'nbStep'          => $nbStep
+          'mission'  => $mission,
+          'step'     => $step,
+          'form'     => $form->createView(),
+          'nbStep'   => $nbStep
         ));
       }
     }

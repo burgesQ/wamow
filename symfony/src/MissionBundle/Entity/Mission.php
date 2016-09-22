@@ -5,6 +5,8 @@ namespace MissionBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
+use ToolsBundle\Entity\Language;
+use ToolsBundle\Form\LanguageType;
 
 
 /**
@@ -39,6 +41,8 @@ class Mission
      * @var string
      *
      * @ORM\Column(name="resume", type="text")
+     * @Assert\Length(
+     *      max = 4000)
      */
     private $resume;
 
@@ -67,35 +71,16 @@ class Mission
     /**
      * @var string
      *
+     * @ORM\Column(name="zipcode", type="string", length=255)
+     */
+    private $zipcode;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="country", type="string", length=255)
      */
     private $country;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="min_number_user", type="smallint")
-     * @Assert\Range(
-     *      min = 1,
-     *      max = 15,
-     *      minMessage = "You must be at least {{ limit }}",
-     *      maxMessage = "You cannot be more than {{ limit }}"
-     * )
-     */
-    private $minNumberUser;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="max_number_user", type="smallint", nullable=true)
-     * @Assert\Range(
-     *      min = 1,
-     *      max = 15,
-     *      minMessage = "You must be at least {{ limit }}",
-     *      maxMessage = "You cannot be more than {{ limit }}"
-     * )
-     */
-    private $maxNumberUser;
 
     /**
      * @var bool
@@ -164,11 +149,23 @@ class Mission
     private $updateDate;
 
     /**
-     * @var array
+     * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="MissionBundle\Entity\Language", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="\ToolsBundle\Entity\Language", cascade={"persist"})
      */
     private $language;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="MissionBundle\Entity\ProfessionalExpertise")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $professionalExpertise;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="MissionBundle\Entity\MissionKind")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $missionKind;
 
     /**
      * @var bool
@@ -176,6 +173,13 @@ class Mission
      * @ORM\Column(name="telecommuting", type="boolean")
      */
     private $telecommuting;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="international", type="boolean")
+     */
+    private $international;
 
     /**
      * @var int
@@ -202,22 +206,25 @@ class Mission
     private $dailyFeesMax;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="duration", type="integer")
-     * @Assert\Range(
-     *      min = 2,
-     *      max = 9999,
-     *      minMessage = "You need to fill this section",)
-     */
-    private $duration;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="beginning", type="datetime")
      */
-    private $beginning;
+    private $missionBeginning;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="ending", type="datetime")
+     */
+    private $missionEnding;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="$applicationEnding", type="datetime")
+     */
+    private $applicationEnding;
 
     /**
      * @var string
@@ -229,20 +236,15 @@ class Mission
      */
     private $image;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="zipcode", type="string", length=255)
-     */
-    private $zipcode;
-
     public function __construct()
       {
         $this->creationDate = new \Datetime();
         $this->UpdateDate = new \DateTime();
         $this->language = new ArrayCollection();
         $this->status = 0;
+        $this->numberStep = 3;
       }
+
     /**
      * Get id
      *
@@ -369,52 +371,6 @@ class Mission
     }
 
     /**
-     * Set minNumberUser
-     *
-     * @param integer $minNumberUser
-     * @return Mission
-     */
-    public function setMinNumberUser($minNumberUser)
-    {
-        $this->minNumberUser = $minNumberUser;
-
-        return $this;
-    }
-
-    /**
-     * Get minNumberUser
-     *
-     * @return integer
-     */
-    public function getMinNumberUser()
-    {
-        return $this->minNumberUser;
-    }
-
-    /**
-     * Set maxNumberUser
-     *
-     * @param integer $maxNumberUser
-     * @return Mission
-     */
-    public function setMaxNumberUser($maxNumberUser)
-    {
-        $this->maxNumberUser = $maxNumberUser;
-
-        return $this;
-    }
-
-    /**
-     * Get maxNumberUser
-     *
-     * @return integer
-     */
-    public function getMaxNumberUser()
-    {
-        return $this->maxNumberUser;
-    }
-
-    /**
      * Set confidentiality
      *
      * @param boolean $confidentiality
@@ -512,7 +468,7 @@ class Mission
      * @param integer $iDCompany
      * @return Mission
      */
-    public function setIDCompagny($iDCompany)
+    public function setIDCompany($iDCompany)
     {
         $this->iDCompany = $iDCompany;
 
@@ -599,29 +555,6 @@ class Mission
     }
 
     /**
-     * Set language
-     *
-     * @param array $language
-     * @return Mission
-     */
-    public function setLanguage($language)
-    {
-        $this->language = $language;
-
-        return $this;
-    }
-
-    /**
-     * Get language
-     *
-     * @return array
-     */
-    public function getLanguage()
-    {
-        return $this->language;
-    }
-
-    /**
      * Set telecommuting
      *
      * @param boolean $telecommuting
@@ -683,34 +616,11 @@ class Mission
     /**
      * Get dailyFeesMax
      *
-     * @return int
+     * @return integer
      */
     public function getDailyFeesMax()
     {
         return $this->dailyFeesMax;
-    }
-
-    /**
-     * Set duration
-     *
-     * @param integer $duration
-     * @return Mission
-     */
-    public function setDuration($duration)
-    {
-        $this->duration = $duration;
-
-        return $this;
-    }
-
-    /**
-     * Get duration
-     *
-     * @return integer
-     */
-    public function getDuration()
-    {
-        return $this->duration;
     }
 
     /**
@@ -762,7 +672,7 @@ class Mission
     /**
      * Set zipcode
      *
-     * @param integer $zipcode
+     * @param string $zipcode
      * @return Mission
      */
     public function setZipcode($zipcode)
@@ -775,10 +685,216 @@ class Mission
     /**
      * Get zipcode
      *
-     * @return integer
+     * @return string
      */
     public function getZipcode()
     {
         return $this->zipcode;
+    }
+
+    /**
+     * Add language
+     *
+     * @param \ToolsBundle\Entity\Language $language
+     * @return Mission
+     */
+    public function addLanguage(\ToolsBundle\Entity\Language $language)
+    {
+        $this->language[] = $language;
+
+        return $this;
+    }
+
+    /**
+     * Remove language
+     *
+     * @param \ToolsBundle\Entity\Language $language
+     */
+    public function removeLanguage(\ToolsBundle\Entity\Language $language)
+    {
+        $this->language->removeElement($language);
+    }
+
+    /**
+     * Get language
+     *
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getLanguage()
+    {
+        return $this->language;
+    }
+
+    /**
+     * Set language
+     *
+     * @param \Doctrine\Common\Collections\ArrayCollection $language
+     * @return Mission
+     */
+    public function setLanguage(ArrayCollection $language)
+    {
+        $this->language = $language;
+    }
+
+
+    /**
+     * Set ending
+     *
+     * @param \DateTime $ending
+     * @return Mission
+     */
+    public function setEnding($ending)
+    {
+        $this->ending = $ending;
+
+        return $this;
+    }
+
+    /**
+     * Get ending
+     *
+     * @return \DateTime
+     */
+    public function getEnding()
+    {
+        return $this->ending;
+    }
+
+    /**
+     * Set international
+     *
+     * @param boolean $international
+     * @return Mission
+     */
+    public function setInternational($international)
+    {
+        $this->international = $international;
+
+        return $this;
+    }
+
+    /**
+     * Get international
+     *
+     * @return boolean
+     */
+    public function getInternational()
+    {
+        return $this->international;
+    }
+
+    /**
+     * Set missionBeginning
+     *
+     * @param \DateTime $missionBeginning
+     * @return Mission
+     */
+    public function setMissionBeginning($missionBeginning)
+    {
+        $this->missionBeginning = $missionBeginning;
+
+        return $this;
+    }
+
+    /**
+     * Get missionBeginning
+     *
+     * @return \DateTime
+     */
+    public function getMissionBeginning()
+    {
+        return $this->missionBeginning;
+    }
+
+    /**
+     * Set missionEnding
+     *
+     * @param \DateTime $missionEnding
+     * @return Mission
+     */
+    public function setMissionEnding($missionEnding)
+    {
+        $this->missionEnding = $missionEnding;
+
+        return $this;
+    }
+
+    /**
+     * Get missionEnding
+     *
+     * @return \DateTime
+     */
+    public function getMissionEnding()
+    {
+        return $this->missionEnding;
+    }
+
+    /**
+     * Set applicationEnding
+     *
+     * @param \DateTime $applicationEnding
+     * @return Mission
+     */
+    public function setApplicationEnding($applicationEnding)
+    {
+        $this->applicationEnding = $applicationEnding;
+
+        return $this;
+    }
+
+    /**
+     * Get applicationEnding
+     *
+     * @return \DateTime
+     */
+    public function getApplicationEnding()
+    {
+        return $this->applicationEnding;
+    }
+
+    /**
+     * Set professionalExpertise
+     *
+     * @param \MissionBundle\Entity\ProfessionalExpertise $professionalExpertise
+     * @return Mission
+     */
+    public function setProfessionalExpertise(\MissionBundle\Entity\ProfessionalExpertise $professionalExpertise)
+    {
+        $this->professionalExpertise = $professionalExpertise;
+
+        return $this;
+    }
+
+    /**
+     * Get professionalExpertise
+     *
+     * @return \MissionBundle\Entity\ProfessionalExpertise
+     */
+    public function getProfessionalExpertise()
+    {
+        return $this->professionalExpertise;
+    }
+
+    /**
+     * Set missionKind
+     *
+     * @param \MissionBundle\Entity\MissionKind $missionKind
+     * @return Mission
+     */
+    public function setMissionKind(\MissionBundle\Entity\MissionKind $missionKind)
+    {
+        $this->missionKind = $missionKind;
+
+        return $this;
+    }
+
+    /**
+     * Get missionKind
+     *
+     * @return \MissionBundle\Entity\MissionKind
+     */
+    public function getMissionKind()
+    {
+        return $this->missionKind;
     }
 }

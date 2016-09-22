@@ -5,8 +5,10 @@ namespace MissionBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use MissionBundle\Entity\Language;
-use MissionBundle\Form\LanguageType;
+use ToolsBundle\Entity\Language;
+use ToolsBundle\Form\LanguageType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
 
 class MissionType extends AbstractType
 {
@@ -21,31 +23,53 @@ class MissionType extends AbstractType
             ->add('resume')
             ->add('address')
             ->add('city')
+            ->add('zipcode')
             ->add('country',          'country')
             ->add('state')
-            ->add('zipcode')
-            ->add('minNumberUser')
-            ->add('maxNumberUser')
             ->add('confidentiality',  'checkbox', array(
                 'label'    => 'Does this mission has to be confidential?',
                 'required' => false,
               ))
-            ->add('numberStep')
-            ->add('language',         'entity', array(
-                'class' => 'MissionBundle:Language',
+            ->add('language',   'entity', array(
+                'class' => 'ToolsBundle:Language',
                 'property' => 'name',
-                'label'=>'Language(s) required:',
                 'multiple' => true,
                 'expanded' => true,
+                'label' => 'Choose language(s) required',
               ))
             ->add('telecommuting',    'checkbox', array(
-                'label'    => 'Does this mission propose telecommuting?',
+                'label'    => 'Requiere physical presence?',
+                'required' => false,
+              ))
+            ->add('international',  'checkbox', array(
+                'label'    => 'Is this mission international?',
                 'required' => false,
               ))
             ->add('dailyFeesMax')
             ->add('dailyFeesMin')
-            ->add('duration')
-            ->add('beginning',        'date')
+            ->add('missionBeginning',         'date', array(
+                'label'    => 'Start of mission :',
+              ))
+            ->add('missionEnding',            'date', array(
+                'label'    => 'End of mission :',
+              ))
+            ->add('applicationEnding',        'date', array(
+                'label'    => 'Application deadline :',
+              ))
+            ->add('professionalExpertise',   'entity', array(
+                'class' => 'MissionBundle:professionalExpertise',
+                'property' => 'name',
+                'multiple' => false,
+                'label' => 'Choose your expertise',
+                'placeholder' => 'Choose an expertise',
+              ))
+            ->add('missionKind',   'entity', array(
+                'class' => 'MissionBundle:missionKind',
+                'property' => 'name',
+                'multiple' => false,
+                'label' => 'Mission kind',
+                'placeholder' => 'Choose a kind',
+                ))
             ->add('image')
             ->add('save',             'submit')
         ;
