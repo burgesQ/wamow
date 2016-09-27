@@ -49,12 +49,18 @@ class MissionType extends AbstractType
             ->add('dailyFeesMin')
             ->add('missionBeginning',         'date', array(
                 'label'    => 'Start of mission :',
+                'data'     => new \Datetime(),
+                'years' => range(2016,2020)
               ))
             ->add('missionEnding',            'date', array(
                 'label'    => 'End of mission :',
+                'data'     => new \Datetime(),
+                'years' => range(2016,2020)
               ))
             ->add('applicationEnding',        'date', array(
                 'label'    => 'Application deadline :',
+                'data'     => new \Datetime(),
+                'years' => range(2016,2020)
               ))
             ->add('professionalExpertise',   'entity', array(
                 'class' => 'MissionBundle:professionalExpertise',
