@@ -1,6 +1,7 @@
 mission_new:
     path:      /mission/new
-    defaults:  { _controller: MissionBundle:Mission:new }
+    defaults:
+        _controller: MissionBundle:Mission:new
 
 mission_view:
     path:      /mission/view/{id}
