@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use ToolsBundle\Entity\Language;
 use ToolsBundle\Form\LanguageType;
-
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * Mission
@@ -222,7 +222,7 @@ class Mission
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="$applicationEnding", type="datetime")
+     * @ORM\Column(name="applicationEnding", type="datetime")
      */
     private $applicationEnding;
 
@@ -896,5 +896,35 @@ class Mission
     public function getMissionKind()
     {
         return $this->missionKind;
+    }
+
+    /**
+     * @Assert\Callback
+     */
+    public function validate(ExecutionContextInterface $context)
+    {
+        $startDate = $this->getMissionBeginning();
+        $endDate = $this->getMissionEnding();
+        $deadline = $this->getApplicationEnding();
+        if ($startDate->format("yy/mm/dd") > $endDate->format("yy/mm/dd"))
+        {
+          echo "ERROR 1";
+          $context
+            ->buildViolation('The mission can not start after the end date.')
+            ->atPath('missionBeginning')
+            ->addViolation()
+            ;
+        }
+        elseif ($deadline->format("yy/mm/dd") > $endDate->format("yy/mm/dd")
+                || $deadline->format("yy/mm/dd") < $startDate->format("yy/mm/dd"))
+        {
+          echo "ERROR 2";
+          $context
+            ->buildViolation('The deadline can not start after the end date
+                              nor before the beguinning date.')
+            ->atPath('missionBeginning')
+            ->addViolation()
+            ;
+        }
     }
 }
