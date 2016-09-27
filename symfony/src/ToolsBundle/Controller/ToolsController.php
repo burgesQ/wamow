@@ -11,7 +11,6 @@ use MissionBundle\Entity\Step;
 use MissionBundle\Entity\Mission;
 use MissionBundle\Form\MissionType;
 use ToolsBundle\Entity\Language;
-use ToolsBundle\Form\LanguageType;
 
 class ToolsController extends Controller
 {

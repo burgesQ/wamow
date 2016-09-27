@@ -12,7 +12,6 @@ use MissionBundle\Entity\Mission;
 use MissionBundle\Form\MissionType;
 use MissionBundle\Form\StepType;
 use ToolsBundle\Entity\Language;
-use ToolsBundle\Form\LanguageType;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
