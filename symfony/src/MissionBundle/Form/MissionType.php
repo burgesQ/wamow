@@ -45,22 +45,22 @@ class MissionType extends AbstractType
                 'label'    => 'Is this mission international?',
                 'required' => false,
               ))
-            ->add('dailyFeesMax')
             ->add('dailyFeesMin')
+            ->add('dailyFeesMax')
             ->add('missionBeginning',         'date', array(
                 'label'    => 'Start of mission :',
                 'data'     => new \Datetime(),
-                'years' => range(2016,2020)
+                'years' => range(date('Y'), date('Y') + 5)
               ))
             ->add('missionEnding',            'date', array(
                 'label'    => 'End of mission :',
                 'data'     => new \Datetime(),
-                'years' => range(2016,2020)
+                'years' => range(date('Y'), date('Y') + 5)
               ))
             ->add('applicationEnding',        'date', array(
                 'label'    => 'Application deadline :',
                 'data'     => new \Datetime(),
-                'years' => range(2016,2020)
+                'years' => range(date('Y'), date('Y') + 5)
               ))
             ->add('professionalExpertise',   'entity', array(
                 'class' => 'MissionBundle:professionalExpertise',

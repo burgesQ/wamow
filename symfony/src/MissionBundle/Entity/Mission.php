@@ -903,26 +903,32 @@ class Mission
      */
     public function validate(ExecutionContextInterface $context)
     {
-        $startDate = $this->getMissionBeginning();
-        $endDate = $this->getMissionEnding();
-        $deadline = $this->getApplicationEnding();
-        if ($startDate->format("yy/mm/dd") > $endDate->format("yy/mm/dd"))
+        $missionBeginning = $this->getMissionBeginning();
+        $missionEnding = $this->getMissionEnding();
+        $applicationEnding = $this->getApplicationEnding();
+        $dailyFeesMin = $this->getDailyFeesMin();
+        $dailyFeesMax = $this->getDailyFeesMax();
+        if ($missionBeginning->format("yy/mm/dd") > $missionEnding->format("yy/mm/dd"))
         {
-          echo "ERROR 1";
           $context
             ->buildViolation('The mission can not start after the end date.')
             ->atPath('missionBeginning')
             ->addViolation()
             ;
         }
-        elseif ($deadline->format("yy/mm/dd") > $endDate->format("yy/mm/dd")
-                || $deadline->format("yy/mm/dd") < $startDate->format("yy/mm/dd"))
+        elseif ($applicationEnding->format("yy/mm/dd") > $missionBeginning->format("yy/mm/dd"))
         {
-          echo "ERROR 2";
           $context
-            ->buildViolation('The deadline can not start after the end date
-                              nor before the beguinning date.')
+            ->buildViolation('The deadline must be before the mission start.')
             ->atPath('missionBeginning')
+            ->addViolation()
+            ;
+        }
+        if ($dailyFeesMin > $dailyFeesMax)
+        {
+          $context
+            ->buildViolation('The minimum fees must be less than the maximum.')
+            ->atPath('dailyFeesMin')
             ->addViolation()
             ;
         }

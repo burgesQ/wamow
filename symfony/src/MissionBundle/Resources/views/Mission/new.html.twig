@@ -11,7 +11,7 @@
     </div>
     <div>
     {{ form_errors(form.resume) }}
-    {{ form_label(form.resume) }}
+    {{ form_label(form.resume, 'Describe your mission :') }}
     {{ form_widget(form.resume) }}
     </div>
     <div>
@@ -56,14 +56,14 @@
     {{ form_widget(form.international) }}
     </div>
     <div>
-    {{ form_errors(form.dailyFeesMax) }}
-    {{ form_label(form.dailyFeesMax) }}
-    {{ form_widget(form.dailyFeesMax) }}
-    </div>
-    <div>
     {{ form_errors(form.dailyFeesMin) }}
     {{ form_label(form.dailyFeesMin) }}
     {{ form_widget(form.dailyFeesMin) }}
+    </div>
+    <div>
+    {{ form_errors(form.dailyFeesMax) }}
+    {{ form_label(form.dailyFeesMax) }}
+    {{ form_widget(form.dailyFeesMax) }}
     </div>
     <div>
     {{ form_errors(form.missionBeginning) }}
