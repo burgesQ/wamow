@@ -15,9 +15,9 @@
   </p>
   <p>
       <h4><br>Address :</h4>
-      {{ mission.address }}, {{ mission.city }},{{ mission.zipcode }} <br>{{ mission.country }}
-        {% if mission.state is not null %}
-          , {{ mission.state }}<br>
+      {{ mission.address.street }},{{ mission.address.street2 }}, {{ mission.address.city }},{{ mission.address.zipcode }} <br>{{ mission.address.country }}
+        {% if mission.address.state is not null %}
+          , {{ mission.address.state }}<br>
         {% endif %}
   </p>
   <p>

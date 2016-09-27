@@ -63,12 +63,6 @@ class Step
      */
     private $endDate;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="max_number_team", type="smallint", nullable=true)
-     */
-    private $maxNumberTeam;
 
     /**
      * @var int
@@ -83,9 +77,7 @@ class Step
         $this->UpdateDate = new \DateTime();
         $this->startDate = new \DateTime();
         $this->endDate = new \DateTime();
-        $this->maxNumberTeam = 4;
         $this->status = 0;
-        $this->position = 1;
       }
 
     /**
@@ -223,29 +215,6 @@ class Step
     public function getEndDate()
     {
         return $this->endDate;
-    }
-
-    /**
-     * Set maxNumberTeam
-     *
-     * @param integer $maxNumberTeam
-     * @return Step
-     */
-    public function setMaxNumberTeam($maxNumberTeam)
-    {
-        $this->maxNumberTeam = $maxNumberTeam;
-
-        return $this;
-    }
-
-    /**
-     * Get maxNumberTeam
-     *
-     * @return integer
-     */
-    public function getMaxNumberTeam()
-    {
-        return $this->maxNumberTeam;
     }
 
     /**

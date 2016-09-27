@@ -28,7 +28,15 @@ class MissionController extends Controller
       if ($form->isValid())
         {
           $em = $this->getDoctrine()->getManager();
+          $em->persist($mission->getAddress());
           $em->persist($mission);
+          for ($i=0; $i < $mission->getNumberStep(); $i++)
+              {
+                  $step = new Step();
+                  $step->setMission($mission);
+                  $step->setPosition($i + 1);
+                  $em->persist($step);
+              }
           $em->flush();
           $id = $mission->getId();
           return $this->render('MissionBundle:Mission:registered.html.twig', array(

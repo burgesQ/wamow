@@ -15,29 +15,34 @@
     {{ form_widget(form.resume) }}
     </div>
     <div>
-    {{ form_errors(form.address) }}
-    {{ form_label(form.address) }}
-    {{ form_widget(form.address) }}
+    {{ form_errors(form.address.street) }}
+    {{ form_label(form.address.street, 'Address') }}
+    {{ form_widget(form.address.street) }}
     </div>
     <div>
-    {{ form_errors(form.city) }}
-    {{ form_label(form.city) }}
-    {{ form_widget(form.city) }}
+    {{ form_errors(form.address.street2) }}
+    {{ form_label(form.address.street2, 'Address 2 *') }}
+    {{ form_widget(form.address.street2) }}
     </div>
     <div>
-    {{ form_errors(form.zipcode) }}
-    {{ form_label(form.zipcode) }}
-    {{ form_widget(form.zipcode) }}
+    {{ form_errors(form.address.city) }}
+    {{ form_label(form.address.city) }}
+    {{ form_widget(form.address.city) }}
     </div>
     <div>
-    {{ form_errors(form.country) }}
-    {{ form_label(form.country) }}
-    {{ form_widget(form.country) }}
+    {{ form_errors(form.address.zipcode) }}
+    {{ form_label(form.address.zipcode) }}
+    {{ form_widget(form.address.zipcode) }}
     </div>
     <div>
-    {{ form_errors(form.state) }}
-    {{ form_label(form.state, 'State *') }}
-    {{ form_widget(form.state) }}
+    {{ form_errors(form.address.country) }}
+    {{ form_label(form.address.country) }}
+    {{ form_widget(form.address.country) }}
+    </div>
+    <div>
+    {{ form_errors(form.address.state) }}
+    {{ form_label(form.address.state, 'State *') }}
+    {{ form_widget(form.address.state) }}
     </div>
     {{ form_row(form.language) }}
     <div>

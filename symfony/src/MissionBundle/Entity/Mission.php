@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use ToolsBundle\Entity\Language;
+use ToolsBundle\Entity\Address;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
@@ -45,41 +46,11 @@ class Mission
      */
     private $resume;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="address", type="string", length=255)
-     * @Assert\Regex(
-     *     pattern="#^[0-9a-zA-Zéèêëçîïíàáâñńœôö]+(?:[\s-][a-zA-Zéèêëçîïíàáâñńœôö]+)*$#",
-     *     match=true,
-     *     message="The address must contain only letters numbers, point, comma or dash.")
+    /*
+     * @ORM\OneToOne(targetEntity="ToolsBundle\Entity\Address", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
      */
     private $address;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="city", type="string", length=255)
-     * @Assert\Regex(
-     *     pattern="#^[a-zA-Zéèêëçîïíàáâñńœôö]+(?:[\s-][a-zA-Zéèêëçîïíàáâñńœôö]+)*$#",
-     *     match=true,
-     *     message="The city must contain only letters or dash.")
-     */
-    private $city;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="zipcode", type="string", length=255)
-     */
-    private $zipcode;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="country", type="string", length=255)
-     */
-    private $country;
 
     /**
      * @var bool
@@ -100,17 +71,6 @@ class Mission
      * )
      */
     private $numberStep;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="state", type="string", length=255, nullable=true)
-     * @Assert\Regex(
-     *     pattern="#^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$#",
-     *     match=true,
-     *     message="The state must contain only letters or dash.")
-     */
-    private $state;
 
     /**
      * @var int
@@ -242,6 +202,7 @@ class Mission
         $this->language = new ArrayCollection();
         $this->status = 0;
         $this->numberStep = 3;
+        $this->address = new Address();
       }
 
     /**
@@ -301,22 +262,9 @@ class Mission
     }
 
     /**
-     * Set address
-     *
-     * @param string $address
-     * @return Mission
-     */
-    public function setAddress($address)
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    /**
      * Get address
      *
-     * @return string
+     * @return \ToolsBundle\Entity\Address
      */
     public function getAddress()
     {
@@ -324,49 +272,14 @@ class Mission
     }
 
     /**
-     * Set city
+     * Set address
      *
-     * @param string $city
+     * @param \ToolsBundle\Entity\Address $Address
      * @return Mission
      */
-    public function setCity($city)
+    public function setAddress(Address $address = null)
     {
-        $this->city = $city;
-
-        return $this;
-    }
-
-    /**
-     * Get city
-     *
-     * @return string
-     */
-    public function getCity()
-    {
-        return $this->city;
-    }
-
-    /**
-     * Set country
-     *
-     * @param string $country
-     * @return Mission
-     */
-    public function setCountry($country)
-    {
-        $this->country = $country;
-
-        return $this;
-    }
-
-    /**
-     * Get country
-     *
-     * @return string
-     */
-    public function getCountry()
-    {
-        return $this->country;
+        $this->address = $address;
     }
 
     /**
@@ -413,29 +326,6 @@ class Mission
     public function getNumberStep()
     {
         return $this->numberStep;
-    }
-
-    /**
-     * Set state
-     *
-     * @param string $state
-     * @return Mission
-     */
-    public function setState($state)
-    {
-        $this->state = $state;
-
-        return $this;
-    }
-
-    /**
-     * Get state
-     *
-     * @return string
-     */
-    public function getState()
-    {
-        return $this->state;
     }
 
     /**

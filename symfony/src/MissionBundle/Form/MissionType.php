@@ -6,6 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use ToolsBundle\Entity\Language;
+use ToolsBundle\Entity\Address;
+use ToolsBundle\Form\AddressType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 
@@ -20,11 +22,7 @@ class MissionType extends AbstractType
         $builder
             ->add('title')
             ->add('resume')
-            ->add('address')
-            ->add('city')
-            ->add('zipcode')
-            ->add('country',          'country')
-            ->add('state')
+            ->add('address',    new AddressType())
             ->add('confidentiality',  'checkbox', array(
                 'label'    => 'Does this mission has to be confidential?',
                 'required' => false,
