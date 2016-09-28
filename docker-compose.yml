@@ -2,7 +2,7 @@ version: '2'
 
 services:
     db:
-        image: mysql
+        image: astaluego/mysql:5.7.13
         ports:
             - 3306:3306
         volumes:
