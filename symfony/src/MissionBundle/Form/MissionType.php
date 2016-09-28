@@ -27,7 +27,7 @@ class MissionType extends AbstractType
                 'label'    => 'Does this mission has to be confidential?',
                 'required' => false,
               ))
-            ->add('language',   'entity', array(
+            ->add('languages',   'entity', array(
                 'class' => 'ToolsBundle:Language',
                 'property' => 'name',
                 'multiple' => true,

@@ -88,7 +88,7 @@ class MissionController extends Controller
         {
           throw new NotFoundHttpException("The mission ".$id." doesn't exist.");
         }
-      $listLanguage = $mission->getLanguage();
+      $listLanguage = $mission->getLanguages();
       return $this->render('MissionBundle:Mission:view.html.twig', array(
         'mission'           => $mission,
         'listLanguage'      => $listLanguage,
