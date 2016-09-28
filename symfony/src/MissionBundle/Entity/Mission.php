@@ -46,7 +46,7 @@ class Mission
      */
     private $resume;
 
-    /*
+    /**
      * @ORM\OneToOne(targetEntity="ToolsBundle\Entity\Address", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
@@ -112,7 +112,7 @@ class Mission
      *
      * @ORM\ManyToMany(targetEntity="\ToolsBundle\Entity\Language", cascade={"persist"})
      */
-    private $language;
+    private $languages;
 
     /**
      * @ORM\ManyToOne(targetEntity="MissionBundle\Entity\ProfessionalExpertise")
@@ -199,7 +199,7 @@ class Mission
       {
         $this->creationDate = new \Datetime();
         $this->UpdateDate = new \DateTime();
-        $this->language = new ArrayCollection();
+        $this->languages = new ArrayCollection();
         $this->status = 0;
         $this->numberStep = 3;
         $this->address = new Address();
@@ -581,50 +581,6 @@ class Mission
         return $this->zipcode;
     }
 
-    /**
-     * Add language
-     *
-     * @param \ToolsBundle\Entity\Language $language
-     * @return Mission
-     */
-    public function addLanguage(\ToolsBundle\Entity\Language $language)
-    {
-        $this->language[] = $language;
-
-        return $this;
-    }
-
-    /**
-     * Remove language
-     *
-     * @param \ToolsBundle\Entity\Language $language
-     */
-    public function removeLanguage(\ToolsBundle\Entity\Language $language)
-    {
-        $this->language->removeElement($language);
-    }
-
-    /**
-     * Get language
-     *
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getLanguage()
-    {
-        return $this->language;
-    }
-
-    /**
-     * Set language
-     *
-     * @param \Doctrine\Common\Collections\ArrayCollection $language
-     * @return Mission
-     */
-    public function setLanguage(ArrayCollection $language)
-    {
-        $this->language = $language;
-    }
-
 
     /**
      * Set ending
@@ -821,5 +777,38 @@ class Mission
             ->addViolation()
             ;
         }
+    }
+
+    /**
+     * Get languages
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLanguages()
+    {
+        return $this->languages;
+    }
+
+    /**
+     * Add languages
+     *
+     * @param \ToolsBundle\Entity\Language $languages
+     * @return Mission
+     */
+    public function addLanguage(\ToolsBundle\Entity\Language $languages)
+    {
+        $this->languages[] = $languages;
+
+        return $this;
+    }
+
+    /**
+     * Remove languages
+     *
+     * @param \ToolsBundle\Entity\Language $languages
+     */
+    public function removeLanguage(\ToolsBundle\Entity\Language $languages)
+    {
+        $this->languages->removeElement($languages);
     }
 }
