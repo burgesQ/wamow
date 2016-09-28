@@ -46,7 +46,7 @@ class Mission
      */
     private $resume;
 
-    /*
+    /**
      * @ORM\OneToOne(targetEntity="ToolsBundle\Entity\Address", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */

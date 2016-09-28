@@ -28,7 +28,6 @@ class MissionController extends Controller
       if ($form->isValid())
         {
           $em = $this->getDoctrine()->getManager();
-          $em->persist($mission->getAddress());
           $em->persist($mission);
           for ($i=0; $i < $mission->getNumberStep(); $i++)
               {
