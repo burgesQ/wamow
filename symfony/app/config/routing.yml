@@ -17,3 +17,7 @@ user:
 compagny:
     resource: "@CompagnyBundle/Resources/config/routing.yml"
     prefix: /
+
+dashboard:
+    resource: "@DashboardBundle/Resources/config/routing.yml"
+    prefix:   /

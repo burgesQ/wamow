@@ -1,0 +1,5 @@
+dashboard_expert:
+    resource: "@DashboardBundle/Resources/config/routing/expert.xml"
+
+dashboard_seeker:
+    resource: "@DashboardBundle/Resources/config/routing/seeker.xml"
