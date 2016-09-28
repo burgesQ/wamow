@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<body>
+<h3>Mission Form</h3>
+<form method="post" {{ form_enctype(form) }}>
+  {{ form_start(form) }}
+    <div>
+    {{ form_errors(form.title) }}
+    {{ form_label(form.title) }}
+    {{ form_widget(form.title) }}
+    </div>
+    <div>
+    {{ form_errors(form.resume) }}
+    {{ form_label(form.resume, 'Describe your mission :') }}
+    {{ form_widget(form.resume) }}
+    </div>
+    <div>
+    {{ form_errors(form.address.street) }}
+    {{ form_label(form.address.street, 'Address') }}
+    {{ form_widget(form.address.street) }}
+    </div>
+    <div>
+    {{ form_errors(form.address.street2) }}
+    {{ form_label(form.address.street2, 'Address 2 *') }}
+    {{ form_widget(form.address.street2) }}
+    </div>
+    <div>
+    {{ form_errors(form.address.city) }}
+    {{ form_label(form.address.city) }}
+    {{ form_widget(form.address.city) }}
+    </div>
+    <div>
+    {{ form_errors(form.address.zipcode) }}
+    {{ form_label(form.address.zipcode) }}
+    {{ form_widget(form.address.zipcode) }}
+    </div>
+    <div>
+    {{ form_errors(form.address.country) }}
+    {{ form_label(form.address.country) }}
+    {{ form_widget(form.address.country) }}
+    </div>
+    <div>
+    {{ form_errors(form.address.state) }}
+    {{ form_label(form.address.state, 'State *') }}
+    {{ form_widget(form.address.state) }}
+    </div>
+    {{ form_row(form.language) }}
+    <div>
+    {{ form_errors(form.confidentiality) }}
+    {{ form_label(form.confidentiality) }}
+    {{ form_widget(form.confidentiality) }}
+    </div>
+    <div>
+    {{ form_errors(form.telecommuting) }}
+    {{ form_label(form.telecommuting) }}
+    {{ form_widget(form.telecommuting) }}
+    </div>
+    <div>
+    {{ form_errors(form.international) }}
+    {{ form_label(form.international) }}
+    {{ form_widget(form.international) }}
+    </div>
+    <div>
+    {{ form_errors(form.dailyFeesMin) }}
+    {{ form_label(form.dailyFeesMin) }}
+    {{ form_widget(form.dailyFeesMin) }}
+    </div>
+    <div>
+    {{ form_errors(form.dailyFeesMax) }}
+    {{ form_label(form.dailyFeesMax) }}
+    {{ form_widget(form.dailyFeesMax) }}
+    </div>
+    <div>
+    {{ form_errors(form.missionBeginning) }}
+    {{ form_label(form.missionBeginning) }}
+    {{ form_widget(form.missionBeginning) }}
+    </div>
+    <div>
+    {{ form_errors(form.missionEnding) }}
+    {{ form_label(form.missionEnding) }}
+    {{ form_widget(form.missionEnding) }}
+    </div>
+    <div>
+    {{ form_errors(form.applicationEnding) }}
+    {{ form_label(form.applicationEnding) }}
+    {{ form_widget(form.applicationEnding) }}
+    </div>
+    <div>
+    {{ form_errors(form.professionalExpertise) }}
+    {{ form_label(form.professionalExpertise) }}
+    {{ form_widget(form.professionalExpertise) }}
+    </div>
+    <div>
+    {{ form_errors(form.missionKind) }}
+    {{ form_label(form.missionKind) }}
+    {{ form_widget(form.missionKind) }}
+    </div>
+    <div>
+    {{ form_errors(form.image) }}
+    {{ form_label(form.image, 'Image *') }}
+    {{ form_widget(form.image) }}
+    </div>
+    {{ form_row(form.save, { 'label': 'Submit' }) }}
+  {{ form_end(form) }}
+</form>
+
+* optional fields
+</body>
+</html>

@@ -1,0 +1,14 @@
+<p>
+	Mission nº
+	{{ mission.id}}
+
+	<p>
+		Step {{ step.position }}	/	{{ mission.numberStep}} registered
+
+		Starts -> {{ step.startDate|date('d/m/Y') }} <br>
+		Ends -> {{ step.endDate|date('d/m/Y') }}
+	</p>
+
+	<br><a href="{{ path('mission_step', {'id': mission.id}) }}"> next step</a>
+
+</p>

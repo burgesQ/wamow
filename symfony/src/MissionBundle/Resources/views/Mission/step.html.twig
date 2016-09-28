@@ -1,0 +1,20 @@
+<p>
+	Mission nº
+	{{ mission.id}}
+
+
+	{% if step.position == 1 %}
+		<p>
+			MISSION BEGINNING
+		</p>
+	{% endif %}
+
+
+	<div class="well">
+	  {{ form(form) }}
+	</div>
+
+	<p>
+		Step {{ step.position }}	/	{{ mission.numberStep}}
+	</p>
+</p>
