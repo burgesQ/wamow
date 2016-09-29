@@ -753,6 +753,7 @@ class Mission
         $applicationEnding = $this->getApplicationEnding();
         $dailyFeesMin = $this->getDailyFeesMin();
         $dailyFeesMax = $this->getDailyFeesMax();
+        $today = new \DateTime();
         if ($missionBeginning->format("yy/mm/dd") > $missionEnding->format("yy/mm/dd"))
         {
           $context
@@ -765,9 +766,19 @@ class Mission
         {
           $context
             ->buildViolation('The deadline must be before the mission start.')
-            ->atPath('missionBeginning')
+            ->atPath('applicationEnding')
             ->addViolation()
             ;
+        }
+        elseif ($missionBeginning < $today
+                || $missionEnding < $today
+                || $applicationEnding < $today)
+        {
+            $context
+              ->buildViolation('You can\'t pick a past date.')
+              ->atPath('missionBeginning')
+              ->addViolation()
+              ;
         }
         if ($dailyFeesMin > $dailyFeesMax)
         {
