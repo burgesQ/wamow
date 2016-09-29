@@ -5,6 +5,7 @@ namespace ToolsBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class AddressType extends AbstractType
 {
@@ -23,7 +24,10 @@ class AddressType extends AbstractType
             ->add('country', 'country', array(
                 'required' => true,
                 'placeholder' => 'Choose a country')
-            );
+            )
+            ->add('label')
+            ->add('name')
+            ;
     }
 
     /**
