@@ -47,15 +47,14 @@
     </div>
     <div>
     {{ form_errors(form.address.label) }}
-    {{ form_label(form.address.label, 'Label *') }}
+    {{ form_label(form.address.label) }}
     {{ form_widget(form.address.label) }}
     </div>
     <div>
     {{ form_errors(form.address.name) }}
-    {{ form_label(form.address.name, 'Name *') }}
+    {{ form_label(form.address.name) }}
     {{ form_widget(form.address.name) }}
     </div>
-    <br>
     {{ form_row(form.languages) }}
     <div>
     <br>
