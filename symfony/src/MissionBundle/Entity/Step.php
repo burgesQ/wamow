@@ -36,6 +36,20 @@ class Step
     private $position;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="nb_max_team", type="smallint")
+     */
+    private $nbMaxTeam;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="realloc_team", type="smallint")
+     */
+    private $reallocTeam;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="creation_date", type="datetime")
@@ -77,6 +91,8 @@ class Step
         $this->UpdateDate = new \DateTime();
         $this->startDate = new \DateTime();
         $this->endDate = new \DateTime();
+        $this->nbMaxTeam = 0;
+        $this->reallocTeam = 0;
         $this->status = 0;
       }
 
@@ -238,5 +254,61 @@ class Step
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * Set nbMaxTeam
+     *
+     * @param integer $nbMaxTeam
+     * @return Step
+     */
+    public function setNbMaxTeam($nbMaxTeam)
+    {
+        $this->nbMaxTeam = $nbMaxTeam;
+
+        return $this;
+    }
+
+    /**
+     * Get nbMaxTeam
+     *
+     * @return integer
+     */
+    public function getNbMaxTeam()
+    {
+        return $this->nbMaxTeam;
+    }
+
+    /**
+     * Set reallocTeam
+     *
+     * @param integer $reallocTeam
+     * @return Step
+     */
+    public function setReallocTeam($reallocTeam)
+    {
+        $this->reallocTeam = $reallocTeam;
+
+        return $this;
+    }
+
+    /**
+     * Get reallocTeam
+     *
+     * @return integer
+     */
+    public function getReallocTeam()
+    {
+        return $this->reallocTeam;
+    }
+
+    /**
+     * Get mission
+     *
+     * @return \MissionBundle\Entity\Mission
+     */
+    public function getMission()
+    {
+        return $this->mission;
     }
 }
