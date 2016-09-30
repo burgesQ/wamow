@@ -15,7 +15,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use FOS\UserBundle\Model\UserInterface;
 
-use ToolsBundle\Entity\Address
+use ToolsBundle\Entity\Address;
 
 class RegistrationController extends BaseController
 {
