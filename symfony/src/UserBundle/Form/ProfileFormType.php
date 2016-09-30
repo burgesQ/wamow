@@ -10,6 +10,8 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
+use ToolsBundle\Form\AddressType;
+
 class ProfileFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -41,14 +43,7 @@ class ProfileFormType extends AbstractType
             'years' => range(date('Y') - 12, date('Y') - 110),
         ));
         $builder->add('dailyFees');
-        $builder->add('address');
-        $builder->add('zipcode');
-        $builder->add('city');
-        $builder->add('country', 'country', array(
-            'placeholder' => 'Choose a country',
-            'required' => true,
-        ));
-        $builder->add('state');
+        $builder->add('address', new AddressType());
         $builder->add('phone');
         $builder->add('image');
     }
@@ -84,31 +79,6 @@ class ProfileFormType extends AbstractType
     }
 
     public function getDailyFees()
-    {
-        return $this->getBlockPrefix();
-    }
-
-    public function getAddress()
-    {
-        return $this->getBlockPrefix();
-    }
-
-    public function getZipcode()
-    {
-        return $this->getBlockPrefix();
-    }
-
-    public function getCity()
-    {
-        return $this->getBlockPrefix();
-    }
-
-    public function getState()
-    {
-        return $this->getBlockPrefix();
-    }
-
-    public function getCountry()
     {
         return $this->getBlockPrefix();
     }

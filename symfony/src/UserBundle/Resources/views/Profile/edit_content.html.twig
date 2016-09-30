@@ -9,14 +9,16 @@
     {{ form_row(form.gender) }}
     {{ form_row(form.firstName) }}
     {{ form_row(form.lastName) }}
-    {{ form_row(form.gender) }}
     {{ form_row(form.birthdate) }}
     {{ form_row(form.phone) }}
-    {{ form_row(form.address) }}
-    {{ form_row(form.zipcode) }}
-    {{ form_row(form.city) }}
-    {{ form_row(form.state) }}
-    {{ form_row(form.country) }}
+  
+    {{ form_row(form.address.country) }}  
+    {{ form_row(form.address.state) }}  
+    {{ form_row(form.address.zipcode) }}
+    {{ form_row(form.address.city) }}
+    {{ form_row(form.address.street) }}  
+    {{ form_row(form.address.street2) }}  
+
     {{ form_row(form.dailyFees) }}
     {{ form_row(form.current_password) }}
 
