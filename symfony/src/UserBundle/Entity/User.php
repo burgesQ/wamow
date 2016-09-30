@@ -33,9 +33,9 @@ class User extends BaseUser
 
     /**
      * @Assert\Regex(
-     *  pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,100}$/",
-     *  message="Le mot de passe doit contenir entre 8 et 100 caractères alphanumériques dont une majuscule, une minuscule et un chiffre."
- * )
+     *  pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[[!-.]|[:-@]|[[-_]|[{-~]])[a-zA-Z\d]{8,100}/",
+     *  message="Le mot de passe doit contenir entre 8 et 100 caractères alphanumériques dont une majuscule, une minuscule un chiffre anisi qu'un caractere exotique."
+     * )
      * @var string
      *
      */
