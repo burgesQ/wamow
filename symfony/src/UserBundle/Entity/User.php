@@ -5,6 +5,7 @@ namespace UserBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Validator\Constraints as Assert;
+use ToolsBundle\Entity\Address;
 
 /**
  * User
@@ -29,6 +30,16 @@ class User extends BaseUser
      * @ORM\Column(name="status", type="smallint", nullable=false)
      */
     private $status;
+
+    /**
+     * @Assert\Regex(
+     *  pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,100}$/",
+     *  message="Le mot de passe doit contenir entre 8 et 100 caractères alphanumériques dont une majuscule, une minuscule et un chiffre."
+ * )
+     * @var string
+     *
+     */
+    protected $plainPassword;
 
     /**
      * @var bool
@@ -99,54 +110,11 @@ class User extends BaseUser
     */
    private $dailyFees;
 
-   /**
-    * @var string
-    *
-    * @ORM\Column(name="address", type="string", length=255, nullable=true)
-    *
-    * @Assert\Regex(
-    *     pattern="#^[0-9a-zA-Zéèêëçîïíàáâñńœôö]+(?:[\s-][a-zA-Zéèêëçîïíàáâñńœôö]+)*$#",
-    *     match=true,
-    *     message="The address must contain only letters numbers, point, comma or dash.")
-    */
-   private $address;
-
-   /**
-    * @var string
-    *
-    * @ORM\Column(name="zipcode", type="string", length=10, nullable=true)
-    *
-    */
-   private $zipcode;
-
-   /**
-    * @var string
-    *
-    * @ORM\Column(name="city", type="string", length=255, nullable=true)
-    * @Assert\Regex(
-    *     pattern="#^[a-zA-Zéèêëçîïíàáâñńœôö]+(?:[\s-][a-zA-Zéèêëçîïíàáâñńœôö]+)*$#",
-    *     match=true,
-    *     message="The city must contain only letters or dash.")
-    */
-   private $city;
-
-   /**
-    * @var string
-    *
-    * @ORM\Column(name="state", type="string", length=255, nullable=true)
-    * @Assert\Regex(
-    *     pattern="#^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$#",
-    *     match=true,
-    *     message="The state must contain only letters or dash.")
-    */
-   private $state;
-
-   /**
-    * @var string
-    *
-    * @ORM\Column(name="country", type="string", length=255, nullable=true)
-    */
-   private $country;
+    /**
+     * @ORM\OneToOne(targetEntity="ToolsBundle\Entity\Address", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $address;
 
    /**
       * @var string
@@ -176,15 +144,6 @@ class User extends BaseUser
      */
     private $updateDate;
 
-    public function setEmail($email)
-    {
-        $email = is_null($email) ? '' : $email;
-        parent::setEmail($email);
-        $this->setUsername($email);
-
-        return $this;
-    }
-
     public function __construct()
     {
         parent::__construct();
@@ -192,6 +151,16 @@ class User extends BaseUser
         $this->updateDate = new \Datetime();
         $this->confidentiality = false;
         $this->status = 0;
+        $this->address = NULL;
+    }
+
+    public function setEmail($email)
+    {
+        $email = is_null($email) ? '' : $email;
+        parent::setEmail($email);
+        $this->setUsername($email);
+
+        return $this;
     }
 
     /**
@@ -377,94 +346,6 @@ class User extends BaseUser
     public function getAddress()
     {
         return $this->address;
-    }
-
-    /**
-     * Set zipcode
-     *
-     * @param string $zipcode
-     * @return User
-     */
-    public function setZipcode($zipcode)
-    {
-        $this->zipcode = $zipcode;
-        return $this;
-    }
-
-    /**
-     * Get zipcode
-     *
-     * @return string
-     */
-    public function getZipcode()
-    {
-        return $this->zipcode;
-    }
-
-    /**
-     * Set city
-     *
-     * @param string $city
-     * @return User
-     */
-    public function setCity($city)
-    {
-        $this->city = $city;
-        return $this;
-    }
-
-    /**
-     * Get city
-     *
-     * @return string
-     */
-    public function getCity()
-    {
-        return $this->city;
-    }
-
-    /**
-     * Set state
-     *
-     * @param string $state
-     * @return User
-     */
-    public function setState($state)
-    {
-        $this->state = $state;
-        return $this;
-    }
-
-    /**
-     * Get state
-     *
-     * @return string
-     */
-    public function getState()
-    {
-        return $this->state;
-    }
-
-    /**
-     * Set country
-     *
-     * @param string $country
-     * @return User
-     */
-    public function setCountry($country)
-    {
-        $this->country = $country;
-        return $this;
-    }
-
-    /**
-     * Get country
-     *
-     * @return string
-     */
-    public function getCountry()
-    {
-        return $this->country;
     }
 
     /**
