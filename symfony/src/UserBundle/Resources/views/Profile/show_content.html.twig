@@ -4,14 +4,17 @@
     <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
     <p>{{ 'profile.show.first_name'|trans }}: {{ user.firstName }}</p>
     <p>{{ 'profile.show.last_name'|trans }}: {{ user.lastName }}</p>
-    <p>{{ 'profile.show.country'|trans }}: {{ user.country }}</p>
-    <p>{{ 'profile.show.gender'|trans }}: {{ user.gender }}</p>
+     <p>{{ 'profile.show.gender'|trans }}: {{ user.gender }}</p>
     <p>{{ 'profile.show.birthdate'|trans}}: {{ user.birthdate|date('m/d/Y') }}</p>
     <p>{{ 'profile.show.daily_fees'|trans }}: {{ user.dailyFees }}</p>
-    <p>{{ 'profile.show.address'|trans }}: {{ user.address }}</p>
-    <p>{{ 'profile.show.zipcode'|trans }}: {{ user.zipcode }}</p>
-    <p>{{ 'profile.show.city'|trans }}: {{ user.city }}</p>
-    <p>{{ 'profile.show.state'|trans }}: {{ user.state }}</p>
+    {% if user.address != null %}
+      <p>{{ 'profile.show.country'|trans }}: {{ user.address.country|countryName }}</p>
+      <p>{{ 'profile.show.state'|trans }}: {{ user.address.state }}</p>
+      <p>{{ 'profile.show.city'|trans }}: {{ user.address.city }}</p>
+      <p>{{ 'profile.show.zipcode'|trans }}: {{ user.address.zipcode }}</p>
+      <p>{{ 'profile.show.address'|trans }}: {{ user.address.street }}</p>
+      <p>{{ 'profile.show.address'|trans }}: {{ user.address.street2 }}</p>
+    {% endif %}
     <p>{{ 'profile.show.phone'|trans }}: {{ user.phone }}</p>
     <p>{{ 'profile.show.image'|trans }}: {{ user.image }}</p>
 </div>
