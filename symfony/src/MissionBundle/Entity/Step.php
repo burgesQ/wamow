@@ -85,14 +85,14 @@ class Step
      */
     private $status;
 
-    public function __construct()
+    public function __construct($nbMaxTeam, $reallocTeam)
       {
         $this->creationDate = new \Datetime();
         $this->UpdateDate = new \DateTime();
         $this->startDate = new \DateTime();
         $this->endDate = new \DateTime();
-        $this->nbMaxTeam = 0;
-        $this->reallocTeam = 0;
+        $this->nbMaxTeam = $nbMaxTeam;
+        $this->reallocTeam = $reallocTeam;
         $this->status = 0;
       }
 

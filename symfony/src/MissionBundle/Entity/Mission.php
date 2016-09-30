@@ -770,9 +770,9 @@ class Mission
             ->addViolation()
             ;
         }
-        elseif ($missionBeginning < $today
-                || $missionEnding < $today
-                || $applicationEnding < $today)
+        elseif ($missionBeginning <= $today
+                || $missionEnding <= $today
+                || $applicationEnding <= $today)
         {
             $context
               ->buildViolation('You can\'t pick a past date.')
