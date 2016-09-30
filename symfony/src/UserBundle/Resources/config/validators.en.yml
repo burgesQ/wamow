@@ -12,12 +12,9 @@ user:
         invalid: 'The email is not valid'
     password:
         blank: 'Please enter a password'
-        short: '[-Inf,Inf]The password is too short'
-        long: '[-Inf,Inf]The password is too long'
         mismatch: 'The entered passwords don''t match'
     new_password:
         blank: 'Please enter a new password'
-        short: '[-Inf,Inf]The new password is too short'
     current_password:
         invalid: 'The entered password is invalid'
     group:
