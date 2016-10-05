@@ -20,8 +20,10 @@ class AddressType extends AbstractType
             ->add('city')
             ->add('zipcode')
             ->add('state')
-            ->add('country',    'country')
-        ;
+            ->add('country', 'country', array(
+                'required' => true,
+                'placeholder' => 'Choose a country')
+            );
     }
 
     /**
