@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Validator\Constraints as Assert;
 use ToolsBundle\Entity\Address;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * User
@@ -124,13 +125,24 @@ class User extends BaseUser
     /**
     * @var int
     *
-    * @ORM\Column(name="daily_fees", type="smallint", nullable=true)
+    * @ORM\Column(name="daily_fees_min", type="smallint", nullable=true)
     *
     * @Assert\Range(
     *      min = 0
     *)
     */
-   private $dailyFees;
+   private $dailyFeesMin;
+
+    /**
+    * @var int
+    *
+    * @ORM\Column(name="daily_fees_max", type="smallint", nullable=true)
+    *
+    * @Assert\Range(
+    *      min = 0
+    *)
+    */
+   private $dailyFeesMax;
 
     /**
      * @ORM\OneToOne(targetEntity="ToolsBundle\Entity\Address", cascade={"persist"})
@@ -328,28 +340,6 @@ class User extends BaseUser
     }
 
     /**
-     * Set dailyFees
-     *
-     * @param integer $dailyFees
-     * @return User
-     */
-    public function setDailyFees($dailyFees)
-    {
-        $this->dailyFees = $dailyFees;
-        return $this;
-    }
-
-    /**
-     * Get dailyFees
-     *
-     * @return integer
-     */
-    public function getDailyFees()
-    {
-        return $this->dailyFees;
-    }
-
-    /**
      * Set phone
      *
      * @param string $phone
@@ -457,4 +447,68 @@ class User extends BaseUser
     {
         return $this->address;
     }
+
+    /**
+     * Set dailyFeesMin
+     *
+     * @param integer $dailyFeesMin
+     * @return User
+     */
+    public function setDailyFeesMin($dailyFeesMin)
+    {
+        $this->dailyFeesMin = $dailyFeesMin;
+
+        return $this;
+    }
+
+    /**
+     * Get dailyFeesMin
+     *
+     * @return integer
+     */
+    public function getDailyFeesMin()
+    {
+        return $this->dailyFeesMin;
+    }
+
+    /**
+     * Set dailyFeesMax
+     *
+     * @param integer $dailyFeesMax
+     * @return User
+     */
+    public function setDailyFeesMax($dailyFeesMax)
+    {
+        $this->dailyFeesMax = $dailyFeesMax;
+
+        return $this;
+    }
+
+    /**
+     * Get dailyFeesMax
+     *
+     * @return integer
+     */
+    public function getDailyFeesMax()
+    {
+        return $this->dailyFeesMax;
+    }
+
+    /**
+     * @Assert\Callback
+     */
+    public function validate(ExecutionContextInterface $context)
+    {
+        $dailyFeesMin = $this->getDailyFeesMin();
+        $dailyFeesMax = $this->getDailyFeesMax();
+        if ($dailyFeesMin > $dailyFeesMax)
+        {
+          $context
+            ->buildViolation('The minimum fees must be less than the maximum.')
+            ->atPath('dailyFeesMin')
+            ->addViolation()
+            ;
+        }
+    }
+
 }

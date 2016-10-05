@@ -43,7 +43,8 @@ class ProfileFormType extends AbstractType
             'pattern' => "{{ month }}/{{ day }}/{{ year }}",
             'years' => range(date('Y') - 12, date('Y') - 110),
         ));
-        $builder->add('dailyFees');
+        $builder->add('dailyFeesMin');
+        $builder->add('dailyFeesMax');
         $builder->add('address', new AddressType());
         $builder->add('phone');
         $builder->add('image');
