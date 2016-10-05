@@ -1,5 +1,5 @@
 {% trans_default_domain 'FOSUserBundle' %}
-0;95;0c
+
 <div class="user_user_show">
     <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
     <p>{{ 'profile.show.first_name'|trans }}: {{ user.firstName }}</p>
@@ -8,8 +8,8 @@
     {% if user.address != null %}
       <p>{{ 'profile.show.birthdate'|trans}}: {{ user.birthdate|date("m/d/Y") }}</p>
     {% endif %}
-    <p>Daily fees min: {{ user.dailyFeesMin }}</p>
-    <p>Daily fees max: {{ user.dailyFeesMax }}</p>
+    <p>{{ 'profile.show.daily_fees_min'|trans }}: {{ user.dailyFeesMin }}</p>
+    <p>{{ 'profile.show.daily_fees_max'|trans }}: {{ user.dailyFeesMax }}</p>
     {% if user.address != null %}
       <p>{{ 'profile.show.country'|trans }}: {{ user.address.country|countryName }}</p>
       <p>{{ 'profile.show.state'|trans }}: {{ user.address.state }}</p>

@@ -26,7 +26,8 @@ profile:
         last_name: 'Last Name'
         gender: Gender
         birthdate: Birthdate
-        daily_fees: Daily Fees
+        daily_fees_min: 'Daily Fees Min'
+        daily_fees_max: 'Daily Fees Max'
         zipcode: Zipcode
         address: Address
         city: City
