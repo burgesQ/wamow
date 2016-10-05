@@ -327,28 +327,6 @@ class User extends BaseUser
     }
 
     /**
-     * Set address
-     *
-     * @param string $address
-     * @return User
-     */
-    public function setAddress($address)
-    {
-        $this->address = $address;
-        return $this;
-    }
-
-    /**
-     * Get address
-     *
-     * @return string
-     */
-    public function getAddress()
-    {
-        return $this->address;
-    }
-
-    /**
      * Set phone
      *
      * @param string $phone
@@ -432,5 +410,28 @@ class User extends BaseUser
     public function getUpdateDate()
     {
         return $this->updateDate;
+    }
+
+    /**
+     * Set address
+     *
+     * @param \ToolsBundle\Entity\Address $address
+     * @return User
+     */
+    public function setAddress(\ToolsBundle\Entity\Address $address = null)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return \ToolsBundle\Entity\Address
+     */
+    public function getAddress()
+    {
+        return $this->address;
     }
 }
