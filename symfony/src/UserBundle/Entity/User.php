@@ -174,6 +174,7 @@ class User extends BaseUser
         $this->confidentiality = false;
         $this->status = 0;
         $this->address = NULL;
+        $this->birthdate = NULL;
     }
 
     public function setEmail($email)
