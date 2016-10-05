@@ -30,13 +30,21 @@ class ProfileFormType extends AbstractType
             'placeholder' => 'Choose your gender',
             'empty_data'  => null
         ));
+
         $builder->add('birthdate', 'birthday', array(
-            'required'      => false,
-            'format'        => 'd M y',
-            'empty_value' => array('year' => 'Year' , 'month' => 'Month' , 'day' => 'Day')
+            'widget' => 'choice',
+            'required'    => false,
+            'placeholder' => array(
+                'month' => 'Month',
+                'day' => 'Day',
+                'year' => 'Year',
+            ),
+            'format' => 'dMMMMy',
+            'pattern' => "{{ month }}/{{ day }}/{{ year }}",
+            'years' => range(date('Y') - 12, date('Y') - 110),
         ));
         $builder->add('dailyFees');
-        $builder->add('address', new AddressType(), array('required' => false));
+        $builder->add('address', new AddressType());
         $builder->add('phone');
         $builder->add('image');
     }
