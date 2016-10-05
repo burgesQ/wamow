@@ -501,7 +501,15 @@ class User extends BaseUser
     {
         $dailyFeesMin = $this->getDailyFeesMin();
         $dailyFeesMax = $this->getDailyFeesMax();
-        if ($dailyFeesMin > $dailyFeesMax)
+
+        if ( ($dailyFeesMax === NULL && $dailyFeesMin !== NULL) ||
+             ($dailyFeesMax !== NULL && $dailyFeesMin === NULL) ) {
+                 $context
+                     ->buildViolation("Dailyfees min and max must be set.")
+                     ->atPath('dailyFeesMin')
+                     ->addViolation();
+        }
+        else if ($dailyFeesMin > $dailyFeesMax)
         {
           $context
             ->buildViolation('The minimum fees must be less than the maximum.')
