@@ -33,9 +33,31 @@ class User extends BaseUser
 
     /**
      * @Assert\Regex(
-     *  pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[[!-.]|[:-@]|[[-_]|[{-~]])[a-zA-Z\d]{8,100}/",
-     *  message="Le mot de passe doit contenir entre 8 et 100 caractères alphanumériques dont une majuscule, une minuscule un chiffre anisi qu'un caractere exotique."
+     *  pattern="/^(?=.*[a-z])/",
+     *  message="The password must contain at least one lowercase letter."
      * )
+     * @Assert\Regex(
+     *  pattern="/^(?=.*[A-Z])/",
+     *  message="The password must contain at least one uppercase letter."
+     * )
+     * @Assert\Regex(
+     *  pattern="/^(?=.*\d)/",
+     *  message="The password must contain at least one number."
+     * )
+     * @Assert\Regex(
+     *  pattern="/^(?=.*\W)/",
+     *  message="The password must contain at least one special character."
+     * )
+     * @Assert\NotBlank(
+     *  message="fos_user.password.blank",
+     *  groups={"Registration", "ResetPassword", "ChangePassword"}
+     * )
+     * @Assert\Length(
+     *  min=8,
+     *  minMessage="fos_user.password.short",
+     *  groups={"Registration", "Profile", "ResetPassword", "ChangePassword"}
+     * )
+     *
      * @var string
      *
      */
