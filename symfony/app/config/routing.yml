@@ -1,12 +1,7 @@
 mission:
     resource: "@MissionBundle/Resources/config/routing.yml"
-#    type:     annotation
-
-fos_user_bundle:
-    resource: "@UserBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix: /
 
 user:
-    resource: "@UserBundle/Controller/"
-    type:     annotation
-    prefix:   /
+    resource: "@UserBundle/Resources/config/routing.yml"
+    prefix: /
