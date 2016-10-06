@@ -7,3 +7,9 @@ services:
         class: UserBundle\Twig\CountryExtension
         tags:
             - { name: twig.extension }
+
+    acme_user.password_resetting:
+        class: UserBundle\EventListener\PasswordResettingListener
+        arguments: [ @router ]
+        tags:
+            - { name: kernel.event_subscriber }

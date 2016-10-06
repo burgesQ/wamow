@@ -15,6 +15,7 @@ security:
         username: Username
         password: Password
         remember_me: 'Remember me'
+        reset: 'Reset password'
         submit: 'Log in'
         email: Email
 
