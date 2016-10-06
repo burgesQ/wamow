@@ -2,11 +2,28 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Wantmore.work{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            {{ 'layout.logged_in_as'|trans({'%first_name%': app.user.firstName, '%last_name%': app.user.lastName}, 'FOSUserBundle') }} |
+            <a href="{{ path('fos_user_security_logout') }}">
+                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+            </a>
+        {% else %}
+            {{ render(controller('UserBundle:Security:loginBis')) }}
+        {% endif %}
+
+        {% for type, messages in app.session.flashBag.all %}
+            {% for message in messages %}
+                <div class="{{ type }}">
+                    {{ message|trans({}, 'FOSUserBundle') }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>

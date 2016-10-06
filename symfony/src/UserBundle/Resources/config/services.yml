@@ -1,0 +1,9 @@
+services:
+#    user.example:
+#        class: UserBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]
+services:
+    acme.twig.acme_extension:
+        class: UserBundle\Twig\CountryExtension
+        tags:
+            - { name: twig.extension }

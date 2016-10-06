@@ -1,0 +1,30 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{{ form_start(form, { 'action': path('user_profile_edit'), 'attr': { 'class': 'user_profile_edit' } }) }}
+
+
+    {{ form_errors(form) }}
+    {{ form_row(form.image) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.gender) }}
+    {{ form_row(form.firstName) }}
+    {{ form_row(form.lastName) }}
+    {{ form_row(form.birthdate) }}
+    {{ form_row(form.phone) }}
+  
+    {{ form_row(form.address.country) }}  
+    {{ form_row(form.address.state) }}  
+    {{ form_row(form.address.zipcode) }}
+    {{ form_row(form.address.city) }}
+    {{ form_row(form.address.street) }}  
+    {{ form_row(form.address.street2) }}  
+
+    {{ form_row(form.dailyFeesMin) }}
+    {{ form_row(form.dailyFeesMax) }}
+    {{ form_row(form.current_password) }}
+
+    <div>
+        <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+    </div>
+
+{{ form_end(form) }}

@@ -16,7 +16,7 @@ class Address
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="id", type="integer", nullable=true)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
@@ -25,7 +25,7 @@ class Address
     /**
      * @var string
      *
-     * @ORM\Column(name="street", type="string", length=255)
+     * @ORM\Column(name="street", type="string", length=255, nullable=true)
      * @Assert\Regex(
      *     pattern="#^[0-9a-zA-Zéèêëçîïíàáâñńœôö]+(?:[\s-][a-zA-Zéèêëçîïíàáâñńœôö]+)*$#",
      *     match=true,
@@ -43,7 +43,7 @@ class Address
     /**
      * @var string
      *
-     * @ORM\Column(name="city", type="string", length=255)
+     * @ORM\Column(name="city", type="string", length=255, nullable=true)
      * @Assert\Regex(
      *     pattern="#^[a-zA-Zéèêëçîïíàáâñńœôö]+(?:[\s-][a-zA-Zéèêëçîïíàáâñńœôö]+)*$#",
      *     match=true,
@@ -54,7 +54,7 @@ class Address
     /**
      * @var string
      *
-     * @ORM\Column(name="zipcode", type="string", length=255)
+     * @ORM\Column(name="zipcode", type="string", length=255, nullable=true)
      */
     private $zipcode;
 
@@ -72,10 +72,9 @@ class Address
     /**
      * @var string
      *
-     * @ORM\Column(name="country", type="string", length=255)
+     * @ORM\Column(name="country", type="string", length=255, nullable=true)
      */
     private $country;
-
 
     /**
      * Get id

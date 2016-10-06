@@ -1,0 +1,109 @@
+UserBundle\Entity\User:
+    properties:
+    # Your custom fields in your user entity, here is an example with FirstName
+        firstName:
+            - NotBlank:
+                message: user.first_name.blank
+                groups: [ "Profile" ]
+            - Length:
+                min: 2
+                minMessage: user.first_name.short
+                max: 255
+                maxMessage: user.first_name.long
+                groups: [ "Profile" ]
+
+
+
+# Note: We still want to validate the email
+# See FOSUserBundle/Resources/config/validation/orm.xml to understand
+# the UniqueEntity constraint that was originally applied to both
+# username and email fields
+#
+# As you can see, we are only applying the UniqueEntity constraint to
+# the email field and not the username field.
+UserBundle\Model\User:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+             fields: email
+             errorPath: email
+             message: user.email.already_used
+             groups: [ "Registration", "Profile" ]
+
+    properties:
+        email:
+            - NotBlank:
+                message: user.email.blank
+                groups: [ "Registration", "Profile" ]
+            - Length:
+                min: 2
+                minMessage: user.email.short
+                max: 255
+                maxMessage: user.email.long
+                groups: [ "Registration", "ResetPassword" ]
+            - Email:
+                message: user.email.invalid
+                groups: [ "Registration", "Profile" ]
+        plainPassword:
+            - NotBlank:
+                message: user.password.blank
+                groups: [ "Registration", "ResetPassword", "ChangePassword" ]
+            - Length:
+                min: 6
+                max: 80
+                minMessage: user.password.short
+                maxMessage: user.password.long
+                groups: [ "Registration", "Profile", "ResetPassword", "ChangePassword"]
+
+UserBundle\Model\Group:
+    properties:
+        name:
+            - NotBlank:
+                message: user.group.blank
+                groups: [ "Registration" ]
+            - Length:
+                min: 2
+                minMessage: user.group.short
+                max: 255
+                maxMessage: user.group.long
+                groups: [ "Registration" ]
+
+UserBundle\Propel\User:
+    properties:
+        email:
+            - NotBlank:
+                message: user.email.blank
+                groups: [ "Registration", "Profile" ]
+            - Length:
+                min: 2
+                minMessage: user.email.short
+                max: 255
+                maxMessage: user.email.long
+                groups: [ "Registration", "ResetPassword" ]
+            - Email:
+                message: user.email.invalid
+                groups: [ "Registration", "Profile" ]
+
+        plainPassword:
+            - NotBlank:
+                message: fser.password.blank
+                groups: [ "Registration", "ResetPassword", "ChangePassword" ]
+            - Length:
+                min: 6
+                max: 80
+                minMessage: user.password.short
+                maxMessage: user.password.long
+                groups: [ "Registration", "Profile", "ResetPassword", "ChangePassword"]
+
+
+UserBundle\Propel\Group:
+    properties:
+        name:
+            - NotBlank:
+                message: user.group.blank
+                groups: [ "Registration" ]
+            - Length:
+                min: 2
+                minMessage: user.group.short
+                max: 255
+                maxMessage: user.group.long
+                groups: [ "Registration" ]
