@@ -1,0 +1,4 @@
+home_page:
+    path:      /
+    defaults:
+        _controller: HomePageBundle:Default:index
