@@ -36,7 +36,7 @@ profile:
         country: Country
         confidentiality: Confidentiality
         status: Status
-        phone: Phone
+        phone: 'Phone Number'
         image: Picture
     edit:
         submit: Update
