@@ -62,7 +62,7 @@ class Mission
     /**
      * @var int
      *
-     * @ORM\Column(name="ID_contact", type="integer")
+     * @ORM\Column(name="ID_contact", type="integer", nullable=true)
      */
     private $iDContact;
 
