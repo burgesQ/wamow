@@ -3,8 +3,8 @@
 	"step0": {
 		"position": "0",
 		"status": "0",
-		"nbMaxTeam": "10",
-		"reallocTeam": "10",
+		"nbMaxTeam": "null",
+		"reallocTeam": "null",
 		"startDate": "null",
 		"endDate": "null"
 	},
