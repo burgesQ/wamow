@@ -1,0 +1,35 @@
+{
+	"nbStep": "4",
+	"step0": {
+		"position": "0",
+		"status": "0",
+		"nbMaxTeam": "null",
+		"reallocTeam": "null",
+		"startDate": "null",
+		"endDate": "null"
+	},
+	"step1": {
+		"position": "1",
+		"status": "0",
+		"nbMaxTeam": "10",
+		"reallocTeam": "10",
+		"startDate": "null",
+		"endDate": "null"
+	},
+	"step2": {
+		"position": "2",
+		"status": "0",
+		"nbMaxTeam": "3",
+		"reallocTeam": "1",
+		"startDate": "null",
+		"endDate": "null"
+	},
+	"step3": {
+		"position": "3",
+		"status": "0",
+		"nbMaxTeam": "null",
+		"reallocTeam": "null",
+		"startDate": "null",
+		"endDate": "null"
+	}
+}
