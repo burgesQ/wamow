@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use ToolsBundle\Entity\Language;
 use ToolsBundle\Entity\Address;
 use ToolsBundle\Form\AddressType;
+use ToolsBundle\Form\FileType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 
@@ -57,14 +58,14 @@ class MissionType extends AbstractType
                 'years' => range(date('Y'), date('Y') + 5),
               ))
             ->add('professionalExpertise',   'entity', array(
-                'class' => 'MissionBundle:professionalExpertise',
+                'class' => 'MissionBundle:ProfessionalExpertise',
                 'property' => 'name',
                 'multiple' => false,
                 'label' => 'Choose your expertise',
                 'placeholder' => 'Choose an expertise',
               ))
             ->add('missionKind',   'entity', array(
-                'class' => 'MissionBundle:missionKind',
+                'class' => 'MissionBundle:MissionKind',
                 'property' => 'name',
                 'multiple' => false,
                 'label' => 'Mission kind',

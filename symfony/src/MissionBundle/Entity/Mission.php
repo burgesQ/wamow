@@ -62,19 +62,6 @@ class Mission
     /**
      * @var int
      *
-     * @ORM\Column(name="number_step", type="smallint")
-     * @Assert\Range(
-     *      min = 1,
-     *      max = 5,
-     *      minMessage = "There is at least {{ limit }}step.",
-     *      maxMessage = "There is no more than {{ limit }}steps."
-     * )
-     */
-    private $numberStep;
-
-    /**
-     * @var int
-     *
      * @ORM\Column(name="ID_contact", type="integer", nullable=true)
      */
     private $iDContact;
@@ -146,7 +133,6 @@ class Mission
      * @ORM\Column(name="daily_fees_min", type="integer")
      * @Assert\Range(
      *      min = 1,
-     *      max = 99999,
      *      minMessage = "You need to fill this field.",
      * )
      */
@@ -158,7 +144,6 @@ class Mission
      * @ORM\Column(name="daily_fees_max", type="integer")
      * @Assert\Range(
      *      min = 1,
-     *      max = 9999,
      *      minMessage = "You need to fill this field.",
      * )
      */
@@ -201,7 +186,6 @@ class Mission
         $this->UpdateDate = new \DateTime();
         $this->languages = new ArrayCollection();
         $this->status = 0;
-        $this->numberStep = 3;
         $this->address = new Address();
       }
 
@@ -303,29 +287,6 @@ class Mission
     public function getConfidentiality()
     {
         return $this->confidentiality;
-    }
-
-    /**
-     * Set numberStep
-     *
-     * @param integer $numberStep
-     * @return Mission
-     */
-    public function setNumberStep($numberStep)
-    {
-        $this->numberStep = $numberStep;
-
-        return $this;
-    }
-
-    /**
-     * Get numberStep
-     *
-     * @return integer
-     */
-    public function getNumberStep()
-    {
-        return $this->numberStep;
     }
 
     /**
@@ -513,29 +474,6 @@ class Mission
     }
 
     /**
-     * Set beginning
-     *
-     * @param \DateTime $beginning
-     * @return Mission
-     */
-    public function setBeginning($beginning)
-    {
-        $this->beginning = $beginning;
-
-        return $this;
-    }
-
-    /**
-     * Get beginning
-     *
-     * @return \DateTime
-     */
-    public function getBeginning()
-    {
-        return $this->beginning;
-    }
-
-    /**
      * Set image
      *
      * @param string $image
@@ -556,53 +494,6 @@ class Mission
     public function getImage()
     {
         return $this->image;
-    }
-
-    /**
-     * Set zipcode
-     *
-     * @param string $zipcode
-     * @return Mission
-     */
-    public function setZipcode($zipcode)
-    {
-        $this->zipcode = $zipcode;
-
-        return $this;
-    }
-
-    /**
-     * Get zipcode
-     *
-     * @return string
-     */
-    public function getZipcode()
-    {
-        return $this->zipcode;
-    }
-
-
-    /**
-     * Set ending
-     *
-     * @param \DateTime $ending
-     * @return Mission
-     */
-    public function setEnding($ending)
-    {
-        $this->ending = $ending;
-
-        return $this;
-    }
-
-    /**
-     * Get ending
-     *
-     * @return \DateTime
-     */
-    public function getEnding()
-    {
-        return $this->ending;
     }
 
     /**
