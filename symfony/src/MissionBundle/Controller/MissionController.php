@@ -95,4 +95,17 @@ class MissionController extends Controller
         'listLanguage'      => $listLanguage,
         ));
     }
+
+    public function allmissionAction()
+        {
+            $repository = $this
+                ->getDoctrine()
+                ->getManager()
+                ->getRepository('MissionBundle:Mission')
+                ;
+            $listMission = $repository->available();
+            return $this->render('MissionBundle:Mission:all_missions.html.twig', array(
+                'listMission'           => $listMission
+                ));
+        }
 }
