@@ -17,7 +17,8 @@ class MissionRepository extends EntityRepository
             $qb = $this->_em->createQueryBuilder();
             $qb->select('m')
             ->from('MissionBundle:Mission', 'm')
-            ->where('m.status = 1')
+            ->where('m.applicationEnding > :today')
+                ->setParameter('today', new \Datetime())
             ->orderBy('m.applicationEnding', 'DESC');
             return $qb->getQuery()->getResult();
         }
