@@ -22,3 +22,8 @@ mission_all:
     path:      /mission/all
     defaults:
         _controller: MissionBundle:Mission:allmission
+
+mission_contractor:
+    path:      /mission/contractor
+    defaults:
+        _controller: MissionBundle:Mission:missionByContractor
