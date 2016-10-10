@@ -155,5 +155,4 @@ class MissionController extends Controller
         // Team creations
         return new Response("Pitch done");
     }
-
 }
