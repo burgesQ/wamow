@@ -108,4 +108,18 @@ class MissionController extends Controller
                 'listMission'           => $listMission
                 ));
         }
+
+    public function missionByContractorAction()
+        {
+            $iDContact = 4; // fake ID to test, real ID available with User identification
+            $repository = $this
+                ->getDoctrine()
+                ->getManager()
+                ->getRepository('MissionBundle:Mission')
+                ;
+            $listMission = $repository->findByiDContact($iDContact);
+            return $this->render('MissionBundle:Mission:all_missions.html.twig', array(
+                'listMission'           => $listMission
+                ));
+            }
 }
