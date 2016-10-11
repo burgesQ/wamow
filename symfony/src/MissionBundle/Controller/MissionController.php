@@ -20,12 +20,12 @@ class MissionController extends Controller
     */
     public function newAction(Request $request)
     {
-      $mission = new Mission();
-      $form = $this->get('form.factory')->create(new MissionType(), $mission);
-      $form->handleRequest($request);
-      $em = $this->getDoctrine()->getManager();
-      $service = $this->container->get('mission.nbStep');
-      $nbStep = $service->getMissionNbStep();
+        $em = $this->getDoctrine()->getManager();
+        $service = $this->container->get('mission.nbStep');
+        $nbStep = $service->getMissionNbStep();
+        $mission = new Mission($nbStep);
+        $form = $this->get('form.factory')->create(new MissionType(), $mission);
+        $form->handleRequest($request);
       if ($form->isValid())
         {
           $em->persist($mission);
@@ -121,5 +121,5 @@ class MissionController extends Controller
             return $this->render('MissionBundle:Mission:all_missions.html.twig', array(
                 'listMission'           => $listMission
                 ));
-            }
+        }
 }

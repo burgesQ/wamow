@@ -180,13 +180,21 @@ class Mission
      */
     private $image;
 
-    public function __construct()
+    /**
+      * @var int
+      *
+     * @ORM\Column(name="number_step", type="smallint")
+     */
+    private $numberStep;
+
+    public function __construct($nbStep)
       {
         $this->creationDate = new \Datetime();
-        $this->UpdateDate = new \DateTime();
+        $this->updateDate = new \DateTime();
         $this->languages = new ArrayCollection();
         $this->status = 0;
         $this->address = new Address();
+        $this->numberStep = $nbStep;
       }
 
     /**
@@ -713,4 +721,27 @@ class Mission
     {
         $this->languages->removeElement($languages);
     }
+
+    /**
+      * Set numberStep
+      *
+      * @param integer $numberStep
+      * @return Mission
+      */
+     public function setNumberStep($numberStep)
+     {
+         $this->numberStep = $numberStep;
+
+         return $this;
+     }
+
+     /**
+      * Get numberStep
+      *
+      * @return integer
+      */
+     public function getNumberStep()
+     {
+         return $this->numberStep;
+     }
 }
