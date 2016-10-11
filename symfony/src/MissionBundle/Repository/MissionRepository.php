@@ -12,13 +12,12 @@ use Doctrine\ORM\EntityRepository;
  */
 class MissionRepository extends EntityRepository
 {
-    public function available()
+    public function missionsAvailables()
         {
             $qb = $this->_em->createQueryBuilder();
             $qb->select('m')
             ->from('MissionBundle:Mission', 'm')
-            ->where('m.applicationEnding > :today')
-                ->setParameter('today', new \Datetime())
+            ->where('m.status = 1')
             ->orderBy('m.applicationEnding', 'DESC');
             return $qb->getQuery()->getResult();
         }

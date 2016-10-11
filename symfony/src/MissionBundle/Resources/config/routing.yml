@@ -18,10 +18,10 @@ mission_step:
     defaults:
         _controller: MissionBundle:Mission:step
 
-mission_all:
+missions_all:
     path:      /mission/all
     defaults:
-        _controller: MissionBundle:Mission:allmission
+        _controller: MissionBundle:Mission:allmissions
 
 mission_contractor:
     path:      /mission/contractor

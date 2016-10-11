@@ -96,14 +96,14 @@ class MissionController extends Controller
         ));
     }
 
-    public function allmissionAction()
+    public function allMissionsAction()
         {
             $repository = $this
                 ->getDoctrine()
                 ->getManager()
                 ->getRepository('MissionBundle:Mission')
                 ;
-            $listMission = $repository->available();
+            $listMission = $repository->missionsAvailables();
             return $this->render('MissionBundle:Mission:all_missions.html.twig', array(
                 'listMission'           => $listMission
                 ));
