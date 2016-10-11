@@ -17,8 +17,8 @@ use Symfony\Component\HttpFoundation\Request;
     public function getMissionConfig()
         {
             $em = $this->em;
-            $idConfig = 1;
-            $config = $em->getRepository('ToolsBundle:Config')->find($idConfig);
+            $config = $em->getRepository('ToolsBundle:Config')
+                         ->findOneBy(array('name' => 'mission_config'));
             $config = $config->getValue();
             $array = json_decode($config, true);
             return ($array);
