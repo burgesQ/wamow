@@ -63,7 +63,7 @@ class RegistrationController extends BaseController
 
                 return $response;
             }
-            return $this->render('UserBundle:Registration:registeradvisor.html.twig', array(
+            return $this->render('UserBundle:Registration:register_expert.html.twig', array(
                 'form' => $form->createView(),
             ));
         }
@@ -114,7 +114,7 @@ class RegistrationController extends BaseController
                 return $response;
             }
 
-            return $this->render('UserBundle:Registration:registercontractor.html.twig', array(
+            return $this->render('UserBundle:Registration:register_seeker.html.twig', array(
                 'form' => $form->createView(),
             ));
         }
