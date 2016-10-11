@@ -6,8 +6,8 @@
         {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
         {% else %}
             <div>
-                <a href="{{ path('fos_user_registration_register_advisor') }}">Advisor</a>
-                <a href="{{ path('fos_user_registration_register_contractor') }}">Contractor</a>
+                <a href="{{ path('fos_user_registration_register_expert') }}">Advisor</a>
+                <a href="{{ path('fos_user_registration_register_seeker') }}">Contractor</a>
             </div>
         {% endif %}
 
