@@ -62,7 +62,7 @@ class Mission
     /**
      * @var int
      *
-     * @ORM\Column(name="ID_contact", type="integer", nullable=true)
+     * @ORM\Column(name="ID_contact", type="integer")
      */
     private $iDContact;
 
@@ -187,7 +187,7 @@ class Mission
      */
     private $numberStep;
 
-    public function __construct($nbStep)
+    public function __construct($nbStep, $iDContact)
       {
         $this->creationDate = new \Datetime();
         $this->updateDate = new \DateTime();
@@ -195,6 +195,7 @@ class Mission
         $this->status = 0;
         $this->address = new Address();
         $this->numberStep = $nbStep;
+        $this->iDContact = $iDContact;
       }
 
     /**

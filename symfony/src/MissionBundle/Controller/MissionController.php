@@ -23,7 +23,8 @@ class MissionController extends Controller
         $em = $this->getDoctrine()->getManager();
         $service = $this->container->get('mission.nbStep');
         $nbStep = $service->getMissionNbStep();
-        $mission = new Mission($nbStep);
+        $user = $this->getUser();
+        $mission = new Mission($nbStep, $user->getId());
         $form = $this->get('form.factory')->create(new MissionType(), $mission);
         $form->handleRequest($request);
       if ($form->isValid())
@@ -111,7 +112,8 @@ class MissionController extends Controller
 
     public function missionByContractorAction()
         {
-            $iDContact = 4; // fake ID to test, real ID available with User identification
+            $user = $this->getUser();
+            $iDContact = $user->getId();
             $repository = $this
                 ->getDoctrine()
                 ->getManager()
