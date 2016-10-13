@@ -39,7 +39,7 @@ class Config
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -62,7 +62,7 @@ class Config
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -85,7 +85,7 @@ class Config
     /**
      * Get value
      *
-     * @return string 
+     * @return string
      */
     public function getValue()
     {
