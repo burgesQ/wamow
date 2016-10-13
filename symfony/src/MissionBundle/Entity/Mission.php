@@ -62,7 +62,7 @@ class Mission
     /**
      * @var int
      *
-     * @ORM\Column(name="ID_contact", type="integer", nullable=true)
+     * @ORM\Column(name="ID_contact", type="integer")
      */
     private $iDContact;
 
@@ -912,60 +912,4 @@ class Mission
             ;
         }
     }
-
-    /**
-     * Get languages
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getLanguages()
-    {
-        return $this->languages;
-    }
-
-    /**
-     * Add languages
-     *
-     * @param \ToolsBundle\Entity\Language $languages
-     * @return Mission
-     */
-    public function addLanguage(\ToolsBundle\Entity\Language $languages)
-    {
-        $this->languages[] = $languages;
-
-        return $this;
-    }
-
-    /**
-     * Remove languages
-     *
-     * @param \ToolsBundle\Entity\Language $languages
-     */
-    public function removeLanguage(\ToolsBundle\Entity\Language $languages)
-    {
-        $this->languages->removeElement($languages);
-    }
-
-    /**
-      * Set numberStep
-      *
-      * @param integer $numberStep
-      * @return Mission
-      */
-     public function setNumberStep($numberStep)
-     {
-         $this->numberStep = $numberStep;
-
-         return $this;
-     }
-
-     /**
-      * Get numberStep
-      *
-      * @return integer
-      */
-     public function getNumberStep()
-     {
-         return $this->numberStep;
-     }
 }
