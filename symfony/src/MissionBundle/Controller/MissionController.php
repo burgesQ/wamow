@@ -178,4 +178,9 @@ class MissionController extends Controller
         $em->flush($team);
         return new Response("Pitch done");
     }
+
+    public function missionPitchAction()
+    {
+        return new Response("Pitch done");
+    }
 }
