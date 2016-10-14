@@ -125,34 +125,22 @@ class MissionController extends Controller
             ;
         $user = $this->getUser();
         $role = $user->getRoles();
-        if ($this->container->get('security.authorization_checker')
-                            ->isGranted('ROLE_CONTRACTOR'))
+        if ($role[0] == "ROLE_CONTRACTOR")
             {
+                echo "contractor";
                 $iDContact = $user->getId();
                 $listMission = $repository->findByiDContact($iDContact);
                 return $this->render('MissionBundle:Mission:all_missions.html.twig', array(
-                    'listMission'           => $listMission,
-                    'role'                  => $role[0]
-                    ));
-            }
-        elseif ($this->container->get('security.authorization_checker')
-                                ->isGranted('ROLE_ADVISOR'))
-            {
-                $listMission = $repository->missionsAvailables();
-                return $this->render('MissionBundle:Mission:all_missions.html.twig', array(
-                    'listMission'           => $listMission,
-                    'role'                  => $role[0]
+                    'listMission'           => $listMission
                     ));
             }
         else
             {
-                throw new NotFoundHttpException("Error : you are neither loged as advisor, nor contractor.");
+                echo "advisor";
+                $listMission = $repository->missionsAvailables();
+                return $this->render('MissionBundle:Mission:all_missions.html.twig', array(
+                    'listMission'           => $listMission
+                    ));
             }
-    }
-
-    public function missionPitchAction()
-    {
-        // Team creations
-        return new Response("Pitch done");
     }
 }
