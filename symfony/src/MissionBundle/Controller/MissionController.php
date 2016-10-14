@@ -108,20 +108,25 @@ class MissionController extends Controller
         $role = $user->getRoles();
         if ($role[0] == "ROLE_CONTRACTOR")
             {
-                echo "contractor";
                 $iDContact = $user->getId();
                 $listMission = $repository->findByiDContact($iDContact);
                 return $this->render('MissionBundle:Mission:all_missions.html.twig', array(
-                    'listMission'           => $listMission
+                    'listMission'           => $listMission,
+                    'role'                  => $role[0]
                     ));
             }
         else
             {
-                echo "advisor";
                 $listMission = $repository->missionsAvailables();
                 return $this->render('MissionBundle:Mission:all_missions.html.twig', array(
-                    'listMission'           => $listMission
+                    'listMission'           => $listMission,
+                    'role'                  => $role[0]
                     ));
             }
+    }
+
+    public function missionPitchAction()
+    {
+        return new Response("Pitch done");
     }
 }
