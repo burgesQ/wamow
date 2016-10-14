@@ -97,31 +97,31 @@ class MissionController extends Controller
         ));
     }
 
-    public function allMissionsAction()
-        {
-            $repository = $this
-                ->getDoctrine()
-                ->getManager()
-                ->getRepository('MissionBundle:Mission')
-                ;
-            $listMission = $repository->missionsAvailables();
-            return $this->render('MissionBundle:Mission:all_missions.html.twig', array(
-                'listMission'           => $listMission
-                ));
-        }
-
-    public function missionByContractorAction()
-        {
-            $user = $this->getUser();
-            $iDContact = $user->getId();
-            $repository = $this
-                ->getDoctrine()
-                ->getManager()
-                ->getRepository('MissionBundle:Mission')
-                ;
-            $listMission = $repository->findByiDContact($iDContact);
-            return $this->render('MissionBundle:Mission:all_missions.html.twig', array(
-                'listMission'           => $listMission
-                ));
-        }
+    public function missionListAction()
+    {
+        $repository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('MissionBundle:Mission')
+            ;
+        $user = $this->getUser();
+        $role = $user->getRoles();
+        if ($role[0] == "ROLE_CONTRACTOR")
+            {
+                echo "contractor";
+                $iDContact = $user->getId();
+                $listMission = $repository->findByiDContact($iDContact);
+                return $this->render('MissionBundle:Mission:all_missions.html.twig', array(
+                    'listMission'           => $listMission
+                    ));
+            }
+        else
+            {
+                echo "advisor";
+                $listMission = $repository->missionsAvailables();
+                return $this->render('MissionBundle:Mission:all_missions.html.twig', array(
+                    'listMission'           => $listMission
+                    ));
+            }
+    }
 }
