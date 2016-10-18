@@ -5,11 +5,11 @@
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
     <route id="fos_user_registration_register_seeker" path="/contractor/register" methods="GET POST">
-        <default key="_controller">UserBundle:Registration:registerContractor</default>
+        <default key="_controller">UserBundle:Registration:registerSeeker</default>
     </route>
 
     <route id="fos_user_registration_register_expert" path="/advisor/register" methods="GET POST">
-        <default key="_controller">UserBundle:Registration:registerAdvisor</default>
+        <default key="_controller">UserBundle:Registration:registerExpert</default>
     </route>
 
     <route id="fos_user_registration_check_email" path="/check-email" methods="GET">

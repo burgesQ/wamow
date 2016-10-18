@@ -6,7 +6,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AddressType extends AbstractType
+use ToolsBundle\Entity\PrefixNumber;
+
+class PhoneNumberType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -14,16 +16,14 @@ class AddressType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('country', 'country', array(
-                'required' => true,
-                'placeholder' => 'Choose a country'))
-            ->add('state')
-            ->add('zipcode')
-            ->add('city')
-            ->add('street')
-            ->add('street2')
-            ;
+        $builder->add('prefix', 'entity', array(
+            'class' => 'ToolsBundle:PrefixNumber',
+            'property' => 'prefix',
+            'multiple' => false,
+            'placeholder' => 'Choose a prefix'));
+
+            //        $builder->add('prefix', new PrefixNumberType(), array('required' => true));
+        $builder->add('tel');
     }
 
     /**
@@ -32,7 +32,7 @@ class AddressType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'ToolsBundle\Entity\Address'
+            'data_class' => 'ToolsBundle\Entity\PhoneNumber'
         ));
     }
 }

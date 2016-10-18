@@ -30,8 +30,11 @@ monolog:
         #    type:   chromephp
         #    level:  info
 
-#swiftmailer:
-#    delivery_address: me@example.com
+# Swif conf for use w/ gmail in local
+# swiftmailer:
+#     transport: gmail
+#     username:  a gmail account
+#     password:  the password of the gmail
 
 twig:
     cache: false

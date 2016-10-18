@@ -11,6 +11,7 @@ use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 use ToolsBundle\Form\AddressType;
+use ToolsBundle\Form\PhoneNumberType;
 
 class ProfileFormType extends AbstractType
 {
@@ -18,6 +19,8 @@ class ProfileFormType extends AbstractType
     {
         parent::buildForm($builder, $options);
         $builder->remove('username');
+
+        $builder->add('image');
         $builder->add('firstName');
         $builder->add('lastName');
         $builder->add('gender', ChoiceType::class, array(
@@ -30,7 +33,6 @@ class ProfileFormType extends AbstractType
             'placeholder' => 'Choose your gender',
             'empty_data'  => null
         ));
-
         $builder->add('birthdate', 'birthday', array(
             'widget' => 'choice',
             'required'    => false,
@@ -43,11 +45,11 @@ class ProfileFormType extends AbstractType
             'pattern' => "{{ month }}/{{ day }}/{{ year }}",
             'years' => range(date('Y') - 12, date('Y') - 110),
         ));
+
         $builder->add('dailyFeesMin');
         $builder->add('dailyFeesMax');
-        $builder->add('address', new AddressType());
-        $builder->add('phone');
-        $builder->add('image');
+        $builder->add('address', new AddressType(), array('required' => false));
+        $builder->add('phone', new PhoneNumberType(), array('required' => false));
     }
 
     public function getParent()
@@ -80,12 +82,12 @@ class ProfileFormType extends AbstractType
         return $this->getBlockPrefix();
     }
 
-    public function getDailyFees()
+    public function getDailyFeesMin()
     {
         return $this->getBlockPrefix();
     }
 
-    public function getPhone()
+    public function getDailyFeesMax()
     {
         return $this->getBlockPrefix();
     }
