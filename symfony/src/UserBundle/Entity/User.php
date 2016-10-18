@@ -36,6 +36,8 @@ class User extends BaseUser
     private $status;
 
     /**
+     * @var string
+     *
      * @Assert\Regex(
      *  pattern="/^(?=.*[a-z])/",
      *  message="The password must contain at least one lowercase letter."
@@ -61,8 +63,6 @@ class User extends BaseUser
      *  minMessage="fos_user.password.short",
      *  groups={"Registration", "Profile", "ResetPassword", "ChangePassword"}
      * )
-     *
-     * @var string
      *
      */
     protected $plainPassword;
@@ -192,6 +192,12 @@ class User extends BaseUser
         $this->birthdate = NULL;
     }
 
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return User
+     */
     public function setEmail($email)
     {
         $email = is_null($email) ? '' : $email;
