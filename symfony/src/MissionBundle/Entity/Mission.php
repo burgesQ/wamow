@@ -195,8 +195,8 @@ class Mission
     private $token;
 
     /**
-      * @var int
-      *
+     * @var int
+     *
      * @ORM\Column(name="size_team_max", type="smallint")
      * @Assert\Range(
      *      min = 1,
@@ -866,4 +866,50 @@ class Mission
      {
          return $this->numberStep;
      }
+
+    /**
+     * Set token
+     *
+     * @param string $token
+     * @return Mission
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    /**
+     * Get token
+     *
+     * @return string
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    /**
+     * Set sizeTeamMax
+     *
+     * @param integer $sizeTeamMax
+     * @return Mission
+     */
+    public function setSizeTeamMax($sizeTeamMax)
+    {
+        $this->sizeTeamMax = $sizeTeamMax;
+
+        return $this;
+    }
+
+    /**
+     * Get sizeTeamMax
+     *
+     * @return integer
+     */
+    public function getSizeTeamMax()
+    {
+        return $this->sizeTeamMax;
+    }
 }
