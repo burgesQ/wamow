@@ -187,6 +187,20 @@ class Mission
      */
     private $numberStep;
 
+    /**
+      * @var string
+      *
+     * @ORM\Column(name="token", type="string", length=255, nullable=false, unique=true)
+     */
+    private $token;
+
+    /**
+      * @var int
+      *
+     * @ORM\Column(name="size_team_max", type="smallint")
+     */
+    private $sizeTeamMax;
+
     public function __construct($nbStep, $iDContact)
       {
         $this->creationDate = new \Datetime();
@@ -196,6 +210,8 @@ class Mission
         $this->address = new Address();
         $this->numberStep = $nbStep;
         $this->iDContact = $iDContact;
+        $this->sizeTeamMax = 1;
+        $this->token = bin2hex(random_bytes(10));
       }
 
     /**
@@ -745,4 +761,50 @@ class Mission
      {
          return $this->numberStep;
      }
+
+    /**
+     * Set token
+     *
+     * @param string $token
+     * @return Mission
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    /**
+     * Get token
+     *
+     * @return string
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    /**
+     * Set sizeTeamMax
+     *
+     * @param integer $sizeTeamMax
+     * @return Mission
+     */
+    public function setSizeTeamMax($sizeTeamMax)
+    {
+        $this->sizeTeamMax = $sizeTeamMax;
+
+        return $this;
+    }
+
+    /**
+     * Get sizeTeamMax
+     *
+     * @return integer
+     */
+    public function getSizeTeamMax()
+    {
+        return $this->sizeTeamMax;
+    }
 }
