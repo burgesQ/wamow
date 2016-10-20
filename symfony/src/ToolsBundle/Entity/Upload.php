@@ -95,7 +95,6 @@ class Upload
         $info = explode("/", $this->getFile()->getMimeType());
 
         if ($this->getType() !== $info[0]) {
-            // ici balancer une erreur pqrt rqpport qu type
             dump("ERRooooooororrororororororororotrololo");
             die();
             return ;
@@ -106,12 +105,10 @@ class Upload
         $str .= time();
         $str .= '.'.$info[1];
 
-        // On save sur le serv
         $this->getFile()->move(
             $this->getUploadRootDir(),
             $str);
 
-        // Ici save des info
         $this->setName($str);
         $this->setFormat($info[1]);
         $this->setPath($this->getUploadRootDir().$str);
