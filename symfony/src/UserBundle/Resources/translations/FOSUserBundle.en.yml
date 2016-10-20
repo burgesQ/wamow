@@ -29,6 +29,8 @@ profile:
         birthdate: Birthdate
         daily_fees_min: 'Daily Fees Min'
         daily_fees_max: 'Daily Fees Max'
+        label: Label
+        name: Name
         zipcode: Zipcode
         address: Address
         city: City

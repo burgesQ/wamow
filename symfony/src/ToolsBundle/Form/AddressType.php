@@ -23,6 +23,8 @@ class AddressType extends AbstractType
             ->add('city')
             ->add('street')
             ->add('street2')
+            ->add('name')
+            ->add('label')
             ;
     }
 
