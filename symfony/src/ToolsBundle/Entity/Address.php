@@ -253,7 +253,6 @@ class Address
     public function setName($name)
     {
         $this->name = $name;
-
         return $this;
     }
 
@@ -276,7 +275,6 @@ class Address
     public function setLabel($label)
     {
         $this->label = $label;
-
         return $this;
     }
 
