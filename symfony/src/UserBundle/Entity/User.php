@@ -128,7 +128,7 @@ class User extends BaseUser
     /**
     * @var int
     *
-    * @ORM\Column(name="daily_fees_min", type="smallint", nullable=true)
+    * @ORM\Column(name="daily_fees_min", type="bigint", nullable=true)
     *
     * @Assert\Range(
     *      min = 0
@@ -139,7 +139,7 @@ class User extends BaseUser
     /**
     * @var int
     *
-    * @ORM\Column(name="daily_fees_max", type="smallint", nullable=true)
+    * @ORM\Column(name="daily_fees_max", type="bigint", nullable=true)
     *
     * @Assert\Range(
     *      min = 0
@@ -554,10 +554,10 @@ class User extends BaseUser
                 ->atPath('dailyFeesMin')
                 ->addViolation();
         }
-        else if ($dailyFeesMin > $dailyFeesMax)
+        else if ($dailyFeesMin >= $dailyFeesMax)
         {
             $context
-              ->buildViolation('The minimum fees must be less than the maximum.')
+              ->buildViolation('The minimum fees must be less than the maximum fees.')
               ->atPath('dailyFeesMin')
               ->addViolation();
         }
