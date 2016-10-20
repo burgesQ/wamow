@@ -198,10 +198,13 @@ class Mission
       * @var int
       *
      * @ORM\Column(name="size_team_max", type="smallint")
+     * @Assert\Range(
+     *      min = 1,
+     *      minMessage = "The max size of users in a team must be at least one.")
      */
     private $sizeTeamMax;
 
-    public function __construct($nbStep, $iDContact)
+    public function __construct($nbStep, $iDContact, $sizeTeamMax, $token)
       {
         $this->creationDate = new \Datetime();
         $this->updateDate = new \DateTime();
@@ -210,8 +213,8 @@ class Mission
         $this->address = new Address();
         $this->numberStep = $nbStep;
         $this->iDContact = $iDContact;
-        $this->sizeTeamMax = 1;
-        $this->token = bin2hex(random_bytes(10));
+        $this->sizeTeamMax = $sizeTeamMax;
+        $this->token = $token;
       }
 
     /**
