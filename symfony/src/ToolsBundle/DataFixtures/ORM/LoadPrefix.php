@@ -12,8 +12,6 @@ class LoadPrefix implements FixtureInterface
     {
         $tab = array(
             'US'=> '+1',
-            'UM'=> '+1',
-            'CA'=> '+1',
             'KZ'=> '+7',
 
             'EG'=> '+20',
@@ -25,7 +23,6 @@ class LoadPrefix implements FixtureInterface
             'ES'=> '+34',
             'HU'=> '+36',
             'VA'=> '+39',
-            'IT'=> '+39',
             'RO'=> '+40',
             'CH'=> '+41',
             'AT'=> '+43',
@@ -33,7 +30,6 @@ class LoadPrefix implements FixtureInterface
             'DK'=> '+45',
             'SE'=> '+46',
             'SJ'=> '+47',
-            'NO'=> '+47',
             'PL'=> '+48',
             'DE'=> '+49',
             'PE'=> '+51',
@@ -46,7 +42,6 @@ class LoadPrefix implements FixtureInterface
             'VE'=> '+58',
             'MY'=> '+60',
             'CX'=> '+61',
-            'AU'=> '+61',
             'ID'=> '+62',
             'PH'=> '+63',
             'NZ'=> '+64',
@@ -66,7 +61,6 @@ class LoadPrefix implements FixtureInterface
             'IR'=> '+98',
 
             'MA'=> '+212',
-            'EH'=> '+212',
             'DZ'=> '+213',
             'TN'=> '+216',
             'LY'=> '+218',
@@ -93,7 +87,6 @@ class LoadPrefix implements FixtureInterface
             'GQ'=> '+240',
             'GA'=> '+241',
             'CG'=> '+242',
-            'CD'=> '+242',
             'AO'=> '+244',
             'GW'=> '+245',
             'IO'=> '+246',
@@ -118,7 +111,6 @@ class LoadPrefix implements FixtureInterface
             'BW'=> '+267',
             'SZ'=> '+268',
             'KM'=> '+269',
-            'YT'=> '+269',
             'SH'=> '+290',
             'ER'=> '+291',
             'AW'=> '+297',
@@ -178,7 +170,6 @@ class LoadPrefix implements FixtureInterface
 
             'TL'=> '+670',
             'NF'=> '+672',
-            'CC'=> '+672',
             'BN'=> '+673',
             'NR'=> '+674',
             'PG'=> '+675',
