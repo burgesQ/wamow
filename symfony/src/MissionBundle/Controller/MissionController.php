@@ -181,6 +181,8 @@ class MissionController extends Controller
 
     public function missionPitchAction()
     {
+        // Team creations
         return new Response("Pitch done");
     }
+
 }
