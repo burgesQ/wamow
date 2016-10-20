@@ -11,9 +11,9 @@
     <p>{{ 'profile.show.daily_fees_min'|trans }}: {{ user.dailyFeesMin }} </p>
     <p>{{ 'profile.show.daily_fees_max'|trans }}: {{ user.dailyFeesMax }} </p>
 
-    <p>{{ 'profile.show.email'|trans }}: {{ user.email }} </p>    
-    <p>{{ 'profile.show.phone'|trans }}: {% if user.phone != null %} {{ user.phone.prefix.prefix }} {{ user.phone.tel }} {% endif %} </p>
-    
+    <p>{{ 'profile.show.email'|trans }}: {{ user.email }} </p>
+    <p>{{ 'profile.show.phone'|trans }}: {% if user.phone != null %} {{ user.phone.prefix.prefix }} {{ user.phone.tel }} ({{ user.phone.prefix.country|countryName }}) {% endif %} </p>
+
     <p>{{ 'profile.show.country'|trans }}:{% if user.address != null %} {{ user.address.country|countryName }} {% endif %} </p>
     <p>{{ 'profile.show.state'|trans }}:{% if user.address != null %} {{ user.address.state }} {% endif %} </p>
     <p>{{ 'profile.show.city'|trans }}:{% if user.address != null %} {{ user.address.city }} {% endif %} </p>
