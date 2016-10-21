@@ -2,24 +2,60 @@
 
 <div class="user_user_show">
 
-    <p>{{ 'profile.show.image'|trans }}: {{ user.image }} </p>
+  <p>{{ 'profile.show.image'|trans }}:
+    {% if user.image != null and user.image.name != null %}
+      {{ user.image.name }} is a {{ user.image.type }}
+      <img src="{{ asset(user.image.webPath()) }}"/>
+    {% endif %} </p>
+
     <p>{{ 'profile.show.first_name'|trans }}: {{ user.firstName }} </p>
     <p>{{ 'profile.show.last_name'|trans }}: {{ user.lastName }} </p>
     <p>{{ 'profile.show.gender'|trans }}: {{ user.gender }} </p>
-    <p>{{ 'profile.show.birthdate'|trans}}:{% if user.birthdate != null %} {{ user.birthdate|date("m/d/Y") }} {% endif %} </p>
+    <p>{{ 'profile.show.birthdate'|trans}}:
+      {% if user.birthdate != null %}
+	{{ user.birthdate|date("m/d/Y") }}
+      {% endif %} </p>
 
     <p>{{ 'profile.show.daily_fees_min'|trans }}: {{ user.dailyFeesMin }} </p>
     <p>{{ 'profile.show.daily_fees_max'|trans }}: {{ user.dailyFeesMax }} </p>
 
     <p>{{ 'profile.show.email'|trans }}: {{ user.email }} </p>
-    <p>{{ 'profile.show.phone'|trans }}: {% if user.phone != null %} {{ user.phone.prefix.prefix }} {{ user.phone.tel }} ({{ user.phone.prefix.country|countryName }}) {% endif %} </p>
+    <p>{{ 'profile.show.phone'|trans }}:
+      {% if user.phone != null %}
+	{{ user.phone.prefix.prefix }} {{ user.phone.tel }} ({{ user.phone.prefix.country|countryName }})
+      {% endif %} </p>
 
-    <p>{{ 'profile.show.country'|trans }}:{% if user.address != null %} {{ user.address.country|countryName }} {% endif %} </p>
-    <p>{{ 'profile.show.state'|trans }}:{% if user.address != null %} {{ user.address.state }} {% endif %} </p>
-    <p>{{ 'profile.show.city'|trans }}:{% if user.address != null %} {{ user.address.city }} {% endif %} </p>
-    <p>{{ 'profile.show.zipcode'|trans }}:{% if user.address != null %} {{ user.address.zipcode }} {% endif %} </p>
-    <p>{{ 'profile.show.address'|trans }}:{% if user.address != null %} {{ user.address.street }} {% endif %} </p>
-    <p>{{ 'profile.show.address'|trans }}:{% if user.address != null %} {{ user.address.street2 }} {% endif %} </p>
-    <p>{{ 'profile.show.label'|trans }}:{% if user.address != null %} {{ user.address.label }} {% endif %} </p>
-    <p>{{ 'profile.show.name'|trans }}:{% if user.address != null %} {{ user.address.name }} {% endif %} </p>
+    <p>{{ 'profile.show.country'|trans }}:
+      {% if user.address != null %}
+	{{ user.address.country|countryName }}
+      {% endif %} </p>
+    <p>{{ 'profile.show.state'|trans }}:
+      {% if user.address != null %}
+	{{ user.address.state }}
+      {% endif %} </p>
+    <p>{{ 'profile.show.city'|trans }}:
+      {% if user.address != null %}
+	{{ user.address.city }}
+      {% endif %} </p>
+    <p>{{ 'profile.show.zipcode'|trans }}:
+      {% if user.address != null %}
+	{{ user.address.zipcode }}
+      {% endif %} </p>
+    <p>{{ 'profile.show.address'|trans }}:
+      {% if user.address != null %}
+	{{ user.address.street }}
+      {% endif %} </p>
+    <p>{{ 'profile.show.address'|trans }}:
+      {% if user.address != null %}
+	{{ user.address.street2 }}
+      {% endif %} </p>
+    <p>{{ 'profile.show.label'|trans }}:
+      {% if user.address != null %}
+	{{ user.address.label }}
+      {% endif %} </p>
+    <p>{{ 'profile.show.name'|trans }}:
+      {% if user.address != null %}
+	{{ user.address.name }}
+      {% endif %} </p>
+      
 </div>
