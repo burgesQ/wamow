@@ -1,4 +1,4 @@
 company_create:
-    path:      /company_create
+    path:      /company/create
     defaults:
         _controller: CompanyBundle:Company:create
