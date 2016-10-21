@@ -31,15 +31,45 @@ class Company
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="creationDate", type="datetime")
+     * @ORM\Column(name="creation_date", type="datetime")
      */
     private $creationDate;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="update_date", type="datetime", nullable=true)
+     */
+    private $update_date;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id_sector", type="integer")
+     */
+    private $id_sector;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="size", type="integer")
+     */
+    private $size;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="kbis", type="string", length=255)
+     */
+
+     private $kbis;
 
     /**
      * @var string
      *
      * @ORM\Column(name="logo", type="string", length=255)
      */
+
     private $logo;
 
     /**
@@ -55,6 +85,37 @@ class Company
      * @ORM\Column(name="resume", type="text")
      */
     private $resume;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id_contact", type="integer")
+     */
+
+    private $id_contact;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255)
+     */
+
+    private $email;
+
+    /**
+     * @ORM\OneToOne(targetEntity="ToolsBundle\Entity\Address", cascade={"persist"})
+     */
+
+    private $address;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=255)
+     */
+
+    private $type;
 
     public function __construct()
       {
