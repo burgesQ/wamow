@@ -24,50 +24,36 @@ class Company
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * @ORM\Column(name="name", type="string", length=255, unique=true, nullable=false)
      */
     private $name;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="creation_date", type="datetime")
+     * @ORM\Column(name="creation_date", type="datetime", nullable=false)
      */
     private $creationDate;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="update_date", type="datetime", nullable=true)
+     * @ORM\Column(name="update_date", type="datetime", nullable=false)
      */
-    private $update_date;
+    private $updateDate;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="id_sector", type="integer")
+     * @ORM\Column(name="size", type="integer", nullable=false)
      */
-    private $id_sector;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="size", type="integer")
-     */
     private $size;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="kbis", type="string", length=255)
-     */
-
-     private $kbis;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="logo", type="string", length=255)
+     * @ORM\Column(name="logo", type="string", length=255, nullable=false)
      */
 
     private $logo;
@@ -75,44 +61,36 @@ class Company
     /**
      * @var int
      *
-     * @ORM\Column(name="status", type="integer")
+     * @ORM\Column(name="status", type="integer", nullable=false)
      */
+
     private $status;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="resume", type="text")
+     * @ORM\Column(name="resume", type="text", nullable=true)
      */
     private $resume;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_contact", type="integer")
+     * @ORM\OneToOne(targetEntity="CompanyBundle\Entity\Sector", cascade={"persist"})
+     * @ORM\Column(name="sector", nullable=false)
      */
 
-    private $id_contact;
+    private $sector;
 
+    /**
+     * @ORM\OneToMany(targetEntity="UserBundle\Entity\User", cascade={"persist"})
+     * @ORM\Column(name="contractors", nullable=false)
+     */
+
+    private $contractors;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255)
-     */
-
-    private $email;
-
-    /**
-     * @ORM\OneToOne(targetEntity="ToolsBundle\Entity\Address", cascade={"persist"})
-     */
-
-    private $address;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="type", type="string", length=255)
+     * @ORM\Column(name="type", type="string", length=255, nullable=false)
      */
 
     private $type;
