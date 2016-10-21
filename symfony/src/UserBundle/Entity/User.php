@@ -3,11 +3,10 @@
 namespace UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContext;
 
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
-
+use FOS\UserBundle\Model\User as BaseUser;
 use ToolsBundle\Entity\Address;
 use ToolsBundle\Entity\PhoneNumber;
 use ToolsBundle\Entity\Upload;
@@ -17,6 +16,7 @@ use ToolsBundle\Entity\Upload;
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="UserBundle\Repository\UserRepository")
+ * @Assert\Callback(methods={"isValidate"})
  */
 class User extends BaseUser
 {
@@ -484,7 +484,6 @@ class User extends BaseUser
         return $this->phone;
     }
 
-
     /**
      * Set image
      *
@@ -507,62 +506,30 @@ class User extends BaseUser
     {
         return $this->image;
     }
-    
+        
     /**
      * @Assert\Callback
      */
-    public function validate(ExecutionContextInterface $context)
+    public function isValidate(ExecutionContext $context)
     {
         $dailyFeesMin = $this->getDailyFeesMin();
         $dailyFeesMax = $this->getDailyFeesMax();
-
-        if ($this->getAddress() !== NULL) {
-            $addr = $this->getAddress()->getStreet();
-            $country = $this->getAddress()->getCountry();
-            $city = $this->getAddress()->getCity();
-            if  ($addr !== NULL && $city === NULL) {
-                $context
-                    ->buildViolation("You must enter a city.")
-                    ->atPath('city')
-                    ->addViolation();
-            }
-            else if  ($city !== NULL && $country === NULL) {
-                $context
-                    ->buildViolation("You must enter a country.")
-                    ->atPath('country')
-                    ->addViolation();
-            }
-        }
-        if ($this->getPhone() !== NULL) {
-            $prefix = $this->getPhone()->getPrefix();
-            $tel = $this->getPhone()->getTel();
-            if  ($tel === NULL && $prefix !== NULL) {
-                $context
-                    ->buildViolation("You must enter a phone number with the prefix.")
-                    ->atPath('tel')
-                    ->addViolation();
-            }
-            else if  ($tel !== NULL && $prefix === NULL) {
-                $context
-                    ->buildViolation("You must enter a prefix with the phone number.")
-                    ->atPath('prefix')
-                    ->addViolation();
-            }
-        }
-        if ( ($dailyFeesMax === NULL && $dailyFeesMin !== NULL) ||
-             ($dailyFeesMax !== NULL && $dailyFeesMin === NULL) )
-        {
+                
+        if ($this->getAddress() != NULL){
+            $this->getAddress()->isValidate($context);
+        } if ($this->getPhone() != NULL){
+            $this->getPhone()->isValidate($context);
+        } if ( ($dailyFeesMax === NULL && $dailyFeesMin !== NULL) ||
+               ($dailyFeesMax !== NULL && $dailyFeesMin === NULL) ) {
             $context
                 ->buildViolation("Dailyfees min and max must be set.")
                 ->atPath('dailyFeesMin')
                 ->addViolation();
-        }
-        else if ($dailyFeesMin != NULL && $dailyFeesMax != NULL && $dailyFeesMin >= $dailyFeesMax)
-        {
+        } else if ($dailyFeesMin != NULL && $dailyFeesMax != NULL && $dailyFeesMin >= $dailyFeesMax) {
             $context
-              ->buildViolation('The minimum fees must be less than the maximum fees.')
-              ->atPath('dailyFeesMin')
-              ->addViolation();
+                ->buildViolation('The minimum fees must be less than the maximum fees.')
+                ->atPath('dailyFeesMin')
+                ->addViolation();
         }
     }
 }

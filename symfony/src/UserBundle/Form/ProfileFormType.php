@@ -49,9 +49,8 @@ class ProfileFormType extends AbstractType
 
         $builder->add('dailyFeesMin');
         $builder->add('dailyFeesMax');
-        // $builder->add('image', 'file');
         
-        $builder->add('address', new AddressType(), array('required' => false));
+        $builder->add('address', new AddressType(), array('required' => true));
         $builder->add('phone', new PhoneNumberType(), array('required' => false));
         $builder->add('image', new UploadType(), array('required' => false));
     }

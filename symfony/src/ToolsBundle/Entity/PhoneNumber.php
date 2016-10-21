@@ -3,15 +3,15 @@
 namespace ToolsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Context\ExecutionContext;
 
 /**
  * PhoneNumber
  *
  * @ORM\Table(name="phone_number")
  * @ORM\Entity(repositoryClass="ToolsBundle\Repository\PhoneNumberRepository")
+ * @Assert\Callback(methods={"isValidate"})
  */
 class PhoneNumber
 {
@@ -36,7 +36,7 @@ class PhoneNumber
 
     /**
      * @ORM\ManyToOne(targetEntity="ToolsBundle\Entity\PrefixNumber", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $prefix;
 
@@ -95,4 +95,26 @@ class PhoneNumber
     {
         return $this->prefix;
     }
+
+    /**
+     * @Assert\Callback
+     */
+    public function isValidate(ExecutionContext $context)
+    {
+        $prefix = $this->getPrefix();
+        $tel = $this->getTel();
+
+        if  ($tel === NULL && $prefix !== NULL) {
+            $context
+                ->buildViolation("You must enter a phone number with the prefix.")
+                ->atPath('tel')
+                ->addViolation();
+        } else if  ($tel !== NULL && $prefix === NULL) {
+            $context
+                ->buildViolation("You must enter a prefix with the phone number.")
+                ->atPath('prefix')
+                ->addViolation();
+        }
+    }
+
 }
