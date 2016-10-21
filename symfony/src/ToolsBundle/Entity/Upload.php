@@ -3,10 +3,9 @@
 namespace ToolsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 use UserBundle\Entity\User;
 
@@ -109,18 +108,20 @@ class Upload
         }
 
         if (null !== $this->laTempo) {
-            $ieuv = $this->getUploadRootDir().$this->laTempo;
-            if (file_exist($ieuv)) {
-                unlink($ieuv);
+            $tmp = $this->getUploadRootDir().$this->laTempo;
+            if (file_exist($tmp)) {
+                unlink($tmp);
             }
         }
         
         $info = explode("/", $this->getFile()->getMimeType());
 
         if ($this->getType() !== null && $this->getType() !== $info[0]) {
+            dump($this);
             $this->setName(null);
             $this->setFormat(null);
             $this->setPath(null);
+            dump($this);
         } else {        
             $this->getFile()->move(
                 $this->getUploadRootDir(),
