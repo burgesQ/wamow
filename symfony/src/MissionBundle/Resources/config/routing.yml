@@ -24,6 +24,6 @@ missions_all:
         _controller: MissionBundle:Mission:missionList
 
 mission_pitch:
-    path:      /mission/pitch/
+    path:      /mission/pitch/{id}
     defaults:
         _controller: MissionBundle:Mission:missionPitch
