@@ -56,10 +56,6 @@ class Upload
      */
     private $format;
 
-    /**
-     * @ORM\Column(type="string")
-     *
-     */
     private $file;
 
     /**
@@ -75,15 +71,35 @@ class Upload
      */
     private $user;
 
-    public function __construct($type = null)
+    private $laTempo;
+    
+    public function __construct()
     {
-        $this->type = $type;
-        $this->uploadDate = new \Datetime();
         $this->user = NULL;
+        $this->uploadDate = new \Datetime();
     }
 
     /**
      * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function preUpload()
+    {
+        if (null === $this->file) {
+            return;
+        }
+        
+        $info = explode("/", $this->getFile()->getMimeType());
+
+        $this->setName($this->id.time().'.'.$info[1]);
+        $this->setFormat($info[1]);
+        $this->setPath($this->getUploadRootDir().$this->getName());
+ 
+        dump($this);
+    }
+
+    /**
+     * @ORM\PostPersist()
      * @ORM\PostUpdate()
      */
     public function upload()
@@ -92,28 +108,45 @@ class Upload
             return;
         }
 
+        if (null !== $this->laTempo) {
+            $ieuv = $this->getUploadRootDir().$this->laTempo;
+            if (file_exist($ieuv)) {
+                unlink($ieuv);
+            }
+        }
+        
         $info = explode("/", $this->getFile()->getMimeType());
 
-        if ($this->getType() !== $info[0]) {
-            dump("ERRooooooororrororororororororotrololo");
-            die();
-            return ;
+        if ($this->getType() !== null && $this->getType() !== $info[0]) {
+            $this->setName(null);
+            $this->setFormat(null);
+            $this->setPath(null);
+        } else {        
+            $this->getFile()->move(
+                $this->getUploadRootDir(),
+                $this->name);
         }
-
-        // Ici generation d'un nom plus random
-        $str = $this->id;
-        $str .= time();
-        $str .= '.'.$info[1];
-
-        $this->getFile()->move(
-            $this->getUploadRootDir(),
-            $str);
-
-        $this->setName($str);
-        $this->setFormat($info[1]);
-        $this->setPath($this->getUploadRootDir().$str);
+        dump($this);
     }
 
+    /**
+     * @ORM\PreRemove()
+     */
+    public function preRemoveUpload()
+    {
+        $this->laTempo = $this->getUploadRootDir().$this->getName();
+    }
+
+    /**
+     * @ORM\PostRemove()
+     */
+    public function removeUpload()
+    {
+        if (file_exists($this->laTempo)) {
+            unlink($this->laTempo);
+        }
+    }
+    
     public function getUploadDir()
     {
         return 'uploads/';
@@ -288,6 +321,13 @@ class Upload
     {
         $this->file = $file;
 
+        if (null !== $this->name) {
+            $this->tempFilename = $this->name;
+
+            $this->name = null;
+            $this->format = null;
+            $this->path = null;
+        }        
         return $this;
     }
 
