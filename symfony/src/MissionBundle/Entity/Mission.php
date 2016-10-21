@@ -187,7 +187,24 @@ class Mission
      */
     private $numberStep;
 
-    public function __construct($nbStep, $iDContact)
+    /**
+      * @var string
+      *
+     * @ORM\Column(name="token", type="string", length=255, nullable=false, unique=true)
+     */
+    private $token;
+
+    /**
+      * @var int
+      *
+     * @ORM\Column(name="size_team_max", type="smallint")
+     * @Assert\Range(
+     *      min = 1,
+     *      minMessage = "The max size of users in a team must be at least one.")
+     */
+    private $sizeTeamMax;
+
+    public function __construct($nbStep, $iDContact, $sizeTeamMax, $token)
       {
         $this->creationDate = new \Datetime();
         $this->updateDate = new \DateTime();
@@ -196,6 +213,8 @@ class Mission
         $this->address = new Address();
         $this->numberStep = $nbStep;
         $this->iDContact = $iDContact;
+        $this->sizeTeamMax = $sizeTeamMax;
+        $this->token = $token;
       }
 
     /**
@@ -745,4 +764,50 @@ class Mission
      {
          return $this->numberStep;
      }
+
+    /**
+     * Set token
+     *
+     * @param string $token
+     * @return Mission
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    /**
+     * Get token
+     *
+     * @return string
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    /**
+     * Set sizeTeamMax
+     *
+     * @param integer $sizeTeamMax
+     * @return Mission
+     */
+    public function setSizeTeamMax($sizeTeamMax)
+    {
+        $this->sizeTeamMax = $sizeTeamMax;
+
+        return $this;
+    }
+
+    /**
+     * Get sizeTeamMax
+     *
+     * @return integer
+     */
+    public function getSizeTeamMax()
+    {
+        return $this->sizeTeamMax;
+    }
 }

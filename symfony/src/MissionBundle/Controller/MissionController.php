@@ -21,10 +21,20 @@ class MissionController extends Controller
     public function newAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        $repository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('MissionBundle:Mission')
+            ;
         $service = $this->container->get('mission.nbStep');
         $nbStep = $service->getMissionNbStep();
         $user = $this->getUser();
-        $mission = new Mission($nbStep, $user->getId());
+        $token = bin2hex(random_bytes(10));
+        while ($repository->findByToken($token) != null)
+            {
+                $token = bin2hex(random_bytes(10));
+            }
+        $mission = new Mission($nbStep, $user->getId(), 1, $token);
         $form = $this->get('form.factory')->create(new MissionType(), $mission);
         $form->handleRequest($request);
       if ($form->isValid())
@@ -127,6 +137,8 @@ class MissionController extends Controller
 
     public function missionPitchAction()
     {
+        // Team creations
         return new Response("Pitch done");
     }
+
 }
