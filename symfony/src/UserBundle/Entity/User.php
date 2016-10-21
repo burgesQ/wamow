@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 use ToolsBundle\Entity\Address;
 use ToolsBundle\Entity\PhoneNumber;
+use ToolsBundle\Entity\Upload;
 
 /**
  * User
@@ -159,12 +160,11 @@ class User extends BaseUser
      */
     private $phone;
 
-   /**
-    * @var string
-    *
-    * @ORM\Column(name="image", type="string", length=255, nullable=true)
-    */
-   private $image;
+    /**
+     * @ORM\OneToOne(targetEntity="ToolsBundle\Entity\Upload", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $image;
 
     /**
      * @var \DateTime
@@ -349,27 +349,6 @@ class User extends BaseUser
     }
 
     /**
-     * Set image
-     *
-     * @param string $image
-     * @return User
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
-        return $this;
-    }
-    /**
-     * Get image
-     *
-     * @return string
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
      * Set creationDate
      *
      * @param \DateTime $creationDate
@@ -505,6 +484,30 @@ class User extends BaseUser
         return $this->phone;
     }
 
+
+    /**
+     * Set image
+     *
+     * @param \ToolsBundle\Entity\Upload $image
+     * @return User
+     */
+    public function setImage(\ToolsBundle\Entity\Upload $image = null)
+    {
+        $this->image = $image;
+        $this->image->setType("image");
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \ToolsBundle\Entity\Upload 
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+    
     /**
      * @Assert\Callback
      */
@@ -554,7 +557,7 @@ class User extends BaseUser
                 ->atPath('dailyFeesMin')
                 ->addViolation();
         }
-        else if ($dailyFeesMin >= $dailyFeesMax)
+        else if ($dailyFeesMin != NULL && $dailyFeesMax != NULL && $dailyFeesMin >= $dailyFeesMax)
         {
             $context
               ->buildViolation('The minimum fees must be less than the maximum fees.')

@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 use ToolsBundle\Form\AddressType;
 use ToolsBundle\Form\PhoneNumberType;
+use ToolsBundle\Form\UploadType;
 
 class ProfileFormType extends AbstractType
 {
@@ -20,7 +21,7 @@ class ProfileFormType extends AbstractType
         parent::buildForm($builder, $options);
         $builder->remove('username');
 
-        $builder->add('image');
+        // $builder->add('image');
         $builder->add('firstName');
         $builder->add('lastName');
         $builder->add('gender', ChoiceType::class, array(
@@ -48,8 +49,11 @@ class ProfileFormType extends AbstractType
 
         $builder->add('dailyFeesMin');
         $builder->add('dailyFeesMax');
+        // $builder->add('image', 'file');
+        
         $builder->add('address', new AddressType(), array('required' => false));
         $builder->add('phone', new PhoneNumberType(), array('required' => false));
+        $builder->add('image', new UploadType(), array('required' => false));
     }
 
     public function getParent()

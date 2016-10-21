@@ -3,11 +3,9 @@
 {{ form_start(form, { 'action': path('user_profile_edit'), 'attr': { 'class': 'user_profile_edit' } }) }}
 
     {{ form_errors(form) }} 
-    {{ form_row(form.image) }} 
 
-    {{ form_errors(form) }}
-    {{ form_row(form.image) }}
     {{ form_row(form.email) }}
+    {{ form_row(form.image.file) }} 
     {{ form_row(form.gender) }}
     {{ form_row(form.firstName) }}
     {{ form_row(form.lastName) }}
