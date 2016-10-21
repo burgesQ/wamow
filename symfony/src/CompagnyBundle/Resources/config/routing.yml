@@ -1,4 +1,0 @@
-compagny_create:
-    path:      /compagny_create
-    defaults:
-        _controller: CompagnyBundle:Compagny:create

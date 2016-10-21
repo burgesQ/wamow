@@ -1,16 +1,16 @@
 <?php
 
-namespace CompagnyBundle\Entity;
+namespace CompanyBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Compagny
+ * Company
  *
- * @ORM\Table(name="compagny")
- * @ORM\Entity(repositoryClass="CompagnyBundle\Repository\CompagnyRepository")
+ * @ORM\Table(name="company")
+ * @ORM\Entity(repositoryClass="CompanyBundle\Repository\CompanyRepository")
  */
-class Compagny
+class Company
 {
     /**
      * @var int
@@ -76,7 +76,7 @@ class Compagny
      * Set name
      *
      * @param string $name
-     * @return Compagny
+     * @return Company
      */
     public function setName($name)
     {
@@ -99,7 +99,7 @@ class Compagny
      * Set creationDate
      *
      * @param \DateTime $creationDate
-     * @return Compagny
+     * @return Company
      */
     public function setCreationDate($creationDate)
     {
@@ -122,7 +122,7 @@ class Compagny
      * Set logo
      *
      * @param string $logo
-     * @return Compagny
+     * @return Company
      */
     public function setLogo($logo)
     {
@@ -145,7 +145,7 @@ class Compagny
      * Set status
      *
      * @param integer $status
-     * @return Compagny
+     * @return Company
      */
     public function setStatus($status)
     {
@@ -168,7 +168,7 @@ class Compagny
      * Set resume
      *
      * @param string $resume
-     * @return Compagny
+     * @return Company
      */
     public function setResume($resume)
     {
