@@ -5,6 +5,7 @@ namespace ToolsBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class AddressType extends AbstractType
 {
@@ -15,16 +16,17 @@ class AddressType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('country', 'country', array(
-                'required' => true,
-                'placeholder' => 'Choose a country'))
-            ->add('state')
-            ->add('zipcode')
-            ->add('city')
             ->add('street')
             ->add('street2')
-            ->add('name')
+            ->add('city')
+            ->add('zipcode')
+            ->add('state')
+            ->add('country', 'country', array(
+                'required' => true,
+                'placeholder' => 'Choose a country')
+            )
             ->add('label')
+            ->add('name')
             ;
     }
 

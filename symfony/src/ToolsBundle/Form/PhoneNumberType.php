@@ -20,9 +20,9 @@ class PhoneNumberType extends AbstractType
             'class' => 'ToolsBundle:PrefixNumber',
             'property' => 'prefix',
             'multiple' => false,
-            'placeholder' => 'Choose a prefix'));
+            'placeholder' => 'Choose a prefix',
+        ));
 
-            //        $builder->add('prefix', new PrefixNumberType(), array('required' => true));
         $builder->add('tel');
     }
 
