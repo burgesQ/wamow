@@ -15,7 +15,7 @@ class CompanyType extends AbstractType
     {
         $builder->add('name')->add('creationDate')->add('logo')->add('status')->add('resume')        ;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -35,4 +35,4 @@ class CompanyType extends AbstractType
     }
 
 
-}
+} 
