@@ -2,3 +2,7 @@ company_create:
     path:      /company/create
     defaults:
         _controller: CompanyBundle:Company:create
+company_join:
+    path:      /company/join
+    defaults:
+        _controller: CompanyBundle:Company:join
