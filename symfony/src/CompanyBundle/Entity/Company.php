@@ -1,7 +1,7 @@
 <?php
 
 namespace CompanyBundle\Entity;
-
+use CompanyBundle\Entity\Sector;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -75,7 +75,6 @@ class Company
 
     /**
      * @ORM\OneToOne(targetEntity="CompanyBundle\Entity\Sector", cascade={"persist"})
-     * @ORM\Column(name="sector", nullable=false)
      */
 
     private $sector;
@@ -98,6 +97,8 @@ class Company
     public function __construct()
       {
         $this->creationDate = new \Datetime();
+        $this->creationDate = new \Datetime();
+        $this->updateDate = new \Datetime();
         $this->status = 0;
       }
 
@@ -224,5 +225,122 @@ class Company
     public function getResume()
     {
         return $this->resume;
+    }
+
+    /**
+     * Set updateDate
+     *
+     * @param \DateTime $updateDate
+     * @return Company
+     */
+    public function setUpdateDate($updateDate)
+    {
+        $this->updateDate = $updateDate;
+
+        return $this;
+    }
+
+    /**
+     * Get updateDate
+     *
+     * @return \DateTime
+     */
+    public function getUpdateDate()
+    {
+        return $this->updateDate;
+    }
+
+    /**
+     * Set size
+     *
+     * @param integer $size
+     * @return Company
+     */
+    public function setSize($size)
+    {
+        $this->size = $size;
+
+        return $this;
+    }
+
+    /**
+     * Get size
+     *
+     * @return integer
+     */
+    public function getSize()
+    {
+        return $this->size;
+    }
+
+
+
+    /**
+     * Set contractors
+     *
+     * @param string $contractors
+     * @return Company
+     */
+    public function setContractors($contractors)
+    {
+        $this->contractors = $contractors;
+
+        return $this;
+    }
+
+    /**
+     * Get contractors
+     *
+     * @return string
+     */
+    public function getContractors()
+    {
+        return $this->contractors;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     * @return Company
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set sector
+     *
+     * @param \CompanyBundle\Entity\Sector $sectorId
+     * @return Company
+     */
+    public function setSector(Sector $sector = null)
+    {
+        $this->sector = $sector;
+
+        return $this;
+    }
+
+    /**
+     * Get sector
+     *
+     * @return \CompanyBundle\Entity\Sector
+     */
+    public function getSector()
+    {
+        return $this->sector;
     }
 }
