@@ -500,32 +500,34 @@ class User extends BaseUser
     /**
      * Get image
      *
-     * @return \ToolsBundle\Entity\Upload 
+     * @return \ToolsBundle\Entity\Upload
      */
     public function getImage()
     {
         return $this->image;
     }
-        
+
     /**
      * @Assert\Callback
      */
     public function isValidate(ExecutionContext $context)
     {
-        $dailyFeesMin = $this->getDailyFeesMin();
-        $dailyFeesMax = $this->getDailyFeesMax();
-                
-        if ($this->getAddress() != NULL){
-            $this->getAddress()->isValidate($context);
-        } if ($this->getPhone() != NULL){
+        if ($this->getPhone() != NULL){
             $this->getPhone()->isValidate($context);
-        } if ( ($dailyFeesMax === NULL && $dailyFeesMin !== NULL) ||
-               ($dailyFeesMax !== NULL && $dailyFeesMin === NULL) ) {
+        }
+        if ($this->dailyFeesMin === NULL) {
             $context
-                ->buildViolation("Dailyfees min and max must be set.")
+                ->buildViolation("Dailyfees min must be set.")
                 ->atPath('dailyFeesMin')
                 ->addViolation();
-        } else if ($dailyFeesMin != NULL && $dailyFeesMax != NULL && $dailyFeesMin >= $dailyFeesMax) {
+        }
+        if ($this->dailyFeesMax === NULL) {
+            $context
+                ->buildViolation("Dailyfees max must be set.")
+                ->atPath('dailyFeesMax')
+                ->addViolation();
+        }
+        if ($dailyFeesMin != NULL && $dailyFeesMax != NULL && $dailyFeesMin >= $dailyFeesMax) {
             $context
                 ->buildViolation('The minimum fees must be less than the maximum fees.')
                 ->atPath('dailyFeesMin')
