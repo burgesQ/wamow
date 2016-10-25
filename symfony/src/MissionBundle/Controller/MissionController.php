@@ -171,7 +171,7 @@ class MissionController extends Controller
                 }
           }
         }
-        $team = new Team();
+        $team = new Team(0);
         $team->setMission($mission);
         $team->addUser($this->getUser());
         $em->persist($team);

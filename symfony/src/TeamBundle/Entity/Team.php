@@ -42,12 +42,20 @@ class Team
     private $creationDate;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="role", type="boolean", nullable=false)
+     */
+    private $role;
+
+    /**
      * Constructor
      */
-    public function __construct()
+    public function __construct($role)
     {
         $this->users = new \Doctrine\Common\Collections\ArrayCollection();
         $this->creationDate = new \DateTime();
+        $this->role = $role;
     }
 
     /**
@@ -137,5 +145,28 @@ class Team
     public function getUsers()
     {
         return $this->users;
+    }
+
+    /**
+     * Set role
+     *
+     * @param boolean $role
+     * @return Team
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
+    /**
+     * Get role
+     *
+     * @return boolean
+     */
+    public function getRole()
+    {
+        return $this->role;
     }
 }
