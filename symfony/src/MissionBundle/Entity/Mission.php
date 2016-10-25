@@ -765,53 +765,6 @@ class Mission
     }
 
     /**
-     * @Assert\Callback
-     */
-    public function validate(ExecutionContextInterface $context)
-    {
-        $missionBeginning = $this->getMissionBeginning();
-        $missionEnding = $this->getMissionEnding();
-        $applicationEnding = $this->getApplicationEnding();
-        $dailyFeesMin = $this->getDailyFeesMin();
-        $dailyFeesMax = $this->getDailyFeesMax();
-        $today = new \DateTime();
-        if ($missionBeginning->format("yy/mm/dd") > $missionEnding->format("yy/mm/dd"))
-        {
-          $context
-            ->buildViolation('The mission can not start after the end date.')
-            ->atPath('missionBeginning')
-            ->addViolation()
-            ;
-        }
-        elseif ($applicationEnding->format("yy/mm/dd") > $missionBeginning->format("yy/mm/dd"))
-        {
-          $context
-            ->buildViolation('The deadline must be before the mission start.')
-            ->atPath('applicationEnding')
-            ->addViolation()
-            ;
-        }
-        elseif ($missionBeginning <= $today
-                || $missionEnding <= $today
-                || $applicationEnding <= $today)
-        {
-            $context
-              ->buildViolation('You can\'t pick a past date.')
-              ->atPath('missionBeginning')
-              ->addViolation()
-              ;
-        }
-        if ($dailyFeesMin > $dailyFeesMax)
-        {
-          $context
-            ->buildViolation('The minimum fees must be less than the maximum.')
-            ->atPath('dailyFeesMin')
-            ->addViolation()
-            ;
-        }
-    }
-
-    /**
      * Get languages
      *
      * @return \Doctrine\Common\Collections\Collection
@@ -911,5 +864,61 @@ class Mission
     public function getSizeTeamMax()
     {
         return $this->sizeTeamMax;
+    }
+
+    /**
+     * @Assert\Callback
+     */
+    public function validate(ExecutionContextInterface $context)
+    {
+        $missionBeginning = $this->getMissionBeginning();
+        $missionEnding = $this->getMissionEnding();
+        $applicationEnding = $this->getApplicationEnding();
+        $dailyFeesMin = $this->getDailyFeesMin();
+        $dailyFeesMax = $this->getDailyFeesMax();
+        $today = new \DateTime();
+        if ($missionBeginning->format("yy/mm/dd") > $missionEnding->format("yy/mm/dd"))
+        {
+          $context
+            ->buildViolation('The mission can not start after the end date.')
+            ->atPath('missionBeginning')
+            ->addViolation()
+            ;
+        }
+        elseif ($applicationEnding->format("yy/mm/dd") > $missionBeginning->format("yy/mm/dd"))
+        {
+          $context
+            ->buildViolation('The deadline must be before the mission start.')
+            ->atPath('applicationEnding')
+            ->addViolation()
+            ;
+        }
+        elseif ($missionBeginning <= $today
+                || $missionEnding <= $today
+                || $applicationEnding <= $today)
+        {
+            $context
+              ->buildViolation('You can\'t pick a past date.')
+              ->atPath('missionBeginning')
+              ->addViolation()
+              ;
+        }
+        if ($dailyFeesMin > $dailyFeesMax)
+        {
+          $context
+            ->buildViolation('The minimum fees must be less than the maximum.')
+            ->atPath('dailyFeesMin')
+            ->addViolation()
+            ;
+        }
+        $array = $this->getLanguages();
+        if ($array["elements"] == null)
+        {
+            $context
+              ->buildViolation('Choose at least one language.')
+              ->atPath('languages')
+              ->addViolation()
+              ;
+        }
     }
 }
