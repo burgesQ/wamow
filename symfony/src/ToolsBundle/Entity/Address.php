@@ -11,7 +11,6 @@ use Symfony\Component\Validator\Context\ExecutionContext;
  *
  * @ORM\Table(name="address")
  * @ORM\Entity(repositoryClass="ToolsBundle\Repository\AddressRepository")
- * @Assert\Callback(methods={"isValidate"})
  */
 class Address
 {
@@ -74,7 +73,7 @@ class Address
     /**
      * @var string
      *
-     * @ORM\Column(name="country", type="string", length=255, nullable=true)
+     * @ORM\Column(name="country", type="string", length=255, nullable=false)
      */
     private $country;
 
@@ -287,33 +286,5 @@ class Address
     public function getLabel()
     {
         return $this->label;
-    }
-
-    /**
-     * @Assert\Callback
-     */
-    public function isValidate(ExecutionContext $context)
-    {
-        $country = $this->getCountry();
-        $city = $this->getCity();
-        $s1 = $this->getStreet();
-        $s2 = $this->getStreet2();
-
-        if ($country === NULL) {
-            $context
-                ->buildViolation("You must enter a country.")
-                ->atPath('country')
-                ->addViolation();
-        } else if ($s1 !== NULL && $city == NULL) {
-            $context
-                ->buildViolation("You must enter a city.")
-                ->atPath('city')
-                ->addViolation();
-        } else if  ($s2 !== NULL && $s1 == NULL) {
-            $context
-                ->buildViolation("Enter street 1 before street 2.")
-                ->atPath('street2')
-                ->addViolation();
-        } 
     }
 }
