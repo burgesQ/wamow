@@ -1,4 +1,4 @@
-src/MissionBundle/Controller/MissionController.php <?php
+<?php
 
 namespace MissionBundle\Controller;
 
