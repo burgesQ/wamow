@@ -809,14 +809,5 @@ class Mission
             ->addViolation()
             ;
         }
-        $array = $this->getLanguages();
-        if ($array["elements"] == null)
-        {
-            $context
-              ->buildViolation('Choose at least one language.')
-              ->atPath('languages')
-              ->addViolation()
-              ;
-        }
     }
 }
