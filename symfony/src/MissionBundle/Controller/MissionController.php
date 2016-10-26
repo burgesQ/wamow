@@ -116,7 +116,8 @@ class MissionController extends Controller
             ;
         $user = $this->getUser();
         $role = $user->getRoles();
-        if ($role[0] == "ROLE_CONTRACTOR")
+        if ($this->container->get('security.authorization_checker')
+                            ->isGranted('ROLE_CONTRACTOR'))
             {
                 $iDContact = $user->getId();
                 $listMission = $repository->findByiDContact($iDContact);
@@ -125,13 +126,18 @@ class MissionController extends Controller
                     'role'                  => $role[0]
                     ));
             }
-        else
+        elseif ($this->container->get('security.authorization_checker')
+                                ->isGranted('ROLE_ADVISOR'))
             {
                 $listMission = $repository->missionsAvailables();
                 return $this->render('MissionBundle:Mission:all_missions.html.twig', array(
                     'listMission'           => $listMission,
                     'role'                  => $role[0]
                     ));
+            }
+        else
+            {
+                throw new NotFoundHttpException("Error : you are neither loged as advisor, nor contractor.");    
             }
     }
 
