@@ -1,4 +1,4 @@
-<?php
+src/MissionBundle/Controller/MissionController.php <?php
 
 namespace MissionBundle\Controller;
 
@@ -20,45 +20,53 @@ class MissionController extends Controller
     */
     public function newAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-        $repository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('MissionBundle:Mission')
-            ;
-        $service = $this->container->get('mission.nbStep');
-        $nbStep = $service->getMissionNbStep();
-        $user = $this->getUser();
-        $token = bin2hex(random_bytes(10));
-        while ($repository->findByToken($token) != null)
+        if ($this->container->get('security.authorization_checker')
+                            ->isGranted('ROLE_CONTRACTOR'))
+        {
+            $em = $this->getDoctrine()->getManager();
+            $repository = $this
+                ->getDoctrine()
+                ->getManager()
+                ->getRepository('MissionBundle:Mission')
+                ;
+            $service = $this->container->get('mission.nbStep');
+            $nbStep = $service->getMissionNbStep();
+            $user = $this->getUser();
+            $token = bin2hex(random_bytes(10));
+            while ($repository->findByToken($token) != null)
             {
                 $token = bin2hex(random_bytes(10));
             }
-        $mission = new Mission($nbStep, $user->getId(), 1, $token);
-        $form = $this->get('form.factory')->create(new MissionType(), $mission);
-        $form->handleRequest($request);
-      if ($form->isValid())
-        {
-          $em->persist($mission);
-          for ($i=0; $i < $nbStep; $i++)
-              {
-                  $array = $service->getMissionStep($i);
-                  $step = new Step($array["nbMaxTeam"], $array["reallocTeam"]);
-                  $step->setMission($mission);
-                  $step->setPosition($i + 1);
-                  $em->persist($step);
-              }
-          $em->flush();
-          $id = $mission->getId();
-          return $this->render('MissionBundle:Mission:registered.html.twig', array(
-            'mission'  =>   $mission,
-            'id'       =>   $id,
-            'form'     =>   $form,
+            $mission = new Mission($nbStep, $user->getId(), 1, $token);
+            $form = $this->get('form.factory')->create(new MissionType(), $mission);
+            $form->handleRequest($request);
+            if ($form->isValid())
+            {
+                $em->persist($mission);
+                for ($i=0; $i < $nbStep; $i++)
+                {
+                    $array = $service->getMissionStep($i);
+                    $step = new Step($array["nbMaxTeam"], $array["reallocTeam"]);
+                    $step->setMission($mission);
+                    $step->setPosition($i + 1);
+                    $em->persist($step);
+                }
+                $em->flush();
+                $id = $mission->getId();
+                return $this->render('MissionBundle:Mission:registered.html.twig', array(
+                    'mission'  =>   $mission,
+                    'id'       =>   $id,
+                    'form'     =>   $form,
+                ));
+            }
+            return $this->render('MissionBundle:Mission:new.html.twig', array(
+                'form' => $form->createView(),
             ));
         }
-      return $this->render('MissionBundle:Mission:new.html.twig', array(
-        'form' => $form->createView(),
-        ));
+        else
+        {
+            throw new NotFoundHttpException("You're not authorized to create a mission.");
+        }
     }
 
     /*
@@ -137,7 +145,7 @@ class MissionController extends Controller
             }
         else
             {
-                throw new NotFoundHttpException("Error : you are neither loged as advisor, nor contractor.");    
+                throw new NotFoundHttpException("Error : you are neither loged as advisor, nor contractor.");
             }
     }
 
