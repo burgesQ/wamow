@@ -10,8 +10,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use MissionBundle\Entity\Step;
 use MissionBundle\Entity\Mission;
 use MissionBundle\Form\MissionType;
-use MissionBundle\Form\StepType;
-use ToolsBundle\Entity\Language;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
@@ -22,31 +20,53 @@ class MissionController extends Controller
     */
     public function newAction(Request $request)
     {
-      $mission = new Mission();
-      $form = $this->get('form.factory')->create(new MissionType(), $mission);
-      $form->handleRequest($request);
-      if ($form->isValid())
+        if ($this->container->get('security.authorization_checker')
+                            ->isGranted('ROLE_CONTRACTOR'))
         {
-          $em = $this->getDoctrine()->getManager();
-          $em->persist($mission);
-          for ($i=0; $i < $mission->getNumberStep(); $i++)
-              {
-                  $step = new Step();
-                  $step->setMission($mission);
-                  $step->setPosition($i + 1);
-                  $em->persist($step);
-              }
-          $em->flush();
-          $id = $mission->getId();
-          return $this->render('MissionBundle:Mission:registered.html.twig', array(
-            'mission'  =>   $mission,
-            'id'       =>   $id,
-            'form'     =>   $form,
+            $em = $this->getDoctrine()->getManager();
+            $repository = $this
+                ->getDoctrine()
+                ->getManager()
+                ->getRepository('MissionBundle:Mission')
+                ;
+            $service = $this->container->get('mission.nbStep');
+            $nbStep = $service->getMissionNbStep();
+            $user = $this->getUser();
+            $token = bin2hex(random_bytes(10));
+            while ($repository->findByToken($token) != null)
+            {
+                $token = bin2hex(random_bytes(10));
+            }
+            $mission = new Mission($nbStep, $user->getId(), 1, $token);
+            $form = $this->get('form.factory')->create(new MissionType(), $mission);
+            $form->handleRequest($request);
+            if ($form->isValid())
+            {
+                $em->persist($mission);
+                for ($i=0; $i < $nbStep; $i++)
+                {
+                    $array = $service->getMissionStep($i);
+                    $step = new Step($array["nbMaxTeam"], $array["reallocTeam"]);
+                    $step->setMission($mission);
+                    $step->setPosition($i + 1);
+                    $em->persist($step);
+                }
+                $em->flush();
+                $id = $mission->getId();
+                return $this->render('MissionBundle:Mission:registered.html.twig', array(
+                    'mission'  =>   $mission,
+                    'id'       =>   $id,
+                    'form'     =>   $form,
+                ));
+            }
+            return $this->render('MissionBundle:Mission:new.html.twig', array(
+                'form' => $form->createView(),
             ));
         }
-      return $this->render('MissionBundle:Mission:new.html.twig', array(
-        'form' => $form->createView(),
-        ));
+        else
+        {
+            throw new NotFoundHttpException("You're not authorized to create a mission.");
+        }
     }
 
     /*
@@ -95,78 +115,44 @@ class MissionController extends Controller
         ));
     }
 
-    /*
-      Add step to a mission
-    */
-    public function stepAction($id, Request $request)
+    public function missionListAction()
     {
-      $em = $this->getDoctrine()->getManager();
-      $mission = $em->getRepository('MissionBundle:Mission')->find($id);
-      $step = new Step();
-      $step->setMission($mission);
-      if (null === $mission)
-        {
-          throw new NotFoundHttpException("The mission ".$id." doesn't exist.");
-        }
-      $form = $this->get('form.factory')->create(new StepType(), $step);
-      $listStep = $em
-      ->getRepository('MissionBundle:Step')
-      ->findBy(array('mission' => $mission))
-      ;
-      $nbStep = 0;
-      foreach ($listStep as $step)
-        {
-          ++$nbStep;
-        }
-      if (!$listStep)    //If there's no step yet
-        {
-          if ($form->handleRequest($request)->isValid())
+        $repository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('MissionBundle:Mission')
+            ;
+        $user = $this->getUser();
+        $role = $user->getRoles();
+        if ($this->container->get('security.authorization_checker')
+                            ->isGranted('ROLE_CONTRACTOR'))
             {
-              $em = $this->getDoctrine()->getManager();
-              $em->persist($step);
-              $em->flush();
-              $id = $mission->getid();
-              return $this->render('MissionBundle:Mission:stepdone.html.twig', array(
-                'mission'  =>   $mission,
-                'id'       =>   $id,
-                'form'     =>   $form,
-                'step'     =>   $step
-                ));
+                $iDContact = $user->getId();
+                $listMission = $repository->findByiDContact($iDContact);
+                return $this->render('MissionBundle:Mission:all_missions.html.twig', array(
+                    'listMission'           => $listMission,
+                    'role'                  => $role[0]
+                    ));
             }
-          return $this->render('MissionBundle:Mission:step.html.twig', array(
-            'mission'  => $mission,
-            'step'     => $step,
-            'form'     => $form->createView()
-            ));
-        }
-      else if ($mission->getNumberStep() == $nbStep)  //If it's the last step
-      {
-        return new Response("Last step");
-      }
-      else                            //Creation of new step
-      {
-        $step = new Step();
-        $step->setMission($mission);
-        $step->setPosition($nbStep + 1);
-        if ($form->handleRequest($request)->isValid())
-          {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($step);
-            $em->flush();
-            $id = $mission->getid();
-            return $this->render('MissionBundle:Mission:stepdone.html.twig', array(
-              'mission'  =>   $mission,
-              'id'       =>   $id,
-              'form'     =>   $form,
-              'step'     =>   $step
-            ));
-          }
-        return $this->render('MissionBundle:Mission:step.html.twig', array(
-          'mission'  => $mission,
-          'step'     => $step,
-          'form'     => $form->createView(),
-          'nbStep'   => $nbStep
-          ));
-      }
+        elseif ($this->container->get('security.authorization_checker')
+                                ->isGranted('ROLE_ADVISOR'))
+            {
+                $listMission = $repository->missionsAvailables();
+                return $this->render('MissionBundle:Mission:all_missions.html.twig', array(
+                    'listMission'           => $listMission,
+                    'role'                  => $role[0]
+                    ));
+            }
+        else
+            {
+                throw new NotFoundHttpException("Error : you are neither loged as advisor, nor contractor.");
+            }
     }
+
+    public function missionPitchAction()
+    {
+        // Team creations
+        return new Response("Pitch done");
+    }
+
 }

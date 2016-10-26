@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <p>
+            All available missions :
+        </p>
+        <p>
+            {% for mission in listMission %}
+             <li>
+                 <a href="{{ path('mission_view', {'id': mission.id}) }}">
+                 {{ mission.title }}</a>
+                 {% if role == "ROLE_ADVISOR" %}
+                    ---> <a href="{{ path('mission_pitch') }}">pitch </a>
+                 {% endif %}
+            </li>
+            {% endfor %}
+        </p>
+    </body>
+</html>

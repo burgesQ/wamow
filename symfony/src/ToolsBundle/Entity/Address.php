@@ -77,6 +77,26 @@ class Address
     private $country;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=true)
+     * @Assert\Regex(
+     *     pattern="#^[0-9a-zA-Zéèêëçîïíàáâñńœôö]+(?:[\s-&][a-zA-Zéèêëçîïíàáâñńœôö]+)*$#",
+     *     match=true)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="label", type="string", length=255, nullable=true)
+     * @Assert\Regex(
+     *     pattern="#^[0-9a-zA-Zéèêëçîïíàáâñńœôö]+(?:[\s-&][a-zA-Zéèêëçîïíàáâñńœôö]+)*$#",
+     *     match=true)
+     */
+    private $label;
+
+    /**
      * Get id
      *
      * @return integer
@@ -222,5 +242,51 @@ class Address
     public function getCountry()
     {
         return $this->country;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Address
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set label
+     *
+     * @param string $label
+     * @return Address
+     */
+    public function setLabel($label)
+    {
+        $this->label = $label;
+
+        return $this;
+    }
+
+    /**
+     * Get label
+     *
+     * @return string
+     */
+    public function getLabel()
+    {
+        return $this->label;
     }
 }

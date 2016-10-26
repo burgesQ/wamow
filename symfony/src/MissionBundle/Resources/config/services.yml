@@ -1,4 +1,4 @@
 services:
-#    Mission.example:
-#        class: MissionBundle\Example
-#        arguments: ["@service_id", "plain_value", %parameter%]
+    mission.nbStep:
+        class: ToolsBundle\Service\MissionNbStep
+        arguments: [@doctrine.orm.entity_manager]

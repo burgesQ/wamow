@@ -14,6 +14,7 @@
     {{ form_label(form.resume, 'Describe your mission :') }}
     {{ form_widget(form.resume) }}
     </div>
+    <br>
     <div>
     {{ form_errors(form.address.street) }}
     {{ form_label(form.address.street, 'Address') }}
@@ -44,8 +45,20 @@
     {{ form_label(form.address.state, 'State *') }}
     {{ form_widget(form.address.state) }}
     </div>
+    <div>
+    {{ form_errors(form.address.label) }}
+    {{ form_label(form.address.label, 'Label *') }}
+    {{ form_widget(form.address.label) }}
+    </div>
+    <div>
+    {{ form_errors(form.address.name) }}
+    {{ form_label(form.address.name, 'Name *') }}
+    {{ form_widget(form.address.name) }}
+    </div>
+    <br>
     {{ form_row(form.languages) }}
     <div>
+    <br>
     {{ form_errors(form.confidentiality) }}
     {{ form_label(form.confidentiality) }}
     {{ form_widget(form.confidentiality) }}
@@ -95,10 +108,12 @@
     {{ form_label(form.missionKind) }}
     {{ form_widget(form.missionKind) }}
     </div>
+    <br>
     <div>
     {{ form_errors(form.image) }}
     {{ form_label(form.image, 'Image *') }}
     {{ form_widget(form.image) }}
+    <br>
     </div>
     {{ form_row(form.save, { 'label': 'Submit' }) }}
   {{ form_end(form) }}

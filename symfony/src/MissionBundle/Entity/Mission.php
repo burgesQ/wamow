@@ -62,20 +62,7 @@ class Mission
     /**
      * @var int
      *
-     * @ORM\Column(name="number_step", type="smallint")
-     * @Assert\Range(
-     *      min = 1,
-     *      max = 5,
-     *      minMessage = "There is at least {{ limit }}step.",
-     *      maxMessage = "There is no more than {{ limit }}steps."
-     * )
-     */
-    private $numberStep;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="ID_contact", type="integer", nullable=true)
+     * @ORM\Column(name="ID_contact", type="integer")
      */
     private $iDContact;
 
@@ -146,7 +133,6 @@ class Mission
      * @ORM\Column(name="daily_fees_min", type="integer")
      * @Assert\Range(
      *      min = 1,
-     *      max = 99999,
      *      minMessage = "You need to fill this field.",
      * )
      */
@@ -158,7 +144,6 @@ class Mission
      * @ORM\Column(name="daily_fees_max", type="integer")
      * @Assert\Range(
      *      min = 1,
-     *      max = 9999,
      *      minMessage = "You need to fill this field.",
      * )
      */
@@ -195,14 +180,41 @@ class Mission
      */
     private $image;
 
-    public function __construct()
+    /**
+      * @var int
+      *
+     * @ORM\Column(name="number_step", type="smallint")
+     */
+    private $numberStep;
+
+    /**
+      * @var string
+      *
+     * @ORM\Column(name="token", type="string", length=255, nullable=false, unique=true)
+     */
+    private $token;
+
+    /**
+      * @var int
+      *
+     * @ORM\Column(name="size_team_max", type="smallint")
+     * @Assert\Range(
+     *      min = 1,
+     *      minMessage = "The max size of users in a team must be at least one.")
+     */
+    private $sizeTeamMax;
+
+    public function __construct($nbStep, $iDContact, $sizeTeamMax, $token)
       {
         $this->creationDate = new \Datetime();
-        $this->UpdateDate = new \DateTime();
+        $this->updateDate = new \DateTime();
         $this->languages = new ArrayCollection();
         $this->status = 0;
-        $this->numberStep = 3;
         $this->address = new Address();
+        $this->numberStep = $nbStep;
+        $this->iDContact = $iDContact;
+        $this->sizeTeamMax = $sizeTeamMax;
+        $this->token = $token;
       }
 
     /**
@@ -303,29 +315,6 @@ class Mission
     public function getConfidentiality()
     {
         return $this->confidentiality;
-    }
-
-    /**
-     * Set numberStep
-     *
-     * @param integer $numberStep
-     * @return Mission
-     */
-    public function setNumberStep($numberStep)
-    {
-        $this->numberStep = $numberStep;
-
-        return $this;
-    }
-
-    /**
-     * Get numberStep
-     *
-     * @return integer
-     */
-    public function getNumberStep()
-    {
-        return $this->numberStep;
     }
 
     /**
@@ -513,29 +502,6 @@ class Mission
     }
 
     /**
-     * Set beginning
-     *
-     * @param \DateTime $beginning
-     * @return Mission
-     */
-    public function setBeginning($beginning)
-    {
-        $this->beginning = $beginning;
-
-        return $this;
-    }
-
-    /**
-     * Get beginning
-     *
-     * @return \DateTime
-     */
-    public function getBeginning()
-    {
-        return $this->beginning;
-    }
-
-    /**
      * Set image
      *
      * @param string $image
@@ -556,53 +522,6 @@ class Mission
     public function getImage()
     {
         return $this->image;
-    }
-
-    /**
-     * Set zipcode
-     *
-     * @param string $zipcode
-     * @return Mission
-     */
-    public function setZipcode($zipcode)
-    {
-        $this->zipcode = $zipcode;
-
-        return $this;
-    }
-
-    /**
-     * Get zipcode
-     *
-     * @return string
-     */
-    public function getZipcode()
-    {
-        return $this->zipcode;
-    }
-
-
-    /**
-     * Set ending
-     *
-     * @param \DateTime $ending
-     * @return Mission
-     */
-    public function setEnding($ending)
-    {
-        $this->ending = $ending;
-
-        return $this;
-    }
-
-    /**
-     * Get ending
-     *
-     * @return \DateTime
-     */
-    public function getEnding()
-    {
-        return $this->ending;
     }
 
     /**
@@ -744,42 +663,6 @@ class Mission
     }
 
     /**
-     * @Assert\Callback
-     */
-    public function validate(ExecutionContextInterface $context)
-    {
-        $missionBeginning = $this->getMissionBeginning();
-        $missionEnding = $this->getMissionEnding();
-        $applicationEnding = $this->getApplicationEnding();
-        $dailyFeesMin = $this->getDailyFeesMin();
-        $dailyFeesMax = $this->getDailyFeesMax();
-        if ($missionBeginning->format("yy/mm/dd") > $missionEnding->format("yy/mm/dd"))
-        {
-          $context
-            ->buildViolation('The mission can not start after the end date.')
-            ->atPath('missionBeginning')
-            ->addViolation()
-            ;
-        }
-        elseif ($applicationEnding->format("yy/mm/dd") > $missionBeginning->format("yy/mm/dd"))
-        {
-          $context
-            ->buildViolation('The deadline must be before the mission start.')
-            ->atPath('missionBeginning')
-            ->addViolation()
-            ;
-        }
-        if ($dailyFeesMin > $dailyFeesMax)
-        {
-          $context
-            ->buildViolation('The minimum fees must be less than the maximum.')
-            ->atPath('dailyFeesMin')
-            ->addViolation()
-            ;
-        }
-    }
-
-    /**
      * Get languages
      *
      * @return \Doctrine\Common\Collections\Collection
@@ -810,5 +693,121 @@ class Mission
     public function removeLanguage(\ToolsBundle\Entity\Language $languages)
     {
         $this->languages->removeElement($languages);
+    }
+
+    /**
+      * Set numberStep
+      *
+      * @param integer $numberStep
+      * @return Mission
+      */
+     public function setNumberStep($numberStep)
+     {
+         $this->numberStep = $numberStep;
+
+         return $this;
+     }
+
+     /**
+      * Get numberStep
+      *
+      * @return integer
+      */
+     public function getNumberStep()
+     {
+         return $this->numberStep;
+     }
+
+    /**
+     * Set token
+     *
+     * @param string $token
+     * @return Mission
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    /**
+     * Get token
+     *
+     * @return string
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    /**
+     * Set sizeTeamMax
+     *
+     * @param integer $sizeTeamMax
+     * @return Mission
+     */
+    public function setSizeTeamMax($sizeTeamMax)
+    {
+        $this->sizeTeamMax = $sizeTeamMax;
+
+        return $this;
+    }
+
+    /**
+     * Get sizeTeamMax
+     *
+     * @return integer
+     */
+    public function getSizeTeamMax()
+    {
+        return $this->sizeTeamMax;
+    }
+
+    /**
+     * @Assert\Callback
+     */
+    public function validate(ExecutionContextInterface $context)
+    {
+        $missionBeginning = $this->getMissionBeginning();
+        $missionEnding = $this->getMissionEnding();
+        $applicationEnding = $this->getApplicationEnding();
+        $dailyFeesMin = $this->getDailyFeesMin();
+        $dailyFeesMax = $this->getDailyFeesMax();
+        $today = new \DateTime();
+        if ($missionBeginning->format("yy/mm/dd") > $missionEnding->format("yy/mm/dd"))
+        {
+          $context
+            ->buildViolation('The mission can not start after the end date.')
+            ->atPath('missionBeginning')
+            ->addViolation()
+            ;
+        }
+        elseif ($applicationEnding->format("yy/mm/dd") > $missionBeginning->format("yy/mm/dd"))
+        {
+          $context
+            ->buildViolation('The deadline must be before the mission start.')
+            ->atPath('applicationEnding')
+            ->addViolation()
+            ;
+        }
+        elseif ($missionBeginning <= $today
+                || $missionEnding <= $today
+                || $applicationEnding <= $today)
+        {
+            $context
+              ->buildViolation('You can\'t pick a past date.')
+              ->atPath('missionBeginning')
+              ->addViolation()
+              ;
+        }
+        if ($dailyFeesMin > $dailyFeesMax)
+        {
+          $context
+            ->buildViolation('The minimum fees must be less than the maximum.')
+            ->atPath('dailyFeesMin')
+            ->addViolation()
+            ;
+        }
     }
 }

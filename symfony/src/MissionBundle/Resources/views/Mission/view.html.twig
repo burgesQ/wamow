@@ -15,11 +15,26 @@
   </p>
   <p>
       <h4><br>Address :</h4>
-      {{ mission.address.street }},{{ mission.address.street2 }}, {{ mission.address.city }},{{ mission.address.zipcode }} <br>{{ mission.address.country }}
-        {% if mission.address.state is not null %}
-          , {{ mission.address.state }}<br>
-        {% endif %}
-  </p>
+      {{ mission.address.street }},
+      {% if mission.address.state is not null %}
+        {{ mission.address.street2 }},<br>
+      {% endif %}
+       {{ mission.address.city }},{{ mission.address.zipcode }}
+       <br>{{ mission.address.country }}
+       {% if mission.address.state is not null %}
+        ,{{ mission.address.state }}<br>
+       {% endif %}
+   </p>
+   <p>
+       {% if mission.address.label is not null %}
+        Label : {{ mission.address.state }}<br>
+       {% endif %}
+   </p>
+   <p>
+       {% if mission.address.name is not null %}
+        Name : {{ mission.address.name }}<br>
+       {% endif %}
+   </p>
   <p>
       <h4><br>Daily Fees :</h4>
         {{ mission.dailyFeesMin }} $/days min <br>
@@ -27,7 +42,7 @@
   </p>
   <p>
       You have until {{ mission.applicationEnding|date('d/m/Y') }} to apply. <br>
-      From {{ mission.missionBeginning|date('d/m/Y') }} to {{ mission.missionEnding|date('d/m/Y') }}
+      From {{ mission.missionBeginning|date('d/m/Y') }} to {{ mission.missionEnding|date('d/m/Y') }}<br>
   </p>
 
         {% if listLanguage is not null %}
@@ -49,6 +64,9 @@
           This mission is international.
         {% endif %}
   </p>
+    <p style="background-color:#ffcc00; text-align:center">
+        <a href="{{ path('mission_pitch') }}">PITCH </a>
+    </p>
 </div>
 </body>
 </html>
