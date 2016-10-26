@@ -12,6 +12,7 @@ use MissionBundle\Entity\Mission;
 use MissionBundle\Form\MissionType;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use TeamBundle\Entity\Team;
 
 class MissionController extends Controller
 {
@@ -149,9 +150,32 @@ class MissionController extends Controller
             }
     }
 
-    public function missionPitchAction()
+    public function missionPitchAction($id)
     {
-        // Team creations
+        $em = $this->getDoctrine()->getManager();
+        $mission = $em
+          ->getRepository('MissionBundle:Mission')
+          ->find($id)
+            ;
+        $listTeams = $em
+              ->getRepository('TeamBundle:Team')
+              ->findBy(array('mission' => $id)); // liste de toutes les Teams sur cette Mission
+        foreach ($listTeams as $team)
+        {
+            $listUsers = $team->getUsers();
+            foreach ($listUsers as $user)
+            {
+                if ($user->getId() == $this->getUser()->getId())
+                {
+                    return new Response("You already apply to this mission.");
+                }
+          }
+        }
+        $team = new Team(0);
+        $team->setMission($mission);
+        $team->addUser($this->getUser());
+        $em->persist($team);
+        $em->flush($team);
         return new Response("Pitch done");
     }
 
