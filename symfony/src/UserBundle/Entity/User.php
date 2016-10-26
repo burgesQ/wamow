@@ -5,8 +5,11 @@ namespace UserBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Validator\Constraints as Assert;
-use ToolsBundle\Entity\Address;
+
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+
+use ToolsBundle\Entity\Address;
+use ToolsBundle\Entity\PhoneNumber;
 
 /**
  * User
@@ -33,6 +36,8 @@ class User extends BaseUser
     private $status;
 
     /**
+     * @var string
+     *
      * @Assert\Regex(
      *  pattern="/^(?=.*[a-z])/",
      *  message="The password must contain at least one lowercase letter."
@@ -58,8 +63,6 @@ class User extends BaseUser
      *  minMessage="fos_user.password.short",
      *  groups={"Registration", "Profile", "ResetPassword", "ChangePassword"}
      * )
-     *
-     * @var string
      *
      */
     protected $plainPassword;
@@ -150,12 +153,11 @@ class User extends BaseUser
      */
     private $address;
 
-   /**
-      * @var string
-      *
-      * @ORM\Column(name="phone", type="string", length=20, nullable=true)
-    */
-   private $phone;
+    /**
+     * @ORM\OneToOne(targetEntity="ToolsBundle\Entity\PhoneNumber", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $phone;
 
    /**
     * @var string
@@ -186,9 +188,16 @@ class User extends BaseUser
         $this->confidentiality = false;
         $this->status = 0;
         $this->address = NULL;
+        $this->prefix = NULL;
         $this->birthdate = NULL;
     }
 
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return User
+     */
     public function setEmail($email)
     {
         $email = is_null($email) ? '' : $email;
@@ -340,27 +349,6 @@ class User extends BaseUser
     }
 
     /**
-     * Set phone
-     *
-     * @param string $phone
-     * @return User
-     */
-    public function setPhone($phone)
-    {
-        $this->phone = $phone;
-        return $this;
-    }
-    /**
-     * Get phone
-     *
-     * @return string
-     */
-    public function getPhone()
-    {
-        return $this->phone;
-    }
-
-    /**
      * Set image
      *
      * @param string $image
@@ -495,6 +483,29 @@ class User extends BaseUser
     }
 
     /**
+     * Set phone
+     *
+     * @param \ToolsBundle\Entity\PhoneNumber $phone
+     * @return User
+     */
+    public function setPhone(\ToolsBundle\Entity\PhoneNumber $phone = null)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return \ToolsBundle\Entity\PhoneNumber
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
      * @Assert\Callback
      */
     public function validate(ExecutionContextInterface $context)
@@ -502,21 +513,53 @@ class User extends BaseUser
         $dailyFeesMin = $this->getDailyFeesMin();
         $dailyFeesMax = $this->getDailyFeesMax();
 
+        if ($this->getAddress() !== NULL) {
+            $addr = $this->getAddress()->getStreet();
+            $country = $this->getAddress()->getCountry();
+            $city = $this->getAddress()->getCity();
+            if  ($addr !== NULL && $city === NULL) {
+                $context
+                    ->buildViolation("You must enter a city.")
+                    ->atPath('city')
+                    ->addViolation();
+            }
+            else if  ($city !== NULL && $country === NULL) {
+                $context
+                    ->buildViolation("You must enter a country.")
+                    ->atPath('country')
+                    ->addViolation();
+            }
+        }
+        if ($this->getPhone() !== NULL) {
+            $prefix = $this->getPhone()->getPrefix();
+            $tel = $this->getPhone()->getTel();
+            if  ($tel === NULL && $prefix !== NULL) {
+                $context
+                    ->buildViolation("You must enter a phone number with the prefix.")
+                    ->atPath('tel')
+                    ->addViolation();
+            }
+            else if  ($tel !== NULL && $prefix === NULL) {
+                $context
+                    ->buildViolation("You must enter a prefix with the phone number.")
+                    ->atPath('prefix')
+                    ->addViolation();
+            }
+        }
         if ( ($dailyFeesMax === NULL && $dailyFeesMin !== NULL) ||
-             ($dailyFeesMax !== NULL && $dailyFeesMin === NULL) ) {
-                 $context
-                     ->buildViolation("Dailyfees min and max must be set.")
-                     ->atPath('dailyFeesMin')
-                     ->addViolation();
+             ($dailyFeesMax !== NULL && $dailyFeesMin === NULL) )
+        {
+            $context
+                ->buildViolation("Dailyfees min and max must be set.")
+                ->atPath('dailyFeesMin')
+                ->addViolation();
         }
         else if ($dailyFeesMin > $dailyFeesMax)
         {
-          $context
-            ->buildViolation('The minimum fees must be less than the maximum.')
-            ->atPath('dailyFeesMin')
-            ->addViolation()
-            ;
+            $context
+              ->buildViolation('The minimum fees must be less than the maximum.')
+              ->atPath('dailyFeesMin')
+              ->addViolation();
         }
     }
-
 }
