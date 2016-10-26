@@ -1,4 +1,4 @@
-<?php
+src/MissionBundle/Controller/MissionController.php <?php
 
 namespace MissionBundle\Controller;
 
@@ -146,7 +146,7 @@ class MissionController extends Controller
             }
         else
             {
-                throw new NotFoundHttpException("Error : you are neither loged as advisor, nor contractor.");    
+                throw new NotFoundHttpException("Error : you are neither loged as advisor, nor contractor.");
             }
     }
 
