@@ -146,37 +146,8 @@ class MissionController extends Controller
             }
         else
             {
-                throw new NotFoundHttpException("Error : you are neither loged as advisor, nor contractor.");
+                throw new NotFoundHttpException("Error : you are neither loged as advisor, nor contractor.");    
             }
-    }
-
-    public function missionPitchAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $mission = $em
-          ->getRepository('MissionBundle:Mission')
-          ->find($id)
-            ;
-        $listTeams = $em
-              ->getRepository('TeamBundle:Team')
-              ->findBy(array('mission' => $id)); // liste de toutes les Teams sur cette Mission
-        foreach ($listTeams as $team)
-        {
-            $listUsers = $team->getUsers();
-            foreach ($listUsers as $user)
-            {
-                if ($user->getId() == $this->getUser()->getId())
-                {
-                    return new Response("You already apply to this mission.");
-                }
-          }
-        }
-        $team = new Team(0);
-        $team->setMission($mission);
-        $team->addUser($this->getUser());
-        $em->persist($team);
-        $em->flush($team);
-        return new Response("Pitch done");
     }
 
     public function missionPitchAction()
