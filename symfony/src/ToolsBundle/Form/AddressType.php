@@ -24,8 +24,6 @@ class AddressType extends AbstractType
             ->add('city')
             ->add('street')
             ->add('street2')
-                'placeholder' => 'Choose a country')
-            )
             ->add('label')
             ->add('name')
             ;
