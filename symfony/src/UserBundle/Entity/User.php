@@ -515,19 +515,19 @@ class User extends BaseUser
         if ($this->getPhone() != NULL){
             $this->getPhone()->isValidate($context);
         }
-        if ($this->dailyFeesMin === NULL) {
+        if ($this->dailyFeesMin === NULL && $this->dailyFeesMax !== NULL) {
             $context
                 ->buildViolation("Dailyfees min must be set.")
                 ->atPath('dailyFeesMin')
                 ->addViolation();
         }
-        if ($this->dailyFeesMax === NULL) {
+        else if ($this->dailyFeesMax === NULL && $this->dailyFeesMin !== NULL) {
             $context
                 ->buildViolation("Dailyfees max must be set.")
                 ->atPath('dailyFeesMax')
                 ->addViolation();
         }
-        if ($dailyFeesMin != NULL && $dailyFeesMax != NULL && $dailyFeesMin >= $dailyFeesMax) {
+        else if ($this->dailyFeesMin != NULL && $this->dailyFeesMax != NULL && $this->dailyFeesMin >= $this->dailyFeesMax) {
             $context
                 ->buildViolation('The minimum fees must be less than the maximum fees.')
                 ->atPath('dailyFeesMin')
