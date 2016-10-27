@@ -16,7 +16,6 @@ use ToolsBundle\Entity\Upload;
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="UserBundle\Repository\UserRepository")
- * @Assert\Callback(methods={"isValidate"})
  */
 class User extends BaseUser
 {
