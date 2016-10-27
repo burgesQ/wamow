@@ -64,7 +64,6 @@ class User extends BaseUser
      *  minMessage="fos_user.password.short",
      *  groups={"Registration", "Profile", "ResetPassword", "ChangePassword"}
      * )
-     *
      */
     protected $plainPassword;
 
@@ -79,7 +78,6 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="first_name", type="string", length=255, nullable=false)
-     *
      * @Assert\NotBlank(message="Please enter your first name.", groups={"Registration", "Profile"})
      * @Assert\Length(
      *     min=2,
@@ -95,7 +93,6 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="last_name", type="string", length=255, nullable=false)
-     *
      * @Assert\NotBlank(message="Please enter your last name.", groups={"Registration", "Profile"})
      * @Assert\Length(
      *     min=2,
@@ -111,7 +108,6 @@ class User extends BaseUser
      * @var int
      *
      * @ORM\Column(name="gender", type="smallint", nullable=true)
-     *
      * @Assert\Range(
      *      min = 0,
      *      max = 2
@@ -130,7 +126,6 @@ class User extends BaseUser
     * @var int
     *
     * @ORM\Column(name="daily_fees_min", type="bigint", nullable=true)
-    *
     * @Assert\Range(
     *      min = 0
     *)
@@ -141,12 +136,25 @@ class User extends BaseUser
     * @var int
     *
     * @ORM\Column(name="daily_fees_max", type="bigint", nullable=true)
-    *
     * @Assert\Range(
     *      min = 0
     *)
     */
    private $dailyFeesMax;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="creation_date", type="datetime", nullable=false)
+     */
+    private $creationDate;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="update_date", type="datetime", nullable=false)
+     */
+    private $updateDate;
 
     /**
      * @ORM\OneToOne(targetEntity="ToolsBundle\Entity\Address", cascade={"persist"})
@@ -165,21 +173,7 @@ class User extends BaseUser
      * @ORM\JoinColumn(nullable=true)
      */
     private $image;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="creation_date", type="datetime", nullable=false)
-     */
-    private $creationDate;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="update_date", type="datetime", nullable=false)
-     */
-    private $updateDate;
-
+    
     public function __construct()
     {
         parent::__construct();
@@ -493,7 +487,7 @@ class User extends BaseUser
     public function setImage(\ToolsBundle\Entity\Upload $image = null)
     {
         $this->image = $image;
-        $this->image->setType("image");
+
         return $this;
     }
 
@@ -512,22 +506,32 @@ class User extends BaseUser
      */
     public function isValidate(ExecutionContext $context)
     {
-        if ($this->getPhone() != NULL){
+        $img = $this->getImage();
+        $feesMin = $this->getDailyFeesMin();
+        $feesMax = $this->getDailyFeesMax();
+        
+        if ($img != NULL && $img->getFile() != NULL)
+        {
+            $info = explode("/", $img->getFile()->getMimeType());
+            if ($info[0] != "image") {
+                $context
+                    ->buildViolation("This file isn't a image.")
+                    ->atPath('image.file')
+                    ->addViolation();
+            }
+        } if ($this->getPhone() != NULL) {
             $this->getPhone()->isValidate($context);
-        }
-        if ($this->dailyFeesMin === NULL && $this->dailyFeesMax !== NULL) {
+        } if ($feesMin == NULL && $feesMax != NULL) {
             $context
                 ->buildViolation("Dailyfees min must be set.")
                 ->atPath('dailyFeesMin')
                 ->addViolation();
-        }
-        else if ($this->dailyFeesMax === NULL && $this->dailyFeesMin !== NULL) {
+        } else if ($feesMax == NULL && $feesMin != NULL) {
             $context
                 ->buildViolation("Dailyfees max must be set.")
                 ->atPath('dailyFeesMax')
                 ->addViolation();
-        }
-        else if ($this->dailyFeesMin != NULL && $this->dailyFeesMax != NULL && $this->dailyFeesMin >= $this->dailyFeesMax) {
+        } else if ($feesMin != NULL && $feesMax != NULL && $feesMin >= $feesMax) {
             $context
                 ->buildViolation('The minimum fees must be less than the maximum fees.')
                 ->atPath('dailyFeesMin')
