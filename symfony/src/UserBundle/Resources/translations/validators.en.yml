@@ -1,0 +1,5 @@
+# validators.en.yml
+image.bad.format: "This file isn't a image."
+minfees.over.maxfees: 'The minimum fees must be less than the maximum fees.'
+maxfees.unset: 'Dailyfees max must be set.'
+minfees.unset: 'Dailyfees min must be set.'

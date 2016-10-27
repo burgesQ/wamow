@@ -4,7 +4,7 @@ namespace UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Context\ExecutionContext;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use ToolsBundle\Entity\Address;
@@ -504,18 +504,18 @@ class User extends BaseUser
     /**
      * @Assert\Callback
      */
-    public function isValidate(ExecutionContext $context)
+    public function isValidate(ExecutionContextInterface $context)
     {
         $img = $this->getImage();
         $feesMin = $this->getDailyFeesMin();
         $feesMax = $this->getDailyFeesMax();
-        
+
         if ($img != NULL && $img->getFile() != NULL)
         {
             $info = explode("/", $img->getFile()->getMimeType());
             if ($info[0] != "image") {
                 $context
-                    ->buildViolation("This file isn't a image.")
+                    ->buildViolation('image.bad.format')
                     ->atPath('image.file')
                     ->addViolation();
             }
@@ -523,17 +523,17 @@ class User extends BaseUser
             $this->getPhone()->isValidate($context);
         } if ($feesMin == NULL && $feesMax != NULL) {
             $context
-                ->buildViolation("Dailyfees min must be set.")
+                ->buildViolation('minfees.unset')
                 ->atPath('dailyFeesMin')
                 ->addViolation();
         } else if ($feesMax == NULL && $feesMin != NULL) {
             $context
-                ->buildViolation("Dailyfees max must be set.")
+                ->buildViolation('maxfees.unset')
                 ->atPath('dailyFeesMax')
                 ->addViolation();
         } else if ($feesMin != NULL && $feesMax != NULL && $feesMin >= $feesMax) {
             $context
-                ->buildViolation('The minimum fees must be less than the maximum fees.')
+                ->buildViolation('minfees.over.maxfees')
                 ->atPath('dailyFeesMin')
                 ->addViolation();
         }
