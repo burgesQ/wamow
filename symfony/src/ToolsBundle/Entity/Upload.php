@@ -84,17 +84,14 @@ class Upload
      */
     public function preUpload()
     {
-        if (null === $this->file) {
+        if (NULL == $this->file) {
             return;
         }
-        
         $info = explode("/", $this->getFile()->getMimeType());
-
-        $this->setName($this->id.time().'.'.$info[1]);
+        $this->setType($info[0]);
         $this->setFormat($info[1]);
+        $this->setName($this->id.time().'.'.$info[1]);
         $this->setPath($this->getUploadRootDir().$this->getName());
- 
-        dump($this);
     }
 
     /**
@@ -103,31 +100,17 @@ class Upload
      */
     public function upload()
     {
-        if (null === $this->file) {
+        if (null == $this->file) {
             return;
-        }
-
-        if (null !== $this->laTempo) {
+        } if (NULL != $this->laTempo) {
             $tmp = $this->getUploadRootDir().$this->laTempo;
-            if (file_exist($tmp)) {
+            if (file_exists($tmp)) {
                 unlink($tmp);
             }
         }
-        
-        $info = explode("/", $this->getFile()->getMimeType());
-
-        if ($this->getType() !== null && $this->getType() !== $info[0]) {
-            dump($this);
-            $this->setName(null);
-            $this->setFormat(null);
-            $this->setPath(null);
-            dump($this);
-        } else {        
-            $this->getFile()->move(
-                $this->getUploadRootDir(),
-                $this->name);
-        }
-        dump($this);
+        $this->getFile()->move(
+            $this->getUploadRootDir(),
+            $this->name);
     }
 
     /**
@@ -311,7 +294,6 @@ class Upload
         return $this->path;
     }
 
-
     /**
      * Set file
      *
@@ -321,14 +303,13 @@ class Upload
     public function setFile($file)
     {
         $this->file = $file;
-
-        if (null !== $this->name) {
-            $this->tempFilename = $this->name;
-
+        if (null != $this->name) {
+            $this->laTempo = $this->name;
             $this->name = null;
             $this->format = null;
             $this->path = null;
-        }        
+            $this->type = null;
+        }
         return $this;
     }
 
