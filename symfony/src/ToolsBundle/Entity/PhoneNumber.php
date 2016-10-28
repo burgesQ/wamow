@@ -11,7 +11,6 @@ use Symfony\Component\Validator\Context\ExecutionContext;
  *
  * @ORM\Table(name="phone_number")
  * @ORM\Entity(repositoryClass="ToolsBundle\Repository\PhoneNumberRepository")
- * @Assert\Callback(methods={"isValidate"})
  */
 class PhoneNumber
 {
@@ -28,7 +27,7 @@ class PhoneNumber
      * @var string
      * @Assert\Regex(
      *  pattern="/^[0-9]{4,10}$/",
-     *  message="The phone number can only have between 4 and 10 digits."
+     *  message="tools.phone.digits"
      * )
      * @ORM\Column(name="tel", type="string", length=255)
      */
@@ -106,12 +105,12 @@ class PhoneNumber
 
         if  ($tel === NULL && $prefix !== NULL) {
             $context
-                ->buildViolation("You must enter a phone number with the prefix.")
+                ->buildViolation('tools.prefix.phone')
                 ->atPath('tel')
                 ->addViolation();
         } else if  ($tel !== NULL && $prefix === NULL) {
             $context
-                ->buildViolation("You must enter a prefix with the phone number.")
+                ->buildViolation('tools.phone.prefix')
                 ->atPath('prefix')
                 ->addViolation();
         }

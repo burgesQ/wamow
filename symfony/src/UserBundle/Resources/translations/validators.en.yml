@@ -1,5 +1,25 @@
 # validators.en.yml
-image.bad.format: "This file isn't a image."
-minfees.over.maxfees: 'The minimum fees must be less than the maximum fees.'
-maxfees.unset: 'Dailyfees max must be set.'
-minfees.unset: 'Dailyfees min must be set.'
+
+user:
+    image.format: "This file isn't a image."
+    minfees.over.maxfees: 'The minimum fees must be less than the maximum fees.'
+    maxfees.unset: 'Dailyfees max must be set.'
+    minfees.unset: 'Dailyfees min must be set.'
+    pass.lowercase: 'The password must contain at least one lowercase letter.'
+    pass.uppercase: 'The password must contain at least one uppercase letter.'
+    pass.number: 'The password must contain at least one number.'
+    pass.spechar: 'The password must contain at least one special character.'
+    fname.blank: 'Please enter your first name.'
+    fname.short: 'The first name is too short.'
+    fname.long: 'The first name is too long.'
+    lname.blank: 'Please enter your last name.'
+    lname.short: 'The last name is too short.'
+    lname.long: 'The last name is too long.'
+
+tools:
+    phone.digits: 'The phone number can only have between 4 and 10 digits.'
+    prefix.phone: 'You must enter a phone number with the prefix.'
+    phone.prefix: 'You must enter a prefix with the phone number.'
+    address.required: 'The address must only contain letters numbers, point, comma or dash.'
+    address.city: 'The city must  only contain letters or dash.'
+    address.state: 'The state must contain only letters or dash.'
