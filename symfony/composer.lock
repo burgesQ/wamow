@@ -833,8 +833,10 @@
             "time": "2015-08-31 13:19:01"
         },
         {
-<<<<<<< 466c9f9a6ad73da25df31f2857ccf97b56d1c2f6
-=======
+
+
+
+
             "name": "friendsofsymfony/user-bundle",
             "version": "dev-master",
             "source": {
@@ -907,7 +909,11 @@
             "time": "2016-09-07 09:22:55"
         },
         {
->>>>>>> | ADD => RegistrationController.php : overload controller for differentiation advisors/contractors
+
+
+
+
+
             "name": "incenteev/composer-parameter-handler",
             "version": "v2.1.2",
             "source": {

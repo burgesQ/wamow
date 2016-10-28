@@ -4,8 +4,9 @@ namespace UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use ToolsBundle\Entity\Address;
+use CompanyBundle\Entity\Company;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-
 use FOS\UserBundle\Model\User as BaseUser;
 use ToolsBundle\Entity\Address;
 use ToolsBundle\Entity\PhoneNumber;
@@ -173,6 +174,11 @@ class User extends BaseUser
      */
     private $image;
     
+    /**
+     * @ORM\ManyToOne(targetEntity="CompanyBundle\Entity\Company")
+     */
+    private $company;
+
     public function __construct()
     {
         parent::__construct();
@@ -184,6 +190,29 @@ class User extends BaseUser
         $this->prefix = NULL;
         $this->birthdate = NULL;
     }
+
+    /**
+     * Set company
+     *
+     * @param \CompanyBundle\Entity\Company $company
+     * @return User
+     */
+    public function setCompany(Company $company)
+    {
+        $this->company = $company;
+        return $this;
+    }
+
+    /**
+     * Get company
+     *
+     * @return \CompanyBundle\Entity\Company
+     */
+    public function getCompany()
+    {
+        return $this->company;
+    }
+
 
     /**
      * Set email
