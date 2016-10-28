@@ -182,7 +182,8 @@ class User extends BaseUser
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="CompanyBundle\Entity\Company")
+     * @ORM\ManyToOne(targetEntity="CompanyBundle\Entity\Company", cascade={"persist"})
+     * @ORM\joinColumn(onDelete="SET NULL")
      */
     private $company;
 
@@ -197,7 +198,7 @@ class User extends BaseUser
         $this->birthdate = NULL;
     }
 
-    public function setCompany(Company $company)
+    public function setCompany(Company $company = null)
     {
         $this->company = $company;
         return $this;

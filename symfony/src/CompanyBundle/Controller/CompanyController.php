@@ -104,6 +104,37 @@ class CompanyController extends Controller
            'form' => $form->createView(),));
     }
 
+
+      /**
+       * @Security("has_role('ROLE_CONTRACTOR')")
+       */
+  public function leaveAction(Request $request)
+    {
+      $data = array();
+      $form = $this->createFormBuilder($data)
+      ->add('save',      'submit')
+      ->getForm();
+
+      $user = $this->getUser();
+      $company = $user->getCompany();
+
+      $form->handleRequest($request);
+      if ($form->isValid())
+      {
+        $user->setCompany(NULL);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($company);
+        $em->persist($user);
+
+        $em->flush();
+        return $this->render('CompanyBundle:Default:leaved.html.twig', array(
+          'company'           => $company,));
+      }
+     return $this->render('CompanyBundle:Default:leave.html.twig', array(
+       'form' => $form->createView(),));
+      }
+
   public function showAction($id)
   {
     $em = $this->getDoctrine()->getManager();
