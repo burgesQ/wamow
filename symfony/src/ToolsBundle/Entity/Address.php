@@ -30,7 +30,7 @@ class Address
      * @Assert\Regex(
      *     pattern="#^[0-9a-zA-Zéèêëçîïíàáâñńœôö]+(?:[\s-][a-zA-Zéèêëçîïíàáâñńœôö]+)*$#",
      *     match=true,
-     *     message="The address must contain only letters numbers, point, comma or dash.")
+     *     message="tools.address.required")
      */
     private $street;
 
@@ -48,7 +48,7 @@ class Address
      * @Assert\Regex(
      *     pattern="#^[a-zA-Zéèêëçîïíàáâñńœôö]+(?:[\s-][a-zA-Zéèêëçîïíàáâñńœôö]+)*$#",
      *     match=true,
-     *     message="The city must contain only letters or dash.")
+     *     message="tools.address.city")
      */
     private $city;
 
@@ -66,7 +66,7 @@ class Address
      * @Assert\Regex(
      *     pattern="#^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$#",
      *     match=true,
-     *     message="The state must contain only letters or dash.")
+     *     message="tools.address.state")
      */
     private $state;
 

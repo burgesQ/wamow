@@ -40,19 +40,19 @@ class User extends BaseUser
      *
      * @Assert\Regex(
      *  pattern="/^(?=.*[a-z])/",
-     *  message="The password must contain at least one lowercase letter."
+     *  message="user.pass.lowercase"
      * )
      * @Assert\Regex(
      *  pattern="/^(?=.*[A-Z])/",
-     *  message="The password must contain at least one uppercase letter."
+     *  message="user.pass.upppercase"
      * )
      * @Assert\Regex(
      *  pattern="/^(?=.*\d)/",
-     *  message="The password must contain at least one number."
+     *  message="user.pass.number"
      * )
      * @Assert\Regex(
      *  pattern="/^(?=.*\W)/",
-     *  message="The password must contain at least one special character."
+     *  message="user.pass.spechar"
      * )
      * @Assert\NotBlank(
      *  message="fos_user.password.blank",
@@ -77,12 +77,12 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="first_name", type="string", length=255, nullable=false)
-     * @Assert\NotBlank(message="Please enter your first name.", groups={"Registration", "Profile"})
+     * @Assert\NotBlank(message="user.fname.blank", groups={"Registration", "Profile"})
      * @Assert\Length(
      *     min=2,
      *     max=255,
-     *     minMessage="The first name is too short.",
-     *     maxMessage="The first name is too long.",
+     *     minMessage="user.fname.short",
+     *     maxMessage="user.fname.long",
      *     groups={"Registration", "Profile"}
      * )
      */
@@ -92,12 +92,12 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="last_name", type="string", length=255, nullable=false)
-     * @Assert\NotBlank(message="Please enter your last name.", groups={"Registration", "Profile"})
+     * @Assert\NotBlank(message="user.lname.blank", groups={"Registration", "Profile"})
      * @Assert\Length(
      *     min=2,
      *     max=255,
-     *     minMessage="The last name is too short.",
-     *     maxMessage="The last name is too long.",
+     *     minMessage="user.lname.short",
+     *     maxMessage="user.lname.long",
      *     groups={"Registration", "Profile"}
      * )
      */
@@ -514,7 +514,7 @@ class User extends BaseUser
             $info = explode("/", $img->getFile()->getMimeType());
             if ($info[0] != "image") {
                 $context
-                    ->buildViolation('image.bad.format')
+                    ->buildViolation('user.image.format')
                     ->atPath('image.file')
                     ->addViolation();
             }
@@ -522,17 +522,17 @@ class User extends BaseUser
             $this->getPhone()->isValidate($context);
         } if ($feesMin == NULL && $feesMax != NULL) {
             $context
-                ->buildViolation('minfees.unset')
+                ->buildViolation('user.minfees.unset')
                 ->atPath('dailyFeesMin')
                 ->addViolation();
         } else if ($feesMax == NULL && $feesMin != NULL) {
             $context
-                ->buildViolation('maxfees.unset')
+                ->buildViolation('user.maxfees.unset')
                 ->atPath('dailyFeesMax')
                 ->addViolation();
         } else if ($feesMin != NULL && $feesMax != NULL && $feesMin >= $feesMax) {
             $context
-                ->buildViolation('minfees.over.maxfees')
+                ->buildViolation('user.minfees.over.maxfees')
                 ->atPath('dailyFeesMin')
                 ->addViolation();
         }

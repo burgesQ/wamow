@@ -10,6 +10,3 @@ fos_user:
         form:
             type: user_profile
             validation_groups: [Profile]
-
-framework:
-    translator: { fallback: en } 
