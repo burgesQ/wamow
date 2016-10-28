@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <form method="post" {{ form_enctype(form) }}>
+        {{ form_start(form) }}
+    
+        <p>
+            Are you sure you want to leave {{ app.user.company.name }}  company ?
+        </p>
+        {{ form_row(form.save, { 'label': 'Yes' }) }}
+        {{ form_end(form) }}
+    </form>
+    </body>
+</html>
