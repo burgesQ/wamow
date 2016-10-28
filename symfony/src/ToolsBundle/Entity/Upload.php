@@ -55,8 +55,6 @@ class Upload
      */
     private $format;
 
-    private $file;
-
     /**
      * @var string
      *
@@ -69,6 +67,8 @@ class Upload
      * @ORM\JoinColumn(nullable=true)
      */
     private $user;
+
+    private $file;
 
     private $laTempo;
     
@@ -105,7 +105,7 @@ class Upload
         } if (NULL != $this->laTempo) {
             $tmp = $this->getUploadRootDir().$this->laTempo;
             if (file_exists($tmp)) {
-                unlink($tmp);
+                rename($tmp, $this->getRmUploadRootDir().$this->laTempo);
             }
         }
         $this->getFile()->move(
@@ -125,20 +125,26 @@ class Upload
      * @ORM\PostRemove()
      */
     public function removeUpload()
-    {
-        if (file_exists($this->laTempo)) {
-            unlink($this->laTempo);
-        }
-    }
+    {}
     
     public function getUploadDir()
     {
         return 'uploads/';
     }
 
+    public function getRmUploadDir()
+    {
+        return 'rm_uploads/';
+    }
+
     public function getUploadRootDir()
     {
         return __DIR__.'/../../../web/'.$this->getUploadDir();
+    }
+
+        public function getRmUploadRootDir()
+    {
+        return __DIR__.'/../../../web/'.$this->getRmUploadDir();
     }
 
     public function getWebPath()
