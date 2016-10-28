@@ -30,7 +30,7 @@ class Team
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="UserBundle\Entity\User", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="UserBundle\Entity\User", mappedBy="teams")
      */
     private $users;
 

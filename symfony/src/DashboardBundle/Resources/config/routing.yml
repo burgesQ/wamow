@@ -1,4 +1,4 @@
 dashboard:
     path:      /dashboard
     defaults:
-        _controller: DashboardBundle:Dashboard:index
+        _controller: DashboardBundle:Dashboard:missionDisplay

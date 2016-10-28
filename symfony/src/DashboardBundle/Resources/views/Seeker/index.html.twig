@@ -1,1 +1,11 @@
 Hello contractor
+
+<p>
+    Missions you created :
+    {% for currentMission in listMission %}
+    <li>
+        <a href="{{ path('mission_view', {'id': currentMission.id}) }}">
+        {{ currentMission.title }}</a>
+    </li>
+    {% endfor %}
+</p>
