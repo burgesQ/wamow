@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Validator\Constraints as Assert;
 use ToolsBundle\Entity\Address;
+use CompanyBundle\Entity\Company;
+
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
@@ -178,6 +180,12 @@ class User extends BaseUser
      */
     private $updateDate;
 
+
+    /**
+     * @ORM\ManyToOne(targetEntity="CompanyBundle\Entity\Company")
+     */
+    private $company;
+
     public function __construct()
     {
         parent::__construct();
@@ -188,6 +196,18 @@ class User extends BaseUser
         $this->address = NULL;
         $this->birthdate = NULL;
     }
+
+    public function setCompany(Company $company)
+    {
+        $this->company = $company;
+        return $this;
+    }
+
+    public function getCompany()
+    {
+        return $this->company;
+    }
+
 
     public function setEmail($email)
     {

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <p>
+            All contractors for Company  {{ company.name }}  :
+        </p>
+        <p>
+            {% for contractor in contractors %}
+             <li>
+
+                 {{ contractor.email }}
+            </li>
+            {% endfor %}
+        </p>
+    </body>
+</html>

@@ -1,8 +1,13 @@
 <?php
 
 namespace CompanyBundle\Entity;
+
 use CompanyBundle\Entity\Sector;
+use UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Company
@@ -74,17 +79,11 @@ class Company
     private $resume;
 
     /**
-     * @ORM\OneToOne(targetEntity="CompanyBundle\Entity\Sector", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="CompanyBundle\Entity\Sector", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
      */
 
     private $sector;
-
-    /**
-     * @ORM\OneToMany(targetEntity="UserBundle\Entity\User", cascade={"persist"})
-     * @ORM\Column(name="contractors", nullable=false)
-     */
-
-    private $contractors;
 
     /**
      * @var string
@@ -101,6 +100,7 @@ class Company
         $this->updateDate = new \Datetime();
         $this->status = 0;
       }
+
 
     /**
      * Get id
@@ -271,31 +271,6 @@ class Company
     public function getSize()
     {
         return $this->size;
-    }
-
-
-
-    /**
-     * Set contractors
-     *
-     * @param string $contractors
-     * @return Company
-     */
-    public function setContractors($contractors)
-    {
-        $this->contractors = $contractors;
-
-        return $this;
-    }
-
-    /**
-     * Get contractors
-     *
-     * @return string
-     */
-    public function getContractors()
-    {
-        return $this->contractors;
     }
 
     /**

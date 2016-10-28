@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-
+<body>
     <form method="post" {{ form_enctype(form) }}>
         {{ form_start(form) }}
         <div>
@@ -11,4 +11,5 @@
         {{ form_row(form.save, { 'label': 'Submit' }) }}
         {{ form_end(form) }}
     </form>
+    </body>
 </html>
