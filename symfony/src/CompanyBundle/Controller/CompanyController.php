@@ -74,15 +74,17 @@ class CompanyController extends Controller
   public function joinAction(Request $request)
    {
      $data = array();
-     $form = $this->createFormBuilder($data)
+      $form = $this->createFormBuilder($data)
      ->add('name', 'entity', array(
-     'class' => 'CompanyBundle:Company',
-     'property' => 'name',))
+      'class' => 'CompanyBundle:Company',
+      'property' => 'name',
+      'multiple' => false,
+      'attr' => array('class' => 'chosen-select', 'multiple'=>false, 'style' => 'width: 350px')))
      ->add('save',      'submit')
      ->getForm();
 
-    $form->handleRequest($request);
 
+    $form->handleRequest($request);
     if ($form->isValid()) {
     $data = $form->getData();
     $company = $data['name'];
@@ -101,7 +103,7 @@ class CompanyController extends Controller
     }
 
     return $this->render('CompanyBundle:Default:join.html.twig', array(
-           'form' => $form->createView(),));
+           'form' => $form->createView() ));
     }
 
 
