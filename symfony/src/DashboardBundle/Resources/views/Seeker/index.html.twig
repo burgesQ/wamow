@@ -1,25 +1,20 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Wantmore.work{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-    {% block subtitle %}
+{% extends "base.html.twig" %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block subtitle %}
         Hello contractor
-    {% endblock %}
-    {% block body %}
-        <p>
-            Missions you created :
-            {% for currentMission in listMission %}
-            <li>
-                <a href="{{ path('mission_view', {'id': currentMission.id}) }}">
-                    {{ currentMission.title }}</a>
-            </li>
-            {% endfor %}
-        </p>
-    {% endblock %}
-    </body>
-</html>
+{% endblock %}
+{% block body %}
+    <p>
+        Missions you created :
+        {% for currentMission in listMission %}
+        <li>
+            <a href="{{ path('mission_view', {'id': currentMission.id}) }}">
+                {{ currentMission.title }}</a>
+        </li>
+        {% endfor %}
+    </p>
+{% endblock %}

@@ -1,36 +1,32 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Wantmore.work{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-    {% block subtitle %}
-        Hello contractor
-    {% endblock %}
-    {% block body %}
-        <p>
-            Current Missions :
-            {% for currentMission in listCurrentMissions %}
-            <li>
-                <a href="{{ path('mission_view', {'id': currentMission.id}) }}">
+{% extends "base.html.twig %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block subtitle %}
+    Hello contractor
+{% endblock %}
+{% block body %}
+    <p>
+        Current Missions :
+        {% for currentMission in listCurrentMissions %}
+        <li>
+            <a href="{{ path('mission_view', {'id': currentMission.id}) }}">
                     {{ currentMission.title }}</a>
-            </li>
-            {% endfor %}
+        </li>
+        {% endfor %}
         </p>
-    {% endblock %}
-    {% block body %}
-        <p>
-            Available Missions :
-            {% for mission in listRemainingMission %}
-            <li>
-                <a href="{{ path('mission_view', {'id': mission.id}) }}">
-                    {{ mission.title }}</a>
-                    ---> <a href="{{ path('mission_pitch', {'id': mission.id}) }}">pitch </a>
-            </li>
-            {% endfor %}
-        </p>
-    {% endblock %}
-</html>
+{% endblock %}
+{% block body %}
+    <p>
+        Available Missions :
+        {% for mission in listRemainingMission %}
+        <li>
+            <a href="{{ path('mission_view', {'id': mission.id}) }}">
+                {{ mission.title }}</a>
+                ---> <a href="{{ path('mission_pitch', {'id': mission.id}) }}">pitch </a>
+        </li>
+        {% endfor %}
+    </p>
+{% endblock %}
