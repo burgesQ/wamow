@@ -1,0 +1,8 @@
+# tools.en.yml
+form:
+    address:
+        street: "Address"
+        city: "City"
+        zipcode: "Zipcode"
+        state: "State"
+        country: "Country"
