@@ -50,7 +50,7 @@ class AddressType extends AbstractType
                 'required' => true,
                 'label'=>'form.address.country',
                 'translation_domain' => 'tools',
-                'placeholder' => 'Choose a country')
+                'placeholder' => 'form.address.choosecountry')
             )
             ;
     }

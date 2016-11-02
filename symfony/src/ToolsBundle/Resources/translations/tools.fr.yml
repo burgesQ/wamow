@@ -1,0 +1,9 @@
+# tools.en.yml
+form:
+    address:
+        street: "Adresse"
+        city: "Ville"
+        zipcode: "Code Postal"
+        state: "Etat"
+        country: "Pays"
+        choosecountry: "Sélectionnez un pays"
