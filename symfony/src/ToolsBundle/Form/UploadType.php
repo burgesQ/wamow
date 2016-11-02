@@ -16,7 +16,13 @@ class UploadType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('file', 'file');
+        $builder
+            ->add('file', 'file',
+                array(
+                'label' => 'form.file.file',
+                'required'=> false,
+                'translation_domain' => 'tools'
+            ));
     }
 
     /**

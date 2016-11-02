@@ -12,3 +12,6 @@ form:
         prefix: "Prefix"
         chooseprefix: "Choose a prefix"
         number: "Phone"
+
+    file:
+        file: "File"
