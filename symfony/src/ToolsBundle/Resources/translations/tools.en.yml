@@ -6,3 +6,9 @@ form:
         zipcode: "Zipcode"
         state: "State"
         country: "Country"
+        choosecountry: "Choose a country"
+
+    phone:
+        prefix: "Prefix"
+        chooseprefix: "Choose a prefix"
+        number: "Phone"

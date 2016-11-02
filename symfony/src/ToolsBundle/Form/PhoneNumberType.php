@@ -16,14 +16,22 @@ class PhoneNumberType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('prefix', 'entity', array(
-            'class' => 'ToolsBundle:PrefixNumber',
-            'property' => 'prefix',
-            'multiple' => false,
-            'placeholder' => 'Choose a prefix',
-        ));
-
-        $builder->add('tel');
+        $builder
+            ->add('prefix', 'entity', array(
+                'class' => 'ToolsBundle:PrefixNumber',
+                'property' => 'prefix',
+                'multiple' => false,
+                'placeholder' => 'form.phone.chooseprefix',
+                'label'=>'form.phone.prefix',
+                'translation_domain' => 'tools',
+            ))
+            ->add('number', null,
+                array(
+                'label'=>'form.phone.number',
+                'required'=>true,
+                'translation_domain' => 'tools'
+            ))
+            ;
     }
 
     /**
