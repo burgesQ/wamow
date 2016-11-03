@@ -42,7 +42,7 @@ services:
             - php
             - nginx
     phpmyadmin:
-        image: phpmyadmin/phpmyadmin
+        image: phpmyadmin/phpmyadmin:4.6.4-1
         ports:
             - "8080:80"
         links:

@@ -6,8 +6,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-use ToolsBundle\Entity\Media;
-
 class UploadType extends AbstractType
 {
     /**

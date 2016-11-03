@@ -3,9 +3,8 @@
 namespace ToolsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Context\ExecutionContext;
 
 /**
  * PhoneNumber
@@ -28,7 +27,7 @@ class PhoneNumber
      * @var string
      * @Assert\Regex(
      *  pattern="/^[0-9]{4,10}$/",
-     *  message="The phone number can only have between 4 and 10 digits."
+     *  message="tools.phone.digits"
      * )
      * @ORM\Column(name="number", type="string", length=255)
      */
@@ -36,7 +35,7 @@ class PhoneNumber
 
     /**
      * @ORM\ManyToOne(targetEntity="ToolsBundle\Entity\PrefixNumber", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $prefix;
 
@@ -95,4 +94,26 @@ class PhoneNumber
     {
         return $this->prefix;
     }
+
+    /**
+     * @Assert\Callback
+     */
+    public function isValidate(ExecutionContext $context)
+    {
+        $prefix = $this->getPrefix();
+        $tel = $this->getTel();
+
+        if  ($tel === NULL && $prefix !== NULL) {
+            $context
+                ->buildViolation('tools.prefix.phone')
+                ->atPath('tel')
+                ->addViolation();
+        } else if  ($tel !== NULL && $prefix === NULL) {
+            $context
+                ->buildViolation('tools.phone.prefix')
+                ->atPath('prefix')
+                ->addViolation();
+        }
+    }
+
 }

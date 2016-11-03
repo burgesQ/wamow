@@ -1,0 +1,49 @@
+# validators.en.yml
+
+user:
+    username:
+        already_used: 'The username is already used'
+        blank: 'Please enter a username'
+        short: '[-Inf,Inf]The username is too short'
+        long: '[-Inf,Inf]The username is too long'
+    email:
+        already_used: 'The email is already used'
+        blank: 'Please enter an email'
+        short: '[-Inf,Inf]The email is too short'
+        long: '[-Inf,Inf]The email is too long'
+        invalid: 'The email is not valid'
+    password:
+        blank: 'Please enter a password'
+        mismatch: 'The entered passwords don''t match'
+    new_password:
+        blank: 'Please enter a new password'
+    current_password:
+        invalid: 'The entered password is invalid'
+    group:
+        blank: 'Please enter a name'
+        short: '[-Inf,Inf]The name is too short'
+        long: '[-Inf,Inf]The name is too long'
+    image:
+        format: "This file isn't a image."
+    minfees:
+        over: 'The minimum fees must be less than the maximum fees.'
+        unset: 'Dailyfees min must be set.'
+    maxfees:
+        unset: 'Dailyfees max must be set.'
+    pass:
+        lowercase: 'The password must contain at least one lowercase letter.'
+        uppercase: 'The password must contain at least one uppercase letter.'
+        number: 'The password must contain at least one number.'
+        spechar: 'The password must contain at least one special character.'
+    fname:
+        blank: 'Please enter your first name.'
+        short: 'The first name is too short.'
+        long: 'The first name is too long.'
+    lname:
+        blank: 'Please enter your last name.'
+        short: 'The last name is too short.'
+        long: 'The last name is too long.'
+
+group:
+    name:
+        already_used: 'The name is already used'

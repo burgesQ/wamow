@@ -1,0 +1,16 @@
+#! /bin/sh
+
+out=`cat nginx.conf |grep "client_max_body_size"`
+if [ "$out" == "" ]; then
+    word=`cat nginx.conf`
+    last=`echo $word | grep -o '.\{1\}$'`
+    while [ $last != "}" ]
+    do
+    	sed -i '' -e '$ d' nginx.conf
+    	word=`cat nginx.conf`
+    	last=`echo $word | grep -o '.\{1\}$'`
+    done
+    sed -i '' -e '$ d' nginx.conf
+    sed -i '' -e '$ d' nginx.conf
+    echo "  client_max_body_size 25M;\n}\n\ndaemon off;" >> nginx.conf
+fi
