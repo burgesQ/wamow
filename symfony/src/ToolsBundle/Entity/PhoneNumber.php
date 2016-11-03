@@ -30,9 +30,9 @@ class PhoneNumber
      *  pattern="/^[0-9]{4,10}$/",
      *  message="The phone number can only have between 4 and 10 digits."
      * )
-     * @ORM\Column(name="tel", type="string", length=255)
+     * @ORM\Column(name="number", type="string", length=255)
      */
-    private $tel;
+    private $number;
 
     /**
      * @ORM\ManyToOne(targetEntity="ToolsBundle\Entity\PrefixNumber", cascade={"persist"})
@@ -51,26 +51,26 @@ class PhoneNumber
     }
 
     /**
-     * Set tel
+     * Set number
      *
-     * @param string $tel
+     * @param string $number
      * @return PhoneNumber
      */
-    public function setTel($tel)
+    public function setNumber($number)
     {
-        $this->tel = $tel;
+        $this->number = $number;
 
         return $this;
     }
 
     /**
-     * Get tel
+     * Get number
      *
      * @return string
      */
-    public function getTel()
+    public function getNumber()
     {
-        return $this->tel;
+        return $this->number;
     }
 
     /**

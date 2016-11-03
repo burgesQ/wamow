@@ -6,9 +6,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-use ToolsBundle\Entity\PrefixNumber;
+use ToolsBundle\Entity\Media;
 
-class PhoneNumberType extends AbstractType
+class UploadType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -17,21 +17,12 @@ class PhoneNumberType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('prefix', 'entity', array(
-                'class' => 'ToolsBundle:PrefixNumber',
-                'property' => 'prefix',
-                'multiple' => false,
-                'placeholder' => 'form.phone.chooseprefix',
-                'label'=>'form.phone.prefix',
-                'translation_domain' => 'tools',
-            ))
-            ->add('number', null,
+            ->add('file', 'file',
                 array(
-                'label'=>'form.phone.number',
-                'required'=>true,
+                'label' => 'form.file.file',
+                'required'=> false,
                 'translation_domain' => 'tools'
-            ))
-            ;
+            ));
     }
 
     /**
@@ -40,7 +31,7 @@ class PhoneNumberType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'ToolsBundle\Entity\PhoneNumber'
+            'data_class' => 'ToolsBundle\Entity\Upload'
         ));
     }
 }
