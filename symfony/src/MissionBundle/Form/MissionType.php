@@ -48,14 +48,33 @@ class MissionType extends AbstractType
             ->add('missionBeginning',         'date', array(
                 'label'    => 'Start of mission :',
                 'years' => range(date('Y'), date('Y') + 5),
+                'placeholder' => array(
+                    'month' => 'Month',
+                    'day' => 'Day',
+                    'year' => 'Year',
+                ),
+                'format' => 'MMddyyyy',
+                'pattern' => "{{ month }}/{{ day }}/{{ year }}",
               ))
             ->add('missionEnding',            'date', array(
                 'label'    => 'End of mission :',
                 'years' => range(date('Y'), date('Y') + 5),
+                'placeholder' => array(
+                    'month' => 'Month',
+                    'day' => 'Day',
+                    'year' => 'Year',
+                ),
+                'format' => 'MMddyyyy',
               ))
             ->add('applicationEnding',        'date', array(
                 'label'    => 'Application deadline :',
                 'years' => range(date('Y'), date('Y') + 5),
+                'placeholder' => array(
+                    'month' => 'Month',
+                    'day' => 'Day',
+                    'year' => 'Year',
+                ),
+                'format' => 'MMddyyyy',
               ))
             ->add('professionalExpertise',   'entity', array(
                 'class' => 'MissionBundle:ProfessionalExpertise',
