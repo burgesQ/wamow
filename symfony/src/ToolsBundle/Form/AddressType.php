@@ -19,7 +19,7 @@ class AddressType extends AbstractType
             ->add('street', null,
                 array(
                 'label'=>'form.address.street',
-                'required'=>true,
+                'required'=>false,
                 'translation_domain' => 'tools'
             ))
             ->add('street2', null,
