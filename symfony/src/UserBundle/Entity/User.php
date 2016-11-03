@@ -509,8 +509,7 @@ class User extends BaseUser
         $feesMin = $this->getDailyFeesMin();
         $feesMax = $this->getDailyFeesMax();
 
-        if ($img != NULL && $img->getFile() != NULL)
-        {
+        if ($img != NULL && $img->getFile() != NULL) {
             $info = explode("/", $img->getFile()->getMimeType());
             if ($info[0] != "image") {
                 $context
@@ -532,7 +531,7 @@ class User extends BaseUser
                 ->addViolation();
         } else if ($feesMin != NULL && $feesMax != NULL && $feesMin >= $feesMax) {
             $context
-                ->buildViolation('user.minfees.over.maxfees')
+                ->buildViolation('user.minfees.over')
                 ->atPath('dailyFeesMin')
                 ->addViolation();
         }
