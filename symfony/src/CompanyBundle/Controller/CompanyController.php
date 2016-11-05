@@ -73,21 +73,29 @@ class CompanyController extends Controller
    */
   public function joinAction(Request $request)
    {
-     $data = array();
+      $em = $this->getDoctrine()->getManager();
+
+      $data = array();
       $form = $this->createFormBuilder($data)
-     ->add('name', 'entity', array(
+      ->add('name', 'entity', array(
       'class' => 'CompanyBundle:Company',
       'property' => 'name',
+      'placeholder' => 'Create a new company ...',
       'multiple' => false,
-      'attr' => array('class' => 'chosen-select', 'multiple'=>false, 'style' => 'width: 350px')))
-     ->add('save',      'submit')
-     ->getForm();
-
+      'required' => false,
+      'attr' => array('class' => 'chosen-select',
+      'style' => 'width: 350px')))
+      ->add('save',  'submit')
+      ->getForm();
 
     $form->handleRequest($request);
     if ($form->isValid()) {
     $data = $form->getData();
     $company = $data['name'];
+    if ($company == null)
+        {
+          return $this->redirectToRoute('company_create');
+        }
 
     $user = $this->getUser();
     $user->setCompany($company);
