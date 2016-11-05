@@ -3,12 +3,7 @@
     <form name="join" action="{{ path('company_join') }}" method="post">
 
         <link rel="stylesheet" href="{{ asset('css/chosen.css') }}">
-        <style type="text/css" media="all">
-            /* fix rtl for demo */
-            .chosen-rtl .chosen-drop {
-                left: -9000px;
-            }
-        </style>
+      
         <body>
 
             <div id="container">
@@ -32,37 +27,8 @@
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
             <script src="{{ asset('js/chosen.jquery.js') }}" type="text/javascript"></script>
             <script src="{{ asset('js/prism.js') }}" type="text/javascript" charset="utf-8"></script>
-            <script type="text/javascript">
+            <script src="{{ asset('js/chosen_config.js') }}" type="text/javascript" charset="utf-8"></script>
 
-                var config = {
-                    '.chosen-select': {
-                        no_results_text: 'Company not found',
-                        search_contains: 'true'
-                    },
-                    '.chosen-select-deselect': {
-                        allow_single_deselect: true
-                    },
-                    '.chosen-select-no-single': {
-                        disable_search_threshold: 10
-                    },
-                    '.chosen-select-no-results': {
-                        no_results_text: 'Company not found'
-                    },
-                    '.chosen-select-width': {
-                        width: "95%"
-                    }
-                }
-                for (var selector in config) {
-                    $(selector).chosen(config[selector]);
-                }
-            </script>
-            <script>
-                $(function() {
-                    jQuery(document).ready(function() {
-                        $('select.chosen-select').chosen();
-                    });
-                })
-            </script>
         </form>
     </body>
 </html>

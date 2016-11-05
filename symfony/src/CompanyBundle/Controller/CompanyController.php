@@ -73,8 +73,6 @@ class CompanyController extends Controller
    */
   public function joinAction(Request $request)
    {
-      $em = $this->getDoctrine()->getManager();
-
       $data = array();
       $form = $this->createFormBuilder($data)
       ->add('name', 'entity', array(
@@ -88,31 +86,28 @@ class CompanyController extends Controller
       ->add('save',  'submit')
       ->getForm();
 
-    $form->handleRequest($request);
-    if ($form->isValid()) {
-    $data = $form->getData();
-    $company = $data['name'];
-    if ($company == null)
-        {
+      $form->handleRequest($request);
+      if ($form->isValid()) {
+      $data = $form->getData();
+      $company = $data['name'];
+      if ($company == null){
           return $this->redirectToRoute('company_create');
-        }
+      }
+      $user = $this->getUser();
+      $user->setCompany($company);
 
-    $user = $this->getUser();
-    $user->setCompany($company);
+      $em = $this->getDoctrine()->getManager();
+      $em->persist($company);
+      $em->persist($user);
+      $em->flush();
 
-    $em = $this->getDoctrine()->getManager();
-    $em->persist($company);
-    $em->persist($user);
+      $request->getSession()->getFlashBag()->add('notice', 'Joined the company');
+      return $this->render('CompanyBundle:Default:joined.html.twig', array('company' => $company));
+      }
 
-    $em->flush();
-
-    $request->getSession()->getFlashBag()->add('notice', 'Joined the company');
-    return $this->render('CompanyBundle:Default:joined.html.twig', array('company' => $company));
-    }
-
-    return $this->render('CompanyBundle:Default:join.html.twig', array(
+      return $this->render('CompanyBundle:Default:join.html.twig', array(
            'form' => $form->createView() ));
-    }
+         }
 
 
       /**
@@ -132,12 +127,11 @@ class CompanyController extends Controller
       if ($form->isValid())
       {
         $user->setCompany(NULL);
-
         $em = $this->getDoctrine()->getManager();
         $em->persist($company);
         $em->persist($user);
-
         $em->flush();
+
         return $this->render('CompanyBundle:Default:leaved.html.twig', array(
           'company'           => $company,));
       }
