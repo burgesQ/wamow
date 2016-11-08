@@ -25,7 +25,7 @@ class MissionType extends AbstractType
                 'label' => 'mission.new.form.title',
                 'translation_domain' => 'MissionBundle'
                 ))
-            ->add('resume',  'text', array(
+            ->add('resume',  null, array(
                 'label' => 'mission.new.form.resume',
                 'translation_domain' => 'MissionBundle'
                 ))
@@ -34,7 +34,6 @@ class MissionType extends AbstractType
                 'translation_domain' => 'ToolsBundle'
                 ))
             ->add('confidentiality',  'checkbox', array(
-                'label'    => 'Does this mission has to be confidential?',
                 'required' => false,
                 'label' => 'mission.new.form.confidentiality',
                 'translation_domain' => 'MissionBundle'
@@ -48,13 +47,11 @@ class MissionType extends AbstractType
                 'translation_domain' => 'MissionBundle'
               ))
             ->add('telecommuting',    'checkbox', array(
-                'label'    => 'Requiere physical presence?',
                 'required' => false,
                 'label' => 'mission.new.form.telecommuting',
                 'translation_domain' => 'MissionBundle'
               ))
             ->add('international',  'checkbox', array(
-                'label'    => 'Is this mission international?',
                 'required' => false,
                 'label' => 'mission.new.form.international',
                 'translation_domain' => 'MissionBundle'
@@ -68,7 +65,6 @@ class MissionType extends AbstractType
                 'translation_domain' => 'MissionBundle'
                 ))
             ->add('missionBeginning',         'date', array(
-                'label'    => 'Start of mission :',
                 'years' => range(date('Y'), date('Y') + 5),
                 'placeholder' => array(
                     'month' => 'mission.new.form.chooseMonth',
@@ -81,7 +77,6 @@ class MissionType extends AbstractType
                 'translation_domain' => 'MissionBundle'
               ))
             ->add('missionEnding',            'date', array(
-                'label'    => 'End of mission :',
                 'years' => range(date('Y'), date('Y') + 5),
                 'placeholder' => array(
                     'month' => 'mission.new.form.chooseMonth',
@@ -93,7 +88,6 @@ class MissionType extends AbstractType
                 'translation_domain' => 'MissionBundle'
               ))
             ->add('applicationEnding',        'date', array(
-                'label'    => 'Application deadline :',
                 'years' => range(date('Y'), date('Y') + 5),
                 'placeholder' => array(
                     'month' => 'mission.new.form.chooseMonth',
@@ -116,7 +110,6 @@ class MissionType extends AbstractType
                 'class' => 'MissionBundle:MissionKind',
                 'property' => 'name',
                 'multiple' => false,
-                'label' => 'Mission kind',
                 'placeholder' => 'mission.new.form.chooseMissionKind',
                 'label' => 'mission.new.form.missionKind',
                 'translation_domain' => 'MissionBundle'
