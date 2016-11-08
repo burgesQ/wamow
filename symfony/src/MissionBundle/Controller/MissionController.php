@@ -1,4 +1,4 @@
-<?php
+src/MissionBundle/Controller/MissionController.php <?php
 
 namespace MissionBundle\Controller;
 
@@ -22,14 +22,14 @@ class MissionController extends Controller
     public function newAction(Request $request)
     {
         if ($this->container->get('security.authorization_checker')
-                            ->isGranted('ROLE_CONTRACTOR'))
+            ->isGranted('ROLE_CONTRACTOR'))
         {
             $em = $this->getDoctrine()->getManager();
             $repository = $this
-                ->getDoctrine()
-                ->getManager()
-                ->getRepository('MissionBundle:Mission')
-                ;
+                        ->getDoctrine()
+                        ->getManager()
+                        ->getRepository('MissionBundle:Mission')
+                        ;
             $service = $this->container->get('mission.nbStep');
             $nbStep = $service->getMissionNbStep();
             $user = $this->getUser();
@@ -71,83 +71,90 @@ class MissionController extends Controller
     }
 
     /*
-      Edit a mission which already exits
+    ** If contractor -> edit if he created else error
+    ** If advisor -> kick
+    ** If not log -> kick
     */
     public function editAction($id, Request $request)
     {
-      $em = $this->getDoctrine()->getManager();
-      $mission = $em->getRepository('MissionBundle:Mission')->find($id);
-      if (null === $mission)
-        {
-          throw new NotFoundHttpException("Mission nº".$id." doesn't exist.");
+        $em = $this->getDoctrine()->getManager();
+        $mission = $em->getRepository('MissionBundle:Mission')->find($id);
+
+        if ( $this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR') ||
+             $this->getUser() === null ) {
+            throw new NotFoundHttpException("Only a logged contractor can edit a mission.");
+        } elseif ( null === $mission ) {
+            throw new NotFoundHttpException("The mission ".$id." doesn't exist.");
+        } elseif ( $this->getUser()->getId() !== $mission->getIDContact() ) {
+            throw new NotFoundHttpException("You can't edit a mission that doesn't belong to you.");
         }
-      $form = $this->get('form.factory')->create(new MissionType(), $mission);
-      $form->handleRequest($request);
-      $mission->setUpdateDate(new \DateTime());
-      if ($form->isValid())
-        {
-          $em->flush();
-          return new Response('Mission updated successfully');
+
+        $form = $this->get('form.factory')->create(new MissionType(), $mission);
+        $form->handleRequest($request);
+        $mission->setUpdateDate(new \DateTime());
+
+        if ($form->isValid()) {
+            $em->flush();
+            return new Response('Mission updated successfully');
         }
-      return $this->render('MissionBundle:Mission:edit.html.twig', array(
-        'form' => $form->createView(),
-        'mission' => $mission,
+        return $this->render('MissionBundle:Mission:edit.html.twig', array(
+            'form' => $form->createView(),
+            'mission' => $mission,
         ));
     }
 
     /*
-      Display a mission
+    ** If contracotr -> show if created by him else error
+    ** If advisor -> show if status === 1
+    ** if not log -> kick
     */
     public function viewAction($id)
     {
-      $em = $this->getDoctrine()->getManager();
-      $mission = $em
-        ->getRepository('MissionBundle:Mission')
-        ->find($id)
-          ;
-      if (null === $mission)
-        {
-          throw new NotFoundHttpException("The mission ".$id." doesn't exist.");
+        $em = $this->getDoctrine()->getManager();
+
+        if ( $this->getUser() === null ) {
+            throw new NotFoundHttpException("Error : you are neither loged as advisor, nor contractor.");
+        } elseif ( ($mission = $em->getRepository('MissionBundle:Mission')->find($id)) === null) {
+            throw new NotFoundHttpException("The mission ".$id." doesn't exist.");
+        } elseif ( $this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR') &&
+                   $mission->getStatus() !== 1 ) {
+            throw new NotFoundHttpException("The mission ".$id." isn't available.");
+        } elseif ( $this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR') &&
+                   $mission->getIDContact() !== $this->getUser()->getId() ) {
+            throw new NotFoundHttpException("The mission ".$id." wasn't created by you.");
         }
-      $listLanguage = $mission->getLanguages();
-      return $this->render('MissionBundle:Mission:view.html.twig', array(
-        'mission'           => $mission,
-        'listLanguage'      => $listLanguage,
-        ));
+
+        $listLanguage = $mission->getLanguages();
+        return $this->render('MissionBundle:Mission:view.html.twig', array(
+            'mission'           => $mission,
+            'listLanguage'      => $listLanguage, ) );
     }
 
+    /*
+    ** If contractor -> show mission by him
+    ** If advisor -> show mission where status === 1
+    ** If not log -> kick
+    */
     public function missionListAction()
     {
         $repository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('MissionBundle:Mission')
-            ;
+                    ->getDoctrine()
+                    ->getManager()
+                    ->getRepository('MissionBundle:Mission');
         $user = $this->getUser();
+
+        if ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR')) {
+            $listMission = $repository->findByiDContact($user->getId());
+        } elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')) {
+            $listMission = $repository->missionsAvailables();
+        } elseif ( $user === null ) {
+            throw new NotFoundHttpException("Error : you are neither loged as advisor, nor contractor.");
+        }
+        
         $role = $user->getRoles();
-        if ($this->container->get('security.authorization_checker')
-                            ->isGranted('ROLE_CONTRACTOR'))
-            {
-                $iDContact = $user->getId();
-                $listMission = $repository->findByiDContact($iDContact);
-                return $this->render('MissionBundle:Mission:all_missions.html.twig', array(
-                    'listMission'           => $listMission,
-                    'role'                  => $role[0]
-                    ));
-            }
-        elseif ($this->container->get('security.authorization_checker')
-                                ->isGranted('ROLE_ADVISOR'))
-            {
-                $listMission = $repository->missionsAvailables();
-                return $this->render('MissionBundle:Mission:all_missions.html.twig', array(
-                    'listMission'           => $listMission,
-                    'role'                  => $role[0]
-                    ));
-            }
-        else
-            {
-                throw new NotFoundHttpException("Error : you are neither loged as advisor, nor contractor.");
-            }
+        return $this->render('MissionBundle:Mission:all_missions.html.twig', array(
+            'listMission'           => $listMission,
+            'role'                  => $role[0], ) );
     }
 
     public function missionPitchAction()
@@ -155,5 +162,4 @@ class MissionController extends Controller
         // Team creations
         return new Response("Pitch done");
     }
-
 }

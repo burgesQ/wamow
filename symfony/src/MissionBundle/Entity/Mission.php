@@ -877,7 +877,7 @@ class Mission
         $dailyFeesMin = $this->getDailyFeesMin();
         $dailyFeesMax = $this->getDailyFeesMax();
         $today = new \DateTime();
-        if ($missionBeginning->format("yy/mm/dd") > $missionEnding->format("yy/mm/dd"))
+        if ($missionBeginning->format("yy/mm/dd") >= $missionEnding->format("yy/mm/dd"))
         {
           $context
             ->buildViolation('The mission can not start after the end date.')
@@ -885,7 +885,7 @@ class Mission
             ->addViolation()
             ;
         }
-        elseif ($applicationEnding->format("yy/mm/dd") > $missionBeginning->format("yy/mm/dd"))
+        elseif ($applicationEnding->format("yy/mm/dd") >= $missionBeginning->format("yy/mm/dd"))
         {
           $context
             ->buildViolation('The deadline must be before the mission start.')
