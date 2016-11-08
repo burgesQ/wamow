@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+{% trans_default_domain "MissionBundle" %}
 <html>
     <head>
     </head>
     <body>
         <p>
-            All available missions :
+            {{ 'mission.all_missions.title'|trans }}
         </p>
         <p>
             {% for mission in listMission %}

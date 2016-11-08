@@ -1,7 +1,7 @@
-<!doctype html>
-<html>
-<body>
-<h3>Mission Form</h3>
+{% trans_default_domain "MissionBundle" %}
+
+<h3>{{ 'mission.new.title'|trans }}</h3>
+
 <form method="post" {{ form_enctype(form) }}>
   {{ form_start(form) }}
     <div>
@@ -11,18 +11,18 @@
     </div>
     <div>
     {{ form_errors(form.resume) }}
-    {{ form_label(form.resume, 'Describe your mission :') }}
+    {{ form_label(form.resume) }}
     {{ form_widget(form.resume) }}
     </div>
     <br>
     <div>
     {{ form_errors(form.address.street) }}
-    {{ form_label(form.address.street, 'Address') }}
+    {{ form_label(form.address.street) }}
     {{ form_widget(form.address.street) }}
     </div>
     <div>
     {{ form_errors(form.address.street2) }}
-    {{ form_label(form.address.street2, 'Address 2 *') }}
+    {{ form_label(form.address.street2) }}
     {{ form_widget(form.address.street2) }}
     </div>
     <div>
@@ -42,19 +42,10 @@
     </div>
     <div>
     {{ form_errors(form.address.state) }}
-    {{ form_label(form.address.state, 'State *') }}
+    {{ form_label(form.address.state) }}
     {{ form_widget(form.address.state) }}
     </div>
     <div>
-    {{ form_errors(form.address.label) }}
-    {{ form_label(form.address.label, 'Label *') }}
-    {{ form_widget(form.address.label) }}
-    </div>
-    <div>
-    {{ form_errors(form.address.name) }}
-    {{ form_label(form.address.name, 'Name *') }}
-    {{ form_widget(form.address.name) }}
-    </div>
     <br>
     {{ form_row(form.languages) }}
     <div>
@@ -111,14 +102,12 @@
     <br>
     <div>
     {{ form_errors(form.image) }}
-    {{ form_label(form.image, 'Image *') }}
+    {{ form_label(form.image) }}
     {{ form_widget(form.image) }}
     <br>
     </div>
-    {{ form_row(form.save, { 'label': 'Submit' }) }}
+    {{ form_row(form.save) }}
   {{ form_end(form) }}
 </form>
 
-* optional fields
-</body>
-</html>
+{{ 'mission.new.optional'|trans }}
