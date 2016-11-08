@@ -18,14 +18,30 @@ class AddressType extends AbstractType
         $builder
             ->add('country', 'country', array(
                 'required' => true,
-                'placeholder' => 'Choose a country'))
-            ->add('state')
-            ->add('zipcode')
-            ->add('city')
-            ->add('street')
-            ->add('street2')
-            ->add('label')
-            ->add('name')
+                'placeholder' => 'mission.new.form.chooseCountry',
+                'label' => 'mission.new.form.country',
+                'translation_domain' => 'MissionBundle'
+            ))
+            ->add('state',  'text', array(
+                'label' => 'mission.new.form.state',
+                'translation_domain' => 'MissionBundle'
+                ))
+            ->add('zipcode',  'text', array(
+                'label' => 'mission.new.form.zipcode',
+                'translation_domain' => 'MissionBundle'
+                ))
+            ->add('city',  'text', array(
+                'label' => 'mission.new.form.city',
+                'translation_domain' => 'MissionBundle'
+                ))
+            ->add('street',  'text', array(
+                'label' => 'mission.new.form.street',
+                'translation_domain' => 'MissionBundle'
+                ))
+            ->add('street2',  'text', array(
+                'label' => 'mission.new.form.street2',
+                'translation_domain' => 'MissionBundle'
+                ))
             ;
     }
 
