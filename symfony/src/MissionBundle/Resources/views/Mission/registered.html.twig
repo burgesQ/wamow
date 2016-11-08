@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-<body>
-Mission saved with success !<br>
-<a href="{{ path('mission_view', {'id': mission.id}) }}">see your mission </a><br>
-<a href="{{ path('mission_edit', {'id': mission.id}) }}">edit your mission </a><br>
-<a href="{{ path('mission_new') }}">make another one </a>
-</body>
-</html>
+{% trans_default_domain "MissionBundle" %}
+
+{{ 'mission.registred.success'|trans }}<br>
+<a href="{{ path('mission_view', {'id': mission.id}) }}">{{ 'mission.registred.see'|trans }}</a><br>
+<a href="{{ path('mission_edit', {'id': mission.id}) }}">{{ 'mission.registred.edit'|trans }}</a><br>
+<a href="{{ path('mission_new') }}">{{ 'mission.registred.another'|trans }}</a>
