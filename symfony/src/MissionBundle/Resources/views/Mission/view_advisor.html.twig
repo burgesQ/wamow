@@ -2,7 +2,7 @@
 
 <html>
 <body>
-<h2>{{ mission.title }}</h2>
+<h2>{{ mission.title }} advisor</h2>
 {% if mission.image is not null %}
   <img src="{{ mission.image }}">
 {% endif %}
@@ -15,28 +15,7 @@
       <h5>{{ 'mission.view.details'|trans }} :</h5>
       {{ mission.professionalExpertise.name }}, {{ mission.missionKind.name }}
   </p>
-  <p>
-      <h4><br>{{ 'mission.view.address'|trans }} :</h4>
-      {{ mission.address.street }},
-      {% if mission.address.state is not null %}
-        {{ mission.address.street2 }},<br>
-      {% endif %}
-       {{ mission.address.city }},{{ mission.address.zipcode }}
-       <br>{{ mission.address.country }}
-       {% if mission.address.state is not null %}
-        ,{{ mission.address.state }}<br>
-       {% endif %}
-   </p>
-   <p>
-       {% if mission.address.label is not null %}
-        {{ 'mission.view.label'|trans }} : {{ mission.address.state }}<br>
-       {% endif %}
-   </p>
-   <p>
-       {% if mission.address.name is not null %}
-        {{ 'mission.view.name'|trans }}: {{ mission.address.name }}<br>
-       {% endif %}
-   </p>
+
   <p>
       <h4><br>{{ 'mission.view.dailyFees'|trans }} :</h4>
         {{ mission.dailyFeesMin }} {{ 'mission.view.dayMin'|trans }} <br>
@@ -57,9 +36,7 @@
           </ul>
         {% endif %}
   <p>
-        {% if mission.confidentiality == 1 %}
-          {{ 'mission.view.confidential'|trans }}
-        {% endif %}
+
         {% if mission.telecommuting == 1 %}
             {{ 'mission.view.telecommuting'|trans }}
         {% endif %}
@@ -67,9 +44,7 @@
             {{ 'mission.view.international'|trans }}
         {% endif %}
   </p>
-    <p style="background-color:#ffcc00; text-align:center">
-        <a href="{{ path('mission_pitch') }}">{{ 'mission.view.pitch'|trans }} </a>
-    </p>
+        <a href="{{ path('mission_pitch', {'id': mission.id}) }}">{{ 'mission.view.pitch'|trans }} </a>
 </div>
 </body>
 </html>

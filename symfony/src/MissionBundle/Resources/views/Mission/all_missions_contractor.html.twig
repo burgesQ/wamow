@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% trans_default_domain "MissionBundle" %}
+<html>
+    <head>
+    </head>
+    <body>
+        <p>
+            {{ 'mission.all_missions.title'|trans }} ALL MY MISSION : 
+        </p>
+        <p>
+            {% for mission in listMission %}
+             <li>
+                 <a href="{{ path('mission_view_contractor', {'id': mission.id}) }}">
+                 {{ mission.title }}</a>
+            </li>
+            {% endfor %}
+        </p>
+    </body>
+</html>
