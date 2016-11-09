@@ -1,5 +1,4 @@
 <?php
-    
 namespace MissionBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -52,6 +51,10 @@ class MissionController extends Controller
                     $step->setPosition($i + 1);
                     $em->persist($step);
                 }
+                $team = new Team(1); //role 1 = contractor
+                $team->setMission($mission);
+                $team->addUser($this->getUser());
+                $em->persist($team);
                 $em->flush();
                 $id = $mission->getId();
                 return $this->render('MissionBundle:Mission:registered.html.twig', array(
@@ -150,16 +153,39 @@ class MissionController extends Controller
         } elseif ( $user === null ) {
             throw new NotFoundHttpException("Error : you are neither loged as advisor, nor contractor.");
         }
-        
+
         $role = $user->getRoles();
         return $this->render('MissionBundle:Mission:all_missions.html.twig', array(
             'listMission'           => $listMission,
             'role'                  => $role[0], ) );
     }
 
-    public function missionPitchAction()
+    public function missionPitchAction($id)
     {
-        // Team creations
+        $em = $this->getDoctrine()->getManager();
+        $mission = $em
+          ->getRepository('MissionBundle:Mission')
+          ->find($id)
+            ;
+        $listTeams = $em
+              ->getRepository('TeamBundle:Team')
+              ->findBy(array('mission' => $id));
+        foreach ($listTeams as $team)
+        {
+            $listUsers = $team->getUsers();
+            foreach ($listUsers as $user)
+            {
+                if ($user->getId() == $this->getUser()->getId())
+                {
+                    return new Response("You already apply to this mission.");
+                }
+          }
+        }
+        $team = new Team(0);  //role 0 = advisor
+        $team->setMission($mission);
+        $team->addUser($this->getUser());
+        $em->persist($team);
+        $em->flush($team);
         return new Response("Pitch done");
     }
 }
