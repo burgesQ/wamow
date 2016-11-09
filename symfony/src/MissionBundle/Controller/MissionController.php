@@ -126,11 +126,19 @@ class MissionController extends Controller
                    $mission->getIDContact() !== $this->getUser()->getId() ) {
             throw new NotFoundHttpException("The mission ".$id." wasn't created by you.");
         }
-
         $listLanguage = $mission->getLanguages();
-        return $this->render('MissionBundle:Mission:view.html.twig', array(
-            'mission'           => $mission,
-            'listLanguage'      => $listLanguage, ) );
+        if ( $this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR'))
+        {
+            return $this->render('MissionBundle:Mission:view_contractor.html.twig', array(
+                'mission'           => $mission,
+                'listLanguage'      => $listLanguage, ) );
+        }
+        else
+        {
+            return $this->render('MissionBundle:Mission:view_advisor.html.twig', array(
+                'mission'           => $mission,
+                'listLanguage'      => $listLanguage, ) );
+        }
     }
 
     /*
@@ -146,18 +154,26 @@ class MissionController extends Controller
                     ->getRepository('MissionBundle:Mission');
         $user = $this->getUser();
 
-        if ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR')) {
-            $listMission = $repository->findByiDContact($user->getId());
-        } elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')) {
-            $listMission = $repository->missionsAvailables();
-        } elseif ( $user === null ) {
+        if ( $user === null ) {
             throw new NotFoundHttpException("Error : you are neither loged as advisor, nor contractor.");
         }
-
-        $role = $user->getRoles();
-        return $this->render('MissionBundle:Mission:all_missions.html.twig', array(
-            'listMission'           => $listMission,
-            'role'                  => $role[0], ) );
+        elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR')) {
+            $listMission = $repository->findByiDContact($user->getId());
+            return $this->render('MissionBundle:Mission:all_missions_contractor.html.twig', array(
+                'listMission'           => $listMission
+            ));
+        }
+        elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')) {
+            $listMission = $repository->missionsAvailables();
+            $role = $user->getRoles();
+            return $this->render('MissionBundle:Mission:all_missions_advisor.html.twig', array(
+                'listMission'           => $listMission
+            );
+        }
+        else
+        {
+            throw new NotFoundHttpException("Error : you are neither loged as advisor, nor contractor.");
+        }
     }
 
     public function missionPitchAction($id)
