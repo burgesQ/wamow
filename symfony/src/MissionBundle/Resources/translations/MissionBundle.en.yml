@@ -69,3 +69,4 @@ mission:
     pitch:
         done: "You just pitch."
         twice: "You already apply to this mission."
+        contractor: "A contractor cannot pitch"

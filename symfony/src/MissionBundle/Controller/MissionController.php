@@ -183,26 +183,32 @@ class MissionController extends Controller
 
     public function missionPitchAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
         $trans = $this->get('translator');
+        
+        if ( $this->getUser() === null ) {
+            throw new NotFoundHttpException($trans->trans('mission.error.logged', array(), 'MissionBundle'));
+        } elseif ( $this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR') ) {
+            throw new NotFoundHttpException($trans->trans('mission.pitch.contractor', array(), 'MissionBundle'));
+        }
+
+        $em = $this->getDoctrine()->getManager();
         $mission = $em
-          ->getRepository('MissionBundle:Mission')
-          ->find($id)
-            ;
+                 ->getRepository('MissionBundle:Mission')
+                 ->find($id)
+                 ;
         $listTeams = $em
-              ->getRepository('TeamBundle:Team')
-              ->findBy(array('mission' => $id));
-        foreach ($listTeams as $team)
-        {
+                   ->getRepository('TeamBundle:Team')
+                   ->findBy(array('mission' => $id));
+        
+        foreach ($listTeams as $team) {
             $listUsers = $team->getUsers();
-            foreach ($listUsers as $user)
-            {
-                if ($user->getId() == $this->getUser()->getId())
-                {
+            foreach ($listUsers as $user) {
+                if ($user->getId() == $this->getUser()->getId()) {
                     return new Response($trans->trans('mission.pitch.twice', array(), 'MissionBundle'));
                 }
-          }
+            }
         }
+        
         $team = new Team(0);  //role 0 = advisor
         $team->setMission($mission);
         $team->addUser($this->getUser());
