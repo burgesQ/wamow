@@ -69,7 +69,10 @@ class MissionController extends Controller
         }
         else
         {
-            throw new NotFoundHttpException("You're not authorized to create a mission.");
+            return new Response($this->get('translator')->trans('mission.error.authorized',
+                                                                array(),
+                                                                'MissionBundle'));
+            #throw new NotFoundHttpException($this->get('translator')->trans('mission.error.authorized'));
         }
     }
 
@@ -82,14 +85,14 @@ class MissionController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $mission = $em->getRepository('MissionBundle:Mission')->find($id);
-
+        $trans = $this->get('translator');
         if ( $this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR') ||
              $this->getUser() === null ) {
-            throw new NotFoundHttpException("Only a logged contractor can edit a mission.");
+            throw new NotFoundHttpException($trans->trans('mission.error.contractor', array(), 'MissionBundle'));
         } elseif ( null === $mission ) {
-            throw new NotFoundHttpException("The mission ".$id." doesn't exist.");
+            throw new NotFoundHttpException($trans->trans('mission.error.wrongId', array('%id%' => $id), 'MissionBundle'));
         } elseif ( $this->getUser()->getId() !== $mission->getIDContact() ) {
-            throw new NotFoundHttpException("You can't edit a mission that doesn't belong to you.");
+            throw new NotFoundHttpException($trans->trans('mission.error.notYourMission', array(), 'MissionBundle'));
         }
 
         $form = $this->get('form.factory')->create(new MissionType(), $mission);
@@ -98,7 +101,7 @@ class MissionController extends Controller
 
         if ($form->isValid()) {
             $em->flush();
-            return new Response('Mission updated successfully');
+            return new Response($trans->trans('mission.edit.successEdit', array(), 'MissionBundle'));
         }
         return $this->render('MissionBundle:Mission:edit.html.twig', array(
             'form' => $form->createView(),
@@ -114,17 +117,17 @@ class MissionController extends Controller
     public function viewAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-
+        $trans = $this->get('translator');
         if ( $this->getUser() === null ) {
-            throw new NotFoundHttpException("Error : you are neither loged as advisor, nor contractor.");
+            throw new NotFoundHttpException($trans->trans('mission.error.logged', array(), 'MissionBundle'));
         } elseif ( ($mission = $em->getRepository('MissionBundle:Mission')->find($id)) === null) {
-            throw new NotFoundHttpException("The mission ".$id." doesn't exist.");
+            throw new NotFoundHttpException($trans->trans('mission.error.wrongId', array('%id%' => $id), 'MissionBundle'));
         } elseif ( $this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR') &&
                    $mission->getStatus() !== 1 ) {
-            throw new NotFoundHttpException("The mission ".$id." isn't available.");
+            throw new NotFoundHttpException($trans->trans('mission.error.available', array('%id%' => $id), 'MissionBundle'));
         } elseif ( $this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR') &&
                    $mission->getIDContact() !== $this->getUser()->getId() ) {
-            throw new NotFoundHttpException("The mission ".$id." wasn't created by you.");
+            throw new NotFoundHttpException($trans->trans('mission.error.wright', array(), 'MissionBundle'));
         }
         $listLanguage = $mission->getLanguages();
         if ( $this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR'))
@@ -153,9 +156,9 @@ class MissionController extends Controller
                     ->getManager()
                     ->getRepository('MissionBundle:Mission');
         $user = $this->getUser();
-
+        $trans = $this->get('translator');
         if ( $user === null ) {
-            throw new NotFoundHttpException("Error : you are neither loged as advisor, nor contractor.");
+            throw new NotFoundHttpException($trans->trans('mission.error.logged', array(), 'MissionBundle'));
         }
         elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR')) {
             $listMission = $repository->findByiDContact($user->getId());
@@ -165,20 +168,20 @@ class MissionController extends Controller
         }
         elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')) {
             $listMission = $repository->missionsAvailables();
-            $role = $user->getRoles();
             return $this->render('MissionBundle:Mission:all_missions_advisor.html.twig', array(
                 'listMission'           => $listMission
-            );
+            ));
         }
         else
         {
-            throw new NotFoundHttpException("Error : you are neither loged as advisor, nor contractor.");
+            throw new NotFoundHttpException($trans->trans('mission.error.logged', array(), 'MissionBundle'));
         }
     }
 
     public function missionPitchAction($id)
     {
         $em = $this->getDoctrine()->getManager();
+        $trans = $this->get('translator');
         $mission = $em
           ->getRepository('MissionBundle:Mission')
           ->find($id)
@@ -193,7 +196,7 @@ class MissionController extends Controller
             {
                 if ($user->getId() == $this->getUser()->getId())
                 {
-                    return new Response("You already apply to this mission.");
+                    return new Response($trans->trans('mission.pitch.twice', array(), 'MissionBundle'));
                 }
           }
         }
@@ -202,6 +205,6 @@ class MissionController extends Controller
         $team->addUser($this->getUser());
         $em->persist($team);
         $em->flush($team);
-        return new Response("Pitch done");
+        return new Response($trans->trans('mission.pitch.done', array(), 'MissionBundle'));
     }
 }

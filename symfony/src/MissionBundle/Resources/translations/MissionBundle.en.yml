@@ -5,6 +5,7 @@ mission:
         title: "Mission editing"
         warning: "You are editing a mission which already exist."
         cancel: "Back to the mission."
+        successEdit: "Mission updated successfully"
     new:
         title: "Mission Form"
         form:
@@ -57,3 +58,14 @@ mission:
         telecommuting: "This mission propose telecommuting."
         international: "This mission is international."
         pitch: "Pitch"
+    error:
+        authorized: "You're not authorized to create a mission."
+        logged: "You are not logged."
+        contractor: "Only a logged contractor can edit a mission."
+        wrongId: "The mission %id% doesn't exist."
+        notYourMission: "You can't edit a mission that doesn't belong to you."
+        available: "The mission %id% is not available."
+        wright: "You did not created this mission."
+        pitch:
+            done: "You just pitch."
+            twice: "You already apply to this mission."
