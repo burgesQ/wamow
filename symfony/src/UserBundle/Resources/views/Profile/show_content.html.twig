@@ -58,9 +58,9 @@
 	{{ user.address.name }}
       {% endif %} </p>
 
-  <p>{{ 'profile.show.cv'|trans }}:
-    {% if user.cv != null and user.cv.name != null %}
-      {{ user.cv.name }} is a {{ user.cv.type }}
+  <p>{{ 'profile.show.resume'|trans }}:
+    {% if user.resume != null and user.resume.name != null %}
+      {{ user.resume.name }} is a {{ user.resume.type }}
     {% endif %} </p>
       
 </div>

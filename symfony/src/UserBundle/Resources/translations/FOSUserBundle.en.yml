@@ -40,7 +40,7 @@ profile:
         status: Status
         phone: 'Phone Number'
         image: Picture
-        cv: 'Curriculum vitae'
+        resume: 'Curriculum vitae'
     edit:
         submit: Update
     flash:

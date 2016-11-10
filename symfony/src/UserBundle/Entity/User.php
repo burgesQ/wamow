@@ -177,7 +177,7 @@ class User extends BaseUser
      * @ORM\OneToOne(targetEntity="ToolsBundle\Entity\Upload", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true)
      */
-    private $cv;
+    private $resume;
     
     public function __construct()
     {
@@ -507,26 +507,26 @@ class User extends BaseUser
     }
 
     /**
-     * Set cv
+     * Set resume
      *
-     * @param \ToolsBundle\Entity\Upload $cv
+     * @param \ToolsBundle\Entity\Upload $resume
      * @return User
      */
-    public function setCv(\ToolsBundle\Entity\Upload $cv = null)
+    public function setResume(\ToolsBundle\Entity\Upload $resume = null)
     {
-        $this->cv = $cv;
+        $this->resume = $resume;
 
         return $this;
     }
 
     /**
-     * Get cv
+     * Get resume
      *
      * @return \ToolsBundle\Entity\Upload
      */
-    public function getCv()
+    public function getResume()
     {
-        return $this->cv;
+        return $this->resume;
     }
 
     /**
@@ -535,7 +535,7 @@ class User extends BaseUser
     public function isValidate(ExecutionContextInterface $context)
     {
         $img = $this->getImage();
-        $cv = $this->getCv();
+        $resume = $this->getResume();
         $feesMin = $this->getDailyFeesMin();
         $feesMax = $this->getDailyFeesMax();
 
@@ -547,12 +547,12 @@ class User extends BaseUser
                     ->atPath('image.file')
                     ->addViolation();
             }
-        } if ($cv != NULL && $cv->getFile() != NULL) {
-            $info = explode("/", $cv->getFile()->getMimeType());
+        } if ($resume != NULL && $resume->getFile() != NULL) {
+            $info = explode("/", $resume->getFile()->getMimeType());
             if ($info[1] != "pdf") {
                 $context
-                    ->buildViolation('user.cv.format')
-                    ->atPath('cv.file')
+                    ->buildViolation('user.resume.format')
+                    ->atPath('resume.file')
                     ->addViolation();
             }
         } if ($this->getPhone() != NULL) {
