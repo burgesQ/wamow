@@ -66,6 +66,6 @@ mission:
         notYourMission: "You can't edit a mission that doesn't belong to you."
         available: "The mission %id% is not available."
         wright: "You did not created this mission."
-        pitch:
-            done: "You just pitch."
-            twice: "You already apply to this mission."
+    pitch:
+        done: "You just pitch."
+        twice: "You already apply to this mission."
