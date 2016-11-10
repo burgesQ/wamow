@@ -57,5 +57,10 @@
       {% if user.address != null %}
 	{{ user.address.name }}
       {% endif %} </p>
+
+  <p>{{ 'profile.show.cv'|trans }}:
+    {% if user.cv != null and user.cv.name != null %}
+      {{ user.cv.name }} is a {{ user.cv.type }}
+    {% endif %} </p>
       
 </div>

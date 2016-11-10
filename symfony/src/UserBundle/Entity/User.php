@@ -172,6 +172,12 @@ class User extends BaseUser
      * @ORM\JoinColumn(nullable=true)
      */
     private $image;
+
+    /**
+     * @ORM\OneToOne(targetEntity="ToolsBundle\Entity\Upload", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $cv;
     
     public function __construct()
     {
@@ -501,11 +507,35 @@ class User extends BaseUser
     }
 
     /**
+     * Set cv
+     *
+     * @param \ToolsBundle\Entity\Upload $cv
+     * @return User
+     */
+    public function setCv(\ToolsBundle\Entity\Upload $cv = null)
+    {
+        $this->cv = $cv;
+
+        return $this;
+    }
+
+    /**
+     * Get cv
+     *
+     * @return \ToolsBundle\Entity\Upload
+     */
+    public function getCv()
+    {
+        return $this->cv;
+    }
+
+    /**
      * @Assert\Callback
      */
     public function isValidate(ExecutionContextInterface $context)
     {
         $img = $this->getImage();
+        $cv = $this->getCv();
         $feesMin = $this->getDailyFeesMin();
         $feesMax = $this->getDailyFeesMax();
 
@@ -515,6 +545,14 @@ class User extends BaseUser
                 $context
                     ->buildViolation('user.image.format')
                     ->atPath('image.file')
+                    ->addViolation();
+            }
+        } if ($cv != NULL && $cv->getFile() != NULL) {
+            $info = explode("/", $cv->getFile()->getMimeType());
+            if ($info[1] != "pdf") {
+                $context
+                    ->buildViolation('user.cv.format')
+                    ->atPath('cv.file')
                     ->addViolation();
             }
         } if ($this->getPhone() != NULL) {

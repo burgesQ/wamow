@@ -24,7 +24,7 @@ user:
         short: '[-Inf,Inf]The name is too short'
         long: '[-Inf,Inf]The name is too long'
     image:
-        format: "This file isn't a image."
+        format: "This image file isn't a image."
     minfees:
         over: 'The minimum fees must be less than the maximum fees.'
         unset: 'Dailyfees min must be set.'
@@ -43,6 +43,8 @@ user:
         blank: 'Please enter your last name.'
         short: 'The last name is too short.'
         long: 'The last name is too long.'
+    cv:
+        format: "This curriculum vitae file isn't a pdf."
 
 group:
     name:
