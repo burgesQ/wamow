@@ -2,6 +2,10 @@ team:
     resource: "@TeamBundle/Resources/config/routing.yml"
     prefix:   /
 
+company:
+    resource: "@CompanyBundle/Resources/config/routing.yml"
+    prefix: /
+
 home_page:
     resource: "@HomePageBundle/Resources/config/routing.yml"
     prefix: /
@@ -12,10 +16,6 @@ mission:
 
 user:
     resource: "@UserBundle/Resources/config/routing.yml"
-    prefix: /
-
-compagny:
-    resource: "@CompagnyBundle/Resources/config/routing.yml"
     prefix: /
 
 dashboard:
