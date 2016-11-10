@@ -8,7 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
 /**
  * Company
  *
@@ -51,6 +50,9 @@ class Company
      * @var int
      *
      * @ORM\Column(name="size", type="integer", nullable=false)
+     * @Assert\Range(
+     *      min = 1
+     *)
      */
 
     private $size;
@@ -94,12 +96,12 @@ class Company
     private $type;
 
     public function __construct()
-      {
+    {
         $this->creationDate = new \Datetime();
         $this->creationDate = new \Datetime();
         $this->updateDate = new \Datetime();
         $this->status = 0;
-      }
+    }
 
 
     /**
