@@ -5,6 +5,7 @@ mission:
         title: "Edition de la mission"
         warning: "Vous éditez une mission qui existe déjà."
         cancel: "Retour à la mission."
+        successEdit: "Mission éditée avec succès."
     new:
         title: "Formulaire"
         form:
@@ -57,3 +58,14 @@ mission:
         telecommuting: "Cette mission propose du télétravail."
         international: "Cette mission est internationale."
         pitch: "Postuler"
+    error:
+        authorized: "Vous n'êtes pas autorisé à créer une mission."
+        logged: "Vous n'êtes pas connecté."
+        contractor: "Seul un expert peut éditer une mission."
+        wrongId: "La misssion %id% n'existe pas."
+        notYourMission: "Vous ne pouvez pas éditer une mission que vous n'avez pas crée."
+        available: "La mission %id% n'est pas disponible."
+        wright: "Vous n'avez pas crée cette mission."
+    pitch:
+        done: "Vous venez de postuler."
+        twice: "Vous avez déjà postulé à cette mission."
