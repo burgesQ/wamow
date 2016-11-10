@@ -69,3 +69,4 @@ mission:
     pitch:
         done: "Vous venez de postuler."
         twice: "Vous avez déjà postulé à cette mission."
+        contractor: "Un contracteur ne peux pitcher"
