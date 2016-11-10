@@ -132,13 +132,13 @@ class MissionController extends Controller
         $listLanguage = $mission->getLanguages();
         if ( $this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR'))
         {
-            return $this->render('MissionBundle:Mission:view_contractor.html.twig', array(
+            return $this->render('MissionBundle:Mission:view_seeker.html.twig', array(
                 'mission'           => $mission,
                 'listLanguage'      => $listLanguage, ) );
         }
         else
         {
-            return $this->render('MissionBundle:Mission:view_advisor.html.twig', array(
+            return $this->render('MissionBundle:Mission:view_expert.html.twig', array(
                 'mission'           => $mission,
                 'listLanguage'      => $listLanguage, ) );
         }
@@ -162,13 +162,13 @@ class MissionController extends Controller
         }
         elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR')) {
             $listMission = $repository->findByiDContact($user->getId());
-            return $this->render('MissionBundle:Mission:all_missions_contractor.html.twig', array(
+            return $this->render('MissionBundle:Mission:all_missions_seeker.html.twig', array(
                 'listMission'           => $listMission
             ));
         }
         elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')) {
             $listMission = $repository->missionsAvailables();
-            return $this->render('MissionBundle:Mission:all_missions_advisor.html.twig', array(
+            return $this->render('MissionBundle:Mission:all_missions_expert.html.twig', array(
                 'listMission'           => $listMission
             ));
         }

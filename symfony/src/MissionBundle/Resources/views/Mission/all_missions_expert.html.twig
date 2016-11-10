@@ -5,12 +5,12 @@
     </head>
     <body>
         <p>
-            {{ 'mission.all_missions.title'|trans }} : 
+            {{ 'mission.all_missions.title'|trans }} :
         </p>
         <p>
             {% for mission in listMission %}
              <li>
-                 <a href="{{ path('mission_view_advisor', {'id': mission.id}) }}">
+                 <a href="{{ path('mission_view_expert', {'id': mission.id}) }}">
                  {{ mission.title }}</a>
                     ---> <a href="{{ path('mission_pitch', {'id': mission.id}) }}">pitch </a>
             </li>
