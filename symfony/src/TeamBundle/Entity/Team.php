@@ -49,6 +49,13 @@ class Team
     private $role;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="status", type="integer", nullable=false)
+     */
+    private $status;
+
+    /**
      * Constructor
      */
     public function __construct($role)
@@ -56,6 +63,7 @@ class Team
         $this->users = new \Doctrine\Common\Collections\ArrayCollection();
         $this->creationDate = new \DateTime();
         $this->role = $role;
+        $this->status = 0;
     }
 
     /**
@@ -168,5 +176,28 @@ class Team
     public function getRole()
     {
         return $this->role;
+    }
+
+    /**
+     * Set status
+     *
+     * @param integer $status
+     * @return Team
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return integer
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }
