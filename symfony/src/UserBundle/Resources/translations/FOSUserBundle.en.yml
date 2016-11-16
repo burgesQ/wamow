@@ -41,6 +41,8 @@ profile:
         phone: 'Phone Number'
         image: Picture
         resume: 'Curriculum vitae'
+        newslettertrue: 'You are registered for the newsletter'
+        newsletterfalse: 'You are not registered for the newsletter'
     edit:
         submit: Update
     flash:
@@ -105,3 +107,4 @@ form:
     password_confirmation: 'Repeat password'
     new_password: 'New password'
     new_password_confirmation: 'Repeat new password'
+    newsletter: 'Would you like to receive our wonderful newsletter?'

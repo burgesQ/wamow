@@ -178,7 +178,14 @@ class User extends BaseUser
      * @ORM\JoinColumn(nullable=true)
      */
     private $resume;
-    
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="newsletter", type="boolean", nullable=false)
+     */
+    private $newsletter;
+
     public function __construct()
     {
         parent::__construct();
@@ -189,6 +196,7 @@ class User extends BaseUser
         $this->address = NULL;
         $this->prefix = NULL;
         $this->birthdate = NULL;
+        $this->newsletter = true;
     }
 
     /**
@@ -527,6 +535,28 @@ class User extends BaseUser
     public function getResume()
     {
         return $this->resume;
+    }
+
+    /**
+     * Set newsletter
+     *
+     * @param boolean $newsletter
+     * @return User
+     */
+    public function setNewsletter($newsletter)
+    {
+        $this->newsletter = $newsletter;
+        return $this;
+    }
+
+    /**
+     * Get newsletter
+     *
+     * @return boolean
+     */
+    public function getNewsletter()
+    {
+        return $this->newsletter;
     }
 
     /**

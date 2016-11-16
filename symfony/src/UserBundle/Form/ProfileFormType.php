@@ -54,6 +54,11 @@ class ProfileFormType extends AbstractType
         $builder->add('phone', new PhoneNumberType(), array('required' => false));
         $builder->add('image', new UploadType(), array('required' => false));
         $builder->add('resume', new UploadType(), array('required' => false));
+        $builder->add('newsletter',  'checkbox', array(
+            'translation_domain' => 'FOSUserBundle',
+            'label' => 'form.newsletter',
+            'required' => false,
+        ));
     }
 
     public function getParent()
@@ -97,6 +102,11 @@ class ProfileFormType extends AbstractType
     }
 
     public function getImage()
+    {
+        return $this->getBlockPrefix();
+    }
+
+    public function getNewsletter()
     {
         return $this->getBlockPrefix();
     }
