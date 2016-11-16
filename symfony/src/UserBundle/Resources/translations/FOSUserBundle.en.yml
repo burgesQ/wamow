@@ -43,8 +43,6 @@ profile:
         resume: 'Curriculum vitae'
         newslettertrue: 'You are registered for the newsletter'
         newsletterfalse: 'You are not registered for the newsletter'
-    edit:
-        submit: Update
     flash:
         updated: 'The profile has been updated'
 
@@ -93,18 +91,33 @@ resetting:
 
 # Global strings
 layout:
-    logout: 'Log out'
-    login: 'Log in'
-    register: Register
-    logged_in_as: 'Hello %first_name% %last_name%'
+    logout: "Log out"
+    login: "Log in"
+    register: "Register"
+    logged_in_as: "Hello %first_name% %last_name%"
 
 form:
-    group_name: 'Group name'
-    username: Username
-    email: Email
-    current_password: 'Current password'
-    password: Password
-    password_confirmation: 'Repeat password'
-    new_password: 'New password'
-    new_password_confirmation: 'Repeat new password'
-    newsletter: 'Would you like to receive our wonderful newsletter?'
+    group_name: "Group name"
+    username: "Username"
+    firstname: "Firstname"
+    lastname: "Lastname"
+    email: "Email"
+    current_password: "Current password"
+    password: "Password"
+    password_confirmation: "Repeat password"
+    new_password: "New password"
+    new_password_confirmation: "Repeat new password"
+    newsletter: "Would you like to receive our wonderful newsletter?"
+    gender:
+        female: "Female"
+        male: "Male"
+        other: "I don't know"
+        choose: "Choose your gender"
+    birthdate:
+        month: "Month"
+        day: "Day"
+        year: "Year"
+    dailyfees:
+        min: "Daily fees minimum"
+        max: "Daily fees maximum"
+    submit: "Update"
