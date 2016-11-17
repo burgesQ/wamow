@@ -70,7 +70,7 @@ class Upload
 
     private $file;
 
-    private $laTempo;
+    private $oldFile;
     
     public function __construct()
     {
@@ -102,10 +102,10 @@ class Upload
     {
         if (null == $this->file) {
             return;
-        } if (NULL != $this->laTempo) {
-            $tmp = $this->getUploadRootDir().$this->laTempo;
+        } if (NULL != $this->oldFile) {
+            $tmp = $this->getUploadRootDir().$this->oldFile;
             if (file_exists($tmp)) {
-                rename($tmp, $this->getRmUploadRootDir().$this->laTempo);
+                rename($tmp, $this->getRmUploadRootDir().$this->oldFile);
             }
         }
         $this->getFile()->move(
@@ -118,7 +118,7 @@ class Upload
      */
     public function preRemoveUpload()
     {
-        $this->laTempo = $this->getUploadRootDir().$this->getName();
+        $this->oldFile = $this->getUploadRootDir().$this->getName();
     }
 
     /**
@@ -310,7 +310,7 @@ class Upload
     {
         $this->file = $file;
         if (null != $this->name) {
-            $this->laTempo = $this->name;
+            $this->oldFile = $this->name;
             $this->name = null;
             $this->format = null;
             $this->path = null;
