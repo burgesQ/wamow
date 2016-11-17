@@ -26,7 +26,8 @@ class CompanyController extends Controller
     public function createAction(Request $request)
     {
         $company = new Company();
-
+        $trans = $this->get('translator');
+        
         $form = $this->get('form.factory')->createBuilder('form', $company)
               ->add('name',      'text')
               ->add('size')
@@ -45,13 +46,13 @@ class CompanyController extends Controller
             $company  = $form->getData();
             $em = $this->getDoctrine()->getManager();
 
-            $exist = $em
+            $tmp = $em
                    ->getRepository('CompanyBundle:Company')
                    ->findOneByName($company->getName())
                    ;
-            if ($exist != null)
+            if ($tmp != null)
             {
-                throw new NotFoundHttpException("The company ".$company->getName()." already exist.");
+                throw new NotFoundHttpException($trans->trans('company.error.usedId', array('%name%' => $company->getName()), 'CompanyBundle'));
             }
             $user = $this->getUser();
             $user->setCompany($company);
@@ -60,7 +61,7 @@ class CompanyController extends Controller
             $em->persist($user);
             $em->flush();
 
-            $request->getSession()->getFlashBag()->add('notice', 'Company successfully registered');
+            $request->getSession()->getFlashBag()->add('notice', $trans->trans('company.action.registered', array(), 'CompanyBundle'));
             return $this->render('CompanyBundle:Default:created.html.twig', array('company' => $company));
         }
 
@@ -73,8 +74,10 @@ class CompanyController extends Controller
    */
     public function joinAction(Request $request)
     {
+        $trans = $this->get('translator');
+
         if ( $this->getUser()->getCompany() ) { // if we remove it we have to check that the user isn't already in the company 
-            throw new NotFoundHttpException("You cannot join more than one company.");
+            throw new NotFoundHttpException($trans->trans('company.error.oneCompany', array(), 'CompanyBundle'));
         }
        
         $data = array();
@@ -104,8 +107,7 @@ class CompanyController extends Controller
             $em->persist($company);
             $em->persist($user);
             $em->flush();
-
-            $request->getSession()->getFlashBag()->add('notice', 'Joined the company');
+            $request->getSession()->getFlashBag()->add('notice', $trans->trans('company.info.join', array(), 'CompanyBundle'));
             return $this->render('CompanyBundle:Default:joined.html.twig', array('company' => $company));
         }
 
@@ -146,14 +148,15 @@ class CompanyController extends Controller
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-
+        $trans = $this->get('translator');
+        
         $company = $em
                  ->getRepository('CompanyBundle:Company')
                  ->find($id)
                  ;
 
         if (null === $company) {
-            throw new NotFoundHttpException("The company Id ".$id." doesn't exist.");
+            throw new NotFoundHttpException($trans->trans('company.error.wrongId', array('%id%' => $id), 'CompanyBundle'));
         }
 
         $contractors = $em

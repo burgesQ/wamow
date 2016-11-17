@@ -1,0 +1,14 @@
+company:
+    name: "company"
+    error:
+        wrongId: "The company %id% doesn't exist."
+        usedId: "The company %name% already exist."
+        oneCompany: "You cannot join more than one company."
+    action:
+        leaved: "You just left the "
+        created: "successfully created !"
+        joined: "You just joined "
+        wannaLeav: "Are you sure you want to leave "
+        registred: "Company successfully registered"
+    info:
+        join: "Joined the company"
