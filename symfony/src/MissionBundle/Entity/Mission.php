@@ -7,6 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use ToolsBundle\Entity\Language;
 use ToolsBundle\Entity\Address;
+use ToolsBundle\Entity\Tag;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
@@ -204,6 +205,11 @@ class Mission
      */
     private $sizeTeamMax;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="ToolsBundle\Entity\Tag", cascade={"persist"})
+     */
+    private $tags;
+
     public function __construct($nbStep, $iDContact, $sizeTeamMax, $token)
       {
         $this->creationDate = new \Datetime();
@@ -215,6 +221,23 @@ class Mission
         $this->iDContact = $iDContact;
         $this->sizeTeamMax = $sizeTeamMax;
         $this->token = $token;
+      }
+
+    public function addTag(Tag $tag)
+      {
+        $this->tags[] = $tag;
+
+        return $this;
+      }
+
+    public function removeTag(Tag $tag)
+      {
+        $this->tags->removeElement($tag);
+      }
+
+    public function getTags()
+      {
+        return $this->tags;
       }
 
     /**

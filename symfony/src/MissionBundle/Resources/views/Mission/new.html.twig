@@ -3,6 +3,7 @@
 <h3>{{ 'mission.new.title'|trans }}</h3>
 
 <form method="post" {{ form_enctype(form) }}>
+  <link rel="stylesheet" href="{{ asset('MissionBundle/css/chosen.css') }}">
   {{ form_start(form) }}
     <div>
     {{ form_errors(form.title) }}
@@ -100,6 +101,16 @@
     {{ form_widget(form.missionKind) }}
     </div>
     <br>
+    <div>
+    {{ form_errors(form.tags) }}
+    {{ form_label(form.tags) }}
+    {{ form_widget(form.tags) }}
+    <br>
+    </div>
     {{ form_row(form.save) }}
   {{ form_end(form) }}
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
+ <script src="{{ asset('MissionBundle/js/chosen.jquery.tag.js') }}" type="text/javascript"></script>
+ <script src="{{ asset('MissionBundle/js/chosen.config.tag.js') }}" type="text/javascript"></script>
+ <script src="{{ asset('MissionBundle/js/prism.js') }}" type="text/javascript" charset="utf-8"></script>
 </form>

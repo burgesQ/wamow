@@ -167,7 +167,7 @@ class User extends BaseUser
      * @ORM\JoinColumn(nullable=true)
      */
     private $phone;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="ToolsBundle\Entity\Upload", mappedBy="user")
      */
@@ -177,7 +177,7 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="ToolsBundle\Entity\Upload", mappedBy="user")
      */
     private $resumes;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="CompanyBundle\Entity\Company", cascade={"persist"})
      * @ORM\joinColumn(onDelete="SET NULL")
@@ -197,13 +197,6 @@ class User extends BaseUser
      */
     private $team;
 
-
-    /**
-     * @ORM\ManyToOne(targetEntity="CompanyBundle\Entity\Company", cascade={"persist"})
-     * @ORM\joinColumn(onDelete="SET NULL")
-     */
-    private $company;
-
     public function __construct()
     {
         parent::__construct();
@@ -215,7 +208,7 @@ class User extends BaseUser
         $this->prefix = NULL;
         $this->birthdate = NULL;
         $this->images = new ArrayCollection();
-        $this->resumes = new ArrayCollection();       
+        $this->resumes = new ArrayCollection();
         $this->newsletter = true;
     }
 
@@ -555,7 +548,7 @@ class User extends BaseUser
     {
         return $this->images;
     }
-    
+
     /**
      * Add resumes
      *
@@ -608,7 +601,7 @@ class User extends BaseUser
     {
         $feesMin = $this->getDailyFeesMin();
         $feesMax = $this->getDailyFeesMax();
-        
+
         if ($this->getPhone() != NULL) {
             $this->getPhone()->isValidate($context);
         } if ($feesMin == NULL && $feesMax != NULL) {
