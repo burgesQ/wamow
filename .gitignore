@@ -1,2 +1,4 @@
 /logs
 /.data
+**/composer.lock
+**/.DS_Store
