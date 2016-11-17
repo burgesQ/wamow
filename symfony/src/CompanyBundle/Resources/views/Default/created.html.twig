@@ -1,10 +1,12 @@
+{% trans_default_domain "CompanyBundle" %}
+
 <!DOCTYPE html>
 <html>
     <head>
     </head>
     <body>
         <p>
-            Company  {{ company.name }}  successfully created !
+            {{ 'company.name'|trans }} {{ company.name }} {{ 'company.action.created'|trans }}
         </p>
       </body>
 </html>
