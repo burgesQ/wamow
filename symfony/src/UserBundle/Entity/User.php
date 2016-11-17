@@ -172,12 +172,26 @@ class User extends BaseUser
      * @ORM\JoinColumn(nullable=true)
      */
     private $image;
+
     
     /**
      * @ORM\ManyToOne(targetEntity="CompanyBundle\Entity\Company", cascade={"persist"})
      * @ORM\joinColumn(onDelete="SET NULL")
      */
     private $company;
+
+    /**
+     * @ORM\OneToOne(targetEntity="ToolsBundle\Entity\Upload", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $resume;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="newsletter", type="boolean", nullable=false)
+     */
+    private $newsletter;
 
     public function __construct()
     {
@@ -189,6 +203,7 @@ class User extends BaseUser
         $this->address = NULL;
         $this->prefix = NULL;
         $this->birthdate = NULL;
+        $this->newsletter = true;
     }
 
     /**
@@ -530,11 +545,57 @@ class User extends BaseUser
     }
 
     /**
+     * Set resume
+     *
+     * @param \ToolsBundle\Entity\Upload $resume
+     * @return User
+     */
+    public function setResume(\ToolsBundle\Entity\Upload $resume = null)
+    {
+        $this->resume = $resume;
+
+        return $this;
+    }
+
+    /**
+     * Get resume
+     *
+     * @return \ToolsBundle\Entity\Upload
+     */
+    public function getResume()
+    {
+        return $this->resume;
+    }
+
+    /**
+     * Set newsletter
+     *
+     * @param boolean $newsletter
+     * @return User
+     */
+    public function setNewsletter($newsletter)
+    {
+        $this->newsletter = $newsletter;
+        return $this;
+    }
+
+    /**
+     * Get newsletter
+     *
+     * @return boolean
+     */
+    public function getNewsletter()
+    {
+        return $this->newsletter;
+    }
+
+    /**
      * @Assert\Callback
      */
     public function isValidate(ExecutionContextInterface $context)
     {
         $img = $this->getImage();
+        $resume = $this->getResume();
         $feesMin = $this->getDailyFeesMin();
         $feesMax = $this->getDailyFeesMax();
 
@@ -544,6 +605,14 @@ class User extends BaseUser
                 $context
                     ->buildViolation('user.image.format')
                     ->atPath('image.file')
+                    ->addViolation();
+            }
+        } if ($resume != NULL && $resume->getFile() != NULL) {
+            $info = explode("/", $resume->getFile()->getMimeType());
+            if ($info[1] != "pdf") {
+                $context
+                    ->buildViolation('user.resume.format')
+                    ->atPath('resume.file')
                     ->addViolation();
             }
         } if ($this->getPhone() != NULL) {

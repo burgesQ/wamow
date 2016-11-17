@@ -43,6 +43,8 @@ user:
         blank: 'Please enter your last name.'
         short: 'The last name is too short.'
         long: 'The last name is too long.'
+    cv:
+        format: "This curriculum vitae file isn't a pdf."
 
 group:
     name:

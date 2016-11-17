@@ -57,5 +57,16 @@
       {% if user.address != null %}
 	{{ user.address.name }}
       {% endif %} </p>
-      
+
+  <p>{{ 'profile.show.resume'|trans }}:
+    {% if user.resume != null and user.resume.name != null %}
+      {{ user.resume.name }} is a {{ user.resume.type }}
+    {% endif %} </p>
+
+    {% if user.newsletter == 1 %}
+        {{ 'profile.show.newslettertrue'|trans }}
+    {% else %}
+        {{ 'profile.show.newsletterfalse'|trans }}
+    {% endif %}
+
 </div>
