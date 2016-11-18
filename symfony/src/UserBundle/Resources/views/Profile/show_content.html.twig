@@ -3,11 +3,12 @@
 <div class="user_user_show">
 
   <p>{{ 'profile.show.image'|trans }}:
-    {% if user.image != null and user.image.name != null %}
-      {{ user.image.name }} is a {{ user.image.type }}
-      <img src="{{ asset(user.image.webPath()) }}"/>
+    {% set image = images|last %} 
+    {% if image != null and image.name != null %} 
+      {{ image.name }} is a {{ image.type }} upload the {{ image.uploadDate|date("m/d/Y") }} 
+      <img src="{{ asset(image.webPath()) }}"/>  
     {% endif %} </p>
-
+    
     <p>{{ 'profile.show.first_name'|trans }}: {{ user.firstName }} </p>
     <p>{{ 'profile.show.last_name'|trans }}: {{ user.lastName }} </p>
     <p>{{ 'profile.show.gender'|trans }}: {{ user.gender }} </p>
@@ -58,10 +59,11 @@
 	{{ user.address.name }}
       {% endif %} </p>
 
-  <p>{{ 'profile.show.resume'|trans }}:
-    {% if user.resume != null and user.resume.name != null %}
-      {{ user.resume.name }} is a {{ user.resume.type }}
-    {% endif %} </p>
+    <p>{{ 'profile.show.resume'|trans }}:
+      {% set resume = resumes|last %} 
+      {% if resume != null and resume.name != null %}
+	{{ resume.name }} is a {{ resume.type }} upload the {{ image.uploadDate|date("m/d/Y") }} 
+      {% endif %} </p>
 
     {% if user.newsletter == 1 %}
         {{ 'profile.show.newslettertrue'|trans }}

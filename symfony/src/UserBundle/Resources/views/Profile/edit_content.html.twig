@@ -6,37 +6,36 @@
 
     {{ form_row(form.image.file) }}
 
-    {{ form_row(form.firstName) }}
-    {{ form_row(form.lastName) }}
+    {{ form_row(form.user.firstName) }}
+    {{ form_row(form.user.lastName) }}
 
-    {{ form_row(form.birthdate) }}
-    {{ form_row(form.gender) }}
+    {{ form_row(form.user.birthdate) }}
+    {{ form_row(form.user.gender) }}
+    {{ form_row(form.user.email) }}
 
-    {{ form_row(form.email) }}
+    {{form_row(form.user.phone.prefix)}}
+    {{form_row(form.user.phone.number)}}
 
-    {{form_row(form.phone.prefix)}}
-    {{form_row(form.phone.tel)}}
+    {{ form_row(form.user.address.country) }}
+    {{ form_row(form.user.address.state) }}
+    {{ form_row(form.user.address.zipcode) }}
+    {{ form_row(form.user.address.city) }}
+    {{ form_row(form.user.address.street) }}
+    {{ form_row(form.user.address.street2) }}
+    {{ form_row(form.user.address.name) }}
+    {{ form_row(form.user.address.label) }}
 
-    {{ form_row(form.address.country) }}
-    {{ form_row(form.address.state) }}
-    {{ form_row(form.address.zipcode) }}
-    {{ form_row(form.address.city) }}
-    {{ form_row(form.address.street) }}
-    {{ form_row(form.address.street2) }}
-    {{ form_row(form.address.name) }}
-    {{ form_row(form.address.label) }}
+    {{ form_row(form.user.dailyFeesMin) }}
+    {{ form_row(form.user.dailyFeesMax) }}
 
-    {{ form_row(form.dailyFeesMin) }}
-    {{ form_row(form.dailyFeesMax) }}
+    {{ form_row(form.resume.file) }} 
 
-    {{ form_row(form.resume.file) }}
+    {{ form_row(form.user.newsletter) }}
 
-    {{ form_row(form.newsletter) }}
-
-    {{ form_row(form.current_password) }}
+    {{ form_row(form.user.current_password) }}
 
     <div>
-	<input type="submit" value="{{ 'form.submit'|trans }}" />
+	<input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
     </div>
 
 {{ form_end(form) }}
