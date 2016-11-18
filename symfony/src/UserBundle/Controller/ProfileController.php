@@ -4,14 +4,19 @@ namespace UserBundle\Controller;
 
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\FormEvent;
-use FOS\UserBundle\Event\FilterUserResponseEvent;
-use FOS\UserBundle\Event\GetResponseUserEvent;
 use FOS\UserBundle\Model\UserInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use FOS\UserBundle\Event\GetResponseUserEvent;
+use FOS\UserBundle\Event\FilterUserResponseEvent;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+
 use FOS\UserBundle\Controller\ProfileController as BaseController;
+
+use ToolsBundle\Entity\Upload;
+use UserBundle\Form\MergedFormType;
 
 class ProfileController extends BaseController
 {
@@ -25,8 +30,12 @@ class ProfileController extends BaseController
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
+        $em = $this->getDoctrine()->getRepository('UserBundle:User');
+
         return $this->render('UserBundle:Profile:show.html.twig', array(
-            'user' => $user
+            'user' => $user,
+            'images' => $em->myFindUserPicture($user),
+            'resumes' => $em->myFindUserResume($user)
         ));
     }
 
@@ -50,11 +59,27 @@ class ProfileController extends BaseController
             return $event->getResponse();
         }
 
-        /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
-        $formFactory = $this->get('fos_user.profile.form.factory');
+        $em = $this->getDoctrine()->getManager();
 
-        $form = $formFactory->createForm();
+        $image = new Upload();
+        $image->setUser($user);
+        $image->setKind(1);
+        $image->setType("image");
+
+        $resume = new Upload();
+        $resume->setUser($user);
+        $resume->setKind(2);
+        $resume->setFormat("pdf");
+            
+        $formData['user'] = $user;
+        $formData['image'] = $image;
+        $formData['resume'] = $resume;
+
+        $form = $this->createForm(new MergedFormType(), $formData);
+
         $form->setData($user);
+        $form->setData($image);
+        $form->setData($resume);
 
         $form->handleRequest($request);
 
@@ -69,6 +94,11 @@ class ProfileController extends BaseController
             $user->setLastName(ucwords($user->getLastName()));
             $userManager->updateUser($user);
 
+            $em->persist($image);
+            $em->persist($resume);
+
+            $em->flush();
+            
             if (null === $response = $event->getResponse()) {
                 $url = $this->generateUrl('user_profile_show');
                 $response = new RedirectResponse($url);

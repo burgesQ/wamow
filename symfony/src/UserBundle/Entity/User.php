@@ -2,13 +2,18 @@
 
 namespace UserBundle\Entity;
 
+
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
-use CompanyBundle\Entity\Company;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+
 use FOS\UserBundle\Model\User as BaseUser;
-use ToolsBundle\Entity\Address;
+
+use CompanyBundle\Entity\Company;
+
 use ToolsBundle\Entity\PhoneNumber;
+use ToolsBundle\Entity\Address;
 use ToolsBundle\Entity\Upload;
 
 /**
@@ -166,25 +171,22 @@ class User extends BaseUser
      * @ORM\JoinColumn(nullable=true)
      */
     private $phone;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="ToolsBundle\Entity\Upload", mappedBy="user")
+     */
+    private $images;
 
     /**
-     * @ORM\OneToOne(targetEntity="ToolsBundle\Entity\Upload", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\OneToMany(targetEntity="ToolsBundle\Entity\Upload", mappedBy="user")
      */
-    private $image;
-
+    private $resumes;
     
     /**
      * @ORM\ManyToOne(targetEntity="CompanyBundle\Entity\Company", cascade={"persist"})
      * @ORM\joinColumn(onDelete="SET NULL")
      */
     private $company;
-
-    /**
-     * @ORM\OneToOne(targetEntity="ToolsBundle\Entity\Upload", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $resume;
 
     /**
      * @var bool
@@ -203,6 +205,8 @@ class User extends BaseUser
         $this->address = NULL;
         $this->prefix = NULL;
         $this->birthdate = NULL;
+        $this->images = new ArrayCollection();
+        $this->resumes = new ArrayCollection();       
         $this->newsletter = true;
     }
 
@@ -227,7 +231,6 @@ class User extends BaseUser
     {
         return $this->company;
     }
-
 
     /**
      * Set email
@@ -522,49 +525,49 @@ class User extends BaseUser
     }
 
     /**
-     * Set image
+     *  Add image
      *
      * @param \ToolsBundle\Entity\Upload $image
      * @return User
      */
-    public function setImage(\ToolsBundle\Entity\Upload $image = null)
+    public function addImages(\ToolsBundle\Entity\Upload $image = null)
     {
-        $this->image = $image;
+        $this->images[] = $image;
 
         return $this;
     }
 
     /**
-     * Get image
+     * Get images
      *
      * @return \ToolsBundle\Entity\Upload
      */
-    public function getImage()
+    public function getImages()
     {
-        return $this->image;
+        return $this->images;
     }
-
+    
     /**
-     * Set resume
+     * Add resumes
      *
      * @param \ToolsBundle\Entity\Upload $resume
      * @return User
      */
-    public function setResume(\ToolsBundle\Entity\Upload $resume = null)
+    public function addResumes(\ToolsBundle\Entity\Upload $resume = null)
     {
-        $this->resume = $resume;
+        $this->resumes[] = $resume;
 
         return $this;
     }
 
     /**
-     * Get resume
+     * Get resumea
      *
      * @return \ToolsBundle\Entity\Upload
      */
-    public function getResume()
+    public function getResumes()
     {
-        return $this->resume;
+        return $this->resumes;
     }
 
     /**
@@ -594,28 +597,10 @@ class User extends BaseUser
      */
     public function isValidate(ExecutionContextInterface $context)
     {
-        $img = $this->getImage();
-        $resume = $this->getResume();
         $feesMin = $this->getDailyFeesMin();
         $feesMax = $this->getDailyFeesMax();
-
-        if ($img != NULL && $img->getFile() != NULL) {
-            $info = explode("/", $img->getFile()->getMimeType());
-            if ($info[0] != "image") {
-                $context
-                    ->buildViolation('user.image.format')
-                    ->atPath('image.file')
-                    ->addViolation();
-            }
-        } if ($resume != NULL && $resume->getFile() != NULL) {
-            $info = explode("/", $resume->getFile()->getMimeType());
-            if ($info[1] != "pdf") {
-                $context
-                    ->buildViolation('user.resume.format')
-                    ->atPath('resume.file')
-                    ->addViolation();
-            }
-        } if ($this->getPhone() != NULL) {
+        
+        if ($this->getPhone() != NULL) {
             $this->getPhone()->isValidate($context);
         } if ($feesMin == NULL && $feesMax != NULL) {
             $context

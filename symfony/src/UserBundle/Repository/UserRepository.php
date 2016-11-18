@@ -4,6 +4,8 @@ namespace UserBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
+use ToolSBundle\Entity\Upload;
+
 /**
  * UserRepository
  *
@@ -12,4 +14,31 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserRepository extends EntityRepository
 {
+    public function myFindUserPicture($user)
+    {
+        $qb = $this->_em->createQueryBuilder();
+
+        $qb->select('u')
+            ->from('ToolsBundle:Upload', 'u')
+            ->where('u.user = :user')
+            ->setParameter("user", $user)
+            ->andwhere('u.kind = 1')
+            ->orderBy('u.uploadDate', 'DESC');
+        
+        return $qb->getQuery()->getResult();
+    }
+
+    public function myFindUserResume($user)
+    {
+        $qb = $this->_em->createQueryBuilder();
+
+        $qb->select('u')
+            ->from('ToolsBundle:Upload', 'u')
+            ->where('u.user = :user')
+            ->setParameter("user", $user)
+            ->andwhere('u.kind = 2')
+            ->orderBy('u.uploadDate', 'DESC');
+        
+        return $qb->getQuery()->getResult();
+    }
 }
