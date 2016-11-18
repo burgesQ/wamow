@@ -5,6 +5,7 @@ namespace ToolsBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 use UserBundle\Entity\User;
@@ -63,19 +64,24 @@ class Upload
     private $path;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="upload", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
+    /**
+     * @var smallint
+     *
+     * @ORM\Column(name="kind", type="smallint", nullable=false)
+     */
+    private $kind;
+    
     private $file;
-
-    private $laTempo;
     
     public function __construct()
     {
-        $this->user = NULL;
         $this->uploadDate = new \Datetime();
+        $this->kind = 0;
     }
 
     /**
@@ -102,49 +108,20 @@ class Upload
     {
         if (null == $this->file) {
             return;
-        } if (NULL != $this->laTempo) {
-            $tmp = $this->getUploadRootDir().$this->laTempo;
-            if (file_exists($tmp)) {
-                rename($tmp, $this->getRmUploadRootDir().$this->laTempo);
-            }
         }
         $this->getFile()->move(
             $this->getUploadRootDir(),
             $this->name);
     }
-
-    /**
-     * @ORM\PreRemove()
-     */
-    public function preRemoveUpload()
-    {
-        $this->laTempo = $this->getUploadRootDir().$this->getName();
-    }
-
-    /**
-     * @ORM\PostRemove()
-     */
-    public function removeUpload()
-    {}
     
     public function getUploadDir()
     {
         return 'uploads/';
     }
 
-    public function getRmUploadDir()
-    {
-        return 'rm_uploads/';
-    }
-
     public function getUploadRootDir()
     {
         return __DIR__.'/../../../web/'.$this->getUploadDir();
-    }
-
-        public function getRmUploadRootDir()
-    {
-        return __DIR__.'/../../../web/'.$this->getRmUploadDir();
     }
 
     public function getWebPath()
@@ -301,6 +278,29 @@ class Upload
     }
 
     /**
+     * Set kind
+     *
+     * @param string $kind
+     * @return Upload
+     */
+    public function setKind($kind)
+    {
+        $this->kind = $kind;
+
+        return $this;
+    }
+
+    /**
+     * Get kind
+     *
+     * @return string
+     */
+    public function getKind()
+    {
+        return $this->kind;
+    }
+    
+    /**
      * Set file
      *
      * @param string $file
@@ -309,13 +309,7 @@ class Upload
     public function setFile($file)
     {
         $this->file = $file;
-        if (null != $this->name) {
-            $this->laTempo = $this->name;
-            $this->name = null;
-            $this->format = null;
-            $this->path = null;
-            $this->type = null;
-        }
+
         return $this;
     }
 
@@ -327,5 +321,21 @@ class Upload
     public function getFile()
     {
         return $this->file;
+    }
+    
+    /**
+     * @Assert\Callback
+     */
+    public function isValidate(ExecutionContextInterface $context)
+    {
+        if ($this->file != NULL) {
+            $info = explode("/", $this->file->getMimeType());
+            if ($info[0] != $this->type ) {
+                $context
+                    ->buildViolation('tools.upload.badFornat')
+                    ->atPath('file')
+                    ->addViolation();
+            }
+        }
     }
 }

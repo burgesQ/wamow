@@ -100,15 +100,12 @@ class PhoneNumber
      */
     public function isValidate(ExecutionContext $context)
     {
-        $prefix = $this->getPrefix();
-        $tel = $this->getTel();
-
-        if  ($tel === NULL && $prefix !== NULL) {
+        if  ($this->number === NULL && $this->prefix !== NULL) {
             $context
                 ->buildViolation('tools.prefix.phone')
-                ->atPath('tel')
+                ->atPath('number')
                 ->addViolation();
-        } else if  ($tel !== NULL && $prefix === NULL) {
+        } else if  ($this->number !== NULL && $this->prefix === NULL) {
             $context
                 ->buildViolation('tools.phone.prefix')
                 ->atPath('prefix')
