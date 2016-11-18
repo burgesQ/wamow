@@ -16,42 +16,55 @@ class AddressType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('name', null,
+                  array(
+                      'label'=>'form.address.name',
+                      'required'=>false,
+                      'translation_domain' => 'tools'
+                  ))
+            ->add('label', null,
+                  array(
+                      'label'=>'form.address.label',
+                      'required'=>false,
+                      'translation_domain' => 'tools'
+                  ))
             ->add('street', null,
-                array(
-                'label'=>'form.address.street',
-                'required'=>false,
-                'translation_domain' => 'tools'
-            ))
+                  array(
+                      'label'=>'form.address.street',
+                      'required'=>false,
+                      'translation_domain' => 'tools'
+                  ))
             ->add('street2', null,
-                array(
-                'label'=>'form.address.street',
-                'required'=>false,
-                'translation_domain' => 'tools'
-            ))
+                  array(
+                      'label'=>'form.address.street',
+                      'required'=>false,
+                      'translation_domain' => 'tools'
+                  ))
             ->add('city', null,
-                array(
-                'label'=>'form.address.city',
-                'required'=>false,
-                'translation_domain' => 'tools'
-            ))
+                  array(
+                      'label'=>'form.address.city',
+                      'required'=>false,
+                      'translation_domain' => 'tools'
+                  ))
             ->add('zipcode', null,
-                array(
-                'label'=>'form.address.zipcode',
-                'required'=>false,
-                'translation_domain' => 'tools'
-            ))
+                  array(
+                      'label'=>'form.address.zipcode',
+                      'required'=>false,
+                      'translation_domain' => 'tools'
+                  ))
             ->add('state', null,
-                array(
-                'label'=>'form.address.state',
-                'required'=>false,
-                'translation_domain' => 'tools'
-            ))
-            ->add('country', 'country', array(
-                'required' => true,
-                'label'=>'form.address.country',
-                'translation_domain' => 'tools',
-                'placeholder' => 'form.address.choosecountry')
-            )
+                  array(
+                      'label'=>'form.address.state',
+                      'required'=>false,
+                      'translation_domain' => 'tools'
+                  ))
+            ->add('country', 'country',
+                  array(
+                      'required' => true,
+                      'label'=>'form.address.country',
+                      'translation_domain' => 'tools',
+                      'placeholder' => 'form.address.choosecountry'
+                  ))
             ;
     }
 

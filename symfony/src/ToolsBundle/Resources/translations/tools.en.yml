@@ -7,6 +7,8 @@ form:
         state: "State"
         country: "Country"
         choosecountry: "Choose a country"
+        name: "Add a name if required"
+        label: "Add a label if required"
 
     phone:
         prefix: "Prefix"

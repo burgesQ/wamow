@@ -64,7 +64,7 @@ class Upload
     private $path;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="upload", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="resumes", inversedBy="images", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
@@ -96,7 +96,7 @@ class Upload
         $info = explode("/", $this->getFile()->getMimeType());
         $this->setType($info[0]);
         $this->setFormat($info[1]);
-        $this->setName($this->id.time().'.'.$info[1]);
+        $this->setName($this->kind.$this->id.time().'.'.$info[1]);
         $this->setPath($this->getUploadRootDir().$this->getName());
     }
 
@@ -330,9 +330,11 @@ class Upload
     {
         if ($this->file != NULL) {
             $info = explode("/", $this->file->getMimeType());
-            if ($info[0] != $this->type ) {
+            
+            if ( ($this->format != null and $this->format != $info[1]) or
+                 ($this->type != null and $this->type != $info[0]) ) {
                 $context
-                    ->buildViolation('tools.upload.badFornat')
+                    ->buildViolation('tools.upload.badFormat')
                     ->atPath('file')
                     ->addViolation();
             }
