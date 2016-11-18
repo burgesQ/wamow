@@ -10,3 +10,5 @@ tools:
         required: 'The address must only contain letters numbers, point, comma or dash.'
         city: 'The city must  only contain letters or dash.'
         state: 'The state must contain only letters or dash.'
+    upload:
+        badFormat: "This fils doesn't match the good format"

@@ -16,11 +16,11 @@ class UploadType extends AbstractType
     {
         $builder
             ->add('file', 'file',
-                array(
-                'label' => 'form.file.file',
-                'required'=> false,
-                'translation_domain' => 'tools'
-            ));
+                  array(
+                      'label' => 'form.file.file',
+                      'required'=> false,
+                      'translation_domain' => 'tools'
+                  ));
     }
 
     /**
@@ -28,8 +28,10 @@ class UploadType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'ToolsBundle\Entity\Upload'
-        ));
+        $resolver
+            ->setDefaults(
+                array(
+                    'data_class' => 'ToolsBundle\Entity\Upload'
+                ));
     }
 }
