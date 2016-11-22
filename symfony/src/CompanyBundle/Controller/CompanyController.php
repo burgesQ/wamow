@@ -24,18 +24,7 @@ class CompanyController extends Controller
         $company = new Company();
         $trans = $this->get('translator');
 
-        $form = $this->get('form.factory')->createBuilder('form', $company)
-              ->add('name',      'text')
-              ->add('size')
-              ->add('logo',      'text')
-              ->add('type',      'text')
-              ->add('resume',    'textarea')
-              ->add('sector',  EntityType::class, array(
-                  'class' => 'CompanyBundle:Sector',
-                  'choice_label' => 'name',))
-              ->add('save',      'submit')
-              ->getForm()
-              ;
+        $form = $this->get('form.factory')->create(new CompanyType(), $company);
         $form->handleRequest($request);
         if ($form->isValid()) {
             $company  = $form->getData();
@@ -46,7 +35,7 @@ class CompanyController extends Controller
                    ;
             if ($tmp != null)
             {
-                throw new NotFoundHttpException($trans->trans('company.error.usedId', array('%name%' => $company->getName()), 'CompanyBundle'));
+                throw new NotFoundHttpException($trans->trans('company.error.usedname', array('%name%' => $company->getName()), 'CompanyBundle'));
             }
             $user = $this->getUser();
             $user->setCompany($company);
@@ -128,7 +117,7 @@ class CompanyController extends Controller
         return $this->render('CompanyBundle:Default:leave.html.twig', array(
             'form' => $form->createView(),));
     }
-    
+
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
