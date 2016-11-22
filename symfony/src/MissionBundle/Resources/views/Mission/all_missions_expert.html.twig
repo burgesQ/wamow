@@ -1,19 +1,18 @@
 <!DOCTYPE html>
+{% trans_default_domain "MissionBundle" %}
 <html>
     <head>
     </head>
     <body>
         <p>
-            All available missions :
+            {{ 'mission.all_missions.title'|trans }} :
         </p>
         <p>
             {% for mission in listMission %}
              <li>
-                 <a href="{{ path('mission_view', {'id': mission.id}) }}">
+                 <a href="{{ path('mission_view_expert', {'id': mission.id}) }}">
                  {{ mission.title }}</a>
-                 {% if role == "ROLE_ADVISOR" %}
-                    ---> <a href="{{ path('mission_pitch') }}">pitch </a>
-                 {% endif %}
+                    ---> <a href="{{ path('mission_pitch', {'id': mission.id}) }}">pitch </a>
             </li>
             {% endfor %}
         </p>

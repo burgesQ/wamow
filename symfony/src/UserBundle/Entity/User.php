@@ -3,12 +3,14 @@
 namespace UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use FOS\UserBundle\Model\User as BaseUser;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
-use ToolsBundle\Entity\Address;
-use CompanyBundle\Entity\Company;
-
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use FOS\UserBundle\Model\User as BaseUser;
+use CompanyBundle\Entity\Company;
+use ToolsBundle\Entity\PhoneNumber;
+use ToolsBundle\Entity\Address;
+use ToolsBundle\Entity\Upload;
 
 /**
  * User
@@ -35,21 +37,23 @@ class User extends BaseUser
     private $status;
 
     /**
+     * @var string
+     *
      * @Assert\Regex(
      *  pattern="/^(?=.*[a-z])/",
-     *  message="The password must contain at least one lowercase letter."
+     *  message="user.pass.lowercase"
      * )
      * @Assert\Regex(
      *  pattern="/^(?=.*[A-Z])/",
-     *  message="The password must contain at least one uppercase letter."
+     *  message="user.pass.upppercase"
      * )
      * @Assert\Regex(
      *  pattern="/^(?=.*\d)/",
-     *  message="The password must contain at least one number."
+     *  message="user.pass.number"
      * )
      * @Assert\Regex(
      *  pattern="/^(?=.*\W)/",
-     *  message="The password must contain at least one special character."
+     *  message="user.pass.spechar"
      * )
      * @Assert\NotBlank(
      *  message="fos_user.password.blank",
@@ -60,9 +64,6 @@ class User extends BaseUser
      *  minMessage="fos_user.password.short",
      *  groups={"Registration", "Profile", "ResetPassword", "ChangePassword"}
      * )
-     *
-     * @var string
-     *
      */
     protected $plainPassword;
 
@@ -77,13 +78,12 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="first_name", type="string", length=255, nullable=false)
-     *
-     * @Assert\NotBlank(message="Please enter your first name.", groups={"Registration", "Profile"})
+     * @Assert\NotBlank(message="user.fname.blank", groups={"Registration", "Profile"})
      * @Assert\Length(
-     *     min=3,
+     *     min=2,
      *     max=255,
-     *     minMessage="The first name is too short.",
-     *     maxMessage="The first name is too long.",
+     *     minMessage="user.fname.short",
+     *     maxMessage="user.fname.long",
      *     groups={"Registration", "Profile"}
      * )
      */
@@ -93,13 +93,12 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="last_name", type="string", length=255, nullable=false)
-     *
-     * @Assert\NotBlank(message="Please enter your last name.", groups={"Registration", "Profile"})
+     * @Assert\NotBlank(message="user.lname.blank", groups={"Registration", "Profile"})
      * @Assert\Length(
-     *     min=3,
+     *     min=2,
      *     max=255,
-     *     minMessage="The last name is too short.",
-     *     maxMessage="The last name is too long.",
+     *     minMessage="user.lname.short",
+     *     maxMessage="user.lname.long",
      *     groups={"Registration", "Profile"}
      * )
      */
@@ -109,7 +108,6 @@ class User extends BaseUser
      * @var int
      *
      * @ORM\Column(name="gender", type="smallint", nullable=true)
-     *
      * @Assert\Range(
      *      min = 0,
      *      max = 2
@@ -127,8 +125,7 @@ class User extends BaseUser
     /**
     * @var int
     *
-    * @ORM\Column(name="daily_fees_min", type="smallint", nullable=true)
-    *
+    * @ORM\Column(name="daily_fees_min", type="bigint", nullable=true)
     * @Assert\Range(
     *      min = 0
     *)
@@ -138,33 +135,12 @@ class User extends BaseUser
     /**
     * @var int
     *
-    * @ORM\Column(name="daily_fees_max", type="smallint", nullable=true)
-    *
+    * @ORM\Column(name="daily_fees_max", type="bigint", nullable=true)
     * @Assert\Range(
     *      min = 0
     *)
     */
    private $dailyFeesMax;
-
-    /**
-     * @ORM\OneToOne(targetEntity="ToolsBundle\Entity\Address", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $address;
-
-   /**
-      * @var string
-      *
-      * @ORM\Column(name="phone", type="string", length=20, nullable=true)
-    */
-   private $phone;
-
-   /**
-    * @var string
-    *
-    * @ORM\Column(name="image", type="string", length=255, nullable=true)
-    */
-   private $image;
 
     /**
      * @var \DateTime
@@ -179,6 +155,47 @@ class User extends BaseUser
      * @ORM\Column(name="update_date", type="datetime", nullable=false)
      */
     private $updateDate;
+
+    /**
+     * @ORM\OneToOne(targetEntity="ToolsBundle\Entity\Address", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $address;
+
+    /**
+     * @ORM\OneToOne(targetEntity="ToolsBundle\Entity\PhoneNumber", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $phone;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="ToolsBundle\Entity\Upload", mappedBy="user")
+     */
+    private $images;
+
+    /**
+     * @ORM\OneToMany(targetEntity="ToolsBundle\Entity\Upload", mappedBy="user")
+     */
+    private $resumes;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="CompanyBundle\Entity\Company", cascade={"persist"})
+     * @ORM\joinColumn(onDelete="SET NULL")
+     */
+    private $company;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="newsletter", type="boolean", nullable=false)
+     */
+    private $newsletter;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="TeamBundle\Entity\Team", inversedBy="users")
+     * @ORM\JoinTable(name="team_user")
+     */
+    private $team;
 
 
     /**
@@ -195,21 +212,41 @@ class User extends BaseUser
         $this->confidentiality = false;
         $this->status = 0;
         $this->address = NULL;
+        $this->prefix = NULL;
         $this->birthdate = NULL;
+        $this->images = new ArrayCollection();
+        $this->resumes = new ArrayCollection();       
+        $this->newsletter = true;
     }
 
+    /**
+     * Set company
+     *
+     * @param \CompanyBundle\Entity\Company $company
+     * @return User
+     */
     public function setCompany(Company $company = null)
     {
         $this->company = $company;
         return $this;
     }
 
+    /**
+     * Get company
+     *
+     * @return \CompanyBundle\Entity\Company
+     */
     public function getCompany()
     {
         return $this->company;
     }
 
-
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return User
+     */
     public function setEmail($email)
     {
         $email = is_null($email) ? '' : $email;
@@ -361,48 +398,6 @@ class User extends BaseUser
     }
 
     /**
-     * Set phone
-     *
-     * @param string $phone
-     * @return User
-     */
-    public function setPhone($phone)
-    {
-        $this->phone = $phone;
-        return $this;
-    }
-    /**
-     * Get phone
-     *
-     * @return string
-     */
-    public function getPhone()
-    {
-        return $this->phone;
-    }
-
-    /**
-     * Set image
-     *
-     * @param string $image
-     * @return User
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
-        return $this;
-    }
-    /**
-     * Get image
-     *
-     * @return string
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
      * Set creationDate
      *
      * @param \DateTime $creationDate
@@ -516,28 +511,154 @@ class User extends BaseUser
     }
 
     /**
+     * Set phone
+     *
+     * @param \ToolsBundle\Entity\PhoneNumber $phone
+     * @return User
+     */
+    public function setPhone(\ToolsBundle\Entity\PhoneNumber $phone = null)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return \ToolsBundle\Entity\PhoneNumber
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     *  Add image
+     *
+     * @param \ToolsBundle\Entity\Upload $image
+     * @return User
+     */
+    public function addImages(\ToolsBundle\Entity\Upload $image = null)
+    {
+        $this->images[] = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get images
+     *
+     * @return \ToolsBundle\Entity\Upload
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
+    
+    /**
+     * Add resumes
+     *
+     * @param \ToolsBundle\Entity\Upload $resume
+     * @return User
+     */
+    public function addResumes(\ToolsBundle\Entity\Upload $resume = null)
+    {
+        $this->resumes[] = $resume;
+
+        return $this;
+    }
+
+    /**
+     * Get resume
+     *
+     * @return \ToolsBundle\Entity\Upload
+     */
+    public function getResumes()
+    {
+        return $this->resumes;
+    }
+
+    /**
+     * Set newsletter
+     *
+     * @param boolean $newsletter
+     * @return User
+     */
+    public function setNewsletter($newsletter)
+    {
+        $this->newsletter = $newsletter;
+        return $this;
+    }
+
+    /**
+     * Get newsletter
+     *
+     * @return boolean
+     */
+    public function getNewsletter()
+    {
+        return $this->newsletter;
+    }
+
+    /**
      * @Assert\Callback
      */
-    public function validate(ExecutionContextInterface $context)
+    public function isValidate(ExecutionContextInterface $context)
     {
-        $dailyFeesMin = $this->getDailyFeesMin();
-        $dailyFeesMax = $this->getDailyFeesMax();
-
-        if ( ($dailyFeesMax === NULL && $dailyFeesMin !== NULL) ||
-             ($dailyFeesMax !== NULL && $dailyFeesMin === NULL) ) {
-                 $context
-                     ->buildViolation("Dailyfees min and max must be set.")
-                     ->atPath('dailyFeesMin')
-                     ->addViolation();
-        }
-        else if ($dailyFeesMin > $dailyFeesMax)
-        {
-          $context
-            ->buildViolation('The minimum fees must be less than the maximum.')
-            ->atPath('dailyFeesMin')
-            ->addViolation()
-            ;
+        $feesMin = $this->getDailyFeesMin();
+        $feesMax = $this->getDailyFeesMax();
+        
+        if ($this->getPhone() != NULL) {
+            $this->getPhone()->isValidate($context);
+        } if ($feesMin == NULL && $feesMax != NULL) {
+            $context
+                ->buildViolation('user.minfees.unset')
+                ->atPath('dailyFeesMin')
+                ->addViolation();
+        } else if ($feesMax == NULL && $feesMin != NULL) {
+            $context
+                ->buildViolation('user.maxfees.unset')
+                ->atPath('dailyFeesMax')
+                ->addViolation();
+        } else if ($feesMin != NULL && $feesMax != NULL && $feesMin >= $feesMax) {
+            $context
+                ->buildViolation('user.minfees.over')
+                ->atPath('dailyFeesMin')
+                ->addViolation();
         }
     }
 
+    /**
+     * Add team
+     *
+     * @param \TeamBundle\Entity\Team $team
+     * @return User
+     */
+    public function addTeam(\TeamBundle\Entity\Team $team)
+    {
+        $this->team[] = $team;
+
+        return $this;
+    }
+
+    /**
+     * Remove team
+     *
+     * @param \TeamBundle\Entity\Team $team
+     */
+    public function removeTeam(\TeamBundle\Entity\Team $team)
+    {
+        $this->team->removeElement($team);
+    }
+
+    /**
+     * Get team
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTeam()
+    {
+        return $this->team;
+    }
 }

@@ -8,6 +8,32 @@
             {{ form_label(form.name) }}
             {{ form_widget(form.name) }}
         </div>
+        <div>
+            {{ form_errors(form.size) }}
+            {{ form_label(form.size) }}
+            {{ form_widget(form.size) }}
+        </div>
+        <div>
+            {{ form_errors(form.logo) }}
+            {{ form_label(form.logo) }}
+            {{ form_widget(form.logo) }}
+        </div>
+        <div>
+            {{ form_errors(form.type) }}
+            {{ form_label(form.type) }}
+            {{ form_widget(form.type) }}
+        </div>
+        <div>
+            {{ form_errors(form.resume) }}
+            {{ form_label(form.resume) }}
+            {{ form_widget(form.resume) }}
+        </div>
+        <div>
+            {{ form_errors(form.sector) }}
+            {{ form_label(form.sector) }}
+            {{ form_widget(form.sector) }}
+        </div>
+        <div>
         {{ form_row(form.save, { 'label': 'Submit' }) }}
         {{ form_end(form) }}
     </form>

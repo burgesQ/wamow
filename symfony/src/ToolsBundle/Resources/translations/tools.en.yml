@@ -1,0 +1,19 @@
+# tools.en.yml
+form:
+    address:
+        street: "Address"
+        city: "City"
+        zipcode: "Zipcode"
+        state: "State"
+        country: "Country"
+        choosecountry: "Choose a country"
+        name: "Add a name if required"
+        label: "Add a label if required"
+
+    phone:
+        prefix: "Prefix"
+        chooseprefix: "Choose a prefix"
+        number: "Phone"
+
+    file:
+        file: "File"

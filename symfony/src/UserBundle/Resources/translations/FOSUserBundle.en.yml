@@ -15,6 +15,7 @@ security:
         username: Username
         password: Password
         remember_me: 'Remember me'
+        reset: 'Reset password'
         submit: 'Log in'
         email: Email
 
@@ -28,6 +29,8 @@ profile:
         birthdate: Birthdate
         daily_fees_min: 'Daily Fees Min'
         daily_fees_max: 'Daily Fees Max'
+        label: Label
+        name: Name
         zipcode: Zipcode
         address: Address
         city: City
@@ -35,10 +38,11 @@ profile:
         country: Country
         confidentiality: Confidentiality
         status: Status
-        phone: Phone
+        phone: 'Phone Number'
         image: Picture
-    edit:
-        submit: Update
+        resume: 'Curriculum vitae'
+        newslettertrue: 'You are registered for the newsletter'
+        newsletterfalse: 'You are not registered for the newsletter'
     flash:
         updated: 'The profile has been updated'
 
@@ -62,7 +66,7 @@ registration:
             To finish activating your account - please visit %confirmationUrl%
 
             Regards,
-            the Team.
+            WantMore.Work Team.
 
 resetting:
     password_already_requested: 'The password for this user has already been requested within the last 24 hours.'
@@ -76,28 +80,44 @@ resetting:
     flash:
         success: 'The password has been reset successfully'
     email:
-        subject: 'Reset Password'
+        subject: 'Reset Password WantMore.Work'
         message: |
             Hello %username%!
 
             To reset your password - please visit %confirmationUrl%
 
             Regards,
-            the Team.
+            WantMore.Work Team.
 
 # Global strings
 layout:
-    logout: 'Log out'
-    login: 'Log in'
-    register: Register
-    logged_in_as: 'Hello %first_name% %last_name%'
+    logout: "Log out"
+    login: "Log in"
+    register: "Register"
+    logged_in_as: "Hello %first_name% %last_name%"
 
 form:
-    group_name: 'Group name'
-    username: Username
-    email: Email
-    current_password: 'Current password'
-    password: Password
-    password_confirmation: 'Repeat password'
-    new_password: 'New password'
-    new_password_confirmation: 'Repeat new password'
+    group_name: "Group name"
+    username: "Username"
+    firstname: "Firstname"
+    lastname: "Lastname"
+    email: "Email"
+    current_password: "Current password"
+    password: "Password"
+    password_confirmation: "Repeat password"
+    new_password: "New password"
+    new_password_confirmation: "Repeat new password"
+    newsletter: "Would you like to receive our wonderful newsletter?"
+    gender:
+        female: "Female"
+        male: "Male"
+        other: "I don't know"
+        choose: "Choose your gender"
+    birthdate:
+        month: "Month"
+        day: "Day"
+        year: "Year"
+    dailyfees:
+        min: "Daily fees minimum"
+        max: "Daily fees maximum"
+    submit: "Update"

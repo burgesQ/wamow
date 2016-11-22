@@ -1,23 +1,74 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 <div class="user_user_show">
-    <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
-    <p>{{ 'profile.show.first_name'|trans }}: {{ user.firstName }}</p>
-    <p>{{ 'profile.show.last_name'|trans }}: {{ user.lastName }}</p>
-      <p>{{ 'profile.show.gender'|trans }}: {{ user.gender }}</p>
-    {% if user.address != null %}
-      <p>{{ 'profile.show.birthdate'|trans}}: {{ user.birthdate|date("m/d/Y") }}</p>
+
+  <p>{{ 'profile.show.image'|trans }}:
+    {% set image = images|last %} 
+    {% if image != null and image.name != null %} 
+      {{ image.name }} is a {{ image.type }} upload the {{ image.uploadDate|date("m/d/Y") }} 
+      <img src="{{ asset(image.webPath()) }}"/>  
+    {% endif %} </p>
+    
+    <p>{{ 'profile.show.first_name'|trans }}: {{ user.firstName }} </p>
+    <p>{{ 'profile.show.last_name'|trans }}: {{ user.lastName }} </p>
+    <p>{{ 'profile.show.gender'|trans }}: {{ user.gender }} </p>
+    <p>{{ 'profile.show.birthdate'|trans}}:
+      {% if user.birthdate != null %}
+	{{ user.birthdate|date("m/d/Y") }}
+      {% endif %} </p>
+
+    <p>{{ 'profile.show.daily_fees_min'|trans }}: {{ user.dailyFeesMin }} </p>
+    <p>{{ 'profile.show.daily_fees_max'|trans }}: {{ user.dailyFeesMax }} </p>
+
+    <p>{{ 'profile.show.email'|trans }}: {{ user.email }} </p>
+    <p>{{ 'profile.show.phone'|trans }}:
+      {% if user.phone != null %}
+	{{ user.phone.prefix.prefix }} {{ user.phone.tel }} ({{ user.phone.prefix.country|countryName }})
+      {% endif %} </p>
+
+    <p>{{ 'profile.show.country'|trans }}:
+      {% if user.address != null %}
+	{{ user.address.country|countryName }}
+      {% endif %} </p>
+    <p>{{ 'profile.show.state'|trans }}:
+      {% if user.address != null %}
+	{{ user.address.state }}
+      {% endif %} </p>
+    <p>{{ 'profile.show.city'|trans }}:
+      {% if user.address != null %}
+	{{ user.address.city }}
+      {% endif %} </p>
+    <p>{{ 'profile.show.zipcode'|trans }}:
+      {% if user.address != null %}
+	{{ user.address.zipcode }}
+      {% endif %} </p>
+    <p>{{ 'profile.show.address'|trans }}:
+      {% if user.address != null %}
+	{{ user.address.street }}
+      {% endif %} </p>
+    <p>{{ 'profile.show.address'|trans }}:
+      {% if user.address != null %}
+	{{ user.address.street2 }}
+      {% endif %} </p>
+    <p>{{ 'profile.show.label'|trans }}:
+      {% if user.address != null %}
+	{{ user.address.label }}
+      {% endif %} </p>
+    <p>{{ 'profile.show.name'|trans }}:
+      {% if user.address != null %}
+	{{ user.address.name }}
+      {% endif %} </p>
+
+    <p>{{ 'profile.show.resume'|trans }}:
+      {% set resume = resumes|last %} 
+      {% if resume != null and resume.name != null %}
+	{{ resume.name }} is a {{ resume.type }} upload the {{ image.uploadDate|date("m/d/Y") }} 
+      {% endif %} </p>
+
+    {% if user.newsletter == 1 %}
+        {{ 'profile.show.newslettertrue'|trans }}
+    {% else %}
+        {{ 'profile.show.newsletterfalse'|trans }}
     {% endif %}
-    <p>{{ 'profile.show.daily_fees_min'|trans }}: {{ user.dailyFeesMin }}</p>
-    <p>{{ 'profile.show.daily_fees_max'|trans }}: {{ user.dailyFeesMax }}</p>
-    {% if user.address != null %}
-      <p>{{ 'profile.show.country'|trans }}: {{ user.address.country|countryName }}</p>
-      <p>{{ 'profile.show.state'|trans }}: {{ user.address.state }}</p>
-      <p>{{ 'profile.show.city'|trans }}: {{ user.address.city }}</p>
-      <p>{{ 'profile.show.zipcode'|trans }}: {{ user.address.zipcode }}</p>
-      <p>{{ 'profile.show.address'|trans }}: {{ user.address.street }}</p>
-      <p>{{ 'profile.show.address'|trans }}: {{ user.address.street2 }}</p>
-    {% endif %}
-    <p>{{ 'profile.show.phone'|trans }}: {{ user.phone }}</p>
-    <p>{{ 'profile.show.image'|trans }}: {{ user.image }}</p>
+
 </div>

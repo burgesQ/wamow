@@ -1,4 +1,6 @@
-<h2>Mission editing</h2>
+{% trans_default_domain "MissionBundle" %}
+
+<h2>{{ 'mission.edit.title'|trans }}</h2>
 
 {{ include("MissionBundle:Mission:new.html.twig") }}
 
@@ -8,11 +10,11 @@
 
 
 <p>
-  You are editing a mission which already exist.
+  {{ 'mission.edit.warning'|trans }}
 </p>
 
 <p>
-  <a href="{{ path('mission_view', {'id': mission.id}) }}">
-   Back to the mission.
+  <a href="{{ path('mission_view_seeker', {'id': mission.id}) }}">
+      {{ 'mission.edit.cancel'|trans }}
   </a>
 </p>

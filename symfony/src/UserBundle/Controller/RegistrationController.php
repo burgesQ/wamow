@@ -19,7 +19,7 @@ use ToolsBundle\Entity\Address;
 
 class RegistrationController extends BaseController
 {
-    public function registerAdvisorAction(Request $request)
+    public function registerExpertAction(Request $request)
     {
         if (!$this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
 
@@ -70,7 +70,7 @@ class RegistrationController extends BaseController
         return $this->redirectToRoute('user_profile_show');
     }
 
-    public function registerContractorAction(Request $request)
+    public function registerSeekerAction(Request $request)
     {
         if (!$this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */

@@ -1,0 +1,19 @@
+# tools.fr.yml
+form:
+    address:
+        street: "Adresse"
+        city: "Ville"
+        zipcode: "Code Postal"
+        state: "État"
+        country: "Pays"
+        choosecountry: "Sélectionnez un pays"
+        name: "Ajouter un nom si besoin"
+        label: "Ajouter un label si besoin"
+
+    phone:
+        prefix: "Préfix"
+        chooseprefix: "Sélectionnez un préfix"
+        number: "Téléphone"
+
+    file:
+        file: "Fichier"

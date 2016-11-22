@@ -1,0 +1,4 @@
+services:
+    current.mission:
+        class: ToolsBundle\Service\currentMission
+        arguments: [@doctrine.orm.entity_manager]

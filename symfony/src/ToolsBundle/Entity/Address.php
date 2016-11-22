@@ -4,6 +4,7 @@ namespace ToolsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContext;
 
 /**
  * Address
@@ -16,7 +17,7 @@ class Address
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer", nullable=true)
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
@@ -29,7 +30,7 @@ class Address
      * @Assert\Regex(
      *     pattern="#^[0-9a-zA-Zéèêëçîïíàáâñńœôö]+(?:[\s-][a-zA-Zéèêëçîïíàáâñńœôö]+)*$#",
      *     match=true,
-     *     message="The address must contain only letters numbers, point, comma or dash.")
+     *     message="tools.address.required")
      */
     private $street;
 
@@ -47,7 +48,7 @@ class Address
      * @Assert\Regex(
      *     pattern="#^[a-zA-Zéèêëçîïíàáâñńœôö]+(?:[\s-][a-zA-Zéèêëçîïíàáâñńœôö]+)*$#",
      *     match=true,
-     *     message="The city must contain only letters or dash.")
+     *     message="tools.address.city")
      */
     private $city;
 
@@ -65,14 +66,14 @@ class Address
      * @Assert\Regex(
      *     pattern="#^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$#",
      *     match=true,
-     *     message="The state must contain only letters or dash.")
+     *     message="tools.address.state")
      */
     private $state;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="country", type="string", length=255, nullable=true)
+     * @ORM\Column(name="country", type="string", length=255, nullable=false)
      */
     private $country;
 
@@ -253,7 +254,6 @@ class Address
     public function setName($name)
     {
         $this->name = $name;
-
         return $this;
     }
 
@@ -276,7 +276,6 @@ class Address
     public function setLabel($label)
     {
         $this->label = $label;
-
         return $this;
     }
 

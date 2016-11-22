@@ -1,10 +1,12 @@
+{% trans_default_domain "CompanyBundle" %}
+
 <!DOCTYPE html>
 <html>
     <head>
     </head>
     <body>
         <p>
-            You just joined {{ company.name }} company  :
+            {{ 'company.action.joined'|trans }} {{ company.name }} {{ 'company.name'|trans }} !
         </p>
     </body>
 </html>

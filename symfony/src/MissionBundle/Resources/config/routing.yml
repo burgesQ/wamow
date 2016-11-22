@@ -4,7 +4,7 @@ mission_new:
         _controller: MissionBundle:Mission:new
 
 mission_view:
-    path:      /mission/view/{id}
+    path:      /mission/{id}
     defaults:
         _controller: MissionBundle:Mission:view
 
@@ -24,6 +24,6 @@ missions_all:
         _controller: MissionBundle:Mission:missionList
 
 mission_pitch:
-    path:      /mission/pitch
+    path:      /mission/pitch/{id}
     defaults:
         _controller: MissionBundle:Mission:missionPitch

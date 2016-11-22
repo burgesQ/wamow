@@ -23,6 +23,8 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new UserBundle\UserBundle(),
             new HomePageBundle\HomePageBundle(),
+            new TeamBundle\TeamBundle(),
+            new DashboardBundle\DashboardBundle(),
             new CompanyBundle\CompanyBundle(),
         );
 

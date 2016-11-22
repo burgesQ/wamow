@@ -1,0 +1,50 @@
+{% trans_default_domain "MissionBundle" %}
+
+<html>
+<body>
+<h2>{{ mission.title }} </h2>
+{% if mission.image is not null %}
+  <img src="{{ mission.image }}">
+{% endif %}
+
+<div class="well">
+  <p>
+      <h4><br>{{ 'mission.view.resume'|trans }} :</h4>
+      {{ mission.resume }}
+
+      <h5>{{ 'mission.view.details'|trans }} :</h5>
+      {{ mission.professionalExpertise.name }}, {{ mission.missionKind.name }}
+  </p>
+
+  <p>
+      <h4><br>{{ 'mission.view.dailyFees'|trans }} :</h4>
+        {{ mission.dailyFeesMin }} {{ 'mission.view.dayMin'|trans }} <br>
+        {{ mission.dailyFeesMax }} {{ 'mission.view.dayMax'|trans }}
+  </p>
+  <p>
+      {{ 'mission.view.applicationEnding'|trans({'%date%': mission.applicationEnding|date('m/d/Y')}) }}<br>
+      {{ 'mission.view.period'|trans({'%start%': mission.missionBeginning|date('m/d/Y'),
+       '%end%': mission.missionEnding|date('d/m/Y') }) }}<br>
+  </p>
+
+        {% if listLanguage is not null %}
+          <h4><br>{{ 'mission.view.languages'|trans }}:</h4>
+          <ul>
+            {% for language in listLanguage %}
+              <li>{{ language.name }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+  <p>
+
+        {% if mission.telecommuting == 1 %}
+            {{ 'mission.view.telecommuting'|trans }}
+        {% endif %}
+        {% if mission.international == 1 %}
+            {{ 'mission.view.international'|trans }}
+        {% endif %}
+  </p>
+        <a href="{{ path('mission_pitch', {'id': mission.id}) }}">{{ 'mission.view.pitch'|trans }} </a>
+</div>
+</body>
+</html>
