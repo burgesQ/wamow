@@ -11,6 +11,7 @@ use CompanyBundle\Entity\Company;
 use ToolsBundle\Entity\PhoneNumber;
 use ToolsBundle\Entity\Address;
 use ToolsBundle\Entity\Upload;
+use ToolsBundle\Entity\ReadResume;
 
 /**
  * User
@@ -235,6 +236,19 @@ class User extends BaseUser
      */
     private $giveUpCount;
 
+    /**
+     * @ORM\OneToOne(targetEntity="ToolsBundle\Entity\ReadResume", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $readResume;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="secretMail", type="array", nullable=false)
+     */
+    private $secretMail;
+    
     public function __construct()
     {
         parent::__construct();
@@ -249,6 +263,8 @@ class User extends BaseUser
         $this->resumes = new ArrayCollection();
         $this->newsletter = true;
         $this->giveUpCount = 0;
+        $this->readResume = NULL;
+        $this->secretMail = array();
     }
 
     /**
@@ -634,34 +650,6 @@ class User extends BaseUser
     }
 
     /**
-     * @Assert\Callback
-     */
-    public function isValidate(ExecutionContextInterface $context)
-    {
-        $feesMin = $this->getDailyFeesMin();
-        $feesMax = $this->getDailyFeesMax();
-
-        if ($this->getPhone() != NULL) {
-            $this->getPhone()->isValidate($context);
-        } if ($feesMin == NULL && $feesMax != NULL) {
-            $context
-                ->buildViolation('user.minfees.unset')
-                ->atPath('dailyFeesMin')
-                ->addViolation();
-        } else if ($feesMax == NULL && $feesMin != NULL) {
-            $context
-                ->buildViolation('user.maxfees.unset')
-                ->atPath('dailyFeesMax')
-                ->addViolation();
-        } else if ($feesMin != NULL && $feesMax != NULL && $feesMin >= $feesMax) {
-            $context
-                ->buildViolation('user.minfees.over')
-                ->atPath('dailyFeesMin')
-                ->addViolation();
-        }
-    }
-
-    /**
      * Set facebook_id
      *
      * @param string $facebookId
@@ -900,4 +888,79 @@ class User extends BaseUser
     {
         return $this->giveUpCount;
     }
+
+    /**
+     * Set readResume
+     *
+     * @param \ToolsBundle\Entity\ReadResume $readResume
+     * @return User
+     */
+    public function setReadResume(ReadResume $readResume = null)
+    {
+        $this->readResume = $readResume;
+        return $this;
+    }
+
+    /**
+     * Get readResume
+     *
+     * @return \ToolsBundle\Entity\ReadResume
+     */
+    public function getReadResume()
+    {
+        return $this->readResume;
+    }
+
+    /**
+     *Add addSecretMail
+     *
+     * @param text $mails
+     * @return User
+     */
+    public function addSecretMail($mail)
+    {
+        array_push( $this->secretMail, $mail);
+        return $this;
+    }
+
+    /**
+     * Get secretMail
+     *
+     * @return array
+     */
+    public function getSecretMail()
+    {
+        return $this->secretMail;
+    }
+    
+    /**
+     * @Assert\Callback
+     */
+    public function isValidate(ExecutionContextInterface $context)
+    {
+        $feesMin = $this->getDailyFeesMin();
+        $feesMax = $this->getDailyFeesMax();
+
+        $this->setUpdateDate(new \Datetime());
+        
+        if ($this->getPhone() != NULL) {
+            $this->getPhone()->isValidate($context);
+        } if ($feesMin == NULL && $feesMax != NULL) {
+            $context
+                ->buildViolation('user.minfees.unset')
+                ->atPath('dailyFeesMin')
+                ->addViolation();
+        } else if ($feesMax == NULL && $feesMin != NULL) {
+            $context
+                ->buildViolation('user.maxfees.unset')
+                ->atPath('dailyFeesMax')
+                ->addViolation();
+        } else if ($feesMin != NULL && $feesMax != NULL && $feesMin >= $feesMax) {
+            $context
+                ->buildViolation('user.minfees.over')
+                ->atPath('dailyFeesMin')
+                ->addViolation();
+        }
+    }
+
 }

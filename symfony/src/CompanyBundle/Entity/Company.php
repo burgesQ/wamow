@@ -52,7 +52,7 @@ class Company
      * @ORM\Column(name="size", type="integer", nullable=false)
      * @Assert\Range(
      *      min = 0,
-     *      max = 3
+     *      max=3
      *)
      */
     private $size;

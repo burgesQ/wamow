@@ -3,7 +3,7 @@
 <div class="user_user_show">
 
   <p>{{ 'profile.show.image'|trans }}:
-    {% set image = images|last %}
+    {% set image = images|first %}
     {% if image != null and image.name != null %}
       {{ image.name }} is a {{ image.type }} upload the {{ image.uploadDate|date("m/d/Y") }}
       <img src="{{ asset(image.webPath()) }}"/>
@@ -64,9 +64,10 @@
         {% endif %} </p>
 
     <p>{{ 'profile.show.resume'|trans }}:
-      {% set resume = resumes|last %}
+      {% set resume = resumes|first %}
       {% if resume != null and resume.name != null %}
-	{{ resume.name }} is a {{ resume.type }} upload the {{ image.uploadDate|date("m/d/Y") }}
+	{{ resume.name }} is a {{ resume.type }} upload the :{{ resume.uploadDate|date("m/d/Y") }}
+	<br>{{ user.readResume.resumesParsed}}
       {% endif %} </p>
 
     {% if user.newsletter == 1 %}
@@ -75,4 +76,6 @@
         {{ 'profile.show.newsletterfalse'|trans }}
     {% endif %}
 
+
+    {{ dump(user) }}
 </div>
