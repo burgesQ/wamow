@@ -100,14 +100,6 @@
     {{ form_widget(form.missionKind) }}
     </div>
     <br>
-    <div>
-    {{ form_errors(form.image) }}
-    {{ form_label(form.image) }}
-    {{ form_widget(form.image) }}
-    <br>
-    </div>
     {{ form_row(form.save) }}
   {{ form_end(form) }}
 </form>
-
-{{ 'mission.new.optional'|trans }}
