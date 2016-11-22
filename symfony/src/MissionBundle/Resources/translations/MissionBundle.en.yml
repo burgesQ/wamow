@@ -38,8 +38,7 @@ mission:
             chooseDay: "Day"
             chooseMonth: "Month"
             chooseYear: "Year"
-        optional: "* optional fields"
-    registred:
+    registered:
         success: "Mission saved with success!"
         see: "see your mission"
         edit: "edit your mission"
