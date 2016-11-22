@@ -2,16 +2,12 @@
 
 namespace UserBundle\Entity;
 
-
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-
 use FOS\UserBundle\Model\User as BaseUser;
-
 use CompanyBundle\Entity\Company;
-
 use ToolsBundle\Entity\PhoneNumber;
 use ToolsBundle\Entity\Address;
 use ToolsBundle\Entity\Upload;
@@ -200,6 +196,13 @@ class User extends BaseUser
      * @ORM\JoinTable(name="team_user")
      */
     private $team;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="CompanyBundle\Entity\Company", cascade={"persist"})
+     * @ORM\joinColumn(onDelete="SET NULL")
+     */
+    private $company;
 
     public function __construct()
     {
@@ -567,7 +570,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get resumea
+     * Get resume
      *
      * @return \ToolsBundle\Entity\Upload
      */
