@@ -1,1 +1,32 @@
-Hello advisor
+{% extends "base.html.twig %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block subtitle %}
+    Hello contractor
+{% endblock %}
+{% block body %}
+    <p>
+        Current Missions :
+        {% for currentMission in listCurrentMissions %}
+        <li>
+            <a href="{{ path('mission_view', {'id': currentMission.id}) }}">
+                    {{ currentMission.title }}</a>
+        </li>
+        {% endfor %}
+        </p>
+{% endblock %}
+{% block body %}
+    <p>
+        Available Missions :
+        {% for mission in listRemainingMission %}
+        <li>
+            <a href="{{ path('mission_view', {'id': mission.id}) }}">
+                {{ mission.title }}</a>
+                ---> <a href="{{ path('mission_pitch', {'id': mission.id}) }}">pitch </a>
+        </li>
+        {% endfor %}
+    </p>
+{% endblock %}

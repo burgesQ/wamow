@@ -16,14 +16,33 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class DashboardController extends Controller
 {
-    public function indexAction()
+    public function missionDisplayAction()
     {
-        if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')) {
-            return $this->render('DashboardBundle:Expert:index.html.twig');
+        $repository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('MissionBundle:Mission')
+            ;
+        if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR'))
+        {
+            $listMissionsAvailable = $repository->missionsAvailables();
+            $service = $this->container->get('current.mission');
+            $currentMissions = $service->currentMission($this->getUser());
+            $listRemainingMission = $service->remainingMission($listMissionsAvailable, $currentMissions);
+            return $this->render('DashboardBundle:Expert:index.html.twig', array(
+                'listRemainingMission' => $listRemainingMission,
+                'listCurrentMissions'   => $currentMissions,
+                ));
         }
-        elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR')) {
-            return $this->render('DashboardBundle:Seeker:index.html.twig');
+        elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR'))
+        {
+            $user = $this->getUser();
+            $iD = $user->getId();
+            $listMission = $repository->findByiDContact($iD);
+            return $this->render('DashboardBundle:Seeker:index.html.twig', array(
+                'listMission' => $listMission
+                ));
         }
-        return $this->render('DashboardBundle:Default:index.html.twig');
+        throw new NotFoundHttpException("You are not logged.");
     }
 }

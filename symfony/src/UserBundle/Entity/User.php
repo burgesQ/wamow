@@ -195,6 +195,12 @@ class User extends BaseUser
      */
     private $newsletter;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="TeamBundle\Entity\Team", inversedBy="users")
+     * @ORM\JoinTable(name="team_user")
+     */
+    private $team;
+
     public function __construct()
     {
         parent::__construct();
@@ -618,5 +624,38 @@ class User extends BaseUser
                 ->atPath('dailyFeesMin')
                 ->addViolation();
         }
+    }
+
+    /**
+     * Add team
+     *
+     * @param \TeamBundle\Entity\Team $team
+     * @return User
+     */
+    public function addTeam(\TeamBundle\Entity\Team $team)
+    {
+        $this->team[] = $team;
+
+        return $this;
+    }
+
+    /**
+     * Remove team
+     *
+     * @param \TeamBundle\Entity\Team $team
+     */
+    public function removeTeam(\TeamBundle\Entity\Team $team)
+    {
+        $this->team->removeElement($team);
+    }
+
+    /**
+     * Get team
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTeam()
+    {
+        return $this->team;
     }
 }
