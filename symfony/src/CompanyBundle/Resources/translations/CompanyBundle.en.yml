@@ -2,7 +2,7 @@ company:
     name: "company"
     error:
         wrongId: "The company %id% doesn't exist."
-        usedId: "The company %name% already exist."
+        usedname: "The company %name% already exist."
         oneCompany: "You cannot join more than one company."
     action:
         leaved: "You just left the "
@@ -12,3 +12,15 @@ company:
         registred: "Company successfully registered"
     info:
         join: "Joined the company"
+    new:
+        name: "Name"
+        size: "Size"
+        choosesize: "Choose the size"
+        small: "Small less than 10 employees"
+        medium: "Medium between 10 and 500 employees"
+        big: "More than 500 employees"
+        logo: "Logo"
+        description: "Description"
+        sector: "Sector"
+        choosesector: "Choose the sector"
+        submit: "OK"
