@@ -8,7 +8,7 @@ use MissionBundle\Entity\ProfessionalExpertise;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class LoadUserData implements FixtureInterface, ContainerAwareInterface
+class LoadUser implements FixtureInterface, ContainerAwareInterface
 {
     /**
      * @var ContainerInterface
