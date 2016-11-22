@@ -84,6 +84,7 @@ class MissionType extends AbstractType
                     'year' => 'mission.new.form.chooseYear',
                 ),
                 'format' => 'MMddyyyy',
+                'pattern' => "{{ month }}/{{ day }}/{{ year }}",
                 'label' => 'mission.new.form.missionEnding',
                 'translation_domain' => 'MissionBundle'
               ))
@@ -95,6 +96,7 @@ class MissionType extends AbstractType
                     'year' => 'mission.new.form.chooseYear',
                 ),
                 'format' => 'MMddyyyy',
+                'pattern' => "{{ month }}/{{ day }}/{{ year }}",
                 'label' => 'mission.new.form.applicationEnding',
                 'translation_domain' => 'MissionBundle'
               ))
@@ -114,7 +116,6 @@ class MissionType extends AbstractType
                 'label' => 'mission.new.form.missionKind',
                 'translation_domain' => 'MissionBundle'
                 ))
-            ->add('image')
             ->add('save',   'submit', array(
                 'label' => 'mission.new.form.submit',
                 'translation_domain' => 'MissionBundle'
