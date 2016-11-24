@@ -1,17 +1,5 @@
 company:
-    name: "company"
-    error:
-        wrongId: "The company %id% doesn't exist."
-        usedname: "The company %name% already exist."
-        oneCompany: "You cannot join more than one company."
-    action:
-        leaved: "You just left the "
-        created: "successfully created !"
-        joined: "You just joined "
-        wannaLeav: "Are you sure you want to leave "
-        registred: "Company successfully registered"
-    info:
-        join: "Joined the company"
+    name: "Company"
     new:
         name: "Name"
         size: "Size"
@@ -24,3 +12,27 @@ company:
         sector: "Sector"
         choosesector: "Choose the sector"
         submit: "OK"
+        registered: "Company name successfully registered"
+        error:
+            onecompany: "You cannot join more than one company"
+            authorized: "You are not authorized"
+            usedname: "The company %name% already exist."
+
+    join:
+        name: "Company"
+        new: "Create a new company"
+        submit: "Join"
+        info : "You're old Company will be replaced"
+        success: "Joined the company"
+        joined: "You joined name company"
+        error:
+            authorized: "You are not authorized"
+            onecompany: "You cannot join more than one company"
+
+    leave:
+        wannaleave: "Do you really want to leave %name% company?"
+        submit: "Yes"
+        leaved: "You left name company"
+        error:
+            authorized: "You are not authorized"
+            nocompany: "You do not belong to any company"
