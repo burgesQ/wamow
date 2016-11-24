@@ -1,0 +1,85 @@
+# app/config/fos_elastica.yml
+
+# conf value for elastica
+parameters:
+    elastica_host: 172.18.0.2
+    elastica_port: 9200
+
+# conf of the indexer and searcher for elastica
+fos_elastica:
+    clients:
+        default: { host: "%elastica_host%", port: "%elastica_port%" }
+    indexes:
+        userinfo:
+            settings:
+                index:
+                    analysis:
+                        analyzer:
+                            custom_analyzer :
+                                type     :    custom
+                                tokenizer:    nGram
+                                filter   :    [asciifolding ,lowercase, worddelimiter, stopwords]
+                                
+                            custom_search_analyzer :
+                                type     :    custom
+                                tokenizer:    nGram
+                                filter   :    [asciifolding ,lowercase, worddelimiter, stopwords, snowball, elision]
+                                
+                            custom_search_analyzer_en :
+                                type     :    custom
+                                tokenizer:    nGram
+                                filter   :    [asciifolding ,lowercase, worddelimiter, stopwords_en, snowball_en, elision_en]
+
+                        tokenizer:
+                            nGram:
+                                type        : nGram
+                                min_gram    : 3
+                                max_gram    : 20
+
+                        filter              : 
+                            snowball        :
+                                type        : snowball
+                                language    : French
+                            snowball_en     :
+                                type        : snowball
+                                language    : English
+                            elision         :
+                                type        : elision
+                                articles    : [l, m, t, qu, n, s, j, d]
+                            elision_en      :
+                                type        : elision
+                                articles    : [i, m]
+                            stopwords       :
+                                type        : stop
+                                stopwords   : [ _french_ ]
+                                ignore_case : true
+                            stopwords_en    :
+                                type        : stop
+                                stopwords   : [ _english_ ]
+                                ignore_case : true
+                            worddelimiter   :
+                                type        : word_delimiter
+
+            types:
+                user:
+                    mappings:
+                        id                    : ~
+                        userId                : ~ 
+                        creationDate          : { type : date }
+                        updateDate            : { type : date }
+                        languages             : ~
+                        professionalExpertise : ~
+                        missionKind           : ~
+                        businessPractice      : ~
+                        cvResume              : { analyzer: custom_search_analyzer }
+                        userResume            : { analyzer: custom_search_analyzer }
+                        country               : { boost : 5 }
+                        dailyFeesMin          : ~
+                        dailyFeesMax          : ~
+                   
+                    persistence:
+                        driver  : orm
+                        model   : UserBundle\Entity\ElasticUser
+                        finder  : ~
+                        provider: ~
+                        listener: ~

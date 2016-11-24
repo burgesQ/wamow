@@ -16,18 +16,19 @@
     {{form_row(form.user.phone.prefix)}}
     {{form_row(form.user.phone.number)}}
 
-    {{ form_row(form.user.address.country) }}
-    {{ form_row(form.user.address.state) }}
-    {{ form_row(form.user.address.zipcode) }}
-    {{ form_row(form.user.address.city) }}
-    {{ form_row(form.user.address.street) }}
-    {{ form_row(form.user.address.street2) }}
+    {{ form_row(form.user.country) }}
 
     {{ form_row(form.user.dailyFeesMin) }}
     {{ form_row(form.user.dailyFeesMax) }}
 
-    {{ form_row(form.resume.file) }}
+    {{ form_row(form.resume.file) }} 
+    {{ form_row(form.user.userResume) }} 
 
+    {{ form_row(form.user.professionalExpertise) }}
+    {{ form_row(form.user.missionKind) }}
+    {{ form_row(form.user.businessPractice) }}
+    {{ form_row(form.user.languages) }}
+  
     {{ form_row(form.user.newsletter) }}
 
     <div>

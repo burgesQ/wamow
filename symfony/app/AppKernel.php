@@ -28,6 +28,7 @@ class AppKernel extends Kernel
             new CompanyBundle\CompanyBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
+            new FOS\ElasticaBundle\FOSElasticaBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

@@ -8,8 +8,6 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-use UserBundle\Entity\User;
-
 /**
  * Upload
  *
@@ -62,12 +60,6 @@ class Upload
      * @ORM\Column(name="path", type="string", length=255, nullable=true)
      */
     private $path;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="resumes", inversedBy="images", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $user;
 
     /**
      * @var smallint
@@ -137,29 +129,6 @@ class Upload
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set user
-     *
-     * @param \UserBundle\Entity\User $user
-     * @return Upload
-     */
-    public function setUser(\UserBundle\Entity\User $user = null)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \UserBundle\Entity\User
-     */
-    public function getUser()
-    {
-        return $this->user;
     }
 
     /**
@@ -330,7 +299,6 @@ class Upload
     {
         if ($this->file != NULL) {
             $info = explode("/", $this->file->getMimeType());
-            
             if ( ($this->format != null and $this->format != $info[1]) or
                  ($this->type != null and $this->type != $info[0]) ) {
                 $context
