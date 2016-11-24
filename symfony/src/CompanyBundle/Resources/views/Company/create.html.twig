@@ -1,8 +1,7 @@
-<!DOCTYPE html>
-<html>
+{% trans_default_domain "CompanyBundle" %}
+
 <body>
-    <form method="post" {{ form_enctype(form) }}>
-        {{ form_start(form) }}
+    {{ form_start(form) }}
         <div>
             {{ form_errors(form.name) }}
             {{ form_label(form.name) }}
@@ -29,8 +28,7 @@
             {{ form_widget(form.sector) }}
         </div>
         <div>
-        {{ form_row(form.save) }}
-        {{ form_end(form) }}
-    </form>
-    </body>
-</html>
+            {{ form_row(form.save) }}
+        </div>
+    {{ form_end(form) }}
+</body>
