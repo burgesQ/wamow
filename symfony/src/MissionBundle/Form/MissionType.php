@@ -56,12 +56,8 @@ class MissionType extends AbstractType
                 'label' => 'mission.new.form.international',
                 'translation_domain' => 'MissionBundle'
               ))
-            ->add('dailyFeesMin', null, array(
-                'label' => 'mission.new.form.daily_fees_min',
-                'translation_domain' => 'MissionBundle'
-                ))
-            ->add('dailyFeesMax', null, array(
-                'label' => 'mission.new.form.daily_fees_max',
+            ->add('budget', null, array(
+                'label' => 'mission.new.form.budget',
                 'translation_domain' => 'MissionBundle'
                 ))
             ->add('missionBeginning',         'date', array(
@@ -114,6 +110,14 @@ class MissionType extends AbstractType
                 'label' => 'mission.new.form.missionKind',
                 'translation_domain' => 'MissionBundle'
                 ))
+            ->add('businessPractice',   'entity', array(
+                'class' => 'MissionBundle:BusinessPractice',
+                'property' => 'name',
+                'multiple' => false,
+                'placeholder' => 'mission.new.form.businessPractice',
+                'label' => 'mission.new.form.businessPractice',
+                'translation_domain' => 'MissionBundle'
+                 ))
             ->add('image')
             ->add('save',   'submit', array(
                 'label' => 'mission.new.form.submit',

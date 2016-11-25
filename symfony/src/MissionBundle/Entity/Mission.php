@@ -114,6 +114,12 @@ class Mission
     private $missionKind;
 
     /**
+     * @ORM\ManyToOne(targetEntity="MissionBundle\Entity\BusinessPractice")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $businessPractice;
+
+    /**
      * @var bool
      *
      * @ORM\Column(name="telecommuting", type="boolean")
@@ -130,24 +136,13 @@ class Mission
     /**
      * @var int
      *
-     * @ORM\Column(name="daily_fees_min", type="integer")
+     * @ORM\Column(name="budget", type="integer")
      * @Assert\Range(
      *      min = 1,
      *      minMessage = "You need to fill this field.",
      * )
      */
-    private $dailyFeesMin;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="daily_fees_max", type="integer")
-     * @Assert\Range(
-     *      min = 1,
-     *      minMessage = "You need to fill this field.",
-     * )
-     */
-    private $dailyFeesMax;
+    private $budget;
 
     /**
      * @var \DateTime
@@ -453,52 +448,6 @@ class Mission
     public function getTelecommuting()
     {
         return $this->telecommuting;
-    }
-
-    /**
-     * Set dailyFeesMin
-     *
-     * @param integer $dailyFeesMin
-     * @return Mission
-     */
-    public function setDailyFeesMin($dailyFeesMin)
-    {
-        $this->dailyFeesMin = $dailyFeesMin;
-
-        return $this;
-    }
-
-    /**
-     * Get dailyFeesMin
-     *
-     * @return integer
-     */
-    public function getDailyFeesMin()
-    {
-        return $this->dailyFeesMin;
-    }
-
-    /**
-     * Set dailyFeesMax
-     *
-     * @param integer $dailyFeesMax
-     * @return Mission
-     */
-    public function setDailyFeesMax($dailyFeesMax)
-    {
-        $this->dailyFeesMax = $dailyFeesMax;
-
-        return $this;
-    }
-
-    /**
-     * Get dailyFeesMax
-     *
-     * @return integer
-     */
-    public function getDailyFeesMax()
-    {
-        return $this->dailyFeesMax;
     }
 
     /**
@@ -809,5 +758,51 @@ class Mission
             ->addViolation()
             ;
         }
+    }
+
+    /**
+     * Set businessPractice
+     *
+     * @param \MissionBundle\Entity\BusinessPractice $businessPractice
+     * @return Mission
+     */
+    public function setBusinessPractice(\MissionBundle\Entity\BusinessPractice $businessPractice)
+    {
+        $this->businessPractice = $businessPractice;
+
+        return $this;
+    }
+
+    /**
+     * Get businessPractice
+     *
+     * @return \MissionBundle\Entity\BusinessPractice
+     */
+    public function getBusinessPractice()
+    {
+        return $this->businessPractice;
+    }
+
+    /**
+     * Set budget
+     *
+     * @param integer $budget
+     * @return Mission
+     */
+    public function setBudget($budget)
+    {
+        $this->budget = $budget;
+
+        return $this;
+    }
+
+    /**
+     * Get budget
+     *
+     * @return integer
+     */
+    public function getBudget()
+    {
+        return $this->budget;
     }
 }
