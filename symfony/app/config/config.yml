@@ -94,3 +94,25 @@ fos_user:
             from_email:
                 address:        server@mail.com # put a valid mail address
                 sender_name:    Reset link
+
+# Assetic Configuration
+assetic:
+    assets:
+        chosen_css:
+            inputs:
+              - '@MissionBundle/Resources/public/css/chosen.css'
+        chosen_jquery_tag:
+            inputs:
+              - '@MissionBundle/Resources/public/js/chosen.jquery.tag.js'
+        chosen_config_tag:
+            inputs:
+              - '@MissionBundle/Resources/public/js/chosen.config.tag.js'
+        prism:
+            inputs:
+              - '@MissionBundle/Resources/public/js/prism.js'
+    debug:          "%kernel.debug%"
+    use_controller: true
+    bundles:        [ToolsBundle, MissionBundle]
+    #java: /usr/bin/java
+    filters:
+        cssrewrite: ~

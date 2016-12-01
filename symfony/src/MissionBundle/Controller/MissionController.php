@@ -15,6 +15,7 @@ use MissionBundle\Entity\Step;
 use MissionBundle\Entity\Mission;
 use MissionBundle\Form\MissionType;
 use TeamBundle\Entity\Team;
+use ToolsBundle\Entity\Tag;
 
 class MissionController extends Controller
 {
@@ -45,6 +46,19 @@ class MissionController extends Controller
             $form->handleRequest($request);
             if ($form->isValid())
             {
+              $em = $this->getDoctrine()->getManager();
+              if ($_POST)
+                {
+                    $values = $_POST['mission']['tags'];
+                    foreach ($values as $value)
+                    {
+                      $tag = new Tag();
+                      $tag->setTag($value);
+                      $mission->addTag($tag);
+                      $em->persist($tag);
+                    }
+                    $em->flush();
+               }
                 $em->persist($mission);
                 for ($i=0; $i < $nbStep; $i++)
                 {
@@ -103,6 +117,17 @@ class MissionController extends Controller
         $mission->setUpdateDate(new \DateTime());
 
         if ($form->isValid()) {
+          if ($_POST)
+            {
+                $values = $_POST['mission']['tags'];
+                foreach ($values as $value)
+                {
+                  $tag = new Tag();
+                  $tag->setTag($value);
+                  $mission->addTag($tag);
+                  $em->persist($tag);
+                }
+           }
             $em->flush();
             return new Response($trans->trans('mission.edit.successEdit', array(), 'MissionBundle'));
         }
@@ -184,7 +209,7 @@ class MissionController extends Controller
     public function missionPitchAction($id)
     {
         $trans = $this->get('translator');
-        
+
         if ( $this->getUser() === null ) {
             throw new NotFoundHttpException($trans->trans('mission.error.logged', array(), 'MissionBundle'));
         } elseif ( $this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR') ) {
@@ -199,7 +224,7 @@ class MissionController extends Controller
         $listTeams = $em
                    ->getRepository('TeamBundle:Team')
                    ->findBy(array('mission' => $id));
-        
+
         foreach ($listTeams as $team) {
             $listUsers = $team->getUsers();
             foreach ($listUsers as $user) {
@@ -208,7 +233,7 @@ class MissionController extends Controller
                 }
             }
         }
-        
+
         $team = new Team(0);  //role 0 = advisor
         $team->setMission($mission);
         $team->addUser($this->getUser());

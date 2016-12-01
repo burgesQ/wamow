@@ -125,6 +125,8 @@ class MissionType extends AbstractType
                 'multiple' => true,
                 'translation_domain' => 'MissionBundle',
                 'required' => false,
+                'mapped' => false,
+                'csrf_protection' => false,
                 'attr' => array('multiple class' => 'chosen-select',
                 'style' => 'width: 350px',
                 'placeholder_text_multiple' => 'Add Some Tags ...')))
@@ -132,6 +134,7 @@ class MissionType extends AbstractType
                 'label' => 'mission.new.form.submit',
                 'translation_domain' => 'MissionBundle'
                 ))
+            ->get('tags')->resetViewTransformers()
             ;
     }
 
