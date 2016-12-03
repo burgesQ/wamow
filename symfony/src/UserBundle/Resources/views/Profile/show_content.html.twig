@@ -23,7 +23,7 @@
     <p>{{ 'profile.show.email'|trans }}: {{ user.email }} </p>
     <p>{{ 'profile.show.phone'|trans }}:
       {% if user.phone != null %}
-	{{ user.phone.prefix.prefix }} {{ user.phone.tel }} ({{ user.phone.prefix.country|countryName }})
+	{{ user.phone.prefix.prefix }} {{ user.phone.number }} ({{ user.phone.prefix.country|countryName }})
       {% endif %} </p>
 
     <p>{{ 'profile.show.country'|trans }}:

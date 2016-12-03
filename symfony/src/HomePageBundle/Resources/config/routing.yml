@@ -1,4 +1,9 @@
-home_page:
+home_page_expert:
     path:      /
     defaults:
-        _controller: HomePageBundle:Default:index
+        _controller: HomePageBundle:Default:expert
+
+home_page_seeker:
+    path:      /contractor
+    defaults:
+        _controller: HomePageBundle:Default:seeker

@@ -96,6 +96,9 @@ layout:
     login: "Log in"
     register: "Register"
     logged_in_as: "Hello %first_name% %last_name%"
+    sign_up: "Sign Up"
+    seeker_access: "Contractor Access"
+    expert_access: "Advisor Access"
 
 form:
     group_name: "Group name"
@@ -122,3 +125,18 @@ form:
         min: "Daily fees minimum"
         max: "Daily fees maximum"
     submit: "Update"
+
+social:
+    sign_in_google: "Sign in with Google"
+    sign_in_linkedin: "Sign in with Linkedin"
+    error:
+        access_denied: "You have refused access for this site."
+        authorization_expired: "Authorization expired."
+        bad_verification_code: "Bad verification code."
+        consumer_key_rejected: "You have refused access for this site."
+        incorrect_client_credentials: "Incorrect client credentials."
+        invalid_assertion: "Invalid assertion."
+        redirect_uri_mismatch: "Redirect URI mismatches configured one."
+        unauthorized_client: "Unauthorized client."
+        unknown_format: "Unknown format."
+        unknown_error: "Unknown OAuth error: %errorCode%."

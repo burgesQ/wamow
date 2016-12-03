@@ -1,10 +1,9 @@
 <?php
 
-namespace MissionBundle\DataFixtures\ORM;
+namespace UserBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use MissionBundle\Entity\ProfessionalExpertise;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -33,6 +32,7 @@ class LoadUser implements FixtureInterface, ContainerAwareInterface
             $user->setLastName($i);
             $user->setEmail($i.'email@domain.com');
             $user->setPlainPassword('password');
+            $user->setPasswordSet(true);
             $user->setEnabled(true);
             $user->setRoles(array('ROLE_ADVISOR'));
             $userManager->updateUser($user, true);
@@ -47,6 +47,7 @@ class LoadUser implements FixtureInterface, ContainerAwareInterface
             $user->setLastName($i);
             $user->setEmail($i.'email@domain.com');
             $user->setPlainPassword('password');
+            $user->setPasswordSet(true);
             $user->setEnabled(true);
             $user->setRoles(array('ROLE_CONTRACTOR'));
             $userManager->updateUser($user, true);
