@@ -1,0 +1,12 @@
+{% trans_default_domain "CompanyBundle" %}
+
+<body>
+    {{ form_start(form) }}
+        <div>
+            {{ 'company.leave.wannaleave' | trans({'%name%': company.name}) }}
+        </div>
+        <div>
+            {{ form_row(form.save) }}
+        </div>
+    {{ form_end(form) }}
+</body>

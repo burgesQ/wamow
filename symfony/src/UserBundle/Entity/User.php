@@ -2,16 +2,12 @@
 
 namespace UserBundle\Entity;
 
-
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-
 use FOS\UserBundle\Model\User as BaseUser;
-
 use CompanyBundle\Entity\Company;
-
 use ToolsBundle\Entity\PhoneNumber;
 use ToolsBundle\Entity\Address;
 use ToolsBundle\Entity\Upload;
@@ -171,7 +167,7 @@ class User extends BaseUser
      * @ORM\JoinColumn(nullable=true)
      */
     private $phone;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="ToolsBundle\Entity\Upload", mappedBy="user")
      */
@@ -181,7 +177,7 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="ToolsBundle\Entity\Upload", mappedBy="user")
      */
     private $resumes;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="CompanyBundle\Entity\Company", cascade={"persist"})
      * @ORM\joinColumn(onDelete="SET NULL")
@@ -195,6 +191,12 @@ class User extends BaseUser
      */
     private $newsletter;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="TeamBundle\Entity\Team", inversedBy="users")
+     * @ORM\JoinTable(name="team_user")
+     */
+    private $team;
+
     public function __construct()
     {
         parent::__construct();
@@ -206,7 +208,7 @@ class User extends BaseUser
         $this->prefix = NULL;
         $this->birthdate = NULL;
         $this->images = new ArrayCollection();
-        $this->resumes = new ArrayCollection();       
+        $this->resumes = new ArrayCollection();
         $this->newsletter = true;
     }
 
@@ -546,7 +548,7 @@ class User extends BaseUser
     {
         return $this->images;
     }
-    
+
     /**
      * Add resumes
      *
@@ -561,7 +563,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get resumea
+     * Get resume
      *
      * @return \ToolsBundle\Entity\Upload
      */
@@ -599,7 +601,7 @@ class User extends BaseUser
     {
         $feesMin = $this->getDailyFeesMin();
         $feesMax = $this->getDailyFeesMax();
-        
+
         if ($this->getPhone() != NULL) {
             $this->getPhone()->isValidate($context);
         } if ($feesMin == NULL && $feesMax != NULL) {
@@ -618,5 +620,38 @@ class User extends BaseUser
                 ->atPath('dailyFeesMin')
                 ->addViolation();
         }
+    }
+
+    /**
+     * Add team
+     *
+     * @param \TeamBundle\Entity\Team $team
+     * @return User
+     */
+    public function addTeam(\TeamBundle\Entity\Team $team)
+    {
+        $this->team[] = $team;
+
+        return $this;
+    }
+
+    /**
+     * Remove team
+     *
+     * @param \TeamBundle\Entity\Team $team
+     */
+    public function removeTeam(\TeamBundle\Entity\Team $team)
+    {
+        $this->team->removeElement($team);
+    }
+
+    /**
+     * Get team
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTeam()
+    {
+        return $this->team;
     }
 }

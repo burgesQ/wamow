@@ -14,7 +14,7 @@ use MissionBundle\Entity\MissionKind;
 use MissionBundle\Entity\Step;
 use TeamBundle\Entity\Team;
 
-class LoadUserData implements FixtureInterface, ContainerAwareInterface
+class LoadUser implements FixtureInterface, ContainerAwareInterface
 {
     /**
      * @var ContainerInterface

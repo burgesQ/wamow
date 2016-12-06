@@ -9,6 +9,7 @@ use ToolsBundle\Entity\Language;
 use ToolsBundle\Entity\Address;
 use ToolsBundle\Form\AddressType;
 use ToolsBundle\Form\FileType;
+use ToolsBundle\Entity\Tag;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 
@@ -84,6 +85,7 @@ class MissionType extends AbstractType
                     'year' => 'mission.new.form.chooseYear',
                 ),
                 'format' => 'MMddyyyy',
+                'pattern' => "{{ month }}/{{ day }}/{{ year }}",
                 'label' => 'mission.new.form.missionEnding',
                 'translation_domain' => 'MissionBundle'
               ))
@@ -95,6 +97,7 @@ class MissionType extends AbstractType
                     'year' => 'mission.new.form.chooseYear',
                 ),
                 'format' => 'MMddyyyy',
+                'pattern' => "{{ month }}/{{ day }}/{{ year }}",
                 'label' => 'mission.new.form.applicationEnding',
                 'translation_domain' => 'MissionBundle'
               ))
@@ -115,10 +118,23 @@ class MissionType extends AbstractType
                 'translation_domain' => 'MissionBundle'
                 ))
             ->add('image')
+            ->add('tags', 'entity', array(
+                'class' => 'ToolsBundle:Tag',
+                'property' => 'tag',
+                'placeholder' => 'Add Tags ...',
+                'multiple' => true,
+                'translation_domain' => 'MissionBundle',
+                'required' => false,
+                'mapped' => false,
+                'csrf_protection' => false,
+                'attr' => array('multiple class' => 'chosen-select',
+                'style' => 'width: 350px',
+                'placeholder_text_multiple' => 'Add Some Tags ...')))
             ->add('save',   'submit', array(
                 'label' => 'mission.new.form.submit',
                 'translation_domain' => 'MissionBundle'
                 ))
+            ->get('tags')->resetViewTransformers()
             ;
     }
 

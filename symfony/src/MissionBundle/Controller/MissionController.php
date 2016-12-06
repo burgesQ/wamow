@@ -18,6 +18,7 @@ use MissionBundle\Entity\Mission;
 use MissionBundle\Form\MissionType;
 use MissionBundle\Form\SelectionType;
 use TeamBundle\Entity\Team;
+use ToolsBundle\Entity\Tag;
 
 class MissionController extends Controller
 {
@@ -53,6 +54,19 @@ class MissionController extends Controller
             $form->handleRequest($request);
             if ($form->isValid())
             {
+              $em = $this->getDoctrine()->getManager();
+              if ($_POST)
+                {
+                    $values = $_POST['mission']['tags'];
+                    foreach ($values as $value)
+                    {
+                      $tag = new Tag();
+                      $tag->setTag($value);
+                      $mission->addTag($tag);
+                      $em->persist($tag);
+                    }
+                    $em->flush();
+               }
                 $em->persist($mission);
                 for ($i=1; $i <= $nbStep; $i++)
                 {
@@ -102,6 +116,17 @@ class MissionController extends Controller
             $mission->setUpdateDate(new \DateTime());
 
             if ($form->isValid()) {
+          		if ($_POST)
+            	{
+           			$values = $_POST['mission']['tags'];
+               		foreach ($values as $value)
+                	{
+                  		$tag = new Tag();
+                  		$tag->setTag($value);
+                  		$mission->addTag($tag);
+                  		$em->persist($tag);
+             		}
+           		}
                 $em->flush();
                 return new Response($trans->trans('mission.edit.successEdit', array(), 'MissionBundle'));
             }

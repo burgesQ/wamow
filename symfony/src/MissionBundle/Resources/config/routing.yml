@@ -3,13 +3,8 @@ mission_new:
     defaults:
         _controller: MissionBundle:Mission:new
 
-mission_view_expert:
-    path:      /mission/view/{id}
-    defaults:
-        _controller: MissionBundle:Mission:view
-
-mission_view_seeker:
-    path:      /mission/view/{id}
+mission_view:
+    path:      /mission/{id}
     defaults:
         _controller: MissionBundle:Mission:view
 

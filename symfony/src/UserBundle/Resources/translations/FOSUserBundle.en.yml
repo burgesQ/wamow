@@ -43,6 +43,7 @@ profile:
         resume: 'Curriculum vitae'
         newslettertrue: 'You are registered for the newsletter'
         newsletterfalse: 'You are not registered for the newsletter'
+        company: "Company"
     flash:
         updated: 'The profile has been updated'
 
