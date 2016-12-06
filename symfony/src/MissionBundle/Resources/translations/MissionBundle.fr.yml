@@ -1,6 +1,7 @@
 mission:
     all_missions:
         title: "Toutes les missions disponibles"
+        start: "commencer"
     edit:
         title: "Edition de la mission"
         warning: "Vous éditez une mission qui existe déjà."
@@ -65,7 +66,25 @@ mission:
         notYourMission: "Vous ne pouvez pas éditer une mission que vous n'avez pas crée."
         available: "La mission %id% n'est pas disponible."
         wright: "Vous n'avez pas crée cette mission."
+        advisor: "Vous n'avez pas accès à cette page."
     pitch:
         done: "Vous venez de postuler."
         twice: "Vous avez déjà postulé à cette mission."
         contractor: "Vous ne pouvez pas pitcher"
+    selection:
+        choose: "Teams disponibles :"
+        selected: "Teams selectionnées :"
+        step: "Étape"
+        delete: "Vous devez garder au moins une team."
+        counter: "Vous ne pouvez plus supprimer de teams."
+        minimum: "Selectionnez entre une et %limit% teams."
+        takeBack: "Vous en avez supprimez une par erreur ?"
+        takeBackError: "Vous ne pouvez plus reprendre de team."
+        pick: "Choississez en une de l'étape précédente."
+        finish: "Vous avez choisis la team numero %id%, votre mission peut maintenant commencer."
+        saveButton: "Choisissez cette teams"
+        saveButton2: "Reprenez cette team"
+        saveButton3: "Prochaine étape"
+        saveButton4: "Supprimer"
+        limit: "%limit% suppression(s) disponible(s)"
+        noTeam: "Aucune team n'a postuler à votre mission."

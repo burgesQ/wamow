@@ -23,7 +23,6 @@ class Team
 
     /**
      * @ORM\ManyToOne(targetEntity="MissionBundle\Entity\Mission", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
      */
     private $mission;
 
@@ -40,6 +39,13 @@ class Team
      * @ORM\Column(name="creationDate", type="datetime")
      */
     private $creationDate;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="update_date", type="datetime", nullable=true)
+     */
+    private $updateDate;
 
     /**
      * @var bool
@@ -199,5 +205,28 @@ class Team
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * Set updateDate
+     *
+     * @param \DateTime $updateDate
+     * @return Team
+     */
+    public function setUpdateDate($updateDate)
+    {
+        $this->updateDate = $updateDate;
+
+        return $this;
+    }
+
+    /**
+     * Get updateDate
+     *
+     * @return \DateTime
+     */
+    public function getUpdateDate()
+    {
+        return $this->updateDate;
     }
 }

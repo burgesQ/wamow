@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% trans_default_domain "MissionBundle" %}
+<html>
+    <head>
+    </head>
+    <body>
+        <h3>{{ 'mission.selection.step'|trans }} {{ step.position }}</h3>
+        {{ 'mission.selection.choose'|trans }}
+
+        <ol>
+            <form action="{{ path('mission_teams_selection', {'missionId': missionId }) }}" method="post">
+                {{ form_row(form.team) }}
+                {{ form_row(form.save) }}
+                {{ form_row(form.delete) }}
+                {% if app.session.flashBag.has('success') %}
+                <div class="alert alert-success">
+                    {% for msg in app.session.flashBag.get('success') %}
+                        {{ msg }}
+                    {% endfor %}
+                </div>
+                {% endif %}
+                <br>
+                {% if step.position == 2 and step.nbMaxTeam != nbTeam and step.reallocCounter != 0 %}
+                    <a href="{{ path('mission_selection_takeback', {'missionId': missionId}) }}"
+                    >{{ 'mission.selection.takeBack'|trans }}</a><br>
+                {% endif %}
+            </form>
+        </ol>
+    </body>
+</html>

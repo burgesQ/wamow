@@ -12,4 +12,36 @@ use Doctrine\ORM\EntityRepository;
  */
 class TeamRepository extends EntityRepository
 {
+    public function takeBackTeams($missionId) // query use in the form to take back a mission
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('t', 'm')
+        ->from('TeamBundle:Team', 't')
+        ->leftjoin('t.mission', 'm')
+        ->where('m.id = :missionId')
+            ->setParameter('missionId', $missionId)
+        ->andWhere('t.role = 0')
+        ->andWhere('t.status = 1')
+        ->orderBy('t.creationDate', 'ASC');
+        return $qb;
+    }
+
+    public function teamInForm($missionId, $step) // query use in the form to select mission
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('t', 'm')
+        ->from('TeamBundle:Team', 't')
+        ->leftjoin('t.mission', 'm')
+        ->where('m.id = :missionId')
+            ->setParameter('missionId', $missionId)
+        ->andWhere('t.role = 0')
+        ->andWhere('t.status = :pos')
+            ->setParameter('pos', $step->getPosition());
+        if($step->getPosition() == 1) {
+            $qb->orWhere('t.status = 0');
+        }
+        $qb->orderBy('t.creationDate', 'ASC')
+        ->setMaxResults($step->getNbMaxTeam());
+        return $qb;
+    }
 }

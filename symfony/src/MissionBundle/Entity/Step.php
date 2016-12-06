@@ -23,7 +23,7 @@ class Step
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MissionBundle\Entity\Mission")
+     * @ORM\ManyToOne(targetEntity="MissionBundle\Entity\Mission", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $mission;
@@ -48,6 +48,13 @@ class Step
      * @ORM\Column(name="realloc_team", type="smallint")
      */
     private $reallocTeam;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="realloc_counter", type="smallint")
+     */
+    private $reallocCounter;
 
     /**
      * @var \DateTime
@@ -94,6 +101,7 @@ class Step
         $this->nbMaxTeam = $nbMaxTeam;
         $this->reallocTeam = $reallocTeam;
         $this->status = 0;
+        $this->reallocCounter = $reallocTeam;
       }
 
     /**
@@ -300,6 +308,29 @@ class Step
     public function getReallocTeam()
     {
         return $this->reallocTeam;
+    }
+
+    /**
+     * Get reallocCounter
+     *
+     * @return integer
+     */
+    public function getReallocCounter()
+    {
+        return $this->reallocCounter;
+    }
+
+    /**
+     * Set reallocCounter
+     *
+     * @param integer $reallocCounter
+     * @return Step
+     */
+    public function setReallocCounter($reallocCounter)
+    {
+        $this->reallocCounter = $reallocCounter;
+
+        return $this;
     }
 
     /**

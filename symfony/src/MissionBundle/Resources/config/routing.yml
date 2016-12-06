@@ -24,6 +24,16 @@ missions_all:
         _controller: MissionBundle:Mission:missionList
 
 mission_pitch:
-    path:      /mission/pitch/{id}
+    path:      /mission/pitch/{missionId}
     defaults:
         _controller: MissionBundle:Mission:missionPitch
+
+mission_teams_selection:
+    path:      /mission/{missionId}/selection
+    defaults:
+        _controller: MissionBundle:Mission:selection
+
+mission_selection_takeback:
+    path:      /mission/{missionId}/selection/takeback
+    defaults:
+        _controller: MissionBundle:Mission:takeBack
