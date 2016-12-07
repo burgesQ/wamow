@@ -80,4 +80,15 @@ namespace MissionBundle\Service;
             $em->flush($team);
         }
     }
+
+    public function checkContractorInTeam($contractor, $mission)
+    {
+        $listUsers = $mission->getTeamContact()->getUsers();
+        foreach ($listUsers as $user)
+        {
+            if ($user == $contractor)
+                return (true);
+        }
+        return (false);
+    }
 }

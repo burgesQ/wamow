@@ -147,7 +147,7 @@ class MissionController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $trans = $this->get('translator');
-
+        $service = $this->container->get('mission.savedTeams');
         $mission = $em->getRepository('MissionBundle:Mission')->find($id);
 
         if ( $this->getUser() === null ) {
@@ -159,7 +159,7 @@ class MissionController extends Controller
         if ( $this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR'))
         {
             $team = $mission->getTeamContact();
-            if ($team->getUsers() != $this->getUser()) {
+            if ($service->checkContractorInTeam($this->getUser(), $mission) == false) {
                 throw new NotFoundHttpException($trans->trans('mission.error.wright', array(), 'MissionBundle'));
             }
             return $this->render('MissionBundle:Mission:view_seeker.html.twig', array(
@@ -182,7 +182,7 @@ class MissionController extends Controller
     ** If advisor -> show mission where status === 1
     ** If not log -> kick
     */
-    public function missionListAction()
+    public function listAction()
     {
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('MissionBundle:Mission');
@@ -228,7 +228,10 @@ class MissionController extends Controller
         foreach ($listTeams as $team) {
             if ($team->getMission() == $mission) {
                 return new Response($trans->trans('mission.pitch.twice', array(), 'MissionBundle'));
-                }
+            }
+        }
+        if ($mission->getStatus() !== 1) {
+            throw new NotFoundHttpException($trans->trans('mission.error.available', array('%id%' => $id), 'MissionBundle'));
         }
         $team = new Team(0);  //role 0 = advisor
         $step = $repository->getSpecificStep($missionId, 1)[0];
@@ -256,6 +259,10 @@ class MissionController extends Controller
         $service = $this->container->get('mission.savedTeams');
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('MissionBundle:Mission');
+        $mission = $repository->find($missionId);
+        if ($mission == null || $mission->getStatus() != 1) {
+            throw new NotFoundHttpException($trans->trans('mission.error.advisor', array(), 'MissionBundle'));
+        }
 
         if ( $this->getUser() === null ) {
             throw new NotFoundHttpException($trans->trans('mission.error.logged', array(), 'MissionBundle'));
@@ -374,5 +381,21 @@ class MissionController extends Controller
             'form' => $form->createView(),
             'missionId' => $missionId
             ));
+    }
+
+    public function deleteMissionAction($missionId)
+    {
+        $trans = $this->get('translator');
+        $em = $this->getDoctrine()->getManager();
+        $service = $this->container->get('mission.savedTeams');
+        $mission = $em->getRepository('MissionBundle:Mission')->find($missionId);
+        if ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR')
+            && $mission != null && $service->checkContractorInTeam($this->getUser(), $mission) == true)
+        {
+            $mission->setStatus(-1);
+            $em->flush($mission);
+            return $this->redirectToRoute('missions_all', array());
+        }
+        throw new NotFoundHttpException($trans->trans('mission.error.advisor', array(), 'MissionBundle'));
     }
 }

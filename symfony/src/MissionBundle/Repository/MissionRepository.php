@@ -28,8 +28,10 @@ class MissionRepository extends EntityRepository
         $qb->select('t', 'u')
         ->from('TeamBundle:Team', 't')
         ->leftjoin('t.users', 'u')
+        ->leftjoin('t.mission', 'm')
         ->where('u.id = :userID')
-            ->setParameter('userID', $userID);
+            ->setParameter('userID', $userID)
+        ->andWhere('m.status != -1');
         return $qb->getQuery()->getResult();
     }
 
