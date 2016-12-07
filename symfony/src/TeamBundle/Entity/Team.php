@@ -29,7 +29,7 @@ class Team
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="UserBundle\Entity\User", mappedBy="teams")
+     * @ORM\ManyToMany(targetEntity="UserBundle\Entity\User", mappedBy="team")
      */
     private $users;
 

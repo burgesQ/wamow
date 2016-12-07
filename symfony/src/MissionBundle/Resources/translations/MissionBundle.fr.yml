@@ -2,6 +2,8 @@ mission:
     all_missions:
         title: "Toutes les missions disponibles"
         start: "commencer"
+        delete: "supprimer"
+        pitch: "pitch"
     edit:
         title: "Edition de la mission"
         warning: "Vous éditez une mission qui existe déjà."
