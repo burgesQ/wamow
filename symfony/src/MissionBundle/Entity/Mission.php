@@ -7,6 +7,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use ToolsBundle\Entity\Language;
 use ToolsBundle\Entity\Address;
+use TeamBundle\Entity\Team;
+use ToolsBundle\Entity\Tag;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
@@ -60,11 +62,10 @@ class Mission
     private $confidentiality;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="ID_contact", type="integer")
+     * @ORM\OneToOne(targetEntity="TeamBundle\Entity\Team", cascade={"persist"})
+     * @ORM\JoinColumn(name="team_contact")
      */
-    private $iDContact;
+    private  $teamContact;
 
     /**
      * @var int
@@ -102,13 +103,13 @@ class Mission
     private $languages;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MissionBundle\Entity\ProfessionalExpertise")
+     * @ORM\ManyToOne(targetEntity="MissionBundle\Entity\ProfessionalExpertise", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $professionalExpertise;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MissionBundle\Entity\MissionKind")
+     * @ORM\ManyToOne(targetEntity="MissionBundle\Entity\MissionKind", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $missionKind;
@@ -199,7 +200,12 @@ class Mission
      */
     private $sizeTeamMax;
 
-    public function __construct($nbStep, $iDContact, $sizeTeamMax, $token)
+    /**
+     * @ORM\ManyToMany(targetEntity="ToolsBundle\Entity\Tag", cascade={"persist"})
+     */
+    private $tags;
+
+    public function __construct($nbStep, $team, $sizeTeamMax, $token)
       {
         $this->creationDate = new \Datetime();
         $this->updateDate = new \DateTime();
@@ -207,9 +213,26 @@ class Mission
         $this->status = 0;
         $this->address = new Address();
         $this->numberStep = $nbStep;
-        $this->iDContact = $iDContact;
+        $this->teamContact = $team;
         $this->sizeTeamMax = $sizeTeamMax;
         $this->token = $token;
+      }
+
+    public function addTag(Tag $tag)
+      {
+        $this->tags[] = $tag;
+
+        return $this;
+      }
+
+    public function removeTag(Tag $tag)
+      {
+        $this->tags->removeElement($tag);
+      }
+
+    public function getTags()
+      {
+        return $this->tags;
       }
 
     /**
@@ -284,7 +307,7 @@ class Mission
      * @param \ToolsBundle\Entity\Address $Address
      * @return Mission
      */
-    public function setAddress(Address $address = null)
+    public function setAddress(Address $address)
     {
         $this->address = $address;
     }
@@ -312,27 +335,29 @@ class Mission
         return $this->confidentiality;
     }
 
+
+
     /**
-     * Set iDContact
+     * Set TeamContact
      *
-     * @param integer $iDContact
+     * @param \TeamBundle\Entity\Team $teamContact
      * @return Mission
      */
-    public function setIDContact($iDContact)
+    public function setTeamContact(\TeamBundle\Entity\Team $teamContact)
     {
-        $this->iDContact = $iDContact;
+        $this->teamContact = $teamContact;
 
         return $this;
     }
 
     /**
-     * Get iDContact
+     * Get TeamContact
      *
-     * @return integer
+     * @return \TeamBundle\Entity\Team
      */
-    public function getIDContact()
+    public function getTeamContact()
     {
-        return $this->iDContact;
+        return $this->teamContact;
     }
 
     /**

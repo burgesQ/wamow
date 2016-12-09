@@ -4,11 +4,17 @@ namespace MissionBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use MissionBundle\Entity\ProfessionalExpertise;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use ToolsBundle\Entity\Address;
+use ToolsBundle\Entity\Language;
+use MissionBundle\Entity\Mission;
+use MissionBundle\Entity\ProfessionalExpertise;
+use MissionBundle\Entity\MissionKind;
+use MissionBundle\Entity\Step;
+use TeamBundle\Entity\Team;
 
-class LoadUserData implements FixtureInterface, ContainerAwareInterface
+class LoadUser implements FixtureInterface, ContainerAwareInterface
 {
     /**
      * @var ContainerInterface
@@ -23,8 +29,10 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
     public function load(ObjectManager $manager)
     {
         $userManager = $this->container->get('fos_user.user_manager');
+        $mission = $manager->getRepository('MissionBundle:Mission')
+                    ->findOneBy(array('title' => "Fixture Test"));
 
-        $i = 0;
+        $i = $j = 0;
         while ($i < 30)
         {
             $user = $userManager->createUser();
@@ -36,9 +44,15 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
             $user->setEnabled(true);
             $user->setRoles(array('ROLE_ADVISOR'));
             $userManager->updateUser($user, true);
+
+            $team = new Team(0);
+            $team->addUser($user);
+            $team->setMission($mission);
+            if ($i < 10)
+                $team->setStatus(1);
+            $manager->persist($team);
             $i++;
         }
-        $j = 0;
         while ($j < 5)
         {
             $user = $userManager->createUser();
@@ -53,5 +67,6 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
             $i++;
             $j++;
         }
+        $manager->flush();
     }
 }

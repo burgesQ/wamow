@@ -1,6 +1,9 @@
 mission:
     all_missions:
         title: "All available missions"
+        start: "start"
+        delete: "delete"
+        pitch: "pitch"
     edit:
         title: "Mission editing"
         warning: "You are editing a mission which already exist."
@@ -39,8 +42,7 @@ mission:
             chooseDay: "Day"
             chooseMonth: "Month"
             chooseYear: "Year"
-        optional: "* optional fields"
-    registred:
+    registered:
         success: "Mission saved with success!"
         see: "see your mission"
         edit: "edit your mission"
@@ -67,7 +69,25 @@ mission:
         notYourMission: "You can't edit a mission that doesn't belong to you."
         available: "The mission %id% is not available."
         wright: "You did not created this mission."
+        advisor: "You have no access to this page."
     pitch:
         done: "You just pitch."
         twice: "You already apply to this mission."
         contractor: "A contractor cannot pitch"
+    selection:
+        choose: "Teams available :"
+        selected: "Teams selected :"
+        step: "Step"
+        delete: "You have to keep at least one team."
+        counter: "You cat not deleted teams anymore."
+        minimum: "Select between one and %limit% teams."
+        takeBack: "You deleted a team by mistake?"
+        takeBackError: "You can not take back another team."
+        pick: "Pick another one from last step :"
+        finish: "You choose team number %id%, your mission can beguin now."
+        saveButton: "Choose this team"
+        saveButton2: "Take back this team"
+        saveButton3: "Next Step"
+        saveButton4: "Delete"
+        limit: "%limit% suppression(s) available"
+        noTeam: "No team applyed to your mission."

@@ -1,13 +1,5 @@
 {
-	"nbStep": "4",
-	"step0": {
-		"position": "0",
-		"status": "0",
-		"nbMaxTeam": "10",
-		"reallocTeam": "10",
-		"startDate": "null",
-		"endDate": "null"
-	},
+	"nbStep": "3",
 	"step1": {
 		"position": "1",
 		"status": "0",
@@ -27,8 +19,8 @@
 	"step3": {
 		"position": "3",
 		"status": "0",
-		"nbMaxTeam": "null",
-		"reallocTeam": "null",
+		"nbMaxTeam": "1",
+		"reallocTeam": "0",
 		"startDate": "null",
 		"endDate": "null"
 	}

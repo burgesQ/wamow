@@ -11,9 +11,7 @@ class LoadConfig implements FixtureInterface
 
   public function load(ObjectManager $manager)
   {
-      $array = array("nbStep" => 4,
-                      "step0" => array('nbMaxTeam' => 10,
-                                      'reallocTeam' => 10),
+      $array = array("nbStep" => 3,
                       "step1" => array('nbMaxTeam' => 10,
                                       'reallocTeam' => 10),
                       "step2" => array('nbMaxTeam' => 3,
@@ -21,21 +19,21 @@ class LoadConfig implements FixtureInterface
                       "step3" => array('nbMaxTeam' => 1,
                                       'reallocTeam' => 0)
                   );
-      $nbStep = 0;
+      $position = 1;
       $json = array();
-      $step = 'step'.$nbStep;
+      $step = 'step'.$position;
       $json["nbStep"] = $array["nbStep"];
       while (isset($array[$step]) == true)
           {
-              $json[$step] = array('position' => $nbStep,
+              $json[$step] = array('position' => $position,
                                   'status'    => 0,
                                   'nbMaxTeam' => $array[$step]["nbMaxTeam"],
                                   'reallocTeam' => $array[$step]["reallocTeam"],
                                   'startDate' => null,
                                   'endDate' => null
                                   );
-              $nbStep++;
-              $step = 'step'.$nbStep;
+              $position++;
+              $step = 'step'.$position;
           }
       $json = json_encode($json);
       $mission_config = new Config();

@@ -10,6 +10,6 @@ services:
 
     acme_user.password_resetting:
         class: UserBundle\EventListener\PasswordResettingListener
-        arguments: [ @router ]
+        arguments: [ '@router' ]
         tags:
             - { name: kernel.event_subscriber }

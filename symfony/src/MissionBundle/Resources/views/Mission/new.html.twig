@@ -3,6 +3,13 @@
 <h3>{{ 'mission.new.title'|trans }}</h3>
 
 <form method="post" {{ form_enctype(form) }}>
+
+{% block stylesheets %}
+    {% stylesheets '@chosen_css' filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
   {{ form_start(form) }}
     <div>
     {{ form_errors(form.title) }}
@@ -101,13 +108,18 @@
     </div>
     <br>
     <div>
-    {{ form_errors(form.image) }}
-    {{ form_label(form.image) }}
-    {{ form_widget(form.image) }}
+    {{ form_errors(form.tags) }}
+    {{ form_label(form.tags) }}
+    {{ form_widget(form.tags) }}
     <br>
     </div>
     {{ form_row(form.save) }}
   {{ form_end(form) }}
-</form>
 
-{{ 'mission.new.optional'|trans }}
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
+ {% javascripts '@chosen_jquery_tag' '@chosen_config_tag' '@prism' %}
+    <script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+
+
+</form>

@@ -1,13 +1,13 @@
 <?php
 
-namespace MissionBundle\Form;
+namespace CompanyBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use MissionBundle\Entity\Step;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class StepType extends AbstractType
+class CompanyLeaveType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -16,10 +16,10 @@ class StepType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('startDate', 'date')
-            ->add('endDate', 'date')
-            ->add('maxNumberTeam')
-            ->add('save',             'submit')
+            ->add('save', SubmitType::class, array(
+                'label' => 'company.leave.submit',
+                'translation_domain' => 'CompanyBundle',
+            ))
         ;
     }
 
@@ -29,7 +29,15 @@ class StepType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'MissionBundle\Entity\Step'
+            'data_class' => 'CompanyBundle\Entity\Company'
         ));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'companybundle_company';
     }
 }

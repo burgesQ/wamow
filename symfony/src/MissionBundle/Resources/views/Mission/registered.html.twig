@@ -1,6 +1,6 @@
 {% trans_default_domain "MissionBundle" %}
 
-{{ 'mission.registred.success'|trans }}<br>
-<a href="{{ path('mission_view_seeker', {'id': mission.id}) }}">{{ 'mission.registred.see'|trans }}</a><br>
-<a href="{{ path('mission_edit', {'id': mission.id}) }}">{{ 'mission.registred.edit'|trans }}</a><br>
-<a href="{{ path('mission_new') }}">{{ 'mission.registred.another'|trans }}</a>
+{{ 'mission.registered.success'|trans }}<br>
+<a href="{{ path('mission_view', {'id': mission.id}) }}">{{ 'mission.registered.see'|trans }}</a><br>
+<a href="{{ path('mission_edit', {'id': mission.id}) }}">{{ 'mission.registered.edit'|trans }}</a><br>
+<a href="{{ path('mission_new') }}">{{ 'mission.registered.another'|trans }}</a>

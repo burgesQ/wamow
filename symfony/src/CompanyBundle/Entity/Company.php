@@ -51,10 +51,10 @@ class Company
      *
      * @ORM\Column(name="size", type="integer", nullable=false)
      * @Assert\Range(
-     *      min = 1
+     *      min = 0,
+     *      max = 3
      *)
      */
-
     private $size;
 
     /**
@@ -62,7 +62,6 @@ class Company
      *
      * @ORM\Column(name="logo", type="string", length=255, nullable=false)
      */
-
     private $logo;
 
     /**
@@ -70,7 +69,6 @@ class Company
      *
      * @ORM\Column(name="status", type="integer", nullable=false)
      */
-
     private $status;
 
     /**
@@ -84,25 +82,14 @@ class Company
      * @ORM\ManyToOne(targetEntity="CompanyBundle\Entity\Sector", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
-
     private $sector;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="type", type="string", length=255, nullable=false)
-     */
-
-    private $type;
 
     public function __construct()
     {
         $this->creationDate = new \Datetime();
-        $this->creationDate = new \Datetime();
         $this->updateDate = new \Datetime();
         $this->status = 0;
     }
-
 
     /**
      * Get id
@@ -273,29 +260,6 @@ class Company
     public function getSize()
     {
         return $this->size;
-    }
-
-    /**
-     * Set type
-     *
-     * @param string $type
-     * @return Company
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
     }
 
     /**
