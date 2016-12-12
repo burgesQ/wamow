@@ -225,6 +225,9 @@ class MissionController extends Controller
         $repository = $em->getRepository('MissionBundle:Mission');
         $listTeams = $repository->myMissions($this->getUser()->getId());
         $mission = $repository->findOneBy(array('id' => $missionId));
+        if ($mission == null) {
+            throw new NotFoundHttpException($trans->trans('mission.error.available', array('%id%' => $id), 'MissionBundle'));
+        }
         foreach ($listTeams as $team) {
             if ($team->getMission() == $mission) {
                 return new Response($trans->trans('mission.pitch.twice', array(), 'MissionBundle'));
@@ -235,7 +238,7 @@ class MissionController extends Controller
         }
         $team = new Team(0);  //role 0 = advisor
         $step = $repository->getSpecificStep($missionId, 1)[0];
-        $i = count($repository->setTeamsAvailables($missionId, $step));
+        $i = count($repository->TeamsAvailables($missionId, $step));
         if ($i < $step->getnbMaxTeam())
             $team->setStatus(1);
         $team->setMission($mission);
@@ -247,6 +250,7 @@ class MissionController extends Controller
 
     /*
     ** Team Status :
+    **     -2 : canceled
     **     -1 : deleted teams
     **      0 : waiting teams
     **      1 : first step
@@ -395,6 +399,57 @@ class MissionController extends Controller
             $mission->setStatus(-1);
             $em->flush($mission);
             return $this->redirectToRoute('missions_all', array());
+        }
+        throw new NotFoundHttpException($trans->trans('mission.error.advisor', array(), 'MissionBundle'));
+    }
+
+    public function pitchAllAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('MissionBundle:Mission');
+        $user = $this->getUser();
+        $trans = $this->get('translator');
+        $em = $this->getDoctrine()->getManager();
+
+        if ( $user === null ) {
+            throw new NotFoundHttpException($trans->trans('mission.error.logged', array(), 'MissionBundle'));
+        }
+        elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR'))
+        {
+            $listTeam = $repository->myMissions($user->getId());
+            return $this->render('MissionBundle:Mission:pitch_all.html.twig', array(
+                'listTeam'           => $listTeam
+            ));
+        }
+        else {
+            throw new NotFoundHttpException($trans->trans('mission.error.logged', array(), 'MissionBundle'));
+        }
+    }
+
+    public function giveUpAction($missionId)
+    {
+        $trans = $this->get('translator');
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('MissionBundle:Mission');
+        $mission = $em->getRepository('MissionBundle:Mission')->find($missionId);
+        $team = $repository->getSpecificTeam($missionId, $this->getUser()->getId())[0];
+        $user = $this->getUser();
+
+        if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')
+            && $mission != null && $team != null)
+        {
+            $listUsers = $team->getUsers();
+            $team->removeUser($user);
+            $user->removeTeam($team);
+            $em->persist($team);
+            $em->flush();
+            $listUsers = $team->getUsers();
+
+            if (count($listUsers) == 0) {
+                $team->setStatus(-2);
+            }
+            $em->flush();
+            return $this->redirectToRoute('mission_pitch_all', array());
         }
         throw new NotFoundHttpException($trans->trans('mission.error.advisor', array(), 'MissionBundle'));
     }

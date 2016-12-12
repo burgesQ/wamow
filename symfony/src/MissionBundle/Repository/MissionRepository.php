@@ -78,4 +78,19 @@ class MissionRepository extends EntityRepository
         ->andWhere('s.status = 1');
         return $qb->getQuery()->getResult();
     }
+
+    public function getSpecificTeam($missionId, $userID)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('t', 'u')
+        ->from('TeamBundle:Team', 't')
+        ->leftjoin('t.mission', 'm')
+        ->leftjoin('t.users', 'u')
+        ->where('m.id = :missionId')
+            ->setParameter('missionId', $missionId)
+        ->andWhere('u.id = :userID')
+            ->setParameter('userID', $userID)
+            ;
+        return $qb->getQuery()->getResult();
+    }
 }
