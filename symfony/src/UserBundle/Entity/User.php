@@ -30,6 +30,36 @@ class User extends BaseUser
     protected $id;
 
     /**
+     * @ORM\Column(name="linkedin_id", type="string", length=255, nullable=true)
+     */
+    protected $linkedin_id;
+
+    /**
+     * @ORM\Column(name="linkedin_access_token", type="string", length=255, nullable=true)
+     */
+    protected $linkedin_access_token;
+
+    /**
+     * @ORM\Column(name="facebook_id", type="string", length=255, nullable=true)
+     */
+    protected $facebook_id;
+
+    /**
+     * @ORM\Column(name="facebook_access_token", type="string", length=255, nullable=true)
+     */
+    protected $facebook_access_token;
+
+    /**
+     * @ORM\Column(name="google_id", type="string", length=255, nullable=true)
+     */
+    protected $google_id;
+
+    /**
+     * @ORM\Column(name="google_access_token", type="string", length=255, nullable=true)
+     */
+    protected $google_access_token;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="status", type="smallint", nullable=false)
@@ -66,6 +96,13 @@ class User extends BaseUser
      * )
      */
     protected $plainPassword;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="password_set", type="boolean", nullable=false)
+     */
+    private $password_set;
 
     /**
      * @var bool
@@ -614,5 +651,245 @@ class User extends BaseUser
                 ->atPath('dailyFeesMin')
                 ->addViolation();
         }
+    }
+
+    /**
+     * Add team
+     *
+     * @param \TeamBundle\Entity\Team $team
+     * @return User
+     */
+    public function addTeam(\TeamBundle\Entity\Team $team)
+    {
+        $this->team[] = $team;
+
+        return $this;
+    }
+
+    /**
+     * Remove team
+     *
+     * @param \TeamBundle\Entity\Team $team
+     */
+    public function removeTeam(\TeamBundle\Entity\Team $team)
+    {
+        $this->team->removeElement($team);
+    }
+
+    /**
+     * Get team
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTeam()
+    {
+        return $this->team;
+    }
+
+    /**
+     * Set facebook_id
+     *
+     * @param string $facebookId
+     * @return User
+     */
+    public function setFacebookId($facebookId)
+    {
+        $this->facebook_id = $facebookId;
+
+        return $this;
+    }
+
+    /**
+     * Get facebook_id
+     *
+     * @return string
+     */
+    public function getFacebookId()
+    {
+        return $this->facebook_id;
+    }
+
+    /**
+     * Set facebook_access_token
+     *
+     * @param string $facebookAccessToken
+     * @return User
+     */
+    public function setFacebookAccessToken($facebookAccessToken)
+    {
+        $this->facebook_access_token = $facebookAccessToken;
+
+        return $this;
+    }
+
+    /**
+     * Get facebook_access_token
+     *
+     * @return string
+     */
+    public function getFacebookAccessToken()
+    {
+        return $this->facebook_access_token;
+    }
+
+    /**
+     * Set google_id
+     *
+     * @param string $googleId
+     * @return User
+     */
+    public function setGoogleId($googleId)
+    {
+        $this->google_id = $googleId;
+
+        return $this;
+    }
+
+    /**
+     * Get google_id
+     *
+     * @return string
+     */
+    public function getGoogleId()
+    {
+        return $this->google_id;
+    }
+
+    /**
+     * Set google_access_token
+     *
+     * @param string $googleAccessToken
+     * @return User
+     */
+    public function setGoogleAccessToken($googleAccessToken)
+    {
+        $this->google_access_token = $googleAccessToken;
+
+        return $this;
+    }
+
+    /**
+     * Get google_access_token
+     *
+     * @return string
+     */
+    public function getGoogleAccessToken()
+    {
+        return $this->google_access_token;
+    }
+
+    /**
+     * Add images
+     *
+     * @param \ToolsBundle\Entity\Upload $images
+     * @return User
+     */
+    public function addImage(\ToolsBundle\Entity\Upload $images)
+    {
+        $this->images[] = $images;
+
+        return $this;
+    }
+
+    /**
+     * Remove images
+     *
+     * @param \ToolsBundle\Entity\Upload $images
+     */
+    public function removeImage(\ToolsBundle\Entity\Upload $images)
+    {
+        $this->images->removeElement($images);
+    }
+
+    /**
+     * Add resumes
+     *
+     * @param \ToolsBundle\Entity\Upload $resumes
+     * @return User
+     */
+    public function addResume(\ToolsBundle\Entity\Upload $resumes)
+    {
+        $this->resumes[] = $resumes;
+
+        return $this;
+    }
+
+    /**
+     * Remove resumes
+     *
+     * @param \ToolsBundle\Entity\Upload $resumes
+     */
+    public function removeResume(\ToolsBundle\Entity\Upload $resumes)
+    {
+        $this->resumes->removeElement($resumes);
+    }
+
+    /**
+     * Set linkedin_id
+     *
+     * @param string $linkedinId
+     * @return User
+     */
+    public function setLinkedinId($linkedinId)
+    {
+        $this->linkedin_id = $linkedinId;
+
+        return $this;
+    }
+
+    /**
+     * Get linkedin_id
+     *
+     * @return string
+     */
+    public function getLinkedinId()
+    {
+        return $this->linkedin_id;
+    }
+
+    /**
+     * Set linkedin_access_token
+     *
+     * @param string $linkedinAccessToken
+     * @return User
+     */
+    public function setLinkedinAccessToken($linkedinAccessToken)
+    {
+        $this->linkedin_access_token = $linkedinAccessToken;
+
+        return $this;
+    }
+
+    /**
+     * Get linkedin_access_token
+     *
+     * @return string
+     */
+    public function getLinkedinAccessToken()
+    {
+        return $this->linkedin_access_token;
+    }
+
+    /**
+     * Set password_set
+     *
+     * @param boolean $passwordSet
+     * @return User
+     */
+    public function setPasswordSet($passwordSet)
+    {
+        $this->password_set = $passwordSet;
+
+        return $this;
+    }
+
+    /**
+     * Get password_set
+     *
+     * @return boolean
+     */
+    public function isPasswordSet()
+    {
+        return $this->password_set;
     }
 }

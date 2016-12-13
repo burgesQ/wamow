@@ -1,28 +1,3 @@
-# To get started with security, check out the documentation:
-# http://symfony.com/doc/current/book/security.html
-# security:
-
-    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
-    # providers:
-        # in_memory:
-            # memory: ~
-
-    # firewalls:
-        # disables authentication for assets and the profiler, adapt it according to your needs
-        # dev:
-            # pattern: ^/(_(profiler|wdt)|css|images|js)/
-            # security: false
-
-        # main:
-            # anonymous: ~
-            # activate different ways to authenticate
-
-            # http_basic: ~
-            # http://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
-
-            # form_login: ~
-            # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
-# app/config/security.yml
 security:
     encoders:
         FOS\UserBundle\Model\UserInterface: bcrypt
@@ -43,34 +18,37 @@ security:
 
     firewalls:
         dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
         main:
             pattern: ^/
             form_login:
                 provider: fos_userbundle
-                csrf_token_generator: security.csrf.token_manager
-                login_path: /
-                use_forward: false
-                check_path: fos_user_security_check
-                failure_path: null
-                default_target_path: /
-                remember_me: true
-                # if you are using Symfony < 2.8, use the following config instead:
-                # csrf_provider: form.csrf_provider
-            remember_me:
-                key:      %secret%
-                lifetime: 3000
-                path:     /
-                domain:   ˜
-            logout:
-                path: fos_user_security_logout
-                target: /
-            anonymous:    true
-            switch_user:  true
+                csrf_provider: form.csrf_provider
+                login_path: /login
+                check_path: /login_check
+            oauth:
+                resource_owners:
+                    linkedin:           "/login/check-linkedin"
+                    facebook:           "/login/check-facebook"
+                    google:             "/login/check-google"
+                login_path:        /login
+                failure_path:      /login
 
-    access_control:
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        # - { path: ^/admin/, role: ROLE_ADMIN }
+                oauth_user_provider:
+                    #this is my custom user provider, created from FOSUBUserProvider - will manage the
+                    #automatic user registration on your site, with data from the provider (facebook. google, etc.)
+                    service: my_user_provider
+            logout:       true
+            anonymous:    true
+
+        login:
+            pattern:  ^/login$
+            security: false
+
+            remember_me:
+                key: "%secret%"
+                lifetime: 3000
+                path: /
+                domain: ~ # Defaults to the current domain from $_SERVER

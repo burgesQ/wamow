@@ -1,0 +1,10 @@
+parameters:
+    linkedin_id: 77ecibwltvypjg
+    linkedin_secret: wpUwphCFmPaRT1Ik
+    linkedin_scope: "r_basicprofile r_emailaddress"
+    google_id: "491078988516-mvuj8btfhuaktvieortp2ose13levhhh.apps.googleusercontent.com"
+    google_secret: "Bxv9IG2nn7mFaZpyT3spQvit"
+    google_scope: "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
+    facebook_id: "fb_id"
+    facebook_secret: "fb_secret"
+    facebook_scope: ""

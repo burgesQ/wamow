@@ -26,14 +26,12 @@
     {{ form_row(form.user.dailyFeesMin) }}
     {{ form_row(form.user.dailyFeesMax) }}
 
-    {{ form_row(form.resume.file) }} 
+    {{ form_row(form.resume.file) }}
 
     {{ form_row(form.user.newsletter) }}
 
-    {{ form_row(form.user.current_password) }}
-
     <div>
-	<input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+       <input type="submit" value="{{ 'profile.edit.submit'|trans }}" method="post" {{ form_enctype(form) }} />
     </div>
 
 {{ form_end(form) }}

@@ -8,8 +8,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
-
 
 use ToolsBundle\Form\PhoneNumberType;
 use ToolsBundle\Form\AddressType;
@@ -17,11 +15,22 @@ use ToolsBundle\Form\UploadType;
 
 class ProfileFormType extends AbstractType
 {
+    private $class;
+
+    /**
+    * @param string $class The User class name
+    */
+    public function __construct($class)
+    {
+      $this->class = $class;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
         $builder
             ->remove('username')
+            ->remove('current_password')
             ->add('firstName',  'text',
                   array(
                       'translation_domain' => 'FOSUserBundle',
@@ -45,6 +54,8 @@ class ProfileFormType extends AbstractType
                       'placeholder' => 'form.gender.choose',
                       'empty_data'  => null
                   ))
+            ->add('email', 'email',
+                  array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle'))
             ->add('birthdate', 'birthday',
                   array(
                       'translation_domain' => 'FOSUserBundle',
@@ -84,6 +95,14 @@ class ProfileFormType extends AbstractType
                       'label' => 'form.newsletter',
                       'required' => false,
                   ));
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+                'data_class' => $this->class,
+                'intention'  => 'profile',
+            ));
     }
 
     public function getParent()

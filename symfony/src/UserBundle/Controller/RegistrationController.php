@@ -17,12 +17,18 @@ use FOS\UserBundle\Model\UserInterface;
 
 use ToolsBundle\Entity\Address;
 
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\Storage\PhpBridgeSessionStorage;
+
+
 class RegistrationController extends BaseController
 {
     public function registerExpertAction(Request $request)
     {
         if (!$this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-
+            $session = new Session(new PhpBridgeSessionStorage());
+            $session->start();
+            $session->set('role', 'ADVISOR');
             /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
             $formFactory = $this->get('fos_user.registration.form.factory');
             /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
@@ -33,6 +39,7 @@ class RegistrationController extends BaseController
             $user = $userManager->createUser();
             $user->setEnabled(true);
             $user->setRoles(array("ROLE_ADVISOR"));
+            $user->setPasswordSet(true);
 
             $event = new GetResponseUserEvent($user, $request);
             $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
@@ -73,6 +80,9 @@ class RegistrationController extends BaseController
     public function registerSeekerAction(Request $request)
     {
         if (!$this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            $session = new Session(new PhpBridgeSessionStorage());
+            $session->start();
+            $session->set('role', 'CONTRACTOR');
             /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
             $formFactory = $this->get('fos_user.registration.form.factory');
             /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
@@ -83,6 +93,7 @@ class RegistrationController extends BaseController
             $user = $userManager->createUser();
             $user->setEnabled(true);
             $user->setRoles(array("ROLE_CONTRACTOR"));
+            $user->setPasswordSet(true);
 
             $event = new GetResponseUserEvent($user, $request);
             $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
