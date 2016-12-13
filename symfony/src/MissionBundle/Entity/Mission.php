@@ -7,6 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use ToolsBundle\Entity\Language;
 use ToolsBundle\Entity\Address;
+use TeamBundle\Entity\Team;
 use ToolsBundle\Entity\Tag;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
@@ -61,11 +62,10 @@ class Mission
     private $confidentiality;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="ID_contact", type="integer")
+     * @ORM\OneToOne(targetEntity="TeamBundle\Entity\Team", cascade={"persist"})
+     * @ORM\JoinColumn(name="team_contact")
      */
-    private $iDContact;
+    private  $teamContact;
 
     /**
      * @var int
@@ -103,16 +103,22 @@ class Mission
     private $languages;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MissionBundle\Entity\ProfessionalExpertise")
+     * @ORM\ManyToOne(targetEntity="MissionBundle\Entity\ProfessionalExpertise", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $professionalExpertise;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MissionBundle\Entity\MissionKind")
+     * @ORM\ManyToOne(targetEntity="MissionBundle\Entity\MissionKind", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $missionKind;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="MissionBundle\Entity\BusinessPractice")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $businessPractice;
 
     /**
      * @var bool
@@ -131,24 +137,13 @@ class Mission
     /**
      * @var int
      *
-     * @ORM\Column(name="daily_fees_min", type="integer")
+     * @ORM\Column(name="budget", type="integer")
      * @Assert\Range(
      *      min = 1,
-     *      minMessage = "You need to fill this field.",
+     *      minMessage = "You can't put something under 0.",
      * )
      */
-    private $dailyFeesMin;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="daily_fees_max", type="integer")
-     * @Assert\Range(
-     *      min = 1,
-     *      minMessage = "You need to fill this field.",
-     * )
-     */
-    private $dailyFeesMax;
+    private $budget;
 
     /**
      * @var \DateTime
@@ -210,7 +205,7 @@ class Mission
      */
     private $tags;
 
-    public function __construct($nbStep, $iDContact, $sizeTeamMax, $token)
+    public function __construct($nbStep, $team, $sizeTeamMax, $token)
       {
         $this->creationDate = new \Datetime();
         $this->updateDate = new \DateTime();
@@ -218,7 +213,7 @@ class Mission
         $this->status = 0;
         $this->address = new Address();
         $this->numberStep = $nbStep;
-        $this->iDContact = $iDContact;
+        $this->teamContact = $team;
         $this->sizeTeamMax = $sizeTeamMax;
         $this->token = $token;
       }
@@ -312,7 +307,7 @@ class Mission
      * @param \ToolsBundle\Entity\Address $Address
      * @return Mission
      */
-    public function setAddress(Address $address = null)
+    public function setAddress(Address $address)
     {
         $this->address = $address;
     }
@@ -340,27 +335,29 @@ class Mission
         return $this->confidentiality;
     }
 
+
+
     /**
-     * Set iDContact
+     * Set TeamContact
      *
-     * @param integer $iDContact
+     * @param \TeamBundle\Entity\Team $teamContact
      * @return Mission
      */
-    public function setIDContact($iDContact)
+    public function setTeamContact(\TeamBundle\Entity\Team $teamContact)
     {
-        $this->iDContact = $iDContact;
+        $this->teamContact = $teamContact;
 
         return $this;
     }
 
     /**
-     * Get iDContact
+     * Get TeamContact
      *
-     * @return integer
+     * @return \TeamBundle\Entity\Team
      */
-    public function getIDContact()
+    public function getTeamContact()
     {
-        return $this->iDContact;
+        return $this->teamContact;
     }
 
     /**
@@ -476,52 +473,6 @@ class Mission
     public function getTelecommuting()
     {
         return $this->telecommuting;
-    }
-
-    /**
-     * Set dailyFeesMin
-     *
-     * @param integer $dailyFeesMin
-     * @return Mission
-     */
-    public function setDailyFeesMin($dailyFeesMin)
-    {
-        $this->dailyFeesMin = $dailyFeesMin;
-
-        return $this;
-    }
-
-    /**
-     * Get dailyFeesMin
-     *
-     * @return integer
-     */
-    public function getDailyFeesMin()
-    {
-        return $this->dailyFeesMin;
-    }
-
-    /**
-     * Set dailyFeesMax
-     *
-     * @param integer $dailyFeesMax
-     * @return Mission
-     */
-    public function setDailyFeesMax($dailyFeesMax)
-    {
-        $this->dailyFeesMax = $dailyFeesMax;
-
-        return $this;
-    }
-
-    /**
-     * Get dailyFeesMax
-     *
-     * @return integer
-     */
-    public function getDailyFeesMax()
-    {
-        return $this->dailyFeesMax;
     }
 
     /**
@@ -788,6 +739,52 @@ class Mission
     }
 
     /**
+     * Set businessPractice
+     *
+     * @param \MissionBundle\Entity\BusinessPractice $businessPractice
+     * @return Mission
+     */
+    public function setBusinessPractice(\MissionBundle\Entity\BusinessPractice $businessPractice)
+    {
+        $this->businessPractice = $businessPractice;
+
+        return $this;
+    }
+
+    /**
+     * Get businessPractice
+     *
+     * @return \MissionBundle\Entity\BusinessPractice
+     */
+    public function getBusinessPractice()
+    {
+        return $this->businessPractice;
+    }
+
+    /**
+     * Set budget
+     *
+     * @param integer $budget
+     * @return Mission
+     */
+    public function setBudget($budget)
+    {
+        $this->budget = $budget;
+
+        return $this;
+    }
+
+    /**
+     * Get budget
+     *
+     * @return integer
+     */
+    public function getBudget()
+    {
+        return $this->budget;
+    }
+
+    /**
      * @Assert\Callback
      */
     public function validate(ExecutionContextInterface $context)
@@ -795,8 +792,6 @@ class Mission
         $missionBeginning = $this->getMissionBeginning();
         $missionEnding = $this->getMissionEnding();
         $applicationEnding = $this->getApplicationEnding();
-        $dailyFeesMin = $this->getDailyFeesMin();
-        $dailyFeesMax = $this->getDailyFeesMax();
         $today = new \DateTime();
         if ($missionBeginning->format("yy/mm/dd") >= $missionEnding->format("yy/mm/dd"))
         {
@@ -823,14 +818,6 @@ class Mission
               ->atPath('missionBeginning')
               ->addViolation()
               ;
-        }
-        if ($dailyFeesMin > $dailyFeesMax)
-        {
-          $context
-            ->buildViolation('The minimum fees must be less than the maximum.')
-            ->atPath('dailyFeesMin')
-            ->addViolation()
-            ;
         }
     }
 }

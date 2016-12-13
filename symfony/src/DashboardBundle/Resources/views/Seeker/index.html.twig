@@ -1,4 +1,5 @@
 {% extends "base.html.twig" %}
+{% trans_default_domain "DashboardBundle" %}
 
 {% block head %}
     {{ parent() }}
@@ -12,8 +13,8 @@
         Missions you created :
         {% for currentMission in listMission %}
         <li>
-            <a href="{{ path('mission_view', {'id': currentMission.id}) }}">
-                {{ currentMission.title }}</a>
+            <a href="{{ path('mission_view', {'id': currentMission.mission.id}) }}">
+                {{ currentMission.mission.title }}</a>
         </li>
         {% endfor %}
     </p>

@@ -228,12 +228,6 @@ class User extends BaseUser
      */
     private $newsletter;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="TeamBundle\Entity\Team", inversedBy="users")
-     * @ORM\JoinTable(name="team_user")
-     */
-    private $team;
-
     public function __construct()
     {
         parent::__construct();

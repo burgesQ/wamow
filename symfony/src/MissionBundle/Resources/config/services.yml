@@ -2,3 +2,6 @@ services:
     mission.nbStep:
         class: ToolsBundle\Service\MissionNbStep
         arguments: ['@doctrine.orm.entity_manager']
+    mission.savedTeams:
+        class: MissionBundle\Service\Team
+        arguments: ['@doctrine.orm.entity_manager']

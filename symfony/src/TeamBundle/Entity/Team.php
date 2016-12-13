@@ -2,6 +2,7 @@
 
 namespace TeamBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,14 +24,13 @@ class Team
 
     /**
      * @ORM\ManyToOne(targetEntity="MissionBundle\Entity\Mission", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
      */
     private $mission;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="UserBundle\Entity\User", mappedBy="teams")
+     * @ORM\ManyToMany(targetEntity="UserBundle\Entity\User", cascade={"persist", "merge"})
      */
     private $users;
 
@@ -40,6 +40,13 @@ class Team
      * @ORM\Column(name="creationDate", type="datetime")
      */
     private $creationDate;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="update_date", type="datetime", nullable=true)
+     */
+    private $updateDate;
 
     /**
      * @var bool
@@ -60,7 +67,7 @@ class Team
      */
     public function __construct($role)
     {
-        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->users = new ArrayCollection();
         $this->creationDate = new \DateTime();
         $this->role = $role;
         $this->status = 0;
@@ -199,5 +206,28 @@ class Team
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * Set updateDate
+     *
+     * @param \DateTime $updateDate
+     * @return Team
+     */
+    public function setUpdateDate($updateDate)
+    {
+        $this->updateDate = $updateDate;
+
+        return $this;
+    }
+
+    /**
+     * Get updateDate
+     *
+     * @return \DateTime
+     */
+    public function getUpdateDate()
+    {
+        return $this->updateDate;
     }
 }

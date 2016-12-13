@@ -4,7 +4,7 @@ mission_new:
         _controller: MissionBundle:Mission:new
 
 mission_view:
-    path:      /mission/{id}
+    path:      /mission/view/{id}
     defaults:
         _controller: MissionBundle:Mission:view
 
@@ -21,9 +21,24 @@ mission_step:
 missions_all:
     path:      /mission/all
     defaults:
-        _controller: MissionBundle:Mission:missionList
+        _controller: MissionBundle:Mission:list
+
+mission_delete:
+    path:      /mission/delete/{missionId}
+    defaults:
+        _controller: MissionBundle:Mission:deleteMission
 
 mission_pitch:
-    path:      /mission/pitch/{id}
+    path:      /mission/pitch/{missionId}
     defaults:
         _controller: MissionBundle:Mission:missionPitch
+
+mission_teams_selection:
+    path:      /mission/{missionId}/selection
+    defaults:
+        _controller: MissionBundle:Mission:selection
+
+mission_selection_takeback:
+    path:      /mission/{missionId}/selection/takeback
+    defaults:
+        _controller: MissionBundle:Mission:takeBack
