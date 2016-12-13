@@ -111,3 +111,20 @@ Simply add this: (then go to [symfony.dev:8080](http://symfony.dev:8080))
        links:
         - db:mysql
     ```
+
+        * Test Fixtures order  :
+            sf doctrine:database:drop --force
+            sf doctrine:database:create
+            sf doctrine:schema:update --force
+            sf doctrine:fixtures:load --append --fixtures=src/MissionBundle/DataFixtures/ORM/LoadExpertise.php
+            sf doctrine:fixtures:load --append --fixtures=src/MissionBundle/DataFixtures/ORM/LoadMissionKind.php
+            sf doctrine:fixtures:load --append --fixtures=src/MissionBundle/DataFixtures/ORM/LoadBusinessPractice.php
+            sf doctrine:fixtures:load --append --fixtures=src/ToolsBundle/DataFixtures/ORM/LoadLanguage.php
+            sf doctrine:fixtures:load --append --fixtures=src/MissionBundle/DataFixtures/ORM/Tests/LoadAddress.php
+            sf doctrine:fixtures:load --append --fixtures=src/MissionBundle/DataFixtures/ORM/Tests/LoadContractor.php
+            sf doctrine:fixtures:load --append --fixtures=src/MissionBundle/DataFixtures/ORM/Tests/LoadMission.php
+            sf doctrine:fixtures:load --append --fixtures=src/MissionBundle/DataFixtures/ORM/Tests/LoadStep.php
+            sf doctrine:fixtures:load --append --fixtures=src/ToolsBundle/DataFixtures/ORM/LoadConfig.php
+            sf doctrine:fixtures:load --append --fixtures=src/MissionBundle/DataFixtures/ORM/Tests/LoadAdvisor.php
+            sf doctrine:fixtures:load --append --fixtures=src/ToolsBundle/DataFixtures/ORM/LoadPrefix.php
+            sf doctrine:fixtures:load --append --fixtures=src/CompanyBundle/DataFixtures/ORM/LoadSector.php

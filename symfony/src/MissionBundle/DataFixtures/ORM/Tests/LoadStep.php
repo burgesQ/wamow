@@ -6,7 +6,7 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use MissionBundle\Entity\Step;
 
-class LoadAddress implements FixtureInterface
+class LoadStep implements FixtureInterface
 {
     public function load(ObjectManager $manager)
     {

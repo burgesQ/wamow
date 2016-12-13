@@ -2,6 +2,7 @@
 
 namespace TeamBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -29,7 +30,7 @@ class Team
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="UserBundle\Entity\User", mappedBy="team")
+     * @ORM\ManyToMany(targetEntity="UserBundle\Entity\User", cascade={"persist", "merge"})
      */
     private $users;
 
@@ -66,7 +67,7 @@ class Team
      */
     public function __construct($role)
     {
-        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->users = new ArrayCollection();
         $this->creationDate = new \DateTime();
         $this->role = $role;
         $this->status = 0;

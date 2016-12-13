@@ -6,9 +6,8 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use TeamBundle\Entity\Team;
 
-class LoadContractorTest implements FixtureInterface, ContainerAwareInterface
+class LoadContractor implements FixtureInterface, ContainerAwareInterface
 {
     /**
      * @var ContainerInterface
@@ -33,11 +32,5 @@ class LoadContractorTest implements FixtureInterface, ContainerAwareInterface
         $contractor->setEnabled(true);
         $contractor->setRoles(array('ROLE_CONTRACTOR'));
         $userManager->updateUser($contractor, true);
-
-        $team = new Team(1);
-        $team->addUser($contractor);
-        $team->setStatus(1);
-        $manager->persist($team);
-        $manager->flush();
     }
 }

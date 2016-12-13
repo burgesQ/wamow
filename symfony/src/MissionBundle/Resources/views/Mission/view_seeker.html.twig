@@ -37,11 +37,10 @@
         {{ 'mission.view.name'|trans }}: {{ mission.address.name }}<br>
        {% endif %}
    </p>
-  <p>
-      <h4><br>{{ 'mission.view.dailyFees'|trans }} :</h4>
-        {{ mission.dailyFeesMin }} {{ 'mission.view.dayMin'|trans }} <br>
-        {{ mission.dailyFeesMax }} {{ 'mission.view.dayMax'|trans }}
-  </p>
+   <p>
+       <h4><br>{{ 'mission.view.budget'|trans }} :</h4>
+         {{ mission.budget }} {{ 'mission.view.budget'|trans }}
+   </p>
   <p>
       {{ 'mission.view.applicationEnding'|trans({'%date%': mission.applicationEnding|date('m/d/Y')}) }}<br>
       {{ 'mission.view.period'|trans({'%start%': mission.missionBeginning|date('m/d/Y'),
