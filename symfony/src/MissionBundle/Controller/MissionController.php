@@ -57,16 +57,17 @@ class MissionController extends Controller
               $em = $this->getDoctrine()->getManager();
               if ($_POST)
                 {
-                    $values = $_POST['mission']['tags'];
-                    foreach ($values as $value)
-                    {
-                      $tag = new Tag();
-                      $tag->setTag($value);
-                      $mission->addTag($tag);
-                      $em->persist($tag);
-                    }
+                    if (($values = $_POST['mission']['tags']) != null) {
+                        foreach ($values as $value)
+                        {
+                            $tag = new Tag();
+                            $tag->setTag($value);
+                            $mission->addTag($tag);
+                            $em->persist($tag);
+                        }
                     $em->flush();
-               }
+                    }
+                }
                 $em->persist($mission);
                 for ($i=1; $i <= $nbStep; $i++)
                 {
@@ -235,7 +236,7 @@ class MissionController extends Controller
         }
         $team = new Team(0);  //role 0 = advisor
         $step = $repository->getSpecificStep($missionId, 1)[0];
-        $i = count($repository->setTeamsAvailables($missionId, $step));
+        $i = count($repository->TeamsAvailables($missionId, $step));
         if ($i < $step->getnbMaxTeam())
             $team->setStatus(1);
         $team->setMission($mission);

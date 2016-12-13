@@ -6,7 +6,7 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use MissionBundle\Entity\BusinessPractice;
 
-class LoadBusinessPracticeData implements FixtureInterface
+class LoadBusinessPractice implements FixtureInterface
 {
     public function load(ObjectManager $manager)
     {

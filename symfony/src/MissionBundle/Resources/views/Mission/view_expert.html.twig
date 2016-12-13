@@ -17,9 +17,8 @@
   </p>
 
   <p>
-      <h4><br>{{ 'mission.view.dailyFees'|trans }} :</h4>
-        {{ mission.dailyFeesMin }} {{ 'mission.view.dayMin'|trans }} <br>
-        {{ mission.dailyFeesMax }} {{ 'mission.view.dayMax'|trans }}
+      <h4><br>{{ 'mission.view.budget'|trans }} :</h4>
+        {{ mission.budget }} {{ 'mission.view.budget'|trans }}
   </p>
   <p>
       {{ 'mission.view.applicationEnding'|trans({'%date%': mission.applicationEnding|date('m/d/Y')}) }}<br>
@@ -44,7 +43,7 @@
             {{ 'mission.view.international'|trans }}
         {% endif %}
   </p>
-        <a href="{{ path('mission_pitch', {'id': mission.id}) }}">{{ 'mission.view.pitch'|trans }} </a>
+        <a href="{{ path('mission_pitch', {'missionId': mission.id}) }}">{{ 'mission.view.pitch'|trans }} </a>
 </div>
 </body>
 </html>

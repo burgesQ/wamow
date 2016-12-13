@@ -140,7 +140,7 @@ class Mission
      * @ORM\Column(name="budget", type="integer")
      * @Assert\Range(
      *      min = 1,
-     *      minMessage = "You need to fill this field.",
+     *      minMessage = "You can't put something under 0.",
      * )
      */
     private $budget;
@@ -739,53 +739,6 @@ class Mission
     }
 
     /**
-     * @Assert\Callback
-     */
-    public function validate(ExecutionContextInterface $context)
-    {
-        $missionBeginning = $this->getMissionBeginning();
-        $missionEnding = $this->getMissionEnding();
-        $applicationEnding = $this->getApplicationEnding();
-        $dailyFeesMin = $this->getDailyFeesMin();
-        $dailyFeesMax = $this->getDailyFeesMax();
-        $today = new \DateTime();
-        if ($missionBeginning->format("yy/mm/dd") >= $missionEnding->format("yy/mm/dd"))
-        {
-          $context
-            ->buildViolation('The mission can not start after the end date.')
-            ->atPath('missionBeginning')
-            ->addViolation()
-            ;
-        }
-        elseif ($applicationEnding->format("yy/mm/dd") >= $missionBeginning->format("yy/mm/dd"))
-        {
-          $context
-            ->buildViolation('The deadline must be before the mission start.')
-            ->atPath('applicationEnding')
-            ->addViolation()
-            ;
-        }
-        elseif ($missionBeginning <= $today
-                || $missionEnding <= $today
-                || $applicationEnding <= $today)
-        {
-            $context
-              ->buildViolation('You can\'t pick a past date.')
-              ->atPath('missionBeginning')
-              ->addViolation()
-              ;
-        }
-        if ($dailyFeesMin > $dailyFeesMax)
-        {
-          $context
-            ->buildViolation('The minimum fees must be less than the maximum.')
-            ->atPath('dailyFeesMin')
-            ->addViolation()
-            ;
-        }
-    }
-
-    /**
      * Set businessPractice
      *
      * @param \MissionBundle\Entity\BusinessPractice $businessPractice
@@ -829,5 +782,42 @@ class Mission
     public function getBudget()
     {
         return $this->budget;
+    }
+
+    /**
+     * @Assert\Callback
+     */
+    public function validate(ExecutionContextInterface $context)
+    {
+        $missionBeginning = $this->getMissionBeginning();
+        $missionEnding = $this->getMissionEnding();
+        $applicationEnding = $this->getApplicationEnding();
+        $today = new \DateTime();
+        if ($missionBeginning->format("yy/mm/dd") >= $missionEnding->format("yy/mm/dd"))
+        {
+          $context
+            ->buildViolation('The mission can not start after the end date.')
+            ->atPath('missionBeginning')
+            ->addViolation()
+            ;
+        }
+        elseif ($applicationEnding->format("yy/mm/dd") >= $missionBeginning->format("yy/mm/dd"))
+        {
+          $context
+            ->buildViolation('The deadline must be before the mission start.')
+            ->atPath('applicationEnding')
+            ->addViolation()
+            ;
+        }
+        elseif ($missionBeginning <= $today
+                || $missionEnding <= $today
+                || $applicationEnding <= $today)
+        {
+            $context
+              ->buildViolation('You can\'t pick a past date.')
+              ->atPath('missionBeginning')
+              ->addViolation()
+              ;
+        }
     }
 }

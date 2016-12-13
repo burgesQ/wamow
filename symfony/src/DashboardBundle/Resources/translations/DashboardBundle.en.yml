@@ -1,0 +1,8 @@
+dashboard:
+    seeker:
+        hello: "Hello contractor"
+        myMission: "My missions"
+    expert:
+        hello: "Hello advisor"
+        current: "Mission in progress"
+        available: "Available missions"

@@ -1,6 +1,6 @@
 <?php
 
-namespace ToolsBundle\Service;
+namespace DashboardBundle\Service;
 
  class currentMission
 {
@@ -9,24 +9,6 @@ namespace ToolsBundle\Service;
     public function __construct(\Doctrine\ORM\EntityManager $em)
     {
         $this->em = $em;
-    }
-
-    public function currentMission($userId)
-    {
-        $em = $this->em;
-        $user = $em
-          ->getRepository('UserBundle:User')
-          ->find($userId)
-            ;
-        $listTeam = $user->getTeam();
-        $i = 0;
-        foreach ($listTeam as $team)
-        {
-            $mission = $team->getMission();
-            $array[$i] = $mission;
-            $i++;
-        }
-        return ($array);
     }
 
     public function remainingMission($listMissionsAvailable, $listCurrentMissions)

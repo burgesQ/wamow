@@ -25,20 +25,21 @@ class DashboardController extends Controller
             ;
         if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR'))
         {
-            $listMissionsAvailable = $repository->missionsAvailables();
             $service = $this->container->get('current.mission');
-            $currentMissions = $service->currentMission($this->getUser());
-            $listRemainingMission = $service->remainingMission($listMissionsAvailable, $currentMissions);
+            $missions = $repository->expertMissionsAvailables();
+            $currentsMissions = $repository->myMissions($this->getUser());
+            $availablesMissions = $service->remainingMission($missions, $currentsMissions);
+            dump($availablesMissions);
             return $this->render('DashboardBundle:Expert:index.html.twig', array(
-                'listRemainingMission' => $listRemainingMission,
-                'listCurrentMissions'   => $currentMissions,
+                'availablesMissions' => $availablesMissions,
+                'currentsMissions'   => $currentsMissions,
                 ));
         }
         elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR'))
         {
             $user = $this->getUser();
             $iD = $user->getId();
-            $listMission = $repository->findByiDContact($iD);
+            $listMission = $repository->myMissions($iD);
             return $this->render('DashboardBundle:Seeker:index.html.twig', array(
                 'listMission' => $listMission
                 ));

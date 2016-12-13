@@ -66,21 +66,3 @@ Enjoy!
 [10]: https://symfony.com/doc/2.8/cookbook/email.html
 [11]: https://symfony.com/doc/2.8/cookbook/logging/monolog.html
 [13]: https://symfony.com/doc/2.8/bundles/SensioGeneratorBundle/index.html
-
---------
-
-    * Test Fixtures order  :
-        sf doctrine:database:drop --force
-        sf doctrine:database:create
-        sf doctrine:schema:update --force
-        sf doctrine:fixtures:load --append --fixtures=src/MissionBundle/DataFixtures/ORM/LoadExpertise.php
-        sf doctrine:fixtures:load --append --fixtures=src/MissionBundle/DataFixtures/ORM/LoadMissionKind.php
-        sf doctrine:fixtures:load --append --fixtures=src/ToolsBundle/DataFixtures/ORM/LoadLanguage.php
-        sf doctrine:fixtures:load --append --fixtures=src/MissionBundle/DataFixtures/ORM/Tests/LoadAddressTest.php
-        sf doctrine:fixtures:load --append --fixtures=src/MissionBundle/DataFixtures/ORM/Tests/ContractorTeam.php
-        sf doctrine:fixtures:load --append --fixtures=src/MissionBundle/DataFixtures/ORM/Tests/MissionTest.php
-        sf doctrine:fixtures:load --append --fixtures=src/MissionBundle/DataFixtures/ORM/Tests/StepTest.php
-        sf doctrine:fixtures:load --append --fixtures=src/ToolsBundle/DataFixtures/ORM/LoadConfig.php
-        sf doctrine:fixtures:load --append --fixtures=src/MissionBundle/DataFixtures/ORM/Tests/LoadUser.php
-        sf doctrine:fixtures:load --append --fixtures=src/ToolsBundle/DataFixtures/ORM/LoadPrefix.php
-        sf doctrine:fixtures:load --append --fixtures=src/CompanyBundle/DataFixtures/ORM/LoadSector.php
