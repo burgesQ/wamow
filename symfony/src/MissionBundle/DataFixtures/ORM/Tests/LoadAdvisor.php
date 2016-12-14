@@ -43,6 +43,7 @@ class LoadAdvisor implements FixtureInterface, ContainerAwareInterface
             $user->setPlainPassword('password');
             $user->setEnabled(true);
             $user->setRoles(array('ROLE_ADVISOR'));
+            $user->setPasswordSet(true);
             $userManager->updateUser($user, true);
 
             $team = new Team(0);
@@ -63,6 +64,7 @@ class LoadAdvisor implements FixtureInterface, ContainerAwareInterface
             $user->setPlainPassword('password');
             $user->setEnabled(true);
             $user->setRoles(array('ROLE_CONTRACTOR'));
+            $user->setPasswordSet(true);
             $userManager->updateUser($user, true);
             $i++;
             $j++;
