@@ -441,7 +441,7 @@ class MissionController extends Controller
         {
             $listUsers = $team->getUsers();
             $team->removeUser($user);
-            $user->removeTeam($team);
+            $user->setGiveUpCount($user->getGiveUpCount() + 1);
             $em->persist($team);
             $em->flush();
             $listUsers = $team->getUsers();
