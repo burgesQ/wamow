@@ -89,3 +89,6 @@ mission:
         saveButton4: "Delete"
         limit: "%limit% suppression(s) available"
         noTeam: "No team applyed to your mission."
+    pitch:
+        title: "My pitchs"
+        giveUp: "give up"
