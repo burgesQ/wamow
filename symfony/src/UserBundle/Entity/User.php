@@ -228,6 +228,13 @@ class User extends BaseUser
      */
     private $newsletter;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="give_up_count", type="integer")
+     */
+    private $giveUpCount;
+
     public function __construct()
     {
         parent::__construct();
@@ -241,6 +248,7 @@ class User extends BaseUser
         $this->images = new ArrayCollection();
         $this->resumes = new ArrayCollection();
         $this->newsletter = true;
+        $this->$giveUpCount = 0;
     }
 
     /**
@@ -858,5 +866,38 @@ class User extends BaseUser
     public function isPasswordSet()
     {
         return $this->password_set;
+    }
+
+    /**
+     * Get password_set
+     *
+     * @return boolean
+     */
+    public function getPasswordSet()
+    {
+        return $this->password_set;
+    }
+
+    /**
+     * Set giveUpCount
+     *
+     * @param integer $giveUpCount
+     * @return User
+     */
+    public function setGiveUpCount($giveUpCount)
+    {
+        $this->giveUpCount = $giveUpCount;
+
+        return $this;
+    }
+
+    /**
+     * Get giveUpCount
+     *
+     * @return integer
+     */
+    public function getGiveUpCount()
+    {
+        return $this->giveUpCount;
     }
 }
