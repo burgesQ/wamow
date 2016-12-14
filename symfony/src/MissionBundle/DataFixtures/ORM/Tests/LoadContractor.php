@@ -31,6 +31,7 @@ class LoadContractor implements FixtureInterface, ContainerAwareInterface
         $contractor->setPlainPassword('password');
         $contractor->setEnabled(true);
         $contractor->setRoles(array('ROLE_CONTRACTOR'));
+        $contractor->setPasswordSet(true);
         $userManager->updateUser($contractor, true);
     }
 }
