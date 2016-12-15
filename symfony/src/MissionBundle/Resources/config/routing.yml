@@ -36,7 +36,7 @@ mission_pitch_all:
 mission_pitch:
     path:      /mission/pitch/{missionId}
     defaults:
-        _controller: MissionBundle:Mission:missionPitch
+        _controller: MissionBundle:Mission:pitch
 
 mission_teams_selection:
     path:      /mission/{missionId}/selection
