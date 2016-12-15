@@ -68,6 +68,7 @@ mission:
         available: "The mission %id% is not available."
         wright: "You did not created this mission."
         forbiddenAccess: "You have no access to this page."
+        alreadyEdit: "You can't edit again the mission"
     pitch:
         done: "You just pitch."
         twice: "You already apply to this mission."

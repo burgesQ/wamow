@@ -102,15 +102,17 @@ class MissionController extends Controller
     */
     public function editAction($id, Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-        $mission = $em->getRepository('MissionBundle:Mission')->find($id);
         $trans = $this->get('translator');
         if ( $this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR'))
         {
-            if ( null === $mission ) {
+            $em = $this->getDoctrine()->getManager();
+            $mission = $em->getRepository('MissionBundle:Mission')->find($id);
+            if (null === $mission) {
                 throw new NotFoundHttpException($trans->trans('mission.error.wrongId', array('%id%' => $id), 'MissionBundle'));
             } elseif ( $this->getUser()->getId() !== $mission->getTeamContact()->getId() ) {
                 throw new NotFoundHttpException($trans->trans('mission.error.notYourMission', array(), 'MissionBundle'));
+            } elseif ($mission->getStatus() != 0) {
+                throw new NotFoundHttpException($trans->trans('mission.error.alreadyEdit', array(), 'MissionBundle'));
             }
 
             $form = $this->get('form.factory')->create(new MissionType(), $mission);
@@ -128,6 +130,7 @@ class MissionController extends Controller
                   		$em->persist($tag);
              		}
            		}
+                $mission->setStatus(1);
                 $em->flush();
                 return new Response($trans->trans('mission.edit.successEdit', array(), 'MissionBundle'));
             }
