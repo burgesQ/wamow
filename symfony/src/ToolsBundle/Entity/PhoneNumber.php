@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Context\ExecutionContext;
  *
  * @ORM\Table(name="phone_number")
  * @ORM\Entity(repositoryClass="ToolsBundle\Repository\PhoneNumberRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class PhoneNumber
 {
@@ -38,6 +39,25 @@ class PhoneNumber
      * @ORM\JoinColumn(nullable=true)
      */
     private $prefix;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="creation_date", type="datetime", nullable=false)
+     */
+    private $creationDate;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="update_date", type="datetime", nullable=true)
+     */
+    private $updateDate;
+
+    public function __construct()
+    {
+        $this->creationDate = new \Datetime();
+    }
 
     /**
      * Get id
@@ -113,4 +133,57 @@ class PhoneNumber
         }
     }
 
+    /**
+     * Set creationDate
+     *
+     * @param \DateTime $creationDate
+     * @return Step
+     */
+    public function setCreationDate($creationDate)
+    {
+        $this->creationDate = $creationDate;
+
+        return $this;
+    }
+
+    /**
+     * Get creationDate
+     *
+     * @return \DateTime
+     */
+    public function getCreationDate()
+    {
+        return $this->creationDate;
+    }
+
+    /**
+     * Set updateDate
+     *
+     * @param \DateTime $updateDate
+     * @return Step
+     */
+    public function setUpdateDate($updateDate)
+    {
+        $this->updateDate = $updateDate;
+
+        return $this;
+    }
+
+    /**
+     * Get updateDate
+     *
+     * @return \DateTime
+     */
+    public function getUpdateDate()
+    {
+        return $this->updateDate;
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function updateDate()
+    {
+        $this->setUpdateDate(new \Datetime());
+    }
 }

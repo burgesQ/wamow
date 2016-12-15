@@ -16,6 +16,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  *
  * @ORM\Table(name="mission")
  * @ORM\Entity(repositoryClass="MissionBundle\Repository\MissionRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Mission
 {
@@ -84,7 +85,7 @@ class Mission
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="creation_date", type="datetime")
+     * @ORM\Column(name="creation_date", type="datetime", nullable=false)
      */
     private $creationDate;
 
@@ -208,7 +209,6 @@ class Mission
     public function __construct($nbStep, $team, $sizeTeamMax, $token)
       {
         $this->creationDate = new \Datetime();
-        $this->updateDate = new \DateTime();
         $this->languages = new ArrayCollection();
         $this->status = 0;
         $this->address = new Address();
@@ -819,5 +819,13 @@ class Mission
               ->addViolation()
               ;
         }
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function updateDate()
+    {
+        $this->setUpdateDate(new \Datetime());
     }
 }

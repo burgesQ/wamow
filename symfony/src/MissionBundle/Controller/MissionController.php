@@ -114,7 +114,6 @@ class MissionController extends Controller
 
             $form = $this->get('form.factory')->create(new MissionType(), $mission);
             $form->handleRequest($request);
-            $mission->setUpdateDate(new \DateTime());
 
             if ($form->isValid()) {
           		if ($_POST)
@@ -321,7 +320,6 @@ class MissionController extends Controller
                     'missionId' => $missionId
                     ));
             }
-            $step->setUpdateDate(new \DateTime());
             $em->flush($step);
             $service->setDeletedTeam($data['team'], $step);
             $teamToChoose = $repository->teamsAvailables($missionId, $step);
@@ -376,7 +374,6 @@ class MissionController extends Controller
             $step->setReallocCounter($step->getReallocCounter() - 1);
             $team->setStatus($step->getPosition());
             $em->flush($team);
-            $step->setUpdateDate(new \DateTime());
             $em->flush($step);
             return $this->redirectToRoute('mission_teams_selection', array(
                 'missionId' => $missionId

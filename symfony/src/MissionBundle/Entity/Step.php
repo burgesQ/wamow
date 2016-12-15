@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="step")
  * @ORM\Entity(repositoryClass="MissionBundle\Repository\StepRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Step
 {
@@ -59,7 +60,7 @@ class Step
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="creation_date", type="datetime")
+     * @ORM\Column(name="creation_date", type="datetime", nullable=false)
      */
     private $creationDate;
 
@@ -95,7 +96,6 @@ class Step
     public function __construct($nbMaxTeam, $reallocTeam)
       {
         $this->creationDate = new \Datetime();
-        $this->UpdateDate = new \DateTime();
         $this->startDate = new \DateTime();
         $this->endDate = new \DateTime();
         $this->nbMaxTeam = $nbMaxTeam;
@@ -341,5 +341,13 @@ class Step
     public function getMission()
     {
         return $this->mission;
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function updateDate()
+    {
+        $this->setUpdateDate(new \Datetime());
     }
 }

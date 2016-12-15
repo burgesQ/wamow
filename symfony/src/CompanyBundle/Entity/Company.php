@@ -13,6 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="company")
  * @ORM\Entity(repositoryClass="CompanyBundle\Repository\CompanyRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Company
 {
@@ -42,7 +43,7 @@ class Company
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="update_date", type="datetime", nullable=false)
+     * @ORM\Column(name="update_date", type="datetime", nullable=true)
      */
     private $updateDate;
 
@@ -87,7 +88,6 @@ class Company
     public function __construct()
     {
         $this->creationDate = new \Datetime();
-        $this->updateDate = new \Datetime();
         $this->status = 0;
     }
 
@@ -283,5 +283,13 @@ class Company
     public function getSector()
     {
         return $this->sector;
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function updateDate()
+    {
+        $this->setUpdateDate(new \Datetime());
     }
 }
