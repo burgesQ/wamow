@@ -212,7 +212,7 @@ class MissionController extends Controller
         }
     }
 
-    public function missionPitchAction($missionId)
+    public function pitchAction($missionId)
     {
         $trans = $this->get('translator');
         $em = $this->getDoctrine()->getManager();
