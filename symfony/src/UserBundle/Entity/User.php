@@ -248,7 +248,7 @@ class User extends BaseUser
         $this->images = new ArrayCollection();
         $this->resumes = new ArrayCollection();
         $this->newsletter = true;
-        $this->$giveUpCount = 0;
+        $this->giveUpCount = 0;
     }
 
     /**
