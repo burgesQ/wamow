@@ -17,7 +17,7 @@ class MissionRepository extends EntityRepository
         $qb = $this->_em->createQueryBuilder();
         $qb->select('m')
         ->from('MissionBundle:Mission', 'm')
-        ->where('m.status = 1')
+        ->where('m.status >= 1')
         ->orderBy('m.applicationEnding', 'DESC');
         return $qb->getQuery()->getResult();
     }
@@ -31,7 +31,7 @@ class MissionRepository extends EntityRepository
         ->leftjoin('t.mission', 'm')
         ->where('u.id = :userID')
             ->setParameter('userID', $userID)
-        ->andWhere('m.status != -1');
+        ->andWhere('m.status >= 0');
         return $qb->getQuery()->getResult();
     }
 
@@ -91,6 +91,17 @@ class MissionRepository extends EntityRepository
         ->andWhere('u.id = :userID')
             ->setParameter('userID', $userID)
             ;
+        return $qb->getQuery()->getResult();
+    }
+
+    public function getAllTeams($missionId)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('t')
+        ->from('TeamBundle:Team', 't')
+        ->leftjoin('t.mission', 'm')
+        ->where('m.id = :missionId')
+            ->setParameter('missionId', $missionId);
         return $qb->getQuery()->getResult();
     }
 }

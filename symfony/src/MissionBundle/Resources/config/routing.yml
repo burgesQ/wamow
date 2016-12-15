@@ -26,8 +26,8 @@ missions_all:
 mission_delete:
     path:      /mission/delete/{missionId}
     defaults:
-        _controller: MissionBundle:Mission:deleteMission
-        
+        _controller: MissionBundle:Mission:delete
+
 mission_pitch_all:
     path:       /mission/pitch/all
     defaults:

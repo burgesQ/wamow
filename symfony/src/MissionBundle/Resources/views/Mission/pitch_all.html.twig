@@ -3,7 +3,7 @@
         {{ 'mission.pitch.title'|trans }}
     </p>
     <p>
-        {% for team in listTeam %}
+        {% for team in listTeams %}
          <li>
              <a href="{{ path('mission_view', {'id': team.mission.id}) }}">
              {{ team.mission.title }}</a>
