@@ -13,11 +13,6 @@ mission_edit:
     defaults:
         _controller: MissionBundle:Mission:edit
 
-mission_step:
-    path:      /mission/step/{id}
-    defaults:
-        _controller: MissionBundle:Mission:step
-
 missions_all:
     path:      /mission/all
     defaults:
