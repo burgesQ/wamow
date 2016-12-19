@@ -57,7 +57,9 @@ class MissionController extends Controller
               $em = $this->getDoctrine()->getManager();
               if ($_POST)
                 {
-                    if (($values = $_POST['mission']['tags']) != null) {
+                    if (isset($_POST['mission']['tags']))
+                    {
+                        $values = $_POST['mission']['tags'];
                         foreach ($values as $value)
                         {
                             $tag = new Tag();
@@ -104,12 +106,14 @@ class MissionController extends Controller
         $em = $this->getDoctrine()->getManager();
         $mission = $em->getRepository('MissionBundle:Mission')->find($id);
         $trans = $this->get('translator');
+        $service = $this->container->get('mission.savedTeams');
+
         if ( $this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR'))
         {
             if ( null === $mission ) {
                 throw new NotFoundHttpException($trans->trans('mission.error.wrongId', array('%id%' => $id), 'MissionBundle'));
-            } elseif ( $this->getUser()->getId() !== $mission->getTeamContact()->getId() ) {
-                throw new NotFoundHttpException($trans->trans('mission.error.notYourMission', array(), 'MissionBundle'));
+            } elseif ($service->checkContractorInTeam($this->getUser(), $mission) == false) {
+                throw new NotFoundHttpException($trans->trans('mission.error.right', array(), 'MissionBundle'));
             }
 
             $form = $this->get('form.factory')->create(new MissionType(), $mission);
@@ -118,14 +122,17 @@ class MissionController extends Controller
             if ($form->isValid()) {
           		if ($_POST)
             	{
-           			$values = $_POST['mission']['tags'];
-               		foreach ($values as $value)
-                	{
-                  		$tag = new Tag();
-                  		$tag->setTag($value);
-                  		$mission->addTag($tag);
-                  		$em->persist($tag);
-             		}
+           			if (isset($_POST['mission']['tags']))
+                    {
+                        $values = $_POST['mission']['tags'];
+               	        foreach ($values as $value)
+                	    {
+                  		    $tag = new Tag();
+                  		    $tag->setTag($value);
+                  		    $mission->addTag($tag);
+                  		    $em->persist($tag);
+             		    }
+                    }
            		}
                 $em->flush();
                 return new Response($trans->trans('mission.edit.successEdit', array(), 'MissionBundle'));
@@ -160,7 +167,7 @@ class MissionController extends Controller
         {
             $team = $mission->getTeamContact();
             if ($service->checkContractorInTeam($this->getUser(), $mission) == false) {
-                throw new NotFoundHttpException($trans->trans('mission.error.wright', array(), 'MissionBundle'));
+                throw new NotFoundHttpException($trans->trans('mission.error.right', array(), 'MissionBundle'));
             }
             return $this->render('MissionBundle:Mission:view_seeker.html.twig', array(
                 'mission'           => $mission,

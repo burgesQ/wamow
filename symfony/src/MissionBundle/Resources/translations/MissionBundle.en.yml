@@ -66,7 +66,7 @@ mission:
         wrongId: "The mission %id% doesn't exist."
         notYourMission: "You can't edit a mission that doesn't belong to you."
         available: "The mission %id% is not available."
-        wright: "You did not created this mission."
+        right: "You did not created this mission."
         advisor: "You have no access to this page."
     pitch:
         done: "You just pitch."
