@@ -13,11 +13,6 @@ mission_edit:
     defaults:
         _controller: MissionBundle:Mission:edit
 
-mission_step:
-    path:      /mission/step/{id}
-    defaults:
-        _controller: MissionBundle:Mission:step
-
 missions_all:
     path:      /mission/all
     defaults:
@@ -26,7 +21,7 @@ missions_all:
 mission_delete:
     path:      /mission/delete/{missionId}
     defaults:
-        _controller: MissionBundle:Mission:deleteMission
+        _controller: MissionBundle:Mission:delete
 
 mission_pitch_all:
     path:       /mission/pitch/all
