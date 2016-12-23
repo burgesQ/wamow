@@ -39,10 +39,12 @@ user:
         blank: 'Please enter your first name.'
         short: 'The first name is too short.'
         long: 'The first name is too long.'
+        illegale: 'This first name contains illegal characters'
     lname:
         blank: 'Please enter your last name.'
         short: 'The last name is too short.'
         long: 'The last name is too long.'
+        illegale: 'This last name contains illegal characters'
     cv:
         format: "This curriculum vitae file isn't a pdf."
 

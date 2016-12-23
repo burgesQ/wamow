@@ -44,6 +44,12 @@ profile:
         newslettertrue: 'You are registered for the newsletter'
         newsletterfalse: 'You are not registered for the newsletter'
         company: "Company"
+        userResume: "Resume of you by you"
+        professionalExpertise: 'Your Professional Expertise'
+        businessPractice: 'Your Business Practice'
+        missionKind: 'Your Mission Kind'
+        languages: 'Languages You speak'
+        
     flash:
         updated: 'The profile has been updated'
 
@@ -117,15 +123,19 @@ form:
         male: "Male"
         other: "I don't know"
         choose: "Choose your gender"
+        gender: "Gender"
     birthdate:
         month: "Month"
         day: "Day"
         year: "Year"
+        birthdate: "Birthdate"
     dailyfees:
         min: "Daily fees minimum"
         max: "Daily fees maximum"
+    userResume: "Enter a few words to describe your expertise"
     submit: "Update"
-
+    languages: "Select the language that you spoke"
+    
 social:
     sign_in_google: "Sign in with Google"
     sign_in_linkedin: "Sign in with Linkedin"

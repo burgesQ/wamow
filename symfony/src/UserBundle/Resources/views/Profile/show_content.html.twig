@@ -1,78 +1,76 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 <div class="user_user_show">
-
-  <p>{{ 'profile.show.image'|trans }}:
-    {% set image = images|last %}
+ 
+  <p> {{ 'profile.show.image'|trans }}:
     {% if image != null and image.name != null %}
-      {{ image.name }} is a {{ image.type }} upload the {{ image.uploadDate|date("m/d/Y") }}
-      <img src="{{ asset(image.webPath()) }}"/>
+      {{ image.name }} is a {{ image.type }} upload the {{ image.uploadDate|date("m/d/Y") }} 
+      <img src="{{ asset(image.webPath()) }}"/> 
     {% endif %} </p>
 
-    <p>{{ 'profile.show.first_name'|trans }}: {{ user.firstName }} </p>
-    <p>{{ 'profile.show.last_name'|trans }}: {{ user.lastName }} </p>
-    <p>{{ 'profile.show.gender'|trans }}: {{ user.gender }} </p>
-    <p>{{ 'profile.show.birthdate'|trans}}:
-      {% if user.birthdate != null %}
-	{{ user.birthdate|date("m/d/Y") }}
-      {% endif %} </p>
+  <p> {{ 'profile.show.first_name'|trans }}: {{ user.firstName }} </p>
+  <p> {{ 'profile.show.last_name'|trans }}: {{ user.lastName }} </p>
+  <p> {{ 'profile.show.gender'|trans }}: {{ user.gender }} </p>
+  <p> {{ 'profile.show.birthdate'|trans}}:
+    {% if user.birthdate != null %}
+      {{ user.birthdate|date("m/d/Y") }}
+    {% endif %} </p>
 
-    <p>{{ 'profile.show.daily_fees_min'|trans }}: {{ user.dailyFeesMin }} </p>
-    <p>{{ 'profile.show.daily_fees_max'|trans }}: {{ user.dailyFeesMax }} </p>
+  <p> {{ 'profile.show.daily_fees_min'|trans }}: {{ user.dailyFeesMin }} </p>
+  <p> {{ 'profile.show.daily_fees_max'|trans }}: {{ user.dailyFeesMax }} </p>
 
-    <p>{{ 'profile.show.email'|trans }}: {{ user.email }} </p>
-    <p>{{ 'profile.show.phone'|trans }}:
+  <p> {{ 'profile.show.email'|trans }}: {{ user.email }} </p>
+  <p> {{ 'profile.show.phone'|trans }}:
       {% if user.phone != null %}
-	{{ user.phone.prefix.prefix }} {{ user.phone.number }} ({{ user.phone.prefix.country|countryName }})
+        {{ user.phone.prefix.prefix }} {{ user.phone.number }} ({{ user.phone.prefix.country|countryName }})
       {% endif %} </p>
 
-    <p>{{ 'profile.show.country'|trans }}:
-      {% if user.address != null %}
-	{{ user.address.country|countryName }}
-      {% endif %} </p>
-    <p>{{ 'profile.show.state'|trans }}:
-      {% if user.address != null %}
-	{{ user.address.state }}
-      {% endif %} </p>
-    <p>{{ 'profile.show.city'|trans }}:
-      {% if user.address != null %}
-	{{ user.address.city }}
-      {% endif %} </p>
-    <p>{{ 'profile.show.zipcode'|trans }}:
-      {% if user.address != null %}
-	{{ user.address.zipcode }}
-      {% endif %} </p>
-    <p>{{ 'profile.show.address'|trans }}:
-      {% if user.address != null %}
-	{{ user.address.street }}
-      {% endif %} </p>
-    <p>{{ 'profile.show.address'|trans }}:
-      {% if user.address != null %}
-	{{ user.address.street2 }}
-      {% endif %} </p>
-    <p>{{ 'profile.show.label'|trans }}:
-      {% if user.address != null %}
-	{{ user.address.label }}
-      {% endif %} </p>
-    <p>{{ 'profile.show.name'|trans }}:
-      {% if user.address != null %}
-	{{ user.address.name }}
-      {% endif %} </p>
-    <p>{{ 'profile.show.company'|trans }}:
-        {% if user.company != null %}
-            {{ user.company.name}}
-        {% endif %} </p>
+  <p> {{ 'profile.show.country'|trans }}:
+    {% if user.country != null %}
+      {{ user.country|countryName }}
+    {% endif %} </p>
+  <p> {{ 'profile.show.company'|trans }}:
+    {% if user.company != null %}
+      {{ user.company.name}}
+    {% endif %} </p>
 
-    <p>{{ 'profile.show.resume'|trans }}:
-      {% set resume = resumes|last %}
-      {% if resume != null and resume.name != null %}
-	{{ resume.name }} is a {{ resume.type }} upload the {{ image.uploadDate|date("m/d/Y") }}
-      {% endif %} </p>
+  <p> {{ 'profile.show.resume'|trans }}:
+    {% if user.elasticUser != null %}
+      {{ user.elasticUser.cvResume }}
+    {% endif %} </p>
+    
+  <p> {{ 'profile.show.userResume'|trans }}:
+    {% if user.userResume != null %}
+      {{ user.elasticUser.userResume }}
+    {% endif %} </p>      
+    
+  <p> {{ 'profile.show.professionalExpertise'|trans }}:
+    {% if user.professionalExpertise != null %}
+      <ul> {% for professionalExpertise in user.professionalExpertise %}
+        <li> {{ professionalExpertise.name }} </li>
+      {% endfor %} </ul>
+    {% endif %} </p>   
+    
+  <p> {{ 'profile.show.businessPractice'|trans }}:
+    {% if user.businessPractice != null %}
+      <ul> {% for businessPractice in user.businessPractice %}
+        <li> {{ businessPractice.name }} </li>
+      {% endfor %} </ul>
+    {% endif %} </p>   
 
-    {% if user.newsletter == 1 %}
-        {{ 'profile.show.newslettertrue'|trans }}
-    {% else %}
-        {{ 'profile.show.newsletterfalse'|trans }}
-    {% endif %}
+  <p> {{ 'profile.show.missionKind'|trans }}:
+    {% if user.missionKind != null %}
+      <ul> {% for missionKind in user.missionKind %}
+        <li> {{ missionKind.name }} </li>
+      {% endfor %} </ul>
+    {% endif %} </p>
 
+  <p> {{ 'profile.show.languages'|trans }}:
+    {% if user.languages is not null %}
+      <ul> {% for language in user.languages %}
+        <li> {{ language.name }} </li>
+      {% endfor %} </ul>
+    {% endif %} </p>
+    
+  <p> {{ user.newsletter ? 'profile.show.newslettertrue'|trans : 'profile.show.newsletterfalse'|trans }} </p>
 </div>

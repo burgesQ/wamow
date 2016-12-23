@@ -15,7 +15,12 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 use FOS\UserBundle\Controller\ProfileController as BaseController;
 
-use ToolsBundle\Entity\Upload;
+use ToolsBundle\Entity\ProfilePicture;
+use ToolsBundle\Entity\UploadResume;
+use ToolsBundle\Entity\ReadResume;
+
+use UserBundle\Entity\ElasticUser;
+
 use UserBundle\Form\MergedFormType;
 
 class ProfileController extends BaseController
@@ -26,28 +31,26 @@ class ProfileController extends BaseController
     public function showAction()
     {
         $user = $this->getUser();
-        if (!is_object($user) || !$user instanceof UserInterface) {
+        if (!is_object($user) || !$user instanceof UserInterface)
             throw new AccessDeniedException('This user does not have access to this section.');
-        }
 
-        $em = $this->getDoctrine()->getRepository('UserBundle:User');
+        $em = $this->getDoctrine()->getManager();
 
         return $this->render('UserBundle:Profile:show.html.twig', array(
             'user' => $user,
-            'images' => $em->myFindUserPicture($user),
-            'resumes' => $em->myFindUserResume($user)
+            'image' => $em->getRepository('ToolsBundle:ProfilePicture')->getLastProfilePictureByUser($user->getId()),
+            'resumes' => $em->getRepository('ToolsBundle:UploadResume')->getLastResumeByUser($user->getId())
         ));
     }
-
+    
     /**
      * Edit the user
      */
     public function editAction(Request $request)
     {
         $user = $this->getUser();
-        if (!is_object($user) || !$user instanceof UserInterface) {
+        if (!is_object($user) || !$user instanceof UserInterface)
             throw new AccessDeniedException('This user does not have access to this section.');
-        }
 
         /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
         $dispatcher = $this->get('event_dispatcher');
@@ -55,31 +58,32 @@ class ProfileController extends BaseController
         $event = new GetResponseUserEvent($user, $request);
         $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_INITIALIZE, $event);
 
-        if (null !== $event->getResponse()) {
+        if (null !== $event->getResponse())
             return $event->getResponse();
-        }
 
         $em = $this->getDoctrine()->getManager();
 
-        $image = new Upload();
-        $image->setUser($user);
-        $image->setKind(1);
-        $image->setType("image");
-
-        $resume = new Upload();
-        $resume->setUser($user);
-        $resume->setKind(2);
-        $resume->setFormat("pdf");
-            
+        $image = new ProfilePicture($user);
+        $image->setUser($user)
+            ->setKind(1)
+            ->setType("image")
+            ;
+        
+        $resume = new UploadResume($user);
+        $resume->setUser($user)
+            ->setKind(2)
+            ->setFormat("pdf")
+            ;
+        
         $formData['user'] = $user;
         $formData['image'] = $image;
         $formData['resume'] = $resume;
 
         $form = $this->createForm(new MergedFormType(), $formData);
 
-        $form->setData($user);
-        $form->setData($image);
-        $form->setData($resume);
+        $form->setData($user)
+            ->setData($image)
+            ->setData($resume);
 
         $form->handleRequest($request);
 
@@ -94,18 +98,26 @@ class ProfileController extends BaseController
             $user->setLastName(ucwords($user->getLastName()));
             $userManager->updateUser($user);
 
-            $em->persist($image);
-            $em->persist($resume);
-
+            if ($image->getFile() != null)
+                $em->persist($image);
+            if ($resume->getFile() != null)
+                $em->persist($resume);
             $em->flush();
             
-            if (null === $response = $event->getResponse()) {
+            $parser = $this->get('user.services');
+            $parser->parseResume($this->getDoctrine()->getRepository('ToolsBundle:UploadResume'),
+                                 $user,
+                                 $this->getDoctrine()->getManager());
+            $parser->elasticSave($this->getDoctrine()->getRepository('ToolsBundle:UploadResume'),
+                                 $user,
+                                 $this->getDoctrine()->getManager());
+                        
+            if (null === $response = $event->getResponse()) {                
                 $url = $this->generateUrl('user_profile_show');
                 $response = new RedirectResponse($url);
             }
-
+            
             $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
-
             return $response;
         }
 

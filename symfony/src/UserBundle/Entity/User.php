@@ -7,10 +7,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use FOS\UserBundle\Model\User as BaseUser;
-use CompanyBundle\Entity\Company;
-use ToolsBundle\Entity\PhoneNumber;
-use ToolsBundle\Entity\Address;
-use ToolsBundle\Entity\Upload;
 
 /**
  * User
@@ -122,8 +118,10 @@ class User extends BaseUser
      *     max=255,
      *     minMessage="user.fname.short",
      *     maxMessage="user.fname.long",
-     *     groups={"Registration", "Profile"}
-     * )
+     *     groups={"Registration", "Profile"} )
+     * @Assert\Regex(
+     *  pattern="/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð '-]+$/",
+     *  message="user.fname.illegale" )
      */
     private $firstName;
 
@@ -137,8 +135,10 @@ class User extends BaseUser
      *     max=255,
      *     minMessage="user.lname.short",
      *     maxMessage="user.lname.long",
-     *     groups={"Registration", "Profile"}
-     * )
+     *     groups={"Registration", "Profile"} )
+     * @Assert\Regex(
+     *  pattern="/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð '-]+$/",
+     *  message="user.lname.illegale" )
      */
     private $lastName;
 
@@ -161,14 +161,14 @@ class User extends BaseUser
     private $birthdate;
 
     /**
-    * @var int
-    *
-    * @ORM\Column(name="daily_fees_min", type="bigint", nullable=true)
-    * @Assert\Range(
-    *      min = 0
-    *)
-    */
-   private $dailyFeesMin;
+     * @var int
+     *
+     * @ORM\Column(name="daily_fees_min", type="bigint", nullable=true)
+     * @Assert\Range(
+     *      min = 0
+     *)
+     */
+    private $dailyFeesMin;
 
     /**
     * @var int
@@ -178,7 +178,7 @@ class User extends BaseUser
     *      min = 0
     *)
     */
-   private $dailyFeesMax;
+    private $dailyFeesMax;
 
     /**
      * @var \DateTime
@@ -193,28 +193,19 @@ class User extends BaseUser
      * @ORM\Column(name="update_date", type="datetime", nullable=true)
      */
     private $updateDate;
-
+    
     /**
-     * @ORM\OneToOne(targetEntity="ToolsBundle\Entity\Address", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=true)
+     * @var string
+     *
+     * @ORM\Column(name="country", type="string", length=255, nullable=true)
      */
-    private $address;
-
+    private $country;
+    
     /**
      * @ORM\OneToOne(targetEntity="ToolsBundle\Entity\PhoneNumber", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $phone;
-
-    /**
-     * @ORM\OneToMany(targetEntity="ToolsBundle\Entity\Upload", mappedBy="user")
-     */
-    private $images;
-
-    /**
-     * @ORM\OneToMany(targetEntity="ToolsBundle\Entity\Upload", mappedBy="user")
-     */
-    private $resumes;
 
     /**
      * @ORM\ManyToOne(targetEntity="CompanyBundle\Entity\Company", cascade={"persist"})
@@ -235,20 +226,87 @@ class User extends BaseUser
      * @ORM\Column(name="give_up_count", type="integer")
      */
     private $giveUpCount;
+    
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="secretMail", type="array", nullable=false)
+     */
+    private $secretMail;
 
+    /**
+     * @ORM\OneToMany(targetEntity="ToolsBundle\Entity\ProfilePicture", mappedBy="user")
+     */
+    private $images;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="ToolsBundle\Entity\UploadResume", mappedBy="user")
+     */
+    private $resumes;
+    
+    /**
+     * @var text
+     *
+     * @ORM\Column(name="user_resume", type="text", nullable=true)
+     */
+    private $userResume;
+    
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="\ToolsBundle\Entity\Language", cascade={"persist"})
+     */
+    private $languages;
+    
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="MissionBundle\Entity\ProfessionalExpertise", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $professionalExpertise;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="MissionBundle\Entity\MissionKind", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $missionKind;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="MissionBundle\Entity\BusinessPractice", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $businessPractice;
+
+    /**
+     * @ORM\OneToOne(targetEntity="UserBundle\Entity\ElasticUser", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $elasticUser;
+        
     public function __construct()
     {
         parent::__construct();
         $this->creationDate = new \Datetime();
         $this->confidentiality = false;
         $this->status = 0;
-        $this->address = NULL;
         $this->prefix = NULL;
         $this->birthdate = NULL;
         $this->images = new ArrayCollection();
         $this->resumes = new ArrayCollection();
         $this->newsletter = true;
         $this->giveUpCount = 0;
+        $this->secretMail = array();
+        $this->elasticuser = new Elasticuser();        
+        $this->userResume = null;
+        $this->languages = new ArrayCollection();
+        $this->professionalexpertise = new ArrayCollection();
+        $this->missionkind = new ArrayCollection();
+        $this->businessPractice = new ArrayCollection();
     }
 
     /**
@@ -482,28 +540,28 @@ class User extends BaseUser
     }
 
     /**
-     * Set address
+     * Set country
      *
-     * @param \ToolsBundle\Entity\Address $address
+     * @param string $country
      * @return User
      */
-    public function setAddress(\ToolsBundle\Entity\Address $address = null)
+    public function setCountry($country)
     {
-        $this->address = $address;
+        $this->country = $country;
 
         return $this;
     }
 
     /**
-     * Get address
+     * Get country
      *
-     * @return \ToolsBundle\Entity\Address
+     * @return string
      */
-    public function getAddress()
+    public function getCountry()
     {
-        return $this->address;
+        return $this->country;
     }
-
+    
     /**
      * Set dailyFeesMin
      *
@@ -574,18 +632,29 @@ class User extends BaseUser
     }
 
     /**
-     *  Add image
+     * Add images
      *
-     * @param \ToolsBundle\Entity\Upload $image
+     * @param \ToolsBundle\Entity\Upload $images
      * @return User
      */
-    public function addImages(\ToolsBundle\Entity\Upload $image = null)
+    public function addImage(\ToolsBundle\Entity\Upload $images)
     {
-        $this->images[] = $image;
+        $this->images[] = $images;
 
         return $this;
     }
 
+    /**
+     * Remove images
+     *
+     * @param \ToolsBundle\Entity\Upload $images
+     */
+    public function removeImage(\ToolsBundle\Entity\Upload $images)
+    {
+        $this->images->removeElement($images);
+    }
+
+    
     /**
      * Get images
      *
@@ -594,29 +663,6 @@ class User extends BaseUser
     public function getImages()
     {
         return $this->images;
-    }
-
-    /**
-     * Add resumes
-     *
-     * @param \ToolsBundle\Entity\Upload $resume
-     * @return User
-     */
-    public function addResumes(\ToolsBundle\Entity\Upload $resume = null)
-    {
-        $this->resumes[] = $resume;
-
-        return $this;
-    }
-
-    /**
-     * Get resume
-     *
-     * @return \ToolsBundle\Entity\Upload
-     */
-    public function getResumes()
-    {
-        return $this->resumes;
     }
 
     /**
@@ -639,34 +685,6 @@ class User extends BaseUser
     public function getNewsletter()
     {
         return $this->newsletter;
-    }
-
-    /**
-     * @Assert\Callback
-     */
-    public function isValidate(ExecutionContextInterface $context)
-    {
-        $feesMin = $this->getDailyFeesMin();
-        $feesMax = $this->getDailyFeesMax();
-
-        if ($this->getPhone() != NULL) {
-            $this->getPhone()->isValidate($context);
-        } if ($feesMin == NULL && $feesMax != NULL) {
-            $context
-                ->buildViolation('user.minfees.unset')
-                ->atPath('dailyFeesMin')
-                ->addViolation();
-        } else if ($feesMax == NULL && $feesMin != NULL) {
-            $context
-                ->buildViolation('user.maxfees.unset')
-                ->atPath('dailyFeesMax')
-                ->addViolation();
-        } else if ($feesMin != NULL && $feesMax != NULL && $feesMin >= $feesMax) {
-            $context
-                ->buildViolation('user.minfees.over')
-                ->atPath('dailyFeesMin')
-                ->addViolation();
-        }
     }
 
     /**
@@ -760,53 +778,7 @@ class User extends BaseUser
     {
         return $this->google_access_token;
     }
-
-    /**
-     * Add images
-     *
-     * @param \ToolsBundle\Entity\Upload $images
-     * @return User
-     */
-    public function addImage(\ToolsBundle\Entity\Upload $images)
-    {
-        $this->images[] = $images;
-
-        return $this;
-    }
-
-    /**
-     * Remove images
-     *
-     * @param \ToolsBundle\Entity\Upload $images
-     */
-    public function removeImage(\ToolsBundle\Entity\Upload $images)
-    {
-        $this->images->removeElement($images);
-    }
-
-    /**
-     * Add resumes
-     *
-     * @param \ToolsBundle\Entity\Upload $resumes
-     * @return User
-     */
-    public function addResume(\ToolsBundle\Entity\Upload $resumes)
-    {
-        $this->resumes[] = $resumes;
-
-        return $this;
-    }
-
-    /**
-     * Remove resumes
-     *
-     * @param \ToolsBundle\Entity\Upload $resumes
-     */
-    public function removeResume(\ToolsBundle\Entity\Upload $resumes)
-    {
-        $this->resumes->removeElement($resumes);
-    }
-
+    
     /**
      * Set linkedin_id
      *
@@ -907,5 +879,258 @@ class User extends BaseUser
     public function getGiveUpCount()
     {
         return $this->giveUpCount;
+    }    
+
+    /**
+     * Add addSecretMail
+     *
+     * @param text $mails
+     * @return User
+     */
+    public function addSecretMail($mail)
+    {
+        array_push( $this->secretMail, $mail);
+        return $this;
     }
+
+    /**
+     * Get secretMail
+     *
+     * @return array
+     */
+    public function getSecretMail()
+    {
+        return $this->secretMail;
+    }
+
+    /**
+     * Add resumes
+     *
+     * @param \ToolsBundle\Entity\UploadResume $resume
+     * @return User
+     */
+    public function addResumes(\ToolsBundle\Entity\UploadResume $resume = null)
+    {
+        $this->resumes[] = $resume;
+
+        return $this;
+    }
+
+    /**
+     * Get resume
+     *
+     * @return \ToolsBundle\Entity\UploadResume
+     */
+    public function getResumes()
+    {
+        return $this->resumes;
+    }
+    
+    /**
+     * Set userResume
+     *
+     * @param string $resume
+     * @return User
+     */
+    public function setUserResume($resume)
+    {
+        $this->userResume = $resume;
+        return $this;
+    }
+
+    /**
+     * Get userResume
+     *
+     * @return string
+     */
+    public function getUserResume()
+    {
+        return $this->userResume;
+    }
+    
+    /**
+     * Get languages
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLanguages()
+    {
+        return $this->languages;
+    }
+
+    /**
+     * Add languages
+     *
+     * @param \ToolsBundle\Entity\Language $languages
+     * @return User
+     */
+    public function addLanguage(\ToolsBundle\Entity\Language $languages)
+    {
+        $this->languages[] = $languages;
+
+        return $this;
+    }
+
+    /**
+     * Remove languages
+     *
+     * @param \ToolsBundle\Entity\Language $languages
+     */
+    public function removeLanguage(\ToolsBundle\Entity\Language $languages)
+    {
+        $this->languages->removeElement($languages);
+    }
+
+    /**
+     * Get Professionalexpertise
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProfessionalExpertise()
+    {
+        return $this->professionalExpertise;
+    }
+    
+    /**
+     * Add Professionalexpertise
+     *
+     * @param \MissionBundle\Entity\ProfessionalExpertise $professionalExpertise
+     * @return User
+     */
+    public function addProfessionalExpertise(\MissionBundle\Entity\ProfessionalExpertise $professionalExpertise)
+    {
+        $this->professionalExpertise[] = $professionalExpertise;
+
+        return $this;
+    }
+
+    /**
+     * Remove Professionalexpertise
+     *
+     * @param \MissionBundle\Entity\ProfessionalExpertise $professionalExpertise
+     */
+    public function removeProfessionalExpertise(\MissionBundle\Entity\ProfessionalExpertise $professionalExpertise)
+    {
+        $this->professionalExpertise->removeElement($professionalExpertise);
+    }
+    
+    /**
+     * Get MissionKind
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMissionKind()
+    {
+        return $this->missionKind;
+    }
+    
+    /**
+     * Add Missionkind
+     *
+     * @param \MissionBundle\Entity\MissionKind $missionKind
+     * @return User
+     */
+    public function addMissionKind(\MissionBundle\Entity\MissionKind $missionKind)
+    {
+        $this->missionKind[] = $missionKind;
+
+        return $this;
+    }
+
+    /**
+     * Remove MissionKind
+     *
+     * @param \MissionBundle\Entity\MissionKind $missionKind
+     */
+    public function removeMissionKind(\MissionBundle\Entity\MissionKind $missionKind)
+    {
+        $this->missionKind->removeElement($missionKind);
+    }
+    
+    /**
+     * Get BusinessPractice
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBusinessPractice()
+    {
+        return $this->businessPractice;
+    }
+
+    /**
+     * Add BusinessPractice
+     *
+     * @param \MissionBundle\Entity\BusinessPractice $businessPractice
+     * @return User
+     */
+    public function addBusinessPractice(\MissionBundle\Entity\BusinessPractic $businessPractice)
+    {
+        $this->businesspractic[] = $businessPractice;
+
+        return $this;
+    }
+
+    /**
+     * Remove BusinessPractice
+     *
+     * @param \MissionBundle\Entity\BusinessPractice $businessPractice
+     */
+    public function removeBusinessPractice(\MissionBundle\Entity\BusinessPractice $businessPractice)
+    {
+        $this->businessPractice->removeElement($businessPractice);
+    }
+
+    /**
+     * Set Elasticuser
+     *
+     * @param \UserBundle\Entity\ElasticUser $elastic
+     * @return User
+     */
+    public function setElasticUser(\UserBundle\Entity\ElasticUser $elastic = null)
+    {
+        $this->elasticUser = $elastic;
+
+        return $this;
+    }
+
+    /**
+     * Get ElasticUser
+     *
+     * @return \UserBundle\Entity\elasticUser
+     */
+    public function getElasticUser()
+    {
+        return $this->elasticUser;
+    }   
+    
+    /**
+     * @Assert\Callback
+     */
+    public function isValidate(ExecutionContextInterface $context)
+    {
+        $feesMin = $this->getDailyFeesMin();
+        $feesMax = $this->getDailyFeesMax();
+
+        $this->setUpdateDate(new \Datetime());
+        
+        if ($this->getPhone() != NULL) {
+            $this->getPhone()->isValidate($context);
+        } if ($feesMin == NULL && $feesMax != NULL) {
+            $context
+                ->buildViolation('user.minfees.unset')
+                ->atPath('dailyFeesMin')
+                ->addViolation();
+        } else if ($feesMax == NULL && $feesMin != NULL) {
+            $context
+                ->buildViolation('user.maxfees.unset')
+                ->atPath('dailyFeesMax')
+                ->addViolation();
+        } else if ($feesMin != NULL && $feesMax != NULL && $feesMin >= $feesMax) {
+            $context
+                ->buildViolation('user.minfees.over')
+                ->atPath('dailyFeesMin')
+                ->addViolation();
+        }
+    }
+
 }
