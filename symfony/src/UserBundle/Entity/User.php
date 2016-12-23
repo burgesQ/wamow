@@ -13,6 +13,7 @@ use FOS\UserBundle\Model\User as BaseUser;
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="UserBundle\Repository\UserRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class User extends BaseUser
 {
@@ -189,7 +190,7 @@ class User extends BaseUser
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="update_date", type="datetime", nullable=false)
+     * @ORM\Column(name="update_date", type="datetime", nullable=true)
      */
     private $updateDate;
     
@@ -291,7 +292,6 @@ class User extends BaseUser
     {
         parent::__construct();
         $this->creationDate = new \Datetime();
-        $this->updateDate = new \Datetime();
         $this->confidentiality = false;
         $this->status = 0;
         $this->prefix = NULL;
@@ -529,6 +529,14 @@ class User extends BaseUser
     public function getUpdateDate()
     {
         return $this->updateDate;
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function updateDate()
+    {
+        $this->setUpdateDate(new \Datetime());
     }
 
     /**

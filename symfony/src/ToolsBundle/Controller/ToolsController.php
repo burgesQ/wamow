@@ -10,8 +10,4 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ToolsController extends Controller
 {
-    public function indexAction()
-    {
-    }
-
 }

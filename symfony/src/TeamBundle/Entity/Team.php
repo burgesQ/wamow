@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="team")
  * @ORM\Entity(repositoryClass="TeamBundle\Repository\TeamRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Team
 {
@@ -37,7 +38,7 @@ class Team
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="creationDate", type="datetime")
+     * @ORM\Column(name="creationDate", type="datetime", nullable=false)
      */
     private $creationDate;
 
@@ -229,5 +230,13 @@ class Team
     public function getUpdateDate()
     {
         return $this->updateDate;
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function updateDate()
+    {
+        $this->setUpdateDate(new \Datetime());
     }
 }
