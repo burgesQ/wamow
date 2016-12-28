@@ -29,7 +29,6 @@ class DashboardController extends Controller
             $missions = $repository->expertMissionsAvailables();
             $currentsMissions = $repository->myMissions($this->getUser());
             $availablesMissions = $service->remainingMission($missions, $currentsMissions);
-            dump($availablesMissions);
             return $this->render('DashboardBundle:Expert:index.html.twig', array(
                 'availablesMissions' => $availablesMissions,
                 'currentsMissions'   => $currentsMissions,
