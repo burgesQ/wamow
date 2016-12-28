@@ -1,10 +1,5 @@
 # app/config/fos_elastica.yml
 
-# conf value for elastica
-parameters:
-    elastica_host: 172.18.0.2
-    elastica_port: 9200
-
 # conf of the indexer and searcher for elastica
 fos_elastica:
     clients:

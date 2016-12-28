@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use FOS\UserBundle\Model\User as BaseUser;
+use CompanyBundle\Entity\Company;
 
 /**
  * User
@@ -1063,7 +1064,7 @@ class User extends BaseUser
      * @param \MissionBundle\Entity\BusinessPractice $businessPractice
      * @return User
      */
-    public function addBusinessPractice(\MissionBundle\Entity\BusinessPractic $businessPractice)
+    public function addBusinessPractice(\MissionBundle\Entity\BusinessPractice $businessPractice)
     {
         $this->businesspractic[] = $businessPractice;
 
