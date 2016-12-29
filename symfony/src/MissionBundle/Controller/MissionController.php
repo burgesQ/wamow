@@ -44,8 +44,7 @@ class MissionController extends Controller
             while ($repository->findByToken($token) != null) {
                 $token = bin2hex(random_bytes(10));
             }
-            $team = new Team(1); //role 1 = contractor
-            $team->addUser($this->getUser());
+            $team = new Team(1, $this->getUser()); //role 1 = contractor
             $team->setStatus(1);
             $em->persist($team);
             $mission = new Mission($nbStep, $team, 1, $token);
@@ -247,13 +246,12 @@ class MissionController extends Controller
         if ($mission->getStatus() !== 1) {
             throw new NotFoundHttpException($trans->trans('mission.error.available', array('%id%' => $id), 'MissionBundle'));
         }
-        $team = new Team(0);  //role 0 = advisor
+        $team = new Team(0, $this->getUser());  //role 0 = advisor
         $step = $repository->getSpecificStep($missionId, 1)[0];
         $i = count($repository->TeamsAvailables($missionId, $step));
         if ($i < $step->getnbMaxTeam())
             $team->setStatus(1);
         $team->setMission($mission);
-        $team->addUser($this->getUser());
         $em->persist($team);
         $em->flush($team);
         return new Response($trans->trans('mission.pitch.done', array(), 'MissionBundle'));

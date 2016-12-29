@@ -66,12 +66,13 @@ class Team
     /**
      * Constructor
      */
-    public function __construct($role)
+    public function __construct($role, $user)
     {
         $this->users = new ArrayCollection();
         $this->creationDate = new \DateTime();
         $this->role = $role;
         $this->status = 0;
+        $this->addUser($user);
     }
 
     /**

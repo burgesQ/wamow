@@ -46,8 +46,7 @@ class LoadAdvisor implements FixtureInterface, ContainerAwareInterface
             $user->setPasswordSet(true);
             $userManager->updateUser($user, true);
 
-            $team = new Team(0);
-            $team->addUser($user);
+            $team = new Team(0, $user);
             $team->setMission($mission);
             if ($i < 10)
                 $team->setStatus(1);

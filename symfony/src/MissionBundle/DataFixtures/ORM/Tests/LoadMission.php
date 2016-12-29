@@ -13,9 +13,8 @@ class LoadMission implements FixtureInterface
     {
         $contractor = $manager->getRepository('UserBundle:User')
                     ->findOneBy(array('id' => "1"));
-                    
-        $team = new Team(1);
-        $team->addUser($contractor);
+
+        $team = new Team(1, $contractor);
         $team->setStatus(1);
         $manager->persist($team);
         $manager->flush();
