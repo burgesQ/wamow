@@ -21,8 +21,10 @@
         "doctrine/doctrine-fixtures-bundle": "~2.2",
         "symfony/assetic-bundle": "^2.8",
         "hwi/oauth-bundle": "0.5.1",
-	"smalot/pdfparser": "0.9.26",
-        "friendsofsymfony/elastica-bundle": "3.2.*"
+        "smalot/pdfparser": "0.9.26",
+        "friendsofsymfony/elastica-bundle": "3.2.*",
+        "friendsofsymfony/jsrouting-bundle": "^1.6",
+        "adesigns/calendar-bundle": "^1.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "~3.0",

@@ -1,0 +1,5 @@
+services:
+    calendar.calendar_event_listener:
+        class: CalendarBundle\EventListener\CalendarEventListener
+        tags:
+            - { name: kernel.event_listener, event: calendar.load_events, method: loadEvents }

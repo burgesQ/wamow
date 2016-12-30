@@ -1,0 +1,3 @@
+calendar:
+    error:
+        forbiddenAccess: "You have no access to this page."

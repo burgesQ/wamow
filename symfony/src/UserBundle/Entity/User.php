@@ -8,6 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use FOS\UserBundle\Model\User as BaseUser;
 use CompanyBundle\Entity\Company;
+use CalendarBundle\Entity\Calendar;
 
 /**
  * User
@@ -194,14 +195,14 @@ class User extends BaseUser
      * @ORM\Column(name="update_date", type="datetime", nullable=true)
      */
     private $updateDate;
-    
+
     /**
      * @var string
      *
      * @ORM\Column(name="country", type="string", length=255, nullable=true)
      */
     private $country;
-    
+
     /**
      * @ORM\OneToOne(targetEntity="ToolsBundle\Entity\PhoneNumber", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
@@ -227,7 +228,7 @@ class User extends BaseUser
      * @ORM\Column(name="give_up_count", type="integer")
      */
     private $giveUpCount;
-    
+
     /**
      * @var array
      *
@@ -239,26 +240,26 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="ToolsBundle\Entity\ProfilePicture", mappedBy="user")
      */
     private $images;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="ToolsBundle\Entity\UploadResume", mappedBy="user")
      */
     private $resumes;
-    
+
     /**
      * @var text
      *
      * @ORM\Column(name="user_resume", type="text", nullable=true)
      */
     private $userResume;
-    
+
     /**
      * @var ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="\ToolsBundle\Entity\Language", cascade={"persist"})
      */
     private $languages;
-    
+
     /**
      * @var ArrayCollection
      *
@@ -289,6 +290,12 @@ class User extends BaseUser
      */
     private $userData;
         
+    /**
+     * @ORM\OneToOne(targetEntity="CalendarBundle\Entity\Calendar", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $calendar;
+
     public function __construct()
     {
         parent::__construct();
@@ -308,6 +315,7 @@ class User extends BaseUser
         $this->professionalexpertise = new ArrayCollection();
         $this->missionkind = new ArrayCollection();
         $this->businessPractice = new ArrayCollection();
+        $this->calendar = new Calendar();
     }
 
     /**
@@ -562,7 +570,7 @@ class User extends BaseUser
     {
         return $this->country;
     }
-    
+
     /**
      * Set dailyFeesMin
      *
@@ -655,7 +663,7 @@ class User extends BaseUser
         $this->images->removeElement($images);
     }
 
-    
+
     /**
      * Get images
      *
@@ -779,7 +787,7 @@ class User extends BaseUser
     {
         return $this->google_access_token;
     }
-    
+
     /**
      * Set linkedin_id
      *
@@ -880,7 +888,7 @@ class User extends BaseUser
     public function getGiveUpCount()
     {
         return $this->giveUpCount;
-    }    
+    }
 
     /**
      * Add addSecretMail
@@ -926,7 +934,7 @@ class User extends BaseUser
     {
         return $this->resumes;
     }
-    
+
     /**
      * Set userResume
      *
@@ -948,7 +956,7 @@ class User extends BaseUser
     {
         return $this->userResume;
     }
-    
+
     /**
      * Get languages
      *
@@ -991,7 +999,7 @@ class User extends BaseUser
     {
         return $this->professionalExpertise;
     }
-    
+
     /**
      * Add Professionalexpertise
      *
@@ -1014,7 +1022,7 @@ class User extends BaseUser
     {
         $this->professionalExpertise->removeElement($professionalExpertise);
     }
-    
+
     /**
      * Get MissionKind
      *
@@ -1024,7 +1032,7 @@ class User extends BaseUser
     {
         return $this->missionKind;
     }
-    
+
     /**
      * Add Missionkind
      *
@@ -1047,7 +1055,7 @@ class User extends BaseUser
     {
         $this->missionKind->removeElement($missionKind);
     }
-    
+
     /**
      * Get BusinessPractice
      *
@@ -1113,7 +1121,7 @@ class User extends BaseUser
         $feesMax = $this->getDailyFeesMax();
 
         $this->setUpdateDate(new \Datetime());
-        
+
         if ($this->getPhone() != NULL) {
             $this->getPhone()->isValidate($context);
         } if ($feesMin == NULL && $feesMax != NULL) {
@@ -1134,4 +1142,27 @@ class User extends BaseUser
         }
     }
 
+    /**
+     * Set calendar
+     *
+     * @param \CalendarBundle\Entity\Calendar $calendar
+     *
+     * @return User
+     */
+    public function setCalendar(\CalendarBundle\Entity\Calendar $calendar)
+    {
+        $this->calendar = $calendar;
+
+        return $this;
+    }
+
+    /**
+     * Get calendar
+     *
+     * @return \CalendarBundle\Entity\Calendar
+     */
+    public function getCalendar()
+    {
+        return $this->calendar;
+    }
 }

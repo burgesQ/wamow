@@ -29,6 +29,9 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new FOS\ElasticaBundle\FOSElasticaBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new CalendarBundle\CalendarBundle(),
+            new ADesigns\CalendarBundle\ADesignsCalendarBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

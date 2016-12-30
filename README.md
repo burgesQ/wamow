@@ -130,3 +130,7 @@ Simply add this: (then go to [symfony.dev:8080](http://symfony.dev:8080))
             sf doctrine:fixtures:load --append --fixtures=src/CompanyBundle/DataFixtures/ORM/LoadSector.php
             sf fos:elastica:reset
             sf fos:elastica:populate
+
+        * Assets Installation order for JS/CSS  :
+            sf assets:install web --symlink
+            sf assetic:dump web
