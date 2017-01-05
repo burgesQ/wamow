@@ -80,10 +80,10 @@ class MissionController extends Controller
                     $em->persist($step);
                 }
                 $em->flush();
-                $id = $mission->getId();
+                $missionId = $mission->getId();
                 return $this->render('MissionBundle:Mission:registered.html.twig', array(
                     'mission'  =>   $mission,
-                    'id'       =>   $id,
+                    'id'       =>   $missionId,
                     'form'     =>   $form,
                 ));
             }
@@ -235,8 +235,8 @@ class MissionController extends Controller
         $repository = $em->getRepository('MissionBundle:Mission');
         $listTeams = $repository->myMissions($this->getUser()->getId());
         $mission = $repository->findOneBy(array('id' => $missionId));
-        if ($mission == null ||  $mission->getStatus() <= 1) {
-            throw new NotFoundHttpException($trans->trans('mission.error.available', array('%id%' => $id), 'MissionBundle'));
+        if ($mission == null ||  $mission->getStatus() < 1) {
+            throw new NotFoundHttpException($trans->trans('mission.error.available', array('%id%' => $missionId), 'MissionBundle'));
         }
         foreach ($listTeams as $team) {
             if ($team->getMission() == $mission) {
@@ -244,7 +244,7 @@ class MissionController extends Controller
             }
         }
         if ($mission->getStatus() !== 1) {
-            throw new NotFoundHttpException($trans->trans('mission.error.available', array('%id%' => $id), 'MissionBundle'));
+            throw new NotFoundHttpException($trans->trans('mission.error.available', array('%id%' => $missionId), 'MissionBundle'));
         }
         $team = new Team(0, $this->getUser());  //role 0 = advisor
         $step = $repository->getSpecificStep($missionId, 1)[0];
@@ -408,7 +408,7 @@ class MissionController extends Controller
             && $mission->getStatus() >= 0)
         {
             $mission->setStatus(-1);
-            $listTeams = $repository->getAllTeam($mission);
+            $listTeams = $repository->getAllTeams($mission);
             foreach ($listTeams as $team) {
                 $team->setStatus(-2);
             }
