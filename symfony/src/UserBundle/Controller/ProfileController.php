@@ -19,7 +19,7 @@ use ToolsBundle\Entity\ProfilePicture;
 use ToolsBundle\Entity\UploadResume;
 use ToolsBundle\Entity\ReadResume;
 
-use UserBundle\Entity\ElasticUser;
+use UserBundle\Entity\UserData;
 
 use UserBundle\Form\MergedFormType;
 

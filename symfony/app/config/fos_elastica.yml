@@ -74,7 +74,7 @@ fos_elastica:
                    
                     persistence:
                         driver  : orm
-                        model   : UserBundle\Entity\ElasticUser
+                        model   : UserBundle\Entity\UserData
                         finder  : ~
                         provider: ~
                         listener: ~

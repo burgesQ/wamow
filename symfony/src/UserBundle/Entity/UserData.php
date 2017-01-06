@@ -9,12 +9,12 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * ElasticUser
+ * UserData
  *
- * @ORM\Table(name="elastic_user")
- * @ORM\Entity(repositoryClass="UserBundle\Repository\ElasticUserRepository")
+ * @ORM\Table(name="user_data")
+ * @ORM\Entity(repositoryClass="UserBundle\Repository\UserDataRepository")
  */
-class ElasticUser
+class UserData
 {
     /**
      * @var int
@@ -134,7 +134,7 @@ class ElasticUser
      *
      * @param integer $userId
      *
-     * @return ElasticUser
+     * @return UserData
      */
     public function setUserId($userId = null)
     {
@@ -211,7 +211,7 @@ class ElasticUser
      * Add languages
      *
      * @param string $languages
-     * @return ElasticUser
+     * @return UserData
      */
     public function addLanguage($languages)
     {
@@ -244,7 +244,7 @@ class ElasticUser
      * Add Professionalexpertise
      *
      * @param string $professionalExpertise
-     * @return ElasticUser
+     * @return UserData
      */
     public function addProfessionalExpertise($professionalExpertise)
     {
@@ -277,7 +277,7 @@ class ElasticUser
      * Add MissionKind
      *
      * @param string $missionKind
-     * @return ElasticUser
+     * @return UserData
      */
     public function addMissionKind($missionKind)
     {
@@ -310,7 +310,7 @@ class ElasticUser
      * Add BusinessPractice
      *
      * @param string $businessPractice
-     * @return ElasticUser
+     * @return UserData
      */
     public function addBusinessPractice($businessPractice)
     {
@@ -334,7 +334,7 @@ class ElasticUser
      * 
      * @param string $cvResume
      *
-     * @return ElasticUser
+     * @return UserData
      */
     public function setCvResume($cvResume = null)
     {
@@ -358,7 +358,7 @@ class ElasticUser
      *
      * @param string $userResume
      *
-     * @return ElasticUser
+     * @return UserData
      */
     public function setUserResume($userResume = null)
     {
@@ -382,7 +382,7 @@ class ElasticUser
      *
      * @param string $country
      *
-     * @return ElasticUser
+     * @return UserData
      */
     public function setCountry($country = null)
     {

@@ -35,13 +35,13 @@
     {% endif %} </p>
 
   <p> {{ 'profile.show.resume'|trans }}:
-    {% if user.elasticUser != null %}
-      {{ user.elasticUser.cvResume }}
+    {% if user.userData != null %}
+      {{ user.userData.cvResume }}
     {% endif %} </p>
     
   <p> {{ 'profile.show.userResume'|trans }}:
     {% if user.userResume != null %}
-      {{ user.elasticUser.userResume }}
+      {{ user.userData.userResume }}
     {% endif %} </p>      
     
   <p> {{ 'profile.show.professionalExpertise'|trans }}:

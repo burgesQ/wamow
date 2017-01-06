@@ -284,10 +284,10 @@ class User extends BaseUser
     private $businessPractice;
 
     /**
-     * @ORM\OneToOne(targetEntity="UserBundle\Entity\ElasticUser", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="UserBundle\Entity\UserData", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
      */
-    private $elasticUser;
+    private $userData;
         
     public function __construct()
     {
@@ -302,7 +302,7 @@ class User extends BaseUser
         $this->newsletter = true;
         $this->giveUpCount = 0;
         $this->secretMail = array();
-        $this->elasticuser = new Elasticuser();        
+        $this->userData = NULL;
         $this->userResume = null;
         $this->languages = new ArrayCollection();
         $this->professionalexpertise = new ArrayCollection();
@@ -1082,26 +1082,26 @@ class User extends BaseUser
     }
 
     /**
-     * Set Elasticuser
+     * Set UserData
      *
-     * @param \UserBundle\Entity\ElasticUser $elastic
+     * @param \UserBundle\Entity\UserData $data
      * @return User
      */
-    public function setElasticUser(\UserBundle\Entity\ElasticUser $elastic = null)
+    public function setUserData(\UserBundle\Entity\UserData $data = null)
     {
-        $this->elasticUser = $elastic;
+        $this->userdata = $data;
 
         return $this;
     }
 
     /**
-     * Get ElasticUser
+     * Get UserData
      *
-     * @return \UserBundle\Entity\elasticUser
+     * @return \UserBundle\Entity\UserData
      */
-    public function getElasticUser()
+    public function getUserData()
     {
-        return $this->elasticUser;
+        return $this->userData;
     }   
     
     /**

@@ -3,7 +3,7 @@
 namespace UserBundle\Services;
 
 use UserBundle\Entity\User;
-use UserBundle\Entity\ElasticUser;
+use UserBundle\Entity\UserData;
 
 class Services
 {
@@ -46,39 +46,39 @@ class Services
      */
     public function elasticSave($em, $user, $emSave)
     {
-        if (($elasticUser = $user->getElasticUser()) == null)
+        if (($userData = $user->getUserData()) == null)
         {
-            $elasticUser = new ElasticUser($user);
-            $elasticUser->setCreationDate($user->getCreationDate());
+            $userData = new UserData($user);
+            $userData->setCreationDate($user->getCreationDate());
         }
         
         if (($resumes = $em->findByUser($user)) != null) {
             $resume = end($resumes);
             $parser = new \Smalot\PdfParser\Parser();
             $pdf = $parser->parseFile($resume->getWebPath());
-            $elasticUser->setCvResume($pdf->getText());
+            $userData->setCvResume($pdf->getText());
         }            
 
-        $elasticUser->setUserId($user->getId());
-        $elasticUser->setUserResume($user->getUserResume());
-        $elasticUser->setCountry($user->getCountry());
+        $userData->setUserId($user->getId());
+        $userData->setUserResume($user->getUserResume());
+        $userData->setCountry($user->getCountry());
         
         foreach ($user->getLanguages() as $language)          
-            $elasticUser->addLanguage($language->getName());
+            $userData->addLanguage($language->getName());
         foreach ($user->getBusinessPractice() as $businessPractice)
-            $elasticUser->addBusinesspractice($businessPractice->getName());
+            $userData->addBusinesspractice($businessPractice->getName());
         foreach ($user->getProfessionalExpertise() as $professionalExpertise)
-            $elasticUser->addProfessionalExpertise($professionalExpertise->getName());
+            $userData->addProfessionalExpertise($professionalExpertise->getName());
         foreach ($user->getMissionKind() as $missionKind)
-            $elasticUser->addMissionKind($missionKind->getName());
+            $userData->addMissionKind($missionKind->getName());
         
-        $elasticUser->setUpdateDate($user->getUpdateDate());
-        $elasticUser->setDailyFeesMin($user->getDailyFeesMin());
-        $elasticUser->setDailyFeesMax($user->getDailyFeesMax());
+        $userData->setUpdateDate($user->getUpdateDate());
+        $userData->setDailyFeesMin($user->getDailyFeesMin());
+        $userData->setDailyFeesMax($user->getDailyFeesMax());
         
-        $user->setElasticUser($elasticUser);
+        $user->setUserData($userData);
 
-        $emSave->persist($elasticUser);
+        $emSave->persist($userData);
         $emSave->persist($user);
         $emSave->flush();
     }    
