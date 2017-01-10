@@ -104,7 +104,7 @@ class MissionController extends Controller
     public function editAction($id, Request $request)
     {
         $trans = $this->get('translator');
-        $service = $this->container->get('mission.savedTeams');
+        $service = $this->container->get('team');
 
         if ( $this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR'))
         {
@@ -112,7 +112,7 @@ class MissionController extends Controller
             $mission = $em->getRepository('MissionBundle:Mission')->find($id);
             if (null === $mission) {
                 throw new NotFoundHttpException($trans->trans('mission.error.wrongId', array('%id%' => $id), 'MissionBundle'));
-            } elseif ($service->checkContractorInTeam($this->getUser(), $mission) == false) {
+            } elseif ($service->isContractorOfMission($this->getUser(), $mission) == false) {
                 throw new NotFoundHttpException($trans->trans('mission.error.right', array(), 'MissionBundle'));
             } elseif ($mission->getStatus() != 0) {
                 throw new NotFoundHttpException($trans->trans('mission.error.alreadyEdit', array(), 'MissionBundle'));
@@ -157,7 +157,7 @@ class MissionController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $trans = $this->get('translator');
-        $service = $this->container->get('mission.savedTeams');
+        $service = $this->container->get('team');
         $mission = $em->getRepository('MissionBundle:Mission')->find($id);
 
         if ( $this->getUser() === null) {
@@ -169,7 +169,7 @@ class MissionController extends Controller
         if ( $this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR'))
         {
             $team = $mission->getTeamContact();
-            if ($service->checkContractorInTeam($this->getUser(), $mission) == false) {
+            if ($service->isContractorOfMission($this->getUser(), $mission) == false) {
                 throw new NotFoundHttpException($trans->trans('mission.error.right', array(), 'MissionBundle'));
             }
             return $this->render('MissionBundle:Mission:view_seeker.html.twig', array(
@@ -270,7 +270,8 @@ class MissionController extends Controller
     public function selectionAction(Request $request, $missionId)
     {
         $trans = $this->get('translator');
-        $service = $this->container->get('mission.savedTeams');
+        $serviceTeam = $this->container->get('team');
+        $serviceMission = $this->container->get('mission');
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('MissionBundle:Mission');
         $mission = $repository->find($missionId);
@@ -295,7 +296,7 @@ class MissionController extends Controller
         if ($teamToChoose == null)
             return new Response($trans->trans('mission.selection.noTeam', array(), 'MissionBundle'));
         $nbTeamToChoose = count($teamToChoose);
-        $service->setTeamsAvailables($teamToChoose, $positionStep);
+        $serviceTeam->setTeamsAvailable($teamToChoose, $positionStep);
 
         $form = $this->get('form.factory')->create(new SelectionType($missionId, $step));
         $form->handleRequest($request);
@@ -307,12 +308,12 @@ class MissionController extends Controller
             {
                 if ($nbChosen > $repository->getSpecificStep($missionId, $positionStep + 1)[0]->getNbMaxTeam() || $nbChosen == 0)
                 {
-                    $service->sendDeleteMessageInView($request, $nbChosen, $nbTeamToChoose, $repository->getSpecificStep($missionId, $positionStep + 1)[0], $trans);
+                    $serviceMission->sendDeleteMessageInView($request, $nbChosen, $nbTeamToChoose, $repository->getSpecificStep($missionId, $positionStep + 1)[0], $trans);
                     return $this->redirectToRoute('mission_teams_selection', array(
                         'missionId' => $missionId
                     ));
                 }
-                $service->setSaveTeamStatus($data['team'], $step);
+                $serviceTeam->keepTeams($data['team'], $step);
                 $nextStep = $repository->getSpecificStep($missionId, $positionStep + 1)[0];
                 $nextStep->setStatus(1);
                 $nextStep->setStartDate(new \DateTime());
@@ -325,15 +326,15 @@ class MissionController extends Controller
             }
             if ($nbChosen > $step->getReallocCounter() || $nbTeamToChoose - $nbChosen <= 0 || $step->getReallocCounter() == 0)
             {
-                $service->sendDeleteMessageInView($request, $nbChosen, $nbTeamToChoose, $step, $trans);
+                $serviceMission->sendDeleteMessageInView($request, $nbChosen, $nbTeamToChoose, $step, $trans);
                 return $this->redirectToRoute('mission_teams_selection', array(
                     'missionId' => $missionId
                     ));
             }
             $em->flush($step);
-            $service->setDeletedTeam($data['team'], $step);
+            $serviceTeam->deleteTeams($data['team'], $step);
             $teamToChoose = $repository->teamsAvailables($missionId, $step);
-            $service->setTeamsAvailables($teamToChoose, $step->getPosition());
+            $serviceTeam->setTeamsAvailable($teamToChoose, $step->getPosition());
             return $this->redirectToRoute('mission_teams_selection', array(
                 'missionId' => $missionId
                 ));
@@ -400,11 +401,11 @@ class MissionController extends Controller
     {
         $trans = $this->get('translator');
         $em = $this->getDoctrine()->getManager();
-        $service = $this->container->get('mission.savedTeams');
+        $service = $this->container->get('team');
         $repository = $em->getRepository('MissionBundle:Mission');
         $mission = $repository->find($missionId);
         if ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR')
-            && $mission != null && $service->checkContractorInTeam($this->getUser(), $mission) == true
+            && $mission != null && $service->isContractorOfMission($this->getUser(), $mission) == true
             && $mission->getStatus() >= 0)
         {
             $mission->setStatus(-1);
