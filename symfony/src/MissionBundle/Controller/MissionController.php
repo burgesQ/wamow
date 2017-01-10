@@ -37,7 +37,7 @@ class MissionController extends Controller
                         ->getManager()
                         ->getRepository('MissionBundle:Mission')
                         ;
-            $service = $this->container->get('mission.nbStep');
+            $service = $this->container->get('config.mission');
             $nbStep = $service->getMissionNbStep();
             $user = $this->getUser();
             $token = bin2hex(random_bytes(10));
@@ -73,7 +73,7 @@ class MissionController extends Controller
                 $em->persist($mission);
                 for ($i=1; $i <= $nbStep; $i++)
                 {
-                    $array = $service->getMissionStep($i);
+                    $array = $service->getStepConfig($i);
                     $step = new Step($array["nbMaxTeam"], $array["reallocTeam"]);
                     $step->setMission($mission);
                     $step->setPosition($i);

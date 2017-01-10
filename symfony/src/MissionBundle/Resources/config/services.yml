@@ -1,4 +1,1 @@
 services:
-    mission.nbStep:
-        class: ToolsBundle\Service\MissionNbStep
-        arguments: ['@doctrine.orm.entity_manager']
