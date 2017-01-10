@@ -1,8 +1,8 @@
 <?php
 
-namespace DashboardBundle\Service;
+namespace MissionBundle\Service;
 
- class currentMission
+ class Mission
 {
     protected $em;
 
@@ -11,7 +11,7 @@ namespace DashboardBundle\Service;
         $this->em = $em;
     }
 
-    public function remainingMission($listMissionsAvailable, $listCurrentMissions)
+    public function organiseMissions($listMissionsAvailable, $listCurrentMissions)
     {
         $i = 0;
         $j = 0;

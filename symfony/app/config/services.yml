@@ -6,3 +6,7 @@ services:
         class: "%my_user_provider.class%"
         #this is the place where the properties are passed to the UserProvider - see config.yml
         arguments: [@fos_user.user_manager,{linkedin: linkedin_id, facebook: facebook_id, google: google_id}]
+
+    mission:
+        class: MissionBundle\Service\Mission
+        arguments: ['@doctrine.orm.entity_manager']

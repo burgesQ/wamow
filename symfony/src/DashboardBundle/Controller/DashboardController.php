@@ -25,10 +25,10 @@ class DashboardController extends Controller
             ;
         if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR'))
         {
-            $service = $this->container->get('current.mission');
+            $service = $this->container->get('mission');
             $missions = $repository->expertMissionsAvailables();
             $currentsMissions = $repository->myMissions($this->getUser());
-            $availablesMissions = $service->remainingMission($missions, $currentsMissions);
+            $availablesMissions = $service->organiseMissions($missions, $currentsMissions);
             return $this->render('DashboardBundle:Expert:index.html.twig', array(
                 'availablesMissions' => $availablesMissions,
                 'currentsMissions'   => $currentsMissions,

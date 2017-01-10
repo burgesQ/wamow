@@ -1,4 +1,1 @@
 services:
-    current.mission:
-        class: DashboardBundle\Service\currentMission
-        arguments: ['@doctrine.orm.entity_manager']
