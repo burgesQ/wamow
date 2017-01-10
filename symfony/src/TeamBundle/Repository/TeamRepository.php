@@ -12,36 +12,82 @@ use Doctrine\ORM\EntityRepository;
  */
 class TeamRepository extends EntityRepository
 {
-    public function takeBackTeams($missionId) // query use in the form to take back a mission
+    // Query get all advisors teams in a mission
+    public function getAdvisorsTeams($missionId)
     {
         $qb = $this->_em->createQueryBuilder();
-        $qb->select('t', 'm')
-        ->from('TeamBundle:Team', 't')
-        ->leftjoin('t.mission', 'm')
-        ->where('m.id = :missionId')
-            ->setParameter('missionId', $missionId)
-        ->andWhere('t.role = 0')
-        ->andWhere('t.status = 1')
-        ->orderBy('t.creationDate', 'ASC');
-        return $qb;
+        $qb->select('t')
+            ->from('TeamBundle:Team', 't')
+            ->leftjoin('t.mission', 'm')
+            ->where('m.id = :missionId')
+                ->setParameter('missionId', $missionId)
+            ->andWhere('t.role = 0');
+        return $qb->getQuery()->getResult();
     }
 
-    public function teamInForm($missionId, $step) // query use in the form to select mission
+    // Query get team of for a user and a specific mission
+    public function getTeamByMissionAndUser($missionId, $userId)
     {
         $qb = $this->_em->createQueryBuilder();
-        $qb->select('t', 'm')
-        ->from('TeamBundle:Team', 't')
-        ->leftjoin('t.mission', 'm')
-        ->where('m.id = :missionId')
-            ->setParameter('missionId', $missionId)
-        ->andWhere('t.role = 0')
-        ->andWhere('t.status = :pos')
-            ->setParameter('pos', $step->getPosition());
-        if($step->getPosition() == 1) {
+        $qb->select('t', 'x')
+            ->from('TeamBundle:Team', 't')
+            ->leftjoin('t.mission', 'm')
+            ->leftjoin('t.users', 'u')
+            ->leftjoin('t.users', 'x')
+            ->where('m.id = :missionId')
+                ->setParameter('missionId', $missionId)
+            ->andwhere('u.id = :userId')
+                ->setParameter('userId', $userId);
+        return $qb->getQuery()->getResult()[0];
+    }
+
+    // Query get teams availables for a specific step
+    public function getAvailablesTeams($missionId, $step)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('t')
+            ->from('TeamBundle:Team', 't')
+            ->leftjoin('t.mission', 'm')
+            ->where('m.id = :missionId')
+                ->setParameter('missionId', $missionId)
+            ->andWhere('t.role = 0')
+            ->andWhere('t.status = :position')
+                ->setParameter('position', $step->getPosition());
+        if ($step->getPosition() == 1) {
             $qb->orWhere('t.status = 0');
         }
         $qb->orderBy('t.creationDate', 'ASC')
-        ->setMaxResults($step->getNbMaxTeam());
+            ->setMaxResults($step->getNbMaxTeam());
+        return $qb->getQuery()->getResult();
+    }
+
+    // Query get teams of users
+    public function getTeamsByUserId($userId)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('t')
+            ->from('TeamBundle:Team', 't')
+            ->leftjoin('t.users', 'u')
+            ->leftjoin('t.mission', 'm')
+            ->where('u.id = :userId')
+                ->setParameter('userId', $userId)
+            ->andWhere('m.status >= 0');
+        return $qb->getQuery()->getResult();
+    }
+
+    // Query get teams for form
+    public function getTeamsForForm($missionId, $position)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('t')
+            ->from('TeamBundle:Team', 't')
+            ->leftjoin('t.mission', 'm')
+            ->where('m.id = :missionId')
+                ->setParameter('missionId', $missionId)
+            ->andWhere('t.role = 0')
+            ->andWhere('t.status = :position')
+                ->setParameter('position', $position)
+            ->orderBy('t.creationDate', 'ASC');
         return $qb;
     }
 }

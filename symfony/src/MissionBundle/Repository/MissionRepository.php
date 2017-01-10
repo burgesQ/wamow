@@ -22,38 +22,6 @@ class MissionRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function myMissions($userID)
-    {
-        $qb = $this->_em->createQueryBuilder();
-        $qb->select('t', 'u')
-        ->from('TeamBundle:Team', 't')
-        ->leftjoin('t.users', 'u')
-        ->leftjoin('t.mission', 'm')
-        ->where('u.id = :userID')
-            ->setParameter('userID', $userID)
-        ->andWhere('m.status >= 0');
-        return $qb->getQuery()->getResult();
-    }
-
-    public function teamsAvailables($missionId, $step)
-    {
-        $qb = $this->_em->createQueryBuilder();
-        $qb->select('t', 'm')
-        ->from('TeamBundle:Team', 't')
-        ->leftjoin('t.mission', 'm')
-        ->where('m.id = :missionId')
-            ->setParameter('missionId', $missionId)
-        ->andWhere('t.role = 0')
-        ->andWhere('t.status = :pos')
-            ->setParameter('pos', $step->getPosition());
-        if($step->getPosition() == 1) {
-            $qb->orWhere('t.status = 0');
-        }
-        $qb->orderBy('t.creationDate', 'ASC')
-        ->setMaxResults($step->getNbMaxTeam());
-        return $qb->getQuery()->getResult();
-    }
-
     public function getSpecificStep($missionId, $stepPos)
     {
         $qb = $this->_em->createQueryBuilder();
@@ -76,32 +44,6 @@ class MissionRepository extends EntityRepository
         ->where('m.id = :missionId')
             ->setParameter('missionId', $missionId)
         ->andWhere('s.status = 1');
-        return $qb->getQuery()->getResult();
-    }
-
-    public function getSpecificTeam($missionId, $userID)
-    {
-        $qb = $this->_em->createQueryBuilder();
-        $qb->select('t', 'u')
-        ->from('TeamBundle:Team', 't')
-        ->leftjoin('t.mission', 'm')
-        ->leftjoin('t.users', 'u')
-        ->where('m.id = :missionId')
-            ->setParameter('missionId', $missionId)
-        ->andWhere('u.id = :userID')
-            ->setParameter('userID', $userID)
-            ;
-        return $qb->getQuery()->getResult();
-    }
-
-    public function getAllTeams($missionId)
-    {
-        $qb = $this->_em->createQueryBuilder();
-        $qb->select('t')
-        ->from('TeamBundle:Team', 't')
-        ->leftjoin('t.mission', 'm')
-        ->where('m.id = :missionId')
-            ->setParameter('missionId', $missionId);
         return $qb->getQuery()->getResult();
     }
 }

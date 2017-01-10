@@ -15,12 +15,12 @@ use TeamBundle\Repository\TeamRepository;
 class SelectionType extends AbstractType
 {
     private $missionId;
-    private $step;
+    private $position;
 
-    public function __construct($missionId, $step)
+    public function __construct($missionId, $position)
     {
         $this->missionId = $missionId;
-        $this->step = $step;
+        $this->position = $position;
     }
 
     /**
@@ -29,13 +29,13 @@ class SelectionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $missionId = $this->missionId;
-        $step = $this->step;
+        $position = $this->position;
         $builder
-            ->add('team', 'entity', array(
+            ->add('team', EntityType::class, array(
                 'class' => 'TeamBundle:Team',
                 'property' => 'id',
-                'query_builder' => function (TeamRepository $entityRepository) use ($missionId, $step) {
-                    return $entityRepository->teamInForm($missionId, $step);
+                'query_builder' => function (TeamRepository $entityRepository) use ($missionId, $position) {
+                    return $entityRepository->getTeamsForForm($missionId, $position);
                 },
                 'expanded' => true,
                 'multiple' => true,

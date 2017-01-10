@@ -15,10 +15,12 @@ use TeamBundle\Repository\TeamRepository;
 class TakeBackType extends AbstractType
 {
     private $missionId;
+    private $position;
 
-    public function __construct($missionId)
+    public function __construct($missionId, $position)
     {
         $this->missionId = $missionId;
+        $this->position = $position;
     }
 
     /**
@@ -27,19 +29,21 @@ class TakeBackType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $missionId = $this->missionId;
+        $position = $this->position;
         $builder
-            ->add('team', 'entity', array(
+            ->add('team', EntityType::class, array(
                 'class' => 'TeamBundle:Team',
                 'property' => 'id',
-                'query_builder' => function (TeamRepository $entityRepository) use ($missionId) {
-                    return $entityRepository->takeBackTeams($missionId);
+                'query_builder' => function (TeamRepository $entityRepository) use ($missionId, $position) {
+                    return $entityRepository->getTeamsForForm($missionId, $position);
                 },
-                'expanded' => true
-                ))
+                'expanded' => true,
+                'multiple' => true,
+                'required' => true,
+            ))
             ->add('save', 'submit', array(
                 'label' => 'mission.selection.saveButton2',
                 'translation_domain' => 'MissionBundle'
-                ))
-            ;
+            ));
     }
 }

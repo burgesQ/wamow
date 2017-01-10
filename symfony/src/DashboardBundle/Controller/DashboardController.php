@@ -18,16 +18,15 @@ class DashboardController extends Controller
 {
     public function missionDisplayAction()
     {
-        $repository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('MissionBundle:Mission')
-            ;
+        $em = $this->getDoctrine()->getManager();
+        $repositoryMission = $em->getRepository('MissionBundle:Mission');
+        $repositoryTeam = $em->getRepository('TeamBundle:Team');
+        $userId = $this->getUser()->getId();
         if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR'))
         {
             $service = $this->container->get('mission');
-            $missions = $repository->expertMissionsAvailables();
-            $currentsMissions = $repository->myMissions($this->getUser());
+            $missions = $repositoryMission->expertMissionsAvailables();
+            $currentsMissions = $repositoryTeam->getTeamsByUserId($userId);
             $availablesMissions = $service->organiseMissions($missions, $currentsMissions);
             return $this->render('DashboardBundle:Expert:index.html.twig', array(
                 'availablesMissions' => $availablesMissions,
@@ -36,9 +35,7 @@ class DashboardController extends Controller
         }
         elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR'))
         {
-            $user = $this->getUser();
-            $iD = $user->getId();
-            $listMission = $repository->myMissions($iD);
+            $listMission = $repositoryTeam->getTeamsByUserId($userId);
             return $this->render('DashboardBundle:Seeker:index.html.twig', array(
                 'listMission' => $listMission
                 ));

@@ -195,7 +195,8 @@ class MissionController extends Controller
     public function listAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $repository = $em->getRepository('MissionBundle:Mission');
+        $repositoryMission = $em->getRepository('MissionBundle:Mission');
+        $repositoryTeam = $em->getRepository('TeamBundle:Team');
         $user = $this->getUser();
         $trans = $this->get('translator');
         $em = $this->getDoctrine()->getManager();
@@ -205,13 +206,13 @@ class MissionController extends Controller
         }
         elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR'))
         {
-            $listTeams = $repository->myMissions($user->getId());
+            $listTeams = $repositoryTeam->getTeamsByUserId($user->getId());
             return $this->render('MissionBundle:Mission:all_missions_seeker.html.twig', array(
                 'listTeams'           => $listTeams
             ));
         }
         elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')) {
-            $listMission = $repository->expertMissionsAvailables();
+            $listMission = $repositoryMission->expertMissionsAvailables();
             return $this->render('MissionBundle:Mission:all_missions_expert.html.twig', array(
                 'listMission'           => $listMission
             ));
@@ -232,9 +233,10 @@ class MissionController extends Controller
         } elseif ( $this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR') ) {
             throw new NotFoundHttpException($trans->trans('mission.pitch.contractor', array(), 'MissionBundle'));
         }
-        $repository = $em->getRepository('MissionBundle:Mission');
-        $listTeams = $repository->myMissions($this->getUser()->getId());
-        $mission = $repository->findOneBy(array('id' => $missionId));
+        $repositoryMission = $em->getRepository('MissionBundle:Mission');
+        $repositoryTeam = $em->getRepository('TeamBundle:Team');
+        $listTeams = $repositoryTeam->getTeamsByUserId($this->getUser()->getId());
+        $mission = $repositoryMission->findOneBy(array('id' => $missionId));
         if ($mission == null ||  $mission->getStatus() < 1) {
             throw new NotFoundHttpException($trans->trans('mission.error.available', array('%id%' => $missionId), 'MissionBundle'));
         }
@@ -246,11 +248,8 @@ class MissionController extends Controller
         if ($mission->getStatus() !== 1) {
             throw new NotFoundHttpException($trans->trans('mission.error.available', array('%id%' => $missionId), 'MissionBundle'));
         }
+
         $team = new Team(0, $this->getUser());  //role 0 = advisor
-        $step = $repository->getSpecificStep($missionId, 1)[0];
-        $i = count($repository->TeamsAvailables($missionId, $step));
-        if ($i < $step->getnbMaxTeam())
-            $team->setStatus(1);
         $team->setMission($mission);
         $em->persist($team);
         $em->flush($team);
@@ -274,6 +273,7 @@ class MissionController extends Controller
         $serviceMission = $this->container->get('mission');
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('MissionBundle:Mission');
+        $repositoryTeam = $em->getRepository('TeamBundle:Team');
         $mission = $repository->find($missionId);
         if ($mission == null || $mission->getStatus() != 1) {
             throw new NotFoundHttpException($trans->trans('mission.error.forbiddenAccess', array(), 'MissionBundle'));
@@ -287,18 +287,18 @@ class MissionController extends Controller
 
         $step = $repository->getCurrentStep($missionId);
         $step = $step[0];
-        $positionStep = $step->getPosition();
-        if ($repository->getSpecificStep($missionId, $step->getPosition() + 1) == null) {
-            $team = $repository->teamsAvailables($missionId, $step)[0];
+        $position = $step->getPosition();
+        if ($repository->getSpecificStep($missionId, $position + 1) == null) {
+            $team = $repositoryTeam->findOneBy(array('mission' => $mission, 'status' => $position));
             return new Response($trans->trans('mission.selection.finish', array('%id%' => $team->getId()), 'MissionBundle'));
         }
-        $teamToChoose = $repository->teamsAvailables($missionId, $step);
+        $teamToChoose = $repositoryTeam->getAvailablesTeams($missionId, $step);
         if ($teamToChoose == null)
             return new Response($trans->trans('mission.selection.noTeam', array(), 'MissionBundle'));
         $nbTeamToChoose = count($teamToChoose);
-        $serviceTeam->setTeamsAvailable($teamToChoose, $positionStep);
+        $serviceTeam->setTeamsAvailable($teamToChoose, $position);
 
-        $form = $this->get('form.factory')->create(new SelectionType($missionId, $step));
+        $form = $this->get('form.factory')->create(new SelectionType($missionId, $position));
         $form->handleRequest($request);
         if ($this->get('request')->getMethod() == 'POST')
         {
@@ -306,15 +306,15 @@ class MissionController extends Controller
             $nbChosen = count($data['team']);
             if ($form->get('save')->isClicked())
             {
-                if ($nbChosen > $repository->getSpecificStep($missionId, $positionStep + 1)[0]->getNbMaxTeam() || $nbChosen == 0)
+                if ($nbChosen > $repository->getSpecificStep($missionId, $position + 1)[0]->getNbMaxTeam() || $nbChosen == 0)
                 {
-                    $serviceMission->sendDeleteMessageInView($request, $nbChosen, $nbTeamToChoose, $repository->getSpecificStep($missionId, $positionStep + 1)[0], $trans);
+                    $serviceMission->sendDeleteMessageInView($request, $nbChosen, $nbTeamToChoose, $repository->getSpecificStep($missionId, $position + 1)[0], $trans);
                     return $this->redirectToRoute('mission_teams_selection', array(
                         'missionId' => $missionId
                     ));
                 }
                 $serviceTeam->keepTeams($data['team'], $step);
-                $nextStep = $repository->getSpecificStep($missionId, $positionStep + 1)[0];
+                $nextStep = $repository->getSpecificStep($missionId, $position + 1)[0];
                 $nextStep->setStatus(1);
                 $nextStep->setStartDate(new \DateTime());
                 $step->setEndDate(new \DateTime());
@@ -333,8 +333,8 @@ class MissionController extends Controller
             }
             $em->flush($step);
             $serviceTeam->deleteTeams($data['team'], $step);
-            $teamToChoose = $repository->teamsAvailables($missionId, $step);
-            $serviceTeam->setTeamsAvailable($teamToChoose, $step->getPosition());
+            $teamToChoose = $repositoryTeam->getAvailablesTeams($missionId, $step);
+            $serviceTeam->setTeamsAvailable($teamToChoose, $position);
             return $this->redirectToRoute('mission_teams_selection', array(
                 'missionId' => $missionId
                 ));
@@ -353,7 +353,8 @@ class MissionController extends Controller
         $em = $this->getDoctrine()->getManager();
         $trans = $this->get('translator');
         $repository = $em->getRepository('MissionBundle:Mission');
-        $step = $repository->getSpecificStep($missionId, 2)[0];
+        $step = $repository->getCurrentStep($missionId);
+        $step = $step[0];
         $mission = $em->getRepository('MissionBundle:Mission')->find($missionId);
 
         if ( $this->getUser() === null ) {
@@ -361,8 +362,8 @@ class MissionController extends Controller
         } elseif ( $this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR') ||  $mission->getStatus() < 0) {
             throw new NotFoundHttpException($trans->trans('mission.error.forbiddenAccess', array(), 'MissionBundle'));
         }
-
-        $form = $this->get('form.factory')->create(new TakeBackType($missionId));
+        $position = $step->getPosition();
+        $form = $this->get('form.factory')->create(new TakeBackType($missionId, $position - 1));
         $form->handleRequest($request);
         if ($step->getStatus() != 1) {
             return $this->redirectToRoute('mission_teams_selection', array(
@@ -382,11 +383,13 @@ class MissionController extends Controller
         if ($this->get('request')->getMethod() == 'POST')
         {
             $data = $form->getData();
-            $team = $data['team'];
-            $step->setReallocCounter($step->getReallocCounter() - 1);
-            $team->setStatus($step->getPosition());
-            $em->flush($team);
-            $em->flush($step);
+            $teams = $data['team'];
+            foreach ($teams as $team) {
+                $step->setReallocCounter($step->getReallocCounter() - 1);
+                $team->setStatus($position);
+                $em->flush($team);
+                $em->flush($step);
+            }
             return $this->redirectToRoute('mission_teams_selection', array(
                 'missionId' => $missionId
             ));
@@ -409,8 +412,9 @@ class MissionController extends Controller
             && $mission->getStatus() >= 0)
         {
             $mission->setStatus(-1);
-            $listTeams = $repository->getAllTeams($mission);
-            foreach ($listTeams as $team) {
+            $repository = $em->getRepository('TeamBundle:Team');
+            $teams = $repository->getAdvisorsTeams($missionId);
+            foreach ($teams as $team) {
                 $team->setStatus(-2);
             }
             $em->flush();
@@ -432,7 +436,7 @@ class MissionController extends Controller
         }
         elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR'))
         {
-            $listTeams = $repository->myMissions($user->getId());
+            $listTeams = $repository->getTeamsByUserId($user->getId());
             return $this->render('MissionBundle:Mission:pitch_all.html.twig', array(
                 'listTeams'           => $listTeams
             ));
@@ -446,10 +450,11 @@ class MissionController extends Controller
     {
         $trans = $this->get('translator');
         $em = $this->getDoctrine()->getManager();
-        $repository = $em->getRepository('MissionBundle:Mission');
-        $mission = $em->getRepository('MissionBundle:Mission')->find($missionId);
-        $team = $repository->getSpecificTeam($missionId, $this->getUser()->getId())[0];
+        $mission = $em->getRepository('MissionBundle:Mission')->findOneById($missionId);
+
         $user = $this->getUser();
+        $repository = $em->getRepository('TeamBundle:Team');
+        $team = $repository->getTeamByMissionAndUser($missionId, $user->getId());
 
         if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')
             && $mission != null && $team != null && $mission->getStatus() >= 1)
@@ -465,7 +470,7 @@ class MissionController extends Controller
                 $team->setStatus(-3);
             }
             $em->flush();
-            return $this->redirectToRoute('mission_pitch_all', array());
+            return $this->redirectToRoute('dashboard', array());
         }
         throw new NotFoundHttpException($trans->trans('mission.error.forbiddenAccess', array(), 'MissionBundle'));
     }
