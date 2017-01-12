@@ -20,7 +20,7 @@
                 </div>
                 {% endif %}
                 <br>
-                {% if step.position == 2 and step.nbMaxTeam != nbTeam and step.reallocCounter != 0 %}
+                {% if step.position == 2 and step.nbMaxTeam != nbTeam and step.reallocTeam != 0 %}
                     <a href="{{ path('mission_selection_takeback', {'missionId': missionId}) }}"
                     >{{ 'mission.selection.takeBack'|trans }}</a><br>
                 {% endif %}

@@ -115,7 +115,7 @@ class Config
      * Set creationDate
      *
      * @param \DateTime $creationDate
-     * @return Step
+     * @return Config
      */
     public function setCreationDate($creationDate)
     {
@@ -138,7 +138,7 @@ class Config
      * Set updateDate
      *
      * @param \DateTime $updateDate
-     * @return Step
+     * @return Config
      */
     public function setUpdateDate($updateDate)
     {

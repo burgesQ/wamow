@@ -18,7 +18,7 @@ namespace TeamBundle\Service;
         foreach ($teams as $team)
         {
             $team->setStatus(-1);
-            $step->setReallocCounter($step->getReallocCounter() - 1);
+            $step->setReallocTeam($step->getReallocTeam() - 1);
             $em->flush($team);
         }
         $em->flush($step);

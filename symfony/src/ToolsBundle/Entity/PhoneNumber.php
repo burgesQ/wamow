@@ -137,7 +137,7 @@ class PhoneNumber
      * Set creationDate
      *
      * @param \DateTime $creationDate
-     * @return Step
+     * @return PhoneNumber
      */
     public function setCreationDate($creationDate)
     {
@@ -160,7 +160,7 @@ class PhoneNumber
      * Set updateDate
      *
      * @param \DateTime $updateDate
-     * @return Step
+     * @return PhoneNumber
      */
     public function setUpdateDate($updateDate)
     {

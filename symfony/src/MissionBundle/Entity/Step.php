@@ -33,6 +33,10 @@ class Step
      * @var int
      *
      * @ORM\Column(name="position", type="smallint")
+     * @Assert\Range(
+     *      min = 0,
+     *      minMessage = "You can't put something under 0.",
+     * )
      */
     private $position;
 
@@ -40,6 +44,10 @@ class Step
      * @var int
      *
      * @ORM\Column(name="nb_max_team", type="smallint")
+     * @Assert\Range(
+     *      min = 1,
+     *      minMessage = "You can't put something under 1.",
+     * )
      */
     private $nbMaxTeam;
 
@@ -47,15 +55,12 @@ class Step
      * @var int
      *
      * @ORM\Column(name="realloc_team", type="smallint")
+     * @Assert\Range(
+     *      min = 0,
+     *      minMessage = "You can't put something under 0.",
+     * )
      */
     private $reallocTeam;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="realloc_counter", type="smallint")
-     */
-    private $reallocCounter;
 
     /**
      * @var \DateTime
@@ -74,16 +79,16 @@ class Step
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="start_date", type="datetime")
+     * @ORM\Column(name="start", type="datetime", nullable=true)
      */
-    private $startDate;
+    private $start;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="end_date", type="datetime")
+     * @ORM\Column(name="end", type="datetime", nullable=true)
      */
-    private $endDate;
+    private $end;
 
 
     /**
@@ -94,15 +99,12 @@ class Step
     private $status;
 
     public function __construct($nbMaxTeam, $reallocTeam)
-      {
+    {
         $this->creationDate = new \Datetime();
-        $this->startDate = new \DateTime();
-        $this->endDate = new \DateTime();
         $this->nbMaxTeam = $nbMaxTeam;
         $this->reallocTeam = $reallocTeam;
         $this->status = 0;
-        $this->reallocCounter = $reallocTeam;
-      }
+    }
 
     /**
      * Get id
@@ -114,6 +116,12 @@ class Step
         return $this->id;
     }
 
+    /**
+     * Set Mission
+     *
+     * @param \MissionBundle\Entity\Mission $mission
+     * @return Step
+     */
     public function setMission($mission)
     {
         $this->mission = $mission;
@@ -121,6 +129,11 @@ class Step
         return $this;
     }
 
+    /**
+     * Get Mission
+     *
+     * @return \MissionBundle\Entity\Mission
+     */
     public function getMisison()
     {
         return $this->Mission;
@@ -196,49 +209,49 @@ class Step
     }
 
     /**
-     * Set startDate
+     * Set start
      *
-     * @param \DateTime $startDate
+     * @param \DateTime $start
      * @return Step
      */
-    public function setStartDate($startDate)
+    public function setStart($start)
     {
-        $this->startDate = $startDate;
+        $this->start = $start;
 
         return $this;
     }
 
     /**
-     * Get startDate
+     * Get start
      *
      * @return \DateTime
      */
-    public function getStartDate()
+    public function getStart()
     {
-        return $this->startDate;
+        return $this->start;
     }
 
     /**
-     * Set endDate
+     * Set end
      *
-     * @param \DateTime $endDate
+     * @param \DateTime $end
      * @return Step
      */
-    public function setEndDate($endDate)
+    public function setEnd($end)
     {
-        $this->endDate = $endDate;
+        $this->end = $end;
 
         return $this;
     }
 
     /**
-     * Get endDate
+     * Get end
      *
      * @return \DateTime
      */
-    public function getEndDate()
+    public function getEnd()
     {
-        return $this->endDate;
+        return $this->end;
     }
 
     /**
@@ -308,29 +321,6 @@ class Step
     public function getReallocTeam()
     {
         return $this->reallocTeam;
-    }
-
-    /**
-     * Get reallocCounter
-     *
-     * @return integer
-     */
-    public function getReallocCounter()
-    {
-        return $this->reallocCounter;
-    }
-
-    /**
-     * Set reallocCounter
-     *
-     * @param integer $reallocCounter
-     * @return Step
-     */
-    public function setReallocCounter($reallocCounter)
-    {
-        $this->reallocCounter = $reallocCounter;
-
-        return $this;
     }
 
     /**

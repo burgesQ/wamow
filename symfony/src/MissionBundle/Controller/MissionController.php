@@ -272,9 +272,9 @@ class MissionController extends Controller
         $serviceTeam = $this->container->get('team');
         $serviceMission = $this->container->get('mission');
         $em = $this->getDoctrine()->getManager();
-        $repository = $em->getRepository('MissionBundle:Mission');
         $repositoryTeam = $em->getRepository('TeamBundle:Team');
-        $mission = $repository->find($missionId);
+        $repositoryStep = $em->getRepository('MissionBundle:Step');
+        $mission = $em->getRepository('MissionBundle:Mission')->find($missionId);
         if ($mission == null || $mission->getStatus() != 1) {
             throw new NotFoundHttpException($trans->trans('mission.error.forbiddenAccess', array(), 'MissionBundle'));
         }
@@ -285,10 +285,9 @@ class MissionController extends Controller
             throw new NotFoundHttpException($trans->trans('mission.error.forbiddenAccess', array(), 'MissionBundle'));
         }
 
-        $step = $repository->getCurrentStep($missionId);
-        $step = $step[0];
+        $step = $repositoryStep->getStepByMissionAndPosition($missionId);
         $position = $step->getPosition();
-        if ($repository->getSpecificStep($missionId, $position + 1) == null) {
+        if ($repositoryStep->getStepByMissionAndPosition($missionId, $position + 1) == null) {
             $team = $repositoryTeam->findOneBy(array('mission' => $mission, 'status' => $position));
             return new Response($trans->trans('mission.selection.finish', array('%id%' => $team->getId()), 'MissionBundle'));
         }
@@ -306,25 +305,25 @@ class MissionController extends Controller
             $nbChosen = count($data['team']);
             if ($form->get('save')->isClicked())
             {
-                if ($nbChosen > $repository->getSpecificStep($missionId, $position + 1)[0]->getNbMaxTeam() || $nbChosen == 0)
+                if ($nbChosen > $repositoryStep->getStepByMissionAndPosition($missionId, $position + 1)->getNbMaxTeam() || $nbChosen == 0)
                 {
-                    $serviceMission->sendDeleteMessageInView($request, $nbChosen, $nbTeamToChoose, $repository->getSpecificStep($missionId, $position + 1)[0], $trans);
+                    $serviceMission->sendDeleteMessageInView($request, $nbChosen, $nbTeamToChoose, $repositoryStep->getStepByMissionAndPosition($missionId, $position + 1), $trans);
                     return $this->redirectToRoute('mission_teams_selection', array(
                         'missionId' => $missionId
                     ));
                 }
                 $serviceTeam->keepTeams($data['team'], $step);
-                $nextStep = $repository->getSpecificStep($missionId, $position + 1)[0];
+                $nextStep = $repositoryStep->getStepByMissionAndPosition($missionId, $position + 1);
                 $nextStep->setStatus(1);
-                $nextStep->setStartDate(new \DateTime());
-                $step->setEndDate(new \DateTime());
+                $nextStep->setStart(new \DateTime());
+                $step->setEnd(new \DateTime());
                 $em->flush($step);
                 $em->flush($nextStep);
                 return $this->redirectToRoute('mission_teams_selection', array(
                     'missionId' => $missionId
                 ));
             }
-            if ($nbChosen > $step->getReallocCounter() || $nbTeamToChoose - $nbChosen <= 0 || $step->getReallocCounter() == 0)
+            if ($nbChosen > $step->getReallocTeam() || $nbTeamToChoose - $nbChosen <= 0 || $step->getReallocTeam() == 0)
             {
                 $serviceMission->sendDeleteMessageInView($request, $nbChosen, $nbTeamToChoose, $step, $trans);
                 return $this->redirectToRoute('mission_teams_selection', array(
@@ -352,9 +351,8 @@ class MissionController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $trans = $this->get('translator');
-        $repository = $em->getRepository('MissionBundle:Mission');
-        $step = $repository->getCurrentStep($missionId);
-        $step = $step[0];
+        $repositoryStep = $em->getRepository('MissionBundle:Step');
+        $step = $repositoryStep->getStepByMissionAndPosition($missionId);
         $mission = $em->getRepository('MissionBundle:Mission')->find($missionId);
 
         if ( $this->getUser() === null ) {
@@ -370,7 +368,7 @@ class MissionController extends Controller
                 'missionId' => $missionId
                 ));
         }
-        if ($step->getReallocCounter() == 0)
+        if ($step->getReallocTeam() == 0)
         {
             $request->getSession()
                     ->getFlashBag()
@@ -385,7 +383,7 @@ class MissionController extends Controller
             $data = $form->getData();
             $teams = $data['team'];
             foreach ($teams as $team) {
-                $step->setReallocCounter($step->getReallocCounter() - 1);
+                $step->setReallocTeam($step->getReallocTeam() - 1);
                 $team->setStatus($position);
                 $em->flush($team);
                 $em->flush($step);

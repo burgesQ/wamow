@@ -43,11 +43,11 @@ namespace MissionBundle\Service;
                     ->add('success', $translator->trans('mission.selection.minimum', array(
                         '%limit%' => $step->getNbMaxTeam()), 'MissionBundle' ));
         }
-        elseif ($i > $step->getReallocCounter())// If you want to delete more than you can
+        elseif ($i > $step->getReallocTeam())// If you want to delete more than you can
         {
             $request->getSession()
                     ->getFlashBag()
-                    ->add('success', $translator->trans('mission.selection.limit', array("%limit%" => $step->getReallocCounter()), 'MissionBundle'));
+                    ->add('success', $translator->trans('mission.selection.limit', array("%limit%" => $step->getReallocTeam()), 'MissionBundle'));
         }
         elseif ($j - $i <= 0)// If after the deletion there is no team left
         {
@@ -55,7 +55,7 @@ namespace MissionBundle\Service;
                     ->getFlashBag()
                     ->add('success', $translator->trans('mission.selection.delete', array(), 'MissionBundle'));
         }
-        elseif ($step->getReallocCounter() == 0) // If you deleted the maximum of team that you can
+        elseif ($step->getReallocTeam() == 0) // If you deleted the maximum of team that you can
         {
             $request->getSession()
                     ->getFlashBag()

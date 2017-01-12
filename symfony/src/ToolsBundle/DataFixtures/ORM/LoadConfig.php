@@ -29,8 +29,8 @@ class LoadConfig implements FixtureInterface
                                   'status'    => 0,
                                   'nbMaxTeam' => $array[$step]["nbMaxTeam"],
                                   'reallocTeam' => $array[$step]["reallocTeam"],
-                                  'startDate' => null,
-                                  'endDate' => null
+                                  'start' => null,
+                                  'end' => null
                                   );
               $position++;
               $step = 'step'.$position;

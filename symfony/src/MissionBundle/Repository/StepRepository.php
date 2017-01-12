@@ -12,4 +12,21 @@ use Doctrine\ORM\EntityRepository;
  */
 class StepRepository extends EntityRepository
 {
+    // Query get step by mission and position
+    public function getStepByMissionAndPosition($missionId, $position = NULL)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('s')
+            ->from('MissionBundle:Step', 's')
+            ->leftjoin('s.mission', 'm')
+            ->where('m.id = :missionId')
+                ->setParameter('missionId', $missionId);
+        if ($position == NULL) {
+            $qb->andWhere('s.status = 1');
+        } else {
+            $qb->andWhere('s.position = :position')
+                ->setParameter('position', $position);
+        }
+        return $qb->getQuery()->getResult()[0];
+    }
 }

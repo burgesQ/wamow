@@ -5,23 +5,23 @@
 		"status": "0",
 		"nbMaxTeam": "10",
 		"reallocTeam": "10",
-		"startDate": "null",
-		"endDate": "null"
+		"start": "null",
+		"end": "null"
 	},
 	"step2": {
 		"position": "2",
 		"status": "0",
 		"nbMaxTeam": "3",
 		"reallocTeam": "1",
-		"startDate": "null",
-		"endDate": "null"
+		"start": "null",
+		"end": "null"
 	},
 	"step3": {
 		"position": "3",
 		"status": "0",
 		"nbMaxTeam": "1",
 		"reallocTeam": "0",
-		"startDate": "null",
-		"endDate": "null"
+		"start": "null",
+		"end": "null"
 	}
 }

@@ -11,7 +11,6 @@ use ToolsBundle\Entity\Language;
 use MissionBundle\Entity\Mission;
 use MissionBundle\Entity\ProfessionalExpertise;
 use MissionBundle\Entity\MissionKind;
-use MissionBundle\Entity\Step;
 use TeamBundle\Entity\Team;
 
 class LoadAdvisor implements FixtureInterface, ContainerAwareInterface

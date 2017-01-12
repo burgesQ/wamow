@@ -313,7 +313,7 @@ class Address
      * Set creationDate
      *
      * @param \DateTime $creationDate
-     * @return Step
+     * @return Address
      */
     public function setCreationDate($creationDate)
     {
@@ -336,7 +336,7 @@ class Address
      * Set updateDate
      *
      * @param \DateTime $updateDate
-     * @return Step
+     * @return Address
      */
     public function setUpdateDate($updateDate)
     {
