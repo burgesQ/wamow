@@ -4,7 +4,7 @@ mission_new:
         _controller: MissionBundle:Mission:new
 
 mission_view:
-    path:      /mission/view/{id}
+    path:      /mission/view/{missionId}
     defaults:
         _controller: MissionBundle:Mission:view
 

@@ -10,7 +10,7 @@
         <p>
             {% for mission in listMission %}
              <li>
-                 <a href="{{ path('mission_view', {'id': mission.id}) }}">
+                 <a href="{{ path('mission_view', {'missionId': mission.id}) }}">
                  {{ mission.title }}</a>
                     ---> <a href="{{ path('mission_pitch', {'missionId': mission.id}) }}"
                     >{{ 'mission.all_missions.pitch'|trans }} </a>

@@ -10,23 +10,13 @@
 {% endblock %}
 {% block body %}
     <p>
-        Current Missions :
-        {% for mission in currentsMissions %}
-        <li>
-            <a href="{{ path('mission_view', {'id': mission.mission.id}) }}">{{ mission.mission.title }}</a>
-        </li>
+        Missions :
+        {% for mission in missions %}
+            <li>
+                <a href="{{ path('mission_view', {'missionId': mission.id}) }}">{{ mission.title }}</a>
+                --->
+                <a href="{{ path('mission_pitch', {'missionId': mission.id}) }}">pitch</a>
+            </li>
         {% endfor %}
-    </p>
-    <p>
-        {% if availablesMissions is not null %}
-        Available Missions :
-        {% for mission in availablesMissions %}
-        <li>
-            <a href="{{ path('mission_view', {'id': mission.id}) }}">{{ mission.title }}</a>
-            --->
-            <a href="{{ path('mission_pitch', {'missionId': mission.id}) }}">pitch</a>
-        </li>
-        {% endfor %}
-        {% endif %}
     </p>
 {% endblock %}

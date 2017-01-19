@@ -10,12 +10,11 @@
 {% endblock %}
 {% block body %}
     <p>
-        Missions you created :
-        {% for currentMission in listMission %}
-        <li>
-            <a href="{{ path('mission_view', {'id': currentMission.mission.id}) }}">
-                {{ currentMission.mission.title }}</a>
-        </li>
+        Missions :
+        {% for mission in missions %}
+            <li>
+                <a href="{{ path('mission_view', {'missionId': mission.id}) }}">{{ mission.title }}</a>
+            </li>
         {% endfor %}
     </p>
 {% endblock %}

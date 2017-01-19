@@ -153,17 +153,17 @@ class MissionController extends Controller
     ** If advisor -> show if status === 1
     ** if not log -> kick
     */
-    public function viewAction($id)
+    public function viewAction($missionId)
     {
         $em = $this->getDoctrine()->getManager();
         $trans = $this->get('translator');
         $service = $this->container->get('team');
-        $mission = $em->getRepository('MissionBundle:Mission')->find($id);
+        $mission = $em->getRepository('MissionBundle:Mission')->find($missionId);
 
         if ( $this->getUser() === null) {
             throw new NotFoundHttpException($trans->trans('mission.error.logged', array(), 'MissionBundle'));
         } elseif ($mission == null ||  $mission->getStatus() < 0) {
-            throw new NotFoundHttpException($trans->trans('mission.error.wrongId', array('%id%' => $id), 'MissionBundle'));
+            throw new NotFoundHttpException($trans->trans('mission.error.wrongId', array('%id%' => $missionId), 'MissionBundle'));
         }
         $listLanguage = $mission->getLanguages();
         if ( $this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR'))
@@ -179,7 +179,7 @@ class MissionController extends Controller
         elseif ( $this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR'))
         {
             if ($mission->getStatus() !== 1) {
-                throw new NotFoundHttpException($trans->trans('mission.error.available', array('%id%' => $id), 'MissionBundle'));
+                throw new NotFoundHttpException($trans->trans('mission.error.available', array('%id%' => $missionId), 'MissionBundle'));
             }
             return $this->render('MissionBundle:Mission:view_expert.html.twig', array(
                 'mission'           => $mission,
@@ -212,7 +212,7 @@ class MissionController extends Controller
             ));
         }
         elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')) {
-            $listMission = $repositoryMission->expertMissionsAvailables();
+            $listMission = $repositoryMission->getExpertMissionsAvailables();
             return $this->render('MissionBundle:Mission:all_missions_expert.html.twig', array(
                 'listMission'           => $listMission
             ));

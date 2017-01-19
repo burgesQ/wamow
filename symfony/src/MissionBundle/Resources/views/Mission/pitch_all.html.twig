@@ -5,7 +5,7 @@
     <p>
         {% for team in listTeams %}
          <li>
-             <a href="{{ path('mission_view', {'id': team.mission.id}) }}">
+             <a href="{{ path('mission_view', {'missionId': team.mission.id}) }}">
              {{ team.mission.title }}</a>
                 - <a href="{{ path('mission_giveup', {'missionId': team.mission.id}) }}"
                 > {{ 'mission.pitch.giveUp'|trans }} </a>

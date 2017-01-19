@@ -11,7 +11,7 @@
             {% if listTeams is not null %}
             {% for team in listTeams %}
              <li>
-                 <a href="{{ path('mission_view', {'id': team.mission.id}) }}">
+                 <a href="{{ path('mission_view', {'missionId': team.mission.id}) }}">
                  {{ team.mission.title }}</a> -
                  <a href="{{ path('mission_teams_selection', {'missionId': team.mission.id}) }}"
                  >{{ 'mission.all_missions.start'|trans }}</a> -

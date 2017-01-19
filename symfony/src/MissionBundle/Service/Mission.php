@@ -13,25 +13,17 @@ namespace MissionBundle\Service;
 
     public function organiseMissions($listMissionsAvailable, $listCurrentMissions)
     {
-        $i = 0;
-        $j = 0;
         foreach ($listMissionsAvailable as $mission)
         {
             foreach ($listCurrentMissions as $currentMission)
             {
                 if ($mission->getId() == $currentMission->getId())
                 {
-                    $i = 1;
+                    unset($listMissionsAvailable[array_search($mission, $listMissionsAvailable)]);
                 }
             }
-            if ($i == 0)
-            {
-                $array[$j] = $mission;
-                $j++;
-            }
-            $i = 0;
         }
-        return ($array);
+        return ($listMissionsAvailable);
     }
 
     public function sendDeleteMessageInView($request, $i, $j, $step, $translator)
