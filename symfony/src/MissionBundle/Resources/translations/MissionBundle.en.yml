@@ -56,6 +56,8 @@ mission:
         telecommuting: "This mission propose telecommuting."
         international: "This mission is international."
         pitch: "Pitch"
+        thread.seekers: "Discussion between you and the team that's pitch"
+        thread.expert: "Discussion between your team and the seeker"
     error:
         authorized: "You're not authorized to create a mission."
         logged: "You are not logged."

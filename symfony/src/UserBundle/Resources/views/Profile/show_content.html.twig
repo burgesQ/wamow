@@ -2,11 +2,30 @@
 
 <div class="user_user_show">
 
-  <p> {{ 'profile.show.image'|trans }}:
+  <p>
+    {% trans with {'%nb%': fos_message_nb_unread()} from 'FOSUserBundle' %}
+      profile.show.unread
+    {% endtrans %}
+  </p>
+  <p>
+    {% trans with {'%nb%': user.nbLoad } from 'FOSUserBundle' %}
+      profile.show.nbLoad
+    {% endtrans %}
+  </p>
+  <p>
+    {% if user.readReport == true %}
+      {{ 'profile.show.readReportActivate'|trans }}
+    {% else %}
+      {{ 'profile.show.readReportDesactivate'|trans }}
+    {% endif %}
+  </p>
+  <p>
+    {{ 'profile.show.image'|trans }}:
     {% if image != null and image.name != null %}
-      {{ image.name }} is a {{ image.type }} upload the {{ image.uploadDate|date("m/d/Y") }}
-      <img src="{{ asset(image.webPath()) }}"/>
-    {% endif %} </p>
+      {{ image.name }} is a {{ image.type }} upload the {{ image.uploadDate|date("m/d/Y") }} 
+      <img src="{{ asset(image.webPath()) }}"/> 
+    {% endif %}
+  </p>
 
   <p> {{ 'profile.show.first_name'|trans }}: {{ user.firstName }} </p>
   <p> {{ 'profile.show.last_name'|trans }}: {{ user.lastName }} </p>

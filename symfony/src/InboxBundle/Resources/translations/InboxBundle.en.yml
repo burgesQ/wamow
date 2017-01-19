@@ -1,0 +1,12 @@
+# inbox.en.yml
+
+thread:
+    error:
+        logged: "Please loggin to access this page"
+        exist: "This convesation doesn't exist"
+        rights: "You cannot see this conversation"
+
+message:
+    readReport:
+        read: "ReadReport: read"
+        receive: "ReadReport: receive"

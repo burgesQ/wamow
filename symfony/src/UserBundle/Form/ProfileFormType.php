@@ -165,6 +165,19 @@ class ProfileFormType extends AbstractType
                       'label' => 'mission.new.form.professionalExpertise',
                       'required'    => false
                   ))
+
+            ->add('nbLoad', null,
+                  array(
+                      'translation_domain' => 'FOSUserBundle',
+                      'label' => 'form.nbLoad'
+                  ))
+
+            ->add('readReport', 'checkbox',
+                  array(
+                      'translation_domain' => 'FOSUserBundle',
+                      'label' => 'form.readReport',
+                      'required'    => false
+                  ))
             ;
     }
 

@@ -56,6 +56,8 @@ mission:
         telecommuting: "Cette mission propose du télétravail."
         international: "Cette mission est internationale."
         pitch: "Postuler"
+        thread.seekers: "Messages entre vous et l'equipe postulant"
+        thread.expert: "Messages entre vous et le contracteur de la mission"
     error:
         authorized: "Vous n'êtes pas autorisé à créer une mission."
         logged: "Vous n'êtes pas connecté."

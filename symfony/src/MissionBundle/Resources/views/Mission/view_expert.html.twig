@@ -1,5 +1,7 @@
 {% trans_default_domain "MissionBundle" %}
 
+{% extends 'MissionBundle:Mission:view_thread_expert.html.twig' %}
+{% block start %}
 <html>
 <body>
 <h2>{{ mission.title }} </h2>
@@ -9,41 +11,49 @@
 
 <div class="well">
   <p>
-      <h4><br>{{ 'mission.view.resume'|trans }} :</h4>
-      {{ mission.resume }}
+  <h4><br>{{ 'mission.view.resume'|trans }} :</h4>
+    {{ mission.resume }}
 
-      <h5>{{ 'mission.view.details'|trans }} :</h5>
-      {{ mission.professionalExpertise.name }}, {{ mission.missionKind.name }}
+  <h5>{{ 'mission.view.details'|trans }} :</h5>
+    {{ mission.professionalExpertise.name|trans }}, {{ mission.missionKind.name|trans }}
   </p>
 
   <p>
-      <h4><br>{{ 'mission.view.budget'|trans }} :</h4>
-        {{ mission.budget }} {{ 'mission.view.budget'|trans }}
+  <h4><br>{{ 'mission.view.budget'|trans }} :</h4>
+    {{ mission.budget }} {{ 'mission.view.budget'|trans }}
   </p>
   <p>
       {{ 'mission.view.applicationEnding'|trans({'%date%': mission.applicationEnding|date('m/d/Y')}) }}<br>
       {{ 'mission.view.period'|trans({'%start%': mission.missionBeginning|date('m/d/Y'),
-       '%end%': mission.missionEnding|date('d/m/Y') }) }}<br>
+          '%end%': mission.missionEnding|date('d/m/Y') }) }}<br>
   </p>
 
-        {% if listLanguage is not null %}
-          <h4><br>{{ 'mission.view.languages'|trans }}:</h4>
-          <ul>
-            {% for language in listLanguage %}
-              <li>{{ language.name }}</li>
-            {% endfor %}
-          </ul>
-        {% endif %}
+    {% if listLanguage is not null %}
+      <h4><br>{{ 'mission.view.languages'|trans }}:</h4>
+      <ul>
+          {% for language in listLanguage %}
+            <li>{{ language.name|trans({}, 'tools')  }}</li>
+          {% endfor %}
+      </ul>
+    {% endif %}
   <p>
-
-        {% if mission.telecommuting == 1 %}
-            {{ 'mission.view.telecommuting'|trans }}
-        {% endif %}
-        {% if mission.international == 1 %}
-            {{ 'mission.view.international'|trans }}
-        {% endif %}
+      {% if mission.telecommuting == 1 %}
+          {{ 'mission.view.telecommuting'|trans }}
+      {% endif %}
+      {% if mission.international == 1 %}
+          {{ 'mission.view.international'|trans }}
+      {% endif %}
   </p>
-        <a href="{{ path('mission_pitch', {'missionId': mission.id}) }}">{{ 'mission.view.pitch'|trans }} </a>
+
+  <p>
+      {% endblock %}
+      {% block chatbox %}
+      {% endblock %}
+      {% block end %}
+  </p>
+  <a href="{{ path('mission_pitch', {'missionId': mission.id}) }}">{{ 'mission.view.pitch'|trans }} </a>
 </div>
 </body>
 </html>
+{% endblock %}
+

@@ -5,13 +5,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormView;
-
-use Doctrine\Common\Collections\ArrayCollection;
-
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 use MissionBundle\Entity\Step;
 use MissionBundle\Entity\Mission;
@@ -202,7 +195,7 @@ class MissionController extends Controller
     /*
     **  View mission
     */
-    public function viewAction($missionId)
+    public function viewAction($missionId, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $trans = $this->get('translator');
@@ -215,31 +208,76 @@ class MissionController extends Controller
         } elseif ($mission == null ||  $mission->getStatus() < 0) {
             throw new NotFoundHttpException($trans->trans('mission.error.wrongId', array('%id%' => $missionId), 'MissionBundle'));
         }
-        $listLanguage = $mission->getLanguages();
-        if ( $this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR'))
+
+		$serviceInbox = $this->container->get('inbox.services');
+        $threadRepo = $em->getRepository('InboxBundle:Thread');
+        $repositoryStep = $em->getRepository('MissionBundle:Step');
+
+        if ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR'))
         {
-            $team = $mission->getTeamContact();
             if ($service->isContractorOfMission($user, $mission) == false) {
                 throw new NotFoundHttpException($trans->trans('mission.error.right', array(), 'MissionBundle'));
             } elseif ($user->getCompany() != $mission->getCompany()) {
                 throw new NotFoundHttpException($trans->trans('mission.error.wrongcompany', array(), 'MissionBundle'));
             }
+
+            $teamRepository = $em->getRepository('TeamBundle:Team');
+            $bigArray = $serviceInbox->setViewContractor($mission, $this, $request, $this->container);
+
+            // reload the page
+            if ($bigArray == null)
+                return $this->redirectToRoute('mission_view', ['missionId' => $missionId]);
+
             return $this->render('MissionBundle:Mission:view_seeker.html.twig', array(
-                'mission'           => $mission,
-                'listLanguage'      => $listLanguage));
+                'user'				=> $user,
+                'role'				=> $user->getRoles(),
+                'mission'			=> $mission,
+                'listLanguage'		=> $mission->getLanguages(),
+                'threads'			=> $bigArray[0],
+                'bigArrayMessage'	=> $bigArray[1],
+                'arrayTeamName'		=> $bigArray[2],
+                'arrayRead'			=> $bigArray[3],
+                'arrayReplyForm'	=> $bigArray[4],
+                'teams'             => $teamRepository->getTeamByMission($missionId),
+                'step'              => $repositoryStep->findOneBy(array('mission' => $mission, 'status' => 1)),
+            ));
         }
-        elseif ( $this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR'))
+        elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR'))
         {
             if ($mission->getStatus() !== 1) {
                 throw new NotFoundHttpException($trans->trans('mission.error.available', array('%id%' => $missionId), 'MissionBundle'));
             }
-            return $this->render('MissionBundle:Mission:view_expert.html.twig', array(
-                'mission'           => $mission,
-                'listLanguage'      => $listLanguage,
-                )
-            );
-        }
-    }
+
+
+            $thread = $serviceInbox->setChatBoxAdvisor($threadRepo->getThreadByMission($mission), $user);
+            $teamName = "";
+            $replyForm = null;
+
+            if ($thread)
+            {
+                $teamName = "Team ".$thread->getTeamCreator()->getId();
+                $replyForm = $serviceInbox->getReplyForm($thread, $user, $request,
+                    $this->container);
+
+                // reload the page
+                if ($replyForm == null)
+                    return $this->redirectToRoute('mission_view', ['missionId' => $missionId]);
+            }
+
+			return $this->render('MissionBundle:Mission:view_expert.html.twig', array(
+				'user'			=> $user,
+				'role'			=> $user->getRoles(),
+				'mission'		=> $mission,
+				'listLanguage'	=> $mission->getLanguages(),
+				'thread'		=> $thread,
+				'arrayMessage'	=> $em->getRepository('InboxBundle:Message')->getMessageForThread($thread, $user->getNbLoad()),
+				'teamName'		=> $teamName,
+				'read'			=> $serviceInbox->updateReadReport($thread, $user, $this->getDoctrine()->getManager()),
+				'replyForm'		=> $replyForm,
+                'step'          => $repositoryStep->findOneBy(array('mission' => $mission, 'status' => 1)),
+			));
+		}
+	}
 
     /*
     **  List
@@ -284,14 +322,14 @@ class MissionController extends Controller
         $trans = $this->get('translator');
         $em = $this->getDoctrine()->getManager();
 
-        if ( $this->getUser() === null ) {
+        if (($user = $this->getUser()) === null ) {
             throw new NotFoundHttpException($trans->trans('mission.error.logged', array(), 'MissionBundle'));
         } elseif ( $this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR') ) {
             throw new NotFoundHttpException($trans->trans('mission.pitch.contractor', array(), 'MissionBundle'));
         }
         $repositoryMission = $em->getRepository('MissionBundle:Mission');
         $repositoryTeam = $em->getRepository('TeamBundle:Team');
-        $listTeams = $repositoryTeam->getTeamsByUserId($this->getUser()->getId());
+        $listTeams = $repositoryTeam->getTeamsByUserId($user->getId());
         $mission = $repositoryMission->findOneBy(array('id' => $missionId));
         if ($mission == null ||  $mission->getStatus() < 1) {
             throw new NotFoundHttpException($trans->trans('mission.error.available', array('%id%' => $missionId), 'MissionBundle'));
@@ -310,10 +348,16 @@ class MissionController extends Controller
         $em->persist($team);
         $em->flush($team);
 
+        // Create a thread between the Advisor Team and the thread
+//        $messenger = $this->get('inbox.services');
+//        $messenger->createThreadPitch($team, $mission, $em,
+//            $this->get('fos_message.composer'),
+//            $this->get('fos_message.sender'));
+
         // Add notification for advisors
         $param = array(
             'mission' => $mission->getId(),
-            'user'    => $this->getUser()->getId(),
+            'user'    => $user,
             'team'    => $team->getId(),
         );
         $notification = $this->container->get('notification');
@@ -330,27 +374,24 @@ class MissionController extends Controller
             $notification->new($contractor, 1, 'notification.seeker.mission.pitchedbynewteam', $param);
         }
 
-
         return new Response($trans->trans('mission.pitch.done', array(), 'MissionBundle'));
     }
 
-    /*
-    ** Team Status :
-    **     -3 : no user left in the team
-    **     -2 : pitch deleted
-    **     -1 : deleted by the contractor
-    **      0 : waiting teams
-    **      1 : first step
-    **      2 : second step
-    **      3 : winning teaam
-    */
+	/*
+	** Team Status :
+	**	   -3 : no user left in the team
+	**	   -2 : pitch deleted
+	**	   -1 : deleted by the contractor
+	**		0 : waiting teams
+	**		1 : first step
+	**		2 : second step
+	**		3 : winning team
+	*/
     public function selectionAction(Request $request, $missionId)
     {
         $trans = $this->get('translator');
         $em = $this->getDoctrine()->getManager();
 
-        $serviceTeam = $this->container->get('team');
-        $serviceMission = $this->container->get('mission');
         $repositoryTeam = $em->getRepository('TeamBundle:Team');
         $repositoryStep = $em->getRepository('MissionBundle:Step');
         $notification = $this->container->get('notification');
@@ -374,7 +415,6 @@ class MissionController extends Controller
         }
 
         // Get steps & position
-
         $step = $repositoryStep->findOneBy(array('mission' => $mission, 'status' => 1));
 
         if ($step == null)
@@ -457,6 +497,8 @@ class MissionController extends Controller
                     ));
                 }
 
+                $messenger = $this->get('inbox.services');
+
                 foreach ($teamsAdvisors as $teamAdvisors)
                 {
                     $teamAdvisors->setStatus($nextStep->getPosition());
@@ -467,6 +509,15 @@ class MissionController extends Controller
                         'user'    => $user->getId(),
                         'step'    => $nextStep->getPosition(),
                     );
+
+                    // Create a thread if it's not already done
+                    // if next step of the mission is ok with that
+                    if ($nextStep->getAnonymousMode() > 0 && !$teamAdvisors->getThreads()[0])
+                    {
+                        $messenger->createThreadPitch($teamAdvisors, $mission, $em,
+                                    $this->get('fos_message.composer'),
+                                    $this->get('fos_message.sender'));
+                    }
 
                     // Add notifications for advisors
                     $advisors = $teamAdvisors->getUsers();
@@ -507,7 +558,6 @@ class MissionController extends Controller
                     'user'    => $user->getId(),
                     'step'    => $position,
                 );
-
 
                 $em->flush();
                 // Add notifications for advisors not selected
@@ -625,14 +675,15 @@ class MissionController extends Controller
         $trans = $this->get('translator');
         $mission = $em->getRepository('MissionBundle:Mission')->find($missionId);
         $step = $em->getRepository('MissionBundle:Step')->findOneby(array('mission' => $mission, 'status' => 1));
+
         if ($step == null)
         {
             throw new NotFoundHttpException($trans->trans('mission.error.stepnotfound', array(), 'MissionBundle'));
         }
+
         $position = $step->getPosition();
-
-
         $user = $this->getUser();
+
         if ($user === null) {
             throw new NotFoundHttpException($trans->trans('mission.error.logged', array(), 'MissionBundle'));
         } elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR') || $mission === null || $mission->getStatus() < 0) {
@@ -644,14 +695,17 @@ class MissionController extends Controller
         $repositoryTeam = $em->getRepository('TeamBundle:Team');
         $nbrTeams = count($repositoryTeam->getAvailablesTeams($missionId, $step, true));
         $full = $nbrTeams >= $step->getNbMaxTeam() ? true : false;
+
         $form = $this->get('form.factory')->create(new TakeBackType($missionId, $position - 1));
         $form->handleRequest($request);
-        if ($step->getStatus() != 1) {
+
+        if ($step->getStatus() != 1)
+        {
             return $this->redirectToRoute('mission_teams_selection', array(
                 'missionId' => $missionId
-                ));
+            ));
         }
-        if ($step->getReallocTeam() == 0)
+        elseif ($step->getReallocTeam() == 0)
         {
             $request->getSession()->getFlashBag()->add('notice', $trans->trans('mission.selection.takeback', array(), 'MissionBundle'));
             return $this->redirectToRoute('mission_teams_selection', array(
@@ -663,10 +717,19 @@ class MissionController extends Controller
             $data = $form->getData();
             $teamsAdvisors = $data['team'];
             $notification = $this->container->get('notification');
+            $messenger = $this->get('inbox.services');
+
             foreach ($teamsAdvisors as $teamAdvisors)
             {
                 $step->setReallocTeam($step->getReallocTeam() - 1);
                 $teamAdvisors->setStatus($position);
+
+                if ($step->getAnoymousMode() > 0 && !$teamAdvisors->getThreads()[0])
+                {
+                    $messenger->createThreadPitch($teamAdvisors, $mission, $em,
+                                                  $this->get('fos_message.composer'),
+                                                  $this->get('fos_message.sender'));
+                }
                 $em->flush($teamAdvisors);
 
                 // Add notifications for advisors

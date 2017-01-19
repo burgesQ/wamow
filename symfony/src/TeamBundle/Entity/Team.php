@@ -64,6 +64,11 @@ class Team
     private $status;
 
     /**
+     * @ORM\ManyToMany(targetEntity="InboxBundle\Entity\Thread", cascade={"persist"} )
+     */
+    private $threads;
+
+    /**
      * Constructor
      */
     public function __construct($role, $user)
@@ -73,6 +78,7 @@ class Team
         $this->role = $role;
         $this->status = 0;
         $this->addUser($user);
+        $this->threads = new ArrayCollection();
     }
 
     /**
@@ -240,4 +246,37 @@ class Team
     {
         $this->setUpdateDate(new \Datetime());
     }
+
+    /**
+     * Get Threads
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getThreads()
+    {
+        return $this->threads;
+    }
+
+    /**
+     * Add Thread
+     *
+     * @param \InboxBundle\Entity\Thread $thread
+     * @return Team
+     */
+    public function addThread($thread)
+    {
+        $this->threads[] = $thread;
+        return $this;
+    }
+
+    /**
+     * Remove Threads
+     *
+     * @param \InboxBundle\Entity\Thread $thread
+     */
+    public function removeThread($thread)
+    {
+        $this->threads->removeElement($thread);
+    }
+
 }

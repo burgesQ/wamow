@@ -1,0 +1,56 @@
+{% trans_default_domain "MissionBundle" %}
+
+{% block start %}
+{% endblock %}
+
+{% if thread != null %}
+
+    <h2>
+        {{ thread.subject }}
+    </h2>
+
+    {% set lastMsg = null %}
+    {% for message in arrayMessage %}
+        <div class="messenger_thread_message">
+            <div class="messenger_thread_message_info">
+                {% if step.anonymousMode == 2 and thread.teamCreator.status == step.position %}
+                    {{ 'message_info'|trans({'%sender%': message.sender, '%date%': message.createdAt|date}, 'FOSMessageBundle') }}
+                {% else %}
+                    {% if message.sender.roles[0] == "ROLE_CONTRACTOR" %}
+                        {{ 'message_info'|trans({'%sender%': 'Contractor', '%date%': message.createdAt|date}, 'FOSMessageBundle') }}
+                    {% else %}
+                        {{ 'message_info'|trans({'%sender%': teamName, '%date%': message.createdAt|date}, 'FOSMessageBundle') }}
+                    {% endif %}
+                {% endif %}
+            </div>
+            <div class="messenger_thread_message_body" id="message_{{ message.id }}">
+                {{ message.body }}
+            </div>
+        </div>
+        {% set lastMsg = message %}
+    {% endfor %}
+
+    {% set sender = lastMsg.getSender() %}
+    {% if sender == user %}
+        {% if read == true %}
+            {{ 'message.readReport.read'|trans({}, 'InboxBundle') }}
+        {% else %}
+            {{ 'message.readReport.receive'|trans({}, 'InboxBundle') }}
+        {% endif %}
+    {% endif %}
+
+    {% if thread.teamCreator.status == step.position %}
+        <h3>
+            {% trans from 'FOSMessageBundle' %}reply{% endtrans %}
+        </h3>
+
+        <form action="{{ url('mission_view', {'missionId': mission.id}) }}" method="post">
+            {{ form_widget(replyForm) }}
+            <input type="submit" />
+        </form>
+    {% endif %}
+
+{% endif %}
+
+{% block end %}
+{% endblock %}

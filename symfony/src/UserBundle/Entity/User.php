@@ -10,6 +10,8 @@ use FOS\UserBundle\Model\User as BaseUser;
 use CompanyBundle\Entity\Company;
 use CalendarBundle\Entity\Calendar;
 
+use FOS\MessageBundle\Model\ParticipantInterface;
+
 /**
  * User
  *
@@ -17,7 +19,7 @@ use CalendarBundle\Entity\Calendar;
  * @ORM\Entity(repositoryClass="UserBundle\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class User extends BaseUser
+class User extends BaseUser implements ParticipantInterface
 {
     /**
      * @var int
@@ -304,6 +306,26 @@ class User extends BaseUser
     */
     protected $emergencyEmail;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="nb_load", type="smallint", nullable=false)
+     * @Assert\Range(
+     *      min = 10,
+     *      max = 1000,
+     *      minMessage = "You must load at least {{ limit }} messages",
+     *      maxMessage = "You cannot load more than {{ limit }} messaxges"
+     * )
+     */
+    private $nbLoad;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="read_report", type="boolean", nullable=false)
+     */
+    private $readReport;
+
     public function __construct()
     {
         parent::__construct();
@@ -325,6 +347,33 @@ class User extends BaseUser
         $this->businessPractice = new ArrayCollection();
         $this->calendar = new Calendar();
         $this->company = NULL;
+        $this->nbLoad = 10;
+        $this->readReport = true;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return User
+     */
+    public function setEmail($email)
+    {
+        $email = is_null($email) ? '' : $email;
+        parent::setEmail($email);
+        $this->setUsername($email);
+
+        return $this;
     }
 
     /**
@@ -347,31 +396,6 @@ class User extends BaseUser
     public function getCompany()
     {
         return $this->company;
-    }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     * @return User
-     */
-    public function setEmail($email)
-    {
-        $email = is_null($email) ? '' : $email;
-        parent::setEmail($email);
-        $this->setUsername($email);
-
-        return $this;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**
@@ -652,10 +676,10 @@ class User extends BaseUser
     /**
      * Add images
      *
-     * @param \ToolsBundle\Entity\Upload $images
+     * @param \ToolsBundle\Entity\ProfilePicture image
      * @return User
      */
-    public function addImage(\ToolsBundle\Entity\Upload $images)
+    public function addImage($images)
     {
         $this->images[] = $images;
 
@@ -665,9 +689,9 @@ class User extends BaseUser
     /**
      * Remove images
      *
-     * @param \ToolsBundle\Entity\Upload $images
+     * @param \ToolsBundle\Entity\ProfilePicture $images
      */
-    public function removeImage(\ToolsBundle\Entity\Upload $images)
+    public function removeImage($images)
     {
         $this->images->removeElement($images);
     }
@@ -907,7 +931,7 @@ class User extends BaseUser
      */
     public function addSecretMail($mail)
     {
-        array_push( $this->secretMail, $mail);
+        $this->secretMail[] = $mail;
         return $this;
     }
 
@@ -919,6 +943,30 @@ class User extends BaseUser
     public function getSecretMail()
     {
         return $this->secretMail;
+    }
+
+    /**
+     * Set secretMail
+     *
+     * @param array $secretMail
+     *
+     * @return User
+     */
+    public function setSecretMail($secretMail)
+    {
+        $this->secretMail = $secretMail;
+
+        return $this;
+    }
+
+    /**
+     * Remove resume
+     *
+     * @param \ToolsBundle\Entity\UploadResume $resume
+     */
+    public function removeResume(\ToolsBundle\Entity\UploadResume $resume)
+    {
+        $this->resumes->removeElement($resume);
     }
 
     /**
@@ -1122,6 +1170,101 @@ class User extends BaseUser
     }
 
     /**
+     * Set NbLoad
+     *
+     * @param integer nbLoad
+     * @return User
+     */
+    public function setNbLoad($nbLoad = 10)
+    {
+        $this->nbLoad = $nbLoad;
+
+        return $this;
+    }
+
+    /**
+     * Get Nbload
+     *
+     * @return integer
+     */
+    public function getNbLoad()
+    {
+        return $this->nbLoad;
+    }
+
+    /**
+     * Set ReadReport
+     *
+     * @param boolean readReport
+     * @return User
+     */
+    public function setReadReport($readReport = true)
+    {
+        $this->readReport = $readReport;
+
+        return $this;
+    }
+
+    /**
+     * Get ReadReport
+     *
+     * @return boolean
+     */
+    public function getReadReport()
+    {
+        return $this->readReport;
+    }
+
+
+    /**
+     * Set calendar
+     *
+     * @param \CalendarBundle\Entity\Calendar $calendar
+     *
+     * @return User
+     */
+    public function setCalendar(\CalendarBundle\Entity\Calendar $calendar)
+    {
+        $this->calendar = $calendar;
+
+        return $this;
+    }
+
+    /**
+     * Get calendar
+     *
+     * @return \CalendarBundle\Entity\Calendar
+     */
+    public function getCalendar()
+    {
+        return $this->calendar;
+    }
+
+    /**
+     * Set emergencyEmail
+     *
+     * @param string $emergencyEmail
+     *
+     * @return User
+     */
+    public function setEmergencyEmail($emergencyEmail)
+    {
+        $this->emergencyEmail = $emergencyEmail;
+
+        return $this;
+    }
+
+    /**
+     * Get emergencyEmail
+     *
+     * @return string
+     */
+    public function getEmergencyEmail()
+    {
+        return $this->emergencyEmail;
+    }
+
+    /**
      * @Assert\Callback
      */
     public function isValidate(ExecutionContextInterface $context)
@@ -1151,89 +1294,4 @@ class User extends BaseUser
         }
     }
 
-    /**
-     * Set calendar
-     *
-     * @param \CalendarBundle\Entity\Calendar $calendar
-     *
-     * @return User
-     */
-    public function setCalendar(\CalendarBundle\Entity\Calendar $calendar)
-    {
-        $this->calendar = $calendar;
-
-        return $this;
-    }
-
-    /**
-     * Get calendar
-     *
-     * @return \CalendarBundle\Entity\Calendar
-     */
-    public function getCalendar()
-    {
-        return $this->calendar;
-    }
-
-    /**
-     * Set secretMail
-     *
-     * @param array $secretMail
-     *
-     * @return User
-     */
-    public function setSecretMail($secretMail)
-    {
-        $this->secretMail = $secretMail;
-
-        return $this;
-    }
-
-    /**
-     * Set emergencyEmail
-     *
-     * @param string $emergencyEmail
-     *
-     * @return User
-     */
-    public function setEmergencyEmail($emergencyEmail)
-    {
-        $this->emergencyEmail = $emergencyEmail;
-
-        return $this;
-    }
-
-    /**
-     * Get emergencyEmail
-     *
-     * @return string
-     */
-    public function getEmergencyEmail()
-    {
-        return $this->emergencyEmail;
-    }
-
-    /**
-     * Add resume
-     *
-     * @param \ToolsBundle\Entity\UploadResume $resume
-     *
-     * @return User
-     */
-    public function addResume(\ToolsBundle\Entity\UploadResume $resume)
-    {
-        $this->resumes[] = $resume;
-
-        return $this;
-    }
-
-    /**
-     * Remove resume
-     *
-     * @param \ToolsBundle\Entity\UploadResume $resume
-     */
-    public function removeResume(\ToolsBundle\Entity\UploadResume $resume)
-    {
-        $this->resumes->removeElement($resume);
-    }
 }

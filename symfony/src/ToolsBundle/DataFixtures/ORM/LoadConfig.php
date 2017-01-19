@@ -13,14 +13,25 @@ class LoadConfig extends AbstractFixture implements OrderedFixtureInterface
 
   public function load(ObjectManager $manager)
   {
-      $array = array("nbStep" => 3,
-                      "step1" => array('nbMaxTeam' => 10,
-                                      'reallocTeam' => 10),
-                      "step2" => array('nbMaxTeam' => 3,
-                                      'reallocTeam' => 1),
-                      "step3" => array('nbMaxTeam' => 1,
-                                      'reallocTeam' => 0)
-                  );
+      $array = [
+          "nbStep" => 3,
+          "step1" => [
+              'nbMaxTeam' => 10,
+              'reallocTeam' => 10,
+              'anonymousMode' => 0
+          ],
+          "step2" => [
+              'nbMaxTeam' => 3,
+              'reallocTeam' => 1,
+              'anonymousMode' => 1
+          ],
+          "step3" => [
+              'nbMaxTeam' => 1,
+              'reallocTeam' => 0,
+              'anonymousMode' => 2
+          ]
+      ];
+
       $position = 1;
       $json = array();
       $step = 'step'.$position;
@@ -28,11 +39,12 @@ class LoadConfig extends AbstractFixture implements OrderedFixtureInterface
       while (isset($array[$step]) == true)
           {
               $json[$step] = array('position' => $position,
-                                  'status'    => 0,
-                                  'nbMaxTeam' => $array[$step]["nbMaxTeam"],
-                                  'reallocTeam' => $array[$step]["reallocTeam"],
-                                  'start' => null,
-                                  'end' => null
+                                   'status'    => 0,
+                                   'nbMaxTeam' => $array[$step]["nbMaxTeam"],
+                                   'reallocTeam' => $array[$step]["reallocTeam"],
+                                   'anonymousMode' => $array[$step]["anonymousMode"],
+                                   'start' => null,
+                                   'end' => null
                                   );
               $position++;
               $step = 'step'.$position;

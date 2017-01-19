@@ -39,3 +39,7 @@ notification:
 tools:
     resource: "@ToolsBundle/Resources/config/routing.yml"
     prefix: /
+
+inbox:
+    resource: "@InboxBundle/Resources/config/routing.yml"
+    prefix:   /inbox

@@ -11,6 +11,7 @@ imports:
     - { resource: "@CompanyBundle/Resources/config/services.yml" }
     - { resource: "@CalendarBundle/Resources/config/services.yml" }
     - { resource: "@NotificationBundle/Resources/config/services.yml" }
+    - { resource: "@InboxBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -176,6 +177,17 @@ hwi_oauth:
             client_id:           "%google_id%"
             client_secret:       "%google_secret%"
             scope:               "%google_scope%"
-    # here you will add one (or more) configurations for resource owners
+# here you will add one (or more) configurations for resource owners
 fos_js_routing:
     routes_to_expose: [fullcalendar_loader, calendar_booking_get, calendar_booking_add, calendar_booking_remove, calendar_booking_edit]
+
+# FOS MessageBundle Multi User Conf
+fos_message:
+    db_driver:              orm
+    thread_class:           InboxBundle\Entity\Thread
+    message_class:          InboxBundle\Entity\Message
+    new_thread_form:
+        type:               FOS\MessageBundle\FormType\NewThreadMultipleMessageFormType
+        handler:            fos_message.new_thread_multiple_form.handler
+        model:              FOS\MessageBundle\FormModel\NewThreadMultipleMessage
+        name:               message

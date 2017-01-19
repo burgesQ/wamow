@@ -33,6 +33,8 @@ class AppKernel extends Kernel
             new CalendarBundle\CalendarBundle(),
             new ADesigns\CalendarBundle\ADesignsCalendarBundle(),
             new NotificationBundle\NotificationBundle(),
+            new FOS\MessageBundle\FOSMessageBundle(),
+            new InboxBundle\InboxBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

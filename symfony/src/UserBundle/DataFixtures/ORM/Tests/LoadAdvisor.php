@@ -61,9 +61,14 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             $team->setMission($mission);
             $team->addUser($advisor_bis);
             $manager->persist($team);
+            $manager->flush();
             $i = $i + 2;
+            // $this->container->get('inbox.services')->createThreadPitch(
+            //     $team, $mission, $manager,
+            //     $this->container->get('fos_message.composer'),
+            //     $this->container->get('fos_message.sender')
+            // );
         }
-        $manager->flush();
     }
 
     public function getOrder()

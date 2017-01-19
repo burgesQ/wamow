@@ -1,0 +1,4 @@
+services:
+   inbox.services:
+       class: InboxBundle\Services\Services
+       arguments: []

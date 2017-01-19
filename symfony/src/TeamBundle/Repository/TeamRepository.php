@@ -35,10 +35,26 @@ class TeamRepository extends EntityRepository
             ->leftjoin('t.users', 'u')
             ->leftjoin('t.users', 'x')
             ->where('m.id = :missionId')
-                ->setParameter('missionId', $missionId)
+            ->setParameter('missionId', $missionId)
             ->andwhere('u.id = :userId')
-                ->setParameter('userId', $userId);
+            ->setParameter('userId', $userId);
         return $qb->getQuery()->getResult()[0];
+    }
+
+    // Query get team of for and a specific mission
+    public function getTeamByMission($missionId)
+    {
+        $qb = $this->_em->createQueryBuilder();
+
+        $qb->select('t')
+            ->from('TeamBundle:Team', 't')
+            ->leftjoin('t.mission', 'm')
+            ->where('m.id = :missionId')
+            ->setParameter('missionId', $missionId)
+            ->orderBy('t.creationDate', 'ASC')
+        ;
+
+        return $qb->getQuery()->getResult();
     }
 
     // Query get teams availables for a specific step

@@ -12,3 +12,7 @@
 /composer.phar
 /composer.json
 /web/app_dev.php
+/genData.sh
+/web/assetic
+/web/css
+/web/js

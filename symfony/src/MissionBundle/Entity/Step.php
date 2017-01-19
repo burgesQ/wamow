@@ -90,7 +90,6 @@ class Step
      */
     private $end;
 
-
     /**
      * @var int
      *
@@ -98,12 +97,20 @@ class Step
      */
     private $status;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="anonymous_mode", type="smallint")
+     */
+    private $anonymousMode;
+
     public function __construct($nbMaxTeam, $reallocTeam)
     {
         $this->creationDate = new \Datetime();
         $this->nbMaxTeam = $nbMaxTeam;
         $this->reallocTeam = $reallocTeam;
         $this->status = 0;
+        $this->anonymousMode = 0;
     }
 
     /**
@@ -142,7 +149,7 @@ class Step
     /**
      * Set Position
      *
-     * @param integer $Position
+     * @param integer $position
      * @return Step
      */
     public function setPosition($position)
@@ -275,6 +282,29 @@ class Step
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * Set AnonymousMode
+     *
+     * @param integer $mode
+     * @return Step
+     */
+    public function setAnonymousMode($mode)
+    {
+        $this->anonymousMode = $mode;
+
+        return $this;
+    }
+
+    /**
+     * Get AnonymousMode
+     *
+     * @return integer
+     */
+    public function getAnonymousMode()
+    {
+        return $this->anonymousMode;
     }
 
     /**

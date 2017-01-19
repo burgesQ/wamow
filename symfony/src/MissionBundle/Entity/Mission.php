@@ -216,7 +216,7 @@ class Mission
         $this->sizeTeamMax = $sizeTeamMax;
         $this->token = $token;
         $this->company = $company;
-      }
+    }
 
     public function addTag(Tag $tag)
       {

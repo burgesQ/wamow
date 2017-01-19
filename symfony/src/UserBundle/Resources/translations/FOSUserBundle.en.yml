@@ -50,6 +50,10 @@ profile:
         businessPractice: 'Your Business Practice'
         missionKind: 'Your Mission Kind'
         languages: 'Languages You speak'
+        unread: 'You have %nb% unread message(s)'
+        nbLoad: 'You have setup your account to load up too %nb% messages by thread'
+        readReportActivate: "Your interlocutor will know that you've read their messages"
+        readReportDesactivate: "Your interlocutor will not know that you've read their messages"
 
     flash:
         updated: 'The profile has been updated'
@@ -137,7 +141,8 @@ form:
     userResume: "Enter a few words to describe your expertise"
     submit: "Update"
     languages: "Select the language that you spoke"
-
+    nbLoad: "Enter how many message should you to load by thread"
+    readReport: "Notify your interlocutor that you've read the message"
 
 social:
     sign_in_google: "Sign in with Google"
