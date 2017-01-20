@@ -3,18 +3,15 @@
 namespace MissionBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\DataFixtures\FixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
-use MissionBundle\Entity\ProfessionalExpertise;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * ProfessionalExpertise
+ * WorkExperience
  *
- * @ORM\Table(name="professional_expertise")
- * @ORM\Entity(repositoryClass="MissionBundle\Repository\ProfessionalExpertiseRepository")
+ * @ORM\Table(name="work_experience")
+ * @ORM\Entity(repositoryClass="MissionBundle\Repository\WorkExperienceRepository")
  */
-class ProfessionalExpertise
+class WorkExperience
 {
     /**
      * @var int
@@ -46,7 +43,7 @@ class ProfessionalExpertise
      * Set name
      *
      * @param string $name
-     * @return ProfessionalExpertise
+     * @return WorkExperience
      */
     public function setName($name)
     {

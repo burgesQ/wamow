@@ -24,7 +24,7 @@ hwi_oauth_security:
     prefix: /login
 
 hwi_oauth_connect:
-    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
+    resource: "@UserBundle/Resources/config/routing/connect.xml"
     prefix: /login
 
 hwi_oauth_redirect:

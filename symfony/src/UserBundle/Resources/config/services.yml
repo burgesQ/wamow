@@ -13,3 +13,7 @@ services:
     user.services:
         class: UserBundle\Services\Services
         arguments: []
+
+    user.registration:
+        class: UserBundle\Services\ServicesSignUp
+        arguments: []

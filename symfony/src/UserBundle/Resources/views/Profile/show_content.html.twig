@@ -68,21 +68,21 @@
   <p> {{ 'profile.show.professionalExpertise'|trans }}:
     {% if user.professionalExpertise != null %}
       <ul> {% for professionalExpertise in user.professionalExpertise %}
-        <li> {{ professionalExpertise.name }} </li>
+        <li> {{ professionalExpertise.name|trans({}, 'MissionBundle') }} </li>
       {% endfor %} </ul>
     {% endif %} </p>
 
   <p> {{ 'profile.show.businessPractice'|trans }}:
     {% if user.businessPractice != null %}
       <ul> {% for businessPractice in user.businessPractice %}
-        <li> {{ businessPractice.name }} </li>
+        <li> {{ businessPractice.name|trans({}, 'MissionBundle') }} </li>
       {% endfor %} </ul>
     {% endif %} </p>
 
   <p> {{ 'profile.show.missionKind'|trans }}:
     {% if user.missionKind != null %}
       <ul> {% for missionKind in user.missionKind %}
-        <li> {{ missionKind.name }} </li>
+        <li> {{ missionKind.name|trans({}, 'MissionBundle') }} </li>
       {% endfor %} </ul>
     {% endif %} </p>
 

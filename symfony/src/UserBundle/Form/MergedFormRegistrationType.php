@@ -9,18 +9,23 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 
-use UserBundle\Form\ProfileFormType;
+use UserBundle\Form\RegistrationType;
 use ToolsBundle\Form\UploadResumeType;
-use ToolsBundle\Form\ProfilePictureType;
 
-class MergedFormType extends AbstractType
+class MergedFormRegistrationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('user', new ProfileFormType('UserBundle:Entity:User'))
-            ->add('image', new ProfilePictureType())
+            ->add('user', new RegistrationType())
             ->add('resume', new UploadResumeType())
+            ->add('save', 'submit')
+            ->add('linkedin', 'submit',
+                [
+                    'translation_domain' => 'FOSUserBundle',
+                    'label' => 'registration.linkedin',
+                ]
+            )
             ;
     }
 }

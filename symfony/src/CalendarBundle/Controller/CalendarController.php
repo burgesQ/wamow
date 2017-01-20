@@ -18,6 +18,11 @@ class CalendarController extends Controller
     {
         if ($this->container->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED'))
         {
+            if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')
+                and ($url = $this->get('signedUp')->checkIfSignedUp($this)))
+            {
+                return $this->redirectToRoute($url);
+            }
             return $this->render('CalendarBundle:Default:view.html.twig');
         }
         else
@@ -30,6 +35,11 @@ class CalendarController extends Controller
     {
         if ($this->container->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED'))
         {
+            if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')
+                and ($url = $this->get('signedUp')->checkIfSignedUp($this)))
+            {
+                return $this->redirectToRoute($url);
+            }
             $em = $this->getDoctrine()->getManager();
             $user = $this->getUser();
             $calendarId = $user->getCalendar()->getId();
@@ -58,6 +68,11 @@ class CalendarController extends Controller
     {
         if ($this->container->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED'))
         {
+            if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')
+                and ($url = $this->get('signedUp')->checkIfSignedUp($this)))
+            {
+                return $this->redirectToRoute($url);
+            }
             $em = $this->getDoctrine()->getManager();
             $user = $this->getUser();
             if ($request->getMethod() == 'POST')
@@ -90,6 +105,11 @@ class CalendarController extends Controller
     {
         if ($this->container->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED'))
         {
+            if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')
+                and ($url = $this->get('signedUp')->checkIfSignedUp($this)))
+            {
+                return $this->redirectToRoute($url);
+            }
             $em = $this->getDoctrine()->getManager();
             $repository = $em->getRepository('CalendarBundle:Booking');
             $user = $this->getUser();

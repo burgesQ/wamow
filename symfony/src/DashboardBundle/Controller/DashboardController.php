@@ -22,6 +22,10 @@ class DashboardController extends Controller
         $userId = $user->getId();
         if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR'))
         {
+            if (($url = $this->get('signedUp')->checkIfSignedUp($this)))
+            {
+                return $this->redirectToRoute($url);
+            }
             $missions = $repository->getExpertMissionsAvailables();
             return $this->render('DashboardBundle:Expert:index.html.twig', array(
                 'missions' => $missions

@@ -3,10 +3,9 @@
 namespace UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-
-use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * UserData
@@ -69,7 +68,7 @@ class UserData
 
     /**
      * @var ArrayCollection
-     * 
+     *
      * @ORM\Column(name="business_practice", type="array", nullable=true)
      */
     private $businessPractice;
@@ -112,11 +111,20 @@ class UserData
      *      min = 0 )
      */
     private $dailyFeesMax;
-    
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\Column(name="experience_shaping", type="array", nullable=true)
+     */
+    private $experienceShaping;
+
     public function __construct()
     {
         $this->creationDate = new \Datetime();
         $this->updateDate = new \Datetime();
+        $this->businessPractice = new ArrayCollection();
+        $this->experienceShaping = new ArrayCollection();
     }
     
     /**
@@ -446,7 +454,40 @@ class UserData
     {
         return $this->dailyFeesMax;
     }
-    
+
+    /**
+     * Get ExperienceShaping
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getExperienceShaping()
+    {
+        return $this->experienceShaping;
+    }
+
+    /**
+     * Add ExperienceShaping
+     *
+     * @param array $experienceShaping
+     * @return User
+     */
+    public function addExperienceShaping($experienceShaping)
+    {
+        $this->experienceShaping[] = $experienceShaping;
+
+        return $this;
+    }
+
+    /**
+     * Remove ExperienceShaping
+     *
+     * @param array $experienceShaping
+     */
+    public function removeExperienceShaping($experienceShaping)
+    {
+        $this->experienceShaping->removeElement($experienceShaping);
+    }
+
     /**
      * @Assert\Callback
      */

@@ -64,6 +64,7 @@ change_password:
         success: 'The password has been changed'
 
 registration:
+    linkedin: Sign up with Linkedin
     check_email: 'An email has been sent to %email%. It contains an activation link you must click to activate your account.'
     confirmed: 'Congrats %username%, your account is now activated.'
     back: 'Back to the originating page.'
@@ -79,6 +80,61 @@ registration:
 
             Regards,
             WantMore.Work Team.
+    step:
+        zero: 'GET MATCHED IN JUST 5 MINUTES'
+        one: |
+            FIRST STEP :
+
+            We need to know where you acquired your experience and / or did your missions.
+            What does www.consultants.wantmore.work mean by Business Practices ?
+            We have identified 13 different business sectors.
+            You can make several choices.
+        two: |
+            SECOND STEP :
+
+            We need to understand which professional expertises you acquired or did in your missions.
+            What does www.consultants.wantmore.work mean by Professional Expertises ?
+            We have identified 22 key functions in organizations.
+            You can make several choices.
+        three: |
+            THIRD STEP :
+
+            We need to understand what you did or experimented as advisor.
+            What does www.consultants.wantmore.work mean by type of missions ?
+            We have identified 25 different consulting positions or levels.
+            You can make several choices.
+        four: |
+            FOURTH STEP :
+
+            To identify your valuable work experience, you need to select between 5 to 10 items.
+            It is important to choose relevant experiences and only proven ones to make your profile unique and bankable!
+        five: |
+            LAST STEP :
+
+            For each selected experiences, you have to specify carefully:
+            - in which kind of organization you acquired your experience: small, medium or large,
+            - the international exposition,
+            - the duration of your similar cumulated experience or missions,
+            - and if you did it in the last two years."
+    cat:
+        zero: |
+            85% OF PITCHES ARE FINDING EXPERTS WITHIN 15 DAYS.
+
+            Having a good matching profile will increase your success ! So fill in your profile details with attention.
+            Be aware that the User Agreement of www. consultants.wantmore.work require a ID background check.
+        one: 'Business Practice ?'
+        two: 'Professional Expertises'
+        three: 'Type of missions'
+        four: 'Valuable Work Experience'
+        five: 'Experience Shaping'
+    consign:
+        zero: "First Let's Connect"
+        one: 'SELECT INDUSTRY YOU’VE ALREADY WORKED ON'
+        two: 'SELECT YOUR EXPERTISES'
+        three: 'SELECT WHICH TYPE OF MISSION'
+        four: 'Select 5 to 10 items'
+        five: 'SPECIFY SELECTED EXPERIENCES'
+    or: 'OR'
 
 resetting:
     password_already_requested: 'The password for this user has already been requested within the last 24 hours.'
@@ -143,6 +199,7 @@ form:
     languages: "Select the language that you spoke"
     nbLoad: "Enter how many message should you to load by thread"
     readReport: "Notify your interlocutor that you've read the message"
+    back: Back
 
 social:
     sign_in_google: "Sign in with Google"

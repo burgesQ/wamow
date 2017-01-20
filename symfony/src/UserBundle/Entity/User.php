@@ -6,11 +6,13 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+
 use FOS\UserBundle\Model\User as BaseUser;
+use FOS\MessageBundle\Model\ParticipantInterface;
+
 use CompanyBundle\Entity\Company;
 use CalendarBundle\Entity\Calendar;
 
-use FOS\MessageBundle\Model\ParticipantInterface;
 
 /**
  * User
@@ -175,13 +177,13 @@ class User extends BaseUser implements ParticipantInterface
     private $dailyFeesMin;
 
     /**
-    * @var int
-    *
-    * @ORM\Column(name="daily_fees_max", type="bigint", nullable=true)
-    * @Assert\Range(
-    *      min = 0
-    *)
-    */
+     * @var int
+     *
+     * @ORM\Column(name="daily_fees_max", type="bigint", nullable=true)
+     * @Assert\Range(
+     *      min = 0
+     *)
+     */
     private $dailyFeesMax;
 
     /**
@@ -299,11 +301,11 @@ class User extends BaseUser implements ParticipantInterface
     private $calendar;
 
     /**
-    * @ORM\Column(name="email_emergency", type="string", length=255, nullable=true)
-    * @Assert\Email(
-    *     message = "The email '{{ value }}' is not a valid email."
-    * )
-    */
+     * @ORM\Column(name="email_emergency", type="string", length=255, nullable=true)
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email."
+     * )
+     */
     protected $emergencyEmail;
 
     /**
@@ -326,6 +328,21 @@ class User extends BaseUser implements ParticipantInterface
      */
     private $readReport;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="\MissionBundle\Entity\WorkExperience", cascade={"persist"})
+     */
+    private $workExperience;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="UserBundle\Entity\ExperienceShaping", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $experienceShaping;
+
     public function __construct()
     {
         parent::__construct();
@@ -342,13 +359,15 @@ class User extends BaseUser implements ParticipantInterface
         $this->userData = NULL;
         $this->userResume = NULL;
         $this->languages = new ArrayCollection();
-        $this->professionalexpertise = new ArrayCollection();
-        $this->missionkind = new ArrayCollection();
+        $this->workExperience = new ArrayCollection();
+        $this->professionalExpertise = new ArrayCollection();
+        $this->missionKind = new ArrayCollection();
         $this->businessPractice = new ArrayCollection();
         $this->calendar = new Calendar();
         $this->company = NULL;
         $this->nbLoad = 10;
         $this->readReport = true;
+        $this->experienceShaping = new ArrayCollection();
     }
 
     /**
@@ -409,6 +428,7 @@ class User extends BaseUser implements ParticipantInterface
         $this->status = $status;
         return $this;
     }
+
     /**
      * Get status
      *
@@ -926,7 +946,7 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * Add addSecretMail
      *
-     * @param text $mails
+     * @param text $mail
      * @return User
      */
     public function addSecretMail($mail)
@@ -983,7 +1003,19 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Get resumes
+     * Add resumes
+     *
+     * @return User
+     */
+    public function resetResumes()
+    {
+        $this->resumes = new ArrayCollection();
+
+        return $this;
+    }
+
+    /**
+     * Get resume
      *
      * @return \ToolsBundle\Entity\UploadResume
      */
@@ -1170,53 +1202,6 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Set NbLoad
-     *
-     * @param integer nbLoad
-     * @return User
-     */
-    public function setNbLoad($nbLoad = 10)
-    {
-        $this->nbLoad = $nbLoad;
-
-        return $this;
-    }
-
-    /**
-     * Get Nbload
-     *
-     * @return integer
-     */
-    public function getNbLoad()
-    {
-        return $this->nbLoad;
-    }
-
-    /**
-     * Set ReadReport
-     *
-     * @param boolean readReport
-     * @return User
-     */
-    public function setReadReport($readReport = true)
-    {
-        $this->readReport = $readReport;
-
-        return $this;
-    }
-
-    /**
-     * Get ReadReport
-     *
-     * @return boolean
-     */
-    public function getReadReport()
-    {
-        return $this->readReport;
-    }
-
-
-    /**
      * Set calendar
      *
      * @param \CalendarBundle\Entity\Calendar $calendar
@@ -1265,6 +1250,131 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
+     * Set NbLoad
+     *
+     * @param integer nbLoad
+     * @return User
+     */
+    public function setNbLoad($nbLoad = 10)
+    {
+        $this->nbLoad = $nbLoad;
+
+        return $this;
+    }
+
+    /**
+     * Get Nbload
+     *
+     * @return integer
+     */
+    public function getNbLoad()
+    {
+        return $this->nbLoad;
+    }
+
+    /**
+     * Set ReadReport
+     *
+     * @param boolean readReport
+     * @return User
+     */
+    public function setReadReport($readReport = true)
+    {
+        $this->readReport = $readReport;
+
+        return $this;
+    }
+
+    /**
+     * Get ReadReport
+     *
+     * @return boolean
+     */
+    public function getReadReport()
+    {
+        return $this->readReport;
+    }
+
+    /**
+     * Get workExperience
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getWorkExperience()
+    {
+        return $this->workExperience;
+    }
+
+    /**
+     * Add workExperience
+     *
+     * @param \MissionBundle\Entity\WorkExperience $workExperience
+     * @return User
+     */
+    public function addWorkExperience(\MissionBundle\Entity\WorkExperience $workExperience)
+    {
+        $this->workExperience[] = $workExperience;
+
+        return $this;
+    }
+
+    /**
+     * Reset workExperience
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function resetWorkExperience()
+    {
+        unset($this->workExperience);
+        $this->workExperience = new ArrayCollection();
+
+        return $this->workExperience;
+    }
+
+    /**
+     * Remove workExperience
+     *
+     * @param \MissionBundle\Entity\WorkExperience $workExperience
+     */
+    public function removeWorkExperience(\MissionBundle\Entity\WorkExperience $workExperience)
+    {
+        $this->workExperience->removeElement($workExperience);
+    }
+
+    /**
+     * Get ExperienceShaping
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getExperienceShaping()
+    {
+        return $this->experienceShaping;
+    }
+
+    /**
+     * Add ExperienceShaping
+     *
+     * @param \MissionBundle\Entity\ExperienceShaping $experienceShaping
+     * @return User
+     */
+    public function addExperienceShaping($experienceShaping)
+    {
+        $this->experienceShaping[] = $experienceShaping;
+
+        return $this;
+    }
+
+    /**
+     * Remove ExperienceShaping
+     *
+     * @param \MissionBundle\Entity\ExperienceShaping $experienceShaping
+     */
+    public function removeExperienceShaping($experienceShaping)
+    {
+        $this->experienceShaping->removeElement($experienceShaping);
+    }
+
+    /**
      * @Assert\Callback
      */
     public function isValidate(ExecutionContextInterface $context)
@@ -1274,24 +1384,30 @@ class User extends BaseUser implements ParticipantInterface
 
         $this->setUpdateDate(new \Datetime());
 
-        if ($this->getPhone() != NULL) {
+        if ($this->getPhone() != NULL)
+        {
             $this->getPhone()->isValidate($context);
-        } if ($feesMin == NULL && $feesMax != NULL) {
+        }
+        if ($feesMin == NULL && $feesMax != NULL)
+        {
             $context
                 ->buildViolation('user.minfees.unset')
                 ->atPath('dailyFeesMin')
                 ->addViolation();
-        } else if ($feesMax == NULL && $feesMin != NULL) {
+        }
+        else if ($feesMax == NULL && $feesMin != NULL)
+        {
             $context
                 ->buildViolation('user.maxfees.unset')
                 ->atPath('dailyFeesMax')
                 ->addViolation();
-        } else if ($feesMin != NULL && $feesMax != NULL && $feesMin >= $feesMax) {
+        }
+        else if ($feesMin != NULL && $feesMax != NULL && $feesMin >= $feesMax)
+        {
             $context
                 ->buildViolation('user.minfees.over')
                 ->atPath('dailyFeesMin')
                 ->addViolation();
         }
     }
-
 }

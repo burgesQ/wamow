@@ -32,8 +32,14 @@ class ProfileController extends BaseController
     {
         $user = $this->getUser();
         if (!is_object($user) || !$user instanceof UserInterface)
+        {
             throw new AccessDeniedException('This user does not have access to this section.');
-
+        }
+        else if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')
+                 && ($url = $this->get('signedUp')->checkIfSignedUp($this)))
+        {
+            return $this->redirectToRoute($url);
+        }
         $em = $this->getDoctrine()->getManager();
 
         return $this->render('UserBundle:Profile:show.html.twig', array(
@@ -50,8 +56,14 @@ class ProfileController extends BaseController
     {
         $user = $this->getUser();
         if (!is_object($user) || !$user instanceof UserInterface)
+        {
             throw new AccessDeniedException('This user does not have access to this section.');
-
+        }
+        else if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')
+                 && ($url = $this->get('signedUp')->checkIfSignedUp($this)))
+        {
+            return $this->redirectToRoute($url);
+        }
         /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
         $dispatcher = $this->get('event_dispatcher');
 
@@ -64,16 +76,10 @@ class ProfileController extends BaseController
         $em = $this->getDoctrine()->getManager();
 
         $image = new ProfilePicture($user);
-        $image->setUser($user)
-            ->setKind(1)
-            ->setType("image")
-            ;
+        $image->setUser($user)->setKind(1)->setType("image");
         
         $resume = new UploadResume($user);
-        $resume->setUser($user)
-            ->setKind(2)
-            ->setFormat("pdf")
-            ;
+        $resume->setUser($user)->setKind(2)->setFormat("pdf");
         
         $formData['user'] = $user;
         $formData['image'] = $image;
@@ -81,13 +87,12 @@ class ProfileController extends BaseController
 
         $form = $this->createForm(new MergedFormType(), $formData);
 
-        $form->setData($user)
-            ->setData($image)
-            ->setData($resume);
+        $form->setData($user)->setData($image)->setData($resume);
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isValid())
+        {
             /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
             $userManager = $this->get('fos_user.user_manager');
 
@@ -99,9 +104,13 @@ class ProfileController extends BaseController
             $userManager->updateUser($user);
 
             if ($image->getFile() != null)
+            {
                 $em->persist($image);
+            }
             if ($resume->getFile() != null)
+            {
                 $em->persist($resume);
+            }
             $em->flush();
             
             $parser = $this->get('user.services');

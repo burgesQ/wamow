@@ -94,8 +94,8 @@ fos_user:
         email:
             template:   UserBundle:Reset:password_resetting.email.twig
             from_email:
-                   address:        server@mail.com # put a valid mail address
-                   sender_name:    Reset link
+                address:        server@mail.com # put a valid mail address
+                sender_name:    Reset link
     from_email:
         address:        server@mail.com # put a valid mail address
         sender_name:    Activation link

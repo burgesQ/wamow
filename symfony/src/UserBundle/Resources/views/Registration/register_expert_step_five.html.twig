@@ -1,0 +1,22 @@
+{% trans_default_domain "FOSUserBundle" %}
+
+{{ 'registration.step.five'|trans }}
+<br/>
+{{ 'registration.cat.five'|trans }}
+<br/>
+{{ 'registration.consign.five'|trans }}
+<br/>
+
+{{ form_start(form) }}
+    {{ form_errors(form) }}
+    {% for oneFrom in form.experienceShaping %}
+        <br/>
+        <h3>
+            {{ domains[loop.index0].name|trans({}, 'MissionBundle') }}
+        </h3>
+        {{ form_widget(oneFrom) }}
+    {% endfor %}
+    </ul>
+    {{ form_row(form.submit) }}
+    {{ form_row(form.back) }}
+{{ form_end(form) }}

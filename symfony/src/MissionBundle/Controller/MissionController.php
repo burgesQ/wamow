@@ -244,7 +244,12 @@ class MissionController extends Controller
         }
         elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR'))
         {
-            if ($mission->getStatus() !== 1) {
+            if (($url = $this->get('signedUp')->checkIfSignedUp($this)))
+            {
+                return $this->redirectToRoute($url);
+            }
+            else if ($mission->getStatus() !== 1)
+            {
                 throw new NotFoundHttpException($trans->trans('mission.error.available', array('%id%' => $missionId), 'MissionBundle'));
             }
 
@@ -302,7 +307,12 @@ class MissionController extends Controller
                 'listMission'           => $listMission
             ));
         }
-        elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')) {
+        elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR'))
+        {
+            if (($url = $this->get('signedUp')->checkIfSignedUp($this)))
+            {
+                return $this->redirectToRoute($url);
+            }
             $listMission = $repositoryMission->getExpertMissionsAvailables();
             return $this->render('MissionBundle:Mission:all_missions_expert.html.twig', array(
                 'listMission'           => $listMission
@@ -322,10 +332,17 @@ class MissionController extends Controller
         $trans = $this->get('translator');
         $em = $this->getDoctrine()->getManager();
 
-        if (($user = $this->getUser()) === null ) {
+        if (($user = $this->getUser()) === null )
+        {
             throw new NotFoundHttpException($trans->trans('mission.error.logged', array(), 'MissionBundle'));
-        } elseif ( $this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR') ) {
+        }
+        elseif ( $this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR') )
+        {
             throw new NotFoundHttpException($trans->trans('mission.pitch.contractor', array(), 'MissionBundle'));
+        }
+        elseif (($url = $this->get('signedUp')->checkIfSignedUp($this)))
+        {
+            return $this->redirectToRoute($url);
         }
         $repositoryMission = $em->getRepository('MissionBundle:Mission');
         $repositoryTeam = $em->getRepository('TeamBundle:Team');

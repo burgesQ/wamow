@@ -12,10 +12,6 @@
                 <a href="{{ path('fos_user_registration_register_seeker') }}">{{ 'layout.sign_up'|trans }}</a>
                 <a href="{{ path('home_page_expert') }}">{{ 'layout.expert_access'|trans }}</a>
             </div>
-            <div>
-                <a href="{{ path('hwi_oauth_service_redirect', {'service': 'linkedin' }) }}">{{ 'social.sign_in_linkedin'|trans }}</a> <br />
-                <a href="{{ path('hwi_oauth_service_redirect', {'service': 'google' }) }}">{{ 'social.sign_in_google'|trans }}</a> <br />
-            </div>
         {% endif %}
 
         </div>

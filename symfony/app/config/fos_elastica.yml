@@ -102,12 +102,12 @@ fos_elastica:
                                 type: custom
                                 tokenizer: nGram
                                 filter: [asciifolding ,lowercase, worddelimiter, stopwords]
-                                
+
                             custom_search_analyzer:
                                 type: custom
                                 tokenizer: nGram
                                 filter: [asciifolding ,lowercase, worddelimiter, stopwords, snowball, elision]
-                                
+
                             custom_search_analyzer_en:
                                 type: custom
                                 tokenizer: nGram
@@ -157,7 +157,8 @@ fos_elastica:
                         country: { boost : 5 }
                         dailyFeesMin: ~
                         dailyFeesMax: ~
-                   
+                        experienceShaping: ~
+
                     persistence:
                         driver: orm
                         model: UserBundle\Entity\UserData

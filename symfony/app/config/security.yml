@@ -26,9 +26,10 @@ security:
             form_login:
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
-                login_path: /login
+                login_path: /
                 check_path: /login_check
                 failure_path: /
+
             oauth:
                 resource_owners:
                     linkedin:           "/login/check-linkedin"

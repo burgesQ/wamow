@@ -2,7 +2,6 @@
 
 namespace UserBundle\Services;
 
-use UserBundle\Entity\User;
 use UserBundle\Entity\UserData;
 
 class Services
@@ -71,7 +70,24 @@ class Services
             $userData->addProfessionalExpertise($professionalExpertise->getName());
         foreach ($user->getMissionKind() as $missionKind)
             $userData->addMissionKind($missionKind->getName());
-        
+        foreach ($user->getExperienceShaping() as $experienceShaping) {
+            $array = [
+                $experienceShaping->getSmallCompany(),
+                $experienceShaping->getMediumCompany(),
+                $experienceShaping->getLargeCompany(),
+                $experienceShaping->getSouthAmerica(),
+                $experienceShaping->getNorthAmerica(),
+                $experienceShaping->getAsia(),
+                $experienceShaping->getEmea(),
+                $experienceShaping->getCumuledMonth(),
+                $experienceShaping->getDailyfees(),
+                $experienceShaping->getPeremption(),
+                $experienceShaping->getWorkTitle()->getName()
+
+            ];
+            $userData->addExperienceShaping($array);
+        }
+
         $userData->setUpdateDate($user->getUpdateDate());
         $userData->setDailyFeesMin($user->getDailyFeesMin());
         $userData->setDailyFeesMax($user->getDailyFeesMax());

@@ -15,6 +15,13 @@ class DefaultController extends Controller
         $session = new Session(new PhpBridgeSessionStorage());
         $session->start();
         $session->set('role', 'ADVISOR');
+
+        if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')
+                 and ($url = $this->get('signedUp')->checkIfSignedUp($this)))
+        {
+            return $this->redirectToRoute($url);
+        }
+
         return $this->render('HomePageBundle:Expert:home.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
         ));

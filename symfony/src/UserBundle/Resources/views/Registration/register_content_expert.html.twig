@@ -1,12 +1,30 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
+{{ 'registration.step.zero'|trans }}
+<br/>
+{{ 'registration.cat.zero'|trans }}
+<br/>
+{{ 'registration.consign.zero'|trans }}
+<br/>
+
 {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register_expert'), 'attr': {'class': 'fos_user_registration_register_expert'}}) }}
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'registration.submit'|trans }}" />
-    </div>
-    <div>
-      <a href="{{ path('hwi_oauth_service_redirect', {'service': 'linkedin' }) }}">{{ 'social.sign_in_linkedin'|trans }}</a> <br />
-      <a href="{{ path('hwi_oauth_service_redirect', {'service': 'google' }) }}">{{ 'social.sign_in_google'|trans }}</a> <br />
-    </div>
+
+{{ form_errors(form) }}
+
+{{ form_row(form.user.firstName) }}
+{{ form_row(form.user.lastName) }}
+{{ form_row(form.user.country) }}
+<br/>
+{{ form_row(form.user.plainPassword) }}
+<br/>
+{{ form_row(form.linkedin) }}
+
+{{ 'registration.or'|trans }}
+
+<br/>
+
+{{ form_row(form.user.email) }}
+{{ form_row(form.resume.file) }}
+{{ form_row(form.save) }}
+
 {{ form_end(form) }}

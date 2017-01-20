@@ -11,4 +11,17 @@ use Doctrine\ORM\EntityRepository;
  * repository methods below.
  */
 class UserRepository extends EntityRepository
-{}
+{
+    public function checkEmailIsUnique($email)
+    {
+        $qb = $this->_em->createQueryBuilder();
+
+        $qb->select('count(u)')
+            ->from('UserBundle:User', 'u')
+            ->where('u.email = :email')
+                ->setParameter('email', $email)
+        ;
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+}
