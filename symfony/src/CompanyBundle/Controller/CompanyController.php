@@ -19,10 +19,9 @@ class CompanyController extends Controller
 {
     public function createAction(Request $request)
     {
-        if ($this->container->get('security.authorization_checker')
-            ->isGranted('ROLE_CONTRACTOR'))
+        $trans = $this->get('translator');
+        if ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR'))
         {
-            $trans = $this->get('translator');
             if ($this->getUser()->getCompany()) {
                 $request->getSession()->getFlashBag()->add('notice', $trans->trans('company.new.error.onecompany', array(), 'CompanyBundle'));
                 return $this->redirectToRoute('dashboard');
@@ -48,6 +47,15 @@ class CompanyController extends Controller
                 $em->persist($company);
                 $em->persist($user);
                 $em->flush();
+
+                // Add notification for contractor
+                $param = array(
+                    'company' => $company->getId(),
+                    'user'    => $user->getId(),
+                );
+                $notification = $this->container->get('notification');
+                $notification->new($this->getUser(), 1, 'notification.seeker.company.join', $param);
+
                 $request->getSession()->getFlashBag()->add('notice', $trans->trans('company.new.registered', array('name' => $company->getName()), 'CompanyBundle'));
                 return $this->redirectToRoute('dashboard');
             }
@@ -60,10 +68,9 @@ class CompanyController extends Controller
 
     public function joinAction(Request $request)
     {
-        if ($this->container->get('security.authorization_checker')
-            ->isGranted('ROLE_CONTRACTOR'))
+        $trans = $this->get('translator');
+        if ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR'))
         {
-            $trans = $this->get('translator');
             if ($this->getUser()->getCompany()) {
                 $request->getSession()->getFlashBag()->add('notice', $trans->trans('company.join.error.onecompany', array(), 'CompanyBundle'));
                 return $this->redirectToRoute('dashboard');
@@ -95,6 +102,15 @@ class CompanyController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($user);
                 $em->flush();
+
+                // Add notification for contractor
+                $param = array(
+                    'company' => $company->getId(),
+                    'user'    => $user->getId(),
+                );
+                $notification = $this->container->get('notification');
+                $notification->new($this->getUser(), 1, 'notification.seeker.company.join', $param);
+
                 $request->getSession()->getFlashBag()->add('notice', $trans->trans('company.join.joined', array('name' => $company->getName()), 'CompanyBundle'));
                 return $this->redirectToRoute('dashboard');
             }
@@ -107,10 +123,9 @@ class CompanyController extends Controller
 
     public function leaveAction(Request $request)
     {
-        if ($this->container->get('security.authorization_checker')
-            ->isGranted('ROLE_CONTRACTOR'))
+        $trans = $this->get('translator');
+        if ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR'))
         {
-            $trans = $this->get('translator');
             if ( !$this->getUser()->getCompany() ) {
                 $request->getSession()->getFlashBag()->add('notice', $trans->trans('company.leave.error.nocompany', array(), 'CompanyBundle'));
                 return $this->redirectToRoute('company_join');
@@ -126,6 +141,15 @@ class CompanyController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($user);
                 $em->flush();
+
+                // Add notification for contractor
+                $param = array(
+                    'company' => $company->getId(),
+                    'user'    => $user->getId(),
+                );
+                $notification = $this->container->get('notification');
+                $notification->new($this->getUser(), 1, 'notification.seeker.company.leave', $param);
+
                 $request->getSession()->getFlashBag()->add('notice', $trans->trans('company.leave.leaved', array('name' => $company->getName()), 'CompanyBundle'));
                 return $this->redirectToRoute('dashboard');
             }

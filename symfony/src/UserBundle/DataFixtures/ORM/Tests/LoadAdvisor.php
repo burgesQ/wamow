@@ -33,41 +33,35 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
         $mission = $manager->getRepository('MissionBundle:Mission')
                     ->findOneBy(array('title' => "Fixture Test"));
 
-        $i = $j = 0;
+        $i = 0;
         while ($i < 30)
         {
-            $user = $userManager->createUser();
-            $user->setUsername('name'.$i);
-            $user->setFirstName($i);
-            $user->setLastName($i);
-            $user->setEmail($i.'email@domain.com');
-            $user->setPlainPassword('password');
-            $user->setEnabled(true);
-            $user->setRoles(array('ROLE_ADVISOR'));
-            $user->setPasswordSet(true);
-            $userManager->updateUser($user, true);
+            $j = $i + 1;
+            $advisor = $userManager->createUser();
+            $advisor->setFirstName('advisor'.$i);
+            $advisor->setLastName('advisor'.$i);
+            $advisor->setEmail($i.'advisor@domain.com');
+            $advisor->setPlainPassword('password');
+            $advisor->setEnabled(true);
+            $advisor->setRoles(array('ROLE_ADVISOR'));
+            $advisor->setPasswordSet(true);
+            $userManager->updateUser($advisor, true);
 
-            $team = new Team(0, $user);
+            $advisor_bis = $userManager->createUser();
+            $advisor_bis->setFirstName('advisor'.$j);
+            $advisor_bis->setLastName('advisor'.$j);
+            $advisor_bis->setEmail($j.'advisor@domain.com');
+            $advisor_bis->setPlainPassword('password');
+            $advisor_bis->setEnabled(true);
+            $advisor_bis->setRoles(array('ROLE_ADVISOR'));
+            $advisor_bis->setPasswordSet(true);
+            $userManager->updateUser($advisor_bis, true);
+
+            $team = new Team(0, $advisor);
             $team->setMission($mission);
-            if ($i < 10)
-                $team->setStatus(1);
+            $team->addUser($advisor_bis);
             $manager->persist($team);
-            $i++;
-        }
-        while ($j < 5)
-        {
-            $user = $userManager->createUser();
-            $user->setUsername('name'.$i);
-            $user->setFirstName($i);
-            $user->setLastName($i);
-            $user->setEmail($i.'email@domain.com');
-            $user->setPlainPassword('password');
-            $user->setEnabled(true);
-            $user->setRoles(array('ROLE_CONTRACTOR'));
-            $user->setPasswordSet(true);
-            $userManager->updateUser($user, true);
-            $i++;
-            $j++;
+            $i = $i + 2;
         }
         $manager->flush();
     }

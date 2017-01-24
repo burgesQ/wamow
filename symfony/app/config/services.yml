@@ -18,3 +18,14 @@ services:
     config.mission:
         class: ToolsBundle\Service\ConfigMission
         arguments: ['@doctrine.orm.entity_manager']
+
+    notification:
+        class:     NotificationBundle\Event\NewNotification
+        arguments: ['@doctrine.orm.entity_manager']
+
+    app.twig.extension.date:
+        class:        Twig_Extensions_Extension_Date
+        arguments:
+             - "@translator.default"
+        tags:
+             - { name: 'twig.extension' }

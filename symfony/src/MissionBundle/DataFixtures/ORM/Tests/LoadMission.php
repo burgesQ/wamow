@@ -17,6 +17,11 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface
                     ->findOneBy(array('id' => "1"));
 
         $team = new Team(1, $contractor);
+
+        $contractor = $manager->getRepository('UserBundle:User')
+                    ->findOneBy(array('id' => "2"));
+        $team->addUser($contractor);
+
         $team->setStatus(1);
         $manager->persist($team);
         $manager->flush();

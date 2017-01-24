@@ -1,0 +1,15 @@
+diff:
+    ago:
+        second: 'Il y a %count% seconde|Il y a %count% secondes'
+        minute: 'Il y a %count% minute|Il y a %count% minutes'
+        hour: 'Il y a %count% heure|Il y a %count% heures'
+        day: 'Il y a %count% jour|Il y a %count% jours'
+        month: 'Il y a %count% mois'
+        year: 'Il y a %count% an|Il y a %count% ans'
+    in:
+        second: 'Dans %count% seconde|Dans %count% secondes'
+        minute: 'Dans %count% minute|Dans %count% minutes'
+        hour: 'Dans %count% heure|Dans %count% heures'
+        day: 'Dans %count% jour|Dans %count% jours'
+        month: 'Dans %count% mois'
+        year: 'Dans %count% an|Dans %count% ans'

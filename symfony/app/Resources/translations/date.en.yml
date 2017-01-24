@@ -1,0 +1,15 @@
+diff:
+    ago:
+        second: '%count% second ago|%count% seconds ago'
+        minute: '%count% minute ago|%count% minutes ago'
+        hour: '%count% hour ago|%count% hours ago'
+        day: '%count% day ago|%count% days ago'
+        month: '%count% month ago|%count% months ago'
+        year: '%count% year ago|%count% years ago'
+    in:
+        second: 'in %count% second|in %count% seconds'
+        minute: 'in %count% minute|in %count% minutes'
+        hour: 'in %count% hour|in %count% hours'
+        day: 'in %count% day|in %count% days'
+        month: 'in %count% month|in %count% months'
+        year: 'in %count% year|in %count% years'

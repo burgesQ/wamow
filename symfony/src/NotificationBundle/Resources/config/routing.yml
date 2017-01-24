@@ -1,0 +1,4 @@
+notification_list:
+    path:      /notifications
+    defaults:
+        _controller: NotificationBundle:Notification:list

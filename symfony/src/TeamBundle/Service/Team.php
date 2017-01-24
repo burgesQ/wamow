@@ -11,32 +11,6 @@ namespace TeamBundle\Service;
         $this->em = $em;
     }
 
-    // Delete teams of the mission
-    public function deleteTeams($teams, $step)
-    {
-        $em = $this->em;
-        foreach ($teams as $team)
-        {
-            $team->setStatus(-1);
-            $step->setReallocTeam($step->getReallocTeam() - 1);
-            $em->flush($team);
-        }
-        $em->flush($step);
-    }
-
-    // Select Teams for the next step
-    public function keepTeams($teams, $step)
-    {
-        $em = $this->em;
-        foreach ($teams as $team)
-        {
-            $team->setStatus($step->getPosition() + 1);
-            $em->flush($team);
-        }
-        $step->setStatus(0);
-        $em->flush($step);
-    }
-
     // Set teams to available
     public function setTeamsAvailable($teams, $position)
     {

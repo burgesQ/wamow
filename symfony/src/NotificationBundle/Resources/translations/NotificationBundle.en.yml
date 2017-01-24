@@ -1,0 +1,30 @@
+notification:
+    seeker:
+        mission:
+            create:
+            createbyother:
+            edit:
+            editbyother:
+            delete:
+            deletebyother:
+            emptyteam:
+            pitchedbynewteam:
+            takeback:
+            takebackbyother:
+            selection:
+            selectionbyother:
+            dismiss:
+            dismissbyother:
+        company:
+            join:
+            leave:
+
+    expert:
+        mission:
+            pitch:
+            giveup:
+            giveupbyother:
+            delete:
+            takeback:
+            selection:
+            dismiss:

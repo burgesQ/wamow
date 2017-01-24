@@ -1,0 +1,32 @@
+notification:
+    seeker:
+        mission:
+            create: "Vous avez créé une mission (%date%)"
+            createbyother: "Quelqu'un de votre team a créer une mission (%date%)"
+            edit: "Vous avez edité une mission (%date%)"
+            editbyother: "Quelqu'un a edité la mission (%date%)"
+            delete: "Vous avez supprimé une mission (%date%)"
+            deletebyother: "Quelqu'un a supprimé une mission (%date%)"
+            emptyteam: "Une team s'est désinscrite du processus de pitch (%date%)"
+            pitchedbynewteam: "Une team s'est inscrite au processus de pitch (%date%)"
+            takeback: "Vous avez repêché une team (%date%)"
+            takebackbyother: "Quelqu'un a repêché une team (%date)"
+            selection: "Vous avez selectionné une team pour la prochaine étape (%date%)"
+            selectionbyother: "Quelqu'un a selectionné une team pour la prochaine étape (%date%)"
+            dismiss: "Vous avez éliminé une team (%date%)"
+            dismissbyother: "Quelqu'un a éliminé une team (%date%)"
+        company:
+            join: "Vous avez rejoint une entité (%date%)"
+            leave: "Vous avez quitté une entité (%date%)"
+
+    expert:
+        mission:
+            pitch: "Vous candidatez pour une mission (%date%)"
+            giveup: "Vous avez abandonnez une candidature (%date%)"
+            giveupbyother: "Quelqu'un de votre team a quitté la candidature (%date%)"
+            delete: "Une mission a été annulée (%date%)"
+            takeback: "Vous avez été repêché (%date%)"
+            selection: "Vous avez été sélectionné pour la prochaine étape (%date%)"
+            dismiss: "Vous avez été éliminé (%date%)"
+            notselected: "Vous n'avez pas été sélectionné pour la prochaine étape (%date%)"
+            beginselection: "Vous faites parti du processus de pitch"

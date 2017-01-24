@@ -4,7 +4,7 @@
 
 {{ include("MissionBundle:Mission:new.html.twig") }}
 
-<form action="{{ path('mission_edit', {'id': mission.id}) }}" method="post">
+<form action="{{ path('mission_edit', {'missionId': mission.id}) }}" method="post">
   {{ form(form) }}
 </form>
 

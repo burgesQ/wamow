@@ -71,6 +71,10 @@ mission:
         alreadyEdit: "You can't edit again the mission"
         needCompany: "Please join a company in order to create a mission"
         wrongcompany: "You don't belong to the right company"
+        stepnotfound: "Sorry internal error"
+        select:
+            toomanyteams: "You have selected too many teams"
+            notenoughteams: "You have not selected enough team"
     pitch:
         done: "You just pitch."
         twice: "You already apply to this mission."

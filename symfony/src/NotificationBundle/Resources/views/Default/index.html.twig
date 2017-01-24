@@ -1,0 +1,13 @@
+{% trans_default_domain "NotificationBundle" %}
+
+{% if notifications is not null %}
+    {% for notification in notifications %}
+        {% if notification.seen == 0 %}
+            ●
+        {% else %}
+            ○
+        {% endif %}
+        {{ notification.messageId | trans({'%user%': notification.messageParams.user, '%date%': notification.creationDate|time_diff}) }}
+        <br/>
+    {% endfor %}
+{% endif %}

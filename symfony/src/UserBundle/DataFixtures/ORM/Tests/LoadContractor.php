@@ -28,17 +28,21 @@ class LoadContractor extends AbstractFixture implements OrderedFixtureInterface,
 
         $userManager = $this->container->get('fos_user.user_manager');
 
-        $contractor = $userManager->createUser();
-        $contractor->setUsername('name');
-        $contractor->setFirstName('contractor');
-        $contractor->setLastName('contractor');
-        $contractor->setEmail('contractor@domain.com');
-        $contractor->setPlainPassword('password');
-        $contractor->setEnabled(true);
-        $contractor->setRoles(array('ROLE_CONTRACTOR'));
-        $contractor->setPasswordSet(true);
-        $contractor->setCompany($company);
-        $userManager->updateUser($contractor, true);
+        $i = 0;
+        while ($i < 10)
+        {
+            $contractor = $userManager->createUser();
+            $contractor->setFirstName('contractor'.$i);
+            $contractor->setLastName('contractor'.$i);
+            $contractor->setEmail($i.'contractor@domain.com');
+            $contractor->setPlainPassword('password');
+            $contractor->setEnabled(true);
+            $contractor->setRoles(array('ROLE_CONTRACTOR'));
+            $contractor->setPasswordSet(true);
+            $contractor->setCompany($company);
+            $userManager->updateUser($contractor, true);
+            $i++;
+        }
     }
 
     public function getOrder()

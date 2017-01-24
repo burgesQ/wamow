@@ -9,12 +9,12 @@ mission_view:
         _controller: MissionBundle:Mission:view
 
 mission_edit:
-    path:      /mission/edit/{id}
+    path:      /mission/edit/{missionId}
     defaults:
         _controller: MissionBundle:Mission:edit
 
 missions_all:
-    path:      /mission/all
+    path:      /missions
     defaults:
         _controller: MissionBundle:Mission:list
 
@@ -23,27 +23,22 @@ mission_delete:
     defaults:
         _controller: MissionBundle:Mission:delete
 
-mission_pitch_all:
-    path:       /mission/pitch/all
-    defaults:
-        _controller: MissionBundle:Mission:pitchAll
-
 mission_pitch:
     path:      /mission/pitch/{missionId}
     defaults:
         _controller: MissionBundle:Mission:pitch
 
-mission_teams_selection:
-    path:      /mission/{missionId}/selection
-    defaults:
-        _controller: MissionBundle:Mission:selection
-
-mission_selection_takeback:
-    path:      /mission/{missionId}/selection/takeback
-    defaults:
-        _controller: MissionBundle:Mission:takeBack
-
 mission_giveup:
     path:       /mission/giveup/{missionId}
     defaults:
         _controller: MissionBundle:Mission:giveUp
+
+mission_teams_selection:
+    path:      /mission/selection/{missionId}
+    defaults:
+        _controller: MissionBundle:Mission:selection
+
+mission_selection_takeback:
+    path:      /mission/takeback/{missionId}
+    defaults:
+        _controller: MissionBundle:Mission:takeBack
