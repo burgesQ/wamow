@@ -12,8 +12,10 @@ use MissionBundle\Entity\Mission;
 use MissionBundle\Entity\ProfessionalExpertise;
 use MissionBundle\Entity\MissionKind;
 use TeamBundle\Entity\Team;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
 
-class LoadAdvisor implements FixtureInterface, ContainerAwareInterface
+class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
     /**
      * @var ContainerInterface
@@ -68,5 +70,12 @@ class LoadAdvisor implements FixtureInterface, ContainerAwareInterface
             $j++;
         }
         $manager->flush();
+    }
+
+    public function getOrder()
+    {
+        // the order in which fixtures will be loaded
+        // the lower the number, the sooner that this fixture is loaded
+        return 12;
     }
 }

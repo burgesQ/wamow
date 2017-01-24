@@ -6,8 +6,10 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
 
-class LoadContractor implements FixtureInterface, ContainerAwareInterface
+class LoadContractor extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
     /**
      * @var ContainerInterface
@@ -33,5 +35,12 @@ class LoadContractor implements FixtureInterface, ContainerAwareInterface
         $contractor->setRoles(array('ROLE_CONTRACTOR'));
         $contractor->setPasswordSet(true);
         $userManager->updateUser($contractor, true);
+    }
+
+    public function getOrder()
+    {
+        // the order in which fixtures will be loaded
+        // the lower the number, the sooner that this fixture is loaded
+        return 9;
     }
 }

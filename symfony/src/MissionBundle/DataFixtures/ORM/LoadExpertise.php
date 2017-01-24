@@ -5,8 +5,10 @@ namespace MissionBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use MissionBundle\Entity\ProfessionalExpertise;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
 
-class LoadExpertise implements FixtureInterface
+class LoadExpertise extends AbstractFixture implements OrderedFixtureInterface
 {
   public function load(ObjectManager $manager)
   {
@@ -42,4 +44,11 @@ class LoadExpertise implements FixtureInterface
     }
     $manager->flush();
   }
+
+    public function getOrder()
+    {
+        // the order in which fixtures will be loaded
+        // the lower the number, the sooner that this fixture is loaded
+        return 4;
+    }
 }

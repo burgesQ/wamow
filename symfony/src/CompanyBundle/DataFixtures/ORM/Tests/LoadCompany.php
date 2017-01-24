@@ -4,20 +4,26 @@ namespace MissionBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use ToolsBundle\Entity\Address;
+use CompanyBundle\Entity\Company;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 
-class LoadAddress extends AbstractFixture implements OrderedFixtureInterface
+class LoadCompany extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $address = new Address();
-        $address->setStreet("18 Avenue Franklin Roosevelt");
-        $address->setCity("Paris");
-        $address->setZipCode("75008");
-        $address->setCountry("France");
-        $manager->persist($address);
+        $sector = $manager->getRepository('CompanyBundle:Sector')
+                    ->findOneBy(array('name' => 'Energy'));
+
+        $company = new Company();
+        $company->setName('Esso');
+        $company->setSize(3);
+        $company->setLogo('esso.png');
+        $company->setResume('Gasoil');
+        $company->setSector($sector);
+
+        $manager->persist($company);
+
         $manager->flush();
     }
 
@@ -25,6 +31,6 @@ class LoadAddress extends AbstractFixture implements OrderedFixtureInterface
     {
         // the order in which fixtures will be loaded
         // the lower the number, the sooner that this fixture is loaded
-        return 8;
+        return 3;
     }
 }

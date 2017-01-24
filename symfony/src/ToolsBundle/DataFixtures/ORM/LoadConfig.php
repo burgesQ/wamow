@@ -5,8 +5,10 @@ namespace ToolsBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use ToolsBundle\Entity\Config;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
 
-class LoadConfig implements FixtureInterface
+class LoadConfig extends AbstractFixture implements OrderedFixtureInterface
 {
 
   public function load(ObjectManager $manager)
@@ -42,4 +44,11 @@ class LoadConfig implements FixtureInterface
       $manager->persist($mission_config);
       $manager->flush($mission_config);
   }
+
+    public function getOrder()
+    {
+        // the order in which fixtures will be loaded
+        // the lower the number, the sooner that this fixture is loaded
+        return 1;
+    }
 }

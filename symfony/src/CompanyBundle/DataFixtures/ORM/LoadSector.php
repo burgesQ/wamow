@@ -5,8 +5,10 @@ namespace CompanyBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use CompanyBundle\Entity\Sector;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
 
-class LoadSector implements FixtureInterface
+class LoadSector extends AbstractFixture implements OrderedFixtureInterface
 {
   public function load(ObjectManager $manager)
   {
@@ -33,4 +35,11 @@ class LoadSector implements FixtureInterface
     }
     $manager->flush();
   }
+
+    public function getOrder()
+    {
+        // the order in which fixtures will be loaded
+        // the lower the number, the sooner that this fixture is loaded
+        return 2;
+    }
 }

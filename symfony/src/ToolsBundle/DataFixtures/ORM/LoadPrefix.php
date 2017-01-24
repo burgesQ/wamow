@@ -5,8 +5,10 @@ namespace ToolsBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use ToolsBundle\Entity\PrefixNumber;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
 
-class LoadPrefix implements FixtureInterface
+class LoadPrefix extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
@@ -254,5 +256,12 @@ class LoadPrefix implements FixtureInterface
             $manager->persist($p_num);
         }
         $manager->flush();
+    }
+
+    public function getOrder()
+    {
+        // the order in which fixtures will be loaded
+        // the lower the number, the sooner that this fixture is loaded
+        return 13;
     }
 }

@@ -6,8 +6,10 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use MissionBundle\Entity\Mission;
 use TeamBundle\Entity\Team;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
 
-class LoadMission implements FixtureInterface
+class LoadMission extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
@@ -52,5 +54,12 @@ class LoadMission implements FixtureInterface
         $team->setMission($mission);
         $manager->persist($team);
         $manager->flush();
+    }
+
+    public function getOrder()
+    {
+        // the order in which fixtures will be loaded
+        // the lower the number, the sooner that this fixture is loaded
+        return 10;
     }
 }
