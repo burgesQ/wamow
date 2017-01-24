@@ -28,9 +28,18 @@ class MissionController extends Controller
     */
     public function newAction(Request $request)
     {
+        $trans = $this->get('translator');
         if ($this->container->get('security.authorization_checker')
             ->isGranted('ROLE_CONTRACTOR'))
         {
+            $user = $this->getUser();
+            $company = $user->getCompany();
+            if ($user->getCompany() == null)
+            {
+                $request->getSession()->getFlashBag()->add('notice', $trans->trans('mission.error.needCompany', array(), 'MissionBundle'));
+                return $this->redirectToRoute('company_join');
+            }
+
             $em = $this->getDoctrine()->getManager();
             $repository = $this
                         ->getDoctrine()
@@ -47,7 +56,7 @@ class MissionController extends Controller
             $team = new Team(1, $this->getUser()); //role 1 = contractor
             $team->setStatus(1);
             $em->persist($team);
-            $mission = new Mission($nbStep, $team, 1, $token);
+            $mission = new Mission($nbStep, $team, 1, $token, $company);
             $team->setMission($mission);
             $em->persist($team);
             $form = $this->get('form.factory')->create(new MissionType(), $mission);
@@ -92,7 +101,7 @@ class MissionController extends Controller
             ));
         }
         else {
-            return new Response($this->get('translator')->trans('mission.error.authorized', array(), 'MissionBundle'));
+            return new Response($trans->trans('mission.error.authorized', array(), 'MissionBundle'));
         }
     }
 
@@ -106,14 +115,17 @@ class MissionController extends Controller
         $trans = $this->get('translator');
         $service = $this->container->get('team');
 
-        if ( $this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR'))
+        if ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR'))
         {
             $em = $this->getDoctrine()->getManager();
             $mission = $em->getRepository('MissionBundle:Mission')->find($id);
+            $user = $this->getUser();
             if (null === $mission) {
                 throw new NotFoundHttpException($trans->trans('mission.error.wrongId', array('%id%' => $id), 'MissionBundle'));
-            } elseif ($service->isContractorOfMission($this->getUser(), $mission) == false) {
+            } elseif ($service->isContractorOfMission($user, $mission) == false) {
                 throw new NotFoundHttpException($trans->trans('mission.error.right', array(), 'MissionBundle'));
+            } elseif ($user->getCompany() != $mission->getCompany()) {
+                throw new NotFoundHttpException($trans->trans('mission.error.wrongcompany', array(), 'MissionBundle'));
             } elseif ($mission->getStatus() != 0) {
                 throw new NotFoundHttpException($trans->trans('mission.error.alreadyEdit', array(), 'MissionBundle'));
             }
@@ -159,8 +171,9 @@ class MissionController extends Controller
         $trans = $this->get('translator');
         $service = $this->container->get('team');
         $mission = $em->getRepository('MissionBundle:Mission')->find($missionId);
+        $user = $this->getUser();
 
-        if ( $this->getUser() === null) {
+        if ($user === null) {
             throw new NotFoundHttpException($trans->trans('mission.error.logged', array(), 'MissionBundle'));
         } elseif ($mission == null ||  $mission->getStatus() < 0) {
             throw new NotFoundHttpException($trans->trans('mission.error.wrongId', array('%id%' => $missionId), 'MissionBundle'));
@@ -169,8 +182,10 @@ class MissionController extends Controller
         if ( $this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR'))
         {
             $team = $mission->getTeamContact();
-            if ($service->isContractorOfMission($this->getUser(), $mission) == false) {
+            if ($service->isContractorOfMission($user, $mission) == false) {
                 throw new NotFoundHttpException($trans->trans('mission.error.right', array(), 'MissionBundle'));
+            } elseif ($user->getCompany() != $mission->getCompany()) {
+                throw new NotFoundHttpException($trans->trans('mission.error.wrongcompany', array(), 'MissionBundle'));
             }
             return $this->render('MissionBundle:Mission:view_seeker.html.twig', array(
                 'mission'           => $mission,
@@ -194,21 +209,22 @@ class MissionController extends Controller
     */
     public function listAction()
     {
-        $em = $this->getDoctrine()->getManager();
-        $repositoryMission = $em->getRepository('MissionBundle:Mission');
-        $repositoryTeam = $em->getRepository('TeamBundle:Team');
-        $user = $this->getUser();
         $trans = $this->get('translator');
         $em = $this->getDoctrine()->getManager();
+        $repositoryMission = $em->getRepository('MissionBundle:Mission');
+        $user = $this->getUser();
 
         if ( $user === null ) {
             throw new NotFoundHttpException($trans->trans('mission.error.logged', array(), 'MissionBundle'));
         }
         elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR'))
         {
-            $listTeams = $repositoryTeam->getTeamsByUserId($user->getId());
+            if ($user->getCompany() != null)
+            {
+                $listMission = $repositoryMission->getSeekerMissions($user->getId(), $user->getCompany()->getId());
+            }
             return $this->render('MissionBundle:Mission:all_missions_seeker.html.twig', array(
-                'listTeams'           => $listTeams
+                'listMission'           => $listMission
             ));
         }
         elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')) {
@@ -279,10 +295,13 @@ class MissionController extends Controller
             throw new NotFoundHttpException($trans->trans('mission.error.forbiddenAccess', array(), 'MissionBundle'));
         }
 
-        if ( $this->getUser() === null ) {
+        $user = $this->getUser();
+        if ($user === null ) {
             throw new NotFoundHttpException($trans->trans('mission.error.logged', array(), 'MissionBundle'));
         } elseif ( $this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR') ||  $mission->getStatus() < 0) {
             throw new NotFoundHttpException($trans->trans('mission.error.forbiddenAccess', array(), 'MissionBundle'));
+        }  elseif ($user->getCompany() != $mission->getCompany()) {
+            throw new NotFoundHttpException($trans->trans('mission.error.wrongcompany', array(), 'MissionBundle'));
         }
 
         $step = $repositoryStep->getStepByMissionAndPosition($missionId);
@@ -359,6 +378,8 @@ class MissionController extends Controller
             throw new NotFoundHttpException($trans->trans('mission.error.logged', array(), 'MissionBundle'));
         } elseif ( $this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR') ||  $mission->getStatus() < 0) {
             throw new NotFoundHttpException($trans->trans('mission.error.forbiddenAccess', array(), 'MissionBundle'));
+        } elseif ($user->getCompany() != $mission->getCompany()) {
+            throw new NotFoundHttpException($trans->trans('mission.error.wrongcompany', array(), 'MissionBundle'));
         }
         $position = $step->getPosition();
         $form = $this->get('form.factory')->create(new TakeBackType($missionId, $position - 1));
@@ -405,9 +426,11 @@ class MissionController extends Controller
         $service = $this->container->get('team');
         $repository = $em->getRepository('MissionBundle:Mission');
         $mission = $repository->find($missionId);
+        $user = $this->getUser();
         if ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR')
-            && $mission != null && $service->isContractorOfMission($this->getUser(), $mission) == true
-            && $mission->getStatus() >= 0)
+            && $mission != null && $service->isContractorOfMission($user, $mission) == true
+            && $mission->getStatus() >= 0
+            && $user->getCompany() == $mission->getCompany())
         {
             $mission->setStatus(-1);
             $repository = $em->getRepository('TeamBundle:Team');

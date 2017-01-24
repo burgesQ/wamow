@@ -8,18 +8,15 @@
             {{ 'mission.all_missions.title'|trans }} :
         </p>
         <p>
-            {% if listTeams is not null %}
-            {% for team in listTeams %}
-             <li>
-                 <a href="{{ path('mission_view', {'missionId': team.mission.id}) }}">
-                 {{ team.mission.title }}</a> -
-                 <a href="{{ path('mission_teams_selection', {'missionId': team.mission.id}) }}"
-                 >{{ 'mission.all_missions.start'|trans }}</a> -
-                 <a href="{{ path('mission_delete', {'missionId': team.mission.id}) }}"
-                 >{{ 'mission.all_missions.delete'|trans }}</a>
-            </li>
-            {% endfor %}
-            {% endif %}
+                {% for mission in listMission %}
+                    <li>
+                        <a href="{{ path('mission_view', {'missionId': mission.id}) }}">{{ mission.title }}</a>
+                        -
+                        <a href="{{ path('mission_teams_selection', {'missionId': mission.id}) }}">{{ 'mission.all_missions.start'|trans }}</a>
+                        -
+                        <a href="{{ path('mission_delete', {'missionId': mission.id}) }}">{{ 'mission.all_missions.delete'|trans }}</a>
+                    </li>
+                {% endfor %}
         </p>
     </body>
 </html>

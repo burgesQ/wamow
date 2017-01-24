@@ -310,12 +310,13 @@ class User extends BaseUser
         $this->giveUpCount = 0;
         $this->secretMail = array();
         $this->userData = NULL;
-        $this->userResume = null;
+        $this->userResume = NULL;
         $this->languages = new ArrayCollection();
         $this->professionalexpertise = new ArrayCollection();
         $this->missionkind = new ArrayCollection();
         $this->businessPractice = new ArrayCollection();
         $this->calendar = new Calendar();
+        $this->company = NULL;
     }
 
     /**
@@ -913,7 +914,7 @@ class User extends BaseUser
     }
 
     /**
-     * Add resumes
+     * Add resume
      *
      * @param \ToolsBundle\Entity\UploadResume $resume
      * @return User
@@ -926,7 +927,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get resume
+     * Get resumes
      *
      * @return \ToolsBundle\Entity\UploadResume
      */

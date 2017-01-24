@@ -69,6 +69,8 @@ mission:
         right: "You did not created this mission."
         forbiddenAccess: "You have no access to this page."
         alreadyEdit: "You can't edit again the mission"
+        needCompany: "Please join a company in order to create a mission"
+        wrongcompany: "You don't belong to the right company"
     pitch:
         done: "You just pitch."
         twice: "You already apply to this mission."

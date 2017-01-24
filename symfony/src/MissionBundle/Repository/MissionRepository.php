@@ -22,7 +22,7 @@ class MissionRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getSeekerMissions($userId)
+    public function getSeekerMissions($userId, $companyId)
     {
         $qb = $this->_em->createQueryBuilder();
         $qb->select('m')
@@ -32,6 +32,8 @@ class MissionRepository extends EntityRepository
             ->where('u.id = :userId')
                 ->setParameter('userId', $userId)
             ->andWhere('m.status >= 0')
+            ->andWhere('m.company = :companyId')
+                ->setParameter('companyId', $companyId)
             ->orderBy('m.applicationEnding', 'DESC');
         return $qb->getQuery()->getResult();
     }

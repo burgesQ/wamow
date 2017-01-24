@@ -66,14 +66,13 @@ class Mission
      * @ORM\OneToOne(targetEntity="TeamBundle\Entity\Team", cascade={"persist"})
      * @ORM\JoinColumn(name="team_contact")
      */
-    private  $teamContact;
+    private $teamContact;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="ID_company", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="CompanyBundle\Entity\Company", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $iDCompany;
+    private $company;
 
     /**
      * @var int
@@ -206,7 +205,7 @@ class Mission
      */
     private $tags;
 
-    public function __construct($nbStep, $team, $sizeTeamMax, $token)
+    public function __construct($nbStep, $team, $sizeTeamMax, $token, $company)
       {
         $this->creationDate = new \Datetime();
         $this->languages = new ArrayCollection();
@@ -216,6 +215,7 @@ class Mission
         $this->teamContact = $team;
         $this->sizeTeamMax = $sizeTeamMax;
         $this->token = $token;
+        $this->company = $company;
       }
 
     public function addTag(Tag $tag)
@@ -361,27 +361,28 @@ class Mission
     }
 
     /**
-     * Set iDCompany
+     * Set company
      *
-     * @param integer $iDCompany
+     * @param \CompanyBundle\Entity\Company $company
      * @return Mission
      */
-    public function setIDCompany($iDCompany)
+    public function setCompany(\CompanyBundle\Entity\Company $company)
     {
-        $this->iDCompany = $iDCompany;
+        $this->company = $company;
 
         return $this;
     }
 
     /**
-     * Get iDCompany
+     * Get company
      *
-     * @return integer
+     * @return \CompanyBundle\Entity\Company
      */
-    public function getIDCompany()
+    public function getCompany()
     {
-        return $this->iDCompany;
+        return $this->company;
     }
+
 
     /**
      * Set status

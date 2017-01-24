@@ -68,6 +68,8 @@ mission:
         available: "La mission %id% n'est pas disponible."
         right: "Vous n'avez pas crée cette mission."
         advisor: "Vous n'avez pas accès à cette page."
+        needCompany: "Veuillez rejoindre une entreprise avant de créer une mission"
+        wrongcompany: "Vous n'appartenez pas à la bonne entreprise"
     pitch:
         done: "Vous venez de postuler."
         twice: "Vous avez déjà postulé à cette mission."

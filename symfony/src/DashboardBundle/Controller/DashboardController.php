@@ -18,20 +18,24 @@ class DashboardController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('MissionBundle:Mission');
-        $userId = $this->getUser()->getId();
+        $user = $this->getUser();
+        $userId = $user->getId();
         if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR'))
         {
             $missions = $repository->getExpertMissionsAvailables();
             return $this->render('DashboardBundle:Expert:index.html.twig', array(
                 'missions' => $missions
-                ));
+            ));
         }
         elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR'))
         {
-            $missions = $repository->getSeekerMissions($userId);
+            if ($user->getCompany() != null)
+            {
+                $missions = $repository->getSeekerMissions($userId, $user->getCompany()->getId());
+            }
             return $this->render('DashboardBundle:Seeker:index.html.twig', array(
                 'missions' => $missions
-                ));
+            ));
         }
         throw new NotFoundHttpException("You are not logged.");
     }

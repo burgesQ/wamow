@@ -23,6 +23,9 @@ class LoadContractor extends AbstractFixture implements OrderedFixtureInterface,
 
     public function load(ObjectManager $manager)
     {
+        $company = $manager->getRepository('CompanyBundle:Company')
+                    ->findOneBy(array('name' => 'Esso'));
+
         $userManager = $this->container->get('fos_user.user_manager');
 
         $contractor = $userManager->createUser();
@@ -34,6 +37,7 @@ class LoadContractor extends AbstractFixture implements OrderedFixtureInterface,
         $contractor->setEnabled(true);
         $contractor->setRoles(array('ROLE_CONTRACTOR'));
         $contractor->setPasswordSet(true);
+        $contractor->setCompany($company);
         $userManager->updateUser($contractor, true);
     }
 

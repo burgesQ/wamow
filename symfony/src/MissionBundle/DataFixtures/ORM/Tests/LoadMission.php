@@ -32,7 +32,7 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface
         $language = $manager->getRepository('ToolsBundle:Language')
                     ->findOneBy(array('name' => 'English'));
 
-        $mission = new Mission(3, $team, 1, "804sadf304efw");
+        $mission = new Mission(3, $team, 1, "804sadf304efw", $contractor->getCompany());
 
         $mission->setAddress($address);
         $mission->setProfessionalExpertise($professionalExpertise);
