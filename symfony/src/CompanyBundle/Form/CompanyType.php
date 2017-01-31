@@ -49,14 +49,15 @@ class CompanyType extends AbstractType
                 'label' => 'company.new.description',
                 'translation_domain' => 'CompanyBundle',
             ))
-            ->add('sector', EntityType::class, array(
-                'class' => 'CompanyBundle:Sector',
-                'choice_label' => 'name',
+            ->add('businessPractice', EntityType::class, array(
+                'class' => 'MissionBundle:BusinessPractice',
+                'property' => 'name',
                 'multiple' => false,
                 'required' => true,
-                'placeholder' => 'company.new.choosesector',
-                'label' => 'company.new.sector',
-                'translation_domain' => 'CompanyBundle'
+                'placeholder' => 'businesspractice.title',
+                'label' => 'businesspractice.title',
+                'translation_domain' => 'MissionBundle',
+                'choice_translation_domain' => 'MissionBundle',
             ))
             ->add('save', SubmitType::class, array(
                 'label' => 'company.new.submit',

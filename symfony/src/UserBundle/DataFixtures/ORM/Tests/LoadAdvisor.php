@@ -70,6 +70,6 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
     {
         // the order in which fixtures will be loaded
         // the lower the number, the sooner that this fixture is loaded
-        return 12;
+        return 11;
     }
 }

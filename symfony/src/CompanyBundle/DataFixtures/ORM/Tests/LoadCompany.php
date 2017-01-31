@@ -12,15 +12,15 @@ class LoadCompany extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $sector = $manager->getRepository('CompanyBundle:Sector')
-                    ->findOneBy(array('name' => 'Energy'));
+        $businessPractice = $manager->getRepository('MissionBundle:BusinessPractice')
+                    ->findOneBy(array('name' => 'businesspractice.industry'));
 
         $company = new Company();
         $company->setName('Esso');
         $company->setSize(3);
         $company->setLogo('esso.png');
         $company->setResume('Gasoil');
-        $company->setSector($sector);
+        $company->setBusinessPractice($businessPractice);
 
         $manager->persist($company);
 
@@ -31,6 +31,6 @@ class LoadCompany extends AbstractFixture implements OrderedFixtureInterface
     {
         // the order in which fixtures will be loaded
         // the lower the number, the sooner that this fixture is loaded
-        return 3;
+        return 5;
     }
 }

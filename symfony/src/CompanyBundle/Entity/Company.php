@@ -2,7 +2,7 @@
 
 namespace CompanyBundle\Entity;
 
-use CompanyBundle\Entity\Sector;
+use MissionBundle\Entity\BusinessPractice;
 use UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\EntityRepository;
@@ -80,10 +80,10 @@ class Company
     private $resume;
 
     /**
-     * @ORM\ManyToOne(targetEntity="CompanyBundle\Entity\Sector", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="MissionBundle\Entity\BusinessPractice")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $sector;
+    private $businessPractice;
 
     public function __construct()
     {
@@ -263,26 +263,26 @@ class Company
     }
 
     /**
-     * Set sector
+     * Set businessPractice
      *
-     * @param \CompanyBundle\Entity\Sector $sectorId
+     * @param \MissionBundle\Entity\BusinessPractice $businessPractice
      * @return Company
      */
-    public function setSector(Sector $sector = null)
+    public function setBusinessPractice(\MissionBundle\Entity\BusinessPractice $businessPractice)
     {
-        $this->sector = $sector;
+        $this->businessPractice = $businessPractice;
 
         return $this;
     }
 
     /**
-     * Get sector
+     * Get businessPractice
      *
-     * @return \CompanyBundle\Entity\Sector
+     * @return \MissionBundle\Entity\BusinessPractice
      */
-    public function getSector()
+    public function getBusinessPractice()
     {
-        return $this->sector;
+        return $this->businessPractice;
     }
 
     /**

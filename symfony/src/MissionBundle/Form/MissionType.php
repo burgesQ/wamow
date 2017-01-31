@@ -12,6 +12,7 @@ use ToolsBundle\Form\FileType;
 use ToolsBundle\Entity\Tag;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class MissionType extends AbstractType
 {
@@ -113,14 +114,16 @@ class MissionType extends AbstractType
                 'label' => 'mission.new.form.missionKind',
                 'translation_domain' => 'MissionBundle'
                 ))
-            ->add('businessPractice',   'entity', array(
+            ->add('businessPractice', EntityType::class, array(
                 'class' => 'MissionBundle:BusinessPractice',
                 'property' => 'name',
                 'multiple' => false,
-                'placeholder' => 'mission.new.form.businessPractice',
-                'label' => 'mission.new.form.businessPractice',
-                'translation_domain' => 'MissionBundle'
-                 ))
+                'required' => true,
+                'placeholder' => 'businesspractice.title',
+                'label' => false,
+                'translation_domain' => 'MissionBundle',
+                'choice_translation_domain' => 'MissionBundle'
+            ))
             ->add('image')
             ->add('tags', 'entity', array(
                 'class' => 'ToolsBundle:Tag',

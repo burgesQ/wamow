@@ -38,7 +38,6 @@ mission:
             chooseCountry: "Choose a country"
             chooseExpertise: "Choose an expertise"
             chooseMissionKind: "Choose a kind"
-            chooseBusinessPractice: "Choose a practice"
             chooseDay: "Day"
             chooseMonth: "Month"
             chooseYear: "Year"
@@ -99,3 +98,19 @@ mission:
     pitch:
         title: "My pitchs"
         giveUp: "give up"
+
+businesspractice:
+    title: "Business Practice"
+    industry: "Industry"
+    finance: "Finance"
+    retail: "Retail"
+    media: "Media-Telecom / Entertainement Business"
+    tourism: "Tourism"
+    construction: "Construction"
+    realestate: "Real Estate"
+    hotel: "Good & Beverage / Hotel / Sport / Leisure"
+    services: "Services (included transport)"
+    energy: "Energy"
+    it: "IT"
+    public: "Public"
+    ngo: "NGO"

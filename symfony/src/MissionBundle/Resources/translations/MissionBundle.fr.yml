@@ -38,7 +38,6 @@ mission:
             chooseCountry: "Choisissez un pays"
             chooseExpertise: "Choisissez une expertise"
             chooseMissionKind: "Choisissez une catégorie"
-            chooseBusinessPractice: "Choisissez un business practice"
             chooseDay: "Jour"
             chooseMonth: "Mois"
             chooseYear: "Année"
@@ -94,3 +93,19 @@ mission:
     pitch:
         title: "Mes pitchs"
         giveUp: "Abandonner"
+
+businesspractice:
+    title: "Secteur d'activité"
+    industry: "Industrie"
+    finance: "Finance - Banque - Assurance"
+    retail: "Commerce - Distribution"
+    media: "Media - Telecom - Industrie des jeux"
+    tourism: "Tourisme"
+    construction: "Construction BTP hors immobilier"
+    realestate: "Immobilier"
+    hotel: "Hôtellerie - Restauration et Loisirs"
+    services: "Services (y compris transports)"
+    energy: "Energie"
+    it: "Systèmes d’information - IT"
+    public: "Administration et opérateurs publics"
+    ngo: "Association et organisation non gouvernementale (ONG)"

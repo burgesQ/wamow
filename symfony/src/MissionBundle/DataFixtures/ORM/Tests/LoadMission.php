@@ -33,7 +33,7 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface
         $missionKind = $manager->getRepository('MissionBundle:MissionKind')
                     ->findOneBy(array('name' => 'CRM'));
         $businessPractice = $manager->getRepository('MissionBundle:BusinessPractice')
-                    ->findOneBy(array('name' => 'Public Administration'));
+                    ->findOneBy(array('name' => 'businesspractice.industry'));
         $language = $manager->getRepository('ToolsBundle:Language')
                     ->findOneBy(array('name' => 'English'));
 
@@ -65,6 +65,6 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface
     {
         // the order in which fixtures will be loaded
         // the lower the number, the sooner that this fixture is loaded
-        return 10;
+        return 9;
     }
 }
