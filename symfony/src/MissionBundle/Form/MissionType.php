@@ -98,14 +98,16 @@ class MissionType extends AbstractType
                 'label' => 'mission.new.form.applicationEnding',
                 'translation_domain' => 'MissionBundle'
               ))
-            ->add('professionalExpertise',   'entity', array(
+            ->add('professionalExpertise', EntityType::class, array(
                 'class' => 'MissionBundle:ProfessionalExpertise',
                 'property' => 'name',
                 'multiple' => false,
-                'placeholder' => 'mission.new.form.chooseExpertise',
-                'label' => 'mission.new.form.professionalExpertise',
-                'translation_domain' => 'MissionBundle'
-              ))
+                'required' => true,
+                'placeholder' => 'professionalexpertises.title',
+                'label' => false,
+                'translation_domain' => 'MissionBundle',
+                'choice_translation_domain' => 'MissionBundle',
+            ))
             ->add('missionKind',   'entity', array(
                 'class' => 'MissionBundle:MissionKind',
                 'property' => 'name',
@@ -122,7 +124,7 @@ class MissionType extends AbstractType
                 'placeholder' => 'businesspractice.title',
                 'label' => false,
                 'translation_domain' => 'MissionBundle',
-                'choice_translation_domain' => 'MissionBundle'
+                'choice_translation_domain' => 'MissionBundle',
             ))
             ->add('image')
             ->add('tags', 'entity', array(

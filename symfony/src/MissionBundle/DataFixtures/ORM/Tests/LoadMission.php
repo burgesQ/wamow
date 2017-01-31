@@ -29,7 +29,7 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface
         $address = $manager->getRepository('ToolsBundle:Address')
                     ->findOneBy(array('street' => "18 Avenue Franklin Roosevelt"));
         $professionalExpertise = $manager->getRepository('MissionBundle:ProfessionalExpertise')
-                    ->findOneBy(array('name' => "IT"));
+                    ->findOneBy(array('name' => 'professionalexpertises.operations'));
         $missionKind = $manager->getRepository('MissionBundle:MissionKind')
                     ->findOneBy(array('name' => 'CRM'));
         $businessPractice = $manager->getRepository('MissionBundle:BusinessPractice')
