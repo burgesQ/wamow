@@ -108,14 +108,16 @@ class MissionType extends AbstractType
                 'translation_domain' => 'MissionBundle',
                 'choice_translation_domain' => 'MissionBundle',
             ))
-            ->add('missionKind',   'entity', array(
+            ->add('missionKind', EntityType::class, array(
                 'class' => 'MissionBundle:MissionKind',
                 'property' => 'name',
                 'multiple' => false,
-                'placeholder' => 'mission.new.form.chooseMissionKind',
-                'label' => 'mission.new.form.missionKind',
-                'translation_domain' => 'MissionBundle'
-                ))
+                'required' => true,
+                'placeholder' => 'typemissions.title',
+                'label' => false,
+                'translation_domain' => 'MissionBundle',
+                'choice_translation_domain' => 'MissionBundle',
+            ))
             ->add('businessPractice', EntityType::class, array(
                 'class' => 'MissionBundle:BusinessPractice',
                 'property' => 'name',
