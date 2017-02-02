@@ -13,6 +13,7 @@ use ToolsBundle\Entity\Tag;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\Count;
 
 class MissionType extends AbstractType
 {
@@ -40,14 +41,19 @@ class MissionType extends AbstractType
                 'label' => 'mission.new.form.confidentiality',
                 'translation_domain' => 'MissionBundle'
               ))
-            ->add('languages',   'entity', array(
+            ->add('languages', EntityType::class, array(
                 'class' => 'ToolsBundle:Language',
                 'property' => 'name',
                 'multiple' => true,
                 'expanded' => true,
-                'label' => 'mission.new.form.languages',
-                'translation_domain' => 'MissionBundle'
-              ))
+                'required' => true,
+                'label' => 'language.title',
+                'translation_domain' => 'tools',
+                'choice_translation_domain' => 'tools',
+                'constraints' => new Count(
+                    array('min' => 1, 'minMessage' => "error.minlanguage")
+                ),
+            ))
             ->add('telecommuting',    'checkbox', array(
                 'required' => false,
                 'label' => 'mission.new.form.telecommuting',

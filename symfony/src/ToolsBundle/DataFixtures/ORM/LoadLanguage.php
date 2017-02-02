@@ -14,16 +14,16 @@ class LoadLanguage extends AbstractFixture implements OrderedFixtureInterface
   public function load(ObjectManager $manager)
   {
     $names = array(
-      'English',
-      'French',
-      'German',
-      'Chinese',
-      'Spanish',
-      'Portuguese',
-      'Japanese',
-      'Arabic',
-      'Italian',
-      'Korean'
+      'language.english',
+      'language.french',
+      'language.german',
+      'language.chinese',
+      'language.spanish',
+      'language.portuguese',
+      'language.japanese',
+      'language.arabic',
+      'language.italian',
+      'language.korean',
     );
 
     foreach ($names as $name) {

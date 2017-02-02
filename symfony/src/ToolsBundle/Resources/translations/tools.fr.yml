@@ -17,3 +17,16 @@ form:
 
     file:
         file: "Fichier"
+
+language:
+    title: "Langues"
+    english: "Anglais"
+    french: "Français"
+    german: "Allemand"
+    chinese: "Chinois"
+    spanish: "Espagnol"
+    portuguese: "Portuguais"
+    japanese: "Japanais"
+    arabic: "Arabe"
+    italian: "Italien"
+    korean: "Coréen"
