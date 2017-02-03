@@ -42,7 +42,8 @@ class TeamRepository extends EntityRepository
     }
 
     // Query get teams availables for a specific step
-    public function getAvailablesTeams($missionId, $step)
+    //$full is a boolean : false => getAvailablesTeams; true => get All availables teams in Array form.
+    public function getAvailablesTeams($missionId, $step, $arrayForm)
     {
         $qb = $this->_em->createQueryBuilder();
         $qb->select('t')
@@ -56,9 +57,13 @@ class TeamRepository extends EntityRepository
         if ($step->getPosition() == 1) {
             $qb->orWhere('t.status = 0');
         }
-        $qb->orderBy('t.creationDate', 'ASC')
-            ->setMaxResults($step->getNbMaxTeam());
-        return $qb->getQuery()->getResult();
+        if ($arrayForm == false)
+        {
+            $qb->orderBy('t.creationDate', 'ASC')
+                ->setMaxResults($step->getNbMaxTeam());
+            return $qb->getQuery()->getResult();
+        }
+        return $qb->getQuery()->getArrayResult();
     }
 
     // Query get teams of users

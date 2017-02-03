@@ -385,7 +385,7 @@ class MissionController extends Controller
         $nextStep = $repositoryStep->findOneBy(array('mission' => $mission, 'position' => $position + 1));
 
         // Get teams
-        $teams = $repositoryTeam->getAvailablesTeams($missionId, $step);
+        $teams = $repositoryTeam->getAvailablesTeams($missionId, $step, false);
 
         // If there is no team in the mission
         if ($teams == null)
@@ -640,6 +640,10 @@ class MissionController extends Controller
         } elseif ($user->getCompany() != $mission->getCompany()) {
             throw new NotFoundHttpException($trans->trans('mission.error.wrongcompany', array(), 'MissionBundle'));
         }
+
+        $repositoryTeam = $em->getRepository('TeamBundle:Team');
+        $nbrTeams = count($repositoryTeam->getAvailablesTeams($missionId, $step, true));
+        $full = $nbrTeams >= $step->getNbMaxTeam() ? true : false;
         $form = $this->get('form.factory')->create(new TakeBackType($missionId, $position - 1));
         $form->handleRequest($request);
         if ($step->getStatus() != 1) {
@@ -705,7 +709,8 @@ class MissionController extends Controller
         }
         return $this->render('MissionBundle:Mission:takeback.html.twig', array(
             'form' => $form->createView(),
-            'missionId' => $missionId
+            'missionId' => $missionId,
+            'full' => $full
             ));
     }
 
@@ -730,8 +735,16 @@ class MissionController extends Controller
             $teams = $em->getRepository('TeamBundle:Team')->getAdvisorsTeams($missionId);
             $notification = $this->container->get('notification');
 
+            $steps = $em->getRepository('MissionBundle:Step')->getStepsAvailables($missionId);
+            foreach ($steps as $step)
+            {
+                $step->setStatus(-1);
+            }
+            $em->flush();
+
             foreach ($teams as $team) {
                 $team->setStatus(-2);
+
 
                 // Add notifications for advisors
                 $users = $team->getusers();

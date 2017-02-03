@@ -5,11 +5,16 @@
     </head>
     <body>
         <h3>{{ 'mission.selection.step2'|trans }}</h3>
+        {% if full == false %}
+            {{ 'mission.selection.pick'|trans }}
+            <form action="{{ path('mission_selection_takeback', {'missionId': missionId }) }}" method="post">
+                {{ form_row(form.team) }}
+                {{ form_row(form.save) }}
+            </form>
+        {% else %}
+            {{ 'mission.selection.takeBackError'|trans }}
+        {% endif %}
 
-        {{ 'mission.selection.pick'|trans }}
-        <form action="{{ path('mission_selection_takeback', {'missionId': missionId }) }}" method="post">
-        {{ form_row(form.team) }}
-        {{ form_row(form.save) }}
-        </form>
+
     </body>
 </html>

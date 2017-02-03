@@ -12,4 +12,15 @@ use Doctrine\ORM\EntityRepository;
  */
 class StepRepository extends EntityRepository
 {
+    public function getStepsAvailables($missionId)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('s')
+        ->from('MissionBundle:Step', 's')
+        ->where('s.status >= 0')
+        ->andWhere('s.mission = :missionId')
+            ->setParameter('missionId', $missionId);
+
+        return $qb->getQuery()->getResult();
+    }
 }
