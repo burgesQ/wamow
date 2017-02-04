@@ -1,11 +1,11 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 <div class="user_user_show">
- 
+
   <p> {{ 'profile.show.image'|trans }}:
     {% if image != null and image.name != null %}
-      {{ image.name }} is a {{ image.type }} upload the {{ image.uploadDate|date("m/d/Y") }} 
-      <img src="{{ asset(image.webPath()) }}"/> 
+      {{ image.name }} is a {{ image.type }} upload the {{ image.uploadDate|date("m/d/Y") }}
+      <img src="{{ asset(image.webPath()) }}"/>
     {% endif %} </p>
 
   <p> {{ 'profile.show.first_name'|trans }}: {{ user.firstName }} </p>
@@ -20,6 +20,8 @@
   <p> {{ 'profile.show.daily_fees_max'|trans }}: {{ user.dailyFeesMax }} </p>
 
   <p> {{ 'profile.show.email'|trans }}: {{ user.email }} </p>
+  <p> {{ 'profile.show.emergencyEmail'|trans }}: {{ user.emergencyEmail }} </p>
+
   <p> {{ 'profile.show.phone'|trans }}:
       {% if user.phone != null %}
         {{ user.phone.prefix.prefix }} {{ user.phone.number }} ({{ user.phone.prefix.country|countryName }})
@@ -38,25 +40,25 @@
     {% if user.userData != null %}
       {{ user.userData.cvResume }}
     {% endif %} </p>
-    
+
   <p> {{ 'profile.show.userResume'|trans }}:
     {% if user.userResume != null %}
       {{ user.userData.userResume }}
-    {% endif %} </p>      
-    
+    {% endif %} </p>
+
   <p> {{ 'profile.show.professionalExpertise'|trans }}:
     {% if user.professionalExpertise != null %}
       <ul> {% for professionalExpertise in user.professionalExpertise %}
         <li> {{ professionalExpertise.name }} </li>
       {% endfor %} </ul>
-    {% endif %} </p>   
-    
+    {% endif %} </p>
+
   <p> {{ 'profile.show.businessPractice'|trans }}:
     {% if user.businessPractice != null %}
       <ul> {% for businessPractice in user.businessPractice %}
         <li> {{ businessPractice.name }} </li>
       {% endfor %} </ul>
-    {% endif %} </p>   
+    {% endif %} </p>
 
   <p> {{ 'profile.show.missionKind'|trans }}:
     {% if user.missionKind != null %}
@@ -71,6 +73,6 @@
         <li> {{ language.name }} </li>
       {% endfor %} </ul>
     {% endif %} </p>
-    
+
   <p> {{ user.newsletter ? 'profile.show.newslettertrue'|trans : 'profile.show.newsletterfalse'|trans }} </p>
 </div>

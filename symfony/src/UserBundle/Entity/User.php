@@ -289,12 +289,20 @@ class User extends BaseUser
      * @ORM\JoinColumn(nullable=true)
      */
     private $userData;
-        
+
     /**
      * @ORM\OneToOne(targetEntity="CalendarBundle\Entity\Calendar", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $calendar;
+
+    /**
+    * @ORM\Column(name="email_emergency", type="string", length=255, nullable=true)
+    * @Assert\Email(
+    *     message = "The email '{{ value }}' is not a valid email."
+    * )
+    */
+    protected $emergencyEmail;
 
     public function __construct()
     {
@@ -1111,8 +1119,8 @@ class User extends BaseUser
     public function getUserData()
     {
         return $this->userData;
-    }   
-    
+    }
+
     /**
      * @Assert\Callback
      */
@@ -1165,5 +1173,67 @@ class User extends BaseUser
     public function getCalendar()
     {
         return $this->calendar;
+    }
+
+    /**
+     * Set secretMail
+     *
+     * @param array $secretMail
+     *
+     * @return User
+     */
+    public function setSecretMail($secretMail)
+    {
+        $this->secretMail = $secretMail;
+
+        return $this;
+    }
+
+    /**
+     * Set emergencyEmail
+     *
+     * @param string $emergencyEmail
+     *
+     * @return User
+     */
+    public function setEmergencyEmail($emergencyEmail)
+    {
+        $this->emergencyEmail = $emergencyEmail;
+
+        return $this;
+    }
+
+    /**
+     * Get emergencyEmail
+     *
+     * @return string
+     */
+    public function getEmergencyEmail()
+    {
+        return $this->emergencyEmail;
+    }
+
+    /**
+     * Add resume
+     *
+     * @param \ToolsBundle\Entity\UploadResume $resume
+     *
+     * @return User
+     */
+    public function addResume(\ToolsBundle\Entity\UploadResume $resume)
+    {
+        $this->resumes[] = $resume;
+
+        return $this;
+    }
+
+    /**
+     * Remove resume
+     *
+     * @param \ToolsBundle\Entity\UploadResume $resume
+     */
+    public function removeResume(\ToolsBundle\Entity\UploadResume $resume)
+    {
+        $this->resumes->removeElement($resume);
     }
 }

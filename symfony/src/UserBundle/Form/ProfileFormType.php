@@ -57,12 +57,15 @@ class ProfileFormType extends AbstractType
                       'placeholder' => 'form.gender.choose',
                       'empty_data'  => null
                   ))
-
             ->add('email', 'email',
                   array('label' => 'form.email',
                         'translation_domain' => 'FOSUserBundle'
                   ))
-
+            ->add('emergencyEmail', 'email' , array(
+                  'label' => 'form.emergencyEmail',
+                  'required' => false,
+                  'translation_domain' => 'FOSUserBundle'
+               ))
             ->add('birthdate', 'birthday',
                   array(
                       'translation_domain' => 'FOSUserBundle',
@@ -161,7 +164,7 @@ class ProfileFormType extends AbstractType
                       'translation_domain' => 'MissionBundle',
                       'label' => 'mission.new.form.professionalExpertise',
                       'required'    => false
-                  ))            
+                  ))
             ;
     }
 
