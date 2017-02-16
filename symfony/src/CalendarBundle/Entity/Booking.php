@@ -50,7 +50,7 @@ class Booking
     private $end;
 
     /**
-     * @ORM\ManyToOne(targetEntity="CalendarBundle\Entity\Calendar", inversedBy="booking")
+     * @ORM\ManyToOne(targetEntity="CalendarBundle\Entity\Calendar", inversedBy="bookings")
      * @ORM\JoinColumn(nullable=false)
      */
     private $calendar;
