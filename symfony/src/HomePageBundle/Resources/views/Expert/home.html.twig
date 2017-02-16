@@ -4,6 +4,8 @@
 {% block body %}
     <div id="wrapper">
         <div id="container">
+            <a href="{{ path('setlocale', {'language': 'fr'}) }}">FR</a>
+            <a href="{{ path('setlocale', {'language': 'en'}) }}">EN</a>
         {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
         {% else %}
             <div>
@@ -16,6 +18,7 @@
                 <a href="{{ path('hwi_oauth_service_redirect', {'service': 'linkedin' }) }}">{{ 'social.sign_in_linkedin'|trans }}</a> <br />
                 <a href="{{ path('hwi_oauth_service_redirect', {'service': 'google' }) }}">{{ 'social.sign_in_google'|trans }}</a> <br />
             </div>
+
         {% endif %}
 
         </div>

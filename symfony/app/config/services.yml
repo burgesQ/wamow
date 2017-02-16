@@ -29,3 +29,9 @@ services:
              - "@translator.default"
         tags:
              - { name: 'twig.extension' }
+
+    tools.locale_listener:
+        class: ToolsBundle\EventListener\LocaleListener
+        arguments: ["%kernel.default_locale%"]
+        tags:
+            - { name: kernel.event_subscriber }

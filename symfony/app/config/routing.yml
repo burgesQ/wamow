@@ -35,3 +35,7 @@ adesigns_calendar:
 notification:
     resource: "@NotificationBundle/Resources/config/routing.yml"
     prefix:   /
+
+tools:
+    resource: "@ToolsBundle/Resources/config/routing.yml"
+    prefix: /

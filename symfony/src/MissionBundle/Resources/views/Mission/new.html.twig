@@ -1,14 +1,16 @@
+{% extends '::lang.html.twig' %}
 {% trans_default_domain "MissionBundle" %}
-
-<h3>{{ 'mission.new.title'|trans }}</h3>
-
-<form method="post" {{ form_enctype(form) }}>
 
 {% block stylesheets %}
     {% stylesheets '@chosen_css' filter='cssrewrite' %}
         <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
 {% endblock %}
+
+{% block body %}
+<h3> {{ 'mission.new.title'|trans }}</h3>
+<form method="post" {{ form_enctype(form) }}>
+
 
   {{ form_start(form) }}
     <div>
@@ -121,3 +123,4 @@
 {% endjavascripts %}
 
 </form>
+{% endblock %}
