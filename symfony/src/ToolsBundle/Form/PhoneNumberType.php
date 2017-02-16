@@ -19,7 +19,7 @@ class PhoneNumberType extends AbstractType
         $builder
             ->add('prefix', 'entity', array(
                 'class' => 'ToolsBundle:PrefixNumber',
-                'property' => 'prefix',
+                'property' => 'country',
                 'multiple' => false,
                 'placeholder' => 'form.phone.chooseprefix',
                 'label'=>'form.phone.prefix',
