@@ -13,7 +13,7 @@ class LoadCompany extends AbstractFixture implements OrderedFixtureInterface
     public function load(ObjectManager $manager)
     {
         $businessPractice = $manager->getRepository('MissionBundle:BusinessPractice')
-                    ->findOneBy(array('name' => 'businesspractice.industry'));
+            ->findOneBy(array('name' => 'businesspractice.industry'));
 
         $company = new Company();
         $company->setName('Esso');

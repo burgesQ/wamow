@@ -1,0 +1,38 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <p>
+    <h1> {{ article.title }} </h1>
+    </p>
+    <p>
+    <h2> {{ article.content }} </h2>
+    </p>
+
+    {% trans with {'%writer': article.writedBy} from "BlogBundle" %}
+        view.footer.writer
+    {% endtrans %}<br>
+    {% trans with {'%poster': article.postedBy.username, '%postDate' : article.postDate|date('m/d/Y H:i:s')} from "BlogBundle" %}
+        view.footer.poster
+    {% endtrans %}<br>
+    {% trans with {'%updateDate' : article.updateDate|date('m/d/Y H:i:s')} from "BlogBundle" %}
+    view.footer.updateDate
+    {% endtrans %}<br><br>
+
+    {% for oneComment in comments %}
+        {% trans with {'%author' : oneComment.emailAuthor, '%postDate' : oneComment.postDate|date('m/d/Y H:i:s')} from "BlogBundle" %}
+            view.comment.meta
+        {% endtrans %}<br>
+        {{ oneComment.content }}<br>
+    {% endfor %}
+
+    <br>
+    <br>
+    <form action="{{ path('article_view', {'url': article.url}) }}" method="post">
+        {{ form_errors(form) }}
+        {{ form_row(form.emailAuthor) }}
+        {{ form_row(form.content) }}
+        {{ form_row(form.post) }}
+        {{ form_end(form) }}
+    </form>
+
+{% endblock %}

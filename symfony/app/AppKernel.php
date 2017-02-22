@@ -35,6 +35,7 @@ class AppKernel extends Kernel
             new NotificationBundle\NotificationBundle(),
             new FOS\MessageBundle\FOSMessageBundle(),
             new InboxBundle\InboxBundle(),
+            new BlogBundle\BlogBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

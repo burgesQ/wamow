@@ -1,0 +1,15 @@
+articles_view:
+    path:      /{name}
+    defaults:
+        _controller: BlogBundle:Articles:view
+
+#articles_edit:
+#    path:      /{name}/edit
+#    defaults:
+#        _controller: BlogBundle:Articles:edit
+#
+#articles_new:
+#    path:      /new/articles
+#    defaults:
+#        _controller: BlogBundle:Articles:new
+

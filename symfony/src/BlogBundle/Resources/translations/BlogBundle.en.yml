@@ -1,0 +1,30 @@
+view:
+    footer:
+        writer: Writed by %writer
+        poster: Posted by %poster the %postDate
+        updateDate: Last update the %updateDate
+    error:
+        notFound: Their is no such article :(
+    comment:
+        author: Email address
+        content: Content of your comment
+        post: Post your comment
+        meta: Posted by %author the %postDate
+
+edit:
+    save: Save changes
+    cancel: Cancel changes
+    content: Change content of the article
+    link: Edit the contente of the article
+
+new:
+    save: Create article
+    content: Content of the new article
+    title: Title of the new article
+    writedBy: Author of this article
+    url: Link for the new article
+    creationDate: Date of the creation of the article (opptional)
+
+user:
+    notLogged: You must be logged to edit the content of a article
+    noRights: You must be the writter or the poster of a article to edit it

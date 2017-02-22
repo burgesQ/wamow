@@ -43,3 +43,8 @@ tools:
 inbox:
     resource: "@InboxBundle/Resources/config/routing.yml"
     prefix:   /inbox
+
+## Must Be Last Import !!!!
+blog:
+    resource: "@BlogBundle/Resources/config/routing.yml"
+    prefix:   /

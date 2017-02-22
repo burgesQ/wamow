@@ -304,7 +304,7 @@ class Mission
     /**
      * Set address
      *
-     * @param \ToolsBundle\Entity\Address $Address
+     * @param \ToolsBundle\Entity\Address $address
      * @return Mission
      */
     public function setAddress(Address $address)

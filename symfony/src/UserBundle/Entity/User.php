@@ -368,6 +368,7 @@ class User extends BaseUser implements ParticipantInterface
         $this->nbLoad = 10;
         $this->readReport = true;
         $this->experienceShaping = new ArrayCollection();
+        $this->languages = new ArrayCollection();
     }
 
     /**
