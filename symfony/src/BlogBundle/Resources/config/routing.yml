@@ -1,15 +1,15 @@
-articles_view:
-    path:      /{name}
+newsletter_list:
+    path:      /newsletter
     defaults:
-        _controller: BlogBundle:Articles:view
+        _controller: BlogBundle:NewsLetter:list
 
-#articles_edit:
-#    path:      /{name}/edit
-#    defaults:
-#        _controller: BlogBundle:Articles:edit
-#
-#articles_new:
-#    path:      /new/articles
-#    defaults:
-#        _controller: BlogBundle:Articles:new
+newsletter_show:
+    path:      /newsletter/{id}
+    defaults:
+        _controller: BlogBundle:NewsLetter:show
 
+## Must Be Last Import !!!
+article_view:
+    path:      /{url}
+    defaults:
+        _controller: BlogBundle:Article:view

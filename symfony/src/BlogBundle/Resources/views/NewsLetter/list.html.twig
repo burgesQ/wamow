@@ -1,0 +1,16 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+    <h4> {{ 'view.newsLetter.what'|trans({}, "BlogBundle") }} </h4>
+
+    {% for oneNewsLetter in newsLetters  %}
+        <br>{{ oneNewsLetter.publishedDate|date('m/d/Y') }}<br>
+        {{ oneNewsLetter.title }}<br>
+
+        <a href="{{ path('newsletter_show', {'id': oneNewsLetter.number}) }}">
+            {{ 'view.newsLetter.link'|trans({}, "BlogBundle") }}
+        </a><br>
+    {% endfor %}
+
+{% endblock %}

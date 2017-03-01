@@ -1,0 +1,7 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+    {{ newsLetter.content|striptags('<h1><h2><h3>')|raw }}
+
+{% endblock %}

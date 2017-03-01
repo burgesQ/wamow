@@ -10,6 +10,9 @@ view:
         content: Content of your comment
         post: Post your comment
         meta: Posted by %author the %postDate
+    newsLetter:
+        link: Click to see the full newsletter
+        what: NewsLetters
 
 edit:
     save: Save changes
