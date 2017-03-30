@@ -808,9 +808,10 @@ class MissionController extends Controller
 
         if ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR')
             && $mission != null && $service->isContractorOfMission($user, $mission) == true
-            && $mission->getStatus() >= 0
+            && $mission->getStatus() == 0
             && $user->getCompany() == $mission->getCompany())
         {
+
             $mission->setStatus(-1);
             $teams = $em->getRepository('TeamBundle:Team')->getAdvisorsTeams($missionId);
             $notification = $this->container->get('notification');
