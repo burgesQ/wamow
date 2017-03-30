@@ -28,7 +28,6 @@ class AppKernel extends Kernel
             new CompanyBundle\CompanyBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
-            new FOS\ElasticaBundle\FOSElasticaBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new CalendarBundle\CalendarBundle(),
             new ADesigns\CalendarBundle\ADesignsCalendarBundle(),

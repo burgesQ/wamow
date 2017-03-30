@@ -39,3 +39,7 @@ services:
     signedUp:
         class: UserBundle\Services\SignedUp
         arguments: ['@doctrine.orm.entity_manager']
+
+    mission_matching:
+        class: MissionBundle\Service\MissionMatching
+        arguments: ['@service_container', '@doctrine.orm.entity_manager']

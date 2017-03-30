@@ -18,7 +18,6 @@ services:
             - 9000:9000
         links:
             - db:mysqldb
-            - elastic
         volumes:
             - ./symfony:/var/www/symfony
             - ./logs/symfony:/var/www/symfony/app/logs
@@ -48,8 +47,3 @@ services:
             - "8080:80"
         links:
             - db
-    elastic :
-        image: elasticsearch:1.7.6
-        ports :
-            - 9200:9200
-            - 9300:9300

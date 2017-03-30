@@ -14,7 +14,7 @@ use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 
-use UserBundle\Entity\ExperienceShaping;
+use MissionBundle\Entity\ExperienceShaping;
 
 use UserBundle\Form\StepOneType;
 use UserBundle\Form\StepTwoType;
@@ -396,8 +396,6 @@ class ServicesSignUp
             // save user in elastic
             $parser = $context->get('user.services');
             $parser->parseResume($context->getDoctrine()->getRepository('ToolsBundle:UploadResume'),
-                                 $user, $context->getDoctrine()->getManager());
-            $parser->elasticSave($context->getDoctrine()->getRepository('ToolsBundle:UploadResume'),
                                  $user, $context->getDoctrine()->getManager());
 
             // pass user next step

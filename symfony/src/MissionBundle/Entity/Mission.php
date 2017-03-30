@@ -205,6 +205,11 @@ class Mission
      */
     private $tags;
 
+    /**
+     * @ORM\OneToMany(targetEntity="MissionBundle\Entity\UserMission", mappedBy="mission")
+     */
+    private $userMission;
+
     public function __construct($nbStep, $team, $sizeTeamMax, $token, $company)
       {
         $this->creationDate = new \Datetime();
@@ -216,6 +221,7 @@ class Mission
         $this->sizeTeamMax = $sizeTeamMax;
         $this->token = $token;
         $this->company = $company;
+        $this->userMission = new ArrayCollection();
     }
 
     public function addTag(Tag $tag)
@@ -828,5 +834,38 @@ class Mission
     public function updateDate()
     {
         $this->setUpdateDate(new \Datetime());
+    }
+
+    /**
+     * Add userMission
+     *
+     * @param \MissionBundle\Entity\UserMission $userMission
+     * @return Mission
+     */
+    public function addUserMission($userMission)
+    {
+        $this->userMission[] = $userMission;
+
+        return $this;
+    }
+
+    /**
+     * Remove userMission
+     *
+     * @param \MissionBundle\Entity\UserMission $userMission
+     */
+    public function removeUserMission($userMission)
+    {
+        $this->userMission->removeElement($userMission);
+    }
+
+    /**
+     * Get userMission
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUserMission()
+    {
+        return $this->userMission;
     }
 }

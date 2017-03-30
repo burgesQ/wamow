@@ -117,8 +117,6 @@ Simply add this: (then go to [symfony.dev:8080](http://symfony.dev:8080))
             sf doctrine:database:create
             sf doctrine:schema:update --force
             sf doctrine:fixtures:load --no-interaction
-            sf fos:elastica:reset
-            sf fos:elastica:populate
 
         * Assets Installation order for JS/CSS  :
             sf assets:install web --symlink

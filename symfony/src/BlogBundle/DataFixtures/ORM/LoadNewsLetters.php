@@ -43,6 +43,6 @@ class LoadNewsLetters extends AbstractFixture implements OrderedFixtureInterface
     {
         // the order in which fixtures will be loaded
         // the lower the number, the sooner that this fixture is loaded
-        return 15;
+        return 11;
     }
 }

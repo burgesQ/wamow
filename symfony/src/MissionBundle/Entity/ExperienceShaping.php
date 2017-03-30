@@ -1,6 +1,6 @@
 <?php
 
-namespace UserBundle\Entity;
+namespace MissionBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * ExperienceShaping
  *
  * @ORM\Table(name="experience_shaping")
- * @ORM\Entity(repositoryClass="UserBundle\Repository\ExperienceShapingRepository")
+ * @ORM\Entity(repositoryClass="MissionBundle\Repository\ExperienceShapingRepository")
  */
 class ExperienceShaping
 {
@@ -153,7 +153,7 @@ class ExperienceShaping
     /**
      * Get workTitle
      *
-     * @return MissionBundle/Entity/WorkExperience
+     * @return \MissionBundle\Entity\WorkExperience
      */
     public function getWorkTitle()
     {

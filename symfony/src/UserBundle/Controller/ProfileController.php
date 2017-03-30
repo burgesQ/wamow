@@ -117,10 +117,7 @@ class ProfileController extends BaseController
             $parser->parseResume($this->getDoctrine()->getRepository('ToolsBundle:UploadResume'),
                                  $user,
                                  $this->getDoctrine()->getManager());
-            $parser->elasticSave($this->getDoctrine()->getRepository('ToolsBundle:UploadResume'),
-                                 $user,
-                                 $this->getDoctrine()->getManager());
-                        
+
             if (null === $response = $event->getResponse()) {                
                 $url = $this->generateUrl('user_profile_show');
                 $response = new RedirectResponse($url);

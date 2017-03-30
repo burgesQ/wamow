@@ -2,19 +2,49 @@
 
 namespace MissionBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
-use Doctrine\Common\DataFixtures\AbstractFixture;
 
 class LoadContractor extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
+
     /**
      * @var ContainerInterface
      */
     private $container;
+    private $arrayDatas = [
+        [
+            "Contractor", "One", "contractor@one.com", "contractor@one.com",
+            "FR", ['language.french', 'language.english'], "password",
+        ], [
+            "Contractor", "Two", "contractor@two.com", "contractor@two.com",
+            "FR", ['language.french', 'language.english'], "password",
+        ], [
+            "Contractor", "Three", "contractor@three.com", "contractor@three.com",
+            "FR", ['language.french', 'language.english'], "password",
+        ], [
+            "Contractor", "Four", "contractor@four.com", "contractor@four.com",
+            "FR", ['language.french', 'language.english'], "password",
+        ], [
+            "Contractor", "Five", "contractor@five.com", "contractor@five.com", "
+            FR", ['language.french', 'language.english'], "password",
+        ], [
+            "Contractor", "Six", "contractor@six.com", "contractor@six.com",
+            "FR", ['language.french', 'language.english'], "password",
+        ], [
+            "Contractor", "Seven", "contractor@seven.com", "contractor@seven.com",
+            "FR", ['language.french', 'language.english'], "password",
+        ], [
+            "Contractor", "Eight", "contractor@eight.com", "contractor@eight.com",
+            "FR", ['language.french', 'language.english'], "password",
+        ], [
+            "Contractor", "Nine", "contractor@nine.com", "contractor@nine.com",
+            "FR", ['language.french', 'language.english'], "password",
+        ]
+    ];
 
     public function setContainer(ContainerInterface $container = null)
     {
@@ -23,32 +53,45 @@ class LoadContractor extends AbstractFixture implements OrderedFixtureInterface,
 
     public function load(ObjectManager $manager)
     {
-        $company = $manager->getRepository('CompanyBundle:Company')
-                    ->findOneBy(array('name' => 'Esso'));
-
         $userManager = $this->container->get('fos_user.user_manager');
+        $langRepo    = $manager->getRepository('ToolsBundle:Language');
+        $company     = $manager->getRepository('CompanyBundle:Company')->findOneByName('Esso');
 
-        $i = 0;
-        while ($i < 10)
-        {
-            $contractor = $userManager->createUser();
-            $contractor->setFirstName('contractor'.$i);
-            $contractor->setLastName('contractor'.$i);
-            $contractor->setEmail($i.'contractor@domain.com');
-            $contractor->setPlainPassword('password');
-            $contractor->setEnabled(true);
-            $contractor->setRoles(array('ROLE_CONTRACTOR'));
-            $contractor->setPasswordSet(true);
-            $contractor->setCompany($company);
-            $userManager->updateUser($contractor, true);
-            $i++;
+        foreach ($this->arrayDatas as $oneData) {
+
+            // create Entity with fName, lName, email, country
+            $newUser = $userManager->createUser();
+
+            $newUser
+                ->setFirstName($oneData[0])
+                ->setLastName($oneData[1])
+                ->setEmail($oneData[2])
+                ->setEmergencyEmail($oneData[3])
+                ->setCountry($oneData[4]);
+
+            // set languages
+            foreach ($oneData[5] as $oneLang)
+                $newUser->addLanguage($langRepo->findOneByName($oneLang));
+
+            // set password and status
+            $newUser
+                ->setPlainPassword($oneData[6])
+                ->setPasswordSet(true)
+                ->setRoles(['ROLE_CONTRACTOR'])
+                ->setEnabled(true)
+                ->setStatus(5);
+
+            // set User Company
+            $newUser->setCompany($company);
+
+            // save user in db
+            $userManager->updateUser($newUser, true);
         }
     }
 
     public function getOrder()
     {
-        // the order in which fixtures will be loaded
-        // the lower the number, the sooner that this fixture is loaded
         return 8;
     }
+
 }

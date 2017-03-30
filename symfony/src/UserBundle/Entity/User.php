@@ -289,12 +289,6 @@ class User extends BaseUser implements ParticipantInterface
     private $businessPractice;
 
     /**
-     * @ORM\OneToOne(targetEntity="UserBundle\Entity\UserData", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $userData;
-
-    /**
      * @ORM\OneToOne(targetEntity="CalendarBundle\Entity\Calendar", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
@@ -338,10 +332,15 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="UserBundle\Entity\ExperienceShaping", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="MissionBundle\Entity\ExperienceShaping", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $experienceShaping;
+
+    /**
+     * @ORM\OneToMany(targetEntity="MissionBundle\Entity\UserMission", mappedBy="mission")
+     */
+    private $userMission;
 
     public function __construct()
     {
@@ -349,14 +348,12 @@ class User extends BaseUser implements ParticipantInterface
         $this->creationDate = new \Datetime();
         $this->confidentiality = false;
         $this->status = 0;
-        $this->prefix = NULL;
         $this->birthdate = NULL;
         $this->images = new ArrayCollection();
         $this->resumes = new ArrayCollection();
         $this->newsletter = true;
         $this->giveUpCount = 0;
         $this->secretMail = array();
-        $this->userData = NULL;
         $this->userResume = NULL;
         $this->languages = new ArrayCollection();
         $this->workExperience = new ArrayCollection();
@@ -369,6 +366,7 @@ class User extends BaseUser implements ParticipantInterface
         $this->readReport = true;
         $this->experienceShaping = new ArrayCollection();
         $this->languages = new ArrayCollection();
+        $this->userMission = new ArrayCollection();
     }
 
     /**
@@ -721,7 +719,7 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * Get images
      *
-     * @return \ToolsBundle\Entity\Upload
+     * @return ArrayCollection
      */
     public function getImages()
     {
@@ -1018,7 +1016,7 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * Get resume
      *
-     * @return \ToolsBundle\Entity\UploadResume
+     * @return ArrayCollection
      */
     public function getResumes()
     {
@@ -1164,7 +1162,7 @@ class User extends BaseUser implements ParticipantInterface
      */
     public function addBusinessPractice(\MissionBundle\Entity\BusinessPractice $businessPractice)
     {
-        $this->businesspractic[] = $businessPractice;
+        $this->businessPractice[] = $businessPractice;
 
         return $this;
     }
@@ -1177,29 +1175,6 @@ class User extends BaseUser implements ParticipantInterface
     public function removeBusinessPractice(\MissionBundle\Entity\BusinessPractice $businessPractice)
     {
         $this->businessPractice->removeElement($businessPractice);
-    }
-
-    /**
-     * Set UserData
-     *
-     * @param \UserBundle\Entity\UserData $data
-     * @return User
-     */
-    public function setUserData(\UserBundle\Entity\UserData $data = null)
-    {
-        $this->userdata = $data;
-
-        return $this;
-    }
-
-    /**
-     * Get UserData
-     *
-     * @return \UserBundle\Entity\UserData
-     */
-    public function getUserData()
-    {
-        return $this->userData;
     }
 
     /**
@@ -1253,7 +1228,7 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * Set NbLoad
      *
-     * @param integer nbLoad
+     * @param integer $nbLoad
      * @return User
      */
     public function setNbLoad($nbLoad = 10)
@@ -1276,7 +1251,7 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * Set ReadReport
      *
-     * @param boolean readReport
+     * @param boolean $readReport
      * @return User
      */
     public function setReadReport($readReport = true)
@@ -1410,5 +1385,38 @@ class User extends BaseUser implements ParticipantInterface
                 ->atPath('dailyFeesMin')
                 ->addViolation();
         }
+    }
+
+    /**
+     * Add userMission
+     *
+     * @param \MissionBundle\Entity\UserMission $userMission
+     * @return User
+     */
+    public function addUserMission($userMission)
+    {
+        $this->userMission[] = $userMission;
+
+        return $this;
+    }
+
+    /**
+     * Remove userMission
+     *
+     * @param \MissionBundle\Entity\UserMission $userMission
+     */
+    public function removeUserMission($userMission)
+    {
+        $this->userMission->removeElement($userMission);
+    }
+
+    /**
+     * Get userMission
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUserMission()
+    {
+        return $this->userMission;
     }
 }

@@ -32,7 +32,3 @@ parameters:
     facebook_id: "fb_id"
     facebook_secret: "fb_secret"
     facebook_scope: ""
-
-    # Elasticsearch
-    elastica_host: 172.18.0.3
-    elastica_port: 9200

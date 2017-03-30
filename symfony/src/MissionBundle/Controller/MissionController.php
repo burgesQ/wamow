@@ -102,6 +102,8 @@ class MissionController extends Controller
                     }
                 }
 
+                $this->get('mission_matching')->setUpPotentialUser($mission);
+
                 return $this->render('MissionBundle:Mission:registered.html.twig', array(
                     'mission'       =>   $mission,
                 ));
@@ -181,6 +183,8 @@ class MissionController extends Controller
                         $notification->new($user, 1, 'notification.seeker.mission.editbyother', $param);
                     }
                 }
+
+                $this->get('mission_matching')->setUpPotentialUser($mission);
 
                 return new Response($trans->trans('mission.edit.successEdit', array(), 'MissionBundle'));
             }

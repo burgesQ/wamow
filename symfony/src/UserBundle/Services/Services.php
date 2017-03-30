@@ -2,8 +2,6 @@
 
 namespace UserBundle\Services;
 
-use UserBundle\Entity\UserData;
-
 class Services
 {
     /**
@@ -40,62 +38,4 @@ class Services
         }
     }
 
-    /**
-     * Edit the ElasticUser
-     */
-    public function elasticSave($em, $user, $emSave)
-    {
-        if (($userData = $user->getUserData()) == null)
-        {
-            $userData = new UserData($user);
-            $userData->setCreationDate($user->getCreationDate());
-        }
-        
-        if (($resumes = $em->findByUser($user)) != null) {
-            $resume = end($resumes);
-            $parser = new \Smalot\PdfParser\Parser();
-            $pdf = $parser->parseFile($resume->getWebPath());
-            $userData->setCvResume($pdf->getText());
-        }            
-
-        $userData->setUserId($user->getId());
-        $userData->setUserResume($user->getUserResume());
-        $userData->setCountry($user->getCountry());
-        
-        foreach ($user->getLanguages() as $language)          
-            $userData->addLanguage($language->getName());
-        foreach ($user->getBusinessPractice() as $businessPractice)
-            $userData->addBusinesspractice($businessPractice->getName());
-        foreach ($user->getProfessionalExpertise() as $professionalExpertise)
-            $userData->addProfessionalExpertise($professionalExpertise->getName());
-        foreach ($user->getMissionKind() as $missionKind)
-            $userData->addMissionKind($missionKind->getName());
-        foreach ($user->getExperienceShaping() as $experienceShaping) {
-            $array = [
-                $experienceShaping->getSmallCompany(),
-                $experienceShaping->getMediumCompany(),
-                $experienceShaping->getLargeCompany(),
-                $experienceShaping->getSouthAmerica(),
-                $experienceShaping->getNorthAmerica(),
-                $experienceShaping->getAsia(),
-                $experienceShaping->getEmea(),
-                $experienceShaping->getCumuledMonth(),
-                $experienceShaping->getDailyfees(),
-                $experienceShaping->getPeremption(),
-                $experienceShaping->getWorkTitle()->getName()
-
-            ];
-            $userData->addExperienceShaping($array);
-        }
-
-        $userData->setUpdateDate($user->getUpdateDate());
-        $userData->setDailyFeesMin($user->getDailyFeesMin());
-        $userData->setDailyFeesMax($user->getDailyFeesMax());
-        
-        $user->setUserData($userData);
-
-        $emSave->persist($userData);
-        $emSave->persist($user);
-        $emSave->flush();
-    }    
 }
