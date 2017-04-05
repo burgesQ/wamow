@@ -184,7 +184,7 @@ class MissionController extends Controller
                     }
                 }
 
-                $this->get('mission_matching')->setUpPotentialUser($mission);
+                $this->get('mission_matching')->setUpPotentialUser($mission, true);
 
                 return new Response($trans->trans('mission.edit.successEdit', array(), 'MissionBundle'));
             }

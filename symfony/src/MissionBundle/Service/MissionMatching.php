@@ -52,20 +52,28 @@ class MissionMatching
      * Get all potential user user by a mission
      * Create the entity user_mission if she doesn't exist
      *
-     * @param $mission
+     * @param      $mission
+     * @param bool $edit
      */
-    public function setUpPotentialUser($mission)
+    public function setUpPotentialUser($mission, $edit = false)
     {
         // get all kind of repo
         $missionRepo     = $this->em->getRepository('MissionBundle:Mission');
         $userMissionRepo = $this->em->getRepository('MissionBundle:UserMission');
         $userManager     = $this->container->get('fos_user.user_manager');
 
+        // a tmp array
+        $newArray = [];
+
+        // get all previous user_mission
+        if ($edit)
+            $oldUserMission = $userMissionRepo->findByMission($mission);
+
         // get array of user that match the mission
         $userArray = $missionRepo->getUsersByMission($mission, false);
 
         foreach ($userArray as $oneUser) {
-            if (!$userMissionRepo->findByUserAndMission($oneUser, $mission)) {
+            if (!($one = $userMissionRepo->findByUserAndMission($oneUser, $mission))) {
 
                 // create a user_mission entity for user $oneUser
                 $userMission = new UserMission($oneUser, $mission);
@@ -80,8 +88,19 @@ class MissionMatching
 
                 // add the entity to the mission
                 $mission->addUserMission($userMission);
+
+                $newArray[] = $userMission;
+            } else {
+                $newArray[] = $one;
             }
         }
+
+        // remove user_mission that was on the previous version of the mission and not anymore
+        if ($edit)
+            foreach ($oldUserMission as $oneUserMission)
+                if (!in_array($oneUserMission, $newArray))
+                    $this->em->remove($oneUserMission);
+
         // save new state of the mission
         $this->em->flush();
     }
