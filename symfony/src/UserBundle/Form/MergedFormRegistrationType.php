@@ -19,13 +19,10 @@ class MergedFormRegistrationType extends AbstractType
         $builder
             ->add('user', new RegistrationType())
             ->add('resume', new UploadResumeType())
-            ->add('save', 'submit')
-            ->add('linkedin', 'submit',
-                [
-                    'translation_domain' => 'FOSUserBundle',
-                    'label' => 'registration.linkedin',
-                ]
-            )
-            ;
+            ->add('save', 'submit', [
+                'translation_domain' => 'FOSUserBundle',
+                'label'              => 'form.next'
+            ])
+        ;
     }
 }

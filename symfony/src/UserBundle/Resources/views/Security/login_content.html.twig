@@ -19,4 +19,5 @@
     <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
 
     <a href="{{ path('fos_user_resetting_request') }}">{{ 'security.login.reset'|trans}}</a>
+    <a href="{{ path('hwi_oauth_service_redirect', {'service': 'linkedin' }) }}">{{ 'security.login.linkedin'|trans }}</a>
 </form>

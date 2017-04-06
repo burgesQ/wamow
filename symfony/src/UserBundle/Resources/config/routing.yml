@@ -1,4 +1,21 @@
-#FosUserBundle Routes
+## HWI OAuthBundle routes, Must Be First Import
+hwi_oauth_security:
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+    prefix: /login
+
+hwi_oauth_connect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
+    prefix: /login
+
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /login
+
+linkedin_login:
+    path: /login/check-linkedin
+
+
+## FOS UserBundle Routes
 fos_user_security:
     resource: "@UserBundle/Resources/config/routing/security.xml"
 
@@ -17,25 +34,3 @@ fos_user_resetting:
 fos_user_change_password:
     resource: "@UserBundle/Resources/config/routing/change_password.xml"
     prefix: /profile
-
-#HWIOAuthBundle routes
-hwi_oauth_security:
-    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
-    prefix: /login
-
-hwi_oauth_connect:
-    resource: "@UserBundle/Resources/config/routing/connect.xml"
-    prefix: /login
-
-hwi_oauth_redirect:
-    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
-    prefix:   /login
-
-facebook_login:
-    path: /login/check-facebook
-
-google_login:
-    path: /login/check-google
-
-linkedin_login:
-    path: /login/check-linkedin

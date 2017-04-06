@@ -1,25 +1,32 @@
 <?php
+
 namespace UserBundle\Security\Core\User;
 
-use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider as BaseClass;
-use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
+use Symfony\Component\DependencyInjection\ContainerInterface as Container;
+use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-
-
-use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpFoundation\Session\Storage\PhpBridgeSessionStorage;
-
-use Doctrine\ORM\EntityManager;
+use FOS\UserBundle\FOSUserEvents;
 
 class FOSUBUserProvider extends BaseClass
 {
 
-    protected $em;
-    public function __construct($fosParams, $fbParms, EntityManager $em)
+    /**
+     * @var Container
+     */
+    private $container;
+
+    /**
+     * MissionMatching constructor.
+     *
+     * @param \FOS\UserBundle\Model\UserManagerInterface $fosParam
+     * @param array                                      $serviceParam
+     * @param Container                                  $container
+     */
+    public function __construct($fosParam, $serviceParam, Container $container)
     {
-        $this->em = $em;
-        parent::__construct($fosParams, $fbParms);
+        $this->container = $container;
+        parent::__construct($fosParam, $serviceParam);
     }
 
     /**
@@ -29,38 +36,24 @@ class FOSUBUserProvider extends BaseClass
     {
         $property = $this->getProperty($response);
         $username = $response->getUsername();
-        $data = $response->getResponse();
 
-        // on connect - get the access token and the user ID
-        $service = $response->getResourceOwner()->getName();
-        $setter = 'set'.ucfirst($service);
-        $setter_id = $setter.'Id';
-        $setter_token = $setter.'AccessToken';
+        //on connect - get the access token and the user ID
+        $service      = $response->getResourceOwner()->getName();
+        $setter       = 'set' . ucfirst($service);
+        $setter_id    = $setter . 'Id';
+        $setter_token = $setter . 'AccessToken';
 
-        // we "disconnect" previously connected users
-        if (null !== ($previousUser = $this->userManager->findUserBy(array($property => $username))))
-        {
+        //we "disconnect" previously connected users
+        if (null !== $previousUser = $this->userManager->findUserBy([$property => $username])) {
             $previousUser->$setter_id(null);
             $previousUser->$setter_token(null);
             $this->userManager->updateUser($previousUser);
         }
-        if (!($this->em->getRepository('UserBundle:User')->checkEmailIsUnique($data['emailAddress'])))
-        {
-            //we connect current user
-            $user->$setter_id($username);
-            $user->$setter_token($response->getAccessToken());
 
-            // we update user Datas
-            $user->setEmail($data['emailAddress']);
-            $user->setStatus(0);
-            $this->userManager->updateUser($user);
-        }
-        else
-        {
-            $user->setEmail("");
-            $user->setStatus(42);
-            $this->userManager->updateUser($user);
-        }
+        //we connect current user
+        $user->$setter_id($username);
+        $user->$setter_token($response->getAccessToken());
+        $this->userManager->updateUser($user);
     }
 
     /**
@@ -68,73 +61,51 @@ class FOSUBUserProvider extends BaseClass
      */
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
-        // start a new session
-        $session = new Session(new PhpBridgeSessionStorage());
-        $session->start();
-        $role = $session->get('role');
 
-        // get data and user Entity
         $data = $response->getResponse();
-        $username = $response->getUsername();
-        $user = $this->userManager->findUserBy(array($this->getProperty($response) => $username));
 
-        // tcheck if email address not already in use
-        if (count($this->em->getRepository('UserBundle:User')->checkEmailIsUnique($data['emailAddress'])))
-            throw new UsernameNotFoundException('Username or email has been already used.');
+        $username = $data['emailAddress'];
+        $user     = $this->userManager->findUserByUsernameOrEmail($username);
 
-        // when the user is registrating
-        if (null === $user)
-        {
-            // get the service en set the ServiceToken
-            $service = $response->getResourceOwner()->getName();
-            $setter = 'set'.ucfirst($service);
-            $setter_id = $setter.'Id';
-            $setter_token = $setter.'AccessToken';
+        //when the user is registrating
+        if (null === $user) {
+
+            $service      = $response->getResourceOwner()->getName();
+            $setter       = 'set' . ucfirst($service);
+            $setter_id    = $setter . 'Id';
+            $setter_token = $setter . 'AccessToken';
 
             // create new user here
             $user = $this->userManager->createUser();
-            $user->$setter_id($username);
-            $user->$setter_token($response->getAccessToken());
-            $user->setRoles([(($role === "ADVISOR") ? "ROLE_ADVISOR" : "ROLE_CONTRACTOR")]);
+            $user->$setter_id($username)->$setter_token($response->getAccessToken());
 
-            if ($service === "linkedin")
-            {
-                $fullname = explode(" ", $data['formattedName']);
+            // set user data
+            $user
+                ->setEmail($username)
+                ->setPassword($username)
+                ->setEnabled(true)
+                ->setRoles(['ROLE_ADVISOR'])
+                ->setFirstName(ucwords($data['firstName']))
+                ->setLastName(ucwords($data['lastName']))
+                ->setUserResume($data['headline'] . $data['summary'])
+                ->setCountry(strtoupper($data['location']['country']['code']))
+                ->setStatus(0)
+                ->setPasswordSet(false)
+            ;
 
-                $user->setFirstName($fullname[0]);
-                $user->setLastName($fullname[1]);
-                $user->setEmail($data['emailAddress']);
-                $user->setUsername($data['emailAddress']);
-                $user->setPlainPassword($username);
-                $user->setPasswordSet(false);
-                $user->setEnabled(true);
-                $this->userManager->updateUser($user);
-
-                return $user;
-            }
-            else if ($service === "google")
-            {
-                $user->setLastName($response->getLastname());
-                $user->setFirstName($response->getFirstname());
-                $user->setUsername($username);
-                $user->setEmail($response->getEmail());
-                $user->setPlainPassword($username);
-                $user->setPasswordSet(false);
-                $user->setEnabled(true);
-                $this->userManager->updateUser($user);
-
-                return $user;
-            }
+            $dispatcher = $this->container->get('event_dispatcher');
+            $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, null);
+        } else {
+            //if user exists - go with the HWIOAuth way
+            $serviceName = $response->getResourceOwner()->getName();
+            $setter      = 'set' . ucfirst($serviceName) . 'AccessToken';
+            //update access token
+            $user->$setter($response->getAccessToken());
         }
 
-        // if user exists - go with the HWIOAuth way
-        $user = parent::loadUserByOAuthUserResponse($response);
-        $serviceName = $response->getResourceOwner()->getName();
-        $setter = 'set' . ucfirst($serviceName) . 'AccessToken';
-
-        // update access token
-        $user->$setter($response->getAccessToken());
+        $this->userManager->updateUser($user);
 
         return $user;
     }
+
 }

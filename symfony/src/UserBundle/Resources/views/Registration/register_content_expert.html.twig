@@ -1,30 +1,29 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {{ 'registration.step.zero'|trans }}
-<br/>
+<br>
 {{ 'registration.cat.zero'|trans }}
-<br/>
+<br>
 {{ 'registration.consign.zero'|trans }}
-<br/>
-
+<br><br>
+<a href="{{ path('hwi_oauth_service_redirect', {'service': 'linkedin' }) }}">{{ 'registration.linkedin'|trans }}</a>
+<br><br>
+{{ 'registration.or'|trans }}
+<br><br>
 {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register_expert'), 'attr': {'class': 'fos_user_registration_register_expert'}}) }}
 
 {{ form_errors(form) }}
 
 {{ form_row(form.user.firstName) }}
 {{ form_row(form.user.lastName) }}
-{{ form_row(form.user.country) }}
-<br/>
-{{ form_row(form.user.plainPassword) }}
-<br/>
-{{ form_row(form.linkedin) }}
-
-{{ 'registration.or'|trans }}
-
-<br/>
-
 {{ form_row(form.user.email) }}
+{{ form_row(form.user.country) }}
 {{ form_row(form.resume.file) }}
+
+{{ form_row(form.user.plainPassword) }}
+
 {{ form_row(form.save) }}
 
 {{ form_end(form) }}
+
+<br>

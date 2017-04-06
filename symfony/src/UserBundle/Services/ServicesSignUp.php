@@ -2,63 +2,55 @@
 
 namespace UserBundle\Services;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Session\Storage\PhpBridgeSessionStorage;
-
-use Symfony\Component\Form\FormError;
-
-use FOS\UserBundle\FOSUserEvents;
+use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
-use FOS\UserBundle\Event\FilterUserResponseEvent;
-
+use FOS\UserBundle\FOSUserEvents;
 use MissionBundle\Entity\ExperienceShaping;
-
-use UserBundle\Form\StepOneType;
-use UserBundle\Form\StepTwoType;
-use UserBundle\Form\StepThreeType;
-use UserBundle\Form\StepFourType;
-use UserBundle\Form\StepFiveType;
-
-use UserBundle\Form\MergedFormRegistrationType;
+use Symfony\Component\Form\FormError;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\Storage\PhpBridgeSessionStorage;
 use ToolsBundle\Entity\UploadResume;
+use UserBundle\Form\MergedFormRegistrationType;
+use UserBundle\Form\StepFiveType;
+use UserBundle\Form\StepFourType;
+use UserBundle\Form\StepOneType;
+use UserBundle\Form\StepThreeType;
+use UserBundle\Form\StepTwoType;
 
 class ServicesSignUp
 {
 
     /**
      * manage signUp Step0 Expert
+     *
+     * @param         $context
+     * @param Request $request
+     *
+     * @return null|RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function manageStepZeroExpert($context, Request $request, $user = null)
+    public function manageStepZeroExpert($context, Request $request)
     {
         /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
         $userManager = $context->get('fos_user.user_manager');
-        /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
-        $formFactory = $context->get('fos_user.registration.form.factory');
         /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
         $dispatcher = $context->get('event_dispatcher');
-        $newUser = false;
 
-        // create user; jump if back button has been submited
-        if (!$user && !($user = $context->getUser()))
-        {
-            $session = new Session(new PhpBridgeSessionStorage());
-            $session->start();
-            $session->set('role', 'ADVISOR');
+        $session = new Session(new PhpBridgeSessionStorage());
+        $session->start();
+        $session->set('role', 'ADVISOR');
 
-            $user = $userManager->createUser();
-            $user->setEnabled(true);
-            $user->setRoles(array("ROLE_ADVISOR"));
-            $user->setPasswordSet(true);
+        $user = $userManager->createUser();
+        $user->setEnabled(true);
+        $user->setRoles(array("ROLE_ADVISOR"));
+        $user->setPasswordSet(true);
 
-            $event = new GetResponseUserEvent($user, $request);
-            $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
-            $newUser = true;
-        }
+        $event = new GetResponseUserEvent($user, $request);
+        $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
 
-        if ($newUser && null !== $event->getResponse())
+        if (null !== $event->getResponse())
             return $event->getResponse();
 
         // create Resume entity
@@ -73,100 +65,63 @@ class ServicesSignUp
         $form->setData($resume);
         $form->handleRequest($request);
 
-        if (!$newUser && $user->getUsername() == "")
-            $form->get('user')->get('email')
-                ->addError(new FormError("Account already linked on the platform"));
-
         // if form submitted
         if ($form->isSubmitted() && $form->isValid())
         {
             $valid = true;
             $event = new FormEvent($form, $request);
-            $linkedIn = null;
 
-            if ($newUser)
-                $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
+            $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
 
-            // option 2, user uploaded resume and country
-            if ($form->get('save')->isClicked())
-            {
-                // if country not submitted
-                if (!$user->getCountry())
-                {
-                    $form->get('user')->get('country')
-                        ->addError(new FormError("Please select a residency country"));
-                    $valid = false;
-                }
-                // elif resume not submitted
-                else if (!$resume->getFile())
-                {
-                    $form->get('resume')->get('file')
-                        ->addError(new FormError("Please upload a resume"));
-                    $valid = false;
-                }
-                // elif email not submitted
-                else if (!$user->getEmail())
-                {
-                    $form->get('email')
-                        ->addError(new FormError("Please upload a email"));
-                    $valid = false;
-                }
-                // save user datas
-                else
-                {
-                    $user->setFirstName(ucwords($user->getFirstName()));
-                    $user->setLastName(ucwords($user->getLastName()));
-                    $user->setStatus(0);
-                    $userManager->updateUser($user);
-                    $em = $context->getDoctrine()->getManager();
-                    $resume->setUser($user);
-                    $em->persist($resume);
-                    $em->flush();
-                }
-            }
-            // option 1, user synced linkedin
-            else
-            {
-                // save user datas
+            // if country not submitted
+            if (!$user->getCountry()) {
+                $form->get('user')->get('country')
+                    ->addError(new FormError("Please select a residency country"));
+                $valid = false;
+            } elseif (!$resume->getFile()) { // elif resume not submitted
+                $form->get('resume')->get('file')
+                    ->addError(new FormError("Please upload a resume"));
+                $valid = false;
+            } elseif (!$user->getEmail()) { // elif email not submitted
+                $form->get('email')
+                    ->addError(new FormError("Please upload a email"));
+                $valid = false;
+            } else { // else save user data
                 $user->setFirstName(ucwords($user->getFirstName()));
                 $user->setLastName(ucwords($user->getLastName()));
-                $user->setUserName("");
-                $user->setEmail("");
                 $user->setStatus(0);
                 $userManager->updateUser($user);
-
-                $linkedIn = new RedirectResponse($context->generateUrl('hwi_oauth_service_redirect',
-                    [
-                        'service' => 'linkedin'
-                    ]
-                ));
+                $em = $context->getDoctrine()->getManager();
+                $resume->setUser($user);
+                $em->persist($resume);
+                    $em->flush();
             }
 
             // if user correctly uploaded datas
             if ($valid)
             {
                 if (null === $response = $event->getResponse())
-                {
                     $response = new RedirectResponse($context->generateUrl('expert_registration_step_one'));
-                }
-                if ($newUser)
-                    $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED,
-                        new FilterUserResponseEvent($user, $request, $response));
-                if ($linkedIn)
-                    return $linkedIn;
+                $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED,
+                    new FilterUserResponseEvent($user, $request, $response));
+
                 return $response;
             }
         }
 
-        return $context->render('UserBundle:Registration:register_expert.html.twig',
-            [
+        return $context->render('UserBundle:Registration:register_expert.html.twig', [
                 'form' => $form->createView(),
-            ]
-        );
+        ]);
     }
 
     /**
      * manage signUp Step1 Expert
+     *
+     * @param         $context
+     * @param Request $request
+     * @param         $user
+     *
+     * @return null|RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function manageStepOneExpert($context, Request $request, $user)
     {
@@ -185,14 +140,6 @@ class ServicesSignUp
             /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
             $userManager = $context->get('fos_user.user_manager');
             $event = new FormEvent($form, $request);
-
-            // if back button submit, reset user data to previous step
-            if ($form->get('back')->isClicked())
-            {
-                $user->setStatus(42);
-                $userManager->updateUser($user);
-                return $this->manageStepZeroExpert($context, $request, $user);
-            }
 
             // update user datas
             $user->setStatus(1);
@@ -358,8 +305,7 @@ class ServicesSignUp
         $domains = [];
 
         // create entity and get their names
-        foreach ($user->getWorkExperience() as $domain)
-        {
+        foreach ($user->getWorkExperience() as $domain) {
             $experienceShaping = new ExperienceShaping($domain);
             $user->addExperienceShaping($experienceShaping);
             array_push($domains, $domain);
@@ -393,26 +339,23 @@ class ServicesSignUp
             $user->setStatus(5);
             $userManager->updateUser($user);
 
-            // save user in elastic
+            // save user
             $parser = $context->get('user.services');
             $parser->parseResume($context->getDoctrine()->getRepository('ToolsBundle:UploadResume'),
                                  $user, $context->getDoctrine()->getManager());
 
             // pass user next step
-            if (null === $response = $event->getResponse())
-            {
+            if (null === $response = $event->getResponse()) {
                 $url = $context->generateUrl('fos_user_registration_confirmed');
-                $response = new RedirectResponse($url);
+                $response = new RedirectResponse(  ($user->getPasswordSet()) ? $url : '/dashboard');
             }
             return $response;
         }
 
-        return $context->render('UserBundle:Registration:register_expert_step_five.html.twig',
-            [
+        return $context->render('UserBundle:Registration:register_expert_step_five.html.twig', [
                 'form' => $form->createView(),
                 'domains' => $domains
-            ]
-        );
+        ]);
     }
 
 };

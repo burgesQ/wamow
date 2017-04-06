@@ -4,8 +4,6 @@ namespace ToolsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-use ToolsBundle\Entity\Upload;
-
 /**
  * UploadResume
  *
@@ -28,7 +26,21 @@ class UploadResume extends Upload
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
-    
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(
+     *     name="content",
+     *     type="string",
+     *     nullable=true
+     * )
+     */
+    private $content;
+
+    /**
+     * UploadResume constructor.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -67,4 +79,27 @@ class UploadResume extends Upload
         return $this->user;
     }
 
+
+    /**
+     * Set content
+     *
+     * @param string $content
+     * @return UploadResume
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+
+        return $this;
+    }
+
+    /**
+     * Get content
+     *
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
 }

@@ -1,3 +1,8 @@
+## Must Be First Import !!
+user:
+    resource: "@UserBundle/Resources/config/routing.yml"
+    prefix: /
+
 calendar:
     resource: "@CalendarBundle/Resources/config/routing.yml"
     prefix:   /
@@ -16,10 +21,6 @@ home_page:
 
 mission:
     resource: "@MissionBundle/Resources/config/routing.yml"
-    prefix: /
-
-user:
-    resource: "@UserBundle/Resources/config/routing.yml"
     prefix: /
 
 dashboard:

@@ -3,7 +3,6 @@
 namespace UserBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use FOS\UserBundle\Util\LegacyFormHelper;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class StepOneType extends AbstractType
@@ -16,32 +15,20 @@ class StepOneType extends AbstractType
             ->remove('username')
             ->remove('current_password')
             ->remove('email')
-            
-            ->add('businessPractice', 'entity',
-                [
-                    'class' => 'MissionBundle:BusinessPractice',
-                    'property' => 'name',
-                    'multiple' => true,
-                    'expanded' => true,
-                    'label' => false,
-                    'translation_domain' => 'MissionBundle',
-                    'choice_translation_domain' => 'MissionBundle',
-                ]
-            )
-            ->add('submit', 'submit',
-                [
-                    'translation_domain' => 'FOSUserBundle',
-                    'label' => 'form.submit'
-                ]
-            )
-            ->add('back', 'submit',
-                [
-                    'translation_domain' => 'FOSUserBundle',
-                    'label' => 'form.back',
-                    'validation_groups' => false,
-                ]
-            )
-            ;
+            ->add('businessPractice', 'entity', [
+                'class'                     => 'MissionBundle:BusinessPractice',
+                'property'                  => 'name',
+                'multiple'                  => true,
+                'expanded'                  => true,
+                'label'                     => false,
+                'translation_domain'        => 'MissionBundle',
+                'choice_translation_domain' => 'MissionBundle',
+            ])
+            ->add('submit', 'submit', [
+                'translation_domain' => 'FOSUserBundle',
+                'label'              => 'form.submit'
+            ])
+        ;
     }
 
     public function getParent()

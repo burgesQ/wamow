@@ -18,6 +18,7 @@ security:
         reset: 'Reset password'
         submit: 'Log in'
         email: Email
+        linkedin: Log In with Linkedin
 
 profile:
     show:
@@ -200,6 +201,7 @@ form:
     nbLoad: "Enter how many message should you to load by thread"
     readReport: "Notify your interlocutor that you've read the message"
     back: Back
+    next: Next
 
 social:
     sign_in_google: "Sign in with Google"
