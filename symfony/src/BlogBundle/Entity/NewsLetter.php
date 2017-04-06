@@ -2,12 +2,14 @@
 
 namespace BlogBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\OrderBy;
 
 /**
  * NewsLetter
- *
- * @ORM\Table(name="news_letter")
+ * @ORM\Table(name="newsletter")
  * @ORM\Entity(repositoryClass="BlogBundle\Repository\NewsLetterRepository")
  * @ORM\HasLifecycleCallbacks
  */
@@ -25,16 +27,16 @@ class NewsLetter
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255, nullable=false)
+     * @ORM\Column(name="pre_title", type="string", length=255, nullable=false)
      */
-    private $title;
+    private $preTitle;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="content", type="text")
+     * @ORM\Column(name="title", type="string", length=255, nullable=false)
      */
-    private $content;
+    private $title;
 
     /**
      * @var \DateTime
@@ -64,16 +66,47 @@ class NewsLetter
      */
     private $number;
 
-    public function __construct($number, $title, $content, $publishedDate)
+    /**
+     * @var string
+     *
+     * @ORM\Column(
+     *     name="url_cover",
+     *     type="string",
+     *     length=255,
+     *     nullable=false
+     * )
+     */
+    private $urlCover;
+
+    /**
+     * @ORM\OneToMany(
+     *   targetEntity="BlogBundle\Entity\Article",
+     *   mappedBy="newLetter"
+     * )
+     * @OrderBy({"id" = "ASC"})
+     * @var Article[]|Collection
+     */
+    private $articles;
+
+    /**
+     * NewsLetter constructor.
+     *
+     * @param $number
+     * @param $preTitle
+     * @param $title
+     * @param $publishedDate
+     * @param $urlCover
+     */
+    public function __construct($number, $preTitle, $title, $publishedDate, $urlCover)
     {
-        $this->number = $number;
-
-        $this->title = $title;
-        $this->content = $content;
-
-        $this->creationDate = new \DateTime();
-        $this->updateDate = new \DateTime();
+        $this->preTitle      = $preTitle;
+        $this->title         = $title;
+        $this->creationDate  = new \DateTime();
+        $this->updateDate    = new \DateTime();
         $this->publishedDate = $publishedDate;
+        $this->number        = $number;
+        $this->urlCover      = $urlCover;
+        $this->articles      = new ArrayCollection();
     }
 
     /**
@@ -86,7 +119,6 @@ class NewsLetter
 
     /**
      * Get id
-     *
      * @return integer
      */
     public function getId()
@@ -95,9 +127,42 @@ class NewsLetter
     }
 
     /**
+     * Get preTitle
+     * @return string
+     */
+    public function getPreTitle()
+    {
+        return $this->preTitle;
+    }
+
+    /**
+     * Set preTitle
+     *
+     * @param $preTitle
+     *
+     * @return NewsLetter
+     */
+    public function setPreTitle($preTitle)
+    {
+        $this->preTitle = $preTitle;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
      * Set title
      *
      * @param string $title
+     *
      * @return NewsLetter
      */
     public function setTitle($title)
@@ -108,42 +173,19 @@ class NewsLetter
     }
 
     /**
-     * Get title
-     *
-     * @return string
+     * Get creationDate
+     * @return \DateTime
      */
-    public function getTitle()
+    public function getCreationDate()
     {
-        return $this->title;
-    }
-
-    /**
-     * Set content
-     *
-     * @param string $content
-     * @return NewsLetter
-     */
-    public function setContent($content)
-    {
-        $this->content = $content;
-
-        return $this;
-    }
-
-    /**
-     * Get content
-     *
-     * @return string 
-     */
-    public function getContent()
-    {
-        return $this->content;
+        return $this->creationDate;
     }
 
     /**
      * Set creationDate
      *
      * @param \DateTime $creationDate
+     *
      * @return NewsLetter
      */
     public function setCreationDate($creationDate)
@@ -154,19 +196,19 @@ class NewsLetter
     }
 
     /**
-     * Get creationDate
-     *
+     * Get updateDate
      * @return \DateTime
      */
-    public function getCreationDate()
+    public function getUpdateDate()
     {
-        return $this->creationDate;
+        return $this->updateDate;
     }
 
     /**
      * Set updateDate
      *
      * @param \DateTime $updateDate
+     *
      * @return NewsLetter
      */
     public function setUpdateDate($updateDate)
@@ -177,19 +219,19 @@ class NewsLetter
     }
 
     /**
-     * Get updateDate
-     *
+     * Get publishedDate
      * @return \DateTime
      */
-    public function getUpdateDate()
+    public function getPublishedDate()
     {
-        return $this->updateDate;
+        return $this->publishedDate;
     }
 
     /**
      * Set publishedDate
      *
      * @param \DateTime $publishedDate
+     *
      * @return NewsLetter
      */
     public function setPublishedDate($publishedDate)
@@ -200,19 +242,19 @@ class NewsLetter
     }
 
     /**
-     * Get publishedDate
-     *
-     * @return \DateTime 
+     * Get number
+     * @return integer
      */
-    public function getPublishedDate()
+    public function getNumber()
     {
-        return $this->publishedDate;
+        return $this->number;
     }
 
     /**
      * Set number
      *
      * @param integer $number
+     *
      * @return NewsLetter
      */
     public function setNumber($number)
@@ -223,13 +265,58 @@ class NewsLetter
     }
 
     /**
-     * Get number
-     *
-     * @return integer
+     * Get urlCover
+     * @return string
      */
-    public function getNumber()
+    public function getUrlCover()
     {
-        return $this->number;
+        return $this->urlCover;
     }
 
+    /**
+     * Set urlCover
+     *
+     * @param string $urlCover
+     *
+     * @return NewsLetter
+     */
+    public function setUrlCover($urlCover)
+    {
+        $this->urlCover = $urlCover;
+
+        return $this;
+    }
+
+    /**
+     * Add articles
+     *
+     * @param \BlogBundle\Entity\Article $articles
+     * @return NewsLetter
+     */
+    public function addArticle($articles)
+    {
+        $this->articles[] = $articles;
+
+        return $this;
+    }
+
+    /**
+     * Remove articles
+     *
+     * @param \BlogBundle\Entity\Article $articles
+     */
+    public function removeArticle($articles)
+    {
+        $this->articles->removeElement($articles);
+    }
+
+    /**
+     * Get articles
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getArticles()
+    {
+        return $this->articles;
+    }
 }

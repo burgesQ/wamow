@@ -1,7 +1,43 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
+    <br>THE NEWSLETTER FOR THOSE WHO WANT TO KNOW MORE ABOUT WORK<br>
+    This Week<br>
+    {{ newsLetter.title|raw }}<br>
 
-    {{ newsLetter.content|striptags('<h1><h2><h3>')|raw }}
+    {% for article in articles %}
+        {% if loop.index0 == 0 %}
+            <a href="{{ path('article_view', {'url': article.url}) }}" target="_blank">
+                <img src={{ article.urlCover }} alt={{ article.preTitle }}>
+                <br>{{ article.preTitle }}
+            </a><br>
+            {% if article.time > 0 %}
+                {{ article.time }}'<br>
+            {% endif %}
+            {{ article.introduction }} <br>
+            <a href="{{ path('article_view', {'url': article.url}) }}" target="_blank">
+                READ MORE
+            </a><br>
+        {% else %}
+            <li>
+                {% if loop.index0 != 2 %}
+                    {{ article.category }}
+                {% endif %}
+                <br>
+
+                <a href="{{ path('article_view', {'url': article.url}) }}" target="_blank">
+                    <img src={{ article.urlCover }} alt={{ article.preTitle }} width="400", height="200">
+                    <br>{{ article.preTitle }}
+                </a><br>
+                {% if article.time > 0 %}
+                    {{ article.time }}'<br>
+                {% endif %}
+                {{ article.introduction }} <br>
+                <a href="{{ path('article_view', {'url': article.url}) }}" target="_blank">
+                    READ MORE
+                </a><br>
+            </li>
+        {% endif %}
+    {% endfor %}
 
 {% endblock %}

@@ -23,7 +23,7 @@ class NewsLetterRepository extends EntityRepository
             ->from('BlogBundle:NewsLetter', 'n')
             ->where('n.publishedDate < :today')
             ->setParameter('today', $today)
-            ->orderBy('n.publishedDate', 'DESC');
+            ->orderBy('n.publishedDate', 'ASC');
 
         return $qb->getQuery()->getResult();
     }

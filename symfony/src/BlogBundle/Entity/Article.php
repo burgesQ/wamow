@@ -3,16 +3,12 @@
 namespace BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-
-use Symfony\Component\Validator\{
-    Context\ExecutionContextInterface,
-    Constraints as Assert
-};
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Article
- *
  * @ORM\Table(name="article")
  * @ORM\Entity(repositoryClass="BlogBundle\Repository\ArticleRepository")
  * @ORM\HasLifecycleCallbacks
@@ -21,7 +17,6 @@ class Article
 {
     /**
      * @var int
-     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -30,21 +25,24 @@ class Article
 
     /**
      * @var string
-     *
      * @ORM\Column(name="url", type="string", length=255, nullable=false)
      */
     private $url;
 
     /**
      * @var string
-     *
+     * @ORM\Column(name="pre_title", type="string", length=255, nullable=false)
+     */
+    private $preTitle;
+
+    /**
+     * @var string
      * @ORM\Column(name="title", type="string", length=255, nullable=false)
      */
     private $title;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="content", type="text", nullable=false)
      * @Assert\NotBlank()
      */
@@ -52,35 +50,30 @@ class Article
 
     /**
      * @var \DateTime
-     *
      * @ORM\Column(name="creation_date", type="datetime", length=255, nullable=false)
      */
     private $creationDate;
 
     /**
      * @var \DateTime
-     *
      * @ORM\Column(name="update_date", type="datetime", length=255, nullable=false)
      */
     private $updateDate;
 
     /**
      * @var \DateTime
-     *
      * @ORM\Column(name="post_date", type="datetime", length=255, nullable=false)
      */
     private $postDate;
 
     /**
      * @var \DateTime
-     *
      * @ORM\Column(name="published_date", type="datetime", length=255, nullable=false)
      */
     private $publishedDate;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="posted_by", type="string", length=255, nullable=false)
      * @Assert\Email()
      */
@@ -88,11 +81,10 @@ class Article
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="writed_by", type="string", length=255, nullable=false)
+     * @ORM\Column(name="written_by", type="string", length=255, nullable=false)
      * @Assert\Email()
      */
-    private $writedBy;
+    private $writtenBy;
 
     /**
      * @ORM\OneToMany(
@@ -101,23 +93,95 @@ class Article
      * )
      * @var Comment[]|Collection
      */
-    protected $comments;
+    private $comments;
 
-    public function __construct($url, $title, $content, $poster, $writer)
+    /**
+     * @var string
+     * @ORM\Column(
+     *     name="category",
+     *     type="string",
+     *     length=255,
+     *     nullable=false
+     * )
+     */
+    private $category;
+
+    /**
+     * @var string
+     * @ORM\Column(
+     *     name="introduction",
+     *     type="text",
+     *      nullable=false
+     * )
+     * @Assert\NotBlank()
+     */
+    private $introduction;
+
+    /**
+     * @var int
+     * @ORM\Column(
+     *     name="time",
+     *     type="integer",
+     *     nullable=false
+     * )
+     */
+    private $time;
+
+    /**
+     * @var string
+     * @ORM\Column(
+     *     name="url_cover",
+     *     type="string",
+     *     length=255,
+     *     nullable=false
+     * )
+     */
+    private $urlCover;
+
+    /**
+     * @var \BlogBundle\Entity\NewsLetter
+     * @ORM\ManyToOne(
+     *   targetEntity="BlogBundle\Entity\NewsLetter",
+     *   inversedBy="articles"
+     * )
+     */
+    private $newsLetter;
+
+    /**
+     * Article constructor.
+     *
+     * @param                               $url
+     * @param                               $preTitle
+     * @param                               $title
+     * @param                               $content
+     * @param                               $poster
+     * @param                               $writer
+     * @param                               $category
+     * @param                               $introduction
+     * @param                               $creationDate
+     * @param                               $time
+     * @param                               $urlCover
+     * @param \BlogBundle\Entity\NewsLetter $newsLetter
+     */
+    public function __construct($url, $preTitle, $title, $content, $poster, $writer, $category, $introduction, $creationDate, $time, $urlCover, $newsLetter)
     {
-        $this->url = $url;
-        $this->title = $title;
-        $this->content = $content;
+        $this->publishedDate = $newsLetter->getPublishedDate();
+        $this->updateDate    = new \DateTime();
+        $this->postDate      = new \DateTime();
 
-        $this->creationDate = new \DateTime();
-        $this->updateDate = new \DateTime();
-        $this->postDate = new \DateTime();
-        $this->publishedDate = new \DateTime();
-
-        $this->postedBy = $poster;
-        $this->writedBy = $writer;
-
-        $this->comments = new ArrayCollection();
+        $this->url           = $url;
+        $this->preTitle      = $preTitle;
+        $this->title         = $title;
+        $this->content       = $content;
+        $this->postedBy      = $poster;
+        $this->writtenBy     = $writer;
+        $this->comments      = new ArrayCollection();
+        $this->category      = $category;
+        $this->introduction  = $introduction;
+        $this->creationDate  = $creationDate;
+        $this->time          = $time;
+        $this->urlcover      = $urlCover;
+        $this->newsLetter    = $newsLetter;
     }
 
     /**
@@ -129,15 +193,8 @@ class Article
     }
 
     /**
-     * @Assert\Callback
-     */
-    public function isValidate(ExecutionContextInterface $context)
-    {}
-
-    /**
      * Get id
-     *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -145,9 +202,19 @@ class Article
     }
 
     /**
+     * Get url
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
      * Set url
      *
      * @param string $url
+     *
      * @return Article
      */
     public function setUrl($url)
@@ -158,19 +225,42 @@ class Article
     }
 
     /**
-     * Get url
-     *
+     * Get preTitle
      * @return string
      */
-    public function getUrl()
+    public function getPreTitle()
     {
-        return $this->url;
+        return $this->preTitle;
+    }
+
+    /**
+     * Set preTitle
+     *
+     * @param string $preTitle
+     *
+     * @return Article
+     */
+    public function setPreTitle($preTitle)
+    {
+        $this->preTitle = $preTitle;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 
     /**
      * Set title
      *
      * @param string $title
+     *
      * @return Article
      */
     public function setTitle($title)
@@ -181,19 +271,19 @@ class Article
     }
 
     /**
-     * Get title
-     *
+     * Get content
      * @return string
      */
-    public function getTitle()
+    public function getContent()
     {
-        return $this->title;
+        return $this->content;
     }
 
     /**
      * Set content
      *
      * @param string $content
+     *
      * @return Article
      */
     public function setContent($content)
@@ -204,19 +294,19 @@ class Article
     }
 
     /**
-     * Get content
-     *
-     * @return string 
+     * Get creationDate
+     * @return \DateTime
      */
-    public function getContent()
+    public function getCreationDate()
     {
-        return $this->content;
+        return $this->creationDate;
     }
 
     /**
      * Set creationDate
      *
      * @param \DateTime $creationDate
+     *
      * @return Article
      */
     public function setCreationDate($creationDate)
@@ -227,19 +317,19 @@ class Article
     }
 
     /**
-     * Get creationDate
-     *
+     * Get updateDate
      * @return \DateTime
      */
-    public function getCreationDate()
+    public function getUpdateDate()
     {
-        return $this->creationDate;
+        return $this->updateDate;
     }
 
     /**
      * Set updateDate
      *
      * @param \DateTime $updateDate
+     *
      * @return Article
      */
     public function setUpdateDate($updateDate)
@@ -250,19 +340,19 @@ class Article
     }
 
     /**
-     * Get updateDate
-     *
+     * Get postDate
      * @return \DateTime
      */
-    public function getUpdateDate()
+    public function getPostDate()
     {
-        return $this->updateDate;
+        return $this->postDate;
     }
 
     /**
      * Set postDate
      *
      * @param \DateTime $postDate
+     *
      * @return Article
      */
     public function setPostDate($postDate)
@@ -273,19 +363,19 @@ class Article
     }
 
     /**
-     * Get postDate
-     *
+     * Get publishedDate
      * @return \DateTime
      */
-    public function getPostDate()
+    public function getPublishedDate()
     {
-        return $this->postDate;
+        return $this->publishedDate;
     }
 
     /**
      * Set publishedDate
      *
      * @param \DateTime $publishedDate
+     *
      * @return Article
      */
     public function setPublishedDate($publishedDate)
@@ -296,19 +386,19 @@ class Article
     }
 
     /**
-     * Get publishedDate
-     *
-     * @return \DateTime
+     * Get postedBy
+     * @return string
      */
-    public function getPublishedDate()
+    public function getPostedBy()
     {
-        return $this->publishedDate;
+        return $this->postedBy;
     }
 
     /**
      * Set postedBy
      *
      * @param string $postedBy
+     *
      * @return Article
      */
     public function setPostedBy($postedBy)
@@ -319,42 +409,33 @@ class Article
     }
 
     /**
-     * Get postedBy
-     *
+     * Get writtenBy
      * @return string
      */
-    public function getPostedBy()
+    public function getWrittenBy()
     {
-        return $this->postedBy;
+        return $this->writtenBy;
     }
 
     /**
-     * Set writedBy
+     * Set writtenBy
      *
-     * @param string $writedBy
+     * @param string $writtenBy
+     *
      * @return Article
      */
-    public function setWritedBy($writedBy)
+    public function setWrittenBy($writtenBy)
     {
-        $this->writedBy = $writedBy;
+        $this->writtenBy = $writtenBy;
 
         return $this;
-    }
-
-    /**
-     * Get writedBy
-     *
-     * @return string
-     */
-    public function getWritedBy()
-    {
-        return $this->writedBy;
     }
 
     /**
      * Add comments
      *
      * @param \BlogBundle\Entity\Comment $comments
+     *
      * @return Article
      */
     public function addComment($comments)
@@ -376,7 +457,6 @@ class Article
 
     /**
      * Get comments
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getComments()
@@ -384,4 +464,118 @@ class Article
         return $this->comments;
     }
 
+    /**
+     * Get category
+     * @return string
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * Set category
+     *
+     * @param string $category
+     *
+     * @return Article
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get introduction
+     * @return string
+     */
+    public function getIntroduction()
+    {
+        return $this->introduction;
+    }
+
+    /**
+     * Set introduction
+     *
+     * @param string $introduction
+     *
+     * @return Article
+     */
+    public function setIntroduction($introduction)
+    {
+        $this->introduction = $introduction;
+
+        return $this;
+    }
+
+    /**
+     * Get time
+     * @return integer
+     */
+    public function getTime()
+    {
+        return $this->time;
+    }
+
+    /**
+     * Set time
+     *
+     * @param integer $time
+     *
+     * @return Article
+     */
+    public function setTime($time)
+    {
+        $this->time = $time;
+
+        return $this;
+    }
+
+    /**
+     * Get urlCover
+     * @return string
+     */
+    public function getUrlCover()
+    {
+        return $this->urlCover;
+    }
+
+    /**
+     * Set urlCover
+     *
+     * @param string $urlCover
+     *
+     * @return Article
+     */
+    public function setUrlCover($urlCover)
+    {
+        $this->urlCover = $urlCover;
+
+        return $this;
+    }
+
+    /**
+     * Get newsLetter
+     * @return \BlogBundle\Entity\NewsLetter
+     */
+    public function getNewsLetter()
+    {
+        return $this->newsLetter;
+    }
+
+    /**
+     * Set newsLetter
+     *
+     * @param \BlogBundle\Entity\NewsLetter $newsLetter
+     *
+     * @return Article
+     */
+    public function setNewsLetter($newsLetter = null)
+    {
+        $this->newsLetter = $newsLetter;
+
+        return $this;
+    }
 }

@@ -66,13 +66,48 @@ class Comment
      */
     private $status;
 
-    public function __construct($emailAuthor, $content)
+    /**
+     * @var string
+     *
+     * @ORM\Column(
+     *     name="first_name_author",
+     *     type="string",
+     *     length=255, nullable=false
+     * )
+     * @Assert\NotBlank()
+     */
+    private $firstNameAuthor;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(
+     *     name="last_name_author",
+     *     type="string",
+     *     length=255, nullable=false
+     * )
+     * @Assert\NotBlank()
+     */
+    private $lastNameAuthor;
+
+    /**
+     * Comment constructor.
+     *
+     * @param string         $emailAuthor
+     * @param string         $firstName
+     * @param string         $lastName
+     * @param string         $content
+     * @param \DateTime|null $postDate
+     */
+    public function __construct($emailAuthor, $firstName, $lastName, $content, $postDate = null)
     {
-        $this->postDate = new \DateTime();
-        $this->article = null;
-        $this->emailAuthor = $emailAuthor;
-        $this->content = $content;
-        $this->status = 0;
+        $this->postDate        = $postDate ? $postDate : new \DateTime();
+        $this->article         = null;
+        $this->emailAuthor     = $emailAuthor;
+        $this->content         = $content;
+        $this->status          = 0;
+        $this->firstNameAuthor = $firstName;
+        $this->lastNameAuthor  = $lastName;
     }
 
     /**
@@ -85,8 +120,10 @@ class Comment
 
     /**
      * @Assert\Callback
+     *
+     * @param ExecutionContextInterface $context
      */
-    public function isValidate(ExecutionContextInterface $context)
+    public function isValidate($context)
     {
         // check content
     }
@@ -216,4 +253,49 @@ class Comment
         return $this->status;
     }
 
+    /**
+     * Set firstNameAuthor
+     *
+     * @param string $firstNameAuthor
+     * @return Comment
+     */
+    public function setFirstNameAuthor($firstNameAuthor)
+    {
+        $this->firstNameAuthor = $firstNameAuthor;
+
+        return $this;
+    }
+
+    /**
+     * Get firstNameAuthor
+     *
+     * @return string
+     */
+    public function getFirstNameAuthor()
+    {
+        return $this->firstNameAuthor;
+    }
+
+    /**
+     * Set lastNameAuthor
+     *
+     * @param string $lastNameAuthor
+     * @return Comment
+     */
+    public function setLastNameAuthor($lastNameAuthor)
+    {
+        $this->lastNameAuthor = $lastNameAuthor;
+
+        return $this;
+    }
+
+    /**
+     * Get lastNameAuthor
+     *
+     * @return string
+     */
+    public function getLastNameAuthor()
+    {
+        return $this->lastNameAuthor;
+    }
 }

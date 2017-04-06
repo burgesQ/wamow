@@ -25,7 +25,21 @@ class CommentType extends AbstractType
             ->add('emailAuthor', TextType::class,
                 [
                     'translation_domain' => 'BlogBundle',
-                    'label' => 'view.comment.author',
+                    'label' => 'view.comment.author_email',
+                    'required' => true,
+                ]
+            )
+            ->add('firstNameAuthor', TextType::class,
+                [
+                    'translation_domain' => 'BlogBundle',
+                    'label' => 'view.comment.author_first_name',
+                    'required' => true,
+                ]
+            )
+            ->add('lastNameAuthor', TextType::class,
+                [
+                    'translation_domain' => 'BlogBundle',
+                    'label' => 'view.comment.author_last_name',
                     'required' => true,
                 ]
             )
@@ -62,6 +76,4 @@ class CommentType extends AbstractType
     {
         return 'blogbundle_comment';
     }
-
-
 }

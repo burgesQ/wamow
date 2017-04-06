@@ -2,32 +2,42 @@
 
 namespace BlogBundle\Controller;
 
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\{
-    HttpKernel\Exception\NotFoundHttpException,
-    HttpFoundation\Request
-};
-
+use Symfony\Component\HttpFoundation\Request;
+use BlogBundle\Repository\ArticleRepository;
+use BlogBundle\Repository\CommentRepository;
 use BlogBundle\Form\CommentType;
+use Symfony\Component\Form\Form;
 
 class ArticleController extends Controller
 {
+    /**
+     * @param Request $request
+     * @param         $url
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function viewAction(Request $request, $url)
     {
-        // get the article by url (url = article.url)
-        $article = $this->getDoctrine()->getRepository('BlogBundle:Article')->findOneByUrl($url);
+        /** @var ArticleRepository $articleRepository */
+        $articleRepository = $this->getDoctrine()->getRepository('BlogBundle:Article');
+        /** @var CommentRepository $commentRepository */
+        $commentRepository = $this->getDoctrine()->getRepository('BlogBundle:Comment');
+        // get the article by url (url = article->url)
+        $article = $articleRepository->findOneBy(['url' => $url]);
 
         // if no article match the url throw error
         if ($article === null || $article->getPublishedDate() > new \DateTime())
             throw new NotFoundHttpException($this->get('translator')->trans('view.error.notFound'));
 
         // create form and handle request
+        /** @var Form $form */
         $form = $this->get('form.factory')->create(new CommentType());
         $form->handleRequest($request);
 
         // handle form submitted
-        if ($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             // get comment and entityManager
             $comment = $form->getData();
             $em = $this->getDoctrine()->getManager();
@@ -42,13 +52,13 @@ class ArticleController extends Controller
             return $this->redirectToRoute('article_view', [
                 'url'     => $article->getUrl()
             ]);
-        }
         // if form isn't submitted and user is logged then set the authorEmail field
-        elseif (($user = $this->getUser()))
+        } elseif (($user = $this->getUser())) {
             $form->get('emailAuthor')->setData($user->getEmail());
+        }
 
         // get comments by articles and status
-        $comments = $this->getDoctrine()->getRepository('BlogBundle:Comment')->getCommentsByArticleIfAvailable($article);
+        $comments = $commentRepository->getCommentsByArticleIfAvailable($article);
 
         // render the article
         return $this->render('BlogBundle:Article:view.html.twig', [
@@ -57,5 +67,4 @@ class ArticleController extends Controller
             'form'        => $form->createView(),
         ]);
     }
-
 }

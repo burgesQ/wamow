@@ -1,38 +1,34 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-    <p>
-    <h1> {{ article.title }} </h1>
-    </p>
-    <p>
-    <h2> {{ article.content }} </h2>
-    </p>
+    <p><h2> {{ article.title }} </h2>
 
-    {% trans with {'%writer': article.writedBy} from "BlogBundle" %}
-        view.footer.writer
-    {% endtrans %}<br>
-    {% trans with {'%poster': article.postedBy.username, '%postDate' : article.postDate|date('m/d/Y H:i:s')} from "BlogBundle" %}
-        view.footer.poster
-    {% endtrans %}<br>
-    {% trans with {'%updateDate' : article.updateDate|date('m/d/Y H:i:s')} from "BlogBundle" %}
-    view.footer.updateDate
-    {% endtrans %}<br><br>
+    <p><img class="aligncenter wp-image-675 size-full" src={{ article.urlCover }} alt={{ article.title }} width="480" height="260" sizes="(max-width: 480px) 100vw, 480px"></p>
+    {{ article.content|raw }}
 
+    {% if comments|length > 0 %}
+        {{ comments|length }}
+        {% trans with { '%article_title': article.title }from "BlogBundle" %}
+            view.comment.intro
+        {% endtrans %}<br><br>
+    {% endif %}
     {% for oneComment in comments %}
-        {% trans with {'%author' : oneComment.emailAuthor, '%postDate' : oneComment.postDate|date('m/d/Y H:i:s')} from "BlogBundle" %}
+        <div>
+            {% trans with {'%author_f_name' : oneComment.firstNameAuthor, '%author_l_name' : oneComment.lastNameAuthor, '%author' : oneComment.emailAuthor, '%postDate' : oneComment.postDate|date('m/d/Y H:i:s')} from "BlogBundle" %}
             view.comment.meta
-        {% endtrans %}<br>
-        {{ oneComment.content }}<br>
+            {% endtrans %}
+        </div><div>
+            {{ oneComment.content|striptags('<br>')|raw }}<br>
+        </div><br>
     {% endfor %}
 
     <br>
+    {% trans from "BlogBundle" %}
+        view.comment.reply
+    {% endtrans %}<br>
     <br>
     <form action="{{ path('article_view', {'url': article.url}) }}" method="post">
-        {{ form_errors(form) }}
-        {{ form_row(form.emailAuthor) }}
-        {{ form_row(form.content) }}
-        {{ form_row(form.post) }}
-        {{ form_end(form) }}
+        {{ form_widget(form) }}
     </form>
 
 {% endblock %}
