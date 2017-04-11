@@ -1,29 +1,29 @@
 <?php
 
-namespace BlogBundle\Controller;
+namespace BlogBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Finder\Finder;
-use BlogBundle\Entity\NewsLetter;
+use BlogBundle\Entity\Newsletter;
 use BlogBundle\Entity\Article;
 use BlogBundle\Entity\Comment;
 
-class LoadNewsLetters extends AbstractFixture implements OrderedFixtureInterface
+class LoadNewsletters extends AbstractFixture implements OrderedFixtureInterface
 {
     /**
      * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager)
     {
-        $fileName = 'NewsLetters.json';
+        $fileName = 'Newsletters.json';
         $finder   = new Finder();
 
         // get all file in current dir
         $finder->files()->in(__DIR__);
 
-        // get content from the json NewsLetters file
+        // get content from the json Newsletters file
         foreach ($finder as $file)
             if (!strcmp($file->getRelativePathname(), $fileName)) {
                 $string = file_get_contents($file->getRealPath());
@@ -34,28 +34,28 @@ class LoadNewsLetters extends AbstractFixture implements OrderedFixtureInterface
             exit;
         }
 
-        // foreach newsLetter
+        // foreach newsletter
         foreach ($json as $oneNews) {
-            $this->createNewsLetterFromJson($manager, $oneNews);
+            $this->createNewsletterFromJson($manager, $oneNews);
         }
 
-        // save the relation between newsLetter and article
+        // save the relation between newsletter and article
         $manager->flush();
     }
 
     /**
-     * Create a NewsLetter from a Json
+     * Create a Newsletter from a Json
      *
      * @param ObjectManager $manager
      * @param               $oneNews
      */
-    private function createNewsLetterFromJson($manager, $oneNews)
+    private function createNewsletterFromJson($manager, $oneNews)
     {
-        // init the number for the newsLetter
+        // init the number for the newsletter
         static $i = 1;
 
-        // create a newsLetter from json
-        $newNews = new NewsLetter(
+        // create a newsletter from json
+        $newNews = new Newsletter(
             $i,
             $oneNews->preTitle,
             $oneNews->title,
@@ -63,7 +63,7 @@ class LoadNewsLetters extends AbstractFixture implements OrderedFixtureInterface
             $oneNews->urlCover
         );
 
-        // save the newsLetter and give her a id
+        // save the newsletter and give her a id
         $manager->persist($newNews);
         $manager->flush();
 
@@ -72,17 +72,17 @@ class LoadNewsLetters extends AbstractFixture implements OrderedFixtureInterface
             $this->createArticleFromJson($manager, $oneArticle, $newNews);
         }
 
-        // increase the id for next newsLetter
+        // increase the id for next newsletter
         $i += 1;
     }
 
     /**
      * Create a article entity from Json
-     * Link the article with the newsLetter
+     * Link the article with the newsletter
      *
      * @param ObjectManager $manager
      * @param               $oneArticle
-     * @param NewsLetter    $newNews
+     * @param Newsletter    $newNews
      */
     private function createArticleFromJson($manager, $oneArticle, $newNews)
     {
@@ -110,7 +110,7 @@ class LoadNewsLetters extends AbstractFixture implements OrderedFixtureInterface
 
         // link news and articles
         $newNews->addArticle($newArticle);
-        $newArticle->setNewsLetter($newNews);
+        $newArticle->setNewsletter($newNews);
 
         foreach ($oneArticle->comments as $oneComment)
             $this->createCommentFromJson($manager, $newArticle, $oneComment);
@@ -145,6 +145,6 @@ class LoadNewsLetters extends AbstractFixture implements OrderedFixtureInterface
     {
         // the order in which fixtures will be loaded
         // the lower the number, the sooner that this fixture is loaded
-        return 11;
+        return 13;
     }
 }

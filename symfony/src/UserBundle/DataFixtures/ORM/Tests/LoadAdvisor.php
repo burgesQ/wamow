@@ -2,12 +2,13 @@
 
 namespace MissionBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\Persistence\ObjectManager;
 use MissionBundle\Entity\ExperienceShaping;
+use UserBundle\Entity\User;
 
 class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
@@ -40,6 +41,7 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "typemissions.crm"
             ],
             [
+                "professionalexpertises.businessunitmanager",
                 "professionalexpertises.marketinginnovation",
                 "professionalexpertises.communication",
                 "professionalexpertises.digital"
@@ -74,7 +76,11 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "businesspractice.industry",
                 "businesspractice.public"
             ],
-            [],
+            [
+                'typemissions.organisationtransformation',
+                'typemissions.strategic',
+                'typemissions.execution'
+            ],
             [
                 "professionalexpertises.salesbusinessdevelopment",
                 "professionalexpertises.operations"
@@ -100,10 +106,14 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "businesspractice.industry",
                 "businesspractice.public"
             ],
-            [],
             [
-                "professionalexpertises.financeaccounting",
-                "professionalexpertises.law"
+                'typemissions.organisationtransformation',
+                'typemissions.strategic',
+                'typemissions.execution'
+            ],
+            [
+                "professionalexpertises.salesbusinessdevelopment",
+                "professionalexpertises.operations"
             ],
             [
                 "workexperience.businessdevelopmentpriorities",
@@ -124,7 +134,11 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             [
                 "businesspractice.finance"
             ],
-            [],
+            [
+                'typemissions.strategic',
+                'typemissions.execution',
+                'typemissions.audit'
+            ],
             [
                 "professionalexpertises.assetmanagement"
             ],
@@ -148,7 +162,12 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "businesspractice.retail",
                 "businesspractice.media"
             ],
-            [],
+            [
+                'typemissions.organisationtransformation',
+                'typemissions.strategic',
+                'typemissions.execution',
+                'typemissions.change'
+            ],
             [
                 "professionalexpertises.administrativemanagement"
             ],
@@ -171,7 +190,13 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "businesspractice.finance",
                 "businesspractice.media"
             ],
-            [],
+            [
+                'typemissions.organisationtransformation',
+                'typemissions.knowledgemanagement',
+                'typemissions.strategic',
+                'typemissions.change',
+                'typemissions.crm'
+            ],
             [
                 "professionalexpertises.researchdevelopment"
             ],
@@ -222,7 +247,9 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "businesspractice.hotel"
             ],
             [
-                "typemissions.communication"
+                "typemissions.interimmanagement",
+                "typemissions.communication",
+                "typemissions.crm"
             ],
             [
                 "professionalexpertises.marketinginnovation",
@@ -248,7 +275,12 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "businesspractice.industry",
                 "businesspractice.retail",
             ],
-            [],
+            [
+                "typemissions.knowledgemanagement",
+                "typemissions.strategic",
+                "typemissions.execution",
+                "typemissions.crm"
+            ],
             [
                 "professionalexpertises.marketinginnovation"
             ],
@@ -271,7 +303,12 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "businesspractice.construction",
                 "businesspractice.services",
             ],
-            [],
+            [
+                "typemissions.organisationtransformation",
+                "typemissions.businessreingeniering",
+                "typemissions.strategic",
+                "typemissions.execution"
+            ],
             [
                 "professionalexpertises.salesbusinessdevelopment"
             ],
@@ -292,7 +329,13 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             [
                 "businesspractice.finance"
             ],
-            [],
+            [
+                "typemissions.organisationtransformation",
+                "typemissions.costkilling",
+                "typemissions.execution",
+                "typemissions.migration",
+                "typemissions.audit"
+            ],
             [],
             [
                 "workexperience.transfertoperationalmanagement",
@@ -315,7 +358,11 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "businesspractice.services"
             ],
             [
-                "typemissions.strategic"
+                "typemissions.organisationtransformation",
+                "typemissions.change",
+                "typemissions.costkilling",
+                "typemissions.strategic",
+                "typemissions.execution"
             ],
             [
                 "professionalexpertises.businessunitmanager"
@@ -339,7 +386,14 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             [
                 "businesspractice.finance",
             ],
-            [],
+            [
+                "typemissions.organisationtransformation",
+                "typemissions.implementation",
+                "typemissions.costkilling",
+                "typemissions.strategic",
+                "typemissions.execution",
+                "typemissions.audit",
+            ],
             [
                 "professionalexpertises.financeaccounting",
                 "professionalexpertises.assetmanagement"
@@ -362,7 +416,11 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "businesspractice.retail",
             ],
             [
-                "typemissions.change",
+                "typemissions.strategic",
+                "typemissions.execution",
+                "typemissions.organisationtransformation",
+                "typemissions.audit",
+                "typemissions.change"
             ],
             [
                 "professionalexpertises.financeaccounting",
@@ -387,7 +445,10 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "businesspractice.energy"
             ],
             [
-                "typemissions.strategic"
+                "typemissions.strategic",
+                "typemissions.execution",
+                "typemissions.crm",
+                "typemissions.knowledgemanagement"
             ],
             [
                 "professionalexpertises.marketinginnovation",
@@ -413,7 +474,15 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "businesspractice.finance",
                 "businesspractice.retail"
             ],
-            [],
+            [
+                "typemissions.strategic",
+                "typemissions.execution",
+                "typemissions.organisationtransformation",
+                "typemissions.change",
+                "typemissions.audit",
+                "typemissions.csp",
+                "typemissions.businessreingeniering"
+            ],
             [
                 "professionalexpertises.operations"
             ],
@@ -437,6 +506,9 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             ],
             [
                 "typemissions.communication",
+                "typemissions.execution",
+                "typemissions.costkilling",
+                "typemissions.crm"
             ],
             [
                 "professionalexpertises.financeaccounting",
@@ -464,8 +536,9 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "businesspractice.retail"
             ],
             [
-                "typemissions.knowledgemanagement",
-                "typemissions.communication"
+                "typemissions.organisationtransformation",
+                "typemissions.execution",
+                "typemissions.strategic",
             ],
             [
                 "professionalexpertises.salesbusinessdevelopment",
@@ -496,7 +569,11 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "businesspractice.media"
             ],
             [
-                "typemissions.communication"
+                "typemissions.communication",
+                "typemissions.change",
+                "typemissions.strategic",
+                "typemissions.execution",
+                "typemissions.organisationtransformation",
             ],
             [
                 "professionalexpertises.salesbusinessdevelopment",
@@ -527,13 +604,17 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "businesspractice.retail",
             ],
             [
-                "typemissions.communication"
+                "typemissions.communication",
+                "typemissions.change",
+                "typemissions.strategic",
+                "typemissions.execution",
+                "typemissions.organisationtransformation",
+                "typemissions.crm",
             ],
             [
                 "professionalexpertises.salesbusinessdevelopment",
                 "professionalexpertises.marketinginnovation",
                 "professionalexpertises.communication",
-                "professionalexpertises.production",
                 "professionalexpertises.operations"
             ],
             [
@@ -558,7 +639,9 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "businesspractice.retail"
             ],
             [
-                "typemissions.communication"
+                "typemissions.communication",
+                "typemissions.strategic",
+                "typemissions.execution",
             ],
             [
                 "professionalexpertises.marketinginnovation",
@@ -586,7 +669,11 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "businesspractice.it"
             ],
             [
-                "typemissions.recruitment"
+                "typemissions.recruitment",
+                "typemissions.organisationtransformation",
+                "typemissions.audit",
+                "typemissions.implementation",
+                "typemissions.costkilling",
             ],
             [
                 "professionalexpertises.financeaccounting",
@@ -614,8 +701,9 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "businesspractice.retail"
             ],
             [
-                "typemissions.communication",
+                "typemissions.organisationtransformation",
                 "typemissions.recruitment",
+                "typemissions.execution",
                 "typemissions.change"
             ],
             [
@@ -644,8 +732,9 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "businesspractice.retail"
             ],
             [
-                "typemissions.knowledgemanagement",
-                "typemissions.communication",
+                "typemissions.organisationtransformation",
+                "typemissions.strategic",
+                "typemissions.execution"
             ],
             [
                 "professionalexpertises.salesbusinessdevelopment",
@@ -693,8 +782,9 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "businesspractice.retail"
             ],
             [
-                "typemissions.certification",
+                "typemissions.organisationtransformation",
                 "typemissions.communication",
+                "typemissions.execution",
                 "typemissions.strategic"
             ],
             [
@@ -727,6 +817,7 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             ],
             [
                 "typemissions.businessreingeniering",
+                "typemissions.execution",
                 "typemissions.strategic",
                 "typemissions.change"
             ],
@@ -739,7 +830,6 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.scope"
             ],
             []
-
         ], [
             "Dodin", "Arnaud", "arnaud.dodin@fr.gt.com",
             "", "FR",
@@ -756,7 +846,12 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "businesspractice.finance"
             ],
             [
+                "typemissions.organisationtransformation",
+                "typemissions.audit",
+                "typemissions.costkilling",
                 "typemissions.execution",
+                "typemissions.strategic",
+                "typemissions.implementation"
             ],
             [
                 "professionalexpertises.controlling",
@@ -770,8 +865,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             []
 
         ], [
-            "Doiteau", "Jean-Rene", "",
-            "jrd@niel-mcp.com", "FR",
+            "Doiteau", "Jean-Rene", "jrd@niel-mcp.com",
+            "", "FR",
             ['language.french'], "password",
             "PDG Fondateur associé du Groupe France - Manutention
             PDG Fondateur associé du Groupe France - Logistique Services
@@ -782,10 +877,11 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "businesspractice.services"
             ],
             [
-                "typemissions.communication",
+                "typemissions.organisationtransformation",
+                "typemissions.businessreingeniering",
                 "typemissions.strategic",
-                "typemissions.mediation",
-                "typemissions.coaching"
+                "typemissions.execution",
+                "typemissions.change"
             ],
             [
                 "professionalexpertises.salesbusinessdevelopment",
@@ -814,9 +910,13 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "businesspractice.it"
             ],
             [
+                "typemissions.organisationtransformation",
                 "typemissions.businessreingeniering",
-                "typemissions.communication",
+                "typemissions.costkilling",
+                "typemissions.execution",
+                "typemissions.strategic",
                 "typemissions.change",
+                "typemissions.audit"
             ],
             [
                 "professionalexpertises.businessunitmanager",
@@ -847,7 +947,9 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "typemissions.organisationtransformation",
                 "typemissions.costkilling",
                 "typemissions.execution",
+                "typemissions.strategic",
                 "typemissions.migration",
+                "typemissions.businessreingeniering",
                 "typemissions.change"
             ],
             [
@@ -879,7 +981,10 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "businesspractice.finance",
             ],
             [
-                "typemissions.infrastructure"
+                "typemissions.infrastructure",
+                "typemissions.crm",
+                "typemissions.migration",
+                "typemissions.implementation",
             ],
             [
                 "professionalexpertises.salesbusinessdevelopment",
@@ -911,9 +1016,10 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             ],
             [
                 "typemissions.businessreingeniering",
+                "typemissions.organisationtransformation",
+                "typemissions.execution",
                 "typemissions.recruitment",
                 "typemissions.change",
-                "typemissions.audit"
             ],
             [
                 "professionalexpertises.administrativemanagement",
@@ -973,7 +1079,9 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             ],
             [
                 "typemissions.organisationtransformation",
-                "typemissions.change"
+                "typemissions.change",
+                "typemissions.crm",
+                "typemissions.execution"
             ],
             [
                 "professionalexpertises.salesbusinessdevelopment"
@@ -1001,7 +1109,12 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "businesspractice.retail",
                 "businesspractice.energy"
             ],
-            [],
+            [
+                "typemissions.organisationtransformation",
+                "typemissions.execution",
+                "typemissions.audit",
+                "typemissions.costkilling"
+            ],
             [
                 "professionalexpertises.salesbusinessdevelopment",
                 "professionalexpertises.financeaccounting"
@@ -1027,6 +1140,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             ],
             [
                 "typemissions.organisationtransformation",
+                "typemissions.businessreingeniering",
+                "typemissions.execution",
                 "typemissions.change"
             ],
             [
@@ -1056,7 +1171,7 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             ],
             [
                 "typemissions.communication",
-                "typemissions.strategic"
+                "typemissions.execution"
             ],
             [
                 "professionalexpertises.marketinginnovation",
@@ -1086,6 +1201,7 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             ],
             [
                 "typemissions.organisationtransformation",
+                "typemissions.execution",
                 "typemissions.strategic"
             ],
             [
@@ -1112,7 +1228,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             ],
             [
                 "typemissions.organisationtransformation",
-                "typemissions.mediation"
+                "typemissions.mediation",
+                "typemissions.coaching"
             ],
             [
                 "professionalexpertises.humanresources"
@@ -1141,8 +1258,9 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             ],
             [
                 "typemissions.organisationtransformation",
-                "typemissions.knowledgemanagement",
-                "typemissions.strategic"
+                "typemissions.coaching",
+                "typemissions.strategic",
+                "typemissions.execution",
             ],
             [
                 "professionalexpertises.businessunitmanager",
@@ -1161,7 +1279,7 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             "ijg@free.fr", "FR",
             ['language.french'], "password",
             "Marketing chez l’OREAL et DANONE
-            Communication internationale ( Louis Vuitton, Lancôme, Chanel) 
+            Communication internationale ( Louis Vuitton, Lancôme, Chanel)
             Lancement de la marque MBT à Paris ( 2009)
             HEC Alumni",
 
@@ -1261,7 +1379,9 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             ],
             [
                 "typemissions.organisationtransformation",
-                "typemissions.strategic"
+                "typemissions.strategic",
+                "typemissions.execution",
+                "typemissions.coaching",
             ],
             [
                 "professionalexpertises.businessunitmanager",
@@ -1292,6 +1412,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             [
                 "typemissions.communication",
                 "typemissions.execution",
+                "typemissions.strategic",
+                "typemissions.coaching",
                 "typemissions.change"
             ],
             [
@@ -1321,8 +1443,9 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "businesspractice.finance"
             ],
             [
-                "typemissions.organisationtransformation",
-                "typemissions.change"
+                "typemissions.strategic",
+                "typemissions.execution",
+                "typemissions.audit"
             ],
             [
                 "professionalexpertises.administrativemanagement",
@@ -1350,8 +1473,11 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             ],
             [
                 "typemissions.organisationtransformation",
+                "typemissions.execution",
                 "typemissions.strategic",
-                "typemissions.change"
+                "typemissions.coaching",
+                "typemissions.change",
+                "typemissions.audit"
             ],
             [
                 "professionalexpertises.administrativemanagement",
@@ -1371,7 +1497,7 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             "stephane.lecca@yahoo.fr", "FR",
             ['language.french'], "password",
             "DG de Publicis Events – Filiale Evénementielle du Groupe Publicis
-            DG associé et créateur de Byzance Communication, conseil en Evénement 
+            DG associé et créateur de Byzance Communication, conseil en Evénement
             DG associé et créateur d’OMV, agence conseil en Street Marketing
             President de la delegation Communication Evenementielle de L'AACC (Association des Agences Conseil en Communication",
 
@@ -1381,6 +1507,7 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             ],
             [
                 "typemissions.communication",
+                "typemissions.execution",
                 "typemissions.strategic"
             ],
             [
@@ -1412,6 +1539,7 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             [
                 "typemissions.organisationtransformation",
                 "typemissions.strategic",
+                "typemissions.execution",
                 "typemissions.mediation",
                 "typemissions.change"
             ],
@@ -1447,7 +1575,9 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "typemissions.organisationtransformation",
                 "typemissions.communication",
                 "typemissions.strategic",
-                "typemissions.change"
+                "typemissions.execution",
+                "typemissions.change",
+                "typemissions.audit"
             ],
             [
                 "professionalexpertises.administrativemanagement",
@@ -1475,8 +1605,9 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "businesspractice.finance"
             ],
             [
-                "typemissions.businessreingeniering",
-                "typemissions.change",
+                "typemissions.execution",
+                "typemissions.organisationtransformation",
+                "typemissions.audit"
             ],
             [
                 "professionalexpertises.salesbusinessdevelopment",
@@ -1513,6 +1644,7 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "typemissions.organisationtransformation",
                 "typemissions.strategic",
                 "typemissions.execution",
+                "typemissions.audit",
                 "typemissions.change"
             ],
             [
@@ -1528,8 +1660,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             "Mamet", "Alexandre", "alexandre.mamet@gt-executive.com",
             "alexandre_mamet@yahoo.com", "FR",
             ['language.french'], "password",
-            "Président Directeur Général - Holding Financière Goa 
-            Directeur Général - Groupe La Brosse et Dupont (LVMH) 
+            "Président Directeur Général - Holding Financière Goa
+            Directeur Général - Groupe La Brosse et Dupont (LVMH)
             Vice-Président - Chocolat Weiss
             Asie du Sud Est et pays emergents",
 
@@ -1540,6 +1672,7 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "typemissions.organisationtransformation",
                 "typemissions.businessreingeniering",
                 "typemissions.outsourcing",
+                "typemissions.communication",
             ],
             [
                 "professionalexpertises.salesbusinessdevelopment",
@@ -1572,7 +1705,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             ],
             [
                 "typemissions.organisationtransformation",
-                "typemissions.change"
+                "typemissions.execution",
+                "typemissions.strategic"
             ],
             [
                 "professionalexpertises.salesbusinessdevelopment",
@@ -1604,8 +1738,6 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "businesspractice.industry"
             ],
             [
-                "typemissions.knowledgemanagement",
-                "typemissions.outsourcing",
                 "typemissions.execution",
                 "typemissions.strategic"
             ],
@@ -1633,8 +1765,10 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             ],
             [
                 "typemissions.organisationtransformation",
-                "typemissions.mediation",
-                "typemissions.change"
+                "typemissions.costkilling",
+                "typemissions.execution",
+                "typemissions.change",
+                "typemissions.audit"
             ],
             [
                 "professionalexpertises.administrativemanagement",
@@ -1666,8 +1800,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             ],
             [
                 "typemissions.knowledgemanagement",
-                "typemissions.outsourcing",
-                "typemissions.change"
+                "typemissions.strategic",
+                "typemissions.execution",
             ],
             [
                 "professionalexpertises.salesbusinessdevelopment",
@@ -1722,7 +1856,7 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             "ppetrou@mytikas.fr", "FR",
             ['language.french', 'language.english'], "password",
             "Country Manager Groupe ALPHA BANK
-            Membre du Directoire de Neuflize Schlumberger Mallet Demachy 
+            Membre du Directoire de Neuflize Schlumberger Mallet Demachy
             Directeur à la Direction Générale d'OBC - Odier Bungener Courvoisier
             HEC Alumni",
 
@@ -1733,7 +1867,7 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             [
                 "typemissions.organisationtransformation",
                 "typemissions.strategic",
-                "typemissions.change"
+                "typemissions.execution"
             ],
             [
                 "professionalexpertises.salesbusinessdevelopment"
@@ -1758,7 +1892,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "businesspractice.retail"
             ],
             [
-                "typemissions.strategic"
+                "typemissions.execution",
+                "typemissions.crm"
             ],
             [
                 "professionalexpertises.marketinginnovation",
@@ -1787,9 +1922,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "businesspractice.it",
             ],
             [
-                "typemissions.knowledgemanagement",
-                "typemissions.implementation",
-                "typemissions.certification",
+                "typemissions.organisationtransformation",
+                "typemissions.execution",
                 "typemissions.strategic"
             ],
             [
@@ -1823,7 +1957,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             ],
             [
                 "typemissions.strategic",
-                "typemissions.mediation",
+                "typemissions.execution",
+                "typemissions.organisationtransformation",
                 "typemissions.change"
             ],
             [
@@ -1859,6 +1994,7 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             ],
             [
                 "typemissions.outsourcing",
+                "typemissions.execution",
                 "typemissions.strategic"
             ],
             [
@@ -1878,7 +2014,7 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             ['language.french'], "password",
             "Directeur Expert Contrôle de Gestion – GTE (Eutelsat, Lafarge)
             Partner OnetoOne (Parclick.com)
-            Manager de transition – Agile Finance (Plastic Omnium, Visteon, Vallourec, FCI..)   
+            Manager de transition – Agile Finance (Plastic Omnium, Visteon, Vallourec, FCI..)
             Resp. Contrôle de Gestion – DAF BU (ArcelorMittal Lux., France, Esp.)
             Louvain Mnagement School, ICADE Madrid, EPWN",
 
@@ -1888,8 +2024,7 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             ],
             [
                 "typemissions.organisationtransformation",
-                "typemissions.knowledgemanagement",
-                "typemissions.certification",
+                "typemissions.execution",
                 "typemissions.change",
                 "typemissions.audit"
             ],
@@ -1927,6 +2062,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             ],
             [
                 "typemissions.implementation",
+                "typemissions.execution",
+                "typemissions.audit",
             ],
             [
                 "professionalexpertises.salesbusinessdevelopment",
@@ -1960,8 +2097,9 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "businesspractice.finance"
             ],
             [
-                "typemissions.knowledgemanagement",
-                "typemissions.outsourcing"
+                "typemissions.organisationtransformation",
+                "typemissions.strategic",
+                "typemissions.execution",
             ],
             [
                 "professionalexpertises.salesbusinessdevelopment",
@@ -1995,7 +2133,7 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             ],
             [
                 "typemissions.organisationtransformation",
-                "typemissions.mediation",
+                "typemissions.execution",
                 "typemissions.change"
             ],
             [
@@ -2007,11 +2145,11 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "professionalexpertises.digital"
             ],
             [
-//                "workexperience.organisationtransformation",
-//                "workexperience.decisionmakingprocess",
-//                "workexperience.crisiscommunication",
-//                "workexperience.redesignfunction",
-//                "workexperience.management"
+                "workexperience.organizatiotransformation",
+                "workexperience.decisionmakingprocess",
+                "workexperience.crisiscommunication",
+                "workexperience.redesignfunction",
+                "workexperience.management"
             ],
             []
 
@@ -2020,7 +2158,7 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             "Stroe", "Madalina", "madalina.stroe@gt-executive.com",
             "madalina_stroe@yahoo.com", "FR",
             ['language.french'], "password",
-            "Entrepreneur & CEO Eliad Technologies, Silicon Valley, brevets US, solutions mobilité Nokia, Vodafone, Telefonica, Otis, Dalkia, Veolia, Kiabi 
+            "Entrepreneur & CEO Eliad Technologies, Silicon Valley, brevets US, solutions mobilité Nokia, Vodafone, Telefonica, Otis, Dalkia, Veolia, Kiabi
             Manager de transition  JP Morgan, Deutsche Bank Londres
             Responsable progiciels de gestion Concept SA France
             Entrepreneurs high-tech",
@@ -2063,6 +2201,9 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             ],
             [
                 "typemissions.strategic",
+                "typemissions.execution",
+                "typemissions.organisationtransformation",
+                "typemissions.communication",
             ],
             [
                 "professionalexpertises.marketinginnovation",
@@ -2090,8 +2231,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             ],
             [
                 "typemissions.organisationtransformation",
-                "typemissions.knowledgemanagement",
-                "typemissions.outsourcing",
+                "typemissions.costkilling",
+                "typemissions.audit",
                 "typemissions.strategic",
                 "typemissions.execution",
                 "typemissions.change"
@@ -2120,7 +2261,9 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             ],
             [
                 "typemissions.organisationtransformation",
-                "typemissions.outsourcing"
+                "typemissions.execution",
+                "typemissions.costkilling",
+                "typemissions.audit"
             ],
             [
                 "professionalexpertises.businessunitmanager",
@@ -2148,8 +2291,7 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "businesspractice.retail"
             ],
             [
-                "typemissions.communication",
-                "typemissions.outsourcing"
+                "typemissions.execution"
             ],
             [
                 "professionalexpertises.salesbusinessdevelopment",
@@ -2177,7 +2319,10 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "businesspractice.finance"
             ],
             [
-                "typemissions.knowledgemanagement",
+                "typemissions.organisationtransformation",
+                "typemissions.execution",
+                "typemissions.audit",
+                "typemissions.costkilling"
             ],
             [
                 "professionalexpertises.businessunitmanager",
@@ -2204,8 +2349,9 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "businesspractice.it"
             ],
             [
+                "typemissions.strategic",
+                "typemissions.execution",
                 "typemissions.organisationtransformation",
-                "typemissions.outsourcing",
                 "typemissions.change"
             ],
             [
@@ -2224,7 +2370,7 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             "Wams", "Nanno", "nanno.wams@gt-executive.com",
             "nanno.wams@gmail.com", "FR",
             ['language.french', 'language.german', 'language.english'], "password",
-            "Directeur Financier et IT de Pays/Région : - DS Smith France –Espagne 
+            "Directeur Financier et IT de Pays/Région : - DS Smith France –Espagne
                   - Lafarge Allemagne, Benelux, Pologne, Corée du Sud
             CFO Division Mondiale : Sodexo Division Bases Vie & Asie-Australie
             CFO Corporate -Euronext C- : ESI Group
@@ -2238,6 +2384,7 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             [
                 "typemissions.organisationtransformation",
                 "typemissions.strategic",
+                "typemissions.execution",
                 "typemissions.change"
             ],
             [
@@ -2319,6 +2466,7 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
         foreach ($this->arrayDatas as $oneData) {
 
             // create Entity with fName, lName, email, country
+            /** @var User $newUser */
             $newUser = $userManager->createUser();
             $newUser
                 ->setFirstName($oneData[0])
@@ -2330,7 +2478,7 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
 
             // set languages
             foreach ($oneData[5] as $oneLang)
-                $newUser->addLanguage($langRepo->findOneByName($oneLang));
+                $newUser->addLanguage($langRepo->findOneBy(['name' => $oneLang]));
 
             // set password and status
             $newUser
@@ -2346,22 +2494,22 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
 
             // set user Datas
             foreach ($oneData[8] as $oneBuisiness)
-                $newUser->addBusinessPractice($practiceRepo->findOneByName($oneBuisiness));
+                $newUser->addBusinessPractice($practiceRepo->findOneBy(['name' => $oneBuisiness]));
 
             foreach ($oneData[9] as $oneMisKind)
-                $newUser->addMissionKind($missionKindRepo->findOneByName($oneMisKind));
+                $newUser->addMissionKind($missionKindRepo->findOneBy(['name' => $oneMisKind]));
 
             foreach ($oneData[10] as $oneProExp)
-                $newUser->addProfessionalExpertise($proExpRepo->findOneByName($oneProExp));
+                $newUser->addProfessionalExpertise($proExpRepo->findOneBy(['name' => $oneProExp]));
 
             foreach ($oneData[11] as $oneWorkExp)
-                $newUser->addWorkExperience($workExpRepo->findOneByName($oneWorkExp));
+                $newUser->addWorkExperience($workExpRepo->findOneBy(['name' => $oneWorkExp]));
 
             // gen Experience shaping
             $i = 0;
             foreach ($oneData[12] as $oneExpShap) {
 
-                $shap = new ExperienceShaping($workExpRepo->findOneByName($oneData[11][$i]));
+                $shap = new ExperienceShaping($workExpRepo->findOneBy(['name' => $oneData[11][$i]]));
 
                 $shap
                     ->setSmallCompany($oneExpShap[0])
@@ -2393,7 +2541,7 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
      */
     public function getOrder()
     {
-        return 9;
+        return 10;
     }
 
 }

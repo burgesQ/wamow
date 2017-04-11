@@ -2,13 +2,14 @@
 
 namespace MissionBundle\Service;
 
-use Doctrine\ORM\EntityManager;
-use Symfony\Component\DependencyInjection\ContainerInterface as Container;
+use Symfony\Component\DependencyInjection\Container;
+use MissionBundle\Repository\MissionRepository;
 use MissionBundle\Entity\UserMission;
+use Doctrine\ORM\EntityManager;
+use UserBundle\Entity\User;
 
 class MissionMatching
 {
-
     /**
      * @var EntityManager
      */
@@ -40,8 +41,8 @@ class MissionMatching
      */
     public function matchMissionByUser($user)
     {
-
-        // get the custome repository from Mission
+        // get the custom repository from Mission
+        /** @var MissionRepository $missionRepository */
         $missionRepository = $this->em->getRepository('MissionBundle:Mission');
 
         // execute a custom magic Query
@@ -52,12 +53,13 @@ class MissionMatching
      * Get all potential user user by a mission
      * Create the entity user_mission if she doesn't exist
      *
-     * @param      $mission
-     * @param bool $edit
+     * @param \MissionBundle\Entity\Mission $mission
+     * @param bool                          $edit
      */
     public function setUpPotentialUser($mission, $edit = false)
     {
         // get all kind of repo
+        /** @var MissionRepository $missionRepo */
         $missionRepo     = $this->em->getRepository('MissionBundle:Mission');
         $userMissionRepo = $this->em->getRepository('MissionBundle:UserMission');
         $userManager     = $this->container->get('fos_user.user_manager');
@@ -66,15 +68,15 @@ class MissionMatching
         $newArray = [];
 
         // get all previous user_mission
-        if ($edit)
-            $oldUserMission = $userMissionRepo->findByMission($mission);
-
+        if ($edit) {
+            $oldArray = $userMissionRepo->findBy(['mission' => $mission]);
+        }
         // get array of user that match the mission
         $userArray = $missionRepo->getUsersByMission($mission, false);
 
+        /** @var User $oneUser */
         foreach ($userArray as $oneUser) {
-            if (!($one =$userMissionRepo->findBy(array('user' => $oneUser, 'mission' => $mission)))) {
-
+            if (!($one = $userMissionRepo->findBy(['user' => $oneUser, 'mission' => $mission]))) {
                 // create a user_mission entity for user $oneUser
                 $userMission = new UserMission($oneUser, $mission);
 
@@ -88,6 +90,7 @@ class MissionMatching
 
                 // add the entity to the mission
                 $mission->addUserMission($userMission);
+                $this->em->flush($mission);
 
                 $newArray[] = $userMission;
             } else {
@@ -96,13 +99,14 @@ class MissionMatching
         }
 
         // remove user_mission that was on the previous version of the mission and not anymore
-        if ($edit)
-            foreach ($oldUserMission as $oneUserMission)
-                if (!in_array($oneUserMission, $newArray))
+        if ($edit) {
+            foreach ($oldArray as $oneUserMission) {
+                if (!in_array($oneUserMission, $newArray)) {
                     $this->em->remove($oneUserMission);
-
-        // save new state of the mission
-        $this->em->flush();
+                }
+            }
+            // flush removed user_mission
+            $this->em->flush();
+        }
     }
-
 }

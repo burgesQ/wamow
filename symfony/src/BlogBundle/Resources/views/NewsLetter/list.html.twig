@@ -2,14 +2,14 @@
 
 {% block body %}
 
-    <h4> {{ 'view.newsLetter.what'|trans({}, "BlogBundle") }} </h4>
+    <h4> {{ 'view.newsletter.what'|trans({}, "BlogBundle") }} </h4>
 
-    {% for oneNewsLetter in newsLetters  %}
-        <a href="{{ path('newsletter_show', {'id': oneNewsLetter.number}) }}">
-            <img src={{ oneNewsLetter.urlCover }} alt={{ oneNewsLtter.title }} style="width:10;height:10;">
+    {% for oneNewsletter in newsletters  %}
+        <a href="{{ path('newsletter_show', {'id': oneNewsletter.number}) }}">
+            <img src={{ oneNewsletter.urlCover }} alt={{ oneNewsletter.title }} style="width:10;height:10;">
         </a>
-        <br>{{ oneNewsLetter.publishedDate|date('m/d/Y') }}
-        <br>{{ oneNewsLetter.preTitle }}<br>
+        <br>{{ oneNewsletter.publishedDate|date('m/d/Y') }}
+        <br>{{ oneNewsletter.preTitle }}<br>
     {% endfor %}
 
 {% endblock %}

@@ -1304,7 +1304,7 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * Get userMission
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getUserMission()
     {

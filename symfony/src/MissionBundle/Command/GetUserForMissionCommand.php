@@ -45,8 +45,7 @@ class GetUserForMissionCommand extends ContainerAwareCommand
         ]);
 
         $missionRepo = $this->getContainer()->get('doctrine')
-            ->getManager()->getRepository('MissionBundle:Mission')
-        ;
+            ->getManager()->getRepository('MissionBundle:Mission');
 
         $mission = $missionRepo->findOneById($input->getArgument('missionId'));
 
@@ -56,14 +55,23 @@ class GetUserForMissionCommand extends ContainerAwareCommand
             '',
             'Business Practice (b)     : '.$mission->getBusinessPractice()->getName(),
             'Profesional Expertise (p) : '.$mission->getProfessionalExpertise()->getName(),
-            'Mission kind (k)          : '.$mission->getMissionKind()->getName(),
+            'Mission kind (k)          : '
+        ]);
+
+        foreach ($mission->getMissionKinds() as $oneKind) {
+            $output->writeln(' - '.$oneKind->getName());
+        }
+
+        $output->writeln([
             'And Speak (l)             : '
         ]);
 
-        foreach ($mission->getLanguages() as $oneLanguage)
+        foreach ($mission->getLanguages() as $oneLanguage) {
             $output->writeln(' - '.$oneLanguage->getName());
+        }
 
-        $users = $missionRepo->getUsersByMission($mission, false, true);
+
+        $users = $missionRepo->getUsersByMission($mission, true, true);
 
         $output->writeln([
             $users[1],
@@ -71,10 +79,10 @@ class GetUserForMissionCommand extends ContainerAwareCommand
             ''
         ]);
 
-        foreach ($users[0] as $oneUser)
-            $output->writeln(dump($oneUser->getEmail()));
-
-        $output->writeln('Well, their is only '.count($users[0]).' user that match the mission');
+        foreach ($users[0] as $oneUser) {
+            $output->writeln(dump($oneUser->getEmail()).$oneUser->getId());
+        }
+        $output->writeln('Well, their is only '.count($users[0]).' user that match the mission '.$mission->getTitle());
     }
 
 }

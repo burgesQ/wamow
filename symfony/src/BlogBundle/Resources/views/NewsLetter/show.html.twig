@@ -3,7 +3,7 @@
 {% block body %}
     <br>THE NEWSLETTER FOR THOSE WHO WANT TO KNOW MORE ABOUT WORK<br>
     This Week<br>
-    {{ newsLetter.title|raw }}<br>
+    {{ newsletter.title|raw }}<br>
 
     {% for article in articles %}
         {% if loop.index0 == 0 %}

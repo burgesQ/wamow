@@ -44,7 +44,7 @@ class LoadStep extends AbstractFixture implements OrderedFixtureInterface
 
     public function getOrder()
     {
-        return 14;
+        return 12;
     }
 
 }

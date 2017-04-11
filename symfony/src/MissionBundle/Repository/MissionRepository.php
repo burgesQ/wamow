@@ -3,6 +3,8 @@
 namespace MissionBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use MissionBundle\Entity\Mission;
+use UserBundle\Entity\User;
 
 /**
  * MissionRepository
@@ -25,9 +27,9 @@ class MissionRepository extends EntityRepository
      * A magic query that return a array of potential mission for a user
      * Need to refacto that shit, that burn my eyes
      *
-     * @param $user
+     * @param User $user
      *
-     * @return array
+     * @return Mission[]
      */
     public function getMissionByUser($user)
     {
@@ -38,7 +40,7 @@ class MissionRepository extends EntityRepository
                 LEFT JOIN m.languages l 
                 LEFT JOIN m.businessPractice b 
                 LEFT JOIN m.professionalExpertise p 
-                LEFT JOIN m.missionKind k 
+                LEFT JOIN m.missionKinds k 
                 LEFT JOIN m.userMission um
                 WHERE     um.user = :user
                 AND       um.status >= 0
@@ -125,11 +127,11 @@ class MissionRepository extends EntityRepository
      * A magic query that return a array of potential user for a mission
      * Need to refacto that shit, that burn my eyes
      *
-     * @param      $mission
-     * @param bool $ignored
-     * @param bool $dql
+     * @param Mission $mission
+     * @param bool    $ignored
+     * @param bool    $dql
      *
-     * @return array
+     * @return User[]
      */
     public function getUsersByMission($mission, $ignored = true, $dql = false)
     {
@@ -160,16 +162,24 @@ class MissionRepository extends EntityRepository
         $base = $base . ')
                 AND       p = :professionalExpertise';
         // add missionKind filter
-        $base = $base . '
-                AND       k = :missionKind';
+        $i = 0;
+        foreach ($mission->getMissionKinds() as $oneLanguage) {
+            if ($i)
+                $base = $base . '
+                OR        k = :missionKinds' . $i;
+            else
+                $base = $base . '
+                AND       (k = :missionKinds' . $i;
+            $i++;
+        }
         // add businessPractice filter
-        $base = $base . '
+        $base = $base . ')
                 AND       b = :businessPractice';
         // if ingored, add userMission filter (user that haven't refused the mission)
         if ($ignored)
             $base = $base . '
                 AND       um.mission = :mission
-                AND       um.status = 0';
+                AND       um.status >= -1';
         // order user by id
         $base = $base . '
                 ORDER BY  u.id ASC';
@@ -184,8 +194,12 @@ class MissionRepository extends EntityRepository
             $query->setParameter('missionLanguage' . $i, $oneLanguage);
             $i++;
         }
+        $i = 0;
+        foreach ($mission->getMissionKinds() as $oneKind) {
+            $query->setParameter('missionKinds' . $i, $oneKind);
+            $i++;
+        }
         $query->setParameter('professionalExpertise', $mission->getProfessionalExpertise());
-        $query->setParameter('missionKind', $mission->getMissionKind());
         $query->setParameter('businessPractice', $mission->getBusinessPractice());
         if ($ignored)
             $query->setParameter('mission', $mission->getId());

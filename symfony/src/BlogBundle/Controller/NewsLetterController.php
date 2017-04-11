@@ -4,20 +4,20 @@ namespace BlogBundle\Controller;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use BlogBundle\Repository\NewsLetterRepository;
+use BlogBundle\Repository\NewsletterRepository;
 
-class NewsLetterController extends Controller
+class NewsletterController extends Controller
 {
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function listAction()
     {
-        /** @var NewsLetterRepository $newsLetterRepository */
-        $newsLetterRepository = $this->getDoctrine()->getRepository('BlogBundle:NewsLetter');
+        /** @var NewsletterRepository $newsletterRepository */
+        $newsletterRepository = $this->getDoctrine()->getRepository('BlogBundle:Newsletter');
 
-        return $this->render('BlogBundle:NewsLetter:list.html.twig', [
-            'newsLetters' => $newsLetterRepository->getAvailableNewsLetters()
+        return $this->render('BlogBundle:Newsletter:list.html.twig', [
+            'newsletters' => $newsletterRepository->getAvailableNewsletters()
         ]);
     }
 
@@ -28,18 +28,18 @@ class NewsLetterController extends Controller
      */
     public function showAction($id)
     {
-        if (!($newsLetter = $this->getDoctrine()->getRepository('BlogBundle:NewsLetter')
+        if (!($newsletter = $this->getDoctrine()->getRepository('BlogBundle:Newsletter')
                 ->findOneBy(['number' => $id])) ||
-            $newsLetter->getPublishedDate > new \DateTime())
-            throw new NotFoundHttpException("No such newsLetter");
+            $newsletter->getPublishedDate > new \DateTime())
+            throw new NotFoundHttpException("No such newsletter");
 
         $articles = $this->getDoctrine()->getRepository('BlogBundle:Article')
             ->findBy([
-                'newsLetter' => $newsLetter
+                'newsletter' => $newsletter
             ]);
 
-        return $this->render('BlogBundle:NewsLetter:show.html.twig', [
-                'newsLetter' => $newsLetter,
+        return $this->render('BlogBundle:Newsletter:show.html.twig', [
+                'newsletter' => $newsletter,
                 'articles'   => $articles
         ]);
     }

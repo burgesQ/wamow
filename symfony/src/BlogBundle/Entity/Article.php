@@ -139,13 +139,13 @@ class Article
     private $urlCover;
 
     /**
-     * @var \BlogBundle\Entity\NewsLetter
+     * @var \BlogBundle\Entity\Newsletter
      * @ORM\ManyToOne(
-     *   targetEntity="BlogBundle\Entity\NewsLetter",
+     *   targetEntity="BlogBundle\Entity\Newsletter",
      *   inversedBy="articles"
      * )
      */
-    private $newsLetter;
+    private $newsletter;
 
     /**
      * Article constructor.
@@ -161,11 +161,11 @@ class Article
      * @param                               $creationDate
      * @param                               $time
      * @param                               $urlCover
-     * @param \BlogBundle\Entity\NewsLetter $newsLetter
+     * @param \BlogBundle\Entity\Newsletter $newsletter
      */
-    public function __construct($url, $preTitle, $title, $content, $poster, $writer, $category, $introduction, $creationDate, $time, $urlCover, $newsLetter)
+    public function __construct($url, $preTitle, $title, $content, $poster, $writer, $category, $introduction, $creationDate, $time, $urlCover, $newsletter)
     {
-        $this->publishedDate = $newsLetter->getPublishedDate();
+        $this->publishedDate = $newsletter->getPublishedDate();
         $this->updateDate    = new \DateTime();
         $this->postDate      = new \DateTime();
 
@@ -181,7 +181,7 @@ class Article
         $this->creationDate  = $creationDate;
         $this->time          = $time;
         $this->urlcover      = $urlCover;
-        $this->newsLetter    = $newsLetter;
+        $this->newsletter    = $newsletter;
     }
 
     /**
@@ -557,24 +557,24 @@ class Article
     }
 
     /**
-     * Get newsLetter
-     * @return \BlogBundle\Entity\NewsLetter
+     * Get newsletter
+     * @return \BlogBundle\Entity\Newsletter
      */
-    public function getNewsLetter()
+    public function getNewsletter()
     {
-        return $this->newsLetter;
+        return $this->newsletter;
     }
 
     /**
-     * Set newsLetter
+     * Set newsletter
      *
-     * @param \BlogBundle\Entity\NewsLetter $newsLetter
+     * @param \BlogBundle\Entity\Newsletter $newsletter
      *
      * @return Article
      */
-    public function setNewsLetter($newsLetter = null)
+    public function setNewsletter($newsletter = null)
     {
-        $this->newsLetter = $newsLetter;
+        $this->newsletter = $newsletter;
 
         return $this;
     }

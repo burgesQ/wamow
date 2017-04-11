@@ -14,9 +14,9 @@ view:
         intro: 'thought on "%article_title"'
         meta: Posted by %author_f_name %author_l_name (%author) the %postDate
         reply: Leave a Reply
-    newsLetter:
+    newsletter:
         link: Click to see the full newsletter
-        what: NewsLetters
+        what: Newsletters
 
 edit:
     save: Save changes

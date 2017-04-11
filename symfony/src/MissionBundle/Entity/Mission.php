@@ -109,10 +109,12 @@ class Mission
     private $professionalExpertise;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MissionBundle\Entity\MissionKind", cascade={"persist"})
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="MissionBundle\Entity\MissionKind", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $missionKind;
+    private $missionKinds;
 
     /**
      * @ORM\ManyToOne(targetEntity="MissionBundle\Entity\BusinessPractice")
@@ -630,26 +632,54 @@ class Mission
     }
 
     /**
-     * Set missionKind
+     * Add missionKind
      *
      * @param \MissionBundle\Entity\MissionKind $missionKind
+     *
      * @return Mission
      */
-    public function setMissionKind(\MissionBundle\Entity\MissionKind $missionKind)
+    public function addMissionKind($missionKind)
     {
-        $this->missionKind = $missionKind;
+        $this->missionKinds[] = $missionKind;
 
         return $this;
     }
 
     /**
-     * Get missionKind
+     * Remove missionKind
      *
-     * @return \MissionBundle\Entity\MissionKind
+     * @param \MissionBundle\Entity\MissionKind $missionKind
+     *
+     * @return Mission
      */
-    public function getMissionKind()
+    public function removeMissionKind($missionKind)
     {
-        return $this->missionKind;
+        $this->missionKinds->removeElement($missionKind);
+
+        return $this;
+    }
+
+    /**
+     * Set missionKinds
+     *
+     * @param ArrayCollection $missionKinds
+     * @return Mission
+     */
+    public function setMissionKinds($missionKinds)
+    {
+        $this->missionKinds = $missionKinds;
+
+        return $this;
+    }
+
+    /**
+     * Get missionKinds
+     *
+     * @return ArrayCollection
+     */
+    public function getMissionKinds()
+    {
+        return $this->missionKinds;
     }
 
     /**
@@ -848,7 +878,7 @@ class Mission
     /**
      * Get userMission
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getUserMission()
     {

@@ -8,12 +8,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\OrderBy;
 
 /**
- * NewsLetter
+ * Newsletter
  * @ORM\Table(name="newsletter")
- * @ORM\Entity(repositoryClass="BlogBundle\Repository\NewsLetterRepository")
+ * @ORM\Entity(repositoryClass="BlogBundle\Repository\NewsletterRepository")
  * @ORM\HasLifecycleCallbacks
  */
-class NewsLetter
+class Newsletter
 {
     /**
      * @var int
@@ -89,7 +89,7 @@ class NewsLetter
     private $articles;
 
     /**
-     * NewsLetter constructor.
+     * Newsletter constructor.
      *
      * @param $number
      * @param $preTitle
@@ -140,7 +140,7 @@ class NewsLetter
      *
      * @param $preTitle
      *
-     * @return NewsLetter
+     * @return Newsletter
      */
     public function setPreTitle($preTitle)
     {
@@ -163,7 +163,7 @@ class NewsLetter
      *
      * @param string $title
      *
-     * @return NewsLetter
+     * @return Newsletter
      */
     public function setTitle($title)
     {
@@ -186,7 +186,7 @@ class NewsLetter
      *
      * @param \DateTime $creationDate
      *
-     * @return NewsLetter
+     * @return Newsletter
      */
     public function setCreationDate($creationDate)
     {
@@ -209,7 +209,7 @@ class NewsLetter
      *
      * @param \DateTime $updateDate
      *
-     * @return NewsLetter
+     * @return Newsletter
      */
     public function setUpdateDate($updateDate)
     {
@@ -232,7 +232,7 @@ class NewsLetter
      *
      * @param \DateTime $publishedDate
      *
-     * @return NewsLetter
+     * @return Newsletter
      */
     public function setPublishedDate($publishedDate)
     {
@@ -255,7 +255,7 @@ class NewsLetter
      *
      * @param integer $number
      *
-     * @return NewsLetter
+     * @return Newsletter
      */
     public function setNumber($number)
     {
@@ -278,7 +278,7 @@ class NewsLetter
      *
      * @param string $urlCover
      *
-     * @return NewsLetter
+     * @return Newsletter
      */
     public function setUrlCover($urlCover)
     {
@@ -291,7 +291,7 @@ class NewsLetter
      * Add articles
      *
      * @param \BlogBundle\Entity\Article $articles
-     * @return NewsLetter
+     * @return Newsletter
      */
     public function addArticle($articles)
     {

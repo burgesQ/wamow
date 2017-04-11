@@ -15,7 +15,10 @@
     {{ mission.resume }}
 
   <h5>{{ 'mission.view.details'|trans }} :</h5>
-    {{ mission.professionalExpertise.name|trans }}, {{ mission.missionKind.name|trans }}
+    {{ mission.professionalExpertise.name|trans }}
+    {% for missionKind in mission.missionKinds %}
+        {{ missionKind.name | trans }}
+    {% endfor %}
   </p>
   <p>
   <h4><br>{{ 'mission.view.address'|trans }} :</h4>
@@ -79,4 +82,3 @@
 </body>
 </html>
 {% endblock %}
-

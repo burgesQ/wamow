@@ -1,12 +1,12 @@
 newsletter_list:
     path:      /archives/
     defaults:
-        _controller: BlogBundle:NewsLetter:list
+        _controller: BlogBundle:Newsletter:list
 
 newsletter_show:
     path:      /newsletters/{id}/
     defaults:
-        _controller: BlogBundle:NewsLetter:show
+        _controller: BlogBundle:Newsletter:show
 
 ## Must Be Last Import !!!
 article_view:
