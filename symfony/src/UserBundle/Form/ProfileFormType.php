@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 use ToolsBundle\Form\PhoneNumberType;
+use UserBundle\Entity\User;
 
 class ProfileFormType extends AbstractType
 {
@@ -191,12 +192,10 @@ class ProfileFormType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(
-            [
-                'data_class' => $this->class,
+        $resolver->setDefaults([
+                'data_class' => User::class,
                 'intention'  => 'profile',
-            ]
-        );
+        ]);
     }
 
     public function getParent()
