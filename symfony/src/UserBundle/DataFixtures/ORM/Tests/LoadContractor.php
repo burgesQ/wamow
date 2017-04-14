@@ -1,12 +1,13 @@
 <?php
 
-namespace MissionBundle\DataFixtures\ORM;
+namespace MissionBundle\DataFixtures\ORM\Tests;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use UserBundle\Entity\User;
 
 class LoadContractor extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
@@ -54,8 +55,11 @@ class LoadContractor extends AbstractFixture implements OrderedFixtureInterface,
     public function load(ObjectManager $manager)
     {
         $userManager = $this->container->get('fos_user.user_manager');
+        $userRepo    = $manager->getRepository('UserBundle:User');
         $langRepo    = $manager->getRepository('ToolsBundle:Language');
         $company     = $manager->getRepository('CompanyBundle:Company')->findOneByName('Esso');
+
+        $i = 42;
 
         foreach ($this->arrayDatas as $oneData) {
 
@@ -79,10 +83,14 @@ class LoadContractor extends AbstractFixture implements OrderedFixtureInterface,
                 ->setPasswordSet(true)
                 ->setRoles(['ROLE_CONTRACTOR'])
                 ->setEnabled(true)
-                ->setStatus(5);
+                ->setStatus(User::REGISTER_NO_STEP);
 
             // set User Company
             $newUser->setCompany($company);
+
+            while ($userRepo->findOneBy(['randomId' => $i]) && $i++);
+            $newUser->setRandomId($i);
+            $i++;
 
             // save user in db
             $userManager->updateUser($newUser, true);
@@ -91,7 +99,7 @@ class LoadContractor extends AbstractFixture implements OrderedFixtureInterface,
 
     public function getOrder()
     {
-        return 9;
+        return 11;
     }
 
 }

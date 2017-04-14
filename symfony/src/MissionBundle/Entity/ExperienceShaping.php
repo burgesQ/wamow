@@ -2,8 +2,9 @@
 
 namespace MissionBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * ExperienceShaping
@@ -23,69 +24,33 @@ class ExperienceShaping
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MissionBundle\Entity\WorkExperience", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(
+     *     targetEntity="MissionBundle\Entity\WorkExperience",
+     *     cascade={"persist"},
+     *     inversedBy="experienceShaping"
+     * )
      */
-    private $workTitle;
+    private $workExperience;
 
     /**
-     * @var boolean
-     *
-     * @ORM\Column(name="small_company", type="boolean")
+     * @ORM\ManyToMany(targetEntity="MissionBundle\Entity\CompanySize")
      */
-    private $smallCompany;
+    private $companySize;
 
     /**
-     * @var boolean
-     *
-     * @ORM\Column(name="medium_company", type="boolean")
+     * @ORM\ManyToMany(targetEntity="MissionBundle\Entity\Continent")
      */
-    private $mediumCompany;
-    
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="large_company", type="boolean")
-     */
-    private $largeCompany;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="south_america", type="boolean")
-     */
-    private $southAmerica;
-    
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="north_america", type="boolean")
-     */
-    private $northAmerica;
-    
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="asia", type="boolean")
-     */
-    private $asia;
-    
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="emea", type="boolean")
-     */
-    private $emea;
+    private $continents;
 
     /**
      * @var int
      *
      * @ORM\Column(name="cumuled_month", type="integer")
      * @Assert\Length(
-     *     min=0, 
+     *     min=0,
      *     max=240,
      *     minMessage="The value enter is too small",
-     *     maxMessage="The valur enter is too big",
+     *     maxMessage="The value enter is too big",
      * )
      */
     private $cumuledMonth;
@@ -109,22 +74,20 @@ class ExperienceShaping
      * @ORM\Column(name="peremption", type="boolean")
      */
     private $peremption;
-    
-    public function __construct($workTitle)
+
+    /**
+     * ExperienceShaping constructor.
+     */
+    public function __construct()
     {
-        $this->smallCompany = false;
-        $this->mediumCompany = false;
-        $this->largeCompany = false;
-        $this->southAmerica = false;
-        $this->northAmerica = false;
-        $this->asia = false;
-        $this->emea = false;
-        $this->cumuledMonth = 0;
-        $this->dailyFees = 0;
-        $this->peremption = false;
-        $this->workTitle = $workTitle;
+        $this->companySize    = new ArrayCollection();
+        $this->continents     = new ArrayCollection();
+        $this->cumuledMonth   = 1;
+        $this->dailyFees      = 0;
+        $this->peremption     = false;
+        $this->workExperience = null;
     }
-    
+
     /**
      * Get id
      *
@@ -135,199 +98,106 @@ class ExperienceShaping
         return $this->id;
     }
 
-
     /**
-     * Set workTitle
-     *
-     * @param MissionBundle/Entity/WorkExperience $workTitle
-     *
-     * @return ExperienceShaping
-     */
-    public function setWorkTitle($workTitle)
-    {
-        $this->workTitle = $workTitle;
-
-        return $this;
-    }
-
-    /**
-     * Get workTitle
+     * Get workExperience
      *
      * @return \MissionBundle\Entity\WorkExperience
      */
-    public function getWorkTitle()
+    public function getWorkExperience()
     {
-        return $this->workTitle;
+        return $this->workExperience;
     }
 
     /**
-     * Set smallCompany
+     * Set workExperience
      *
-     * @param boolean $smallCompany
+     * @param MissionBundle /Entity/WorkExperience $workExperience
      *
      * @return ExperienceShaping
      */
-    public function setSmallCompany($smallCompany)
+    public function setWorkExperience($workExperience)
     {
-        $this->smallCompany = $smallCompany;
+        $this->workExperience = $workExperience;
 
         return $this;
     }
 
     /**
-     * Get smallCompany
+     * Add companySize
      *
-     * @return boolean
-     */
-    public function getSmallCompany()
-    {
-        return $this->smallCompany;
-    }
-
-    /**
-     * Set mediumCompany
-     *
-     * @param boolean $mediumCompany
-     *
+     * @param \MissionBundle\Entity\CompanySize $companySize
      * @return ExperienceShaping
      */
-    public function setMediumCompany($mediumCompany)
+    public function addCompanySize($companySize)
     {
-        $this->mediumCompany = $mediumCompany;
+        $this->companySize[] = $companySize;
 
         return $this;
     }
 
     /**
-     * Get mediumCompany
+     * Remove companySize
      *
-     * @return boolean
+     * @param \MissionBundle\Entity\CompanySize $companySize
      */
-    public function getMediumCompany()
+    public function removeCompanySize($companySize)
     {
-        return $this->mediumCompany;
+        $this->companySize->removeElement($companySize);
     }
 
     /**
-     * Set largeCompany
+     * Get companySize
      *
-     * @param boolean $largeCompany
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCompanySize()
+    {
+        return $this->companySize;
+    }
+
+    /**
+     * Add continents
      *
+     * @param \MissionBundle\Entity\Continent $continents
      * @return ExperienceShaping
      */
-    public function setLargeCompany($largeCompany)
+    public function addContinent($continents)
     {
-        $this->largeCompany = $largeCompany;
+        $this->continents[] = $continents;
 
         return $this;
     }
 
     /**
-     * Get largeCompany
+     * Remove continents
      *
-     * @return boolean
+     * @param \MissionBundle\Entity\Continent $continents
      */
-    public function getLargeCompany()
+    public function removeContinent($continents)
     {
-        return $this->largeCompany;
+        $this->continents->removeElement($continents);
     }
 
     /**
-     * Set southAmerica
+     * Get continents
      *
-     * @param boolean $southAmerica
-     *
-     * @return ExperienceShaping
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function setSouthAmerica($southAmerica)
+    public function getContinents()
     {
-        $this->southAmerica = $southAmerica;
-
-        return $this;
+        return $this->continents;
     }
 
     /**
-     * Get southAmerica
+     * Get cumuledMonth
      *
-     * @return boolean
+     * @return int
      */
-    public function getSouthAmerica()
+    public function getCumuledMonth()
     {
-        return $this->southAmerica;
+        return $this->cumuledMonth;
     }
 
-    /**
-     * Set northAmerica
-     *
-     * @param boolean $northAmerica
-     *
-     * @return ExperienceShaping
-     */
-    public function setNorthAmerica($northAmerica)
-    {
-        $this->northAmerica = $northAmerica;
-
-        return $this;
-    }
-
-    /**
-     * Get northAmerica
-     *
-     * @return boolean
-     */
-    public function getNorthAmerica()
-    {
-        return $this->northAmerica;
-    }
-
-    /**
-     * Set asia
-     *
-     * @param boolean $asia
-     *
-     * @return ExperienceShaping
-     */
-    public function setAsia($asia)
-    {
-        $this->asia = $asia;
-
-        return $this;
-    }
-
-    /**
-     * Get asia
-     *
-     * @return boolean
-     */
-    public function getAsia()
-    {
-        return $this->asia;
-    }
-    
-    /**
-     * Set emea
-     *
-     * @param boolean $emea
-     *
-     * @return ExperienceShaping
-     */
-    public function setEmea($emea)
-    {
-        $this->emea = $emea;
-
-        return $this;
-    }
-
-    /**
-     * Get emea
-     *
-     * @return boolean
-     */
-    public function getEmea()
-    {
-        return $this->emea;
-    }
-    
     /**
      * Set cumuledMonth
      *
@@ -343,13 +213,13 @@ class ExperienceShaping
     }
 
     /**
-     * Get cumuledMonth
+     * Get dailyFees
      *
      * @return int
      */
-    public function getCumuledMonth()
+    public function getDailyFees()
     {
-        return $this->cumuledMonth;
+        return $this->dailyFees;
     }
 
     /**
@@ -367,13 +237,13 @@ class ExperienceShaping
     }
 
     /**
-     * Get dailyFees
+     * Get peremption
      *
-     * @return int
+     * @return bool
      */
-    public function getDailyFees()
+    public function getPeremption()
     {
-        return $this->dailyFees;
+        return $this->peremption;
     }
 
     /**
@@ -389,15 +259,4 @@ class ExperienceShaping
 
         return $this;
     }
-
-    /**
-     * Get peremption
-     *
-     * @return bool
-     */
-    public function getPeremption()
-    {
-        return $this->peremption;
-    }
 }
-

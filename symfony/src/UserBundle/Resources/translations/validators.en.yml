@@ -47,6 +47,21 @@ user:
         illegale: 'This last name contains illegal characters'
     cv:
         format: "This curriculum vitae file isn't a pdf."
+    businesspractice:
+        min: "Please select at least one Business practice"
+    professionalexpertises:
+        min: "Please select at least one Professional expertise"
+    kindfomission:
+        min: "Please select at least one Kind of mission"
+    valuableworkexperience:
+        min: "Please select at least one Valuable work experience"
+        max: "You selected too mush Valuable work experience"
+    languages:
+        min: Please select at least one Language
+    continent:
+        min: Please select at least one Continent
+
+
 
 group:
     name:

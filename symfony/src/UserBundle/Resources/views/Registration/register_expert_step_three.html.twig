@@ -1,13 +1,22 @@
-{% trans_default_domain "FOSUserBundle" %}
-
-{{ 'registration.step.three'|trans }}
-<br/>
-{{ 'registration.cat.three'|trans }}
-<br/>
-{{ 'registration.consign.three'|trans }}
-<br/>
-
-{{ form_start(form) }}
-{{ form_errors(form) }}
-{{ form_widget(form) }}
-{{ form_end(form) }}
+{% extends '::base.html.twig' %}
+{% trans_default_domain "tools" %}
+{% block body %}
+{{ 'registration.advisor.three.title' | trans }}
+<br>
+{{ 'registration.advisor.three.subtitle' | trans | upper }}
+<br>
+{{ 'registration.advisor.three.howtotitle' | trans | upper }}
+<br>
+{{ 'registration.advisor.three.howtotext' | trans }}
+<br>
+<div class="well">
+    {{ form_start(form) }}
+        {{ form_errors(form.missionKind) }}
+        {% for missionKind in form.missionKind %}
+            {{ form_row(missionKind) }}
+        {% endfor %}
+        {{ form_widget(form.back) }}
+        {{ form_widget(form.submit) }}
+    {{ form_end(form) }}
+</div>
+{% endblock %}

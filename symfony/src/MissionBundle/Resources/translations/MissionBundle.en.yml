@@ -94,6 +94,22 @@ mission:
         title: "My pitchs"
         giveUp: "give up"
 
+continent:
+    emea:          EMEA
+    south_america: South America
+    north_america: North America
+    asia:          Asia - Pacific
+
+company_size:
+    small:  Small Companies
+    medium: Medium Companies
+    large:  Large Companies
+
+experience_shaping:
+    cumuledmonth:   How many cumuled month ?
+    daily_fees:      What was you're daily fees for the last mission of this kind ?
+    peremption:     Was the last mission of this kind within the last 2 years ?
+
 businesspractice:
     title: "Business Practice"
     industry: "Industry"

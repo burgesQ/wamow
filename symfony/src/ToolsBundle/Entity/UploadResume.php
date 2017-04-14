@@ -22,8 +22,9 @@ class UploadResume extends Upload
     private $id;
    
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="resumes", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User",
+     *     inversedBy="resumes", cascade={"remove"})
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     private $user;
 

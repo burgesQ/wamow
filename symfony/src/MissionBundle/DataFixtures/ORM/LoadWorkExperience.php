@@ -1,7 +1,7 @@
 <?php
 
 
-namespace ToolsBundle\DataFixtures\ORM;
+namespace MissionBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\DataFixtures\AbstractFixture;

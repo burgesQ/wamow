@@ -12,3 +12,9 @@ tools:
         state: 'The state must contain only letters or dash.'
     upload:
         badFormat: "This fils doesn't match the good format"
+
+user:
+    companysize:
+        min: "Please select at least one Company size"
+    continent:
+        min: "Please select at least one Area"

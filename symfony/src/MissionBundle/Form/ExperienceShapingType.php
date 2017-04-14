@@ -2,101 +2,78 @@
 
 namespace MissionBundle\Form;
 
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\FormBuilderInterface;
 use MissionBundle\Entity\ExperienceShaping;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Validator\Constraints\Count;
 
 class ExperienceShapingType extends AbstractType
 {
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->remove('workTitle')
-            ->add('smallCompany', CheckboxType::class,
-                  [
-                      'translation_domain' => 'ExperienceShaping',
-                      'label' => 'form.label.smallCompany',
-                      'required' => false,
-                      'data_class' => null,
-                  ]
-            )
-            ->add('mediumCompany', CheckboxType::class,
-                  [
-                      'translation_domain' => 'ExperienceShaping',
-                      'label' => 'form.label.mediumCompany',
-                      'required' => false,
-                  ]
-            )
-            ->add('largeCompany', CheckboxType::class,
-                  [
-                      'translation_domain' => 'ExperienceShaping',
-                      'label' => 'form.label.largeCompany',
-                      'required' => false,
-                  ]
-            )
-            ->add('southAmerica', CheckboxType::class,
-                  [
-                      'translation_domain' => 'ExperienceShaping',
-                      'label' => 'form.label.southAmerica',
-                      'required' => false,
-                  ]
-            )
-            ->add('northAmerica', CheckboxType::class,
-                  [
-                      'translation_domain' => 'ExperienceShaping',
-                      'label' => 'form.label.northAmerica',
-                      'required' => false,
-                  ]
-            )
-            ->add('asia', CheckboxType::class,
-                  [
-                      'translation_domain' => 'ExperienceShaping',
-                      'label' => 'form.label.asia',
-                      'required' => false,
-                  ]
-            )
-            ->add('emea', CheckboxType::class,
-                  [
-                      'translation_domain' => 'ExperienceShaping',
-                      'label' => 'form.label.emea',
-                      'required' => false,
-                  ]
-            )
-            ->add('cumuledMonth', 'integer',
-                  [
-                      'translation_domain' => 'ExperienceShaping',
-                      'label' => 'form.label.cumuledMonth',
-                      'required' => false,
-                  ]
-            )
-            ->add('dailyFees', 'integer',
-                  [
-                      'translation_domain' => 'ExperienceShaping',
-                      'label' => 'form.label.dailyFees',
-                      'required' => false,
-                  ]
-            )
-            ->add('peremption', CheckboxType::class,
-                  [
-                      'translation_domain' => 'ExperienceShaping',
-                      'label' => 'form.label.peremption',
-                      'required' => false,
-                  ]
-            )
-            ;
+            ->remove('workExperience')
+            ->add('companySize', EntityType::class, [
+                'class'                     => 'MissionBundle:CompanySize',
+                'property'                  => 'name',
+                'multiple'                  => true,
+                'required'                  => true,
+                'expanded'                  => true,
+                'label'                     => false,
+                'translation_domain'        => 'tools',
+                'choice_translation_domain' => 'tools',
+                'constraints'               => new Count([
+                    'min' => 1,
+                    'minMessage' => 'user.companysize.min',
+                ])
+            ])
+            ->add('continents', EntityType::class, [
+                'class'                     => 'MissionBundle:Continent',
+                'property'                  => 'name',
+                'multiple'                  => true,
+                'required'                  => true,
+                'expanded'                  => true,
+                'label'                     => false,
+                'translation_domain'        => 'tools',
+                'choice_translation_domain' => 'tools',
+                'constraints'               => new Count([
+                    'min' => 1,
+                    'minMessage' => 'user.continent.min',
+                ])
+            ])
+            ->add('cumuledMonth', IntegerType::class, [
+                'translation_domain' => 'tools',
+                'label'              => 'registration.advisor.four.cumuledmonth',
+                'required'           => true,
+                'attr'               => [
+                    'min' => 1
+                ]
+            ])
+            ->add('dailyFees', IntegerType::class, [
+                'translation_domain' => 'tools',
+                'label'              => 'registration.advisor.four.dailyfees',
+                'required'           => true,
+                'attr'               => [
+                    'min' => 1
+                ]
+            ])
+            ->add('peremption', CheckboxType::class, [
+                'translation_domain' => 'tools',
+                'label'              => 'registration.advisor.four.peremption',
+                'required'           => false
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(
-            [
-                'data_class' => ExperienceShaping::class,
-            ]
-        );
+        $resolver->setDefaults([
+            'data_class' => ExperienceShaping::class,
+        ]);
     }
-
 }

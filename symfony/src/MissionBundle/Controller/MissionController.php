@@ -206,7 +206,7 @@ class MissionController extends Controller
             ]);
         } elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')) {
 
-            if (($url = $this->get('signedUp')->checkIfSignedUp($this))) {
+            if (($url = $this->get('signedUp')->checkIfSignedUp($user->getStatus()))) {
                 return $this->redirectToRoute($url);
             } elseif ($mission->getStatus() !== Mission::PUBLISHED) {
                 throw new NotFoundHttpException($trans
@@ -260,7 +260,7 @@ class MissionController extends Controller
         }
         elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR'))
         {
-            if (($url = $this->get('signedUp')->checkIfSignedUp($this)))
+            if (($url = $this->get('signedUp')->checkIfSignedUp($user->getStatus())))
             {
                 return $this->redirectToRoute($url);
             }
@@ -296,7 +296,7 @@ class MissionController extends Controller
         {
             throw new NotFoundHttpException($trans->trans('mission.pitch.contractor', array(), 'MissionBundle'));
         }
-        elseif (($url = $this->get('signedUp')->checkIfSignedUp($this)))
+        elseif (($url = $this->get('signedUp')->checkIfSignedUp($user->getStatus())))
         {
             return $this->redirectToRoute($url);
         }
@@ -343,7 +343,7 @@ class MissionController extends Controller
         {
             throw new NotFoundHttpException($trans->trans('mission.pitch.contractor', array(), 'MissionBundle'));
         }
-        elseif (($url = $this->get('signedUp')->checkIfSignedUp($this)))
+        elseif (($url = $this->get('signedUp')->checkIfSignedUp($user->getStatus())))
         {
             return $this->redirectToRoute($url);
         }

@@ -144,6 +144,11 @@ assetic:
         calendar_full_js:
             inputs:
               - '@CalendarBundle/Resources/public/js/fullcalendar.js'
+
+        jquery:
+            inputs:
+              - '%kernel.root_dir%/../vendor/components/jquery/jquery.js'
+
     debug:          "%kernel.debug%"
     use_controller: true
     bundles:        [ToolsBundle, MissionBundle, CalendarBundle, CompanyBundle]

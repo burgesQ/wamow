@@ -1,6 +1,6 @@
 <?php
 
-namespace MissionBundle\DataFixtures\ORM;
+namespace MissionBundle\DataFixtures\ORM\Tests;
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -151,6 +151,6 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface, Co
 
     public function getOrder()
     {
-        return 11;
+        return 13;
     }
 }

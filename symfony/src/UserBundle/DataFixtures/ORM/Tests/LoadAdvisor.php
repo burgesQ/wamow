@@ -1,7 +1,8 @@
 <?php
 
-namespace MissionBundle\DataFixtures\ORM;
+namespace MissionBundle\DataFixtures\ORM\Tests;
 
+use MissionBundle\Entity\CompanySize;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -2459,9 +2460,22 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
         // get all kind of repo
         $practiceRepo    = $manager->getRepository('MissionBundle:BusinessPractice');
         $missionKindRepo = $manager->getRepository('MissionBundle:MissionKind');
+        $userRepo        = $manager->getRepository('UserBundle:User');
         $workExpRepo     = $manager->getRepository('MissionBundle:WorkExperience');
         $proExpRepo      = $manager->getRepository('MissionBundle:ProfessionalExpertise');
         $langRepo        = $manager->getRepository('ToolsBundle:Language');
+        $companySizeRepo = $manager->getRepository('MissionBundle:CompanySize');
+        $continentRepo   = $manager->getRepository('MissionBundle:Continent');
+
+        $smallComp    = $companySizeRepo->findOneBy(['name' => 'company.small']);
+        $mediumComp   = $companySizeRepo->findOneBy(['name' => 'company.medium']);
+        $largeComp    = $companySizeRepo->findOneBy(['name' => 'company.large']);
+        $southAmerica = $continentRepo->findOneBy(['name' => 'continent.southAmerica']);
+        $northAmerica = $continentRepo->findOneBy(['name' => 'continent.northAmerica']);
+        $asia         = $continentRepo->findOneBy(['name' => 'continent.asia']);
+        $emea         = $continentRepo->findOneBy(['name' => 'continent.emea']);
+
+        $j = 42;
 
         foreach ($this->arrayDatas as $oneData) {
 
@@ -2476,6 +2490,9 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 ->setCountry($oneData[4])
             ;
 
+            while ($userRepo->findOneBy(['randomId' => $j]) && $j++);
+            $newUser->setRandomId($j);
+
             // set languages
             foreach ($oneData[5] as $oneLang)
                 $newUser->addLanguage($langRepo->findOneBy(['name' => $oneLang]));
@@ -2486,7 +2503,7 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 ->setPasswordSet(true)
                 ->setRoles(['ROLE_ADVISOR'])
                 ->setEnabled(true)
-                ->setStatus(5)
+                ->setStatus(User::REGISTER_NO_STEP)
             ;
 
             // set User resume
@@ -2509,21 +2526,40 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             $i = 0;
             foreach ($oneData[12] as $oneExpShap) {
 
-                $shap = new ExperienceShaping($workExpRepo->findOneBy(['name' => $oneData[11][$i]]));
+                $shap = new ExperienceShaping();
+
 
                 $shap
-                    ->setSmallCompany($oneExpShap[0])
-                    ->setMediumCompany($oneExpShap[1])
-                    ->setLargeCompany($oneExpShap[2])
-                    ->setSouthAmerica($oneExpShap[3])
-                    ->setNorthAmerica($oneExpShap[4])
-                    ->setAsia($oneExpShap[5])
-                    ->setEmea($oneExpShap[6])
+                    ->setWorkExperience($workExpRepo->findOneBy(['name' => $oneData[11][$i]]))
                     ->setCumuledMonth($oneExpShap[7])
                     ->setDailyFees($oneExpShap[8])
                     ->setPeremption($oneExpShap[9])
                 ;
 
+                switch ($oneExpShap) {
+                    case 0:
+                        $shap->setCompanySize($smallComp);
+                        break;
+                    case 1:
+                        $shap->setCompanySize($mediumComp);
+                        break;
+                    case 2:
+                        $shap->setCompanySize($largeComp);
+                        break;
+                    case 3:
+                        $shap->addContinent($southAmerica);
+                        break;
+                    case 4:
+                        $shap->addContinent($northAmerica);
+                        break;
+                    case 5:
+                        $shap->addContinent($asia);
+                        break;
+                    case 6:
+                        $shap->addContinent($emea);
+                        break;
+                }
+                
                 $manager->persist($shap);
                 $newUser->addExperienceShaping($shap);
                 $i++;
@@ -2541,7 +2577,6 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
      */
     public function getOrder()
     {
-        return 10;
+        return 12;
     }
-
 }

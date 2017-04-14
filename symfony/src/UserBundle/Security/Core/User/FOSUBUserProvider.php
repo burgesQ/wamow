@@ -7,6 +7,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface as Container;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use FOS\UserBundle\FOSUserEvents;
+use UserBundle\Entity\User;
 
 class FOSUBUserProvider extends BaseClass
 {
@@ -76,6 +77,7 @@ class FOSUBUserProvider extends BaseClass
             $setter_token = $setter . 'AccessToken';
 
             // create new user here
+            /** @var \UserBundle\Entity\User $user */
             $user = $this->userManager->createUser();
             $user->$setter_id($username)->$setter_token($response->getAccessToken());
 
@@ -85,13 +87,18 @@ class FOSUBUserProvider extends BaseClass
                 ->setPassword($username)
                 ->setEnabled(true)
                 ->setRoles(['ROLE_ADVISOR'])
-                ->setFirstName(ucwords($data['firstName']))
-                ->setLastName(ucwords($data['lastName']))
-                ->setUserResume($data['headline'] . $data['summary'])
-                ->setCountry(strtoupper($data['location']['country']['code']))
-                ->setStatus(0)
                 ->setPasswordSet(false)
             ;
+
+            if (array_key_exists('firstName', $data))
+                $user->setFirstName(ucwords($data['firstName']));
+            if (array_key_exists('lastName', $data))
+                $user->setLastName(ucwords($data['lastName']));
+            if (array_key_exists('headline', $data) && array_key_exists('summary', $data))
+                $user->setUserResume($data['headline'] . $data['summary']);
+            if (array_key_exists('location', $data) && array_key_exists('country', $data['location'])
+                && array_key_exists('code', $data['location']['country']))
+                $user->setCountry(strtoupper($data['location']['country']['code']));
 
             $dispatcher = $this->container->get('event_dispatcher');
             $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, null);

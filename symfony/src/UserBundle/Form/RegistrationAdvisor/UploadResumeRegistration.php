@@ -15,9 +15,10 @@ class UploadResumeRegistrationType extends AbstractType
         parent::buildForm($builder, $options);
         $builder
             ->remove('username')
+
             ->add('firstName')
             ->add('lastName')
-            ;
+        ;
     }
 
     public function getParent()
@@ -39,5 +40,4 @@ class UploadResumeRegistrationType extends AbstractType
     {
         return $this->getBlockPrefix();
     }
-
 }

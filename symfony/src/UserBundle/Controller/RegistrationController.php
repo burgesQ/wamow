@@ -2,42 +2,36 @@
 
 namespace UserBundle\Controller;
 
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use FOS\UserBundle\Controller\RegistrationController as BaseController;
-use Symfony\Component\HttpFoundation\Request;
-use FOS\UserBundle\FOSUserEvents;
-use FOS\UserBundle\Event\FormEvent;
-use FOS\UserBundle\Event\GetResponseUserEvent;
-use FOS\UserBundle\Event\FilterUserResponseEvent;
-
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\Storage\PhpBridgeSessionStorage;
+use FOS\UserBundle\Controller\RegistrationController as BaseController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Session\Session;
+use FOS\UserBundle\Event\FilterUserResponseEvent;
+use FOS\UserBundle\Event\GetResponseUserEvent;
+use Symfony\Component\HttpFoundation\Request;
+use FOS\UserBundle\Event\FormEvent;
+use FOS\UserBundle\FOSUserEvents;
+use UserBundle\Entity\User;
 
 class RegistrationController extends BaseController
 {
-    
-    public function registerExpertAction(Request $request)
+    /**
+     * Redirect to the correct registration step
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function registerExpertAction()
     {
-        if (($user = $this->getUser()))
-        {
-            $step = $user->getStatus();
-            $registrationService = $this->container->get('user.registration');
+        if (($user = $this->getUser()) &&
+            (($url = $this->get('signedup')->checkIfSignedUp($user->getStatus())) !==  null)) {
 
-            if ($user->getUsername() == "" || $step == 42)
-                return $this->container->get('user.registration')->manageStepZeroExpert($this, $request);
-            else if ($step == 0)
-                return $registrationService->manageStepOneExpert($this, $request, $user);
-            else if ($step == 1)
-                return $registrationService->manageStepTwoExpert($this, $request, $user);
-            else if ($step == 2)
-                return $registrationService->manageStepThreeExpert($this, $request, $user);
-            else if ($step == 3)
-                return $registrationService->manageStepFourExpert($this, $request, $user);
-            else if ($step == 4)
-                return $registrationService->manageStepFiveExpert($this, $request, $user);
+            return $this->redirectToRoute($url);
         }
-        else if (!$this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED'))
-            return $this->container->get('user.registration')->manageStepZeroExpert($this, $request);
+        elseif (!$user &&
+                !$this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+
+            return $this->redirectToRoute('expert_registration_step_zero');
+        }
 
         return $this->redirectToRoute('dashboard');
     }

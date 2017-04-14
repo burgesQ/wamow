@@ -7,9 +7,6 @@ rm -rf app/cache &&
     php app/console doctrine:schema:update --force -vvv &&
 ##* Load Fixture  :
     php app/console doctrine:fixtures:load --no-interaction -vvv &&
-##* Load Elastica  :
-    php app/console fos:elastica:reset &&
-    php app/console fos:elastica:populate &&
 ##* Assets Installation order for JS/CSS  :
     php app/console assets:install web --symlink &&
     php app/console assetic:dump web

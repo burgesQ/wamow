@@ -23,6 +23,13 @@ use CalendarBundle\Entity\Calendar;
  */
 class User extends BaseUser implements ParticipantInterface
 {
+    const REGISTER_STEP_ZERO      = 0;
+    const REGISTER_STEP_ONE       = 1;
+    const REGISTER_STEP_TWO       = 2;
+    const REGISTER_STEP_THREE     = 3;
+    const REGISTER_STEP_FOUR      = 4;
+    const REGISTER_NO_STEP        = 5;
+
     /**
      * @var int
      *
@@ -97,7 +104,7 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="first_name", type="string", length=255, nullable=false)
+     * @ORM\Column(name="first_name", type="string", length=255, nullable=true)
      * @Assert\NotBlank(message="user.fname.blank", groups={"Registration", "Profile"})
      * @Assert\Length(
      *     min=2,
@@ -114,7 +121,7 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="last_name", type="string", length=255, nullable=false)
+     * @ORM\Column(name="last_name", type="string", length=255, nullable=true)
      * @Assert\NotBlank(message="user.lname.blank", groups={"Registration", "Profile"})
      * @Assert\Length(
      *     min=2,
@@ -226,7 +233,9 @@ class User extends BaseUser implements ParticipantInterface
     private $images;
 
     /**
-     * @ORM\OneToMany(targetEntity="ToolsBundle\Entity\UploadResume", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="ToolsBundle\Entity\UploadResume",
+     *     mappedBy="user", cascade={"remove"})
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     private $resumes;
 
@@ -241,6 +250,10 @@ class User extends BaseUser implements ParticipantInterface
      * @var ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="\ToolsBundle\Entity\Language", cascade={"persist"})
+     * @Assert\Count(
+     *     min=1,
+     *     minMessage="user.languages.min"
+     * )
      */
     private $languages;
 
@@ -325,31 +338,49 @@ class User extends BaseUser implements ParticipantInterface
      */
     private $userMission;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="remote_work", type="boolean", nullable=false)
+     */
+    private $remoteWork;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="random_id", type="integer", nullable=false, unique=true)
+     */
+    private $randomId;
+
+    /**
+     * User constructor.
+     */
     public function __construct()
     {
         parent::__construct();
         $this->creationDate = new \Datetime();
         $this->confidentiality = false;
-        $this->status = 0;
-        $this->birthdate = NULL;
+        $this->status = self::REGISTER_STEP_ZERO;
+        $this->birthdate = null;
         $this->images = new ArrayCollection();
         $this->resumes = new ArrayCollection();
         $this->newsletter = true;
         $this->giveUpCount = 0;
-        $this->secretMail = array();
-        $this->userResume = NULL;
+        $this->secretMail = [];
+        $this->userResume = null;
         $this->languages = new ArrayCollection();
         $this->workExperience = new ArrayCollection();
         $this->professionalExpertise = new ArrayCollection();
         $this->missionKind = new ArrayCollection();
         $this->businessPractice = new ArrayCollection();
         $this->calendar = new Calendar();
-        $this->company = NULL;
+        $this->company = null;
         $this->nbLoad = 10;
         $this->readReport = true;
         $this->experienceShaping = new ArrayCollection();
-        $this->languages = new ArrayCollection();
         $this->userMission = new ArrayCollection();
+        $this->randomId = 0;
+        $this->remoteWork = false;
     }
 
     /**
@@ -874,7 +905,7 @@ class User extends BaseUser implements ParticipantInterface
      *
      * @param \ToolsBundle\Entity\UploadResume $resume
      */
-    public function removeResume(\ToolsBundle\Entity\UploadResume $resume)
+    public function removeResume($resume)
     {
         $this->resumes->removeElement($resume);
     }
@@ -885,15 +916,18 @@ class User extends BaseUser implements ParticipantInterface
      * @param \ToolsBundle\Entity\UploadResume $resume
      * @return User
      */
-    public function addResumes(\ToolsBundle\Entity\UploadResume $resume = null)
+    public function addResume($resume)
     {
+        if ($this->getId() > 0) {
+            $resumes->setUser($this);
+        }
         $this->resumes[] = $resume;
 
         return $this;
     }
 
     /**
-     * Add resumes
+     * Reset resumes
      *
      * @return User
      */
@@ -947,26 +981,26 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Add languages
+     * Add language
      *
-     * @param \ToolsBundle\Entity\Language $languages
+     * @param \ToolsBundle\Entity\Language $language
      * @return User
      */
-    public function addLanguage(\ToolsBundle\Entity\Language $languages)
+    public function addLanguage($language)
     {
-        $this->languages[] = $languages;
+        $this->languages[] = $language;
 
         return $this;
     }
 
     /**
-     * Remove languages
+     * Remove language
      *
-     * @param \ToolsBundle\Entity\Language $languages
+     * @param \ToolsBundle\Entity\Language $language
      */
-    public function removeLanguage(\ToolsBundle\Entity\Language $languages)
+    public function removeLanguage($language)
     {
-        $this->languages->removeElement($languages);
+        $this->languages->removeElement($language);
     }
 
     /**
@@ -1309,5 +1343,52 @@ class User extends BaseUser implements ParticipantInterface
     public function getUserMission()
     {
         return $this->userMission;
+    }
+
+    /**
+     * Set remoteWork
+     *
+     * @param boolean $remoteWork
+     * @return User
+     */
+    public function setRemoteWork($remoteWork)
+    {
+        $this->remoteWork = $remoteWork;
+
+        return $this;
+    }
+
+    /**
+     * Get remoteWork
+     *
+     * @return boolean
+     */
+    public function getRemoteWork()
+    {
+        return $this->remoteWork;
+    }
+
+
+    /**
+     * Set randomId
+     *
+     * @param integer $randomId
+     * @return User
+     */
+    public function setRandomId($randomId)
+    {
+        $this->randomId = $randomId;
+
+        return $this;
+    }
+
+    /**
+     * Get randomId
+     *
+     * @return integer 
+     */
+    public function getRandomId()
+    {
+        return $this->randomId;
     }
 }

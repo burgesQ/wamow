@@ -1,13 +1,22 @@
-{% trans_default_domain "FOSUserBundle" %}
-
-{{ 'registration.step.two'|trans }}
-<br/>
-{{ 'registration.cat.two'|trans }}
-<br/>
-{{ 'registration.consign.two'|trans }}
-<br/>
-
-{{ form_start(form) }}
-{{ form_errors(form) }}
-{{ form_widget(form) }}
-{{ form_end(form) }}
+{% extends '::base.html.twig' %}
+{% trans_default_domain "tools" %}
+{% block body %}
+{{ 'registration.advisor.two.title' | trans }}
+<br>
+{{ 'registration.advisor.two.subtitle' | trans | upper }}
+<br>
+{{ 'registration.advisor.two.howtotitle' | trans | upper }}
+<br>
+{{ 'registration.advisor.two.howtotext' | trans }}
+<br>
+<div class="well">
+    {{ form_start(form) }}
+        {{ form_errors(form.professionalExpertise) }}
+        {% for professionalExpertise in form.professionalExpertise %}
+            {{ form_row(professionalExpertise) }}
+        {% endfor %}
+        {{ form_widget(form.back) }}
+        {{ form_widget(form.submit) }}
+    {{ form_end(form) }}
+</div>
+{% endblock %}

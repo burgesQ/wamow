@@ -1,26 +1,3 @@
-# tools.en.yml
-form:
-    address:
-        street: "Address"
-        city: "City"
-        zipcode: "Zipcode"
-        state: "State"
-        country: "Country"
-        choosecountry: "Choose a country"
-        name: "Add a name if required"
-        label: "Add a label if required"
-
-    phone:
-        prefix: "Prefix"
-        chooseprefix: "Choose a prefix"
-        number: "Phone"
-
-    file:
-        file: "File"
-
-
-
-
 ## Dashboard
 dashboard:
     advisor:
@@ -43,7 +20,7 @@ dashboard:
             giveup: "Giveup"
             dismiss: "Dismiss"
             delete: "Delete"
-            unread: '{0}No new message|{1}You have %unread% new message|]1,Inf]You have %unread% new messages'
+            unread: "{0}No new message|{1}You have %unread% new message|]1,Inf]You have %unread% new messages"
         close:
             showmore: "Show more"
     contractor:
@@ -70,7 +47,7 @@ dashboard:
             waiting: "Waiting"
             finish: "Finish"
             mustbefinish: "Must be finish"
-            unread: '{0}No new message|{1}You have %unread% new message|]1,Inf]You have %unread% new messages'
+            unread: "{0}No new message|{1}You have %unread% new message|]1,Inf]You have %unread% new messages"
         draft:
             title: "Drafts"
             date: "Started at "
@@ -78,6 +55,60 @@ dashboard:
             deletebutton: "Delete"
     error:
         logged: "You are not logged"
+
+
+## Registration
+registration:
+    advisor:
+        zero:
+            title: "Firts, let's connect."
+            subtitle: "Get matched in just 5 minutes."
+            howtotitle: "85% of pitches are finding experts within 15 days."
+            howtotext: "Having a good matching profile will increase your succes! So fill in your profile details with attention. Be aware that the User Agreement of www.consultants.wantmore.work require an ID background check."
+            linkedinbutton: "Sign Up with Linkedin"
+            or: "or"
+            firstname: "First name"
+            lastname: "Last name"
+            email: "Email"
+            country: "Country of residence"
+            remote: "I'm mobile"
+            languages: "Select your languages"
+            password: "Password"
+            repeatpassord: "Repeat password"
+            mismatchpassword: "Mismatch password"
+            resume: "Upload your CV"
+            nextbutton: "NEXT"
+        one:
+            title: "Business practice?"
+            subtitle: "Select industry you've already worked on"
+            howtotitle: "First step:"
+            howtotext: "We need to know where you acquired your experience and / or did your missions. What does www.consultants.wantmore.work mean by Business Practices? We have identified 13 different business sectors. You can make several choices."
+            backbutton: "BACK"
+            nextbutton: "NEXT"
+        two:
+            title: "Kind of mission"
+            subtitle: "Select your missions"
+            howtotitle: "Second step:"
+            howtotext: "We need to understand which professional expertises you acquired or did in your missions. What does www.consultants.wantmore.work mean by Professional Expertises? We have identified 22 key functions in organizations. You can make several choices."
+            backbutton: "BACK"
+            nextbutton: "NEXT"
+        three:
+            title: "Professional Expertises"
+            subtitle: "Select wich type of missions"
+            howtotitle: "Third step:"
+            howtotext: "We need to understand what you did or experimented as advisor. What does www.consultants.wantmore.work mean by type of missions? We have identified 25 different consulting positions or levels. You can make several choices."
+            backbutton: "BACK"
+            nextbutton: "NEXT"
+        four:
+            title: "Valuable Work Experience"
+            subtitle: "Select 1 to 10 items"
+            howtotitle: "Fourth step:"
+            howtotext: "To identify your valuable work experience, you need to select between 1 to 10 items. It is important to choose relevant experiences and only proven ones to make your profile unique and bankable!"
+            backbutton: "BACK"
+            nextbutton: "FINISH"
+            cumuledmonth: "How many cumulted years?"
+            dailyfees: "Average daily fees"
+            peremption: "Was the last mission of this kind within the last 2 years?"
 
 
 ## Business vocabulary

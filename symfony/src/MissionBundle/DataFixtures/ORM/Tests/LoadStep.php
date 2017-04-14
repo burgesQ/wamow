@@ -1,6 +1,6 @@
 <?php
 
-namespace MissionBundle\DataFixtures\ORM;
+namespace MissionBundle\DataFixtures\ORM\Tests;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -44,7 +44,7 @@ class LoadStep extends AbstractFixture implements OrderedFixtureInterface
 
     public function getOrder()
     {
-        return 12;
+        return 14;
     }
 
 }

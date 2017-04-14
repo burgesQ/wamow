@@ -36,7 +36,7 @@ class ProfileController extends BaseController
             throw new AccessDeniedException('This user does not have access to this section.');
         }
         else if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')
-                 && ($url = $this->get('signedUp')->checkIfSignedUp($this)))
+                 && ($url = $this->get('signedUp')->checkIfSignedUp($user->getStatus())))
         {
             return $this->redirectToRoute($url);
         }
@@ -60,7 +60,7 @@ class ProfileController extends BaseController
             throw new AccessDeniedException('This user does not have access to this section.');
         }
         else if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')
-                 && ($url = $this->get('signedUp')->checkIfSignedUp($this)))
+                 && ($url = $this->get('signedUp')->checkIfSignedUp($user->getStatus())))
         {
             return $this->redirectToRoute($url);
         }
