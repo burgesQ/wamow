@@ -21,22 +21,6 @@ class MissionRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getSeekerMissions($userId, $companyId)
-    {
-        $qb = $this->_em->createQueryBuilder();
-        $qb->select('m')
-            ->from('MissionBundle:Mission', 'm')
-            ->leftjoin('m.teamContact', 't')
-            ->leftjoin('t.users', 'u')
-            ->where('u.id = :userId')
-                ->setParameter('userId', $userId)
-            ->andWhere('m.status >= 0')
-            ->andWhere('m.company = :companyId')
-                ->setParameter('companyId', $companyId)
-            ->orderBy('m.applicationEnding', 'DESC');
-        return $qb->getQuery()->getResult();
-    }
-
     /**
      * A magic query that return a array of potential mission for a user
      * Need to refacto that shit, that burn my eyes

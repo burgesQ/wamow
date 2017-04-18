@@ -7,10 +7,6 @@ calendar:
     resource: "@CalendarBundle/Resources/config/routing.yml"
     prefix:   /
 
-team:
-    resource: "@TeamBundle/Resources/config/routing.yml"
-    prefix:   /
-
 company:
     resource: "@CompanyBundle/Resources/config/routing.yml"
     prefix: /

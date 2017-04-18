@@ -21,14 +21,11 @@ class MessageRepository extends EntityRepository
             ->leftjoin('m.thread', 't')
             ->where('t = :thread')
             ->setParameter('thread', $thread)
-            ->orderBy('m.id', 'DESC')
+            ->orderBy('m.id', 'ASC')
             ->setMaxResults($maxMessages)
             ;
 
-        $array = $qb->getQuery()->getResult();
-        $array = array_reverse($array);
-
-        return $array;
+        return $qb->getQuery()->getResult();
     }
     
 }

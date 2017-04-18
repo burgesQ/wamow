@@ -318,7 +318,10 @@ class User extends BaseUser implements ParticipantInterface
     private $experienceShaping;
 
     /**
-     * @ORM\OneToMany(targetEntity="MissionBundle\Entity\UserMission", mappedBy="mission")
+     * @ORM\OneToMany(
+     *     targetEntity="MissionBundle\Entity\UserMission",
+     *     mappedBy="user"
+     * )
      */
     private $userMission;
 

@@ -1,6 +1,9 @@
 <?php
 namespace MissionBundle\Controller;
 
+use InboxBundle\Repository\MessageRepository;
+use InboxBundle\Repository\ThreadRepository;
+use InboxBundle\Services\Services;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -8,10 +11,10 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 use MissionBundle\Entity\Step;
 use MissionBundle\Entity\Mission;
+use MissionBundle\Entity\UserMission;
 use MissionBundle\Form\MissionType;
 use MissionBundle\Form\SelectionType;
 use MissionBundle\Form\TakeBackType;
-use TeamBundle\Entity\Team;
 use ToolsBundle\Entity\Tag;
 
 class MissionController extends Controller
@@ -45,12 +48,7 @@ class MissionController extends Controller
             while ($repository->findByToken($token) != null) {
                 $token = bin2hex(random_bytes(10));
             }
-            $team = new Team(1, $this->getUser()); //role 1 = contractor
-            $team->setStatus(1);
-            $em->persist($team);
-            $mission = new Mission($nbStep, $team, 1, $token, $company);
-            $team->setMission($mission);
-            $em->persist($team);
+            $mission = new Mission($nbStep, $user, $token, $company);
             $form = $this->get('form.factory')->create(new MissionType(), $mission);
             $form->handleRequest($request);
             if ($form->isValid())
@@ -75,7 +73,7 @@ class MissionController extends Controller
                 for ($i=1; $i <= $nbStep; $i++)
                 {
                     $array = $service->getStepConfig($i);
-                    $step = new Step($array["nbMaxTeam"], $array["reallocTeam"]);
+                    $step = new Step($array["nbMaxUser"], $array["reallocUser"]);
                     $step->setMission($mission);
                     $step->setPosition($i);
                     $em->persist($step);
@@ -84,23 +82,11 @@ class MissionController extends Controller
 
                 // Add notification for contractor
                 $notification = $this->container->get('notification');
-                $users = $team->getUsers();
                 $param = array(
                     'mission' => $mission->getId(),
                     'user'    => $user->getId(),
                 );
-                foreach ($users as $user)
-                {
-                    if ($user->getId() == $this->getUser()->getId())
-                    {
-                        $notification->new($this->getUser(), 1, 'notification.seeker.mission.create', $param);
-                    }
-                    else
-                    {
-                        //!\\ notification inactive
-                        $notification->new($user, 0, 'notification.seeker.mission.createbyother', $param);
-                    }
-                }
+                $notification->new($this->getUser(), 1, 'notification.seeker.mission.create', $param);
 
                 $this->get('mission_matching')->setUpPotentialUser($mission);
 
@@ -123,7 +109,6 @@ class MissionController extends Controller
     public function editAction($missionId, Request $request)
     {
         $trans = $this->get('translator');
-        $service = $this->container->get('team');
 
         if ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR'))
         {
@@ -133,7 +118,7 @@ class MissionController extends Controller
             $user = $this->getUser();
             if (null === $mission) {
                 throw new NotFoundHttpException($trans->trans('mission.error.wrongId', array('%id%' => $missionId), 'MissionBundle'));
-            } elseif ($service->isContractorOfMission($user, $mission) == false) {
+            } elseif ($mission->getContact() != $user) {
                 throw new NotFoundHttpException($trans->trans('mission.error.right', array(), 'MissionBundle'));
             } elseif ($user->getCompany() != $mission->getCompany()) {
                 throw new NotFoundHttpException($trans->trans('mission.error.wrongcompany', array(), 'MissionBundle'));
@@ -164,26 +149,6 @@ class MissionController extends Controller
                 $step->setStatus(1);
                 $em->flush();
 
-                // Add notification for contractors
-                $team = $mission->getTeamContact();
-                $users = $team->getUsers();
-                $notification = $this->container->get('notification');
-                $param = array(
-                    'mission' => $mission->getId(),
-                    'user'    => $this->getUser()->getId(),
-                );
-                foreach ($users as $user)
-                {
-                    if ($user->getId() == $this->getUser()->getId())
-                    {
-                        $notification->new($this->getUser(), 1, 'notification.seeker.mission.edit', $param);
-                    }
-                    else
-                    {
-                        $notification->new($user, 1, 'notification.seeker.mission.editbyother', $param);
-                    }
-                }
-
                 $this->get('mission_matching')->setUpPotentialUser($mission, true);
 
                 return new Response($trans->trans('mission.edit.successEdit', array(), 'MissionBundle'));
@@ -201,92 +166,78 @@ class MissionController extends Controller
     */
     public function viewAction($missionId, Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-        $trans = $this->get('translator');
-        $service = $this->container->get('team');
+        $em      = $this->getDoctrine()->getManager();
+        $trans   = $this->get('translator');
         $mission = $em->getRepository('MissionBundle:Mission')->find($missionId);
-        $user = $this->getUser();
+        $user    = $this->getUser();
 
         if ($user === null) {
-            throw new NotFoundHttpException($trans->trans('mission.error.logged', array(), 'MissionBundle'));
-        } elseif ($mission == null ||  $mission->getStatus() < 0) {
-            throw new NotFoundHttpException($trans->trans('mission.error.wrongId', array('%id%' => $missionId), 'MissionBundle'));
+            throw new NotFoundHttpException($trans->trans('mission.error.logged', [], 'MissionBundle'));
+        } elseif ($mission == null || $mission->getStatus() < 0) {
+            throw new NotFoundHttpException($trans->trans('mission.error.wrongId', ['%id%' => $missionId], 'MissionBundle'));
         }
 
-		$serviceInbox = $this->container->get('inbox.services');
-        $threadRepo = $em->getRepository('InboxBundle:Thread');
-        $repositoryStep = $em->getRepository('MissionBundle:Step');
+        $serviceInbox    = $this->container->get('inbox.services');
+        /** @var ThreadRepository $threadRepo */
+        $threadRepo      = $em->getRepository('InboxBundle:Thread');
+        $messageRepo     = $em->getRepository('InboxBundle:Message');
+        $userMissionRepo = $em->getRepository('MissionBundle:UserMission');
+        $repositoryStep  = $em->getRepository('MissionBundle:Step');
 
-        if ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR'))
-        {
-            if ($service->isContractorOfMission($user, $mission) == false) {
-                throw new NotFoundHttpException($trans->trans('mission.error.right', array(), 'MissionBundle'));
-            } elseif ($user->getCompany() != $mission->getCompany()) {
-                throw new NotFoundHttpException($trans->trans('mission.error.wrongcompany', array(), 'MissionBundle'));
+        if ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR')) {
+            if ($user->getCompany() != $mission->getCompany()) {
+                throw new NotFoundHttpException($trans->trans('mission.error.wrongcompany', [], 'MissionBundle'));
             }
 
-            $teamRepository = $em->getRepository('TeamBundle:Team');
-            $bigArray = $serviceInbox->setViewContractor($mission, $this, $request, $this->container);
+            $bigArray = $serviceInbox->setViewContractor($user, $mission, $request);
 
-            // reload the page
-            if ($bigArray == null)
+            // reload the page if needed (new message receive)
+            if ($bigArray == null) {
                 return $this->redirectToRoute('mission_view', ['missionId' => $missionId]);
+            }
 
-            return $this->render('MissionBundle:Mission:view_seeker.html.twig', array(
-                'user'				=> $user,
-                'role'				=> $user->getRoles(),
-                'mission'			=> $mission,
-                'listLanguage'		=> $mission->getLanguages(),
-                'threads'			=> $bigArray[0],
-                'bigArrayMessage'	=> $bigArray[1],
-                'arrayTeamName'		=> $bigArray[2],
-                'arrayRead'			=> $bigArray[3],
-                'arrayReplyForm'	=> $bigArray[4],
-                'teams'             => $teamRepository->getTeamByMission($missionId),
-                'step'              => $repositoryStep->findOneBy(array('mission' => $mission, 'status' => 1)),
-            ));
-        }
-        elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR'))
-        {
-            if (($url = $this->get('signedUp')->checkIfSignedUp($this)))
-            {
+            return $this->render('MissionBundle:Mission:view_seeker.html.twig', [
+                'user'            => $user,
+                'mission'         => $mission,
+                'threads'         => $bigArray[0],
+                'bigArrayMessage' => $bigArray[1],
+                'arrayReplyForm'  => $bigArray[4],
+                'step'            => $repositoryStep->findOneBy(['mission' => $mission, 'status' => 1]),
+            ]);
+        } elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')) {
+
+            if (($url = $this->get('signedUp')->checkIfSignedUp($this))) {
                 return $this->redirectToRoute($url);
+            } elseif ($mission->getStatus() !== 1) {
+                throw new NotFoundHttpException($trans
+                    ->trans('mission.error.available', ['%id%' => $missionId], 'MissionBundle'));
             }
-            else if ($mission->getStatus() !== 1)
-            {
-                throw new NotFoundHttpException($trans->trans('mission.error.available', array('%id%' => $missionId), 'MissionBundle'));
-            }
 
+            $userMission = $userMissionRepo->findOneBy(['user' => $user, 'mission' => $mission]);
+            $thread      = $threadRepo->findOneBy(['userMission' => $userMission]);
 
-            $thread = $serviceInbox->setChatBoxAdvisor($threadRepo->getThreadByMission($mission), $user);
-            $teamName = "";
-            $replyForm = null;
+            /** @var MessageRepository $messageRepository */
+            $replyForm         = null;
 
-            if ($thread)
-            {
-                $teamName = "Team ".$thread->getTeamCreator()->getId();
-                $replyForm = $serviceInbox->getReplyForm($thread, $user, $request,
-                    $this->container);
+            if ($thread) {
+                $replyForm = $serviceInbox->getReplyForm($thread, $user, $request);
 
-                // reload the page
-                if ($replyForm == null)
+                // if needed reload the page
+                if ($replyForm == null) {
                     return $this->redirectToRoute('mission_view', ['missionId' => $missionId]);
+                }
             }
-
-			return $this->render('MissionBundle:Mission:view_expert.html.twig', array(
-				'user'			=> $user,
-				'role'			=> $user->getRoles(),
-				'mission'		=> $mission,
-				'listLanguage'	=> $mission->getLanguages(),
-				'thread'		=> $thread,
-				'arrayMessage'	=> $em->getRepository('InboxBundle:Message')->getMessageForThread($thread, $user->getNbLoad()),
-				'teamName'		=> $teamName,
-				'read'			=> $serviceInbox->updateReadReport($thread, $user, $this->getDoctrine()->getManager()),
-				'replyForm'		=> $replyForm,
-                'step'          => $repositoryStep->findOneBy(array('mission' => $mission, 'status' => 1)),
-			));
-		}
-	}
+            $serviceInbox->updateReadReport($thread, $user);
+            return $this->render('MissionBundle:Mission:view_expert.html.twig', [
+                'user'         => $user,
+                'mission'      => $mission,
+                'thread'       => $thread,
+                'arrayMessage' => $messageRepo->getMessageForThread($thread, $user->getNbLoad()),
+                'replyForm'    => $replyForm,
+                'step'         => $repositoryStep->findOneBy(['mission' => $mission, 'status' => 1]),
+            ]);
+        }
+    }
 
     /*
     **  List
@@ -295,18 +246,14 @@ class MissionController extends Controller
     {
         $trans = $this->get('translator');
         $em = $this->getDoctrine()->getManager();
-        $repositoryMission = $em->getRepository('MissionBundle:Mission');
         $user = $this->getUser();
 
-        if ( $user === null ) {
+        if ($user === null) {
             throw new NotFoundHttpException($trans->trans('mission.error.logged', array(), 'MissionBundle'));
         }
         elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR'))
         {
-            if ($user->getCompany() != null)
-            {
-                $listMission = $repositoryMission->getSeekerMissions($user->getId(), $user->getCompany()->getId());
-            }
+            $listMission = $em->getRepository('MissionBundle:Mission')->findBy(array('contact' => $user, 'company' => $user->getCompany()));
             return $this->render('MissionBundle:Mission:all_missions_seeker.html.twig', array(
                 'listMission'           => $listMission
             ));
@@ -317,7 +264,11 @@ class MissionController extends Controller
             {
                 return $this->redirectToRoute($url);
             }
-            $listMission = $repositoryMission->getExpertMissionsAvailables();
+            $listMission = array();
+            $userMissions = $em->getRepository('MissionBundle:UserMission')->findBy(array('user' => $user));
+            foreach ($userMissions as $userMission) {
+                array_push($listMission, $userMission->getMission());
+            }
             return $this->render('MissionBundle:Mission:all_missions_expert.html.twig', array(
                 'listMission'           => $listMission
             ));
@@ -326,6 +277,53 @@ class MissionController extends Controller
         {
             throw new NotFoundHttpException($trans->trans('mission.error.logged', array(), 'MissionBundle'));
         }
+    }
+
+    /*
+    **  Interested
+    */
+    public function interestedAction($missionId)
+    {
+        $trans = $this->get('translator');
+        $em = $this->getDoctrine()->getManager();
+
+        // Security check
+        if (($user = $this->getUser()) === null )
+        {
+            throw new NotFoundHttpException($trans->trans('mission.error.logged', array(), 'MissionBundle'));
+        }
+        elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR') )
+        {
+            throw new NotFoundHttpException($trans->trans('mission.pitch.contractor', array(), 'MissionBundle'));
+        }
+        elseif (($url = $this->get('signedUp')->checkIfSignedUp($this)))
+        {
+            return $this->redirectToRoute($url);
+        }
+
+        // Check mission
+        $missionRepo = $em->getRepository('MissionBundle:Mission');
+        $mission = $missionRepo->findOneBy(array('id' => $missionId));
+        if ($mission == null || $mission->getStatus() < 1)
+        {
+            throw new NotFoundHttpException($trans->trans('mission.error.available', array('%id%' => $missionId), 'MissionBundle'));
+        }
+
+        // Check UserMission
+        $userMissionRepo = $em->getRepository('MissionBundle:UserMission');
+        if (!($userMission = $userMissionRepo->findOneby(array('mission' => $mission, 'user' => $user))))
+        {
+            throw new NotFoundHttpException($trans->trans('mission.error.usermission', array(), 'MissionBundle'));
+        }
+
+        // Check Status UserMission
+        if ($userMission->getStatus() == UserMission::NEW)
+        {
+            $userMission->setStatus(UserMission::INTERESTED);
+            $em->flush();
+            return new Response($trans->trans('mission.interested.done', array(), 'MissionBundle'));
+        }
+        throw new NotFoundHttpException($trans->trans('mission.pitch.forbidden', array(), 'MissionBundle'));
     }
 
     /*
@@ -348,73 +346,60 @@ class MissionController extends Controller
         {
             return $this->redirectToRoute($url);
         }
+
         $repositoryMission = $em->getRepository('MissionBundle:Mission');
-        $repositoryTeam = $em->getRepository('TeamBundle:Team');
-        $listTeams = $repositoryTeam->getTeamsByUserId($user->getId());
         $mission = $repositoryMission->findOneBy(array('id' => $missionId));
-        if ($mission == null ||  $mission->getStatus() < 1) {
+        if ($mission == null || $mission->getStatus() < 1) {
             throw new NotFoundHttpException($trans->trans('mission.error.available', array('%id%' => $missionId), 'MissionBundle'));
         }
 
-        // Check if the expert has already pitch
-        foreach ($listTeams as $team) {
-            if ($team->getMission() == $mission) {
-                return new Response($trans->trans('mission.pitch.twice', array(), 'MissionBundle'));
-            }
+        // Check if the advisor has already pitch
+        /** @var UserMission $userMission */
+        $userMission = $em->getRepository('MissionBundle:UserMission')
+            ->findOneBy(['user' => $user, 'mission' => $mission]);
+
+        if ($userMission->getStatus() >= UserMission::STEP1)
+        {
+            return new Response($trans->trans('mission.pitch.twice', array(), 'MissionBundle'));
+        }
+        elseif ($userMission->getStatus() < UserMission::NEW)
+        {
+            return new Response($trans->trans('mission.pitch.forbidden', array(), 'MissionBundle'));
         }
 
-        // Create team
-        $team = new Team(0, $this->getUser());  //role 0 = advisor
-        $team->setMission($mission);
-        $em->persist($team);
-        $em->flush($team);
+        // Create a thread between the Advisor and the thread
+        $this->get('inbox.services')->createThreadPitch($userMission);
 
-        // Create a thread between the Advisor Team and the thread
-//        $messenger = $this->get('inbox.services');
-//        $messenger->createThreadPitch($team, $mission, $em,
-//            $this->get('fos_message.composer'),
-//            $this->get('fos_message.sender'));
+        // Add expert
+        $userMission->setStatus(UserMission::STEP1);
+        $em->flush();
 
-        // Add notification for advisors
-        $param = array(
+        // Add notification for advisor
+        $param = [
             'mission' => $mission->getId(),
             'user'    => $user,
-            'team'    => $team->getId(),
-        );
-        $notification = $this->container->get('notification');
-        $advisors = $team->getUsers();
-        foreach ($advisors as $advisor)
-        {
-            $notification->new($advisor, 1, 'notification.expert.mission.pitch', $param);
-        }
+        ];
 
-        // Add notification for contractors
-        $contractors = $mission->getTeamContact()->getUsers();
-        foreach ($contractors as $contractor)
-        {
-            $notification->new($contractor, 1, 'notification.seeker.mission.pitchedbynewteam', $param);
-        }
+        $notification = $this->container->get('notification');
+        $notification->new($user, 1, 'notification.expert.mission.pitch', $param);
+
+        // Add notification for contractor
+        $contractor = $mission->getContact();
+        $notification->new($contractor, 1, 'notification.seeker.mission.pitchedbynewuser', $param);
 
         return new Response($trans->trans('mission.pitch.done', array(), 'MissionBundle'));
     }
 
 	/*
-	** Team Status :
-	**	   -3 : no user left in the team
-	**	   -2 : pitch deleted
-	**	   -1 : deleted by the contractor
-	**		0 : waiting teams
-	**		1 : first step
-	**		2 : second step
-	**		3 : winning team
+    **  Selection of Advisors
 	*/
     public function selectionAction(Request $request, $missionId)
     {
         $trans = $this->get('translator');
         $em = $this->getDoctrine()->getManager();
 
-        $repositoryTeam = $em->getRepository('TeamBundle:Team');
         $repositoryStep = $em->getRepository('MissionBundle:Step');
+        $repositoryUserMission = $em->getRepository('MissionBundle:UserMission');
         $notification = $this->container->get('notification');
 
         // Security
@@ -445,85 +430,53 @@ class MissionController extends Controller
         $position = $step->getPosition();
         $nextStep = $repositoryStep->findOneBy(array('mission' => $mission, 'position' => $position + 1));
 
-        // Get teams
-        $teams = $repositoryTeam->getAvailablesTeams($missionId, $step, false);
-
-        // If there is no team in the mission
-        if ($teams == null)
-        {
-            return new Response($trans->trans('mission.selection.noTeam', array(), 'MissionBundle'));
-        }
-
-        // If it's the first step keep the fastest teams of advisors
-        if ($position == 1)
-        {
-            foreach ($teams as $team)
-            {
-                if ($team->getStatus() == 0)
-                {
-                    $team->setStatus($position);
-                    $em->persist($team);
-                    $param = array(
-                        'mission' => $missionId,
-                        'user'    => $user->getId(),
-                        'step'    => $position,
-                    );
-
-                    // Add notifications for advisors
-                    $advisors = $team->getUsers();
-                    foreach ($advisors as $advisor)
-                    {
-                        $notification->new($advisor, 1, 'notification.expert.mission.beginselection', $param);
-                    }
-                }
-            }
-            $em->flush();
-        }
+        $usersMission = $repositoryUserMission->getAvailablesUsers($missionId, $step, false);
 
         // If the selection is done
         if ($nextStep == null)
         {
-            foreach ($teams as $team)
+            foreach ($usersMission as $userMission)
             {
-                return new Response($trans->trans('mission.selection.finish', array('%id%' => $team->getId()), 'MissionBundle'));
+                return new Response($trans->trans('mission.selection.finish', array('%id%' => $userMission->getUser()->getId(), 'MissionBundle')));
             }
         }
 
-        // Number of possibles teams
-        $nbTeams = count($teams);
+        // Number of possible users
+        $nbUsers = count($usersMission);
 
-        $form = $this->get('form.factory')->create(new SelectionType($missionId, $position));
+        $form = $this->get('form.factory')->create(new SelectionType($missionId, $step));
         $form->handleRequest($request);
         if ($this->get('request')->getMethod() == 'POST')
         {
             $data = $form->getData();
-            $teamsAdvisors = $data['team'];
-            $nbTeamsChosen = count($teamsAdvisors);
 
-            // Selection de teams
+            $advisors = $data['userMission'];
+            $nbAdvisorsChosen = count($advisors);
+
+            // Select users
             if ($form->get('save')->isClicked())
             {
-                if ($nbTeamsChosen > $nextStep->getNbMaxTeam())
+                if ($nbAdvisorsChosen > $nextStep->getNbMaxUser())
                 {
-                    $request->getSession()->getFlashBag()->add('notice', $trans->trans('mission.error.select.toomanyteams', array(), 'MissionBundle'));
-                    return $this->redirectToRoute('mission_teams_selection', array(
+                    $request->getSession()->getFlashBag()->add('notice', $trans->trans('mission.error.select.toomanyusers', array(), 'MissionBundle'));
+                    return $this->redirectToRoute('mission_users_selection', array(
                         'missionId' => $missionId
                     ));
                 }
-                else if ($nbTeamsChosen == 0 || $nbTeamsChosen != $nextStep->getNbMaxTeam())
+                else if ($nbAdvisorsChosen < $nextStep->getNbMaxUser())
                 {
-                    $request->getSession()->getFlashBag()->add('notice', $trans->trans('mission.error.select.notenoughteams', array(), 'MissionBundle'));
-                    return $this->redirectToRoute('mission_teams_selection', array(
+                    $request->getSession()->getFlashBag()->add('notice', $trans->trans('mission.error.select.notenoughusers', array(), 'MissionBundle'));
+                    return $this->redirectToRoute('mission_users_selection', array(
                         'missionId' => $missionId
                     ));
                 }
 
-                $messenger = $this->get('inbox.services');
+                //$messenger = $this->get('inbox.services');
 
-                foreach ($teamsAdvisors as $teamAdvisors)
+                foreach ($advisors as $advisor)
                 {
-                    $teamAdvisors->setStatus($nextStep->getPosition());
-                    $em->persist($teamAdvisors);
+                    $advisor->setStatus($nextStep->getPosition());
+                    $em->persist($advisor);
 
                     $param = array(
                         'mission' => $missionId,
@@ -531,41 +484,27 @@ class MissionController extends Controller
                         'step'    => $nextStep->getPosition(),
                     );
 
-                    // Create a thread if it's not already done
-                    // if next step of the mission is ok with that
-                    if ($nextStep->getAnonymousMode() > 0 && !$teamAdvisors->getThreads()[0])
-                    {
-                        $messenger->createThreadPitch($teamAdvisors, $mission, $em,
-                                    $this->get('fos_message.composer'),
-                                    $this->get('fos_message.sender'));
+                    /** @var Services    $inboxService */
+                    $inboxService = $this->container->get('inbox.services');
+                    /** @var UserMission $userMission */
+                    $userMission  = $repositoryUserMission->findOneBy(['user' => $advisor, 'mission' => $mission]);
+                    // TODO => if $userMission === null (user that wanna pitch wasn't selected by the algo)
+                    // Create a thread if it's not already done if next step of the mission is ok with that
+                    if ($nextStep->getAnonymousMode() > 0) {
+                        $thread = $inboxService->createThreadPitch($userMission);
                     }
 
                     // Add notifications for advisors
-                    $advisors = $teamAdvisors->getUsers();
-                    foreach ($advisors as $advisor)
-                    {
-                        $notification->new($advisor, 1, 'notification.expert.mission.selection', $param);
-                    }
+                    $notification->new($advisor->getUser(), 1, 'notification.expert.mission.selection', $param);
 
                     // Add notifications for contractors
-                    $contractors = $mission->getTeamContact()->getUsers();
-                    foreach ($contractors as $contractor)
-                    {
-                        $param = array(
-                            'mission'      => $missionId,
-                            'user'         => $user->getId(),
-                            'step'         => $step->getPosition(),
-                            'teamAdvisors' => $teamAdvisors->getId(),
-                        );
-                        if ($contractor->getId() == $user->getId())
-                        {
-                            $notification->new($user, 1, 'notification.seeker.mission.selection', $param);
-                        }
-                        else
-                        {
-                            $notification->new($contractor, 1, 'notification.seeker.mission.selectionbyother', $param);
-                        }
-                    }
+                    $param = array(
+                        'mission'      => $missionId,
+                        'user'         => $user->getId(),
+                        'step'         => $step->getPosition(),
+                        'user' => $advisor->getUser()->getId(),
+                    );
+                    $notification->new($user, 1, 'notification.seeker.mission.selection', $param);
                 }
                 $nextStep->setStatus(1);
                 $nextStep->setStart(new \DateTime());
@@ -582,35 +521,32 @@ class MissionController extends Controller
 
                 $em->flush();
                 // Add notifications for advisors not selected
-                $teamsNotSelected = $repositoryTeam->findBy(array('mission' => $mission, 'status' => $position));
-                foreach ($teamsNotSelected as $teamNotSelected)
+                $usersNotSelected = $repositoryUserMission->findBy(array('mission' => $mission, 'status' => $position));
+                foreach ($usersNotSelected as $userNotSelected)
                 {
-                    $advisors = $teamNotSelected->getUsers();
-                    foreach ($advisors as $advisor)
-                    {
-                        $notification->new($advisor, 1, 'notification.expert.mission.notselected', $param);
-                    }
+                    $notification->new($userNotSelected->getUser(), 1, 'notification.expert.mission.notselected', $param);
                 }
 
-                return $this->redirectToRoute('mission_teams_selection', array(
+                return $this->redirectToRoute('mission_users_selection', array(
                     'missionId' => $missionId
                 ));
             }
-            // Suppression de team
+            // Delete users
             else
             {
-                if ($nbTeamsChosen == 0 || $nbTeamsChosen > $step->getReallocTeam())
+                //TODO verifier si le nombre de suppression est inferieur au nombre de users dispo dans la step du dessous...
+                if ($nbAdvisorsChosen == 0 || $nbAdvisorsChosen > $step->getReallocUser())
                 {
-                    $request->getSession()->getFlashBag()->add('notice', $trans->trans('mission.error.select.toomanyteams', array(), 'MissionBundle'));
-                    return $this->redirectToRoute('mission_teams_selection', array(
+                    $request->getSession()->getFlashBag()->add('notice', $trans->trans('mission.error.select.toomanyusers', array(), 'MissionBundle'));
+                    return $this->redirectToRoute('mission_users_selection', array(
                         'missionId' => $missionId
                     ));
                 }
 
-                foreach ($teamsAdvisors as $teamAdvisors)
+                foreach ($advisors as $advisor)
                 {
-                    $teamAdvisors->setStatus(-1);
-                    $em->persist($teamAdvisors);
+                    $advisor->setStatus(UserMission::DISMISS);
+                    $em->persist($advisor);
 
                     $param = array(
                         'mission' => $missionId,
@@ -619,62 +555,21 @@ class MissionController extends Controller
                     );
 
                     // Add notifications for advisors
-                    $advisors = $teamAdvisors->getUsers();
-                    foreach ($advisors as $advisor)
-                    {
-                        $notification->new($advisor, 1, 'notification.expert.mission.dismiss', $param);
-                    }
+                    $notification->new($advisor->getUser(), 1, 'notification.expert.mission.dismiss', $param);
 
                     // Add notifications for contractors
-                    $teamContractors = $mission->getTeamContact();
-                    $contractors = $teamContractors->getUsers();
-                    foreach ($contractors as $contractor)
-                    {
-                        $param = array(
+                    $contractor = $mission->getContact();
+                    $param = array(
                             'mission'      => $missionId,
                             'user'         => $user->getId(),
                             'step'         => $nextStep->getPosition(),
-                            'teamAdvisors' => $teamAdvisors->getId(),
-                        );
-                        if ($contractor->getId() == $user->getId())
-                        {
-                            $notification->new($user, 1, 'notification.seeker.mission.dismiss', $param);
-                        }
-                        else
-                        {
-                            $notification->new($contractor, 1, 'notification.seeker.mission.dismissbyother', $param);
-                        }
-                    }
+                            'advisor'      => $advisor->getUser()->getId(),
+                    );
+                    $notification->new($user, 1, 'notification.seeker.mission.dismiss', $param);
                 }
                 $em->flush();
-
-                // if this is the first step the takeback is automatic
-                if ($position == 1)
-                {
-                    foreach ($teams as $team)
-                    {
-                        if ($team->getStatus() == 0)
-                        {
-                            $team->setStatus($position);
-                            $em->persist($team);
-                            $param = array(
-                                'mission' => $missionId,
-                                'user'    => $user->getId(),
-                                'step'    => $position,
-                            );
-
-                            // Add notifications for advisors
-                            $advisors = $team->getUsers();
-                            foreach ($advisors as $advisor)
-                            {
-                                $notification->new($advisor, 1, 'notification.expert.mission.beginselection', $param);
-                            }
-                        }
-                    }
-                    $em->flush();
-                }
             }
-            return $this->redirectToRoute('mission_teams_selection', array(
+            return $this->redirectToRoute('mission_users_selection', array(
                 'missionId' => $missionId
             ));
         }
@@ -683,7 +578,7 @@ class MissionController extends Controller
             'form' => $form->createView(),
             'missionId' => $missionId,
             'step' => $step,
-            'nbTeams' => $nbTeams
+            'nbUsers' => $nbUsers
         ));
     }
 
@@ -692,10 +587,12 @@ class MissionController extends Controller
     */
     public function takebackAction(Request $request, $missionId)
     {
-        $em = $this->getDoctrine()->getManager();
         $trans = $this->get('translator');
+
+        $em = $this->getDoctrine()->getManager();
         $mission = $em->getRepository('MissionBundle:Mission')->find($missionId);
         $step = $em->getRepository('MissionBundle:Step')->findOneby(array('mission' => $mission, 'status' => 1));
+        $oldStep = $em->getRepository('MissionBundle:Step')->findOneby(array('mission' => $mission, 'position' => ($step->getPosition() - 1)));
 
         if ($step == null)
         {
@@ -713,88 +610,68 @@ class MissionController extends Controller
             throw new NotFoundHttpException($trans->trans('mission.error.wrongcompany', array(), 'MissionBundle'));
         }
 
-        $repositoryTeam = $em->getRepository('TeamBundle:Team');
-        $nbrTeams = count($repositoryTeam->getAvailablesTeams($missionId, $step, true));
-        $full = $nbrTeams >= $step->getNbMaxTeam() ? true : false;
-
-        $form = $this->get('form.factory')->create(new TakeBackType($missionId, $position - 1));
-        $form->handleRequest($request);
-
-        if ($step->getStatus() != 1)
-        {
-            return $this->redirectToRoute('mission_teams_selection', array(
-                'missionId' => $missionId
-            ));
-        }
-        elseif ($step->getReallocTeam() == 0)
+        if ($step->getReallocUser() == 0)
         {
             $request->getSession()->getFlashBag()->add('notice', $trans->trans('mission.selection.takeback', array(), 'MissionBundle'));
-            return $this->redirectToRoute('mission_teams_selection', array(
+            return $this->redirectToRoute('mission_users_selection', array(
                 'missionId' => $missionId
             ));
         }
+
+        $repositoryUserMission = $em->getRepository('MissionBundle:UserMission');
+        $vacancies = $step->getNbMaxUser() - count($repositoryUserMission->getAvailablesUsers($missionId, $step, false));
+
+        $form = $this->get('form.factory')->create(new TakeBackType($missionId, $oldStep));
+        $form->handleRequest($request);
+
         if ($this->get('request')->getMethod() == 'POST')
         {
             $data = $form->getData();
-            $teamsAdvisors = $data['team'];
+            $advisors = $data['userMission'];
             $notification = $this->container->get('notification');
-            $messenger = $this->get('inbox.services');
+            /** @var Services    $inboxService */
+            $inboxService = $this->container->get('inbox.services');
 
-            foreach ($teamsAdvisors as $teamAdvisors)
+            foreach ($advisors as $advisor)
             {
-                $step->setReallocTeam($step->getReallocTeam() - 1);
-                $teamAdvisors->setStatus($position);
+                $step->setReallocUser($step->getReallocUser() - 1);
+                $advisor->setStatus($position);
 
-                if ($step->getAnoymousMode() > 0 && !$teamAdvisors->getThreads()[0])
-                {
-                    $messenger->createThreadPitch($teamAdvisors, $mission, $em,
-                                                  $this->get('fos_message.composer'),
-                                                  $this->get('fos_message.sender'));
+                /** @var UserMission $userMission */
+                $userMission  = $repositoryUserMission->findOneBy(['user' => $advisor, 'mission' => $mission]);
+                // TODO => if $userMission === null (user that wanna pitch wasn't selected by the algo)
+                if ($step->getAnoymousMode() > 0 ) {
+                    $thread = $inboxService->createThreadPitch($userMission);
                 }
-                $em->flush($teamAdvisors);
+                $em->flush($advisor);
 
-                // Add notifications for advisors
+                // Add notifications for advisor
                 $param = array(
                     'mission' => $mission->getId(),
                     'user'    => $user->getId(),
                     'step'    => $position,
                 );
-                $advisors = $teamAdvisors->getUsers();
-                foreach ($advisors as $advisor)
-                {
-                    $notification->new($advisor, 1, 'notification.expert.mission.takeback', $param);
-                }
+                $notification->new($advisor->getUser(), 1, 'notification.expert.mission.takeback', $param);
 
-                // Add notifications for contractors
-                $teamContractors = $mission->getTeamContact();
-                $contractors = $teamContractors->getUsers();
-                foreach ($contractors as $contractor)
-                {
-                        $param = array(
-                            'mission'      => $missionId,
-                            'user'         => $user->getId(),
-                            'step'         => $position,
-                            'teamAdvisors' => $teamAdvisors->getId(),
-                        );
-                        if ($contractor->getId() == $this->getUser()->getId())
-                        {
-                            $notification->new($this->getUser(), 1, 'notification.seeker.mission.takeback', $param);
-                        }
-                        else
-                        {
-                            $notification->new($contractor, 1, 'notification.seeker.mission.takebackbyother', $param);
-                        }
-                }
+                // Add notifications for contractor
+                $contractor = $mission->getContact();
+                $param = array(
+                    'mission'      => $missionId,
+                    'user'         => $user->getId(),
+                    'step'         => $position,
+                    'advisor'      => $advisor->getUser()->getId(),
+                );
+                $notification->new($this->getUser(), 1, 'notification.seeker.mission.takeback', $param);
             }
             $em->flush($step);
-            return $this->redirectToRoute('mission_teams_selection', array(
+            return $this->redirectToRoute('mission_users_selection', array(
                 'missionId' => $missionId
             ));
         }
         return $this->render('MissionBundle:Mission:takeback.html.twig', array(
             'form' => $form->createView(),
             'missionId' => $missionId,
-            'full' => $full
+            'vacancies' => $vacancies
             ));
     }
 
@@ -805,64 +682,44 @@ class MissionController extends Controller
     {
         $trans = $this->get('translator');
         $em = $this->getDoctrine()->getManager();
-        $service = $this->container->get('team');
-        $repository = $em->getRepository('MissionBundle:Mission');
-        $mission = $repository->find($missionId);
+        $mission = $em->getRepository('MissionBundle:Mission')->find($missionId);
         $user = $this->getUser();
 
         if ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR')
-            && $mission != null && $service->isContractorOfMission($user, $mission) == true
+            && $mission != null
+            && $mission->getContact() == $user
             && $mission->getStatus() == 0
             && $user->getCompany() == $mission->getCompany())
         {
 
             $mission->setStatus(-1);
-            $teams = $em->getRepository('TeamBundle:Team')->getAdvisorsTeams($missionId);
             $notification = $this->container->get('notification');
-
             $steps = $em->getRepository('MissionBundle:Step')->getStepsAvailables($missionId);
             foreach ($steps as $step)
             {
                 $step->setStatus(-1);
+                $em->persist($step);
             }
-            $em->flush();
 
-            foreach ($teams as $team) {
-                $team->setStatus(-2);
+            $param = array(
+                'mission' => $mission->getId(),
+                'user'    => $user->getId(),
+            );
 
+            $usersMission = $em->getRepository('MissionBundle:UserMission')->findBy(array('mission' => $mission));
+            foreach ($usersMission as $userMission) {
+                $userMission->setStatus(UserMission::DELETED);
+                $em->persist($userMission);
 
                 // Add notifications for advisors
-                $users = $team->getusers();
-                foreach ($users as $user)
-                {
-                    $param = array(
-                        'mission' => $mission->getId(),
-                        'user'    => $user->getId(),
-                    );
-                    $notification->new($user, 1, 'notification.expert.mission.delete', $param);
-                }
-                $em->flush();
-            }
+                $notification->new($userMission->getUser(), 1, 'notification.expert.mission.delete', $param);
 
-            // Add notifications for contractors
-            $team = $mission->getTeamContact();
-            $users = $team->getUsers();
-            foreach ($users as $user)
-            {
-                    $param = array(
-                        'mission' => $mission->getId(),
-                        'user'    => $this->getUser()->getId(),
-                    );
-                    if ($user->getId() == $this->getUser()->getId())
-                    {
-                        $notification->new($this->getUser(), 1, 'notification.seeker.mission.delete', $param);
-                    }
-                    else
-                    {
-                        $notification->new($user, 1, 'notification.seeker.mission.deletebyother', $param);
-                    }
             }
-            return $this->redirectToRoute('missions_all', array());
+            // Add notifications for contractor
+            $notification->new($user, 1, 'notification.seeker.mission.delete', $param);
+
+            $em->flush();
+            return $this->redirectToRoute('dashboard', array());
         }
         throw new NotFoundHttpException($trans->trans('mission.error.forbiddenAccess', array(), 'MissionBundle'));
     }
@@ -874,64 +731,57 @@ class MissionController extends Controller
     {
         $trans = $this->get('translator');
         $notification = $this->container->get('notification');
+
         $em = $this->getDoctrine()->getManager();
         $mission = $em->getRepository('MissionBundle:Mission')->findOneById($missionId);
 
         $user = $this->getUser();
-        $repository = $em->getRepository('TeamBundle:Team');
-        $team = $repository->getTeamByMissionAndUser($missionId, $user->getId());
+        $userMission = $em->getRepository('MissionBundle:UserMission')->findOneBy(array('user' => $user, 'mission' => $mission));
 
         if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')
-            && $mission != null && $team != null && $mission->getStatus() >= 1)
+            && $mission != null && $mission->getStatus() >= 1 && $userMission != null)
         {
-            $param = array(
-                'mission' => $mission->getId(),
-                'user'    => $user->getId(),
-            );
+            switch ($userMission->getStatus()) {
+                case UserMission::GIVEUP:
+                    throw new NotFoundHttpException($trans->trans('mission.error.alreadygiveup', array(), 'MissionBundle'));
+                    break;
+                case UserMission::DELETED:
+                case UserMission::REFUSED:
+                case UserMission::DISMISS:
+                    throw new NotFoundHttpException($trans->trans('mission.error.cantgiveup', array(), 'MissionBundle'));
+                    break;
+                case UserMission::NEW:
+                case UserMission::INTERESTED:
+                    $userMission->setStatus(UserMission::REFUSED);
+                    $em->persist($userMission);
+                    $em->persist($user);
+                    $em->flush();
+                    return $this->redirectToRoute('dashboard', array());
+                    break;
+                case UserMission::WIP:
+                    $userMission->setStatus(UserMission::GIVEUP);
+                    $em->persist($userMission);
+                    $em->persist($user);
+                    $em->flush();
+                    $param = array(
+                        'mission' => $mission->getId(),
+                        'user'    => $user->getId(),
+                    );
 
-            $advisors = $team->getUsers();
-            foreach ($advisors as $advisor)
-            {
-                // Add notification for advisors
-                if ($advisor->getId() == $this->getUser()->getId())
-                {
-                    $notification->new($advisor, 1, 'notification.expert.mission.giveup', $param);
-                }
-                else
-                {
-                    $notification->new($advisor, 1, 'notification.expert.mission.giveupbyother', $param);
-                }
+                    // Add notification for advisor
+                    $notification->new($user, 1, 'notification.expert.mission.giveup', $param);
+
+                    // Add notification for contractors
+                    $param = array(
+                        'mission' => $mission->getId(),
+                        'user'    => $user->getId(),
+                    );
+                    $contractor = $mission->getContact();
+
+                    $notification->new($contractor, 1, 'notification.seeker.mission.empty', $param);
+                    return $this->redirectToRoute('dashboard', array());
+                    break;
             }
-
-            $team->removeUser($user);
-            $user->setGiveUpCount($user->getGiveUpCount() + 1);
-            $em->persist($team);
-            $em->flush();
-
-            // If there is no advisor in the team
-            if (count($advisors) == 0)
-            {
-                $team->setStatus(-3);
-
-                // Add notification for contractors
-                $param = array(
-                    'mission' => $mission->getId(),
-                    'team'    => $team->getId(),
-                );
-                $contractors = $mission->getTeamContact()->getUsers();
-
-                //TODO : voir si on active cette option --> possibilite de repecher une team si une team se desinscrit pdt le process
-                //$repositoryStep = $em->getRepository('MissionBundle:Step');
-                //$step = $repositoryStep->findOneby(array('mission' => $mission, 'status' => 1));
-                //$step->setReallocTeam($step->getReallocTeam + 1);
-                foreach ($contractors as $contractor)
-                {
-                        $notification->new($contractor, 1, 'notification.seeker.mission.emptyteam', $param);
-                        //TODO : a ajouter dans translator
-                        //$notification->new($contractor, 1, 'notification.seeker.mission.addcounter', $param);
-                }
-            }
-            return $this->redirectToRoute('dashboard', array());
         }
         throw new NotFoundHttpException($trans->trans('mission.error.forbiddenAccess', array(), 'MissionBundle'));
     }

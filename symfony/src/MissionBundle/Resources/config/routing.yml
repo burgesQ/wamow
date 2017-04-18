@@ -23,6 +23,11 @@ mission_delete:
     defaults:
         _controller: MissionBundle:Mission:delete
 
+mission_interested:
+    path:      /mission/interested/{missionId}
+    defaults:
+        _controller: MissionBundle:Mission:interested
+
 mission_pitch:
     path:      /mission/pitch/{missionId}
     defaults:
@@ -33,7 +38,7 @@ mission_giveup:
     defaults:
         _controller: MissionBundle:Mission:giveUp
 
-mission_teams_selection:
+mission_users_selection:
     path:      /mission/selection/{missionId}
     defaults:
         _controller: MissionBundle:Mission:selection

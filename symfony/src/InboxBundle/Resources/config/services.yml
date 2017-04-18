@@ -1,4 +1,4 @@
 services:
    inbox.services:
        class: InboxBundle\Services\Services
-       arguments: []
+       arguments: ['@service_container', '@doctrine.orm.entity_manager']

@@ -7,20 +7,19 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use TeamBundle\Entity\Team;
 use MissionBundle\Entity\Mission;
 use MissionBundle\Repository\MissionRepository;
-use TeamBundle\Repository\TeamRepository;
+use MissionBundle\Repository\UserMissionRepository;
 
 class SelectionType extends AbstractType
 {
     private $missionId;
-    private $position;
+    private $step;
 
-    public function __construct($missionId, $position)
+    public function __construct($missionId, $step)
     {
         $this->missionId = $missionId;
-        $this->position = $position;
+        $this->step = $step;
     }
 
     /**
@@ -29,13 +28,14 @@ class SelectionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $missionId = $this->missionId;
-        $position = $this->position;
+        $step = $this->step;
         $builder
-            ->add('team', EntityType::class, array(
-                'class' => 'TeamBundle:Team',
+            ->add('userMission', EntityType::class, array(
+                'class' => 'MissionBundle:UserMission',
+                'label' => false,
                 'property' => 'id',
-                'query_builder' => function (TeamRepository $entityRepository) use ($missionId, $position) {
-                    return $entityRepository->getTeamsForForm($missionId, $position);
+                'query_builder' => function (UserMissionRepository $entityRepository) use ($missionId, $step) {
+                    return $entityRepository->getAvailablesUsers($missionId, $step, true);
                 },
                 'expanded' => true,
                 'multiple' => true,

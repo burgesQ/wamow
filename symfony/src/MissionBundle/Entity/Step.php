@@ -43,24 +43,24 @@ class Step
     /**
      * @var int
      *
-     * @ORM\Column(name="nb_max_team", type="smallint")
+     * @ORM\Column(name="nb_max_user", type="smallint")
      * @Assert\Range(
      *      min = 1,
      *      minMessage = "You can't put something under 1.",
      * )
      */
-    private $nbMaxTeam;
+    private $nbMaxUser;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="realloc_team", type="smallint")
+     * @ORM\Column(name="realloc_user", type="smallint")
      * @Assert\Range(
      *      min = 0,
      *      minMessage = "You can't put something under 0.",
      * )
      */
-    private $reallocTeam;
+    private $reallocUser;
 
     /**
      * @var \DateTime
@@ -104,11 +104,11 @@ class Step
      */
     private $anonymousMode;
 
-    public function __construct($nbMaxTeam, $reallocTeam)
+    public function __construct($nbMaxUser, $reallocUser)
     {
         $this->creationDate = new \Datetime();
-        $this->nbMaxTeam = $nbMaxTeam;
-        $this->reallocTeam = $reallocTeam;
+        $this->nbMaxUser = $nbMaxUser;
+        $this->reallocUser = $reallocUser;
         $this->status = 0;
         $this->anonymousMode = 0;
     }
@@ -308,49 +308,49 @@ class Step
     }
 
     /**
-     * Set nbMaxTeam
+     * Set nbMaxUser
      *
-     * @param integer $nbMaxTeam
+     * @param integer $nbMaxUser
      * @return Step
      */
-    public function setNbMaxTeam($nbMaxTeam)
+    public function setNbMaxUser($nbMaxUser)
     {
-        $this->nbMaxTeam = $nbMaxTeam;
+        $this->nbMaxUser = $nbMaxUser;
 
         return $this;
     }
 
     /**
-     * Get nbMaxTeam
+     * Get nbMaxUser
      *
      * @return integer
      */
-    public function getNbMaxTeam()
+    public function getNbMaxUser()
     {
-        return $this->nbMaxTeam;
+        return $this->nbMaxUser;
     }
 
     /**
-     * Set reallocTeam
+     * Set reallocUser
      *
-     * @param integer $reallocTeam
+     * @param integer $reallocUser
      * @return Step
      */
-    public function setReallocTeam($reallocTeam)
+    public function setReallocUser($reallocUser)
     {
-        $this->reallocTeam = $reallocTeam;
+        $this->reallocUser = $reallocUser;
 
         return $this;
     }
 
     /**
-     * Get reallocTeam
+     * Get reallocUser
      *
      * @return integer
      */
-    public function getReallocTeam()
+    public function getReallocUser()
     {
-        return $this->reallocTeam;
+        return $this->reallocUser;
     }
 
     /**

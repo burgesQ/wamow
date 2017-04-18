@@ -8,7 +8,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 use MissionBundle\Entity\Mission;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use TeamBundle\Entity\Team;
 
 class LoadMission extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
@@ -125,19 +124,10 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface, Co
         $i = 1;
         foreach ($this->arrayDatas as $oneMission) {
 
-            // create a Contractor Team
-            $team = new Team(1, $contractorOne);
-            $team->addUser($contractorTwo);
-            $team->setStatus(1);
-
-            // persiste and save the new team
-            $manager->persist($team);
-            $manager->flush();
-
             // create mission w/ random token
             $i++;
             $i       *= 2;
-            $mission = new Mission(3, $team, 1, $i, $company);
+            $mission = new Mission(3, $contractorOne, $i, $company);
 
             // set mission datas
             $mission->setInternational(0);
@@ -183,16 +173,9 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface, Co
             // save missions
             $manager->flush();
 
-            // link the mission to the team
-            $team->setMission($mission);
-
-            // persist team
-            $manager->persist($team);
-
             $missionMatchingService->setUpPotentialUser($mission);
         }
 
-        // save teamS
         $manager->flush();
 
     }

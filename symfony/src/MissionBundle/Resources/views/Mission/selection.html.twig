@@ -5,13 +5,12 @@
     </head>
     <body>
         <h3>{{ 'mission.selection.step'|trans }} {{ step.position }}</h3>
-        {{ 'mission.selection.choose'|trans }}
-            <form action="{{ path('mission_teams_selection', {'missionId': missionId }) }}" method="post">
-                {{ form_row(form.team) }}
+            <form action="{{ path('mission_users_selection', {'missionId': missionId }) }}" method="post">
+                {{ form_row(form.userMission) }}
                 {{ form_row(form.save) }}
                 {{ form_row(form.delete) }}
                 <br>
-                {% if step.position == 2 and step.nbMaxTeam != nbTeams and step.reallocTeam != 0 %}
+                {% if step.position == 2 and step.nbMaxUser != nbUsers and step.reallocUser != 0 %}
                     <a href="{{ path('mission_selection_takeback', {'missionId': missionId}) }}">{{ 'mission.selection.takeBack'|trans }}</a><br>
                 {% endif %}
             </form>

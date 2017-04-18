@@ -2,8 +2,10 @@
 
 namespace InboxBundle\Form;
 
-use FOS\MessageBundle\Util\LegacyFormHelper;
+use InboxBundle\Entity\Thread;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,27 +18,21 @@ class ThreadType extends AbstractType
     {
         $builder
             ->remove('mission')
-            ->remove('teamCreator')
-
-            ->add('reply', LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\TextareaType'),
-                array(
-                    'label' => 'body',
-                    'translation_domain' => 'FOSMessageBundle',
-                )
-            )
-
-            ->add('submit', 'submit')
-        ;
+            ->add('reply', TextAreaType::class, [
+                'label'              => 'body',
+                'translation_domain' => 'FOSMessageBundle',
+            ])
+            ->add('submit', SubmitType::class);
     }
-    
+
     /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'InboxBundle\Entity\Thread'
-        ));
+        $resolver->setDefaults([
+            'data_class' => Thread::class
+        ]);
     }
 
     /**
@@ -46,6 +42,4 @@ class ThreadType extends AbstractType
     {
         return 'inboxbundle_thread';
     }
-
-
 }

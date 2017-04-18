@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use ToolsBundle\Entity\Language;
 use ToolsBundle\Entity\Address;
-use TeamBundle\Entity\Team;
+use UserBundle\Entity\User;
 use ToolsBundle\Entity\Tag;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
@@ -63,10 +63,10 @@ class Mission
     private $confidentiality;
 
     /**
-     * @ORM\OneToOne(targetEntity="TeamBundle\Entity\Team", cascade={"persist"})
-     * @ORM\JoinColumn(name="team_contact")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", cascade={"persist"})
+     * @ORM\JoinColumn(name="contact")
      */
-    private $teamContact;
+    private $contact;
 
     /**
      * @ORM\ManyToOne(targetEntity="CompanyBundle\Entity\Company", cascade={"persist"})
@@ -191,55 +191,64 @@ class Mission
     private $token;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="size_team_max", type="smallint")
-     * @Assert\Range(
-     *      min = 1,
-     *      minMessage = "The max size of users in a team must be at least one.")
-     */
-    private $sizeTeamMax;
-
-    /**
      * @ORM\ManyToMany(targetEntity="ToolsBundle\Entity\Tag", cascade={"persist"})
      */
     private $tags;
 
     /**
-     * @ORM\OneToMany(targetEntity="MissionBundle\Entity\UserMission", mappedBy="mission")
+     * @ORM\OneToMany(
+     *     targetEntity="MissionBundle\Entity\UserMission",
+     *     mappedBy="mission"
+     * )
      */
     private $userMission;
 
-    public function __construct($nbStep, $team, $sizeTeamMax, $token, $company)
-      {
+    /**
+     * @ORM\OneToMany(
+     *     targetEntity="InboxBundle\Entity\Thread",
+     *     mappedBy="mission"
+     * )
+     */
+    private $threads;
+
+    /**
+     * Mission constructor.
+     *
+     * @param $nbStep
+     * @param $user
+     * @param $token
+     * @param $company
+     */
+    public function __construct($nbStep, $user, $token, $company)
+    {
         $this->creationDate = new \Datetime();
-        $this->languages = new ArrayCollection();
-        $this->status = 0;
-        $this->address = new Address();
-        $this->numberStep = $nbStep;
-        $this->teamContact = $team;
-        $this->sizeTeamMax = $sizeTeamMax;
-        $this->token = $token;
-        $this->company = $company;
-        $this->userMission = new ArrayCollection();
+        $this->languages    = new ArrayCollection();
+        $this->status       = 0;
+        $this->address      = new Address();
+        $this->numberStep   = $nbStep;
+        $this->contact      = $user;
+        $this->token        = $token;
+        $this->company      = $company;
+        $this->userMission  = new ArrayCollection();
+        $this->threads      = new ArrayCollection();
     }
 
     public function addTag(Tag $tag)
-      {
+    {
         $this->tags[] = $tag;
 
         return $this;
-      }
+    }
 
     public function removeTag(Tag $tag)
-      {
+    {
         $this->tags->removeElement($tag);
-      }
+    }
 
     public function getTags()
-      {
+    {
         return $this->tags;
-      }
+    }
 
     /**
      * Get id
@@ -344,26 +353,26 @@ class Mission
 
 
     /**
-     * Set TeamContact
+     * Set Contact
      *
-     * @param \TeamBundle\Entity\Team $teamContact
+     * @param \UserBundle\Entity\User $contact
      * @return Mission
      */
-    public function setTeamContact(\TeamBundle\Entity\Team $teamContact)
+    public function setContact(\UserBundle\Entity\User $contact)
     {
-        $this->teamContact = $teamContact;
+        $this->contact = $contact;
 
         return $this;
     }
 
     /**
-     * Get TeamContact
+     * Get contact
      *
-     * @return \TeamBundle\Entity\Team
+     * @return \UserBundle\Entity\User
      */
-    public function getTeamContact()
+    public function getContact()
     {
-        return $this->teamContact;
+        return $this->contact;
     }
 
     /**
@@ -723,29 +732,6 @@ class Mission
     }
 
     /**
-     * Set sizeTeamMax
-     *
-     * @param integer $sizeTeamMax
-     * @return Mission
-     */
-    public function setSizeTeamMax($sizeTeamMax)
-    {
-        $this->sizeTeamMax = $sizeTeamMax;
-
-        return $this;
-    }
-
-    /**
-     * Get sizeTeamMax
-     *
-     * @return integer
-     */
-    public function getSizeTeamMax()
-    {
-        return $this->sizeTeamMax;
-    }
-
-    /**
      * Set businessPractice
      *
      * @param \MissionBundle\Entity\BusinessPractice $businessPractice
@@ -867,5 +853,38 @@ class Mission
     public function getUserMission()
     {
         return $this->userMission;
+    }
+
+    /**
+     * Add threads
+     *
+     * @param \InboxBundle\Entity\Thread $threads
+     * @return Mission
+     */
+    public function addThread($threads)
+    {
+        $this->threads[] = $threads;
+
+        return $this;
+    }
+
+    /**
+     * Remove threads
+     *
+     * @param \InboxBundle\Entity\Thread $threads
+     */
+    public function removeThread($threads)
+    {
+        $this->threads->removeElement($threads);
+    }
+
+    /**
+     * Get threads
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getThreads()
+    {
+        return $this->threads;
     }
 }

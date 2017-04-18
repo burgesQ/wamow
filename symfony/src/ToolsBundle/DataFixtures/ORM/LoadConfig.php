@@ -16,18 +16,18 @@ class LoadConfig extends AbstractFixture implements OrderedFixtureInterface
       $array = [
           "nbStep" => 3,
           "step1" => [
-              'nbMaxTeam' => 10,
-              'reallocTeam' => 10,
+              'nbMaxUser' => 10,
+              'reallocUser' => 10,
               'anonymousMode' => 0
           ],
           "step2" => [
-              'nbMaxTeam' => 3,
-              'reallocTeam' => 1,
+              'nbMaxUser' => 3,
+              'reallocUser' => 1,
               'anonymousMode' => 1
           ],
           "step3" => [
-              'nbMaxTeam' => 1,
-              'reallocTeam' => 0,
+              'nbMaxUser' => 1,
+              'reallocUser' => 0,
               'anonymousMode' => 2
           ]
       ];
@@ -40,8 +40,8 @@ class LoadConfig extends AbstractFixture implements OrderedFixtureInterface
           {
               $json[$step] = array('position' => $position,
                                    'status'    => 0,
-                                   'nbMaxTeam' => $array[$step]["nbMaxTeam"],
-                                   'reallocTeam' => $array[$step]["reallocTeam"],
+                                   'nbMaxUser' => $array[$step]["nbMaxUser"],
+                                   'reallocUser' => $array[$step]["reallocUser"],
                                    'anonymousMode' => $array[$step]["anonymousMode"],
                                    'start' => null,
                                    'end' => null

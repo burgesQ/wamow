@@ -77,7 +77,6 @@ class InboxController extends Controller
 //                    'user'          => $user,
 //                    'thread'        => $thread,
 //                    'arrayMessage'  => $messageRepo->getMessageForThread($thread, $user->getNbLoad()),
-//                    'teamName'      => $thread->getTeamCreator(),
 //                    'read'          => $serviceInbox->updateReadReport($thread, $user, $em),
 //                    'form'          => $form->createView()
 //                ));

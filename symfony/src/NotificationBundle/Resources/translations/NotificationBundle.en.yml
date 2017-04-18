@@ -2,19 +2,13 @@ notification:
     seeker:
         mission:
             create:
-            createbyother:
             edit:
-            editbyother:
             delete:
-            deletebyother:
-            emptyteam:
-            pitchedbynewteam:
+            empty:
+            pitchedbynewuser:
             takeback:
-            takebackbyother:
             selection:
-            selectionbyother:
             dismiss:
-            dismissbyother:
         company:
             join:
             leave:
@@ -23,7 +17,6 @@ notification:
         mission:
             pitch:
             giveup:
-            giveupbyother:
             delete:
             takeback:
             selection:

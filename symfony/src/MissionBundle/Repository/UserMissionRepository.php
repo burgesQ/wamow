@@ -12,29 +12,23 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserMissionRepository extends EntityRepository
 {
-
-    /**
-     * @param $user
-     * @param $mission
-     *
-     * @return array
-     */
-    public function findByUserAndMission($user, $mission)
+    // Query get users availables for a specific step
+    //$full is a boolean : false => getAvailablesUsers; true => get All availables users in Array form.
+    public function getAvailablesUsers($missionId, $step, $arrayForm)
     {
         $qb = $this->_em->createQueryBuilder();
-
-        $qb
-            ->select('um')
-            ->from('MissionBundle:UserMission', 'um')
-            ->leftJoin('um.mission', 'm')
-            ->leftJoin('um.user',  'u')
-            ->where('u = :user')
-            ->setParameter('user', $user)
-            ->andWhere('m = :mission')
-            ->setParameter('mission', $mission)
-        ;
-
+        $qb->select('t')
+            ->from('MissionBundle:UserMission', 't')
+            ->leftjoin('t.mission', 'm')
+            ->where('m.id = :missionId')
+                ->setParameter('missionId', $missionId)
+            ->andWhere('t.status = :position')
+                ->setParameter('position', $step->getPosition());
+        if ($arrayForm == true) {
+            $qb->orderBy('t.creationDate', 'ASC')
+                ->setMaxResults($step->getNbMaxUser());
+            return $qb;
+        }
         return $qb->getQuery()->getResult();
     }
-
 }

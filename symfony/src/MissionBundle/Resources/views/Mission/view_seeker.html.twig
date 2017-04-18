@@ -49,10 +49,10 @@
           '%end%': mission.missionEnding|date('d/m/Y') }) }}<br>
   </p>
 
-    {% if listLanguage is not null %}
+    {% if mission.languages is not null %}
       <h4><br>{{ 'mission.view.languages'|trans }}:</h4>
       <ul>
-          {% for language in listLanguage %}
+          {% for language in mission.languages %}
             <li>{{ language.name|trans({}, 'tools') }}</li>
           {% endfor %}
       </ul>

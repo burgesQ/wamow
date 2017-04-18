@@ -12,11 +12,15 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class UserMission
 {
+    const DELETED    = -5;
+    const DISMISS    = -4;
+    const GIVEUP     = -3;
     const REFUSED    = -2;
-    const ENDED      = -1;
-    const NEW        = 0;
-    const INTERESTED = 1;
-    const WIP        = 2;
+    const NEW        = -1;
+    const INTERESTED = 0;
+    const STEP1      = 1;
+    const STEP2      = 2;
+    const STEP3      = 3;
 
     /**
      * @var int
@@ -45,13 +49,19 @@ class UserMission
     private $updateDate;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\ManyToOne(
+     *     targetEntity="UserBundle\Entity\User",
+     *     inversedBy="userMission"
+     * )
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MissionBundle\Entity\Mission")
+     * @ORM\ManyToOne(
+     *     targetEntity="MissionBundle\Entity\Mission",
+     *     inversedBy="userMission"
+     * )
      * @ORM\JoinColumn(nullable=false)
      */
     private $mission;

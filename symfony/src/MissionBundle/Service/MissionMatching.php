@@ -73,7 +73,7 @@ class MissionMatching
         $userArray = $missionRepo->getUsersByMission($mission, false);
 
         foreach ($userArray as $oneUser) {
-            if (!($one = $userMissionRepo->findByUserAndMission($oneUser, $mission))) {
+            if (!($one =$userMissionRepo->findBy(array('user' => $oneUser, 'mission' => $mission)))) {
 
                 // create a user_mission entity for user $oneUser
                 $userMission = new UserMission($oneUser, $mission);

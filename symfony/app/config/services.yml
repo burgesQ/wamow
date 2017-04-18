@@ -10,10 +10,6 @@ services:
         class: MissionBundle\Service\Mission
         arguments: ['@doctrine.orm.entity_manager']
 
-    team:
-        class: TeamBundle\Service\Team
-        arguments: ['@doctrine.orm.entity_manager']
-
     config.mission:
         class: ToolsBundle\Service\ConfigMission
         arguments: ['@doctrine.orm.entity_manager']

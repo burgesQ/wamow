@@ -1,14 +1,14 @@
 <?php
 
-namespace TeamBundle\Form;
+namespace MissionBundle\Form;
 
+use InboxBundle\Form\ThreadType;
+use MissionBundle\Entity\Mission;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-use InboxBundle\Form\ThreadType;
-
-class ThreadTeamType extends AbstractType
+class ThreadMissionType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -23,11 +23,9 @@ class ThreadTeamType extends AbstractType
             ->remove('mission')
             ->remove('users')
 
-            ->add('threads', 'collection',
-                array(
-                    'type' => new ThreadType(),
-                )
-            )
+            ->add('threads', 'collection', [
+                'type' => new ThreadType(),
+            ])
         ;
     }
     
@@ -36,9 +34,9 @@ class ThreadTeamType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'TeamBundle\Entity\Team'
-        ));
+        $resolver->setDefaults([
+            'data_class' => Mission::class
+        ]);
     }
 
     /**
@@ -46,7 +44,6 @@ class ThreadTeamType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'teambundle_team';
+        return 'thread_mission_type';
     }
-
 }

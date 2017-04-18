@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use MissionBundle\Entity\Mission;
+use MissionBundle\Entity\UserMission;
 use MissionBundle\Form\MissionType;
 use ToolsBundle\Entity\Language;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -17,26 +18,26 @@ class DashboardController extends Controller
     public function missionDisplayAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $repository = $em->getRepository('MissionBundle:Mission');
         $user = $this->getUser();
-        $userId = $user->getId();
+
         if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR'))
         {
             if (($url = $this->get('signedUp')->checkIfSignedUp($this)))
             {
                 return $this->redirectToRoute($url);
             }
-            $missions = $repository->getExpertMissionsAvailables();
+            $missions = array();
+            $userMissions = $em->getRepository('MissionBundle:UserMission')->findBy(array('user' => $user));
+            foreach ($userMissions as $userMission) {
+                array_push($missions, $userMission->getMission());
+            }
             return $this->render('DashboardBundle:Expert:index.html.twig', array(
                 'missions' => $missions
             ));
         }
         elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR'))
         {
-            if ($user->getCompany() != null)
-            {
-                $missions = $repository->getSeekerMissions($userId, $user->getCompany()->getId());
-            }
+            $missions = $em->getRepository('MissionBundle:Mission')->findBy(array('contact' => $user, 'company' => $user->getCompany()));
             return $this->render('DashboardBundle:Seeker:index.html.twig', array(
                 'missions' => $missions
             ));

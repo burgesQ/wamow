@@ -6,8 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use FOS\MessageBundle\Entity\Thread as BaseThread;
 
-use MissionBundle\Entity\Mission;
-
 /**
  * @ORM\Entity(repositoryClass="InboxBundle\Repository\ThreadRepository")
  */
@@ -40,18 +38,28 @@ class Thread extends BaseThread
     protected $metadata;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MissionBundle\Entity\Mission")
+     * @ORM\ManyToOne(
+     *     targetEntity="MissionBundle\Entity\Mission",
+     *     inversedBy="threads"
+     * )
      */
     private $mission;
 
     /**
-     * @ORM\ManyToOne(targetEntity="TeamBundle\Entity\Team")
+     * @ORM\OneToOne(
+     *     targetEntity="MissionBundle\Entity\UserMission"
+     * )
      */
-    protected $teamCreator;
+    protected $userMission;
 
     /**
-     * @var reply
-     * @ORM\Column(name="reply", type="text", nullable=true)
+     * @var string
+     *
+     * @ORM\Column(
+     *     name="reply",
+     *     type="text",
+     *     nullable=true
+     * )
      */
     protected $reply;
 
@@ -61,9 +69,34 @@ class Thread extends BaseThread
 
         $this->reply = null;
     }
-    
+
+    /**
+     * Get Metadata
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMetadata()
+    {
+        return $this->metadata;
+    }
+
+    /**
+     * Set Metadata
+     *
+     * @param \Doctrine\Common\Collections\Collection
+     *
+     * @return Thread
+     */
+    public function setMetadata($metadata)
+    {
+        $this->metadata = $metadata;
+
+        return $this;
+    }
     /**
      * Set Mission
+     *
+     * @param $mission
      *
      * @return Thread
      */
@@ -77,7 +110,7 @@ class Thread extends BaseThread
     /**
      * Get Mission
      *
-     * @return MissionBundle\Entity\Mission
+     * @return /MissionBundle/Entity/Mission
      */
     public function getMission()
     {
@@ -85,41 +118,35 @@ class Thread extends BaseThread
     }
 
     /**
-     * Get metadata
+     * Set UserMission
      *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getMetadata()
-    {
-        return $this->metadata;
-    }
-
-    /**
-     * set TeamCreator
+     * @param $userMission
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Thread
      */
-    public function setTeamCreator($teamCreator)
+    public function setUserMission($userMission)
     {
-        $this->teamCreator = $teamCreator;
+        $this->userMission = $userMission;
 
         return $this;
     }
 
     /**
-     * Get TeamCreator
+     * Get UserMission
      *
-     * @return TeamBundle\Entity\Team
+     * @return \MissionBundle\Entity\UserMission
      */
-    public function getTeamCreator()
+    public function getUserMission()
     {
-        return $this->teamCreator;
+        return $this->userMission;
     }
 
     /**
-     * set Reply
+     * Set Reply
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @param $reply
+     *
+     * @return Thread
      */
     public function setReply($reply)
     {

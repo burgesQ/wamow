@@ -12,7 +12,7 @@
                     <li>
                         <a href="{{ path('mission_view', {'missionId': mission.id}) }}">{{ mission.title }}</a>
                         -
-                        <a href="{{ path('mission_teams_selection', {'missionId': mission.id}) }}">{{ 'mission.all_missions.start'|trans }}</a>
+                        <a href="{{ path('mission_users_selection', {'missionId': mission.id}) }}">{{ 'mission.all_missions.start'|trans }}</a>
                         -
                         <a href="{{ path('mission_delete', {'missionId': mission.id}) }}">{{ 'mission.all_missions.delete'|trans }}</a>
                     </li>

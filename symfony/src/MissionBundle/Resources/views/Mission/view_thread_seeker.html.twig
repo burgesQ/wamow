@@ -4,54 +4,41 @@
 {% endblock %}
 
 {% for oneThread in threads %}
-    {% if threads[loop.index0] != null %}
+    <h2>{{ oneThread.subject }}</h2>
 
-        <h2>
-            {{ threads[loop.index0].subject }}
-        </h2>
-
-        {% set lastMsg = null %}
-        {% set i = loop.index0 %}
-        {% for message in bigArrayMessage[i] %}
-            <div class="messenger_threads_message">
-                <div class="messenger_thread_message_info">
-                    {% if step.anonymousMode == 2 and teams[i + 1].status == step.position %}
-                        {{ 'message_info'|trans({'%sender%': message.sender, '%date%': message.createdAt|date}, 'FOSMessageBundle') }}
+    {% set lastMsg = null %}
+    {% set i = loop.index0 %}
+    {% for message in bigArrayMessage[i] %}
+        <div class="messenger_threads_message">
+            <div class="messenger_thread_message_info">
+                {% if step.anonymousMode == 2 %}
+                    {{ 'message_info'|trans({'%sender%': message.sender, '%date%': message.createdAt|date}, 'FOSMessageBundle') }}
+                {% else %}
+                    {% if message.sender.roles[0] == "ROLE_CONTRACTOR" %}
+                        {{ 'message_info'|trans({'%sender%': 'Contractor', '%date%': message.createdAt|date}, 'FOSMessageBundle') }}
                     {% else %}
-                        {% if message.sender.roles[0] == "ROLE_CONTRACTOR" %}
-                            {{ 'message_info'|trans({'%sender%': 'Contractor', '%date%': message.createdAt|date}, 'FOSMessageBundle') }}
-                        {% else %}
-                            {{ 'message_info'|trans({'%sender%': arrayTeamName[i], '%date%': message.createdAt|date}, 'FOSMessageBundle') }}
-                        {% endif %}
+                        {{ 'message_info'|trans({'%sender%': message.sender.id, '%date%': message.createdAt|date}, 'FOSMessageBundle') }}
                     {% endif %}
-                </div>
-                <div class="messenger_thread_message_body" id="message_{{ message.id }}">
-                    {{ message.body }}
-                </div>
-            </div>
-            {% set lastMsg = message %}
-        {% endfor %}
+                {% endif %}</div>
+            <div class="messenger_thread_message_body" id="message_{{ message.id }}">{{ message.body }}</div></div>
+        {% set lastMsg = message %}
+    {% endfor %}
 
-        {% set sender = lastMsg.getSender() %}
-        {% if sender.email == user.email %}
-            {% if arrayRead[i] == true %}
-                {{ 'message.readReport.read'|trans({}, 'InboxBundle') }}
-            {% else %}
-                {{ 'message.readReport.receive'|trans({}, 'InboxBundle') }}
-            {% endif %}
+    {% set sender = lastMsg.sender %}
+    {% if sender.email == user.email %}
+        {% if lastMsg.metadata[0].isRead == true %}
+            {{ 'message.readReport.read'|trans({}, 'InboxBundle') }}
+        {% else %}
+            {{ 'message.readReport.receive'|trans({}, 'InboxBundle') }}
         {% endif %}
+    {% endif %}
 
-        {% if teams[loop.index0 + 1].status == step.position %}
-            <h3>
-                {% trans from 'FOSMessageBundle' %}reply{% endtrans %}
-            </h3>
-
-            <form action="{{ url('mission_view', {'missionId': mission.id}) }}" method="post">
-                {{ form_row(arrayReplyForm.threads[loop.index0].reply) }}
-                {{ form_row(arrayReplyForm.threads[loop.index0].submit) }}
-            </form>
-        {% endif %}
-
+    {% if oneThread.userMission.status == step.position %}
+        <h3>{% trans from 'FOSMessageBundle' %}reply{% endtrans %}</h3>
+        <form action="{{ url('mission_view', {'missionId': mission.id}) }}" method="post">
+            {{ form_row(arrayReplyForm.threads[i].reply) }}
+            {{ form_row(arrayReplyForm.threads[i].submit) }}
+        </form>
     {% endif %}
 {% endfor %}
 
