@@ -56,7 +56,7 @@ class ExportMissionsCommand extends ContainerAwareCommand
                 . $translator->trans($mission->getBusinessPractice()->getName(), [], 'MissionBundle', 'en_US') . "\", \""
                 . $translator->trans($mission->getProfessionalExpertise()->getName(), [], 'MissionBundle', 'en_US') . "\", \""
                 . $mission->getTelecommuting() . "\", \""
-                . $translator->trans($mission->getMissionKind()->getName(), [], 'MissionBundle', 'en_US') . "\", \""
+                . $translator->trans($mission->getMissionKinds()->getName(), [], 'MissionBundle', 'en_US') . "\", \""
                 ;
             $i = 0;
             /** @var Language $oneLanguage */

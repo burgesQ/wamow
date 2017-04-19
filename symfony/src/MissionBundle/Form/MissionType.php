@@ -64,6 +64,26 @@ class MissionType extends AbstractType
                 'label' => 'mission.new.form.international',
                 'translation_domain' => 'MissionBundle'
               ))
+            ->add('southAmerica',  'checkbox', array(
+                'required' => false,
+                'label' => 'mission.new.form.southamerica',
+                'translation_domain' => 'MissionBundle'
+            ))
+            ->add('northAmerica',  'checkbox', array(
+                'required' => false,
+                'label' => 'mission.new.form.northamerica',
+                'translation_domain' => 'MissionBundle'
+            ))
+            ->add('emea',  'checkbox', array(
+                'required' => false,
+                'label' => 'mission.new.form.emea',
+                'translation_domain' => 'MissionBundle'
+            ))
+            ->add('asia',  'checkbox', array(
+                'required' => false,
+                'label' => 'mission.new.form.asia',
+                'translation_domain' => 'MissionBundle'
+            ))
             ->add('budget', null, array(
                 'label' => 'mission.new.form.budget',
                 'translation_domain' => 'MissionBundle'
@@ -120,10 +140,12 @@ class MissionType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
                 'required' => true,
-                'placeholder' => 'typemissions.title',
-                'label' => false,
+                'label' => 'typemissions.title',
                 'translation_domain' => 'MissionBundle',
                 'choice_translation_domain' => 'MissionBundle',
+                'constraints' => new Count(
+                    array('min' => 1, 'minMessage' => "error.minMissionLanguage")
+                ),
             ))
             ->add('businessPractice', EntityType::class, array(
                 'class' => 'MissionBundle:BusinessPractice',

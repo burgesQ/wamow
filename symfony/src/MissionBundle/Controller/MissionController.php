@@ -122,7 +122,7 @@ class MissionController extends Controller
                 throw new NotFoundHttpException($trans->trans('mission.error.right', array(), 'MissionBundle'));
             } elseif ($user->getCompany() != $mission->getCompany()) {
                 throw new NotFoundHttpException($trans->trans('mission.error.wrongcompany', array(), 'MissionBundle'));
-            } elseif ($mission->getStatus() != 0) {
+            } elseif ($mission->getStatus() != Mission::DRAFT) {
                 throw new NotFoundHttpException($trans->trans('mission.error.alreadyEdit', array(), 'MissionBundle'));
             }
 
@@ -173,7 +173,7 @@ class MissionController extends Controller
 
         if ($user === null) {
             throw new NotFoundHttpException($trans->trans('mission.error.logged', [], 'MissionBundle'));
-        } elseif ($mission == null || $mission->getStatus() < 0) {
+        } elseif ($mission == null || $mission->getStatus() < Mission::DRAFT) {
             throw new NotFoundHttpException($trans->trans('mission.error.wrongId', ['%id%' => $missionId], 'MissionBundle'));
         }
 
@@ -208,7 +208,7 @@ class MissionController extends Controller
 
             if (($url = $this->get('signedUp')->checkIfSignedUp($this))) {
                 return $this->redirectToRoute($url);
-            } elseif ($mission->getStatus() !== 1) {
+            } elseif ($mission->getStatus() !== Mission::PUBLISHED) {
                 throw new NotFoundHttpException($trans
                     ->trans('mission.error.available', ['%id%' => $missionId], 'MissionBundle'));
             }
@@ -304,7 +304,7 @@ class MissionController extends Controller
         // Check mission
         $missionRepo = $em->getRepository('MissionBundle:Mission');
         $mission = $missionRepo->findOneBy(array('id' => $missionId));
-        if ($mission == null || $mission->getStatus() < 1)
+        if ($mission == null || $mission->getStatus() < Mission::PUBLISHED)
         {
             throw new NotFoundHttpException($trans->trans('mission.error.available', array('%id%' => $missionId), 'MissionBundle'));
         }
@@ -321,7 +321,8 @@ class MissionController extends Controller
         {
             $userMission->setStatus(UserMission::INTERESTED);
             $em->flush();
-            return new Response($trans->trans('mission.interested.done', array(), 'MissionBundle'));
+            new Response($trans->trans('mission.interested.done', array(), 'MissionBundle'));
+            return $this->redirectToRoute('dashboard', array());
         }
         throw new NotFoundHttpException($trans->trans('mission.pitch.forbidden', array(), 'MissionBundle'));
     }
@@ -349,7 +350,7 @@ class MissionController extends Controller
 
         $repositoryMission = $em->getRepository('MissionBundle:Mission');
         $mission = $repositoryMission->findOneBy(array('id' => $missionId));
-        if ($mission == null || $mission->getStatus() < 1) {
+        if ($mission == null || $mission->getStatus() < Mission::PUBLISHED) {
             throw new NotFoundHttpException($trans->trans('mission.error.available', array('%id%' => $missionId), 'MissionBundle'));
         }
 
@@ -358,7 +359,7 @@ class MissionController extends Controller
         $userMission = $em->getRepository('MissionBundle:UserMission')
             ->findOneBy(['user' => $user, 'mission' => $mission]);
 
-        if ($userMission->getStatus() >= UserMission::STEP1)
+        if ($userMission->getStatus() >= UserMission::ONGOING)
         {
             return new Response($trans->trans('mission.pitch.twice', array(), 'MissionBundle'));
         }
@@ -371,7 +372,7 @@ class MissionController extends Controller
         $this->get('inbox.services')->createThreadPitch($userMission);
 
         // Add expert
-        $userMission->setStatus(UserMission::STEP1);
+        $userMission->setStatus(UserMission::ONGOING);
         $em->flush();
 
         // Add notification for advisor
@@ -414,7 +415,7 @@ class MissionController extends Controller
         $mission = $em->getRepository('MissionBundle:Mission')->findOneById($missionId);
 
         // Check if mission exists and if is available
-        if ($mission == null || $mission->getStatus() != 1) {
+        if ($mission == null || $mission->getStatus() != Mission::PUBLISHED) {
             throw new NotFoundHttpException($trans->trans('mission.error.forbiddenAccess', array(), 'MissionBundle'));
         }  elseif ($user->getCompany() != $mission->getCompany()) {
             throw new NotFoundHttpException($trans->trans('mission.error.wrongcompany', array(), 'MissionBundle'));
@@ -604,7 +605,7 @@ class MissionController extends Controller
 
         if ($user === null) {
             throw new NotFoundHttpException($trans->trans('mission.error.logged', array(), 'MissionBundle'));
-        } elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR') || $mission === null || $mission->getStatus() < 0) {
+        } elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR') || $mission === null || $mission->getStatus() < Mission::PUBLISHED) {
             throw new NotFoundHttpException($trans->trans('mission.error.forbiddenAccess', array(), 'MissionBundle'));
         } elseif ($user->getCompany() != $mission->getCompany()) {
             throw new NotFoundHttpException($trans->trans('mission.error.wrongcompany', array(), 'MissionBundle'));
@@ -688,7 +689,7 @@ class MissionController extends Controller
         if ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR')
             && $mission != null
             && $mission->getContact() == $user
-            && $mission->getStatus() == 0
+            && $mission->getStatus() == Mission::DRAFT
             && $user->getCompany() == $mission->getCompany())
         {
 
@@ -739,7 +740,7 @@ class MissionController extends Controller
         $userMission = $em->getRepository('MissionBundle:UserMission')->findOneBy(array('user' => $user, 'mission' => $mission));
 
         if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')
-            && $mission != null && $mission->getStatus() >= 1 && $userMission != null)
+            && $mission != null && $mission->getStatus() >= Mission::PUBLISHED && $userMission != null)
         {
             switch ($userMission->getStatus()) {
                 case UserMission::GIVEUP:

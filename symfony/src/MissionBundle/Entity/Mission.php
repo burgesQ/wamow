@@ -20,6 +20,10 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  */
 class Mission
 {
+    const DELETED   = -1;
+    const DRAFT     = 0;
+    const PUBLISHED = 1;
+
     /**
      * @var int
      *
@@ -212,6 +216,45 @@ class Mission
      * )
      */
     private $threads;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="south_america", type="boolean")
+     */
+    private $southAmerica;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="north_america", type="boolean")
+     */
+    private $northAmerica;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="asia", type="boolean")
+     */
+    private $asia;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="emea", type="boolean")
+     */
+    private $emea;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="MissionBundle\Entity\Step",
+     *      mappedBy="mission"
+     * )
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $steps;
+
 
     /**
      * Mission constructor.
@@ -632,13 +675,23 @@ class Mission
     }
 
     /**
+     * Get missionKind
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMissionKinds()
+    {
+        return $this->missionKinds;
+    }
+
+    /**
      * Add missionKind
      *
      * @param \MissionBundle\Entity\MissionKind $missionKind
      *
      * @return Mission
      */
-    public function addMissionKind($missionKind)
+    public function addMissionKind(\MissionBundle\Entity\MissionKind $missionKind)
     {
         $this->missionKinds[] = $missionKind;
 
@@ -649,37 +702,10 @@ class Mission
      * Remove missionKind
      *
      * @param \MissionBundle\Entity\MissionKind $missionKind
-     *
-     * @return Mission
      */
-    public function removeMissionKind($missionKind)
+    public function removeMissionKind(\MissionBundle\Entity\MissionKind $missionKind)
     {
         $this->missionKinds->removeElement($missionKind);
-
-        return $this;
-    }
-
-    /**
-     * Set missionKinds
-     *
-     * @param ArrayCollection $missionKinds
-     * @return Mission
-     */
-    public function setMissionKinds($missionKinds)
-    {
-        $this->missionKinds = $missionKinds;
-
-        return $this;
-    }
-
-    /**
-     * Get missionKinds
-     *
-     * @return ArrayCollection
-     */
-    public function getMissionKinds()
-    {
-        return $this->missionKinds;
     }
 
     /**
@@ -911,10 +937,140 @@ class Mission
     /**
      * Get threads
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getThreads()
     {
         return $this->threads;
+    }
+
+    /**
+     * Set southAmerica
+     *
+     * @param boolean $southAmerica
+     *
+     * @return ExperienceShaping
+     */
+    public function setSouthAmerica($southAmerica)
+    {
+        $this->southAmerica = $southAmerica;
+
+        return $this;
+    }
+
+    /**
+     * Get southAmerica
+     *
+     * @return boolean
+     */
+    public function getSouthAmerica()
+    {
+        return $this->southAmerica;
+    }
+
+    /**
+     * Set northAmerica
+     *
+     * @param boolean $northAmerica
+     *
+     * @return ExperienceShaping
+     */
+    public function setNorthAmerica($northAmerica)
+    {
+        $this->northAmerica = $northAmerica;
+
+        return $this;
+    }
+
+    /**
+     * Get northAmerica
+     *
+     * @return boolean
+     */
+    public function getNorthAmerica()
+    {
+        return $this->northAmerica;
+    }
+
+    /**
+     * Set asia
+     *
+     * @param boolean $asia
+     *
+     * @return ExperienceShaping
+     */
+    public function setAsia($asia)
+    {
+        $this->asia = $asia;
+
+        return $this;
+    }
+
+    /**
+     * Get asia
+     *
+     * @return boolean
+     */
+    public function getAsia()
+    {
+        return $this->asia;
+    }
+
+    /**
+     * Set emea
+     *
+     * @param boolean $emea
+     *
+     * @return ExperienceShaping
+     */
+    public function setEmea($emea)
+    {
+        $this->emea = $emea;
+
+        return $this;
+    }
+
+    /**
+     * Get emea
+     *
+     * @return boolean
+     */
+    public function getEmea()
+    {
+        return $this->emea;
+    }
+
+
+    /**
+     * Get steps
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSteps()
+    {
+        return $this->steps;
+    }
+
+    /**
+     * Add step
+     *
+     * @param \MissionBundle\Entity\Step $step
+     * @return Mission
+     */
+    public function addStep(\MissionBundle\Entity\Step $step)
+    {
+        $this->steps[] = $step;
+
+        return $this;
+    }
+
+    /**
+     * Remove step
+     *
+     * @param \MissionBundle\Entity\Step $step
+     */
+    public function removeStep(\MissionBundle\Entity\Step $step)
+    {
+        $this->steps->removeElement($step);
     }
 }

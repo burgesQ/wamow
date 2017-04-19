@@ -15,8 +15,9 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class DashboardController extends Controller
 {
-    public function missionDisplayAction()
+    public function dashboardAction()
     {
+        $trans = $this->get('translator');
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
 
@@ -26,22 +27,27 @@ class DashboardController extends Controller
             {
                 return $this->redirectToRoute($url);
             }
-            $missions = array();
-            $userMissions = $em->getRepository('MissionBundle:UserMission')->findBy(array('user' => $user));
-            foreach ($userMissions as $userMission) {
-                array_push($missions, $userMission->getMission());
-            }
-            return $this->render('DashboardBundle:Expert:index.html.twig', array(
-                'missions' => $missions
+            $userMissionRepo = $em->getRepository('MissionBundle:UserMission');
+            $news = $userMissionRepo->findBy(array('user' => $user, 'status' => UserMission::NEW));
+            $wips = $userMissionRepo->getMyMissions($user->getId());
+            $closes = $userMissionRepo->getMyOldMissions($user->getId());
+            return $this->render('DashboardBundle:Expert:dashboard.html.twig', array(
+                'user'   => $user,
+                'news'   => $news,
+                'wips'   => $wips,
+                'closes' => $closes
             ));
         }
         elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR'))
         {
-            $missions = $em->getRepository('MissionBundle:Mission')->findBy(array('contact' => $user, 'company' => $user->getCompany()));
-            return $this->render('DashboardBundle:Seeker:index.html.twig', array(
-                'missions' => $missions
+            $missionRepo = $em->getRepository('MissionBundle:Mission');
+            $missions = $missionRepo->getContractorMissions($user->getId(), $user->getCompany()->getId(), Mission::DRAFT);
+            $drafts = $missionRepo->findBy(array('contact' => $user, 'company' => $user->getCompany(), 'status' => Mission::DRAFT));
+            return $this->render('DashboardBundle:Seeker:dashboard.html.twig', array(
+                'missions' => $missions,
+                'drafts'   => $drafts
             ));
         }
-        throw new NotFoundHttpException("You are not logged.");
+        throw new NotFoundHttpException($trans->trans('dashboard.error.logged', array(), 'tools'));
     }
 }

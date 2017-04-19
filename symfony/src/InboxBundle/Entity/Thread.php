@@ -5,6 +5,7 @@ namespace InboxBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use FOS\MessageBundle\Entity\Thread as BaseThread;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="InboxBundle\Repository\ThreadRepository")
@@ -47,10 +48,20 @@ class Thread extends BaseThread
 
     /**
      * @ORM\OneToOne(
-     *     targetEntity="MissionBundle\Entity\UserMission"
+     *     targetEntity="MissionBundle\Entity\UserMission",
+     *     inversedBy="thread"
      * )
      */
     protected $userMission;
+
+    /**
+     * @ORM\OneToMany(
+     *      targetEntity="ToolsBundle\Entity\Proposal",
+     *      mappedBy="thread"
+     * )
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $proposals;
 
     /**
      * @var string
@@ -66,7 +77,7 @@ class Thread extends BaseThread
     public function __construct()
     {
         parent::__construct();
-
+        $this->proposals = new ArrayCollection();
         $this->reply = null;
     }
 
@@ -126,6 +137,7 @@ class Thread extends BaseThread
      */
     public function setUserMission($userMission)
     {
+        $userMission->setThread($this);
         $this->userMission = $userMission;
 
         return $this;
@@ -165,4 +177,38 @@ class Thread extends BaseThread
         return $this->reply;
     }
 
+
+    /**
+     * Add proposal
+     *
+     * @param \ToolsBundle\Entity\Upload $proposal
+     * @return Thread
+     */
+    public function addProposal($proposal)
+    {
+        $this->proposals[] = $proposal;
+
+        return $this;
+    }
+
+    /**
+     * Remove proposal
+     *
+     * @param \ToolsBundle\Entity\Upload $proposal
+     */
+    public function removeProposal($proposal)
+    {
+        $this->proposals->removeElement($proposal);
+    }
+
+
+    /**
+     * Get proposals
+     *
+     * @return ArrayCollection
+     */
+    public function getProposals()
+    {
+        return $this->proposals;
+    }
 }

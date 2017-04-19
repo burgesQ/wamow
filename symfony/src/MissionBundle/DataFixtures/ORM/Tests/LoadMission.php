@@ -110,7 +110,13 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface, Co
             // set address
             $mission->setAddress($this->createAddress($manager, $oneMission->address));
 
-            // save mission
+            // set area
+            $mission->setNorthAmerica(false);
+            $mission->setSouthAmerica(false);
+            $mission->setAsia(false);
+            $mission->setEmea(false);
+
+            // persist mission
             $manager->persist($mission);
             $manager->flush();
             $manager->flush();

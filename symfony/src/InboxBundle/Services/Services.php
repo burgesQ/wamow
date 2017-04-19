@@ -76,6 +76,7 @@ class Services
 
         // send first message
         $sender->send($message->getMessage());
+        $message->getMessage()->setIsReadByParticipant($advisor, true);
 
         // update the thread data
         /** @var \InboxBundle\Entity\Thread $thread */
@@ -114,8 +115,11 @@ class Services
             $composer = $this->container->get('fos_message.composer');
             $sender   = $this->container->get('fos_message.sender');
 
-            $sender->send($composer->reply($thread)->setSender($user)
-                ->setBody($replyForm->getData()->getBody())->getMessage());
+            $message = $composer->reply($thread)->setSender($user)
+                ->setBody($replyForm->getData()->getBody())->getMessage();
+            $sender->send($message);
+            $message->setIsReadByParticipant($user, true);
+            $this->em->flush();
 
             // return null to inform the controller
             // to reload the page
@@ -188,6 +192,7 @@ class Services
 
                     // send the message
                     $sender->send($message);
+                    $message->setIsReadByParticipant($user, true);
 
                     // reset the request and the reply data
                     $oneThread->setReply(null);

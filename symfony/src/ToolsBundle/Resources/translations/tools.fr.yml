@@ -30,3 +30,8 @@ language:
     arabic: "Arabe"
     italian: "Italien"
     korean: "Coréen"
+
+
+dashboard:
+    advisor:
+        interested:

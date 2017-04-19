@@ -1,0 +1,129 @@
+{% extends "base.html.twig" %}
+{% trans_default_domain "tools" %}
+
+{% block body %}
+    <div>
+        <a href="{{ path('mission_new')}}">{{ 'dashboard.contractor.new.button' | trans | upper }}</a></br>
+    </div>
+    <div>
+        <p>
+            {{ 'dashboard.contractor.fyi.title' | trans | upper }}
+            {{ 'dashboard.contractor.fyi.text' | trans | upper }}
+        </p>
+    </div>
+    <div>
+        <p>
+            {{ 'dashboard.contractor.mission.title' | trans }}
+        </p>
+    </div>
+    <p>
+        {% for mission in missions %}
+            <li>
+                {% set advisors = mission.usermission %}
+                {% set interested = 0 %}
+                {% set selected = 0 %}
+                {% set proposal = 0 %}
+                {% set finisher = 0 %}
+
+                {% for advisor in advisors %}
+                    {% if advisor.status >= 1 %}
+                        {% set interested = interested + 1  %}
+                        {% if advisor.status >= 2 %}
+                            {% set selected = selected + 1 %}
+                            {% if advisor.thread.proposals.count > 0 %}
+                                {% set proposal = proposal + 1 %}
+                            {% endif %}
+                            {% if advisor.status >= 3 %}
+                                {% set finisher = finisher + 1 %}
+                            {% endif  %}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                {{ 'dashboard.contractor.mission.date' | trans }} {{ mission.creationDate | date("m/d/Y") }}</br>
+                <a href="{{ path('mission_view', {'missionId': mission.id}) }}">{{ mission.title }}</a></br>
+                {{ mission.resume | truncate(20, false, '[...]') }}</br>
+                <a href="{{ path('mission_view', {'missionId': mission.id}) }}">{{ 'dashboard.contractor.mission.showmore' | trans | upper }}</a></br>
+
+
+                {% if mission.status == 1 %}
+                    {% if selected == 0 %}
+                        <a href="{{ path('mission_view', {'missionId': mission.id}) }}">{{ 'dashboard.contractor.mission.seethepitchbutton' | trans | upper }}</a></br>
+                        <a href="{{ path('mission_delete', {'missionId': mission.id}) }}">{{ 'dashboard.contractor.mission.deletebutton' | trans | upper }}</a></br>
+                    {% else %}
+                        <a href="{{ path('mission_view', {'missionId': mission.id}) }}">{{ 'dashboard.contractor.mission.answerbutton' | trans | upper }}</a></br>
+                    {% endif %}
+                {% elseif mission.status == 2 %}
+                    <a href="{{ path('mission_view', {'missionId': mission.id}) }}">{{ 'dashboard.contractor.mission.selectfinalistbutton' | trans | upper }}</a></br>
+                {% elseif mission.status == 3 %}
+                    <a href="{{ path('mission_view', {'missionId': mission.id}) }}">{{ 'dashboard.contractor.mission.contactbutton' | trans | upper }}</a></br>
+                {% endif %}
+
+
+
+                {{ mission.professionalExpertise.name | trans }}</br>
+                $ {{ mission.budget }}</br>
+                {{ mission.businessPractice.name | trans }}</br>
+
+
+
+
+                {% if mission.status == 1 %}
+                    {{ interested }} {{ 'dashboard.contractor.mission.interested' | trans }}</br>
+                    {{ selected }}/3 {{ 'dashboard.contractor.mission.selected' | trans }}</br>
+                    {% if selected == 0 %}
+                        {{ 'dashboard.contractor.mission.waiting' | trans }}</br>
+                        <a href="{{ path('mission_delete', {'missionId': mission.id}) }}">{{ 'dashboard.contractor.mission.deletebutton' | trans }}</a></br>
+                    {% else %}
+                        {{ 'dashboard.contractor.mission.ongoing' | trans }}</br>
+                    {% endif %}
+                    {% if "now" | date('Ymd')  < mission.applicationEnding | date('Ymd') %}
+                        {{ mission.applicationEnding | time_diff }}</br>
+                    {% else %}
+                        {{ 'dashboard.contractor.mission.mustbefinish' | trans }}</br>
+                    {% endif %}
+                {% elseif mission.status == 2 %}
+                    {{ proposal }}/3 {{ 'dashboard.contractor.mission.proposal' | trans }}</br>
+                    {{ finisher }}/1 {{ 'dashboard.contractor.mission.finisher' | trans }}</br>
+                    {{ 'dashboard.contractor.mission.shortlist' | trans }}</br>
+                    {% if "now" | date('Ymd')  < mission.applicationEnding | date('Ymd') %}
+                        {{ mission.applicationEnding | time_diff }}</br>
+                    {% else %}
+                        {{ 'dashboard.contractor.mission.mustbefinish' | trans }}</br>
+                    {% endif %}
+                {% elseif mission.status == 3 %}
+                    {{ proposal }}/3 {{ 'dashboard.contractor.mission.proposal' | trans }}</br>
+                    {{ finisher }}/1 {{ 'dashboard.contractor.mission.finisher' | trans }}</br>
+                    {{ 'dashboard.contractor.mission.finish' | trans }}</br>
+                {% endif %}
+
+                {% set unread = 0 %}
+                {% for thread in mission.threads %}
+                    {% set break = false %}
+                    {% for message in thread.messages | reverse if not break %}
+                        {% if message.metadata[1].isRead == false %}
+                            {% set unread = unread + 1 %}
+                        {% else %}
+                            {% set break = true %}
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+                {% transchoice unread with {'%unread%': unread} %}dashboard.contractor.mission.unread{% endtranschoice %}
+            </br>
+            </li>
+        {% endfor %}
+
+
+        <div>
+            <p>
+                {{ 'dashboard.contractor.draft.title' | trans }}
+            </p>
+        </div>
+        {% for draft in drafts %}
+            {{ 'dashboard.contractor.draft.date' | trans }} {{ draft.creationDate | date("m/d/Y") }}</br>
+            {{ draft.title }}
+            {{ draft.resume | truncate(20, false, '[...]') }}</br>
+            <a href="{{ path('mission_edit', {'missionId': draft.id}) }}">{{ 'dashboard.contractor.draft.continuebutton' | trans | upper }}</a></br>
+            <a href="{{ path('mission_delete', {'missionId': draft.id}) }}">{{ 'dashboard.contractor.draft.deletebutton' | trans | upper }}</a></br>
+        {% endfor %}
+    </p>
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends "base.html.twig" %}
+{% trans_default_domain "tools" %}
+
+{% block body %}
+    <div>
+        <p>
+            {{ 'dashboard.advisor.fyi.title' | trans | upper }}
+            {{ 'dashboard.advisor.fyi.text' | trans | upper }}
+        </p>
+        <p>
+            {{ 'dashboard.advisor.new.title' | trans }}
+        </p>
+    </div>
+    <div>
+        {% for new in news %}
+            <li>
+                <a href="{{ path('mission_view', {'missionId': new.mission.id}) }}">{{ new.mission.title }}</a></br>
+                {{ 'dashboard.advisor.new.date' | trans }} {{ new.mission.creationDate | date("m/d/Y") }}</br>
+                {{ new.mission.resume | truncate(20, false, '[...]') }}</br>
+                {{ new.mission.professionalExpertise.name | trans }}</br>
+                $ {{ new.mission.budget }}</br>
+                {{ new.mission.businessPractice.name | trans }}</br>
+                {{ new.mission.applicationEnding | time_diff }}</br>
+                {{ new.mission.address.city }} - {{ new.mission.address.country | upper }}</br>
+                <a href="{{ path('mission_interested', {'missionId': new.mission.id}) }}">{{ 'dashboard.advisor.new.interestedbutton' | trans | upper }}</a>
+            </li>
+        {% endfor %}
+    </div>
+
+    <div>
+        <p>
+            {{ 'dashboard.advisor.wip.title' | trans }}
+        </p>
+        {% for wip in wips %}
+        <li>
+            <a href="{{ path('mission_view', {'missionId': wip.mission.id}) }}">{{ wip.mission.title }}</a></br>
+            {{ 'dashboard.advisor.wip.date' | trans }} {{ wip.mission.creationDate | date("m/d/Y") }}</br>
+            {{ wip.mission.resume | truncate(20, false, '[...]') }}</br>
+            <a href="{{ path('mission_view', {'missionId': wip.mission.id}) }}">{{ 'dashboard.advisor.wip.showmore' | trans | upper }}</a></br>
+            <a href="{{ path('mission_giveup', {'missionId': wip.mission.id}) }}">{{ 'dashboard.advisor.wip.giveupbutton' | trans | upper }}</a></br>
+            {{ wip.mission.professionalExpertise.name | trans }}</br>
+            $ {{ wip.mission.budget }}</br>
+            {{ wip.mission.businessPractice.name | trans }}</br>
+            {{ wip.mission.applicationEnding | time_diff }}</br>
+            {% set difference = date(wip.mission.missionEnding).diff(date(wip.mission.missionBeginning)) %}
+            {% set days = difference.days %}
+            {% if days > 30 %}
+                {{ (days / 30) | number_format(0) }} months
+            {% else %}
+                {{ days }} days
+            {% endif %}
+            {{ wip.mission.address.city }} - {{ wip.mission.address.country | upper }}</br>
+            {% if wip.status == 0 %}
+                {{ 'dashboard.advisor.wip.interested' | trans }}</br>
+            {% elseif wip.status == 1 %}
+                {{ 'dashboard.advisor.wip.ongoing' | trans }}</br>
+            {% elseif wip.status == 2 %}
+                {{ 'dashboard.advisor.wip.shortlist' | trans }}</br>
+            {% elseif wip.status == 3 %}
+                {{ 'dashboard.advisor.wip.finalist' | trans }}</br>
+            {% elseif wip.status == -3 %}
+                {{ 'dashboard.advisor.wip.givup' | trans }}</br>
+            {% elseif wip.status == -4 %}
+                {{ 'dashboard.advisor.wip.dismiss' | trans }}</br>
+            {% elseif wip.status == -5 %}
+                {{ 'dashboard.advisor.wip.delete' | trans }}</br>
+            {% endif %}
+
+            {% if wip.thread != NULL %}
+                {% set unread = 0 %}
+                {% set break = false %}
+                {% for message in wip.thread.messages | reverse if not break %}
+                    {% if message.metadata[0].isRead == false %}
+                        {% set unread = unread + 1 %}
+                    {% else %}
+                        {% set break = true %}
+                    {% endif %}
+                {% endfor %}
+                {% transchoice unread with {'%unread%': unread} %}dashboard.advisor.wip.unread{% endtranschoice %}
+            {% endif %}
+        </li>
+        {% endfor %}
+    </div>
+    <div>
+        {% for close in closes %}
+        <li>
+            {{ close.mission.title }} <a href="{{ path('mission_view', {'missionId': close.mission.id}) }}">{{ 'dashboard.advisor.wip.showmore' | trans | upper }}</a></br>
+        </li>
+        {% endfor %}
+    <div>
+
+{% endblock %}

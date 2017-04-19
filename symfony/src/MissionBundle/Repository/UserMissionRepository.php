@@ -3,6 +3,7 @@
 namespace MissionBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use MissionBundle\Entity\UserMission;
 
 /**
  * UserMissionRepository
@@ -29,6 +30,38 @@ class UserMissionRepository extends EntityRepository
                 ->setMaxResults($step->getNbMaxUser());
             return $qb;
         }
+        return $qb->getQuery()->getResult();
+    }
+
+    public function getMyMissions($userId)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('t')
+            ->from('MissionBundle:UserMission', 't')
+            ->leftjoin('t.user', 'u')
+            ->leftjoin('t.mission', 'm')
+            ->where('u.id = :userId')
+                ->setParameter('userId', $userId)
+            ->andWhere('t.status != :status1')
+                ->setParameter('status1', UserMission::NEW)
+            ->andWhere('t.status != :status2')
+                ->setParameter('status2', UserMission::REFUSED)
+            ->orderBy('m.applicationEnding', 'ASC');
+        return $qb->getQuery()->getResult();
+    }
+
+    public function getMyOldMissions($userId)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('t')
+            ->from('MissionBundle:UserMission', 't')
+            ->leftjoin('t.user', 'u')
+            ->leftjoin('t.mission', 'm')
+            ->where('u.id = :userId')
+                ->setParameter('userId', $userId)
+            ->andWhere('t.status < :status')
+                ->setParameter('status', UserMission::NEW)
+            ->orderBy('m.applicationEnding', 'ASC');
         return $qb->getQuery()->getResult();
     }
 }

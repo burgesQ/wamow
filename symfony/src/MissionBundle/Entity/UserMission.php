@@ -18,9 +18,10 @@ class UserMission
     const REFUSED    = -2;
     const NEW        = -1;
     const INTERESTED = 0;
-    const STEP1      = 1;
-    const STEP2      = 2;
-    const STEP3      = 3;
+    const ONGOING    = 1;
+    const SHORTLIST  = 2;
+    const FINALIST   = 3;
+
 
     /**
      * @var int
@@ -38,13 +39,13 @@ class UserMission
 
     /**
      * @var \DateTime
-     * @ORM\Column(name="creationDate", type="datetime")
+     * @ORM\Column(name="creationDate", type="datetime", nullable=false)
      */
     private $creationDate;
 
     /**
      * @var \DateTime
-     * @ORM\Column(name="updateDate", type="datetime")
+     * @ORM\Column(name="updateDate", type="datetime", nullable=false)
      */
     private $updateDate;
 
@@ -65,6 +66,16 @@ class UserMission
      * @ORM\JoinColumn(nullable=false)
      */
     private $mission;
+
+    /**
+     * @ORM\OneToOne(
+     *     targetEntity="InboxBundle\Entity\Thread",
+     *     mappedBy="userMission"
+     * )
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $thread;
+
 
     /**
      * UserMission constructor.
@@ -209,6 +220,29 @@ class UserMission
     public function setMission($mission)
     {
         $this->mission = $mission;
+
+        return $this;
+    }
+
+    /**
+     * Get thread
+     * @return \ToolsBundle\Entity\Thread
+     */
+    public function getThread()
+    {
+        return $this->thread;
+    }
+
+    /**
+     * Set thread
+     *
+     * @param \ToolsBundle\Entity\Thread $thread
+     *
+     * @return UserMission
+     */
+    public function setThread($thread)
+    {
+        $this->thread = $thread;
 
         return $this;
     }

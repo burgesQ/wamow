@@ -24,7 +24,10 @@ class Step
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MissionBundle\Entity\Mission", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="MissionBundle\Entity\Mission",
+     *      cascade={"persist"},
+     *      inversedBy="steps"
+     *      )
      * @ORM\JoinColumn(nullable=false)
      */
     private $mission;
@@ -132,6 +135,7 @@ class Step
     public function setMission($mission)
     {
         $this->mission = $mission;
+        $mission->addStep($this);
 
         return $this;
     }
@@ -351,16 +355,6 @@ class Step
     public function getReallocUser()
     {
         return $this->reallocUser;
-    }
-
-    /**
-     * Get mission
-     *
-     * @return \MissionBundle\Entity\Mission
-     */
-    public function getMission()
-    {
-        return $this->mission;
     }
 
     /**

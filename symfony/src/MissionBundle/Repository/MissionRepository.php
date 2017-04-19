@@ -19,7 +19,21 @@ class MissionRepository extends EntityRepository
         $qb->select('m')
         ->from('MissionBundle:Mission', 'm')
         ->where('m.status >= 1')
-        ->orderBy('m.applicationEnding', 'DESC');
+            ->orderBy('m.applicationEnding', 'DESC');
+        return $qb->getQuery()->getResult();
+    }
+
+    public function getContractorMissions($userId, $companyId, $status)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('m')
+        ->from('MissionBundle:Mission', 'm')
+        ->where('m.contact = :userId')
+            ->setParameter('userId', $userId)
+        ->andWhere('m.company = :companyId')
+            ->setParameter('companyId', $companyId)
+        ->andWhere('m.status > :status')
+            ->setParameter('status', $status);
         return $qb->getQuery()->getResult();
     }
 
@@ -36,11 +50,11 @@ class MissionRepository extends EntityRepository
         // select all mission at step one
         // left join necessary table
         $base = "SELECT   m
-                FROM      MissionBundle:Mission m 
-                LEFT JOIN m.languages l 
-                LEFT JOIN m.businessPractice b 
-                LEFT JOIN m.professionalExpertise p 
-                LEFT JOIN m.missionKinds k 
+                FROM      MissionBundle:Mission m
+                LEFT JOIN m.languages l
+                LEFT JOIN m.businessPractice b
+                LEFT JOIN m.professionalExpertise p
+                LEFT JOIN m.missionKind k
                 LEFT JOIN m.userMission um
                 WHERE     um.user = :user
                 AND       um.status >= 0
@@ -72,10 +86,10 @@ class MissionRepository extends EntityRepository
         $i = 0;
         foreach ($user->getProfessionalExpertise() as $oneExp) {
             if ($i)
-                $base = $base . ' 
+                $base = $base . '
                 OR        p = :userExp' . $i;
             else
-                $base = $base . ') 
+                $base = $base . ')
                 AND       (p = :userExp' . $i;
             $i++;
         }
@@ -137,9 +151,9 @@ class MissionRepository extends EntityRepository
     {
         // select all advisor fully register
         // left join necessary table
-        $base = "SELECT   u 
+        $base = "SELECT   u
                 FROM      UserBundle:User u
-                LEFT JOIN u.languages l 
+                LEFT JOIN u.languages l
                 LEFT JOIN u.professionalExpertise p
                 LEFT JOIN u.missionKind k
                 LEFT JOIN u.businessPractice b
@@ -163,14 +177,14 @@ class MissionRepository extends EntityRepository
                 AND       p = :professionalExpertise';
         // add missionKind filter
         $i = 0;
-        foreach ($mission->getMissionKinds() as $oneLanguage) {
+        foreach ($mission->getMissionKinds() as $missionKind) {
             if ($i)
-                $base = $base . '
-                OR        k = :missionKinds' . $i;
-            else
-                $base = $base . '
-                AND       (k = :missionKinds' . $i;
-            $i++;
+                    $base = $base . '
+                    OR        k = :missionKinds' . $i;
+                else
+                    $base = $base . '
+                    AND       (k = :missionKinds' . $i;
+                $i++;
         }
         // add businessPractice filter
         $base = $base . ')
