@@ -1,5 +1,17 @@
 {% trans_default_domain 'tools' %}
 <h3>{{ 'mails.hello' | trans({ '%f_name': f_name, '%l_name': l_name }, 'tools') }}</h3>
 
-{{ 'mails.inbox.new_message_mission' | trans({ '%title': title}, 'tools') | nl2br }}
-{# TODO put a link to the mission_view_advisor #}
+{{ 'mails.inbox.new_message_mission' | trans({ '%title': title }, 'tools') }}<br>
+
+{% if roles == 'ROLE_ADVISOR '%}
+    <a href="{{ absolute_url(path('mission_answer_to_advisor', { 'userMissionId': userMissionId })) }}">
+        {{ 'mails.inbox.link' | trans }}
+    </a>
+{% else %}
+    <a href="{{ absolute_url(path('mission_view', { 'missionId': missionId })) }}">
+        {{ 'mails.inbox.link' | trans }}
+    </a>
+{% endif %}
+<br>
+
+{{ 'mails.inbox.the_team' | trans }}

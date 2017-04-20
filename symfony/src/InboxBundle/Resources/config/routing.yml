@@ -4,14 +4,22 @@
 #    path:   /
 #    defaults:
 #        _controller: InboxBundle:Inbox:showAllThread
-#
+
 #show_thread:
 #    path:   /{id}
 #    defaults:
 #        _controller: InboxBundle:Inbox:showThread
 
-send_message:
-    path:            /send_message
+## Action
+
+send_message_to_contractor:
+    path:            /send_message_ctr
     defaults:
         _controller: InboxBundle:Action:sendMessageAdvisor
-        method: POST
+    methods: [POST]
+
+send_message_to_advisor:
+    path:            /send_message_adv
+    defaults:
+        _controller: InboxBundle:Action:sendMessageContractor
+    methods:     [POST]

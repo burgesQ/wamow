@@ -19,7 +19,7 @@
     <div class="header">
         <div class="status">
             PencileIcon<br>
-            {{ 'mission.view.advisor.to_answer' | trans }} <br>
+            {{ 'mission.view.to_answer' | trans }} <br>
         </div>
         <div class="finance">
             {{ 'mission.view.advisor.finance' | trans({ '%price': mission.price * 1000, '%professionalExpertise': mission.professionalExpertise.name | trans }, 'tools') | nl2br }}
@@ -111,7 +111,7 @@
     <script type="text/javascript">
         function sendMessage() {
             $.ajax({
-                url: "{{ path('send_message') }}",
+                url: "{{ path('send_message_to_contractor') }}",
                 method: "post",
                 data: {
                     id: {{ user_mission.id }},

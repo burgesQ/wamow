@@ -19,6 +19,11 @@ mission_shortlist:
     defaults:
         _controller: MissionBundle:Mission:shortlist
 
+mission_answer_to_advisor:
+    path:            /mission/answer/{userMissionId}
+    defaults:
+        _controller: MissionBundle:Mission:answerToAdvisor
+
 # Mission Generator
 mission_new_step_one:
     path:      /mission/new/1/{missionId}
@@ -61,28 +66,28 @@ certifications_autocomplete:
     path:            /certifications/autocomplete
     defaults:
         _controller: MissionBundle:Action:certificationsAutocomplete
-        methode:     GET
+    methods:     [GET]
 
 user_mission_add_to_shortlist:
     path:            /shortlist/add
     defaults:
         _controller: MissionBundle:Action:addToShortlist
-        methode:     PUT
+    methods:     [PUT]
 
 user_mission_remove_from_shortlist:
     path:            /shortlist/remove
     defaults:
         _controller: MissionBundle:Action:removeFromShortlist
-        methode:     PUT
+    methods:     [PUT]
 
 user_mission_refuse:
     path:            /refuse
     defaults:
         _controller: MissionBundle:Action:refuseUserMission
-        methode:     PUT
+    methods:     [PUT]
 
 user_mission_notes:
     path:            /save_notes
     defaults:
         _controller: MissionBundle:Action:saveNote
-        methode:     POST
+    methods:     [POST]

@@ -91,6 +91,9 @@ class MissionController extends Controller
                     $form = $this->createForm(MessageMissionFormType::class);
                     if ($form->handleRequest($request)->isSubmitted() && $form->isValid()) {
                         // passe the user_mission to the next step
+
+                        $userMission->setIdForContractor(count($userMissionRepo->findAllAtLeastThan($mission,
+                            UserMission::ONGOING)) + 1);
                         $inboxService->createThreadPitch($userMission, $form->getData()['text']);
                         $userMission->setStatus(UserMission::ONGOING);
                         $em->flush();
@@ -105,6 +108,7 @@ class MissionController extends Controller
                     && $user->getPayment()) :
                     return $this->interestedAction($missionId);
                 case (UserMission::ONGOING) :
+                case (UserMission::SHORTLIST) :
                     return $this->render('@Mission/Mission/Advisor/mission_to_answer.html.twig', [
                         'user_mission' => $userMission,
                         'userId'       => $userMission->getUser()->getId(),
@@ -211,7 +215,7 @@ class MissionController extends Controller
             'mission' => $mission, 'status'  => 1]))
             || !($nextStep = $em->getRepository('MissionBundle:Step')->findOneby([
                 'mission'  => $mission, 'position' => $step->getPosition() + 1]))
-            || count($userMissionRepo->findAllAtLeastThan($mission, UserMission::SHORTLIST)) !== $nextStep->getNbMaxUser()) {
+            || count($userMissionRepo->findAllAtLeastThan($mission, UserMission::SHORTLIST)) >= $nextStep->getNbMaxUser()) {
             throw new NotFoundHttpException($trans->trans('error.mission.not_enough', [], 'tools'));
         }
 
@@ -220,5 +224,109 @@ class MissionController extends Controller
         $em->flush();
 
         return $this->redirectToRoute('mission_view', ['missionId' => $missionId]);
+    }
+
+    /**
+     * @param $userMissionId
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function answerToAdvisorAction($userMissionId)
+    {
+        $trans = $this->get('translator');
+
+        if (!($user = $this->getUser())) {
+            throw new NotFoundHttpException($trans->trans('error.logged', [], 'tools'));
+        } elseif ($user->getRoles()[0] !== 'ROLE_CONTRACTOR') {
+            throw new NotFoundHttpException($trans->trans('error.mission.not_found', [], 'tools'));
+        }
+
+        if (!($userMission =  $this->getDoctrine()->getRepository('MissionBundle:UserMission')->findoneBy(['id' => $userMissionId]))
+            || $userMission->getMission()->getcompany() !== $user->getcompany()) {
+            throw new NotFoundHttpException($trans->trans('error.user_mission.not_found', ['id' => $userMissionId] , 'tools'));
+        }
+
+        /** @var \MissionBundle\Entity\Mission $mission */
+        $mission = $userMission->getMission();
+
+        if (!($step = $this->getDoctrine()->getRepository('MissionBundle:Step')
+            ->findOneBy(['mission' => $mission, 'status' => 1]))) {
+            throw new NotFoundHttpException('No step found.');
+        }
+
+        return $this->render('@Mission/Mission/Contractor/mission_answer_to_advisor.html.twig', [
+            'title'                 => $mission->getTitle(),
+            'certifications'        => $mission->getCertifications(),
+            'missionKinds'          => $mission->getMissionKinds(),
+            'price'                 => $mission->getPrice() * 1000,
+            'professionalExpertise' => $mission->getProfessionalExpertise()->getName(),
+            'applicationEnding'     => $mission->getApplicationEnding(),
+            'missionBeginning'      => $mission->getMissionEnding(),
+            'missionEnding'         => $mission->getMissionEnding(),
+            'address'               => $mission->getAddress(),
+            'languages'             => $mission->getLanguages(),
+            'telecommuting'         => $mission->getTelecommuting(),
+            'updateDate'            => $mission->getUpdateDate(),
+            'resume'                => $mission->getResume(),
+            'interested'            => count($this->getDoctrine()->getRepository('MissionBundle:UserMission')
+                ->findAllAtLeastThan($mission,UserMission::ONGOING)),
+            'shortlisted'           => count($this->getDoctrine()->getRepository('MissionBundle:UserMission')
+                ->findAllAtLeastThan($mission,UserMission::SHORTLIST)),
+            'userMission'           => $userMission,
+            'anonymous'             => $step->getAnonymousMode(),
+            'userId'                => $user->getId(),
+            'nbAdvisor'             => $userMission->getIdForContractor()
+        ]);
+    }
+
+    /**
+     * @param $missionId
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function giveUpAction($missionId)
+    {
+        $trans        = $this->get('translator');
+        $notification = $this->container->get('notification');
+        $em           = $this->getDoctrine()->getManager();
+        $mission      = $em->getRepository('MissionBundle:Mission')->findOneBy(['id' => $missionId]);
+        $user         = $this->getUser();
+        $userMission  = $em->getRepository('MissionBundle:UserMission')
+            ->findOneBy(['user' => $user, 'mission' => $mission]);
+
+        if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')
+            && $mission  && $mission->getStatus() >= Mission::PUBLISHED && $userMission) {
+            switch ($userMission->getStatus()) {
+                case UserMission::GIVEUP:
+                    throw new NotFoundHttpException($trans->trans('error.user_mission.already_giveup', [], 'tools'));
+                case UserMission::DELETED:
+                case UserMission::ENDDATE:
+                case UserMission::DISMISS:
+                    throw new NotFoundHttpException($trans->trans('error.user_mission.cant_giveup', [], 'tools'));
+                case UserMission::ACTIVATED:
+                case UserMission::MATCHED:
+                case UserMission::INTERESTED:
+                    $userMission->setStatus(UserMission::GIVEUP);
+                    $em->flush();
+                    return $this->redirectToRoute('dashboard', array());
+                case UserMission::ONGOING:
+                    $userMission->setStatus(UserMission::GIVEUP);
+                    $em->flush();
+                    $param = [
+                        'mission' => $mission->getId(),
+                        'user'    => $user->getId(),
+                    ];
+                    // Add notification for advisor
+                    $notification->new($user, 1, 'notification.expert.mission.giveup', $param);
+                    // Add notification for contractors
+                    $param = [
+                        'mission' => $mission->getId(),
+                        'user'    => $user->getId(),
+                    ];
+                    $contractor = $mission->getContact();
+                    $notification->new($contractor, 1, 'notification.seeker.mission.empty', $param);
+                    return $this->redirectToRoute('dashboard', []);
+            }
+        }
+        throw new NotFoundHttpException($trans->trans('mission.error.forbiddenAccess', array(), 'MissionBundle'));
     }
 }

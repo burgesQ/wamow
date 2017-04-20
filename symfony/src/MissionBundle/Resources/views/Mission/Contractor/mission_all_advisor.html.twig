@@ -7,7 +7,7 @@
     {% set interested = 0 %}
     {% set selected = 0 %}
     {% for advisor in userMissions %}
-        {% if advisor.status >= constant('INTERESTED', advisor)  %}
+        {% if advisor.status >= constant('ONGOING', advisor)  %}
             {% set interested = interested + 1  %}
             {% if advisor.status >= constant('SHORTLIST', advisor) %}
                 {% set selected = selected + 1 %}
@@ -27,13 +27,12 @@
                 > 3. {{ 'mission.view.contractor.status_finalit' | trans | upper }}
                 &nbsp;&nbsp;&nbsp;
                 CrossIcon
-                &nbsp;
                 <a href="{{ path('dashboard') }}">{{ 'mission.view.advisor.btn_back_to_board' | trans | upper }}</a>
             </h4>
         </div>
         <p>
 
-        {# set up header #}
+            {# set up header #}
         <div class="header">
             <div class="info">
                 {{ title }}<br>
@@ -113,10 +112,9 @@
 
         {# set up right content #}
         <div class="user_mission">
-            {% set i = 1 %}
             {% for userMission in userMissions %}
                 <div class="user_pseudo">
-                    Advisor {{ i }}
+                    <a href="{{ path('mission_answer_to_advisor', { 'userMissionId' : userMission.id}) }}">Advisor {{ userMission.idForContractor }}</a>
                 </div>
                 <div class="last_msg">
                     {% set lastMsg = userMission.thread.messages | last %}
@@ -131,7 +129,6 @@
                     <button id="shortlist_{{ userMission.id }}" {% if userMission.status == constant('SHORTLIST', userMission) %}hidden{% endif %}>{{ 'mission.view.contractor.btn_add_to_shortlist' | trans | upper }}</button>
                     <button id="remove_from_shortlist_{{ userMission.id }}" {% if userMission.status < constant('SHORTLIST', userMission) %}hidden{% endif %}>{{ 'mission.view.contractor.btn_remove_from_shortlist' | trans | upper }}</button>
                 </div>
-                {% set i = i + 1 %}
             {% endfor %}
         </div>
     </div>

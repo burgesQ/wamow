@@ -91,6 +91,12 @@ class UserMission
     private $note;
 
     /**
+     * @var int
+     * @ORM\Column(name="id_for_conrtarctor", type="integer", nullable=true)
+     */
+    private $idForContractor;
+
+    /**
      * UserMission constructor.
      *
      * @param $user
@@ -306,5 +312,28 @@ class UserMission
     public function getNote()
     {
         return $this->note;
+    }
+
+    /**
+     * Set idForContractor
+     *
+     * @param integer $idForContractor
+     * @return UserMission
+     */
+    public function setIdForContractor($idForContractor)
+    {
+        $this->idForContractor = $idForContractor;
+
+        return $this;
+    }
+
+    /**
+     * Get idForContractor
+     *
+     * @return integer 
+     */
+    public function getIdForContractor()
+    {
+        return $this->idForContractor;
     }
 }

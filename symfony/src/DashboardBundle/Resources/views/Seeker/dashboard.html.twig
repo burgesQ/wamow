@@ -27,7 +27,7 @@
                 {% set stepPosition = null %}
 
                 {% for advisor in advisors %}
-                    {% if advisor.status >= constant('INTERESTED', advisor) %}
+                    {% if advisor.status >= constant('ONGOING', advisor) %}
                         {% set interested = interested + 1  %}
                         {% if advisor.status >= constant('SHORTLIST', advisor) %}
                             {% set selected = selected + 1 %}

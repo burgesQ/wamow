@@ -12,6 +12,14 @@ form:
         label: "Add a label if required"
         number: Street Number
 
+    btn:
+        send: send
+        save: save
+
+    note:
+        indicator: Saving ...
+        tooltip: Click to edit note
+
     phone:
         prefix: "Prefix"
         number: "Phone"
@@ -48,6 +56,8 @@ error:
         subscribe: Please Subscribe
     user_mission:
         not_found: No such userMission entity (%id)
+        cant_giveup: Uou can't give up this mission.
+        already_giveup: You alredy give_up this mission.
     mission:
         pitch:
             contractor: A contractor cannot pitch
@@ -257,6 +267,7 @@ mission:
                 %professionalExpertise
         advisor:
             btn_back_to_board: back to board
+            btn_back_to_global_view: back to global view
             intrested: Intrested
             finance: |
                 FINANCE
@@ -576,9 +587,8 @@ company_size:
 mails:
     hello: Hello %f_name %l_name !
     inbox:
-        new_message_mission: |
-         You've got a new message on the mission %title.
-
-         The team.
+        new_message_mission: You've got a new message on the mission %title.
+        link: Go there to check it.
+        the_team: The team.
     subject:
          new_message: You've got a new message !

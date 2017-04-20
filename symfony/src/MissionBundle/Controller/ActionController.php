@@ -92,6 +92,7 @@ class ActionController extends Controller
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @return \Symfony\Component\HttpFoundation\JsonResponse
+     * @throws \HttpHeaderException
      */
     public function removeFromShortlistAction(Request $request)
     {
@@ -165,6 +166,7 @@ class ActionController extends Controller
             throw new \HttpHeaderException('Missing id parameters');
         }
 
+        // Get Check UserMission
         $id              = $request->request->get('id');
         $userMissionRepo = $em->getRepository('MissionBundle:UserMission');
         if (!($userMission = $userMissionRepo->findOneBy(['id' => $id]))) {

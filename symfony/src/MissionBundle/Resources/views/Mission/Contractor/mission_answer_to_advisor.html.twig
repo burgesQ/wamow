@@ -1,0 +1,196 @@
+{% extends '::base.html.twig' %}
+{% trans_default_domain "tools" %}
+
+{% block body %}
+
+    {# set up top #}
+    <div class="top">
+
+        {# set up content_top #}
+        <div class="content_top">
+            <div class="info">
+                {{ title }}<br>
+                CertificationIcon {{ 'typemissions.certification' | trans }}:
+                {% for certif in certifications %}
+                {{ certif.name }}
+                {% if not loop.last %}
+                    ,
+                {% endif %}
+                {% endfor %}<br>
+            </div>
+            <div class="intereted">
+                InterestedIcon<br>
+                {{ interested }} {{ 'dashboard.contractor.mission.interested' | trans }}
+            </div>
+            <div class="selected">
+                {{ shortlisted }}/3 {{ 'dashboard.contractor.mission.selected' | trans }}
+            </div>
+            <div class="finance">
+                {% for kind in missionKinds %}
+                {{ kind.name | trans }}
+                {% if not loop.last %}
+                    ,
+                {% endif %}
+                {% endfor %}<br>
+                {{ 'mission.view.contractor.finance' | trans({ '%price': price, '%professionalExpertise': professionalExpertise | trans }, 'tools') | nl2br }}
+            </div>
+            <div class="day_left">
+                ClockIcon<br>
+                {{ applicationEnding | time_diff }}
+            </div>
+            <div class="calendar">
+                CalendarIcon<br>
+                {{ missionBeginning | date("M d") }}<br>
+                {{ missionEnding | date("M d") }}
+            </div>
+            <div class="address">
+                PinPointIcon<br>
+                {% if address %}
+                    {% if address.city %}
+                        {{ address.city }}<br>
+                    {% endif %}
+                    {{ address.country | countryName }}
+                {% endif %}
+            </div>
+            <div class="lang">
+                BubleIcon<br>
+                {% for lang in languages %}
+                    {{ lang.name | trans }}
+                    {% if not loop.last %}
+                        ,
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="on_site">
+                EarthIcon<br>
+                {% if telecommuting %}
+                    {{ 'mission.view.advisor.on_site' | trans }}
+                {% else %}
+                    {{ 'mission.view.advisor.not_on_site' | trans }}
+                {% endif %}
+            </div>
+            PencilIcon<br>
+            {{ 'mission.view.to_answer' | trans }}
+        </div>
+    </div>
+
+    {# set up left and right content #}
+    <div class="content">
+
+        {# set up left content #}
+        <div class="meta_data">
+            Pitched at {{ updateDate | date('d/m/Y') }} <br>
+                <h4>{{ title }}</h4> <br>
+        </div>
+        <div class="resume">
+            {{ resume | nl2br }}
+        </div>
+
+        {# set up right content #}
+        <div class="top_chat_box">
+            <div class="button_action">
+                <button id="refuse_{{ userMission.id }}">{{ 'mission.view.contractor.btn_refuse' | trans }}</button>
+                <button id="shortlist_{{ userMission.id }}" {% if userMission.status == constant('SHORTLIST', userMission) %}hidden{% endif %}>{{ 'mission.view.contractor.btn_add_to_shortlist' | trans | upper }}</button>
+                <button id="remove_from_shortlist_{{ userMission.id }}" {% if userMission.status < constant('SHORTLIST', userMission) %}hidden{% endif %}>{{ 'mission.view.contractor.btn_remove_from_shortlist' | trans | upper }}</button>
+            </div>
+
+            {{ 'footer.advisor' | trans }}{{ nbAdvisor }}
+
+            CrossIcon
+            <a href="{{ path('dashboard') }}">{{ 'mission.view.advisor.btn_back_to_global_view' | trans | upper }}</a>
+        </div>
+        <div class="chat_box"><p>
+            <div class="message" id="thread_message">
+                {% include '@Mission/Mission/Contractor/view_thread_contractor.html.twig' %}
+            </div>
+            <div class="answer">
+                <form>
+                    <textarea id="inbox_input_message" name="inbox[inout_message]" required="required"></textarea>
+                    <input type="button" id="submit_text" value="{{ 'form.btn.send' | trans | upper }}"
+                           onClick="sendMessage()"/>
+                </form>
+            </div>
+            <div class="edit" id="{{ userMission.id }}">
+                {{ userMission.note }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="http://www.appelsiini.net/download/jquery.jeditable.js"></script>
+    <script src="http://www.appelsiini.net/download/jquery.jeditable.mini.js"></script>
+    <script type="text/javascript">
+
+        $('.edit').editable('{{ path('user_mission_notes') }}', {
+            type: 'textarea',
+            submit: '{{ 'form.btn.save' | trans }}',
+            indicator: '{{ 'form.note.indicator' | trans }}',
+            tooltip: '{{ 'form.note.tooltip' | trans }}',
+            id: $(this).attr('id')
+        });
+
+        $('[id^="shortlist_"]').each(function () {
+            $(this).click(function () {
+                var id = $(this).attr('id').split('_')[1];
+                $.ajax({
+                    url: "{{ path('user_mission_add_to_shortlist') }}",
+                    method: "put",
+                    data: {id: id}
+                }).done(function (msg) {
+                    alert("{{ 'mission.action.add_to_shortlist' | trans }}");
+                    $('#shortlist_' + id).hide();
+                    $('#remove_from_shortlist_' + id).show();
+                }).fail(function () {
+                    alert("{{ 'error.action.failed' | trans }}");
+                });
+            });
+        });
+
+        $('[id^="remove_from_shortlist_"]').each(function () {
+            $(this).click(function () {
+                var id = $(this).attr('id').split('_')[3];
+                $.ajax({
+                    url: "{{ path('user_mission_remove_from_shortlist') }}",
+                    method: "put",
+                    data: {id: id}
+                }).done(function (msg) {
+                    alert("{{ 'mission.action.remove_from_shortlist' | trans }}");
+                    $('#remove_from_shortlist_' + id).hide();
+                    $('#shortlist_' + id).show();
+                }).fail(function () {
+                    alert("{{ 'error.action.failed' | trans }}");
+                });
+            });
+        });
+
+        $('[id^="refuse_"]').each(function () {
+            $(this).click(function () {
+                var id = $(this).attr('id').split('_')[1];
+                $.ajax({
+                    url: "{{ path('user_mission_refuse') }}",
+                    method: "put",
+                    data: {id: id}
+                }).done(function (msg) {
+                    alert("{{ 'mission.action.refuse_user' | trans }}");
+                }).fail(function () {
+                    alert("{{ 'error.action.failed' | trans }}");
+                });
+            });
+        });
+        
+        function sendMessage() {
+            $.ajax({
+                url: "{{ path('send_message_to_advisor') }}",
+                method: "post",
+                data: {
+                    id: {{ userMission.id }},
+                    message: $('textarea#inbox_input_message').val()
+                }
+            }).done(function (msg) {
+                $('textarea#inbox_input_message').val('');
+                $('#thread_message').html(msg);
+            });
+        }
+    </script>
+{% endblock %}
