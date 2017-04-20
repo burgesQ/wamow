@@ -98,7 +98,6 @@ mission:
         contractor: "Only a logged contractor can edit a mission."
         wrongId: "The mission %id% doesn't exist."
         notYourMission: "You can't edit a mission that doesn't belong to you."
-        available: "The mission %id% is not available."
         right: "You did not created this mission."
         forbiddenAccess: "You have no access to this page."
         alreadyEdit: "You can't edit again the mission"

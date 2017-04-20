@@ -4,6 +4,7 @@ namespace UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Asset\Context\ContextInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use FOS\UserBundle\Model\User as BaseUser;
@@ -311,6 +312,13 @@ class User extends BaseUser implements ParticipantInterface
     private $emailNotification;
 
     /**
+     * @var boolean
+     *
+     * @orm\Column(nullable=false, name="payement", type="boolean")
+     */
+    private $payement;
+
+    /**
      * User constructor.
      */
     public function __construct()
@@ -330,20 +338,28 @@ class User extends BaseUser implements ParticipantInterface
         $this->secretMail            = new ArrayCollection();
         $this->userMission           = new ArrayCollection();
         $this->confidentiality       = false;
+        $this->payement              = false;
         $this->remoteWork            = false;
         $this->newsletter            = true;
         $this->emailNotification     = true;
         $this->userResume            = null;
         $this->company               = null;
         $this->publicId              = "";
-        $this->nbLoad                = 10;
         $this->giveUpCount           = 0;
         $this->secretMail            = [];
     }
 
     /**
+     * @ORM\PreUpdate
+     */
+    public function updateDate()
+    {
+        $this->setUpdateDate(new \Datetime());
+    }
+
+    /**
      * @Assert\Callback
-     * @param \Symfony\Component\Validator\Context\ExecutionContextInterface $context
+     * @param ExecutionContextInterface $context
      */
     public function isValidate(ExecutionContextInterface $context)
     {
@@ -352,8 +368,7 @@ class User extends BaseUser implements ParticipantInterface
 
         if ($this->getPhone() != NULL) {
             $this->getPhone()->isValidate($context);
-        }
-        if ($feesMin == NULL && $feesMax != NULL) {
+        } elseif ($feesMin == NULL && $feesMax != NULL) {
             $context
                 ->buildViolation('user.minfees.unset')
                 ->atPath('dailyFeesMin')
@@ -369,14 +384,6 @@ class User extends BaseUser implements ParticipantInterface
                 ->atPath('dailyFeesMin')
                 ->addViolation();
         }
-    }
-
-    /**
-     * @ORM\PreUpdate
-     */
-    public function updateDate()
-    {
-        $this->setUpdateDate(new \Datetime());
     }
 
     /**
@@ -1141,20 +1148,6 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Add address
-     *
-     * @param \ToolsBundle\Entity\Address $address
-     * @return User
-     */
-    public function addAddress($address)
-    {
-        $address->setUser($this);
-        $this->addresses[] = $address;
-
-        return $this;
-    }
-
-    /**
      * Get remoteWork
      *
      * @return boolean
@@ -1176,7 +1169,6 @@ class User extends BaseUser implements ParticipantInterface
 
         return $this;
     }
-
 
     /**
      * Get publicId
@@ -1215,14 +1207,53 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
+     * Get emailNotification
+     *
+     * @return boolean
+     */
+    public function getEmailNotification()
+    {
+        return $this->emailNotification;
+    }
+
+    /**
+     * Get linkedinData
+     *
+     * @return array
+     */
+    public function getLinkedinData()
+    {
+        return $this->linkedinData;
+    }
+
+
+    /**
+     * Add address
+     *
+     * @param \ToolsBundle\Entity\Address $address
+     * @return User
+     */
+    public function addAddress($address)
+    {
+        $address->setUser($this);
+        $this->addresses[] = $address;
+
+        return $this;
+    }
+
+    /**
      * Remove address
      *
      * @param \ToolsBundle\Entity\Address $address
+     *
+     * @return $this
      */
     public function removeAddress($address)
     {
         $address->setUser(null);
         $this->addresses->removeElement($address);
+
+        return $this;
     }
 
     /**
@@ -1236,24 +1267,25 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Get LinkedinData
+     * Set payement
      *
-     * @return array 
+     * @param boolean $payement
+     * @return User
      */
-    public function getLinkedinData()
+    public function setPayement($payement)
     {
-        return $this->linkedinData;
+        $this->payement = $payement;
+
+        return $this;
     }
 
-
     /**
-     * Get emailNotification
+     * Get payement
      *
      * @return boolean
      */
-    public function getEmailNotification()
+    public function getPayement()
     {
-        return $this->emailNotification;
-
+        return $this->payement;
     }
 }

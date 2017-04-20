@@ -100,6 +100,6 @@ class LoadContractor extends AbstractFixture implements OrderedFixtureInterface,
 
     public function getOrder()
     {
-        return 13;
+        return 12;
     }
 }

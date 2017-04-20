@@ -64,4 +64,20 @@ class UserMissionRepository extends EntityRepository
             ->orderBy('m.applicationEnding', 'ASC');
         return $qb->getQuery()->getResult();
     }
+
+    public function findMoreThanInterested($mission)
+    {
+        $qb = $this->_em->createQueryBuilder();
+
+        $qb->select('um')
+            ->from('MissionBundle:UserMission', 'um')
+            ->leftjoin('um.mission', 'm')
+            ->where('m.id = :mId')
+                ->setParameter('mId', $mission->getId())
+            ->andWhere('um.status >= :status')
+                ->setParameter('status', UserMission::ONGOING)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
 }

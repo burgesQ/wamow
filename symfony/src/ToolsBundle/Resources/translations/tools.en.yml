@@ -37,6 +37,15 @@ user:
         advisor:
             btn_save_change: SAVE CHANGE
 
+## Common error
+error:
+    forbidden: You have no access to this page
+    logged: You're not logged
+    mission:
+        not_found: The asked mission dosen't exist
+    user:
+        subscribe: Please Subscribe
+
 ## Dashboard
 dashboard:
     advisor:
@@ -95,7 +104,6 @@ dashboard:
     error:
         logged: "You are not logged"
 
-
 ## Registration
 registration:
     advisor:
@@ -149,6 +157,34 @@ registration:
             dailyfees: "Average daily fees"
             peremption: "Was the last mission of this kind within the last 2 years?"
 
+## Mission
+mission:
+    error:
+        pitch:
+            contractor: A contractor cannot pitch
+        available: This mission isn't available
+        user_mission: You cannot pitch that mission
+        interested_twice: You already mark youreself as inetrested
+        available: The mission %id is not available.
+        limit_reach: The advisor answer limit was reached for this mission. The mission is closed
+    view:
+        advisor:
+            btn_back_to_board: back to board
+            intrested: Intrested
+            finance: |
+                FINANCE
+                $ %price
+                %professionalExpertise
+            on_site: On site
+            not_on_site: Not on site
+            to_answer: To Answer
+
+## Inbox
+inbox:
+    form:
+        placeholder:
+            empty: Write your message here
+        btn_submit_empty_interested: ACCEPT THE PITCH AND SEND
 
 ## Business vocabulary
 language:

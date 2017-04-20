@@ -16,6 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Mission
 {
+    // PITCH GENERATOR STATUS
     const STEP_ZERO  = 0;
     const STEP_ONE   = 1;
     const STEP_TWO   = 2;
@@ -23,9 +24,12 @@ class Mission
     const STEP_FOUR  = 4;
     const DONE       = 5;
 
+    // MISSION STATUS
     const DELETED   = -1;
     const DRAFT     = 0;
     const PUBLISHED = 1;
+    const STEP2     = 2;
+    const STEP3     = 3;
 
     /**
      * @var int
@@ -279,7 +283,8 @@ class Mission
     private $publicId;
 
     /**
-     * @var booleam
+     * @var boolean
+     *
      * @ORM\Column(name="on_draft", type="boolean", nullable=false)
      */
     private $onDraft;
@@ -1082,29 +1087,6 @@ class Mission
     public function getLanguages()
     {
         return $this->languages;
-    }
-
-    /**
-     * Set companyName
-     *
-     * @param string $companyName
-     * @return Mission
-     */
-    public function setCompanyName($companyName)
-    {
-        $this->companyName = $companyName;
-
-        return $this;
-    }
-
-    /**
-     * Get companyName
-     *
-     * @return string 
-     */
-    public function getCompanyName()
-    {
-        return $this->companyName;
     }
 
     /**

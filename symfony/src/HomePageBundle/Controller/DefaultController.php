@@ -17,7 +17,7 @@ class DefaultController extends Controller
         $session->set('role', 'ADVISOR');
 
         if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')
-                 && ($url = $this->get('signedUp')->checkIfSignedUp($this->getUser()->getStatus()))) {
+                 && ($url = $this->get('signed_up')->checkIfSignedUp($this->getUser()->getStatus()))) {
             return $this->redirectToRoute($url);
         }
 

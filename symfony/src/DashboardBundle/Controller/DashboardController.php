@@ -23,7 +23,7 @@ class DashboardController extends Controller
 
         if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR'))
         {
-            if (($url = $this->get('signedUp')->checkIfSignedUp($user->getStatus())))
+            if (($url = $this->get('signed_up')->checkIfSignedUp($user->getStatus())))
             {
                 return $this->redirectToRoute($url);
             }

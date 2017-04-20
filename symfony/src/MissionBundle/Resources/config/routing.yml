@@ -1,39 +1,18 @@
 # Mission Action
-
 mission_view:
     path:      /mission/view/{missionId}
     defaults:
         _controller: MissionBundle:Mission:view
-
-missions_all:
-    path:      /missions
-    defaults:
-        _controller: MissionBundle:Mission:list
-
-mission_interested:
-    path:      /mission/interested/{missionId}
-    defaults:
-        _controller: MissionBundle:Mission:interested
-
-mission_pitch:
-    path:      /mission/pitch/{missionId}
-    defaults:
-        _controller: MissionBundle:Mission:pitch
 
 mission_giveup:
     path:       /mission/giveup/{missionId}
     defaults:
         _controller: MissionBundle:Mission:giveUp
 
-mission_users_selection:
-    path:      /mission/selection/{missionId}
+mission_interested:
+    path:      /mission/interested/{missionId}
     defaults:
-        _controller: MissionBundle:Mission:selection
-
-mission_selection_takeback:
-    path:      /mission/takeback/{missionId}
-    defaults:
-        _controller: MissionBundle:Mission:takeBack
+        _controller: MissionBundle:Mission:interested
 
 # Mission Generator
 mission_new_step_one:
@@ -72,7 +51,7 @@ mission_delete:
     defaults:
         _controller: MissionBundle:MissionGenerator:delete
 
-# certifications autocoomplete
+# Certifications Autocomplete
 certifications_autocomplete:
     path:            /certifications/autocomplete
     defaults:

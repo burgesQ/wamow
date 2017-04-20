@@ -5,6 +5,7 @@ namespace ToolsBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContext;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * PhoneNumber
@@ -117,8 +118,9 @@ class PhoneNumber
 
     /**
      * @Assert\Callback
+     * @param ExecutionContextInterface $context
      */
-    public function isValidate(ExecutionContext $context)
+    public function isValidate(ExecutionContextInterface $context)
     {
         if  ($this->number === NULL && $this->prefix !== NULL) {
             $context

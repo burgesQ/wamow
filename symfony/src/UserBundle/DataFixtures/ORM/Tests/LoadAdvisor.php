@@ -2498,9 +2498,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             $newUser
                 ->setPlainPassword($oneData[5])
                 ->setRoles(['ROLE_ADVISOR'])
-                ->setEnabled(true)
-                ->setStatus(User::REGISTER_NO_STEP)
-            ;
+                ->setEnabled(true);
+            $newUser->setStatus(User::REGISTER_NO_STEP);
 
             // set User resume
             $newUser->setUserResume($oneData[6]);
@@ -2536,32 +2535,32 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 ;
 
                 switch ($oneExpShap) {
-                    case 0:
+                    case $oneExpShap[0] == true:
                         $shap->addCompanySize($smallComp);
                         break;
-                    case 1:
+                    case $oneExpShap[1] == true:
                         $shap->addCompanySize($mediumComp);
                         break;
-                    case 2:
+                    case $oneExpShap[2] == true:
                         $shap->addCompanySize($largeComp);
                         break;
-                    case 3:
+                    case $oneExpShap[3] == true:
                         $shap->addContinent($southAmerica);
                         break;
-                    case 4:
+                    case $oneExpShap[4] == true:
                         $shap->addContinent($northAmerica);
                         break;
-                    case 5:
+                    case $oneExpShap[5] == true:
                         $shap->addContinent($asia);
                         break;
-                    case 6:
+                    case $oneExpShap[6] == true:
                         $shap->addContinent($emea);
                         break;
                 }
 
                 $manager->persist($shap);
+                $manager->flush();
                 $newUser->addExperienceShaping($shap);
-                $i++;
             }
 
             if (key_exists(12, $oneData)) {
@@ -2624,6 +2623,6 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
      */
     public function getOrder()
     {
-        return 12;
+        return 13;
     }
 }

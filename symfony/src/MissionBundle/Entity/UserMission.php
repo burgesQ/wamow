@@ -12,7 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class UserMission
 {
-    const DELETED    = -5;
+    // USER_MISSION STATUS
+    const DELETED    = -6;
+    const ENDDATE    = -5;
     const DISMISS    = -4;
     const GIVEUP     = -3;
     const REFUSED    = -2;
@@ -21,7 +23,6 @@ class UserMission
     const ONGOING    = 1;
     const SHORTLIST  = 2;
     const FINALIST   = 3;
-
 
     /**
      * @var int
@@ -39,13 +40,13 @@ class UserMission
 
     /**
      * @var \DateTime
-     * @ORM\Column(name="creationDate", type="datetime", nullable=false)
+     * @ORM\Column(name="creation_date", type="datetime", nullable=false)
      */
     private $creationDate;
 
     /**
      * @var \DateTime
-     * @ORM\Column(name="updateDate", type="datetime", nullable=false)
+     * @ORM\Column(name="update_date", type="datetime", nullable=false)
      */
     private $updateDate;
 
@@ -76,6 +77,11 @@ class UserMission
      */
     private $thread;
 
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="interested_at", type="datetime", nullable=true)
+     */
+    private $interestedAt;
 
     /**
      * UserMission constructor.
@@ -226,7 +232,7 @@ class UserMission
 
     /**
      * Get thread
-     * @return \ToolsBundle\Entity\Thread
+     * @return \InboxBundle\Entity\Thread
      */
     public function getThread()
     {
@@ -236,7 +242,7 @@ class UserMission
     /**
      * Set thread
      *
-     * @param \ToolsBundle\Entity\Thread $thread
+     * @param \InboxBundle\Entity\Thread $thread
      *
      * @return UserMission
      */
@@ -247,4 +253,27 @@ class UserMission
         return $this;
     }
 
+
+    /**
+     * Set interestedAt
+     *
+     * @param \DateTime $interestedAt
+     * @return UserMission
+     */
+    public function setInterestedAt($interestedAt)
+    {
+        $this->interestedAt = $interestedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get interestedAt
+     *
+     * @return \DateTime
+     */
+    public function getInterestedAt()
+    {
+        return $this->interestedAt;
+    }
 }
