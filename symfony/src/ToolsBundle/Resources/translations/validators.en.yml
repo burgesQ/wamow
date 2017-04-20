@@ -12,6 +12,8 @@ tools:
         state: 'The state must contain only letters or dash.'
     upload:
         badFormat: "This fils doesn't match the good format"
+    number:
+        reauired: "Please enter a valid number"
 
 user:
     companysize:

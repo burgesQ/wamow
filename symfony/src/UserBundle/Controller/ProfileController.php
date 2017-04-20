@@ -2,53 +2,40 @@
 
 namespace UserBundle\Controller;
 
-use FOS\UserBundle\FOSUserEvents;
-use FOS\UserBundle\Event\FormEvent;
-use FOS\UserBundle\Model\UserInterface;
-use FOS\UserBundle\Event\GetResponseUserEvent;
-use FOS\UserBundle\Event\FilterUserResponseEvent;
-
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-
 use FOS\UserBundle\Controller\ProfileController as BaseController;
-
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use FOS\UserBundle\Event\FilterUserResponseEvent;
+use FOS\UserBundle\Event\GetResponseUserEvent;
+use Symfony\Component\HttpFoundation\Request;
+use FOS\UserBundle\Model\UserInterface;
 use ToolsBundle\Entity\ProfilePicture;
 use ToolsBundle\Entity\UploadResume;
-use ToolsBundle\Entity\ReadResume;
-
-use UserBundle\Entity\UserData;
-
-use UserBundle\Form\MergedFormType;
+use FOS\UserBundle\Event\FormEvent;
+use FOS\UserBundle\FOSUserEvents;
 
 class ProfileController extends BaseController
 {
     /**
-     * Show the user
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function showAction()
     {
-        $user = $this->getUser();
-        if (!is_object($user) || !$user instanceof UserInterface)
-        {
+        if (!is_object(($user = $this->getUser())) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
-        }
-        else if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')
-                 && ($url = $this->get('signedUp')->checkIfSignedUp($user->getStatus())))
-        {
+        } elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')
+                  && ($url = $this->get('signedUp')->checkIfSignedUp($user->getStatus()))) {
+
             return $this->redirectToRoute($url);
         }
+
         $em = $this->getDoctrine()->getManager();
 
-        return $this->render('UserBundle:Profile:show.html.twig', array(
-            'user' => $user,
-            'image' => $em->getRepository('ToolsBundle:ProfilePicture')->getLastProfilePictureByUser($user->getId()),
-            'resumes' => $em->getRepository('ToolsBundle:UploadResume')->getLastResumeByUser($user->getId())
-        ));
+        return $this->render('UserBundle:Profile:show.html.twig', [
+            'user' => $user
+        ]);
     }
-    
+
     /**
      * Edit the user
      */

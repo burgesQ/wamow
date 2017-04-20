@@ -26,6 +26,17 @@ class Address
     /**
      * @var string
      *
+     * @ORM\Column(name="number", type="string", length=255, nullable=true)
+     * @Assert\Regex(
+     *     pattern="#^[0-9a-zA-Zéèêëçîïíàáâñńœôö]+(?:[\s-][a-zA-Zéèêëçîïíàáâñńœôö]+)*$#",
+     *     match=true,
+     *     message="tools.number.required")
+     */
+    private $number;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="street", type="string", length=255, nullable=true)
      * @Assert\Regex(
      *     pattern="#^[0-9a-zA-Zéèêëçîïíàáâñńœôö]+(?:[\s-][a-zA-Zéèêëçîïíàáâñńœôö]+)*$#",
@@ -110,6 +121,14 @@ class Address
      * @ORM\Column(name="update_date", type="datetime", nullable=false)
      */
     private $updateDate;
+
+    /**
+     * @ORM\ManyToOne(
+     *     targetEntity="UserBundle\Entity\User",
+     *     inversedBy="addresses"
+     * )
+     */
+    private $user;
 
     public function __construct()
     {
@@ -361,5 +380,51 @@ class Address
     public function updateDate()
     {
         $this->setUpdateDate(new \Datetime());
+    }
+
+    /**
+     * Set user
+     *
+     * @param \UserBundle\Entity\User $user
+     * @return Address
+     */
+    public function setUser($user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set number
+     *
+     * @param string $number
+     * @return Address
+     */
+    public function setNumber($number)
+    {
+        $this->number = $number;
+
+        return $this;
+    }
+
+    /**
+     * Get number
+     *
+     * @return string
+     */
+    public function getNumber()
+    {
+        return $this->number;
     }
 }

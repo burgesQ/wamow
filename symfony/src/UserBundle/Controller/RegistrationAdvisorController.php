@@ -18,6 +18,7 @@ use Symfony\Component\Form\FormError;
 use ToolsBundle\Entity\UploadResume;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\FOSUserEvents;
+use ToolsBundle\Entity\Address;
 use UserBundle\Entity\User;
 
 class RegistrationAdvisorController extends Controller
@@ -60,6 +61,13 @@ class RegistrationAdvisorController extends Controller
         // create Resume entity
         $resume = new UploadResume($user);
         $resume->setKind(2)->setFormat("pdf");
+
+        // create a Address entity
+        if ($user->getAddresses()->isEmpty()) {
+            $address = new Address();
+            $user->addAddress($address);
+            $em->persist($address);
+        }
 
         // create merged form
         $formData['user']   = $user;

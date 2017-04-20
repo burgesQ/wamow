@@ -1,3 +1,42 @@
+# tools.en.yml
+form:
+    address:
+        street: "Address"
+        street_2: "Address bis"
+        city: "City"
+        zipcode: "Zipcode"
+        state: "State"
+        country: "Country"
+        choosecountry: "Choose a country"
+        name: "Add a name if required"
+        label: "Add a label if required"
+        number: Street Number
+
+    phone:
+        prefix: "Prefix"
+        chooseprefix: "Choose a prefix"
+        number: "Phone"
+
+    file:
+        file: "File"
+
+## Users
+user:
+    profile_show:
+        wait_subscription_plan: SUBSCRIPTION PLAN, WAIT FOR #98
+        linkedin_stuff: LinkeDin stuff's
+        resume_stuff: Resume stuff's
+        advisor:
+            link_back_to_board: back to board
+            link_edit_profile: edit profile
+            link_general: GENERALE
+            link_billing: BILLING
+            title_algorithm_improvment: algorythm improvment
+            title_subscription: subscription
+    profile_edit:
+        advisor:
+            btn_save_change: SAVE CHANGE
+
 ## Dashboard
 dashboard:
     advisor:

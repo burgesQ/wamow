@@ -10,6 +10,6 @@ rm -rf app/cache &&
 ##* Assets Installation order for JS/CSS :
     php app/console braincrafted:bootstrap:install &&
     php app/console assets:install &&
-    php app/console assetic:dump &&
+    php app/console assetic:dump
 ##* Right Pb :
-#    chmod -R 777 app/cache app/logs
+    # && chmod -R 777 app/cache app/logs

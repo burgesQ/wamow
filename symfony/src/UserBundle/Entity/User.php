@@ -8,7 +8,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use FOS\UserBundle\Model\User as BaseUser;
 use FOS\MessageBundle\Model\ParticipantInterface;
-
 use CompanyBundle\Entity\Company;
 
 /**
@@ -92,13 +91,6 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * @var bool
      *
-     * @ORM\Column(name="password_set", type="boolean", nullable=false)
-     */
-    private $password_set;
-
-    /**
-     * @var bool
-     *
      * @ORM\Column(name="confidentiality", type="boolean", nullable=false)
      */
     private $confidentiality;
@@ -140,24 +132,6 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * @var int
      *
-     * @ORM\Column(name="gender", type="smallint", nullable=true)
-     * @Assert\Range(
-     *      min = 0,
-     *      max = 2
-     *)
-     */
-    private $gender;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="birthdate", type="datetime", nullable=true)
-     */
-    private $birthdate;
-
-    /**
-     * @var int
-     *
      * @ORM\Column(name="daily_fees_min", type="bigint", nullable=true)
      * @Assert\Range(
      *      min = 0
@@ -188,13 +162,6 @@ class User extends BaseUser implements ParticipantInterface
      * @ORM\Column(name="update_date", type="datetime", nullable=true)
      */
     private $updateDate;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="country", type="string", length=255, nullable=true)
-     */
-    private $country;
 
     /**
      * @ORM\OneToOne(targetEntity="ToolsBundle\Entity\PhoneNumber", cascade={"persist"})
@@ -230,7 +197,7 @@ class User extends BaseUser implements ParticipantInterface
     private $secretMail;
 
     /**
-     * @ORM\OneToMany(targetEntity="ToolsBundle\Entity\ProfilePicture", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="ToolsBundle\Entity\ProfilePicture", mappedBy="user", cascade={"persist"})
      */
     private $images;
 
@@ -242,7 +209,7 @@ class User extends BaseUser implements ParticipantInterface
     private $resumes;
 
     /**
-     * @var text
+     * @var string
      *
      * @ORM\Column(name="user_resume", type="text", nullable=true)
      */
@@ -305,13 +272,6 @@ class User extends BaseUser implements ParticipantInterface
     private $nbLoad;
 
     /**
-     * @var boolean
-     *
-     * @ORM\Column(name="read_report", type="boolean", nullable=false)
-     */
-    private $readReport;
-
-    /**
      * @var ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="\MissionBundle\Entity\WorkExperience", cascade={"persist"})
@@ -348,6 +308,22 @@ class User extends BaseUser implements ParticipantInterface
     private $publicId;
 
     /**
+     * @ORM\OneToMany(
+     *     targetEntity="ToolsBundle\Entity\Address",
+     *     mappedBy="user",
+     *     cascade={"persist"}
+     * )
+     */
+    private $addresses;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(nullable=false, name="email_notification", type="boolean")
+     */
+    private $emailNotification;
+
+    /**
      * User constructor.
      */
     public function __construct()
@@ -363,18 +339,57 @@ class User extends BaseUser implements ParticipantInterface
         $this->missionKind           = new ArrayCollection();
         $this->businessPractice      = new ArrayCollection();
         $this->experienceShaping     = new ArrayCollection();
+        $this->addresses             = new ArrayCollection();
+        $this->secretMail            = new ArrayCollection();
         $this->userMission           = new ArrayCollection();
         $this->confidentiality       = false;
         $this->remoteWork            = false;
         $this->newsletter            = true;
-        $this->readReport            = true;
+        $this->emailNotification     = true;
         $this->userResume            = null;
-        $this->birthdate             = null;
         $this->company               = null;
         $this->publicId              = "";
         $this->nbLoad                = 10;
         $this->giveUpCount           = 0;
         $this->secretMail            = [];
+    }
+
+    /**
+     * @Assert\Callback
+     * @param \Symfony\Component\Validator\Context\ExecutionContextInterface $context
+     */
+    public function isValidate(ExecutionContextInterface $context)
+    {
+        $feesMin = $this->getDailyFeesMin();
+        $feesMax = $this->getDailyFeesMax();
+
+        if ($this->getPhone() != NULL) {
+            $this->getPhone()->isValidate($context);
+        }
+        if ($feesMin == NULL && $feesMax != NULL) {
+            $context
+                ->buildViolation('user.minfees.unset')
+                ->atPath('dailyFeesMin')
+                ->addViolation();
+        } elseif ($feesMax == NULL && $feesMin != NULL) {
+            $context
+                ->buildViolation('user.maxfees.unset')
+                ->atPath('dailyFeesMax')
+                ->addViolation();
+        } elseif ($feesMin != NULL && $feesMax != NULL && $feesMin >= $feesMax) {
+            $context
+                ->buildViolation('user.minfees.over')
+                ->atPath('dailyFeesMin')
+                ->addViolation();
+        }
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function updateDate()
+    {
+        $this->setUpdateDate(new \Datetime());
     }
 
     /**
@@ -513,50 +528,6 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Set gender
-     *
-     * @param integer $gender
-     * @return User
-     */
-    public function setGender($gender)
-    {
-        $this->gender = $gender;
-        return $this;
-    }
-
-    /**
-     * Get gender
-     *
-     * @return integer
-     */
-    public function getGender()
-    {
-        return $this->gender;
-    }
-
-    /**
-     * Set birthdate
-     *
-     * @param \DateTime $birthdate
-     * @return User
-     */
-    public function setBirthdate($birthdate)
-    {
-        $this->birthdate = $birthdate;
-        return $this;
-    }
-
-    /**
-     * Get birthdate
-     *
-     * @return \DateTime
-     */
-    public function getBirthdate()
-    {
-        return $this->birthdate;
-    }
-
-    /**
      * Set creationDate
      *
      * @param \DateTime $creationDate
@@ -598,37 +569,6 @@ class User extends BaseUser implements ParticipantInterface
     public function getUpdateDate()
     {
         return $this->updateDate;
-    }
-
-    /**
-     * @ORM\PreUpdate
-     */
-    public function updateDate()
-    {
-        $this->setUpdateDate(new \Datetime());
-    }
-
-    /**
-     * Set country
-     *
-     * @param string $country
-     * @return User
-     */
-    public function setCountry($country)
-    {
-        $this->country = $country;
-
-        return $this;
-    }
-
-    /**
-     * Get country
-     *
-     * @return string
-     */
-    public function getCountry()
-    {
-        return $this->country;
     }
 
     /**
@@ -683,7 +623,7 @@ class User extends BaseUser implements ParticipantInterface
      * @param \ToolsBundle\Entity\PhoneNumber $phone
      * @return User
      */
-    public function setPhone(\ToolsBundle\Entity\PhoneNumber $phone = null)
+    public function setPhone($phone = null)
     {
         $this->phone = $phone;
 
@@ -706,9 +646,10 @@ class User extends BaseUser implements ParticipantInterface
      * @param \ToolsBundle\Entity\ProfilePicture image
      * @return User
      */
-    public function addImage($images)
+    public function addImage($image)
     {
-        $this->images[] = $images;
+        $image->setUser($this);
+        $this->images[] = $image;
 
         return $this;
     }
@@ -716,11 +657,11 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * Remove images
      *
-     * @param \ToolsBundle\Entity\ProfilePicture $images
+     * @param \ToolsBundle\Entity\ProfilePicture $image
      */
-    public function removeImage($images)
+    public function removeImage($image)
     {
-        $this->images->removeElement($images);
+        $this->images->removeElement($image);
     }
 
 
@@ -803,39 +744,6 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Set password_set
-     *
-     * @param boolean $passwordSet
-     * @return User
-     */
-    public function setPasswordSet($passwordSet)
-    {
-        $this->password_set = $passwordSet;
-
-        return $this;
-    }
-
-    /**
-     * Get password_set
-     *
-     * @return boolean
-     */
-    public function isPasswordSet()
-    {
-        return $this->password_set;
-    }
-
-    /**
-     * Get password_set
-     *
-     * @return boolean
-     */
-    public function getPasswordSet()
-    {
-        return $this->password_set;
-    }
-
-    /**
      * Set giveUpCount
      *
      * @param integer $giveUpCount
@@ -861,7 +769,7 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * Add addSecretMail
      *
-     * @param text $mail
+     * @param string $mail
      * @return User
      */
     public function addSecretMail($mail)
@@ -998,7 +906,7 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Get Professionalexpertise
+     * Get ProfessionalExpertise
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -1008,12 +916,12 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Add Professionalexpertise
+     * Add ProfessionalExpertise
      *
      * @param \MissionBundle\Entity\ProfessionalExpertise $professionalExpertise
      * @return User
      */
-    public function addProfessionalExpertise(\MissionBundle\Entity\ProfessionalExpertise $professionalExpertise)
+    public function addProfessionalExpertise($professionalExpertise)
     {
         $this->professionalExpertise[] = $professionalExpertise;
 
@@ -1021,11 +929,11 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Remove Professionalexpertise
+     * Remove ProfessionalExpertise
      *
      * @param \MissionBundle\Entity\ProfessionalExpertise $professionalExpertise
      */
-    public function removeProfessionalExpertise(\MissionBundle\Entity\ProfessionalExpertise $professionalExpertise)
+    public function removeProfessionalExpertise($professionalExpertise)
     {
         $this->professionalExpertise->removeElement($professionalExpertise);
     }
@@ -1041,12 +949,12 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Add Missionkind
+     * Add MissionKind
      *
      * @param \MissionBundle\Entity\MissionKind $missionKind
      * @return User
      */
-    public function addMissionKind(\MissionBundle\Entity\MissionKind $missionKind)
+    public function addMissionKind($missionKind)
     {
         $this->missionKind[] = $missionKind;
 
@@ -1058,7 +966,7 @@ class User extends BaseUser implements ParticipantInterface
      *
      * @param \MissionBundle\Entity\MissionKind $missionKind
      */
-    public function removeMissionKind(\MissionBundle\Entity\MissionKind $missionKind)
+    public function removeMissionKind($missionKind)
     {
         $this->missionKind->removeElement($missionKind);
     }
@@ -1121,52 +1029,6 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Set NbLoad
-     *
-     * @param integer $nbLoad
-     * @return User
-     */
-    public function setNbLoad($nbLoad = 10)
-    {
-        $this->nbLoad = $nbLoad;
-
-        return $this;
-    }
-
-    /**
-     * Get Nbload
-     *
-     * @return integer
-     */
-    public function getNbLoad()
-    {
-        return $this->nbLoad;
-    }
-
-    /**
-     * Set ReadReport
-     *
-     * @param boolean $readReport
-     * @return User
-     */
-    public function setReadReport($readReport = true)
-    {
-        $this->readReport = $readReport;
-
-        return $this;
-    }
-
-    /**
-     * Get ReadReport
-     *
-     * @return boolean
-     */
-    public function getReadReport()
-    {
-        return $this->readReport;
-    }
-
-    /**
      * Get workExperience
      *
      * @return \Doctrine\Common\Collections\Collection
@@ -1182,7 +1044,7 @@ class User extends BaseUser implements ParticipantInterface
      * @param \MissionBundle\Entity\WorkExperience $workExperience
      * @return User
      */
-    public function addWorkExperience(\MissionBundle\Entity\WorkExperience $workExperience)
+    public function addWorkExperience($workExperience)
     {
         $this->workExperience[] = $workExperience;
 
@@ -1207,7 +1069,7 @@ class User extends BaseUser implements ParticipantInterface
      *
      * @param \MissionBundle\Entity\WorkExperience $workExperience
      */
-    public function removeWorkExperience(\MissionBundle\Entity\WorkExperience $workExperience)
+    public function removeWorkExperience($workExperience)
     {
         $this->workExperience->removeElement($workExperience);
     }
@@ -1243,43 +1105,6 @@ class User extends BaseUser implements ParticipantInterface
     public function removeExperienceShaping($experienceShaping)
     {
         $this->experienceShaping->removeElement($experienceShaping);
-    }
-
-    /**
-     * @Assert\Callback
-     */
-    public function isValidate(ExecutionContextInterface $context)
-    {
-        $feesMin = $this->getDailyFeesMin();
-        $feesMax = $this->getDailyFeesMax();
-
-        $this->setUpdateDate(new \Datetime());
-
-        if ($this->getPhone() != NULL)
-        {
-            $this->getPhone()->isValidate($context);
-        }
-        if ($feesMin == NULL && $feesMax != NULL)
-        {
-            $context
-                ->buildViolation('user.minfees.unset')
-                ->atPath('dailyFeesMin')
-                ->addViolation();
-        }
-        else if ($feesMax == NULL && $feesMin != NULL)
-        {
-            $context
-                ->buildViolation('user.maxfees.unset')
-                ->atPath('dailyFeesMax')
-                ->addViolation();
-        }
-        else if ($feesMin != NULL && $feesMax != NULL && $feesMin >= $feesMax)
-        {
-            $context
-                ->buildViolation('user.minfees.over')
-                ->atPath('dailyFeesMin')
-                ->addViolation();
-        }
     }
 
     /**
@@ -1329,6 +1154,20 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
+     * Add address
+     *
+     * @param \ToolsBundle\Entity\Address $address
+     * @return User
+     */
+    public function addAddress($address)
+    {
+        $address->setUser($this);
+        $this->addresses[] = $address;
+
+        return $this;
+    }
+
+    /**
      * Get remoteWork
      *
      * @return boolean
@@ -1350,6 +1189,7 @@ class User extends BaseUser implements ParticipantInterface
 
         return $this;
     }
+
 
     /**
      * Get publicId
@@ -1375,6 +1215,40 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
+     * Remove address
+     *
+     * @param \ToolsBundle\Entity\Address $address
+     */
+    public function removeAddress($address)
+    {
+        $address->setUser(null);
+        $this->addresses->removeElement($address);
+    }
+
+    /**
+     * Get address
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAddresses()
+    {
+        return $this->addresses;
+    }
+
+    /**
+     * Set emailNotification
+     *
+     * @param boolean $emailNotification
+     * @return User
+     */
+    public function setEmailNotification($emailNotification)
+    {
+        $this->emailNotification = $emailNotification;
+
+        return $this;
+    }
+
+    /**
      * Get linkedinData
      *
      * @return array 
@@ -1382,5 +1256,17 @@ class User extends BaseUser implements ParticipantInterface
     public function getLinkedinData()
     {
         return $this->linkedinData;
+    }
+
+
+    /**
+     * Get emailNotification
+     *
+     * @return boolean
+     */
+    public function getEmailNotification()
+    {
+        return $this->emailNotification;
+
     }
 }

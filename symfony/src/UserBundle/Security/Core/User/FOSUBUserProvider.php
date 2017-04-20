@@ -7,6 +7,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface as Container;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use FOS\UserBundle\FOSUserEvents;
+use ToolsBundle\Entity\Address;
 use UserBundle\Entity\User;
 
 class FOSUBUserProvider extends BaseClass
@@ -97,8 +98,12 @@ class FOSUBUserProvider extends BaseClass
             if (array_key_exists('headline', $data) && array_key_exists('summary', $data))
                 $user->setUserResume($data['headline'] . $data['summary']);
             if (array_key_exists('location', $data) && array_key_exists('country', $data['location'])
-                && array_key_exists('code', $data['location']['country']))
-                $user->setCountry(strtoupper($data['location']['country']['code']));
+                && array_key_exists('code', $data['location']['country'])) {
+                $address = new Address();
+                $address->setCountry(strtoupper($data['location']['country']['code']));
+                $this->container->get('doctrine')->getManager()->persist($address);
+                $user->addAddress($address);
+            }
 
             $user->setLinkedinData($data);
 

@@ -22,8 +22,10 @@
     {{ form_errors(form.user.email) }}
     {{ form_errors(form.user.plainPassword) }}
     {{ form_errors(form.user.plainPassword.first) }}
+    {% set address = form.user.addresses | last %}
+    {{ form_errors(address) }}
+    {{ form_errors(address.country) }}
     {{ form_errors(form.user.plainPassword.second) }}
-    {{ form_errors(form.user.country) }}
     {{ form_errors(form.user.languages) }}
     {{ form_errors(form.resume) }}
 
@@ -44,8 +46,8 @@
     <br>
 
     <br>
-    {{ form_widget(form.user.country) }}
-    {{ form_label(form.user.country) }}
+    {{ form_widget(address.country) }}
+    {{ form_label(address.country) }}
     <br>
     {{ form_label(form.user.remoteWork) }}
     {{ form_widget(form.user.remoteWork) }}

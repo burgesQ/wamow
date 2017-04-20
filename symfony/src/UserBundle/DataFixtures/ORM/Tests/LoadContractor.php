@@ -2,11 +2,12 @@
 
 namespace MissionBundle\DataFixtures\ORM\Tests;
 
-use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\Persistence\ObjectManager;
+use ToolsBundle\Entity\Address;
 use UserBundle\Entity\User;
 
 class LoadContractor extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
@@ -69,7 +70,11 @@ class LoadContractor extends AbstractFixture implements OrderedFixtureInterface,
                 ->setLastName($oneData[1])
                 ->setEmail($oneData[2])
                 ->setEmergencyEmail($oneData[3])
-                ->setCountry($oneData[4]);
+            ;
+
+            $address = new Address();
+            $address->setCountry($oneData[4]);
+            $newUser->addAddress($address);
 
             // set languages
             foreach ($oneData[5] as $oneLang)
@@ -78,7 +83,6 @@ class LoadContractor extends AbstractFixture implements OrderedFixtureInterface,
             // set password and status
             $newUser
                 ->setPlainPassword($oneData[6])
-                ->setPasswordSet(true)
                 ->setRoles(['ROLE_CONTRACTOR'])
                 ->setEnabled(true)
                 ->setStatus(User::REGISTER_NO_STEP);
@@ -96,6 +100,6 @@ class LoadContractor extends AbstractFixture implements OrderedFixtureInterface,
 
     public function getOrder()
     {
-        return 12;
+        return 13;
     }
 }
