@@ -63,7 +63,7 @@ class ActionController extends Controller
             throw new NotFoundHttpException($trans->trans('error.mission.not_found', [], 'tools'));
         }
 
-        return $this->render('@Mission/Mission/view_thread_expert.html.twig', [
+        return $this->render('@Mission/Mission/Advisor/view_thread_advisor.html.twig', [
             'thread'    => $thread,
             'userId'    => $user->getId(),
             'anonymous' => $step->getAnonymousMode()

@@ -68,6 +68,12 @@ certifications_autocomplete:
         _controller: MissionBundle:Action:certificationsAutocomplete
     methods:     [GET]
 
+user_mission_add_to_contract:
+    path:            /contract/add
+    defaults:
+        _controller: MissionBundle:Action:addToContract
+        methode:     PUT
+
 user_mission_add_to_shortlist:
     path:            /shortlist/add
     defaults:

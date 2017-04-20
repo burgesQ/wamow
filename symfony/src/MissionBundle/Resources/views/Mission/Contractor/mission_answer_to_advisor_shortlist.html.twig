@@ -12,27 +12,27 @@
                 {{ mission.title }}<br>
                 CertificationIcon {{ 'typemissions.certification' | trans }}:
                 {% for certif in mission.certifications %}
-                    {{ certif.name }}
-                    {% if not loop.last %}
-                        ,
-                    {% endif %}
+                {{ certif.name }}
+                {% if not loop.last %}
+                    ,
+                {% endif %}
                 {% endfor %}<br>
             </div>
-            <div class="intereted">
-                InterestedIcon<br>
-                {{ interested }} {{ 'dashboard.contractor.mission.interested' | trans }}
-            </div>
             <div class="selected">
-                {{ shortlisted }}/3 {{ 'dashboard.contractor.mission.selected' | trans }}
+                SElectedIcon<br>
+                {{ nbProposale }}/3 {{ 'dashboard.contractor.mission.proposal' | trans }}
+            </div>
+            <div class="proposal">
+                3/3 {{ 'dashboard.contractor.mission.selected' | trans }}
             </div>
             <div class="finance">
                 {% for kind in mission.missionKinds %}
-                    {{ kind.name | trans }}
-                    {% if not loop.last %}
-                        ,
-                    {% endif %}
+                {{ kind.name | trans }}
+                {% if not loop.last %}
+                    ,
+                {% endif %}
                 {% endfor %}<br>
-                {{ 'mission.view.contractor.finance' | trans({ '%price': mission.price * 1000, '%professionalExpertise': mission.professionalExpertise.name | trans }, 'tools') | nl2br }}
+                {{ 'mission.view.contractor.finance' | trans({ '%price': mission.price, '%professionalExpertise': mission.professionalExpertise.name | trans }, 'tools') | nl2br }}
             </div>
             <div class="day_left">
                 ClockIcon<br>
@@ -73,15 +73,14 @@
             {{ 'mission.view.to_answer' | trans }}
         </div>
     </div>
-
+    <br>
     {# set up left and right content #}
     <div class="content">
 
         {# set up left content #}
         <div class="meta_data">
-            {#TODO TRANS#}
             Pitched at {{ mission.updateDate | date('d/m/Y') }} <br>
-                <h4>{{ mission.title }}</h4> <br>
+                {{ mission.title }}
         </div>
         <div class="resume">
             {{ mission.resume | nl2br }}
@@ -91,14 +90,13 @@
         <div class="top_chat_box">
             <div class="button_action">
                 <button id="refuse_{{ userMission.id }}">{{ 'mission.view.contractor.btn_refuse' | trans }}</button>
-                <button id="shortlist_{{ userMission.id }}" {% if userMission.status == constant('SHORTLIST', userMission) %}hidden{% endif %}>{{ 'mission.view.contractor.btn_add_to_shortlist' | trans | upper }}</button>
-                <button id="remove_from_shortlist_{{ userMission.id }}" {% if userMission.status < constant('SHORTLIST', userMission) %}hidden{% endif %}>{{ 'mission.view.contractor.btn_remove_from_shortlist' | trans | upper }}</button>
+                <button id="contract_{{ userMission.id }}">{{ 'mission.view.contractor.btn_contract' | trans | upper }}</button>
             </div>
 
-            {{ 'footer.advisor' | trans }}{{ nbAdvisor }}
+            {{ userMission.user.firstName }} {{ userMission.user.lastName }}
 
             CrossIcon
-            <a href="{{ path('dashboard') }}">{{ 'mission.view.advisor.btn_back_to_global_view' | trans | upper }}</a>
+            <a href="{{ path('mission_view', {'missionId': mission.id}) }}">{{ 'mission.view.advisor.btn_back_to_global_view' | trans | upper }}</a>
         </div>
         <div class="chat_box"><p>
             <div class="message" id="thread_message">
@@ -106,10 +104,18 @@
             </div>
             <div class="answer">
                 <form>
-                    <textarea id="inbox_input_message" name="inbox[inout_message]" required="required"></textarea>
+                    <textarea id="inbox_input_message" name="inbox[inout_message]" required="required" title=''></textarea>
                     <input type="button" id="submit_text" value="{{ 'form.btn.send' | trans | upper }}"
                            onClick="sendMessage()"/>
                 </form>
+            </div>
+            <div class="dl_proposal">
+                {% if userMission.thread.proposals is not empty %}
+                    {% set proposal = userMission.thread.proposals | last %}
+                    {# TODO find a better methode #}
+                    {%  set path = "http://symfony.dev/" ~ proposal.getUploadRootDir %}
+                    <a href="{{ path }}" download="{{ proposal.downloadName }}">{{ 'form.btn.download_proposal' | trans }}</a><br>
+                {% endif %}
             </div>
             <div class="edit" id="{{ userMission.id }}">
                 {{ userMission.note }}
@@ -131,34 +137,15 @@
             id: $(this).attr('id')
         });
 
-        $('[id^="shortlist_"]').each(function () {
+        $('[id^="contract_"]').each(function () {
             $(this).click(function () {
                 var id = $(this).attr('id').split('_')[1];
                 $.ajax({
-                    url: "{{ path('user_mission_add_to_shortlist') }}",
+                    url: "{{ path('user_mission_add_to_contract') }}",
                     method: "put",
                     data: {id: id}
                 }).done(function (msg) {
-                    alert("{{ 'mission.action.add_to_shortlist' | trans }}");
-                    $('#shortlist_' + id).hide();
-                    $('#remove_from_shortlist_' + id).show();
-                }).fail(function () {
-                    alert("{{ 'error.action.failed' | trans }}");
-                });
-            });
-        });
-
-        $('[id^="remove_from_shortlist_"]').each(function () {
-            $(this).click(function () {
-                var id = $(this).attr('id').split('_')[3];
-                $.ajax({
-                    url: "{{ path('user_mission_remove_from_shortlist') }}",
-                    method: "put",
-                    data: {id: id}
-                }).done(function (msg) {
-                    alert("{{ 'mission.action.remove_from_shortlist' | trans }}");
-                    $('#remove_from_shortlist_' + id).hide();
-                    $('#shortlist_' + id).show();
+                    alert("{{ 'mission.action.add_to_contract' | trans }}");
                 }).fail(function () {
                     alert("{{ 'error.action.failed' | trans }}");
                 });
@@ -179,7 +166,7 @@
                 });
             });
         });
-        
+
         function sendMessage() {
             if ($('textarea#inbox_input_message').val()) {
                 $.ajax({
@@ -195,5 +182,5 @@
                 });
             }
         }
-    </script>
+        </script>
 {% endblock %}

@@ -19,10 +19,11 @@ class Proposal extends Upload
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="InboxBundle\Entity\Thread", inversedBy="proposals", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="InboxBundle\Entity\Thread",
+     *     inversedBy="proposals", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $thread;
@@ -30,11 +31,8 @@ class Proposal extends Upload
     /**
      * @var string
      *
-     * @ORM\Column(
-     *     name="content",
-     *     type="string",
-     *     nullable=true
-     * )
+     * @ORM\Column(name="content",
+     *     type="string", nullable=true)
      */
     private $content;
 
@@ -62,8 +60,9 @@ class Proposal extends Upload
      * @param \InboxBundle\Entity\Thread $thread
      * @return Proposal
      */
-    public function setThread(\InboxBundle\Entity\Thread $thread = null)
+    public function setThread($thread)
     {
+        $thread->addProposal($this);
         $this->thread = $thread;
 
         return $this;
@@ -84,7 +83,7 @@ class Proposal extends Upload
      * Set content
      *
      * @param string $content
-     * @return UploadResume
+     * @return Proposal
      */
     public function setContent($content)
     {

@@ -19,14 +19,21 @@ class UploadResume extends Upload
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
-   
+    protected $id;
+
     /**
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User",
      *     inversedBy="resumes", cascade={"remove"})
      * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="MissionBundle\Entity\UserMission",
+     *     inversedBy="proposals", cascade={"remove"})
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
+     */
+    private $userMission;
 
     /**
      * @var string
@@ -46,21 +53,13 @@ class UploadResume extends Upload
     {
         parent::__construct();
 
-        $this->addFormat('docx')
+        $this
             ->addFormat('doc')
-            ->addFormat('pdf');
+            ->addFormat('vnd.openxmlformats-officedocument.wordprocessingml.document') // docx
+            ->addFormat('pdf')
+        ;
     }
 
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }    
-    
     /**
      * Set user
      *
@@ -106,5 +105,28 @@ class UploadResume extends Upload
     public function getContent()
     {
         return $this->content;
+    }
+
+    /**
+     * Set userMission
+     *
+     * @param \MissionBundle\Entity\UserMission $userMission
+     * @return UploadResume
+     */
+    public function setUserMission($userMission = null)
+    {
+        $this->userMission = $userMission;
+
+        return $this;
+    }
+
+    /**
+     * Get userMission
+     *
+     * @return \MissionBundle\Entity\UserMission 
+     */
+    public function getUserMission()
+    {
+        return $this->userMission;
     }
 }

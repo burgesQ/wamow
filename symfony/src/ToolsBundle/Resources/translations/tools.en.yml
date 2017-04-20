@@ -15,6 +15,8 @@ form:
     btn:
         send: send
         save: save
+        upload_proposal: Upload Porposal
+        download_proposal: Download Porposal
 
     note:
         indicator: Saving ...
@@ -68,6 +70,7 @@ error:
         limit_reach: The advisor answer limit was reached for this mission. The mission is closed
         wrong_company: You don't belong tothe right company
         not_enough: Not enough user selected to proceed to next step
+        already: You already execute this action.
     action:
         failed: Action failed.
 
@@ -125,7 +128,7 @@ dashboard:
     advisor:
         fyi:
             title: "Your dashboard:"
-            text:
+            text: ''
         new:
             title: "You may be interested..."
             date: "Pitched at "
@@ -152,7 +155,7 @@ dashboard:
             button: "Write pitch"
         fyi:
             title: "Your dashboard:"
-            text:
+            text: ''
         mission:
             title: "Pitchs published"
             date: "Pitched at "
@@ -172,6 +175,7 @@ dashboard:
             finish: "Finish"
             mustbefinish: "Must be finish"
             unread: "{0}No new message|{1}You have %unread% new message|]1,Inf]You have %unread% new messages"
+            proposal: Proposal
         draft:
             title: "Drafts"
             date: "Started at "
@@ -260,6 +264,7 @@ mission:
             status_finalit: finalist
             btn_refuse: REFUSE
             btn_proced_to_shortlist: Proceed to shortlist
+            btn_contract: contract
             btn_add_to_shortlist: add to shortlist
             btn_remove_from_shortlist: remove from shortlist
             finance: |
@@ -278,6 +283,7 @@ mission:
         to_answer: To Answer
     action:
         add_to_shortlist: User added to shortlist !
+        add_to_contract: User added to contract !
         remove_from_shortlist: User removed from shortlist !
         refuse_user: User refused.
 
@@ -287,6 +293,10 @@ inbox:
         placeholder:
             empty: Write your message here
         btn_submit_empty_interested: ACCEPT THE PITCH AND SEND
+    read: read
+    show: show
+    you: you
+    new_message: New Message
 
 ## Business vocabulary
 language:
