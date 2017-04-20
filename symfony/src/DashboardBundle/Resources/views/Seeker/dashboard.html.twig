@@ -3,7 +3,7 @@
 
 {% block body %}
     <div>
-        <a href="{{ path('mission_new')}}">{{ 'dashboard.contractor.new.button' | trans | upper }}</a></br>
+        <a href="{{ path('mission_new_step_one')}}">{{ 'dashboard.contractor.new.button' | trans | upper }}</a></br>
     </div>
     <div>
         <p>
@@ -122,7 +122,7 @@
             {{ 'dashboard.contractor.draft.date' | trans }} {{ draft.creationDate | date("m/d/Y") }}</br>
             {{ draft.title }}
             {{ draft.resume | truncate(20, false, '[...]') }}</br>
-            <a href="{{ path('mission_edit', {'missionId': draft.id}) }}">{{ 'dashboard.contractor.draft.continuebutton' | trans | upper }}</a></br>
+            <a href="{{ path('mission_edit', {'missionId' : draft.id})}}">{{ 'dashboard.contractor.new.button' | trans | upper }}</a></br>
             <a href="{{ path('mission_delete', {'missionId': draft.id}) }}">{{ 'dashboard.contractor.draft.deletebutton' | trans | upper }}</a></br>
         {% endfor %}
     </p>

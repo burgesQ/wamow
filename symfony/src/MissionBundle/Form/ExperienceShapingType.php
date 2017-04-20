@@ -2,15 +2,14 @@
 
 namespace MissionBundle\Form;
 
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Count;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use MissionBundle\Entity\ExperienceShaping;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Validator\Constraints\Count;
 
 class ExperienceShapingType extends AbstractType
 {

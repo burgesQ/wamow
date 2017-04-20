@@ -1,0 +1,54 @@
+{% extends '::base.html.twig' %}
+{% trans_default_domain "MissionBundle" %}
+
+{% block body %}
+
+    <br>
+    <br>
+    <div>
+        <h3>{{ 'mission.new.step_two.title'|trans }}</h3>
+        <h4>{{ 'mission.new.step_two.subtitle'|trans }}</h4>
+        {{ 'mission.new.step_two.hint'|trans|striptags('<br>')|raw }}
+    </div>
+    <br>
+
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    <div>
+        {{ 'mission.new.form.business_practice'|trans|upper }}<br><br>
+        {% for oneBusinessPractice in form.businessPractice %}
+            {{ form_label(oneBusinessPractice) }}
+            {{ form_widget(oneBusinessPractice) }}
+            {% if (loop.index0 + 1) % 4 == 0  %}
+                <br>
+            {% endif %}
+        {% endfor %}
+    </div><br>
+    <div>
+        {{ form_row(form.professionalExpertise) }}
+    </div><br>
+    <div>
+        {{ form_label(form.budget) }}{{ form_widget(form.budget) }} {{ 'mission.view.currency_k'|trans }}
+    </div><br>
+    <div>
+        {{ form_errors(form.continents) }}
+        {{ form_row(form.continents) }}
+    </div><br>
+    <div>
+        {{ form_row(form.applicationEnding) }}
+        {{ form_row(form.missionBeginning) }}
+        {{ form_row(form.missionEnding) }}
+    </div><br>
+    <div>
+        {{ form_label(form.confidentiality) }}{{ form_widget(form.confidentiality) }}
+        {{ form_label(form.telecommuting)}}{{ form_widget(form.telecommuting) }}
+        {{ form_errors(form.address)}}
+        {{ form_widget(form.address.country) }}
+    </div>
+    {{ form_widget(form.forLater, {attr: {formnovalidate: 'formnovalidate'}}) }}
+    {{ form_widget(form.back, {attr: {formnovalidate: 'formnovalidate'}}) }}
+    {{ form_widget(form.next) }}
+    {{ form_end(form) }}
+
+{% endblock %}
+

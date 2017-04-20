@@ -9,55 +9,152 @@ mission:
         warning: "Vous éditez une mission qui existe déjà."
         cancel: "Retour à la mission."
         successEdit: "Mission éditée avec succès."
+
     new:
-        title: "Formulaire"
         form:
-            title: "Titre"
-            resume: "Decrivez votre mission"
-            street: "Adresse"
-            street2: "Adresse"
-            city: "Ville"
-            zipcode: "Code Postal"
-            country: "Pays"
-            state: "Region"
-            label: "Label"
-            name: "Nom"
-            languages: "Choisissez la/les langue(s) requise(s)"
-            confidentiality: "Cette mission doit-elle être confidentielle ?"
-            telecommuting: "Une présence physique est-elle requise ?"
-            international: "Est-ce une mission internationale ?"
-            budget: "Budget"
-            missionBeginning: "Début de la mission"
-            missionEnding: "Fin de la mission"
-            applicationEnding: "Date limite pour postuler"
-            professionalExpertise: "Choisissez votre expertise professionelle"
-            businessPractice: "Choisissez votre business practice"
-            missionKind: "Choisissez le type de la mission"
-            image: "Image"
-            submit: "Sauvegarder"
-            chooseCountry: "Choisissez un pays"
-            chooseDay: "Jour"
-            chooseMonth: "Mois"
-            chooseYear: "Année"
+            back_resume: REVENIR AU RESUME
+            save_mod: APPLIQUER LES MODIFICATIONS
+            later: FINIR PLUS TARD
+            next: NEXT
+            back: BACK
+            print: PRINT
+            edit: edit
+            share_pitch: DIFFUSER LE PITCH
+            title: TITRE DU PITCH
+            resume: DESCRIPTION DU PROJET (500 MOTS)
+            business_practice: Secteur d'activité
+            professional_expertise: DOMAINE FONCTIONNEL
+            budget: BUDGET ESTIMÉ
+            confidentiality: Entreprise anonyme
+            telecommuting: Présence sur site requise
+            country: PAYS
+            applicationEnding: DATE LIMITE DE RÉPONSE AU PITCH
+            missionBeginning: DÉBUT DE MISSION
+            missionEnding: FIN DE MISSION ESTIMÉE
+            north_america: North America
+            south_america: South AMerica
+            emea: EMEA
+            asia: Asia - Pacific
+            range: PRIX
+            language: LANGUE(S) DE TRAVAILLE
+            company: Société
+            share: diffuser le pitch ci-dessous rédigé a la communauté d'expert consultants.wantmore.work
+            reference: diffuser le nom de l'entreprise comme une référence
+            chooseDay: Jours
+            chooseMonth: Mois
+            chooseYear: Annee
+            first_name: Prenom
+            last_name: Nom
+            +: +
+            certification: Cértification / Compétences Spécifique
+
+        step_one:
+            title: Le pitch
+            subtitle: COMMENCONS PAR LE COMMENCEMENT
+            hint: |
+                FIRST STEP :<br><br>
+                Commenecez part rédiger le<br>
+                pitch de votre recherche.<br>
+                Exposer vos probléma-<br>
+                tique de manière simple et<br>
+                concise.<br><br>
+                Il est possible de sauvegar-<br>
+                der vos brouillons pour y <br>
+                revenir plus tard.<br><br>
+                Vous pouvez bénéficier<br>
+                d'une assistance si vous le<br>
+                desirez au 01.75.77.52.727
+
+        step_two:
+            title: Caractéristiques de la mission
+            subtitle: DITES-NOUS EN PLUS !
+            hint: |
+                SECOND STEP :<br><br>
+                Séléctionner le secteur et le<br>
+                domain fonctinonel corres-<br>
+                podant  à votre recherche.<br>
+                (1 seul choix possible par<br>
+                catégorie)<br><br>
+                L'option "entreprise ano-<br>
+                nyme", activée par defaut,<br>
+                vous permet de masquez le <br>
+                nom de votre l'entreprise aux<br>
+                advisors.
+
+        step_three:
+            title: Typologie de mission
+            subtitle: ET CONCERNANT VOTRE FUTUR COLLABORATEUR ?
+            hint: |
+                THIRD STEP :<br><br>
+                BLABLAS<br>
+                BLABLA<br>
+
+        step_four:
+            title: Resume
+            subtitle: TRES BIEN, FAISONS UN PETIT POINT
+            hint: |
+                FOURTH STEP :<br><br>
+                Relisez attentivement les<br>
+                informations avant de confir-<br>
+                mez l'envoi.
+
+        step_five:
+            title: Fianl Step
+            subtitle: DERNIERE ETAPE ET NOUYS Y SOMMES
+            hint: |
+                FINAL STEP:<br><br>
+                Derniere étape avant l'envoi<br>
+                du pitch aux expert. Vous<br>
+                serez orienté vers un site de<br>
+                payement de ligne.
+
+    view:
+        country: Pays de la mission
+        link: Creer un nouveau Pitch
+        draft: Pitch en cours de creation
+        price_day: '%price €/jour'
+        currency_k: 'k€'
+
+        step_four:
+            professional_expertise: DOMAINE FONCTIONNEL
+            end_pitch: FIN DU PITCH
+            start_mission: DATE DE MISSION
+            mission_kind: TYPOLOGIE
+            telecommuting: SUR SITE
+            confidentiality: ANONYME
+            languages: LANGUES
+            certif: CERTIFICATION
+            budget: BUDGET
+            price: PRIX
+            concerned: CONSULTANT CONCERNÉS
+            languages: LANGUES
+            finance: Finance
+            date_range: "%startDate au %endDate"
+
+        step_five:
+            introduction: |
+                Consultants.wantmore.work est une marque BestAdvizor SAS, Societe au capitale de 51.000 euros - RCS Paris <br>
+                815 362 736 - Siège social : 116 Av Felix Faure 75015 Paris Buraux : 18 avenue Franklin D. Roosvelt 75008 <br>
+                Paris
+            person: "Je sousigné "
+            company: "déclare etre habilité a contractualiser pour la société %company autorise BestAdvizor SAS a :"
+            cac: "et avoir déclaré comme commissaires aux comptes :"
+            name: nom
+            ending: |
+                BestAdvizor met en relation une expression de besoin (Pitch) - en accompagnamt le demandeur dans sa formula- <br>
+                tion - et des experts sur la base de la proposition de solution. BestAdvizor n'est pas un cabinet de conseil et son <br>
+                engagement se limite a cette mise en relation qualifiée. Sa responsabilité ne saurait etre engagé sur le delivrable <br>
+                de la <br>
+                mission en lui meme. Clause attributive de competence: tous les litiges relatif a l'application de la présente <br>
+                seront de la compétence exclusive du Tribunal de Commerce de Paris. <br><br>
+                La Société se reserve le droit de faire état des pitches realisés et des noms des clients, de les divulguer a titre de <br>
+                références.
+
     registered:
         success: "Mission sauvegardée !"
         see: "Voir votre mission"
         edit: "Editer votre mission"
         another: "Créer une nouvelle mission"
-    view:
-        resume: "Description"
-        details: "Détails"
-        address: "Adresse"
-        budget: "Budget"
-        applicationEnding: "Vous avez jusqu'au %date% pour postuler."
-        period: "Du %start% au %end%."
-        languages: "Langue(s) requise(s)"
-        confidential: "Cette mission est confidentielle."
-        telecommuting: "Cette mission propose du télétravail."
-        international: "Cette mission est internationale."
-        pitch: "Postuler"
-        thread.seekers: "Messages entre vous et l'equipe postulant"
-        thread.expert: "Messages entre vous et le contracteur de la mission"
     error:
         authorized: "Vous n'êtes pas autorisé à créer une mission."
         logged: "Vous n'êtes pas connecté."

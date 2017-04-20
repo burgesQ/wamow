@@ -13,7 +13,9 @@
 /web/app_dev.php
 /genData.sh
 /web/assetic
+/web/uploads
 /web/css
 /web/js
 /web/uploads
+/web/fonts
 /.idea

@@ -1,0 +1,97 @@
+{% extends '::base.html.twig' %}
+{% trans_default_domain "MissionBundle" %}
+
+{% block body %}
+
+    <br><br><div>
+        <h3>{{ 'mission.new.step_five.title'|trans }}</h3>
+        <h4>{{ 'mission.new.step_five.subtitle'|trans }}</h4>
+        {{ 'mission.new.step_five.hint'|trans|striptags('<br>')|raw }}
+    </div><br>
+    <div>
+        {{ 'mission.view.step_five.introduction'|trans|raw }}<br><br>
+
+
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        <div>
+            {{ form_label(form.lastName)}}
+            {{ form_widget(form.lastName)}}
+            {{ form_widget(form.firstName)}}
+        </div>
+        <div>
+            {{ 'mission.view.step_five.company'|trans({'%company': user.company}, 'MissionBundle') }}
+        </div>
+        <div>
+            {{ form_label(form.share) }}
+            {{ form_widget(form.share) }}
+            {{ form_label(form.reference) }}
+            {{ form_widget(form.reference) }}
+        </div><br>
+        <div>
+            {{ form_row(form.inspectors) }}
+        </div><br><br>
+        {{ 'mission.view.step_five.ending'|trans|raw }}
+
+        </div><br>
+        {{ form_widget(form.back, {attr: {formnovalidate: 'formnovalidate'}}) }}
+        {{ form_widget(form.sharePitch) }}
+        {{ form_end(form) }}
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            var $container = $('div#step_five_form_inspectors');
+            var $addButton   = $('<button id="add_inspectors">+</button>');
+            $container.append($addButton);
+
+            $addButton.click(function(e) {
+                addCac($container);
+                e.preventDefault();
+                return false;
+            });
+
+            var index = $container.find(':input').length;
+
+            console.log(index);
+
+            if (index === 1) {
+                addCac($container);
+            } else {
+                $container.children('div').each(function() {
+                    addDeleteButton($(this));
+                });
+            }
+
+            function addCac($container) {
+                var $prototype = $($container.attr('data-prototype')
+                    .replace(/__name__label__/g, '')
+                    .replace(/__name__/g, index));
+
+                addDeleteButton($prototype);
+
+                $container.append($prototype);
+
+                index++;
+            }
+
+            function addDeleteButton($prototype) {
+
+                $deleteButton = $('<button >-</button>');
+
+                $prototype.append($deleteButton);
+
+                $deleteButton.click(function(e) {
+                    $prototype.remove();
+                    e.preventDefault();
+                    return false
+                });
+            }
+        });
+    </script>
+
+{% endblock %}
+

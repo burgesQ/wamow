@@ -6,13 +6,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-
 use FOS\UserBundle\Model\User as BaseUser;
 use FOS\MessageBundle\Model\ParticipantInterface;
 
 use CompanyBundle\Entity\Company;
-use CalendarBundle\Entity\Calendar;
-
 
 /**
  * User
@@ -48,6 +45,11 @@ class User extends BaseUser implements ParticipantInterface
      * @ORM\Column(name="linkedin_access_token", type="string", length=255, nullable=true)
      */
     protected $linkedin_access_token;
+
+    /**
+     * @ORM\Column(name="linkedin_data", type="array", nullable=true)
+     */
+    protected $linkedinData;
 
     /**
      * @var int
@@ -282,12 +284,6 @@ class User extends BaseUser implements ParticipantInterface
     private $businessPractice;
 
     /**
-     * @ORM\OneToOne(targetEntity="CalendarBundle\Entity\Calendar", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $calendar;
-
-    /**
      * @ORM\Column(name="email_emergency", type="string", length=255, nullable=true)
      * @Assert\Email(
      *     message = "The email '{{ value }}' is not a valid email."
@@ -346,11 +342,10 @@ class User extends BaseUser implements ParticipantInterface
     private $remoteWork;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="random_id", type="integer", nullable=false, unique=true)
+     * @var string
+     * @ORM\Column(name="public_id", type="string", nullable=true, unique=true)
      */
-    private $randomId;
+    private $publicId;
 
     /**
      * User constructor.
@@ -358,29 +353,28 @@ class User extends BaseUser implements ParticipantInterface
     public function __construct()
     {
         parent::__construct();
-        $this->creationDate = new \Datetime();
-        $this->confidentiality = false;
-        $this->status = self::REGISTER_STEP_ZERO;
-        $this->birthdate = null;
-        $this->images = new ArrayCollection();
-        $this->resumes = new ArrayCollection();
-        $this->newsletter = true;
-        $this->giveUpCount = 0;
-        $this->secretMail = [];
-        $this->userResume = null;
-        $this->languages = new ArrayCollection();
-        $this->workExperience = new ArrayCollection();
+        $this->status                = self::REGISTER_STEP_ZERO;
+        $this->creationDate          = new \Datetime();
+        $this->images                = new ArrayCollection();
+        $this->resumes               = new ArrayCollection();
+        $this->languages             = new ArrayCollection();
+        $this->workExperience        = new ArrayCollection();
         $this->professionalExpertise = new ArrayCollection();
-        $this->missionKind = new ArrayCollection();
-        $this->businessPractice = new ArrayCollection();
-        $this->calendar = new Calendar();
-        $this->company = null;
-        $this->nbLoad = 10;
-        $this->readReport = true;
-        $this->experienceShaping = new ArrayCollection();
-        $this->userMission = new ArrayCollection();
-        $this->randomId = 0;
-        $this->remoteWork = false;
+        $this->missionKind           = new ArrayCollection();
+        $this->businessPractice      = new ArrayCollection();
+        $this->experienceShaping     = new ArrayCollection();
+        $this->userMission           = new ArrayCollection();
+        $this->confidentiality       = false;
+        $this->remoteWork            = false;
+        $this->newsletter            = true;
+        $this->readReport            = true;
+        $this->userResume            = null;
+        $this->birthdate             = null;
+        $this->company               = null;
+        $this->publicId              = "";
+        $this->nbLoad                = 10;
+        $this->giveUpCount           = 0;
+        $this->secretMail            = [];
     }
 
     /**
@@ -916,10 +910,10 @@ class User extends BaseUser implements ParticipantInterface
      * @param \ToolsBundle\Entity\UploadResume $resume
      * @return User
      */
-    public function addResume($resume)
+    public function addResume($resume = null)
     {
         if ($this->getId() > 0) {
-            $resumes->setUser($this);
+            $resume->setUser($this);
         }
         $this->resumes[] = $resume;
 
@@ -1085,7 +1079,7 @@ class User extends BaseUser implements ParticipantInterface
      * @param \MissionBundle\Entity\BusinessPractice $businessPractice
      * @return User
      */
-    public function addBusinessPractice(\MissionBundle\Entity\BusinessPractice $businessPractice)
+    public function addBusinessPractice($businessPractice)
     {
         $this->businessPractice[] = $businessPractice;
 
@@ -1097,33 +1091,9 @@ class User extends BaseUser implements ParticipantInterface
      *
      * @param \MissionBundle\Entity\BusinessPractice $businessPractice
      */
-    public function removeBusinessPractice(\MissionBundle\Entity\BusinessPractice $businessPractice)
+    public function removeBusinessPractice($businessPractice)
     {
         $this->businessPractice->removeElement($businessPractice);
-    }
-
-    /**
-     * Set calendar
-     *
-     * @param \CalendarBundle\Entity\Calendar $calendar
-     *
-     * @return User
-     */
-    public function setCalendar(\CalendarBundle\Entity\Calendar $calendar)
-    {
-        $this->calendar = $calendar;
-
-        return $this;
-    }
-
-    /**
-     * Get calendar
-     *
-     * @return \CalendarBundle\Entity\Calendar
-     */
-    public function getCalendar()
-    {
-        return $this->calendar;
     }
 
     /**
@@ -1368,27 +1338,49 @@ class User extends BaseUser implements ParticipantInterface
         return $this->remoteWork;
     }
 
-
     /**
-     * Set randomId
+     * Set publicId
      *
-     * @param integer $randomId
+     * @param string $publicId
      * @return User
      */
-    public function setRandomId($randomId)
+    public function setPublicId($publicId)
     {
-        $this->randomId = $randomId;
+        $this->publicId = $publicId;
 
         return $this;
     }
 
     /**
-     * Get randomId
+     * Get publicId
      *
-     * @return integer 
+     * @return string 
      */
-    public function getRandomId()
+    public function getPublicId()
     {
-        return $this->randomId;
+        return $this->publicId;
+    }
+
+    /**
+     * Set linkedinData
+     *
+     * @param array $linkedinData
+     * @return User
+     */
+    public function setLinkedinData($linkedinData)
+    {
+        $this->linkedinData = $linkedinData;
+
+        return $this;
+    }
+
+    /**
+     * Get linkedinData
+     *
+     * @return array 
+     */
+    public function getLinkedinData()
+    {
+        return $this->linkedinData;
     }
 }

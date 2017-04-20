@@ -5,44 +5,46 @@
 <html>
 <body>
 <h2>{{ mission.title }} </h2>
-{% if mission.image is not null %}
-  <img src="{{ mission.image }}">
 {% endif %}
 
 <div class="well">
-  <p>
   <h4><br>{{ 'mission.view.resume'|trans }} :</h4>
     {{ mission.resume }}
-
   <h5>{{ 'mission.view.details'|trans }} :</h5>
-    {{ mission.professionalExpertise.name|trans }}
-    {% for missionKind in mission.missionKind %}
-      <li>{{ missionKind.name | trans }}</li>
+
+    {% for oneProExp in mission.professionalExpertise %}
+        {{ oneProExp.name|trans }},
     {% endfor %}
-  </p>
-  <p>
-  <h4><br>{{ 'mission.view.address'|trans }} :</h4>
-    {{ mission.address.street }},
-    {% if mission.address.state is not null %}
-        {{ mission.address.street2 }},<br>
-    {% endif %}
-    {{ mission.address.city }},{{ mission.address.zipcode }}
-  <br>{{ mission.address.country }}
-    {% if mission.address.state is not null %}
-      ,{{ mission.address.state }}<br>
-    {% endif %}
-  </p>
-  <p>
+    {% for oneMissionKind in mission.missionKinds %}
+        {{ oneMissionKind.name|trans }},
+    {% endfor %}
+
+  <div>
+    {% if mission.address is not null %}
+      <h4><br>{{ 'mission.view.address'|trans }} :</h4>
+
+      {{ mission.address.street }},
+      {% if mission.address.state is not null %}
+          {{ mission.address.street2 }},<br>
+      {% endif %}
+      {{ mission.address.city }},{{ mission.address.zipcode }}
+      <br>{{ mission.address.country }}
+      {% if mission.address.state is not null %}
+        ,{{ mission.address.state }}<br>
+      {% endif %}
+
       {% if mission.address.label is not null %}
           {{ 'mission.view.label'|trans }} : {{ mission.address.state }}<br>
       {% endif %}
-  </p>
-  <p>
       {% if mission.address.name is not null %}
           {{ 'mission.view.name'|trans }}: {{ mission.address.name }}<br>
       {% endif %}
-  </p>
-  <p>
+    {% endif %}
+      {{ 'mission.view.country'|trans }}: {{ mission.address.country|countryName(app.request.locale) }}
+  </div>
+
+
+
   <h4><br>{{ 'mission.view.budget'|trans }} :</h4>
     {{ mission.budget }} {{ 'mission.view.budget'|trans }}
   </p>
@@ -66,9 +68,6 @@
       {% endif %}
       {% if mission.telecommuting == 1 %}
           {{ 'mission.view.telecommuting'|trans }}
-      {% endif %}
-      {% if mission.international == 1 %}
-          {{ 'mission.view.international'|trans }}
       {% endif %}
   </p>
 

@@ -2,7 +2,6 @@
 
 namespace UserBundle\Controller;
 
-use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Session\Storage\PhpBridgeSessionStorage;
 use UserBundle\Form\RegistrationAdvisor\MergedFormRegistrationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -15,6 +14,7 @@ use UserBundle\Form\RegistrationAdvisor\StepTwoType;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\FormError;
 use ToolsBundle\Entity\UploadResume;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\FOSUserEvents;
@@ -81,6 +81,7 @@ class RegistrationAdvisorController extends Controller
                 $user->setLastName(ucwords($user->getLastName()));
                 $user->setStatus(User::REGISTER_STEP_ONE);
                 $userManager->updateUser($user);
+                $user->setPublicId(md5(uniqid() . $user->getUserResume() . $user->getId()));
                 $resume->setUser($user);
                 $em->persist($resume);
                 $em->flush();

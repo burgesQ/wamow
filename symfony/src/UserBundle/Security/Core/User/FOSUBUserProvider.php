@@ -100,6 +100,8 @@ class FOSUBUserProvider extends BaseClass
                 && array_key_exists('code', $data['location']['country']))
                 $user->setCountry(strtoupper($data['location']['country']['code']));
 
+            $user->setLinkedinData($data);
+
             $dispatcher = $this->container->get('event_dispatcher');
             $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, null);
         } else {

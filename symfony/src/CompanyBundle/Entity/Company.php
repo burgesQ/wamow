@@ -91,6 +91,11 @@ class Company
         $this->status = 0;
     }
 
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
     /**
      * Get id
      *

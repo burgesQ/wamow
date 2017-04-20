@@ -59,8 +59,6 @@ class LoadContractor extends AbstractFixture implements OrderedFixtureInterface,
         $langRepo    = $manager->getRepository('ToolsBundle:Language');
         $company     = $manager->getRepository('CompanyBundle:Company')->findOneByName('Esso');
 
-        $i = 42;
-
         foreach ($this->arrayDatas as $oneData) {
 
             // create Entity with fName, lName, email, country
@@ -88,18 +86,16 @@ class LoadContractor extends AbstractFixture implements OrderedFixtureInterface,
             // set User Company
             $newUser->setCompany($company);
 
-            while ($userRepo->findOneBy(['randomId' => $i]) && $i++);
-            $newUser->setRandomId($i);
-            $i++;
-
             // save user in db
+            $userManager->updateUser($newUser, true);
+
+            $newUser->setPublicId(md5(uniqid() . $newUser->getUsername() . $newUser->getId()));
             $userManager->updateUser($newUser, true);
         }
     }
 
     public function getOrder()
     {
-        return 11;
+        return 12;
     }
-
 }

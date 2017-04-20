@@ -1,0 +1,83 @@
+{% extends '::base.html.twig' %}
+{% trans_default_domain "MissionBundle" %}
+
+{% block body %}
+
+    <br><br>
+    <div>
+        <h3>{{ 'mission.new.step_four.title'|trans }}</h3>
+        <h4>{{ 'mission.new.step_four.subtitle'|trans }}</h4>
+        {{ 'mission.new.step_four.hint'|trans|striptags('<br>')|raw }}
+    </div><br>
+    <div>
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+        <div>
+            <br><h2>{{ 'mission.view.step_four.finance'|trans }}</h2><br>
+            <div>
+                {{ 'mission.view.step_four.professional_expertise'|trans }}<br>
+                {{ mission.professionalExpertise.name|trans }}<br>
+            </div>
+            <div>
+                {{ 'mission.view.step_four.end_pitch'|trans }}<br>
+                {{ mission.applicationEnding|date("m/d/Y") }}<br>
+            </div>
+            <div>
+                {{ 'mission.view.step_four.start_mission'|trans }}<br>
+                {{ 'mission.view.step_four.date_range'|trans({'%startDate': mission.missionBeginning|date("m/d/Y"), '%endDate': mission.missionEnding|date("m/d/Y")}, 'MissionBundle') }}
+            </div>
+            <div>
+                {{ 'mission.view.step_four.budget'|trans }}<br>
+                {{ mission.budget * 1000 }}
+            </div>
+            {{ form_row(form.telecommuting) }}
+            {{ form_row(form.confidentiality) }}
+            {{  form_row(form.edit_1) }}
+        </div><br>
+        <div>
+            <div>
+                {{ 'mission.view.step_four.mission_kind'|trans }}<br>
+                {% for missionKind in mission.missionKinds %}
+                    <li>{{ missionKind.name|trans }}</li>
+                {% endfor %}
+            </div>
+            <div>
+                {{ 'mission.view.step_four.languages'|trans }}<br>
+                {% for languages in mission.languages %}
+                    <li>{{ languages.name|trans({}, 'tools') }}</li>
+                {% endfor %}
+                {{ 'mission.view.step_four.certif'|trans }}<br>
+                {% for certification in mission.certifications %}
+                    <li>{{ certification.name }}</li>
+                {% endfor %}
+
+            </div>
+            <div>
+                {{ 'mission.view.step_four.price'|trans }}<br>
+                {{ mission.price }} $/j
+            </div>
+            <div>
+                {{ 'mission.view.step_four.concerned'|trans }}<br>
+                <b>{{ nbAdvisors }}</b>
+            </div>
+            {{  form_row(form.edit_2) }}
+        </div><br>
+        <div>
+            <div>
+                {{ mission.title }}<br>
+            </div>
+            <div>
+                {{ mission.resume|nl2br }}<br>
+            </div>
+            {{  form_row(form.edit) }}
+        </div><br>
+        {{ form_widget(form.forLater, {attr: {formnovalidate: 'formnovalidate'}}) }}
+        {{ form_widget(form.print, {attr: {formnovalidate: 'formnovalidate'}}) }}
+        {{ form_widget(form.back, {attr: {formnovalidate: 'formnovalidate'}}) }}
+        {{ form_widget(form.next) }}
+        {{ form_end(form) }}
+
+    </div>
+
+{% endblock %}
+

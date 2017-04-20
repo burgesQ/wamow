@@ -1,0 +1,28 @@
+{% extends '::base.html.twig' %}
+{% trans_default_domain "MissionBundle" %}
+
+{% block body %}
+
+    <br>
+    <br>
+    <div>
+        <h3>{{ 'mission.new.step_one.title'|trans }}</h3>
+        <h4>{{ 'mission.new.step_one.subtitle'|trans }}</h4>
+        {{ 'mission.new.step_one.hint'|trans|striptags('<br>')|raw }}
+    </div>
+    <br>
+
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    <div>
+        {{ form_row(form.title) }}
+    </div>
+    <div>
+        {{ form_row(form.resume) }}
+    </div>
+    {{ form_widget(form.forLater, {attr: {formnovalidate: 'formnovalidate'}}) }}
+    {{ form_widget(form.back, {attr: {formnovalidate: 'formnovalidate'}}) }}
+    {{ form_widget(form.next) }}
+    {{ form_end(form) }}
+
+{% endblock %}

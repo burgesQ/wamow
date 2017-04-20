@@ -2,9 +2,8 @@
 
 namespace ToolsBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Context\ExecutionContext;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Address
@@ -74,7 +73,7 @@ class Address
     /**
      * @var string
      *
-     * @ORM\Column(name="country", type="string", length=255, nullable=false)
+     * @ORM\Column(name="country", type="string", length=255, nullable=true)
      */
     private $country;
 
@@ -108,13 +107,14 @@ class Address
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="update_date", type="datetime", nullable=true)
+     * @ORM\Column(name="update_date", type="datetime", nullable=false)
      */
     private $updateDate;
 
     public function __construct()
     {
         $this->creationDate = new \Datetime();
+        $this->updateDate   = new \Datetime();
     }
 
     /**

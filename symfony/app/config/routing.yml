@@ -3,10 +3,6 @@ user:
     resource: "@UserBundle/Resources/config/routing.yml"
     prefix: /
 
-calendar:
-    resource: "@CalendarBundle/Resources/config/routing.yml"
-    prefix:   /
-
 company:
     resource: "@CompanyBundle/Resources/config/routing.yml"
     prefix: /
@@ -22,12 +18,6 @@ mission:
 dashboard:
     resource: "@DashboardBundle/Resources/config/routing.yml"
     prefix:   /
-
-fos_js_routing:
-    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
-
-adesigns_calendar:
-    resource: "@ADesignsCalendarBundle/Resources/config/routing.xml"
 
 notification:
     resource: "@NotificationBundle/Resources/config/routing.yml"

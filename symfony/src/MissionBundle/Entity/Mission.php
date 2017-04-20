@@ -2,14 +2,10 @@
 
 namespace MissionBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
-use ToolsBundle\Entity\Language;
-use ToolsBundle\Entity\Address;
-use UserBundle\Entity\User;
-use ToolsBundle\Entity\Tag;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Mission
@@ -20,6 +16,13 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  */
 class Mission
 {
+    const STEP_ZERO  = 0;
+    const STEP_ONE   = 1;
+    const STEP_TWO   = 2;
+    const STEP_THREE = 3;
+    const STEP_FOUR  = 4;
+    const DONE       = 5;
+
     const DELETED   = -1;
     const DRAFT     = 0;
     const PUBLISHED = 1;
@@ -36,26 +39,25 @@ class Mission
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=255, nullable=false)
      * @Assert\Regex(
      *     pattern="#^[a-zA-Zéèêëçîïíàáâñńœôö]+(?:[\s-][a-zA-Zéèêëçîïíàáâñńœôö]+)*$#",
      *     match=true,
-     *     message="The title must contain only letters, numbers, point, comma or dash.")
+     *     message="error.mission.title.illegale"
+     * )
      */
     private $title;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="resume", type="text")
-     * @Assert\Length(
-     *      max = 4000)
+     * @ORM\Column(name="resume", type="text", nullable=true)
      */
     private $resume;
 
     /**
      * @ORM\OneToOne(targetEntity="ToolsBundle\Entity\Address", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $address;
 
@@ -95,20 +97,19 @@ class Mission
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="update_date", type="datetime", nullable=true)
+     * @ORM\Column(name="update_date", type="datetime", nullable=false)
      */
     private $updateDate;
 
     /**
-     * @var ArrayCollection
-     *
      * @ORM\ManyToMany(targetEntity="\ToolsBundle\Entity\Language", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
      */
     private $languages;
 
     /**
      * @ORM\ManyToOne(targetEntity="MissionBundle\Entity\ProfessionalExpertise", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $professionalExpertise;
 
@@ -122,128 +123,144 @@ class Mission
 
     /**
      * @ORM\ManyToOne(targetEntity="MissionBundle\Entity\BusinessPractice")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $businessPractice;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="telecommuting", type="boolean")
+     * @ORM\Column(name="telecommuting", type="boolean", nullable=true)
      */
     private $telecommuting;
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(name="international", type="boolean")
-     */
-    private $international;
-
-    /**
      * @var int
      *
-     * @ORM\Column(name="budget", type="integer")
-     * @Assert\Range(
-     *      min = 1,
-     *      minMessage = "You can't put something under 0.",
-     * )
+     * @ORM\Column(name="budget", type="integer", nullable=true)
+     * @Assert\Range(min = 1)
      */
     private $budget;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="beginning", type="datetime")
+     * @ORM\Column(name="beginning", type="datetime", nullable=true)
      */
     private $missionBeginning;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="ending", type="datetime")
+     * @ORM\Column(name="ending", type="datetime", nullable=true)
      */
     private $missionEnding;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="applicationEnding", type="datetime")
+     * @ORM\Column(name="applicationEnding", type="datetime", nullable=true)
      */
     private $applicationEnding;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="image", type="string", length=255, nullable=true)
-     * @Assert\Url(
-     *    message = "The url '{{ value }}' is not a valid url",
-     * )
-     */
-    private $image;
-
-    /**
       * @var int
       *
-     * @ORM\Column(name="number_step", type="smallint")
+     * @ORM\Column(name="number_step", type="smallint", nullable=false)
      */
     private $numberStep;
 
     /**
-      * @var string
-      *
-     * @ORM\Column(name="token", type="string", length=255, nullable=false, unique=true)
-     */
-    private $token;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="ToolsBundle\Entity\Tag", cascade={"persist"})
-     */
-    private $tags;
-
-    /**
-     * @ORM\OneToMany(
-     *     targetEntity="MissionBundle\Entity\UserMission",
-     *     mappedBy="mission"
-     * )
+     * @ORM\OneToMany(targetEntity="MissionBundle\Entity\UserMission", mappedBy="mission")
      */
     private $userMission;
 
     /**
-     * @ORM\OneToMany(
-     *     targetEntity="InboxBundle\Entity\Thread",
-     *     mappedBy="mission"
-     * )
+     * @ORM\OneToMany(targetEntity="InboxBundle\Entity\Thread", mappedBy="mission")
      */
     private $threads;
 
     /**
-     * @var boolean
+     * @var integer
      *
-     * @ORM\Column(name="south_america", type="boolean")
+     * @ORM\Column(name="status_generator", type="integer", nullable=false)
      */
-    private $southAmerica;
+    private $statusGenerator;
 
     /**
-     * @var boolean
-     *
-     * @ORM\Column(name="north_america", type="boolean")
+     * @ORM\ManyToMany(targetEntity="MissionBundle\Entity\Continent")
      */
-    private $northAmerica;
+    private $continents;
 
     /**
-     * @var boolean
+     * @var int
      *
-     * @ORM\Column(name="asia", type="boolean")
+     * @ORM\Column(name="price", type="integer", nullable=true)
+     * @Assert\Range(min = 1)
      */
-    private $asia;
+    private $price;
 
     /**
-     * @var boolean
+     * @var string
      *
-     * @ORM\Column(name="emea", type="boolean")
+     * @ORM\Column(name="first_name", type="string", length=255, nullable=true)
+     * @Assert\NotBlank(message="user.fname.blank", groups={"Registration", "Profile"})
+     * @Assert\Length(
+     *     min=2,
+     *     max=255
+     * )
+     * @Assert\Regex(
+     *  pattern="/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð '-]+$/",
+     *  message="user.fname.illegale"
+     * )
      */
-    private $emea;
+    private $firstName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="last_name", type="string", length=255, nullable=true)
+     * @Assert\NotBlank(message="user.lname.blank", groups={"Registration", "Profile"})
+     * @Assert\Length(
+     *     min=2,
+     *     max=255
+     * )
+     * @Assert\Regex(
+     *  pattern="/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð '-]+$/",
+     *  message="user.lname.illegale"
+     * )
+     */
+    private $lastName;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="share", type="boolean", nullable=true)
+     */
+    private $share;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="reference", type="boolean", nullable=true)
+     */
+    private $reference;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="CompanyBundle\Entity\Inspector", cascade={"persist"}, inversedBy="missions")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $inspectors;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="MissionBundle\Entity\Certification", cascade={"persist"}, inversedBy="missions")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $certifications;
 
     /**
      * @var ArrayCollection
@@ -255,44 +272,112 @@ class Mission
      */
     private $steps;
 
+    /**
+     * @var string
+     * @ORM\Column(name="public_id", type="string", nullable=true, unique=true)
+     */
+    private $publicId;
+
+    /**
+     * @var booleam
+     * @ORM\Column(name="on_draft", type="boolean", nullable=false)
+     */
+    private $onDraft;
 
     /**
      * Mission constructor.
      *
      * @param $nbStep
      * @param $user
-     * @param $token
      * @param $company
      */
-    public function __construct($nbStep, $user, $token, $company)
+    public function __construct($nbStep, $user, $company)
     {
-        $this->creationDate = new \Datetime();
-        $this->languages    = new ArrayCollection();
-        $this->status       = 0;
-        $this->address      = new Address();
-        $this->numberStep   = $nbStep;
-        $this->contact      = $user;
-        $this->token        = $token;
-        $this->company      = $company;
-        $this->userMission  = new ArrayCollection();
-        $this->threads      = new ArrayCollection();
+        $this->numberStep      = $nbStep;
+        $this->contact         = $user;
+        $this->company         = $company;
+        $this->status          = self::DRAFT;
+        $this->statusGenerator = self::STEP_ZERO;
+        $this->creationDate    = new \Datetime();
+        $this->updateDate      = new \Datetime();
+        $this->languages       = new ArrayCollection();
+        $this->userMission     = new ArrayCollection();
+        $this->threads         = new ArrayCollection();
+        $this->inspectors      = new ArrayCollection();
+        $this->certifications  = new ArrayCollection();
+        $this->missionKinds    = new ArrayCollection();
+        $this->continents      = new ArrayCollection();
+        $this->confidentiality = true;
+        $this->telecommuting   = true;
+        $this->share           = true;
+        $this->reference       = true;
+        $this->address         = null;
+        $this->price           = 1;
+        $this->onDraft         = false;
     }
 
-    public function addTag(Tag $tag)
+    /**
+     * @Assert\Callback
+     * @param \Symfony\Component\Validator\Context\ExecutionContextInterface $context
+     */
+    public function validate(ExecutionContextInterface $context)
     {
-        $this->tags[] = $tag;
-
-        return $this;
+        if ($this->getOnDraft() === false) {
+            if ($this->getStatusGenerator() == self::STEP_ZERO) {
+                if (substr_count($this->getResume(), ' ') >= 500) {
+                    $context
+                        ->buildViolation('error.resume.max_words')
+                        ->atPath('resume')->addViolation()
+                    ;
+                }
+            } elseif ($this->getStatusGenerator() == self::STEP_ONE) {
+                $missionBeginning = $this->getMissionBeginning();
+                $missionEnding = $this->getMissionEnding();
+                $applicationEnding = $this->getApplicationEnding();
+                $today = new \DateTime();
+                if ($missionBeginning <= $today || $missionEnding <= $today || $applicationEnding <= $today) {
+                    $context
+                        ->buildViolation('error.date.past_date')
+                        ->atPath('missionBeginning')->addViolation()
+                    ;
+                } elseif ($missionBeginning->format("yy/mm/dd") >= $missionEnding->format("yy/mm/dd")) {
+                    $context
+                        ->buildViolation('error.date.after_end_date')
+                        ->atPath('missionBeginning')->addViolation()
+                    ;
+                } elseif ($applicationEnding->format("yy/mm/dd")
+                          >= $missionBeginning->format("yy/mm/dd")) {
+                    $context
+                        ->buildViolation('error.date.before_start_date')
+                        ->atPath('applicationEnding')->addViolation()
+                    ;
+                } elseif ($this->getMissionEnding()) {
+                    $this->setPrice(($this->getBudget() * 1000) / $this->getMissionEnding()
+                            ->diff($this->getMissionBeginning())
+                            ->format('%a'));
+                }
+            } elseif ($this->getStatusGenerator() == self::STEP_TWO) {
+                if (!count($this->getMissionKinds())) {
+                    $context
+                        ->buildViolation('error.mission_kind.one')
+                        ->atPath('missionKinds')->addViolation()
+                    ;
+                } elseif (!count($this->getLanguages())) {
+                    $context
+                        ->buildViolation('error.languages.one')
+                        ->atPath('languages')->addViolation()
+                    ;
+                }
+            }
+        }
     }
 
-    public function removeTag(Tag $tag)
+    /**
+     * @ORM\PreUpdate
+     */
+    public function updateDate()
     {
-        $this->tags->removeElement($tag);
-    }
-
-    public function getTags()
-    {
-        return $this->tags;
+        $this->setUpdateDate(new \Datetime());
     }
 
     /**
@@ -365,59 +450,14 @@ class Mission
      * Set address
      *
      * @param \ToolsBundle\Entity\Address $address
+     *
      * @return Mission
      */
-    public function setAddress(Address $address)
+    public function setAddress($address)
     {
         $this->address = $address;
-    }
-
-    /**
-     * Set confidentiality
-     *
-     * @param boolean $confidentiality
-     * @return Mission
-     */
-    public function setConfidentiality($confidentiality)
-    {
-        $this->confidentiality = $confidentiality;
 
         return $this;
-    }
-
-    /**
-     * Get confidentiality
-     *
-     * @return boolean
-     */
-    public function getConfidentiality()
-    {
-        return $this->confidentiality;
-    }
-
-
-
-    /**
-     * Set Contact
-     *
-     * @param \UserBundle\Entity\User $contact
-     * @return Mission
-     */
-    public function setContact(\UserBundle\Entity\User $contact)
-    {
-        $this->contact = $contact;
-
-        return $this;
-    }
-
-    /**
-     * Get contact
-     *
-     * @return \UserBundle\Entity\User
-     */
-    public function getContact()
-    {
-        return $this->contact;
     }
 
     /**
@@ -426,7 +466,7 @@ class Mission
      * @param \CompanyBundle\Entity\Company $company
      * @return Mission
      */
-    public function setCompany(\CompanyBundle\Entity\Company $company)
+    public function setCompany($company)
     {
         $this->company = $company;
 
@@ -537,52 +577,6 @@ class Mission
     }
 
     /**
-     * Set image
-     *
-     * @param string $image
-     * @return Mission
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * Get image
-     *
-     * @return string
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
-     * Set international
-     *
-     * @param boolean $international
-     * @return Mission
-     */
-    public function setInternational($international)
-    {
-        $this->international = $international;
-
-        return $this;
-    }
-
-    /**
-     * Get international
-     *
-     * @return boolean
-     */
-    public function getInternational()
-    {
-        return $this->international;
-    }
-
-    /**
      * Set missionBeginning
      *
      * @param \DateTime $missionBeginning
@@ -657,7 +651,7 @@ class Mission
      * @param \MissionBundle\Entity\ProfessionalExpertise $professionalExpertise
      * @return Mission
      */
-    public function setProfessionalExpertise(\MissionBundle\Entity\ProfessionalExpertise $professionalExpertise)
+    public function setProfessionalExpertise($professionalExpertise)
     {
         $this->professionalExpertise = $professionalExpertise;
 
@@ -689,56 +683,26 @@ class Mission
      *
      * @param \MissionBundle\Entity\MissionKind $missionKind
      *
-     * @return Mission
+     * @return $this
      */
-    public function addMissionKind(\MissionBundle\Entity\MissionKind $missionKind)
-    {
-        $this->missionKinds[] = $missionKind;
-
-        return $this;
-    }
-
-    /**
-     * Remove missionKind
-     *
-     * @param \MissionBundle\Entity\MissionKind $missionKind
-     */
-    public function removeMissionKind(\MissionBundle\Entity\MissionKind $missionKind)
+    public function removeMissionKind($missionKind)
     {
         $this->missionKinds->removeElement($missionKind);
-    }
-
-    /**
-     * Get languages
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getLanguages()
-    {
-        return $this->languages;
-    }
-
-    /**
-     * Add languages
-     *
-     * @param \ToolsBundle\Entity\Language $languages
-     * @return Mission
-     */
-    public function addLanguage(\ToolsBundle\Entity\Language $languages)
-    {
-        $this->languages[] = $languages;
 
         return $this;
     }
 
     /**
-     * Remove languages
+     * Add missionKinds
      *
-     * @param \ToolsBundle\Entity\Language $languages
+     * @param \MissionBundle\Entity\MissionKind $missionKinds
+     * @return Mission
      */
-    public function removeLanguage(\ToolsBundle\Entity\Language $languages)
+    public function addMissionKind($missionKinds)
     {
-        $this->languages->removeElement($languages);
+        $this->missionKinds[] = $missionKinds;
+
+        return $this;
     }
 
     /**
@@ -765,35 +729,12 @@ class Mission
      }
 
     /**
-     * Set token
-     *
-     * @param string $token
-     * @return Mission
-     */
-    public function setToken($token)
-    {
-        $this->token = $token;
-
-        return $this;
-    }
-
-    /**
-     * Get token
-     *
-     * @return string
-     */
-    public function getToken()
-    {
-        return $this->token;
-    }
-
-    /**
      * Set businessPractice
      *
      * @param \MissionBundle\Entity\BusinessPractice $businessPractice
      * @return Mission
      */
-    public function setBusinessPractice(\MissionBundle\Entity\BusinessPractice $businessPractice)
+    public function setBusinessPractice($businessPractice)
     {
         $this->businessPractice = $businessPractice;
 
@@ -831,51 +772,6 @@ class Mission
     public function getBudget()
     {
         return $this->budget;
-    }
-
-    /**
-     * @Assert\Callback
-     */
-    public function validate(ExecutionContextInterface $context)
-    {
-        $missionBeginning = $this->getMissionBeginning();
-        $missionEnding = $this->getMissionEnding();
-        $applicationEnding = $this->getApplicationEnding();
-        $today = new \DateTime();
-        if ($missionBeginning->format("yy/mm/dd") >= $missionEnding->format("yy/mm/dd"))
-        {
-          $context
-            ->buildViolation('The mission can not start after the end date.')
-            ->atPath('missionBeginning')
-            ->addViolation()
-            ;
-        }
-        elseif ($applicationEnding->format("yy/mm/dd") >= $missionBeginning->format("yy/mm/dd"))
-        {
-          $context
-            ->buildViolation('The deadline must be before the mission start.')
-            ->atPath('applicationEnding')
-            ->addViolation()
-            ;
-        }
-        elseif ($missionBeginning <= $today
-                || $missionEnding <= $today
-                || $applicationEnding <= $today)
-        {
-            $context
-              ->buildViolation('You can\'t pick a past date.')
-              ->atPath('missionBeginning')
-              ->addViolation()
-              ;
-        }
-    }
-
-    /**
-     * @ORM\PreUpdate
-     */
-    public function updateDate()
-    {
-        $this->setUpdateDate(new \Datetime());
     }
 
     /**
@@ -945,101 +841,61 @@ class Mission
     }
 
     /**
-     * Set southAmerica
+     * Set statusGenerator
      *
-     * @param boolean $southAmerica
+     * @param integer $statusGenerator
      *
-     * @return ExperienceShaping
+     * @return Mission
      */
-    public function setSouthAmerica($southAmerica)
+    public function setStatusGenerator($statusGenerator)
     {
-        $this->southAmerica = $southAmerica;
+        $this->statusGenerator = $statusGenerator;
 
         return $this;
     }
 
     /**
-     * Get southAmerica
+     * Get statusGenerator
      *
-     * @return boolean
+     * @return integer
      */
-    public function getSouthAmerica()
+    public function getStatusGenerator()
     {
-        return $this->southAmerica;
+        return $this->statusGenerator;
     }
 
     /**
-     * Set northAmerica
+     * Add continents
      *
-     * @param boolean $northAmerica
-     *
-     * @return ExperienceShaping
+     * @param \MissionBundle\Entity\Continent $continents
+     * @return Mission
      */
-    public function setNorthAmerica($northAmerica)
+    public function addContinent($continents)
     {
-        $this->northAmerica = $northAmerica;
+        $this->continents[] = $continents;
 
         return $this;
     }
 
     /**
-     * Get northAmerica
+     * Remove continents
      *
-     * @return boolean
+     * @param \MissionBundle\Entity\Continent $continents
      */
-    public function getNorthAmerica()
+    public function removeContinent($continents)
     {
-        return $this->northAmerica;
+        $this->continents->removeElement($continents);
     }
 
     /**
-     * Set asia
+     * Get continents
      *
-     * @param boolean $asia
-     *
-     * @return ExperienceShaping
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function setAsia($asia)
+    public function getContinents()
     {
-        $this->asia = $asia;
-
-        return $this;
+        return $this->continents;
     }
-
-    /**
-     * Get asia
-     *
-     * @return boolean
-     */
-    public function getAsia()
-    {
-        return $this->asia;
-    }
-
-    /**
-     * Set emea
-     *
-     * @param boolean $emea
-     *
-     * @return ExperienceShaping
-     */
-    public function setEmea($emea)
-    {
-        $this->emea = $emea;
-
-        return $this;
-    }
-
-    /**
-     * Get emea
-     *
-     * @return boolean
-     */
-    public function getEmea()
-    {
-        return $this->emea;
-    }
-
 
     /**
      * Get steps
@@ -1057,7 +913,7 @@ class Mission
      * @param \MissionBundle\Entity\Step $step
      * @return Mission
      */
-    public function addStep(\MissionBundle\Entity\Step $step)
+    public function addStep($step)
     {
         $this->steps[] = $step;
 
@@ -1069,8 +925,344 @@ class Mission
      *
      * @param \MissionBundle\Entity\Step $step
      */
-    public function removeStep(\MissionBundle\Entity\Step $step)
+    public function removeStep($step)
     {
         $this->steps->removeElement($step);
+    }
+
+    /**
+     * Set Price
+     *
+     * @param integer $price
+     *
+     * @return Mission
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get Price
+     *
+     * @return integer
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Set firstName
+     *
+     * @param string $firstName
+     *
+     * @return Mission
+     */
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    /**
+     * Get firstName
+     *
+     * @return string
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * Set lastName
+     *
+     * @param string $lastName
+     *
+     * @return Mission
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    /**
+     * Get lastName
+     *
+     * @return string
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * Set share
+     *
+     * @param boolean $share
+     *
+     * @return Mission
+     */
+    public function setShare($share)
+    {
+        $this->share = $share;
+
+        return $this;
+    }
+
+    /**
+     * Get share
+     *
+     * @return boolean
+     */
+    public function getShare()
+    {
+        return $this->share;
+    }
+
+    /**
+     * Set reference
+     *
+     * @param boolean $reference
+     *
+     * @return Mission
+     */
+    public function setReference($reference)
+    {
+        $this->reference = $reference;
+
+        return $this;
+    }
+
+    /**
+     * Get reference
+     *
+     * @return boolean
+     */
+    public function getReference()
+    {
+        return $this->reference;
+    }
+
+    /**
+     * Add languages
+     *
+     * @param \ToolsBundle\Entity\Language $languages
+     *
+     * @return Mission
+     */
+    public function addLanguage($languages)
+    {
+        $this->languages[] = $languages;
+
+        return $this;
+    }
+
+    /**
+     * Remove languages
+     *
+     * @param \ToolsBundle\Entity\Language $languages
+     */
+    public function removeLanguage($languages)
+    {
+        $this->languages->removeElement($languages);
+    }
+
+    /**
+     * Get languages
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getLanguages()
+    {
+        return $this->languages;
+    }
+
+    /**
+     * Set companyName
+     *
+     * @param string $companyName
+     * @return Mission
+     */
+    public function setCompanyName($companyName)
+    {
+        $this->companyName = $companyName;
+
+        return $this;
+    }
+
+    /**
+     * Get companyName
+     *
+     * @return string 
+     */
+    public function getCompanyName()
+    {
+        return $this->companyName;
+    }
+
+    /**
+     * Set contact
+     *
+     * @param \UserBundle\Entity\User $contact
+     * @return Mission
+     */
+    public function setContact($contact = null)
+    {
+        $this->contact = $contact;
+
+        return $this;
+    }
+
+    /**
+     * Get contact
+     *
+     * @return \UserBundle\Entity\User 
+     */
+    public function getContact()
+    {
+        return $this->contact;
+    }
+
+    /**
+     * Add inspector
+     *
+     * @param \CompanyBundle\Entity\Inspector $inspector
+     * @return Mission
+     */
+    public function addInspector($inspector)
+    {
+        $inspector->addMission($this);
+        $this->inspectors[] = $inspector;
+
+        return $this;
+    }
+
+    /**
+     * Remove inspector
+     *
+     * @param \CompanyBundle\Entity\Inspector $inspector
+     */
+    public function removeInspector($inspector)
+    {
+        $this->inspectors->removeElement($inspector);
+    }
+
+    /**
+     * Get inspectors
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getInspectors()
+    {
+        return $this->inspectors;
+    }
+
+    /**
+     * Add certifications
+     *
+     * @param \MissionBundle\Entity\Certification $certifications
+     * @return Mission
+     */
+    public function addCertification($certifications)
+    {
+        $this->certifications[] = $certifications;
+
+        return $this;
+    }
+
+    /**
+     * Remove certifications
+     *
+     * @param \MissionBundle\Entity\Certification $certifications
+     */
+    public function removeCertification($certifications)
+    {
+        $this->certifications->removeElement($certifications);
+    }
+
+    /**
+     * Get certifications
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCertifications()
+    {
+        return $this->certifications;
+    }
+
+    /**
+     * Set publicId
+     *
+     * @param string $publicId
+     * @return Mission
+     */
+    public function setPublicId($publicId)
+    {
+        $this->publicId = $publicId;
+
+        return $this;
+    }
+
+    /**
+     * Get publicId
+     *
+     * @return string 
+     */
+    public function getPublicId()
+    {
+        return $this->publicId;
+    }
+
+    /**
+     * Set confidentiality
+     *
+     * @param boolean $confidentiality
+     * @return Mission
+     */
+    public function setConfidentiality($confidentiality)
+    {
+        $this->confidentiality = $confidentiality;
+
+        return $this;
+    }
+
+    /**
+     * Get confidentiality
+     *
+     * @return boolean 
+     */
+    public function getConfidentiality()
+    {
+        return $this->confidentiality;
+    }
+
+    /**
+     * Set onDraft
+     *
+     * @param boolean $onDraft
+     * @return Mission
+     */
+    public function setOnDraft($onDraft)
+    {
+        $this->onDraft = $onDraft;
+
+        return $this;
+    }
+
+    /**
+     * Get onDraft
+     *
+     * @return boolean 
+     */
+    public function getOnDraft()
+    {
+        return $this->onDraft;
     }
 }

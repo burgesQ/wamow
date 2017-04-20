@@ -9,42 +9,71 @@ mission:
         warning: "You are editing a mission which already exist."
         cancel: "Back to the mission."
         successEdit: "Mission updated successfully"
+
     new:
-        title: "Mission Form"
+        step_one:
+            title: The pitch
+            subtitle: Let's start with the begining
+            hint: "FIRST STEP : "
+        step_two:
+            title: Mission Specification
+            subtitle: Tell us more !
+            hint: "SECOND STEP : "
+        step_three:
+            title: Mission Kind
+            subtitle: And what about your futur collaborator ?
+            hint: "THIRED STEP : "
+        step_four:
+            title: Resume
+            subtitle: Ok, let's make a point
+            hint: "FOURTH STEP : "
+        step_five:
+            title: Final Step
+            subtitle: Last Step And we're good !
+            hint: "FINAL STEP : "
+
         form:
-            title: "Title"
-            resume: "Describe your mission"
-            street: "Address"
-            street2: "Address"
-            city: "City"
-            zipcode: "ZipCode"
-            country: "Country"
-            state: "State"
-            label: "Label"
-            name: "Name"
-            languages: "Choose language(s) required"
-            confidentiality: "Does this mission has to be confidential?"
-            telecommuting: "Require physical presence?"
-            international: "Is this mission international?"
-            budget: "Budget"
-            missionBeginning: "Start of mission"
-            missionEnding: "End of mission"
-            applicationEnding: "Application deadline"
-            professionalExpertise: "Choose your expertise"
-            missionKind: "Choose your mission kind"
-            businessPractice: "Choose your business practice"
-            image: "Image"
-            submit: "Save"
-            chooseCountry: "Choose a country"
-            chooseDay: "Day"
-            chooseMonth: "Month"
-            chooseYear: "Year"
-    registered:
-        success: "Mission saved with success!"
-        see: "see your mission"
-        edit: "edit your mission"
-        another: "make another one"
+            back_resume: BACK TO THE RESUME
+            save_mod: SAVE MODIFICATIONS
+            later: FINISH LASTER
+            next: NEXT
+            back: BACK
+            print: PRINT
+            edit: edit
+            share_pitch: SHARE THE PITCH
+            title: TITLE OF THE PITCH
+            resume: DESCRIPTION OF THE  PROJET (500 WORDS)
+            business_practice: Business Practice
+            professional_expertise: Professional Expertise
+            budget: ESTIMED BUDGET
+            confidentiality: Anonymous corporate
+            telecommuting: On site presence required
+            country: COUNTRY
+            applicationEnding: END DATE FOR POSTULING TO THE PITCH
+            missionBeginning: START DATE OF THE MISSION
+            missionEnding: ESIMAT END DATEOF THE MISSION
+            north_america: North America
+            south_america: South AMerica
+            emea: EMEA
+            asia: Asia - Pacific
+            range: PRICE
+            language: WORK LANGUAGE(S)
+            company: Corporate
+            share: share the below pitch to the Expert community of consultants.wantmore.work
+            reference: share the name of the corporateas a reference
+            chooseDay: Days
+            chooseMonth: Month
+            chooseYear: Year
+            first_name: FirstName
+            last_name: LastName
+            +: +
+            certification: Certification / Special Skills
+
     view:
+        country: Country of the mission
+        link: Create a new pitch
+        draft: Resume your pitch drafted
+
         resume: "Resume"
         details: "Details"
         address: "Address"
@@ -58,6 +87,11 @@ mission:
         pitch: "Pitch"
         thread.seekers: "Discussion between you and the advisor"
         thread.expert: "Discussion between you and the seeker"
+    registered:
+        success: "Mission saved with success!"
+        see: "see your mission"
+        edit: "edit your mission"
+        another: "make another one"
     error:
         authorized: "You're not authorized to create a mission."
         logged: "You are not logged."
@@ -93,17 +127,6 @@ mission:
     pitch:
         title: "My pitchs"
         giveUp: "give up"
-
-continent:
-    emea:          EMEA
-    south_america: South America
-    north_america: North America
-    asia:          Asia - Pacific
-
-company_size:
-    small:  Small Companies
-    medium: Medium Companies
-    large:  Large Companies
 
 experience_shaping:
     cumuledmonth:   How many cumuled month ?

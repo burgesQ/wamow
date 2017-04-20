@@ -2460,16 +2460,15 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
         // get all kind of repo
         $practiceRepo    = $manager->getRepository('MissionBundle:BusinessPractice');
         $missionKindRepo = $manager->getRepository('MissionBundle:MissionKind');
-        $userRepo        = $manager->getRepository('UserBundle:User');
         $workExpRepo     = $manager->getRepository('MissionBundle:WorkExperience');
         $proExpRepo      = $manager->getRepository('MissionBundle:ProfessionalExpertise');
         $langRepo        = $manager->getRepository('ToolsBundle:Language');
         $companySizeRepo = $manager->getRepository('MissionBundle:CompanySize');
         $continentRepo   = $manager->getRepository('MissionBundle:Continent');
 
-        $smallComp    = $companySizeRepo->findOneBy(['name' => 'company.small']);
-        $mediumComp   = $companySizeRepo->findOneBy(['name' => 'company.medium']);
-        $largeComp    = $companySizeRepo->findOneBy(['name' => 'company.large']);
+        $smallComp    = $companySizeRepo->findOneBy(['name' => 'company_size.small']);
+        $mediumComp   = $companySizeRepo->findOneBy(['name' => 'company_size.medium']);
+        $largeComp    = $companySizeRepo->findOneBy(['name' => 'company_size.large']);
         $southAmerica = $continentRepo->findOneBy(['name' => 'continent.southAmerica']);
         $northAmerica = $continentRepo->findOneBy(['name' => 'continent.northAmerica']);
         $asia         = $continentRepo->findOneBy(['name' => 'continent.asia']);
@@ -2489,9 +2488,6 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 ->setEmergencyEmail($oneData[3])
                 ->setCountry($oneData[4])
             ;
-
-            while ($userRepo->findOneBy(['randomId' => $j]) && $j++);
-            $newUser->setRandomId($j);
 
             // set languages
             foreach ($oneData[5] as $oneLang)
@@ -2522,12 +2518,14 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             foreach ($oneData[11] as $oneWorkExp)
                 $newUser->addWorkExperience($workExpRepo->findOneBy(['name' => $oneWorkExp]));
 
+            $userManager->updateUser($newUser, true);
+
+
             // gen Experience shaping
             $i = 0;
             foreach ($oneData[12] as $oneExpShap) {
 
                 $shap = new ExperienceShaping();
-
 
                 $shap
                     ->setWorkExperience($workExpRepo->findOneBy(['name' => $oneData[11][$i]]))
@@ -2537,37 +2535,41 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 ;
 
                 switch ($oneExpShap) {
-                    case 0:
-                        $shap->setCompanySize($smallComp);
+                    case $oneExpShap[0] == true:
+                        $shap->addCompanySize($smallComp);
                         break;
-                    case 1:
-                        $shap->setCompanySize($mediumComp);
+                    case $oneExpShap[1] == true:
+                        $shap->addCompanySize($mediumComp);
                         break;
-                    case 2:
-                        $shap->setCompanySize($largeComp);
+                    case $oneExpShap[2] == true:
+                        $shap->addCompanySize($largeComp);
                         break;
-                    case 3:
+                    case $oneExpShap[3] == true:
                         $shap->addContinent($southAmerica);
                         break;
-                    case 4:
+                    case $oneExpShap[4] == true:
                         $shap->addContinent($northAmerica);
                         break;
-                    case 5:
+                    case $oneExpShap[5] == true:
                         $shap->addContinent($asia);
                         break;
-                    case 6:
+                    case $oneExpShap[6] == true:
                         $shap->addContinent($emea);
                         break;
                 }
                 
                 $manager->persist($shap);
+                $manager->flush();
                 $newUser->addExperienceShaping($shap);
-                $i++;
             }
 
             // flush the experience shaping
             $manager->flush();
+
             // save user in db
+            $userManager->updateUser($newUser, true);
+
+            $newUser->setPublicId(md5(uniqid() .$newUser->getUsername() . $newUser->getId()));
             $userManager->updateUser($newUser, true);
         }
     }

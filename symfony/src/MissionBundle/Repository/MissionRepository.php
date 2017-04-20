@@ -17,8 +17,8 @@ class MissionRepository extends EntityRepository
     {
         $qb = $this->_em->createQueryBuilder();
         $qb->select('m')
-        ->from('MissionBundle:Mission', 'm')
-        ->where('m.status >= 1')
+            ->from('MissionBundle:Mission', 'm')
+            ->where('m.status >= 1')
             ->orderBy('m.applicationEnding', 'DESC');
         return $qb->getQuery()->getResult();
     }
@@ -41,7 +41,7 @@ class MissionRepository extends EntityRepository
      * A magic query that return a array of potential mission for a user
      * Need to refacto that shit, that burn my eyes
      *
-     * @param User $user
+     * @param \UserBundle\Entity\User $user
      *
      * @return Mission[]
      */
@@ -54,7 +54,7 @@ class MissionRepository extends EntityRepository
                 LEFT JOIN m.languages l
                 LEFT JOIN m.businessPractice b
                 LEFT JOIN m.professionalExpertise p
-                LEFT JOIN m.missionKind k
+                LEFT JOIN m.missionKinds k
                 LEFT JOIN m.userMission um
                 WHERE     um.user = :user
                 AND       um.status >= 0
@@ -141,9 +141,9 @@ class MissionRepository extends EntityRepository
      * A magic query that return a array of potential user for a mission
      * Need to refacto that shit, that burn my eyes
      *
-     * @param Mission $mission
-     * @param bool    $ignored
-     * @param bool    $dql
+     * @param \MissionBundle\Entity\Mission $mission
+     * @param bool                          $ignored
+     * @param bool                          $dql
      *
      * @return User[]
      */
@@ -178,14 +178,16 @@ class MissionRepository extends EntityRepository
         // add missionKind filter
         $i = 0;
         foreach ($mission->getMissionKinds() as $missionKind) {
-            if ($i)
-                    $base = $base . '
+            if ($i) {
+                $base = $base . '
                     OR        k = :missionKinds' . $i;
-                else
-                    $base = $base . '
+            } else {
+                $base = $base . '
                     AND       (k = :missionKinds' . $i;
-                $i++;
+            }
+            $i++;
         }
+
         // add businessPractice filter
         $base = $base . ')
                 AND       b = :businessPractice';
@@ -209,8 +211,8 @@ class MissionRepository extends EntityRepository
             $i++;
         }
         $i = 0;
-        foreach ($mission->getMissionKinds() as $oneKind) {
-            $query->setParameter('missionKinds' . $i, $oneKind);
+        foreach ($mission->getMissionKinds() as $oneMissionKind) {
+            $query->setParameter('missionKinds' . $i, $oneMissionKind);
             $i++;
         }
         $query->setParameter('professionalExpertise', $mission->getProfessionalExpertise());
@@ -223,5 +225,4 @@ class MissionRepository extends EntityRepository
             return [$query->getResult(), $query->getDQL()];
         return $query->getResult();
     }
-
 }

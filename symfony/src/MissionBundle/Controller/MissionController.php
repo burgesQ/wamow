@@ -1,166 +1,21 @@
 <?php
+
 namespace MissionBundle\Controller;
 
 use InboxBundle\Repository\MessageRepository;
 use InboxBundle\Repository\ThreadRepository;
 use InboxBundle\Services\Services;
+use MissionBundle\Entity\Mission;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-
-use MissionBundle\Entity\Step;
-use MissionBundle\Entity\Mission;
 use MissionBundle\Entity\UserMission;
-use MissionBundle\Form\MissionType;
 use MissionBundle\Form\SelectionType;
 use MissionBundle\Form\TakeBackType;
-use ToolsBundle\Entity\Tag;
 
 class MissionController extends Controller
 {
-    /*
-    **  Create a new mission
-    */
-    public function newAction(Request $request)
-    {
-        $trans = $this->get('translator');
-        if ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR'))
-        {
-            $user = $this->getUser();
-            $company = $user->getCompany();
-            if ($user->getCompany() == null)
-            {
-                $request->getSession()->getFlashBag()->add('notice', $trans->trans('mission.error.needCompany', array(), 'MissionBundle'));
-                return $this->redirectToRoute('company_join');
-            }
-
-            $em = $this->getDoctrine()->getManager();
-            $repository = $this
-                        ->getDoctrine()
-                        ->getManager()
-                        ->getRepository('MissionBundle:Mission')
-                        ;
-            $service = $this->container->get('config.mission');
-            $nbStep = $service->getMissionNbStep();
-            $user = $this->getUser();
-            $token = bin2hex(random_bytes(10));
-            while ($repository->findByToken($token) != null) {
-                $token = bin2hex(random_bytes(10));
-            }
-            $mission = new Mission($nbStep, $user, $token, $company);
-            $form = $this->get('form.factory')->create(new MissionType(), $mission);
-            $form->handleRequest($request);
-            if ($form->isValid())
-            {
-              $em = $this->getDoctrine()->getManager();
-              if ($_POST)
-                {
-                    if (isset($_POST['mission']['tags']))
-                    {
-                        $values = $_POST['mission']['tags'];
-                        foreach ($values as $value)
-                        {
-                            $tag = new Tag();
-                            $tag->setTag($value);
-                            $mission->addTag($tag);
-                            $em->persist($tag);
-                        }
-                    $em->flush();
-                    }
-                }
-                $em->persist($mission);
-                for ($i=1; $i <= $nbStep; $i++)
-                {
-                    $array = $service->getStepConfig($i);
-                    $step = new Step($array["nbMaxUser"], $array["reallocUser"]);
-                    $step->setMission($mission);
-                    $step->setPosition($i);
-                    $em->persist($step);
-                }
-                $em->flush();
-
-                // Add notification for contractor
-                $notification = $this->container->get('notification');
-                $param = array(
-                    'mission' => $mission->getId(),
-                    'user'    => $user->getId(),
-                );
-                $notification->new($this->getUser(), 1, 'notification.seeker.mission.create', $param);
-
-                $this->get('mission_matching')->setUpPotentialUser($mission);
-
-                return $this->render('MissionBundle:Mission:registered.html.twig', array(
-                    'mission'       =>   $mission,
-                ));
-            }
-            return $this->render('MissionBundle:Mission:new.html.twig', array(
-                'form' => $form->createView(),
-            ));
-        }
-        else {
-            return new Response($trans->trans('mission.error.authorized', array(), 'MissionBundle'));
-        }
-    }
-
-    /*
-    **  Edit a mission
-    */
-    public function editAction($missionId, Request $request)
-    {
-        $trans = $this->get('translator');
-
-        if ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR'))
-        {
-            $em = $this->getDoctrine()->getManager();
-
-            $mission = $em->getRepository('MissionBundle:Mission')->find($missionId);
-            $user = $this->getUser();
-            if (null === $mission) {
-                throw new NotFoundHttpException($trans->trans('mission.error.wrongId', array('%id%' => $missionId), 'MissionBundle'));
-            } elseif ($mission->getContact() != $user) {
-                throw new NotFoundHttpException($trans->trans('mission.error.right', array(), 'MissionBundle'));
-            } elseif ($user->getCompany() != $mission->getCompany()) {
-                throw new NotFoundHttpException($trans->trans('mission.error.wrongcompany', array(), 'MissionBundle'));
-            } elseif ($mission->getStatus() != Mission::DRAFT) {
-                throw new NotFoundHttpException($trans->trans('mission.error.alreadyEdit', array(), 'MissionBundle'));
-            }
-
-            $form = $this->get('form.factory')->create(new MissionType(), $mission);
-            $form->handleRequest($request);
-
-            if ($form->isValid()) {
-          		if ($_POST)
-            	{
-           			if (isset($_POST['mission']['tags']))
-                    {
-                        $values = $_POST['mission']['tags'];
-               	        foreach ($values as $value)
-                	    {
-                  		    $tag = new Tag();
-                  		    $tag->setTag($value);
-                  		    $mission->addTag($tag);
-                  		    $em->persist($tag);
-             		    }
-                    }
-           		}
-                $step = $em->getRepository('MissionBundle:Step')->findOneBy(array('mission' => $mission, 'position' => 1));
-                $mission->setStatus(1);
-                $step->setStatus(1);
-                $em->flush();
-
-                $this->get('mission_matching')->setUpPotentialUser($mission, true);
-
-                return new Response($trans->trans('mission.edit.successEdit', array(), 'MissionBundle'));
-            }
-            return $this->render('MissionBundle:Mission:edit.html.twig', array(
-                'form' => $form->createView(),
-                'mission' => $mission,
-            ));
-        }
-        throw new NotFoundHttpException($trans->trans('mission.error.contractor', array(), 'MissionBundle'));
-    }
-
     /*
     **  View mission
     */
@@ -237,6 +92,7 @@ class MissionController extends Controller
                 'step'         => $repositoryStep->findOneBy(['mission' => $mission, 'status' => 1]),
             ]);
         }
+        return $this->redirectToRoute('dashboard');
     }
 
     /*
@@ -644,7 +500,7 @@ class MissionController extends Controller
                 if ($step->getAnoymousMode() > 0 ) {
                     $thread = $inboxService->createThreadPitch($userMission);
                 }
-                $em->flush($advisor);
+                $em->flush();
 
                 // Add notifications for advisor
                 $param = array(
@@ -664,7 +520,7 @@ class MissionController extends Controller
                 );
                 $notification->new($this->getUser(), 1, 'notification.seeker.mission.takeback', $param);
             }
-            $em->flush($step);
+            $em->flush();
             return $this->redirectToRoute('mission_users_selection', array(
                 'missionId' => $missionId
             ));
@@ -674,55 +530,6 @@ class MissionController extends Controller
             'missionId' => $missionId,
             'vacancies' => $vacancies
             ));
-    }
-
-    /*
-    **  Delete mission
-    */
-    public function deleteAction($missionId)
-    {
-        $trans = $this->get('translator');
-        $em = $this->getDoctrine()->getManager();
-        $mission = $em->getRepository('MissionBundle:Mission')->find($missionId);
-        $user = $this->getUser();
-
-        if ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR')
-            && $mission != null
-            && $mission->getContact() == $user
-            && $mission->getStatus() == Mission::DRAFT
-            && $user->getCompany() == $mission->getCompany())
-        {
-
-            $mission->setStatus(-1);
-            $notification = $this->container->get('notification');
-            $steps = $em->getRepository('MissionBundle:Step')->getStepsAvailables($missionId);
-            foreach ($steps as $step)
-            {
-                $step->setStatus(-1);
-                $em->persist($step);
-            }
-
-            $param = array(
-                'mission' => $mission->getId(),
-                'user'    => $user->getId(),
-            );
-
-            $usersMission = $em->getRepository('MissionBundle:UserMission')->findBy(array('mission' => $mission));
-            foreach ($usersMission as $userMission) {
-                $userMission->setStatus(UserMission::DELETED);
-                $em->persist($userMission);
-
-                // Add notifications for advisors
-                $notification->new($userMission->getUser(), 1, 'notification.expert.mission.delete', $param);
-
-            }
-            // Add notifications for contractor
-            $notification->new($user, 1, 'notification.seeker.mission.delete', $param);
-
-            $em->flush();
-            return $this->redirectToRoute('dashboard', array());
-        }
-        throw new NotFoundHttpException($trans->trans('mission.error.forbiddenAccess', array(), 'MissionBundle'));
     }
 
     /*

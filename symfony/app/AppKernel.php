@@ -27,13 +27,12 @@ class AppKernel extends Kernel
             new CompanyBundle\CompanyBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
-            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
-            new CalendarBundle\CalendarBundle(),
-            new ADesigns\CalendarBundle\ADesignsCalendarBundle(),
             new NotificationBundle\NotificationBundle(),
             new FOS\MessageBundle\FOSMessageBundle(),
             new InboxBundle\InboxBundle(),
             new BlogBundle\BlogBundle(),
+            new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
+            new Tetranz\Select2EntityBundle\TetranzSelect2EntityBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
