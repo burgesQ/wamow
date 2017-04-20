@@ -12,7 +12,6 @@ use UserBundle\Entity\User;
 
 class FOSUBUserProvider extends BaseClass
 {
-
     /**
      * @var Container
      */
@@ -118,5 +117,4 @@ class FOSUBUserProvider extends BaseClass
 
         return $user;
     }
-
 }

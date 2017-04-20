@@ -2476,6 +2476,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
         $asia         = $continentRepo->findOneBy(['name' => 'continent.asia']);
         $emea         = $continentRepo->findOneBy(['name' => 'continent.emea']);
 
+        $i = 0;
+
         foreach ($this->arrayDatas as $oneData) {
 
             // create Entity with fName, lName, email, country
@@ -2489,31 +2491,37 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             ;
 
             // set languages
-            foreach ($oneData[4] as $oneLang)
+            foreach ($oneData[4] as $oneLang) {
                 $newUser->addLanguage($langRepo->findOneBy(['name' => $oneLang]));
+            }
 
             // set password and status
             $newUser
                 ->setPlainPassword($oneData[5])
                 ->setRoles(['ROLE_ADVISOR'])
-                ->setEnabled(true);
+                ->setEnabled(true)
+            ;
             $newUser->setStatus(User::REGISTER_NO_STEP);
 
             // set User resume
             $newUser->setUserResume($oneData[6]);
 
             // set user Datas
-            foreach ($oneData[7] as $oneBuisiness)
+            foreach ($oneData[7] as $oneBuisiness) {
                 $newUser->addBusinessPractice($practiceRepo->findOneBy(['name' => $oneBuisiness]));
+            }
 
-            foreach ($oneData[8] as $oneMisKind)
+            foreach ($oneData[8] as $oneMisKind) {
                 $newUser->addMissionKind($missionKindRepo->findOneBy(['name' => $oneMisKind]));
+            }
 
-            foreach ($oneData[9] as $oneProExp)
+            foreach ($oneData[9] as $oneProExp) {
                 $newUser->addProfessionalExpertise($proExpRepo->findOneBy(['name' => $oneProExp]));
+            }
 
-            foreach ($oneData[10] as $oneWorkExp)
+            foreach ($oneData[10] as $oneWorkExp) {
                 $newUser->addWorkExperience($workExpRepo->findOneBy(['name' => $oneWorkExp]));
+            }
 
             $userManager->updateUser($newUser, true);
 
@@ -2557,31 +2565,20 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 }
 
                 $manager->persist($shap);
-                $manager->flush();
                 $newUser->addExperienceShaping($shap);
             }
 
             if (key_exists(12, $oneData)) {
-                $userManager->updateUser($newUser, true);
                 $this->linkPhone($oneData[12], $newUser, $manager);
                 $this->linkAddress($oneData[12], $newUser, $manager);
             }
 
-            if (key_exists(12, $oneData)) {
-                $userManager->updateUser($newUser, true);
-                $this->linkPhone($oneData[12], $newUser, $manager);
-                $this->linkAddress($oneData[12], $newUser, $manager);
-            }
-
-            // flush the experience shaping
-            $manager->flush();
-
+            $newUser->setPublicId(md5(uniqid() . $newUser->getUsername() . $i));
             // save user in db
             $userManager->updateUser($newUser, true);
-
-            $newUser->setPublicId(md5(uniqid() .$newUser->getUsername() . $newUser->getId()));
-            $userManager->updateUser($newUser, true);
+            $i++;
         }
+        $manager->flush();
     }
 
     /**

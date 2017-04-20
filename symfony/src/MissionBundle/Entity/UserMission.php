@@ -84,6 +84,12 @@ class UserMission
     private $interestedAt;
 
     /**
+     * @var string
+     * @ORM\Column(name="note", type="text", nullable=false)
+     */
+    private $note;
+
+    /**
      * UserMission constructor.
      *
      * @param $user
@@ -96,6 +102,7 @@ class UserMission
         $this->updateDate   = new \DateTime();
         $this->user         = $user;
         $this->mission      = $mission;
+        $this->note         = "";
     }
 
     /**
@@ -275,5 +282,28 @@ class UserMission
     public function getInterestedAt()
     {
         return $this->interestedAt;
+    }
+
+    /**
+     * Set note
+     *
+     * @param string $note
+     * @return UserMission
+     */
+    public function setNote($note)
+    {
+        $this->note = $note;
+
+        return $this;
+    }
+
+    /**
+     * Get note
+     *
+     * @return string 
+     */
+    public function getNote()
+    {
+        return $this->note;
     }
 }

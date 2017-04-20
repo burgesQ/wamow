@@ -43,6 +43,21 @@ error:
         not_found: The asked mission dosen't exist
     user:
         subscribe: Please Subscribe
+    user_mission:
+        not_found: No such userMission entity (%id)
+    mission:
+        pitch:
+            contractor: A contractor cannot pitch
+        available: This mission isn't available
+        user_mission: You cannot pitch that mission
+        interested_twice: You already mark youreself as inetrested
+        available: The mission %id is not available.
+        limit_reach: The advisor answer limit was reached for this mission. The mission is closed
+        wrong_company: You don't belong tothe right company
+        not_enough: Not enough user selected to proceed to next step
+    action:
+        failed: Action failed.
+
 
 ## Home
 home:
@@ -223,15 +238,18 @@ user:
 
 ## Mission
 mission:
-    error:
-        pitch:
-            contractor: A contractor cannot pitch
-        available: This mission isn't available
-        user_mission: You cannot pitch that mission
-        interested_twice: You already mark youreself as inetrested
-        available: The mission %id is not available.
-        limit_reach: The advisor answer limit was reached for this mission. The mission is closed
     view:
+        contractor:
+            status_advisor: all advisor
+            stats_shortlist: shortlist
+            status_finalit: finalit
+            btn_refuse: REFUSE
+            btn_proced_to_shortlist: Proceed to shortlist
+            btn_add_to_shortlist: add to shortlist
+            btn_remove_from_shortlist: remove from shortlist
+            finance: |
+                $ %price
+                %professionalExpertise
         advisor:
             btn_back_to_board: back to board
             intrested: Intrested
@@ -241,7 +259,11 @@ mission:
                 %professionalExpertise
             on_site: On site
             not_on_site: Not on site
-            to_answer: To Answer
+        to_answer: To Answer
+    action:
+        add_to_shortlist: User added to shortlist !
+        remove_from_shortlist: User removed from shortlist !
+        refuse_user: User refused.
 
 ## Inbox
 inbox:

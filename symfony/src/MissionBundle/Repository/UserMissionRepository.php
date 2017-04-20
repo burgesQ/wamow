@@ -65,7 +65,12 @@ class UserMissionRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function findMoreThanInterested($mission)
+    /**
+     * @param $mission
+     * @param $status
+     * @return array
+     */
+    public function findAllAtLeastThan($mission, $status)
     {
         $qb = $this->_em->createQueryBuilder();
 
@@ -73,9 +78,9 @@ class UserMissionRepository extends EntityRepository
             ->from('MissionBundle:UserMission', 'um')
             ->leftjoin('um.mission', 'm')
             ->where('m.id = :mId')
-                ->setParameter('mId', $mission->getId())
+            ->setParameter('mId', $mission->getId())
             ->andWhere('um.status >= :status')
-                ->setParameter('status', UserMission::ONGOING)
+            ->setParameter('status', $status)
         ;
 
         return $qb->getQuery()->getResult();

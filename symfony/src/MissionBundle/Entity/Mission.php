@@ -1105,7 +1105,7 @@ class Mission
     /**
      * Get contact
      *
-     * @return \UserBundle\Entity\User 
+     * @return \UserBundle\Entity\User
      */
     public function getContact()
     {

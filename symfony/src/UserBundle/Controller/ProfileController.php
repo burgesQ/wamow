@@ -3,7 +3,6 @@
 namespace UserBundle\Controller;
 
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use FOS\UserBundle\Controller\ProfileController as BaseController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use UserBundle\Form\EditProfileMergedFormType;
@@ -11,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use UserBundle\Form\EditPasswordFormType;
 use FOS\UserBundle\Model\UserInterface;
 use ToolsBundle\Entity\ProfilePicture;
+use ToolsBundle\Entity\Address;
 use UserBundle\Entity\User;
 
 class ProfileController extends Controller
@@ -23,8 +23,7 @@ class ProfileController extends Controller
         if (!is_object(($user = $this->getUser())) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         } elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')
-                  && ($url = $this->get('signedUp')->checkIfSignedUp($user->getStatus()))) {
-
+                  && ($url = $this->get('signed_up')->checkIfSignedUp($user->getStatus()))) {
             return $this->redirectToRoute($url);
         }
 
@@ -44,8 +43,7 @@ class ProfileController extends Controller
         if (!is_object($user = $this->getUser()) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         } elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')
-                  && ($url = $this->get('signedUp')->checkIfSignedUp($user->getStatus()))) {
-
+                 && ($url = $this->get('signed_up')->checkIfSignedUp($user->getStatus()))) {
             return $this->redirectToRoute($url);
         }
 
@@ -55,6 +53,13 @@ class ProfileController extends Controller
             'user'  => $user,
             'image' => $image
         ];
+
+        $newAddress = null;
+        if ($user->getAddresses()->isEmpty()) {
+            $newAddress = new Address();
+            $user->addAddress($newAddress);
+        }
+
         $arrayOption['role'] = $user->getRoles()[0];
         $form                = $this->createForm(EditProfileMergedFormType::class,
             $arrayData, $arrayOption)->setData($arrayData)
@@ -71,6 +76,10 @@ class ProfileController extends Controller
 
             if ($image->getFile()) {
                 $user->addImage($image);
+            }
+
+            if ($newAddress !== null) {
+                $em->persist($newAddress);
             }
 
             $userManager->updateUser($user);

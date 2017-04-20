@@ -15,7 +15,8 @@ class MissionController extends Controller
      * Display the given Mission
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param                                           $missionId
+     * @param  integer                                  $missionId
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function viewAction(Request $request, $missionId)
@@ -23,84 +24,96 @@ class MissionController extends Controller
         $em    = $this->getDoctrine()->getManager();
         $trans = $this->get('translator');
 
-        if (($user = $this->geTUser()) === null) {
+        if (($user = $this->getUser()) === null) {
             throw new NotFoundHttpException($trans->trans('error.logged', [], 'tools'));
         } elseif (($mission = $em->getRepository('MissionBundle:Mission')->findOneBy(['id' => $missionId])) === null) {
             throw new NotFoundHttpException($trans->trans('error.mission.not_found', [], 'tools'));
-        } elseif ($mission->getStatus() < Mission::PUBLISHED) {
-            throw new NotFoundHttpException($trans->trans('mission.error.available', ['%id' => $missionId], 'tools'));
+        } elseif ($mission->getStatus() !== Mission::PUBLISHED) {
+            throw new NotFoundHttpException($trans->trans('error.mission.available', ['%id' => $missionId], 'tools'));
+        } elseif (!($step = $em->getRepository('MissionBundle:Step')->findOneBy(['mission' => $mission, 'status' => 1]))) {
+            throw new NotFoundHttpException($trans->trans('error.mission.not_found', [], 'tools'));
         }
 
-        $inboxService    = $this->container->get('inbox.services');
-        $userMissionRepo = $em->getRepository('MissionBundle:UserMission');
-        $repositoryStep  = $em->getRepository('MissionBundle:Step');
-
         if ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR')) {
-            if ($user->getCompany() != $mission->getCompany()) {
-                throw new NotFoundHttpException($trans->trans('mission.error.wrongcompany', [], 'MissionBundle'));
+            if ($user->getCompany() !== $mission->getCompany()) {
+                throw new NotFoundHttpException($trans->trans('error.mission.wrong_company', [], 'tools'));
             }
 
-            $bigArray = $inboxService->setViewContractor($user, $mission, $request);
-
-            // reload the page if needed (new message receive)
-            if ($bigArray == null) {
-                return $this->redirectToRoute('mission_view', ['missionId' => $missionId]);
+            switch ($step->getPosition()) {
+                case (1) :
+                    return $this->render('@Mission/Mission/Contractor/mission_all_advisor.html.twig', [
+                        'missionId'             => $missionId,
+                        'title'                 => $mission->getTitle(),
+                        'certifications'        => $mission->getCertifications(),
+                        'missionKinds'          => $mission->getMissionKinds(),
+                        'price'                 => $mission->getPrice() * 1000,
+                        'professionalExpertise' => $mission->getProfessionalExpertise()->getName(),
+                        'applicationEnding'     => $mission->getApplicationEnding(),
+                        'missionBeginning'      => $mission->getMissionEnding(),
+                        'missionEnding'         => $mission->getMissionEnding(),
+                        'address'               => $mission->getAddress(),
+                        'languages'             => $mission->getLanguages(),
+                        'telecommuting'         => $mission->getTelecommuting(),
+                        'updateDate'            => $mission->getUpdateDate(),
+                        'resume'                => $mission->getResume(),
+                        'userMissions'          => $em->getRepository('MissionBundle:UserMission')->findAllAtLeastThan($mission, UserMission::ONGOING)
+                    ]);
+                default :
+                    throw new NotFoundHttpException('No view for this Mission with the step (' .
+                                                    $step->getStatus() . ')');
+                    break;
             }
-
-            return $this->render('MissionBundle:Mission:view_seeker.html.twig', [
-                'user'            => $user,
-                'mission'         => $mission,
-                'threads'         => $bigArray[0],
-                'bigArrayMessage' => $bigArray[1],
-                'arrayReplyForm'  => $bigArray[4],
-                'step'            => $repositoryStep->findOneBy(['mission' => $mission, 'status' => 1]),
-            ]);
         } elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')) {
+            // check if user fully registred
             if (($url = $this->get('signed_up')->checkIfSignedUp($user->getStatus()))) {
-
                 return $this->redirectToRoute($url);
             }
+            $userMissionRepo = $em->getRepository('MissionBundle:UserMission');
 
             if (!($userMission = $userMissionRepo->findOneBy(['user' => $user, 'mission' => $mission]))) {
                 throw new NotFoundHttpException();
             }
 
+            $inboxService      = $this->get('inbox.services');
             $userMissionStatus = $userMission->getStatus();
-            $step              = $em->getRepository('MissionBundle:Step')->findOneby([
-                'mission' => $mission,
-                'status'  => 1
-            ]);
 
-            if (count($userMissionRepo->findMoreThanInterested($mission)) >= $step->getNbMaxUser()
+            // if the maximum number of advisor have been reached
+            if (count($userMissionRepo->findAllAtLeastThan($mission, UserMission::ONGOING)) >= $step->getNbMaxUser()
                 && $userMissionStatus < UserMission::ONGOING) {
-                throw new NotFoundHttpException($trans->trans('mission.error.limit_reach', [], 'tools'));
+                throw new NotFoundHttpException($trans->trans('error.mission.limit_reach', [], 'tools'));
             }
 
+            // return the view in function of uesrMission::Status
             switch ($userMissionStatus) {
                 case (UserMission::NEW && !$user->getPayment()) :
                 case (UserMission::INTERESTED) :
                     $form = $this->createForm(MessageMissionFormType::class);
                     if ($form->handleRequest($request)->isSubmitted() && $form->isValid()) {
+                        // passe the user_mission to the next step
                         $inboxService->createThreadPitch($userMission, $form->getData()['text']);
                         $userMission->setStatus(UserMission::ONGOING);
                         $em->flush();
+
+                        return $this->redirectToRoute('mission_view', ['missionId' => $missionId]);
                     }
+
                     return $this->render('@Mission/Mission/Advisor/mission_interested.html.twig', [
                         'user_mission' => $userMission,
                         'form'         => $form->createView()
                     ]);
-
                 default :
                     throw new NotFoundHttpException('No view for this UserMission status defined (' .
                                                     $userMissionStatus . ')');
             }
         }
-
         return $this->redirectToRoute('dashboard');
     }
 
     /**
-     * @param $missionId
+     * Mark the user mission as interested
+     *
+     * @param integer $missionId
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function interestedAction($missionId)
@@ -113,7 +126,7 @@ class MissionController extends Controller
         if (($user = $this->getUser()) === null) {
             throw new NotFoundHttpException($trans->trans('error.logged', [], 'tools'));
         } elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR')) {
-            throw new NotFoundHttpException($trans->trans('mission.error.pitch.contractor', [], 'tools'));
+            throw new NotFoundHttpException($trans->trans('error.mission.pitch.contractor', [], 'tools'));
         } elseif (($url = $this->get('signed_up')->checkIfSignedUp($user->getStatus()))) {
             return $this->redirectToRoute($url);
         }
@@ -132,27 +145,72 @@ class MissionController extends Controller
             'status'  => 1
         ]);
         if (!($userMission = $userMissionRepo->findOneby(['mission' => $mission, 'user' => $user]))
-            || count($userMissionRepo->findMoreThanInterested($mission)) >= $step->getNbMaxUser()) {
-            throw new NotFoundHttpException($trans->trans('mission.error.limit_reach', [], 'tools'));
+            || count($userMissionRepo->findAllAtLeastThan($mission, UserMission::INTERESTED)) >= $step->getNbMaxUser()) {
+            throw new NotFoundHttpException($trans->trans('error.mission.limit_reach', [], 'tools'));
         }
         switch (($userMissionStatus = $userMission->getStatus())) {
             case (UserMission::NEW) :
-
                 if ($user->getPayment()) {
                     // mark user as interested for the mission
                     $userMission->setStatus(UserMission::INTERESTED)->setInterestedAt(new \DateTime());
                     $em->flush();
                 }
-//TODO when strip ok; lil thing to passe userMission to interested
+                //TODO when strip ok; lil thing to passe userMission to interested
                 return $this->redirectToRoute('mission_view', [
                     'missionId' => $mission->getId()
                 ]);
             case (UserMission::INTERESTED) :
-                throw new NotFoundHttpException($trans->trans('mission.error.interested_twice', [], 'tools'));
+                throw new NotFoundHttpException($trans->trans('error.mission.interested_twice', [], 'tools'));
             default :
                 break;
         };
         throw new NotFoundHttpException($trans->trans('error.forbidden', [], 'tools'));
+    }
+
+    /**
+     * Mark the mission as ShortListed
+     *
+     * @param integer $missionId
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function shortlistAction($missionId)
+    {
+        $trans = $this->get('translator');
+        $em    = $this->getDoctrine()->getManager();
+
+        // Get Check User
+        /** @var \UserBundle\Entity\User $user */
+        if (($user = $this->getUser()) === null) {
+            throw new NotFoundHttpException($trans->trans('error.logged', [], 'tools'));
+        } elseif (!$this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR')) {
+            throw new NotFoundHttpException($trans->trans('error.forbidden', [], 'tools'));
+        }
+
+        // Get Check Mission
+        $missionRepo = $em->getRepository('MissionBundle:Mission');
+        if (!($mission = $missionRepo->findOneBy(['id' => $missionId]))
+            || $mission->getStatus() !== Mission::PUBLISHED
+            || $user->getCompany() !== $mission->getCompany()) {
+            throw new NotFoundHttpException($trans->trans('error.mission.not_found', [], 'tools'));
+        }
+
+        // Get Check Count UserMission
+        $userMissionRepo = $em->getRepository('MissionBundle:UserMission');
+
+        if (!($step = $em->getRepository('MissionBundle:Step')->findOneby([
+            'mission' => $mission, 'status'  => 1]))
+            || !($nextStep = $em->getRepository('MissionBundle:Step')->findOneby([
+                'mission'  => $mission, 'position' => $step->getPosition() + 1]))
+            || count($userMissionRepo->findAllAtLeastThan($mission, UserMission::SHORTLIST)) !== $nextStep->getNbMaxUser()) {
+            throw new NotFoundHttpException($trans->trans('error.mission.not_enough', [], 'tools'));
+        }
+
+        $step->setStatus(0);
+        $nextStep->setStatus(1);
+        $em->flush();
+
+        return $this->redirectToRoute('mission_view', ['missionId' => $missionId]);
     }
 
     /*

@@ -251,6 +251,14 @@ class User extends BaseUser implements ParticipantInterface
     private $businessPractice;
 
     /**
+     * @ORM\Column(name="email_emergency", type="string", length=255, nullable=true)
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email."
+     * )
+     */
+    protected $emergencyEmail;
+
+    /**
      * @var ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="\MissionBundle\Entity\WorkExperience", cascade={"persist"})
@@ -274,14 +282,6 @@ class User extends BaseUser implements ParticipantInterface
     private $userMission;
 
     /**
-     * @ORM\Column(name="emergency_email", type="string", length=255, nullable=true)
-     * @Assert\Email(
-     *     message = "The email '{{ value }}' is not a valid email."
-     * )
-     */
-    protected $emergencyEmail;
-
-    /**
      * @var boolean
      *
      * @ORM\Column(name="remote_work", type="boolean", nullable=false)
@@ -290,6 +290,7 @@ class User extends BaseUser implements ParticipantInterface
 
     /**
      * @var string
+     *
      * @ORM\Column(name="public_id", type="string", nullable=true, unique=true)
      */
     private $publicId;

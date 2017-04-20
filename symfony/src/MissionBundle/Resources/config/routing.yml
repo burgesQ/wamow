@@ -14,6 +14,11 @@ mission_interested:
     defaults:
         _controller: MissionBundle:Mission:interested
 
+mission_shortlist:
+    path:      /mission/shortlist/{missionId}
+    defaults:
+        _controller: MissionBundle:Mission:shortlist
+
 # Mission Generator
 mission_new_step_one:
     path:      /mission/new/1/{missionId}
@@ -51,9 +56,33 @@ mission_delete:
     defaults:
         _controller: MissionBundle:MissionGenerator:delete
 
-# Certifications Autocomplete
+# AJAX Request
 certifications_autocomplete:
     path:            /certifications/autocomplete
     defaults:
         _controller: MissionBundle:Action:certificationsAutocomplete
         methode:     GET
+
+user_mission_add_to_shortlist:
+    path:            /shortlist/add
+    defaults:
+        _controller: MissionBundle:Action:addToShortlist
+        methode:     PUT
+
+user_mission_remove_from_shortlist:
+    path:            /shortlist/remove
+    defaults:
+        _controller: MissionBundle:Action:removeFromShortlist
+        methode:     PUT
+
+user_mission_refuse:
+    path:            /refuse
+    defaults:
+        _controller: MissionBundle:Action:refuseUserMission
+        methode:     PUT
+
+user_mission_notes:
+    path:            /save_notes
+    defaults:
+        _controller: MissionBundle:Action:saveNote
+        methode:     POST

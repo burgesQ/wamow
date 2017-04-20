@@ -19,7 +19,7 @@
     <p>
         {% for mission in missions %}
             <li>
-                {% set advisors = mission.usermission %}
+                {% set advisors = mission.userMission %}
                 {% set interested = 0 %}
                 {% set selected = 0 %}
                 {% set proposal = 0 %}
@@ -40,10 +40,8 @@
                     {% endif %}
                 {% endfor %}
                 {{ 'dashboard.contractor.mission.date' | trans }} {{ mission.creationDate | date("m/d/Y") }}</br>
-                <a href="{{ path('mission_view', {'missionId': mission.id}) }}">{{ mission.title }}</a></br>
+                {{ mission.title }}</br>
                 {{ mission.resume | truncate(20, false, '[...]') }}</br>
-                <a href="{{ path('mission_view', {'missionId': mission.id}) }}">{{ 'dashboard.contractor.mission.showmore' | trans | upper }}</a></br>
-
 
                 {% if mission.status == 1 %}
                     {% if selected == 0 %}

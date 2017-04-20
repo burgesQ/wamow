@@ -22,52 +22,40 @@
         {{ form_widget(form.experienceShaping) }}
         {{ form_widget(form.back) }}
         {{ form_widget(form.submit) }}
-    {{ form_end(form) }}
-</div>
+        {{ form_end(form) }}
+    </div>
 
 {% endblock %}
 {% block javascripts %}
-<script type="text/javascript">
-    jQuery(document).ready(function () {
-        // 160 = nb workExp
-        for (i = 1; i <= 160; i++) {
-            // check each workExp checkbox
-            var $workExperience = $('#app_user_profile_workExperience_' + i);
-            // on change, display/remove a btn AddEdit and a expShap form
-            $workExperience.change(function () {
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            $('[id^="app_user_profile_workExperience_"]').change(function () {
                 if ($(this).is(":checked")) {
                     addExpShapForm($(this).val());
                 } else {
                     removeExpShapForm($(this).val());
                 }
             });
-        }
 
-        // add the AddEdit btn and the expShap form to the page
-        function addExpShapForm(i) {
+            // add the AddEdit btn and the expShap form to the page
+            function addExpShapForm(i) {
+                var $checkbox = $('input#app_user_profile_workExperience_' + i);
+                var $container = $('div#app_user_profile_experienceShaping');
+                var $prototype = $($container.attr('data-prototype')
+                    .replace(/__name__label__/g, '')
+                    .replace(/__name__/g, i));
+                $container.append($prototype);
+                var $btn = '<input type="button" id="add_edit_' + i + '" value="AddEdit">';
+                $checkbox.after($btn);
+            }
 
-            var $checkbox =  $('input#app_user_profile_workExperience_' + i);
-            var $container = $('div#app_user_profile_experienceShaping');
-            var $prototype = $($container.attr('data-prototype')
-                .replace(/__name__label__/g, '')
-                .replace(/__name__/g, i));
-
-            $container.append($prototype);
-
-            var $btn = '<input type="button" id="add_edit_' + i + '" onclick="alertFunc()" value="AddEdit">';
-
-            $checkbox.after($btn);
-        }
-
-        // add the AddEdit btn and the expShap form to the page
-        function removeExpShapForm(i) {
-
-            var $container = $('div#app_user_profile_experienceShaping_' + i);
-            var $btn = $('input#add_edit_' + i);
-            $container.remove();
-            $btn.remove();
-        }
-    });
-
-</script>
+            // add the AddEdit btn and the expShap form to the page
+            function removeExpShapForm(i) {
+                var $container = $('div#app_user_profile_experienceShaping_' + i);
+                var $btn = $('input#add_edit_' + i);
+                $container.remove();
+                $btn.remove();
+            }
+        });
+    </script>
 {% endblock %}
