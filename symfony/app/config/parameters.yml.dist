@@ -6,7 +6,7 @@ parameters:
     # Language
     locale:            fr
 
-    database_host:     localhost
+    database_host:     db
     database_port:     ~
     database_name:     symfony
     database_user:     root

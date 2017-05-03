@@ -2,7 +2,7 @@ version: '2'
 
 services:
     db:
-        image: astaluego/mysql:5.7.13
+        image: mysql
         ports:
             - 3306:3306
         volumes:
@@ -10,8 +10,6 @@ services:
             - "./script:/stack"
         environment:
             MYSQL_ROOT_PASSWORD: root
-        command:
-            - "/stack/localdb-run.sh"
     php:
         build: php7-fpm
         ports:
