@@ -1,0 +1,58 @@
+// Custom template
+
+@font-face {
+    font-family:"icons";
+    src: url("../fonts/icons.eot?c3c545fc930de30f89d91a325134134f");
+    src: url("../fonts/icons.eot?#iefix") format("embedded-opentype"),
+		url("../fonts/icons.woff?c3c545fc930de30f89d91a325134134f") format("woff"),
+		url("../fonts/icons.ttf?c3c545fc930de30f89d91a325134134f") format("truetype"),
+		url("../fonts/icons.svg?c3c545fc930de30f89d91a325134134f#icons") format("svg");
+    font-weight:normal;
+    font-style:normal;
+    }
+
+.icon {
+    font-family:"icons";
+    display:inline-block;
+    font-style:normal;
+    speak:none;
+    -webkit-font-smoothing:antialiased;
+    font-size:1em;
+    line-height:1em;
+    vertical-align:middle;
+    }
+
+// Icons
+.icon--arrow:before { content:"\f101"; }
+.icon--avatar:before { content:"\f102"; }
+.icon--budget:before { content:"\f103"; }
+.icon--business-construction:before { content:"\f104"; }
+.icon--business-finance:before { content:"\f105"; }
+.icon--business-food-beverage:before { content:"\f106"; }
+.icon--business-hotel:before { content:"\f107"; }
+.icon--business-leisure:before { content:"\f108"; }
+.icon--business-manufacturing:before { content:"\f109"; }
+.icon--business-media-telco-entertainment:before { content:"\f10a"; }
+.icon--business-retail:before { content:"\f10b"; }
+.icon--business-sport:before { content:"\f10c"; }
+.icon--business-tourisme:before { content:"\f10d"; }
+.icon--calendar:before { content:"\f10e"; }
+.icon--certification:before { content:"\f10f"; }
+.icon--clock:before { content:"\f110"; }
+.icon--company-large:before { content:"\f111"; }
+.icon--company-medium:before { content:"\f112"; }
+.icon--company-small:before { content:"\f113"; }
+.icon--consultant:before { content:"\f114"; }
+.icon--cross:before { content:"\f115"; }
+.icon--facebook:before { content:"\f116"; }
+.icon--language:before { content:"\f117"; }
+.icon--linkedin:before { content:"\f118"; }
+.icon--locker:before { content:"\f119"; }
+.icon--mail:before { content:"\f11a"; }
+.icon--notes:before { content:"\f11b"; }
+.icon--pen:before { content:"\f11c"; }
+.icon--pointer:before { content:"\f11d"; }
+.icon--star:before { content:"\f11e"; }
+.icon--twitter:before { content:"\f11f"; }
+.icon--typology:before { content:"\f120"; }
+.icon--world:before { content:"\f121"; }

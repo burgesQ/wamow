@@ -1,0 +1,23 @@
+.wmw-progressbar{
+	font-size:0;
+	width:320px;
+	max-width:80%;
+	margin:35px auto 0 auto;
+
+	span{
+		display:inline-block;
+		background:$colorgreyxxlight;
+		width:18%;
+		height:10px;
+		margin:0 2% 0 0;
+		transform:skewX(-20deg);
+
+		&:last-child{
+			margin:0;
+		}
+
+		&.active{
+			background:$colorgreen;
+		}
+	}
+}
