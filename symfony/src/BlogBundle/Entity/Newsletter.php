@@ -81,7 +81,7 @@ class Newsletter
     /**
      * @ORM\OneToMany(
      *   targetEntity="BlogBundle\Entity\Article",
-     *   mappedBy="newLetter"
+     *   mappedBy="newsletter"
      * )
      * @OrderBy({"id" = "ASC"})
      * @var Article[]|Collection
