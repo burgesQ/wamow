@@ -1,0 +1,268 @@
+*{
+	outline:0;
+}
+
+.wmw-button{
+	position:relative;
+	display:inline-block;
+	height:45px;
+	padding:0 35px;
+	line-height:45px;
+	color:white;
+	overflow:hidden;
+	border:none;
+	background:transparent;
+	transition:color .3s;
+	text-decoration:none;
+	font-family:$fontcantarell;
+	font-size:14px;
+	letter-spacing:0.06em;
+	text-transform:uppercase;
+	white-space:nowrap;
+
+	&:before,
+	&:after{
+		content:'';
+		display:block;
+		position:absolute;
+		height:50%;
+		width:125%;
+		background:$colorpurple;
+		transform:skewX(-30deg);
+		transition:background .3s, border .3s;
+	}
+
+	&:before{
+		top:0;
+		left:0;
+		transform-origin:bottom right;
+		border-top:1px solid $colorpurple;
+		border-left:1px solid $colorpurple;
+	}
+
+	&:after{
+		bottom:0;
+		right:0;
+		transform-origin:top right;
+		border-bottom:1px solid $colorpurple;
+		border-right:1px solid $colorpurple;
+	}
+
+	i{
+		display:block;
+		position:absolute;
+		width:1px;
+		height:50%;
+		background:$colorpurple;
+		opacity:1;
+
+		&:first-child{
+			bottom:0; 
+			left:0;
+		}
+
+		&:last-child{
+			top:0; 
+			right:0;
+		}
+	}
+
+	.icon{
+		display:inline-block !important;
+		background:none !important;
+		position:relative !important;
+		vertical-align:baseline !important;
+		font-size:14px;
+		width:auto;
+		height:auto;
+	}
+
+	span{
+		position:relative;
+		z-index:10;
+	}
+
+	&:hover{
+		color:$colorpurple;
+
+		&:before{
+			background:transparent;
+		}
+
+		&:after{
+			background:transparent;
+		}
+	}
+
+	&.wmw-button--border{
+		color:$colorpurple;
+
+		&:before,
+		&:after{
+			background:transparent;
+		}
+
+		&:hover{
+			color:white;
+
+			&:before,
+			&:after{
+				background:$colorpurple;
+			}
+		}
+	}
+
+	&.wmw-button--green{
+
+		&:before,
+		&:after{
+			background-color:$colorgreen;
+			border-color:$colorgreen;
+		}
+
+		i{
+			background:$colorgreen;
+		}
+
+		&:hover{
+			color:$colorgreen;
+
+			&:before,
+			&:after{
+				background:transparent;
+			}
+		}
+
+		&.wmw-button--border{
+			color:$colorgreen;
+
+			&:before,
+			&:after{
+				background:transparent;
+			}
+
+			&:hover{
+				color:white;
+
+				&:before,
+				&:after{
+					background:$colorgreen;
+				}
+			}
+		}
+	}
+
+	&.wmw-button--black{
+
+		&:before,
+		&:after{
+			background-color:$colorgrey;
+			border-color:$colorgrey;
+		}
+
+		i{
+			background:$colorgrey;
+		}
+
+		&:hover{
+			color:$colorgrey;
+
+			&:before,
+			&:after{
+				background:transparent;
+			}
+		}
+
+		&.wmw-button--border{
+			color:$colorgrey;
+
+			&:before,
+			&:after{
+				background:transparent;
+			}
+
+			&:hover{
+				color:white;
+
+				&:before,
+				&:after{
+					background:$colorgrey;
+				}
+			}
+		}
+	}
+
+	&.wmw-button--red{
+
+		&:before,
+		&:after{
+			background-color:$colorred;
+			border-color:$colorred;
+		}
+
+		i{
+			background:$colorred;
+		}
+
+		&:hover{
+			color:$colorred;
+
+			&:before,
+			&:after{
+				background:transparent;
+			}
+		}
+
+		&.wmw-button--border{
+			color:$colorred;
+
+			&:before,
+			&:after{
+				background:transparent;
+			}
+
+			&:hover{
+				color:white;
+
+				&:before,
+				&:after{
+					background:$colorred;
+				}
+			}
+		}
+	}
+
+	&.wmw-button--small{
+		height:25px;
+		padding:0 15px;
+		line-height:26px;
+		font-size:10px;
+
+		.icon{
+			font-size:11px;
+			margin:0 2px;
+		}
+	}
+}
+
+.wmw-button-more{
+	display:inline-block;
+	width:22px;
+	height:22px;
+	border-radius:50%;
+	border:1px solid $colorgreen;
+	color:$colorgreen;
+	text-decoration:none;
+	text-align:center;
+	line-height:19px;
+	font-size:22px;
+	vertical-align:middle;
+	font-family:$fontcantarell;
+	margin:0 10px;
+	transition:background .3s, color .3s;
+
+	&:hover{
+		background:$colorgreen;
+		color:white;
+	}
+}

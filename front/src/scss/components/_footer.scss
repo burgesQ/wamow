@@ -1,0 +1,117 @@
+.wmw-footer{
+	background:white;
+	padding:45px 0;
+	margin:50px 0 0 0;
+	box-shadow:0 0 10px rgba(0,0,0,0.15);
+	text-align:center;
+
+	.wmw-footer-logo{
+		display:inline-block;
+		width:240px;
+
+		img{
+			width:100%;
+			height:auto;
+			display:block;
+		}
+	}
+
+	.wmw-footer-nav{
+		display:block;
+		padding:50px 0;
+
+		a{
+			color:$colorgrey;
+			text-decoration:none;
+			text-transform:uppercase;
+			font-family:$fontcantarell;
+			font-size:12px;
+			letter-spacing:0.06em;
+			display:block;
+		}
+	}
+
+	.wmw-footer-social{
+
+	}
+}
+
+/* ------------------------------------------------------------------------------ */
+/* ----------- MEDIUM SCREENS --------------------------------------------------- */
+/* ------------------------------------------------------------------------------ */
+
+@media screen and (min-width: $screen-md-min){
+
+	.wmw-footer{
+
+		.wmw-footer-logo{
+			vertical-align:middle;
+			width:180px;
+		}
+
+		.wmw-footer-nav{
+			display:inline-block;
+			vertical-align:middle;
+			padding:0;
+			white-space:nowrap;
+			margin:0 50px;
+
+			a{
+				display:inline-block;
+				margin:0 10px 0 0;
+
+				&:after{
+					content: ' /';
+				}
+
+				&:last-child{
+					margin:0;
+				}
+			}
+		}
+
+		.wmw-footer-social{
+			display:inline-block;
+			vertical-align:middle;
+			font-size:20px;
+
+			a{
+				color:$colorpurple;
+				text-decoration:underline;
+				margin:0 20px 0 0;
+			}
+		}
+	}
+}
+
+
+/* ------------------------------------------------------------------------------ */
+/* ----------- XLARGE SCREENS --------------------------------------------------- */
+/* ------------------------------------------------------------------------------ */
+
+@media screen and (min-width: $screen-xl-min){
+
+	.wmw-footer{
+
+		.wmw-footer-logo{
+			width:240px;
+		}
+
+		.wmw-footer-nav{
+			margin:0 80px;
+
+			a{
+				font-size:13px;
+				margin:0 35px 0 0;
+			}
+		}
+
+		.wmw-footer-social{
+			font-size:25px;
+
+			a{
+				margin:0 40px 0 0;
+			}
+		}
+	}
+}
