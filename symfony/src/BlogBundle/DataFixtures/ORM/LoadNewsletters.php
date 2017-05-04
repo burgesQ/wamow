@@ -31,7 +31,7 @@ class LoadNewsletters extends AbstractFixture implements OrderedFixtureInterface
 
         // if nothing was found exit
         if (empty($string) || !($json = json_decode($string))) {
-            exit;
+            return ;
         }
 
         // foreach newsletter
