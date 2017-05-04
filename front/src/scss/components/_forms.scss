@@ -73,7 +73,7 @@ select{
 	font-family:$fontroboto;
 	font-size:14px;
 	color:$colorgreylight;
-	padding:0 15px;
+	padding:0 15px !important;
 
 	&.invalid{
 		border-color:$colorinvalid;
