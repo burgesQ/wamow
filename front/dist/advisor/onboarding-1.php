@@ -30,8 +30,8 @@
 					<label class="wmw-label wmw-label--right col-xs-5" for="wmw-ob-email">E-mail</label>
 				</div>
 
-				<div class="wmw-fieldrow">
-					<select id="wmw-ob-country" name="wmw-ob-country" class="required">
+				<div class="wmw-fieldrow row">
+					<select id="wmw-ob-country" name="wmw-ob-country" class="col-xs-12 col-sm-6 col-md-5 required">
 						<option value="">Country of residence</option>
 						<option value="france">France</option>
 						<option value="germany">Germany</option>
@@ -46,16 +46,21 @@
 					</div>
 				</div>
 
-				<div class="wmw-fieldrow">
-					<select id="wmw-ob-languages" name="wmw-ob-languages">
-						<option>Select your languages</option>
-						<option value="FR">French</option>
-						<option value="EN">English</option>
-						<option value="IT">Italian</option>
-					</select>
-					<a href="#" class="wmw-tag">FR</a>
-					<a href="#" class="wmw-tag">EN</a>
-					<a href="#" class="wmw-tag">IT</a>
+				<div class="wmw-fieldrow wmw-checklistfield row">
+					<button type="button" class="col-xs-12 col-sm-6 col-md-5">Select your languages</button>
+					<div class="wmw-checklistfield-wrapper col-xs-12 col-sm-6 col-md-5">
+						<input type="checkbox" id="language-fr" value="fr" />
+						<label for="language-fr">French</label><br />
+						<input type="checkbox" id="language-en" value="en" />
+						<label for="language-en">English</label><br />
+						<input type="checkbox" id="language-de" value="de" />
+						<label for="language-de">German</label><br />
+						<input type="checkbox" id="language-it" value="it" />
+						<label for="language-it">Italian</label><br />
+						<input type="checkbox" id="language-sp" value="sp" />
+						<label for="language-sp">Spanish</label>
+					</div>
+					<div class="wmw-tags"></div>
 				</div>
 
 				<div class="wmw-uploadfield">

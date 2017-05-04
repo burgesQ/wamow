@@ -252,6 +252,54 @@ input[type=range]::-ms-thumb {
 	}
 }
 
+.wmw-checklistfield{
+	position:relative;
+	z-index:100;
+
+	button{
+		display:inline-block;
+		vertical-align:middle;
+		height:32px;
+		line-height:32px;
+		text-align:center;
+		font-family:$fontroboto;
+		letter-spacing:0.06em;
+		font-size:14px;
+		color:$colorgreylight;
+		border:1px solid $colorgreyxlight;
+		padding:0 15px;
+		background:white;
+		white-space:nowrap;
+	}
+
+	.wmw-checklistfield-wrapper{
+		display:none;
+		position:absolute;
+		left:0; top:31px;
+		background:white;
+		border:1px solid $colorgreyxlight;
+		padding:5px 20px;
+
+		&.wmw-checklistfield-wrapper--active{
+			display:block;
+		}
+
+		label{
+			display:inline-block;
+			vertical-align:middle;
+			color:$colorgrey;
+			font-size:14px;
+			margin:0 0 0 10px;
+		}
+
+		input{
+			display:inline-block;
+			vertical-align:middle;
+			line-height:14px;
+		}
+	}
+}
+
 .wmw-sectionfield{
 	margin:0 0 25px 0;
 	text-align:left;

@@ -1467,6 +1467,39 @@ var Master = {
     			$(this).removeClass('active');
     	}); 
 
+        $('.wmw-checklistfield button').on('click', function(){
+            $(this).parent().find('.wmw-checklistfield-wrapper').toggleClass('wmw-checklistfield-wrapper--active');
+        });
+
+        $('body').on('click', function(){
+            $('.wmw-checklistfield-wrapper').removeClass('wmw-checklistfield-wrapper--active');
+        });
+
+        $('.wmw-checklistfield').on('click', function(e){
+            e.stopPropagation();
+        });
+
+        $('.wmw-checklistfield-wrapper input').on('change', function(){
+            var $wrap = $(this).parent().parent();
+            var id = $(this).attr('id');
+            var val = $(this).val();
+            if($(this).is(':checked')){
+                $wrap.append('<a href="#'+id+'" class="wmw-tag">'+val+'</a>')
+            }else{
+                $wrap.find('a.wmw-tag[href="#'+id+'"]').remove();
+            }
+        });
+
+        $('.wmw-checklistfield').on('click', 'a.wmw-tag', function(e){
+            e.preventDefault();
+            console.log('allo');
+            var id = $(this).attr('href');
+            var $field = $(this).parent().find( id );
+            console.log($field, id);
+            $field.prop('checked', false);
+            $(this).remove();
+        })
+
         $('.wmw-cdashboard-sidebar .sidebar-button').on('click', function(e){
             e.preventDefault();
             $('.wmw-cdashboard-sidebar').toggleClass('wmw-cdashboard-sidebar--active');
