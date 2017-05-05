@@ -245,6 +245,39 @@
 	}
 }
 
+.wmw-simple-button{
+	height:43px;
+	line-height:43px;
+	padding:0 15px;
+	color:white;
+	text-decoration:none;
+	border:1px solid $colorpurple;
+	background:$colorpurple;
+	font-size:20px;
+	color:white;
+	font-family:$fontdincondreg;
+	transition:background .3s, color .3s;
+
+	.icon{
+		font-size:26px;
+	}
+
+	&:hover{
+		background:transparent;
+		color:$colorpurple;
+	}
+
+	&.wmw-simple-button--green{
+		background:$colorgreen;
+		border-color:$colorgreen;
+
+		&:hover{
+			background:transparent;
+			color:$colorgreen;
+		}
+	}
+}
+
 .wmw-button-more{
 	display:inline-block;
 	width:22px;

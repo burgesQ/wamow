@@ -108,6 +108,7 @@ textarea{
 	font-size:14px;
 	color:$colorgreylight;
 	letter-spacing:0.02em;
+	resize: none;
 
 	&.invalid{
 		border-color:$colorinvalid;

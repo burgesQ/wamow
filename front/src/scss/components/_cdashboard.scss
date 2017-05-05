@@ -42,7 +42,7 @@
 			font-size:20px;	
 			text-decoration:none;
 			text-transform:uppercase;
-			padding:0 10px 0 35px;
+			padding:0 12px 0 35px;
 
 			.wmw-button{
 				top:-3px;
@@ -58,6 +58,7 @@
 				border-bottom:22.5px solid transparent;
 				position:absolute;
 				top:0; right:-19px;
+				z-index:100;
 			}
 
 			&:before{
@@ -66,13 +67,9 @@
 				right:-20px;
 			}
 
-			&.current{
+			&.active{
 				color:white;
 				background:$colorgreen;
-			
-				&:before{
-					content:none;
-				}
 
 				&:after{
 					content:'';
@@ -164,6 +161,25 @@
 				.icon{
 					color:$colorred;
 					font-size:35px;
+				}
+			}
+
+			.summary-selected{
+				background:#ebf9f8;
+				color:$colorgreen;
+				padding:12px 25px;
+				font-size:16px;
+				line-height:13px;
+
+				.icon{
+					color:$colorgreen;
+					font-size:35px;
+				}
+
+				small{
+					font-size:9px;
+					color:$colorgreylight;
+					text-transform:uppercase;
 				}
 			}
 		}
@@ -353,6 +369,60 @@
 				padding:60px 60px 220px 400px;
 				position:relative;
 
+				.mail-content-profile{
+					position:absolute;
+					top:60px; left:60px;
+					background:white;
+					border:1px solid $colorgreyxlight;
+					width:280px;
+					height:calc(50% - 60px);
+					padding:30px 20px 0 20px;
+
+					.mail-content-profile-picture{
+						display:block;
+						width:105px;
+						height:105px;
+						border-radius:50%;
+						background-size:cover;
+						margin:0 auto 10px auto;
+					}
+
+					.mail-content-profile-name{
+						font-family:$fontdincondmed;
+						font-size:30px;
+						color:$colorgrey;
+						letter-spacing:0.06em;
+						text-align:center;
+						text-transform:uppercase;
+						margin:0 0 5px 0;
+					}
+
+					.mail-content-profile-coords{
+						font-size:18px;
+						font-weight:bold;
+						color:$colorgreylight;
+						line-height:1.8em;
+						text-align:center;
+
+						a{
+							color:$colorgreylight;
+							text-decoration:none;
+						}
+					}
+
+					.mail-content-profile-buttons{
+						position:absolute;
+						padding:0 25px 25px 25px;
+						bottom:0; left:0;
+						width:100%;
+
+						a{
+							float:left;
+							&:last-child{ float:right; }
+						}
+					}
+				}
+
 				.mail-content-notes{
 					position:absolute;
 					top:60px; left:60px;
@@ -361,6 +431,12 @@
 					padding:60px 0 0 0;
 					width:280px;
 					height:calc(100% - 120px);
+
+					&.mail-content-notes--semi{
+						top:50%;
+						margin-top:60px;
+						height:calc(50% - 120px);
+					}
 
 					strong{
 						font-size:35px;
