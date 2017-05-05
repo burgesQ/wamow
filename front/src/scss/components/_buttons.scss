@@ -246,6 +246,8 @@
 }
 
 .wmw-simple-button{
+	display:inline-block;
+	vertical-align:middle;
 	height:43px;
 	line-height:43px;
 	padding:0 15px;
@@ -257,6 +259,7 @@
 	color:white;
 	font-family:$fontdincondreg;
 	transition:background .3s, color .3s;
+	text-transform:none;
 
 	.icon{
 		font-size:26px;
