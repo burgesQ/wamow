@@ -6,13 +6,8 @@
 
 			<div class="wmw-cdashboard-breadcrumbs">
 				<a href="#" class="breadcrumbs-el active">1. All advisors</a>
-				<span class="breadcrumbs-el">
-					2. Shortlist 
-					<button class="wmw-button wmw-button--black wmw-button--border wmw-button--small">
-						<i></i><span>Proceed to checklist</span><i></i>
-					</button>
-				</span>
-				<span class="breadcrumbs-el">3. Finalist</span>
+				<a href="#" class="breadcrumbs-el active">2. Shortlist</a>
+				<a href="#" class="breadcrumbs-el active">3. Finalist</a>
 			</div>
 		
 			<div class="wmw-cdashboard-header">
@@ -50,9 +45,10 @@
 						<i class="icon icon--world"></i><br />
 						On the site
 					</span>
-					<span class="summary-answer">
-						<i class="icon icon--pen"></i><br />
-						To answer
+					<span class="summary-selected">
+						<i class="icon icon--handshake"></i><br />
+						Selected<br />
+						<small>Mission status</small>
 					</span>
 				</div>
 			</div>
@@ -83,7 +79,20 @@
 
 						<div class="mail-content">
 
-							<div class="mail-content-notes">
+							<div class="mail-content-profile">
+								<div class="mail-content-profile-picture" style="background-image:url(../library/images/_tmp/michael-flanagan-large.jpg);"></div>
+								<div class="mail-content-profile-name">Franck Dellage</div>
+								<div class="mail-content-profile-coords">
+									<a href="mailto:franckdellage@gmail.com">franckdellage@gmail.com</a><br />
+									+33659259562
+								</div>
+								<div class="mail-content-profile-buttons row">
+									<a href="#" class="wmw-simple-button"><i class="icon icon--download"></i> CV</a>
+									<a href="#" class="wmw-simple-button wmw-simple-button--green"><i class="icon icon--download"></i> Proposal</a>
+								</div>
+							</div>
+
+							<div class="mail-content-notes mail-content-notes--semi">
 								<strong>Notes</strong>
 								<textarea></textarea>
 							</div>
