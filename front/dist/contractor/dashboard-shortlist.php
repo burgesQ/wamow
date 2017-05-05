@@ -6,12 +6,7 @@
 
 			<div class="wmw-cdashboard-breadcrumbs">
 				<a href="#" class="breadcrumbs-el active">1. All advisors</a>
-				<span class="breadcrumbs-el">
-					2. Shortlist 
-					<button class="wmw-button wmw-button--black wmw-button--border wmw-button--small">
-						<i></i><span>Proceed to checklist</span><i></i>
-					</button>
-				</span>
+				<a href="#" class="breadcrumbs-el active">2. Shortlist</a>
 				<span class="breadcrumbs-el">3. Finalist</span>
 			</div>
 		
@@ -66,53 +61,31 @@
 
 				<div class="wmw-cdashboard-content row">
 
-					<div class="wmw-cdashboard-element">
-						<div class="element-title">Advisor 1</div>
+					<div class="wmw-cdashboard-element wmw-cdashboard-element--shortlist">
+						<div class="element-title">
+							Albilan François
+							<a href="#" class="wmw-simple-button wmw-simple-button--green"><i class="icon icon--download"></i> Proposal</a>
+							<a href="#" class="element-title-link">Profile</a>
+						</div>
 						<div class="element-content">
 							<div class="element-content-title">Advisor 1</div>
 							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,  occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore. accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.
-							<div class="element-content-bottom">Today, 15h20</div>
-						</div>
-						<div class="element-notes">
-							- Excepteur sint<br />
-							- occaecat cupidatat<br />
-							- non proident, sunt in<br />
-							- culpa qui officia de<br />
-							- serunt mollit anim id<br />
-							- est laborum. Sed ut   
-							   perspiciatis unde<br />
-							- iste natus error sit   
-							   volupta
-						</div>
-						<div class="element-buttons">
-							<button type="button" class="wmw-button wmw-button--red wmw-button--border wmw-button--small">
-								<i></i><span>
-									<i class="icon icon--cross"></i>
-									Refuse
-								</span><i></i>
-							</button>
-							<button type="button" class="wmw-button wmw-button--green wmw-button--border wmw-button--small">
-								<i></i><span>
-									<i class="icon icon--star"></i>
-									Add to shortlist
-								</span><i></i>
-							</button>
-						</div>
-					</div>
-
-					<div class="wmw-cdashboard-element">
-						<div class="element-title">Advisor 2</div>
-						<div class="element-content">
-							<div class="element-content-title">Advisor 1</div>
-							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,  occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore. accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.
-							<div class="element-content-bottom">Today, 15h20</div>
-						</div>
-						<div class="element-notes">
-							<div class="element-notes-empty">
-								Notes<br />
-								<i class="icon icon--notes"></i>
+							<div class="element-content-bottom">
+								Today, 15h20
+								<a href="#"><i class="icon icon--eye"></i> Show</a>
 							</div>
 						</div>
+						<div class="element-notes">
+							- Excepteur sint<br />
+							- occaecat cupidatat<br />
+							- non proident, sunt in<br />
+							- culpa qui officia de<br />
+							- serunt mollit anim id<br />
+							- est laborum. Sed ut   
+							   perspiciatis unde<br />
+							- iste natus error sit   
+							   volupta
+						</div>
 						<div class="element-buttons">
 							<button type="button" class="wmw-button wmw-button--red wmw-button--border wmw-button--small">
 								<i></i><span>
@@ -122,19 +95,27 @@
 							</button>
 							<button type="button" class="wmw-button wmw-button--green wmw-button--border wmw-button--small">
 								<i></i><span>
-									<i class="icon icon--star"></i>
-									Add to shortlist
+									<i class="icon icon--handshake"></i>
+									Contract
 								</span><i></i>
 							</button>
 						</div>
 					</div>
 
-					<div class="wmw-cdashboard-element">
-						<div class="element-title">Advisor 3</div>
-						<div class="element-content">
+					<div class="wmw-cdashboard-element wmw-cdashboard-element--shortlist">
+						<div class="element-title">
+							Jack Turner
+							<a href="#" class="wmw-simple-button wmw-simple-button--green"><i class="icon icon--download"></i> Proposal</a>
+							<a href="#" class="element-title-link">Profile</a>
+						</div>
+						<div class="element-content element-content--newmessage">
 							<div class="element-content-title">Advisor 1</div>
+							<div class="element-content-new">New message</div>
 							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,  occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore. accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.
-							<div class="element-content-bottom">Today, 15h20</div>
+							<div class="element-content-bottom">
+								Today, 15h20
+								<a href="#"><i class="icon icon--eye"></i> Show</a>
+							</div>
 						</div>
 						<div class="element-notes">
 							- Excepteur sint<br />
@@ -156,19 +137,26 @@
 							</button>
 							<button type="button" class="wmw-button wmw-button--green wmw-button--border wmw-button--small">
 								<i></i><span>
-									<i class="icon icon--star"></i>
-									Add to shortlist
+									<i class="icon icon--handshake"></i>
+									Contract
 								</span><i></i>
 							</button>
 						</div>
 					</div>
 
-					<div class="wmw-cdashboard-element">
-						<div class="element-title">Advisor 4</div>
+					<div class="wmw-cdashboard-element wmw-cdashboard-element--shortlist">
+						<div class="element-title">
+							Marie Solame
+							<a href="#" class="wmw-simple-button wmw-simple-button--green"><i class="icon icon--download"></i> Proposal</a>
+							<a href="#" class="element-title-link">Profile</a>
+						</div>
 						<div class="element-content">
 							<div class="element-content-title">Advisor 1</div>
 							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,  occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore. accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.
-							<div class="element-content-bottom">Today, 15h20</div>
+							<div class="element-content-bottom">
+								Today, 15h20
+								<a href="#"><i class="icon icon--eye"></i> Show</a>
+							</div>
 						</div>
 						<div class="element-notes">
 							- Excepteur sint<br />
@@ -190,47 +178,13 @@
 							</button>
 							<button type="button" class="wmw-button wmw-button--green wmw-button--border wmw-button--small">
 								<i></i><span>
-									<i class="icon icon--star"></i>
-									Add to shortlist
+									<i class="icon icon--handshake"></i>
+									Contract
 								</span><i></i>
 							</button>
 						</div>
 					</div>
 
-					<div class="wmw-cdashboard-element">
-						<div class="element-title">Advisor 5</div>
-						<div class="element-content">
-							<div class="element-content-title">Advisor 1</div>
-							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,  occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore. accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.
-							<div class="element-content-bottom">Today, 15h20</div>
-						</div>
-						<div class="element-notes">
-							- Excepteur sint<br />
-							- occaecat cupidatat<br />
-							- non proident, sunt in<br />
-							- culpa qui officia de<br />
-							- serunt mollit anim id<br />
-							- est laborum. Sed ut   
-							   perspiciatis unde<br />
-							- iste natus error sit   
-							   volupta
-						</div>
-						<div class="element-buttons">
-							<button type="button" class="wmw-button wmw-button--red wmw-button--border wmw-button--small">
-								<i></i><span>
-									<i class="icon icon--cross"></i>
-									Refuse
-								</span><i></i>
-							</button>
-							<button type="button" class="wmw-button wmw-button--green wmw-button--border wmw-button--small">
-								<i></i><span>
-									<i class="icon icon--star"></i>
-									Add to shortlist
-								</span><i></i>
-							</button>
-						</div>
-					</div>
-				
 				</div>
 
 				<div class="wmw-cdashboard-sidebar">
