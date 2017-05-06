@@ -2,6 +2,24 @@
 	outline:0;
 }
 
+.wmw-tinylink{
+	font-family:$fontcantarell;
+	font-size:10px;
+	text-transform:uppercase;
+	color:#a2a2a2;
+	text-decoration:none;
+
+	.icon{
+		font-size:14px;
+		vertical-align:middle;
+		margin-top:-3px;
+	}
+
+	&:hover{
+		text-decoration:underline;
+	}
+}
+
 .wmw-button{
 	position:relative;
 	display:inline-block;
@@ -227,6 +245,46 @@
 				&:before,
 				&:after{
 					background:$colorred;
+				}
+			}
+		}
+	}
+
+	&.wmw-button--grey{
+
+		&:before,
+		&:after{
+			background-color:#a2a2a2;
+			border-color:#a2a2a2;
+		}
+
+		i{
+			background:#a2a2a2;
+		}
+
+		&:hover{
+			color:#a2a2a2;
+
+			&:before,
+			&:after{
+				background:transparent;
+			}
+		}
+
+		&.wmw-button--border{
+			color:#a2a2a2;
+
+			&:before,
+			&:after{
+				background:transparent;
+			}
+
+			&:hover{
+				color:white;
+
+				&:before,
+				&:after{
+					background:#a2a2a2;
 				}
 			}
 		}
