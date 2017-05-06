@@ -1,6 +1,6 @@
 .wmw-header{
 	display:block;
-	text-align:center;
+	text-align:left;
 	height:60px;
 	line-height:60px;
 
@@ -9,6 +9,7 @@
 		height:35px;
 		width:auto;
 		vertical-align:middle;
+		margin-left:8.3333333%;
 	
 		img{
 			display:block;
@@ -21,7 +22,7 @@
 		display:block;
 		position:absolute;
 		white-space:nowrap;
-		top: 35px;
+		top: 6px;
 	    right: 8.33333%;
 	    height: auto;
 	    line-height: 1em;
@@ -44,13 +45,19 @@
 
 		.wmw-button{
 			padding:0 20px;
+
+			.name{
+				display:none;
+			}
 		}
 	}
 
 	&.wmw-header--ob{
+		text-align:center;
 
 		.wmw-header-logo{
 			vertical-align:bottom;
+			margin-left:0;
 		}
 	}
 }
@@ -64,9 +71,22 @@
 	.wmw-header{
 		height:120px;
 		line-height:120px;
+		text-align:center;
 
 		.wmw-header-logo{
 			height:45px;
+			margin:0;
+		}
+
+		.wmw-header-profile{
+			top:35px;
+
+			.wmw-button{
+
+				.name{
+					display:inline;
+				}
+			}
 		}
 	}
 }
