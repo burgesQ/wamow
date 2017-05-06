@@ -1,6 +1,6 @@
 /*include /libs/jquery.core.js*/
 /*include /libs/jquery.validval.js*/
-/*include /libs/scrollbars.js*/
+/*include /libs/jquery.scrollbars.js*/
 
 // --------------------- MASTER PART -------------------------- //
 // ------------------------------------------------------------ //
@@ -117,6 +117,10 @@ var Master = {
 
         Master.init_pitch_finder();
         Master.init_mission_overlay();
+
+        $('.wmw-overlay-inner').perfectScrollbar({ suppressScrollX:true });  
+        $('.mail-content-chat').perfectScrollbar({ suppressScrollX:true });  
+        $('.wmw-cdashboard-element .element-notes').perfectScrollbar({ suppressScrollX:true }); 
     },
 
     onload : function(){

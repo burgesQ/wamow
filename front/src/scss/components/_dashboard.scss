@@ -1,0 +1,494 @@
+.wmw-dashboard{
+
+	&:before{
+		content:'';
+		display:block;
+		width:100%;
+		height:3px;
+		background: linear-gradient(to right, $colorpurple, $colorgreen);
+	}
+
+	.wmw-dashboard-sidebar{
+
+		.sidebar-progress{
+			display:block;
+			width:163px;
+			height:163px;
+			background:url(../images/dashboard-profile-circle.png) no-repeat;
+			background-position:0 0;
+			display:flex;
+			align-items:center;
+			justify-content:center;
+			color:$colorgreen;
+			font-family:$fontcantarell;
+			letter-spacing:0.06em;
+			font-size:18px;
+			margin:30px auto;
+		}
+
+		.sidebar-notifications{
+
+			label{
+				position:relative;
+				color:$colorpurple;
+				font-family:$fontcantarell;
+				font-size:10px;
+				line-height:1.2em;
+				letter-spacing:0.06em;
+				text-transform:uppercase;
+				padding-left:35px;
+				display:inline-block;
+				margin:0 10px 0 0;
+
+				.icon{
+					display:block;
+					position:absolute;
+					font-size:23px;
+					top:0; left:0;
+				}
+			}
+
+			.wmw-switchfield{
+				display:inline-block;
+			}
+		}
+
+		.sidebar-text{
+			margin:50px 0 0 0;
+			color:$colorpurple;
+			font-size:15px;
+			line-height:1.4em;
+
+			strong{
+				font-family:$fontcantarell;
+				font-size:13px;
+				text-transform:uppercase;
+				letter-spacing:0.06em;
+				display:block;
+				margin:0 0 20px 0;
+			}
+		}
+	}
+
+	.wmw-dashboard-main{
+		padding:0 0 0 50px;
+
+		.main-title{
+			font-family:$fontdincondreg;
+			letter-spacing:0.06em;
+			font-size:50px;
+			color:$colorpurple;
+			font-weight:normal;
+			margin: 20px 0;
+
+			.icon{
+				font-size:35px;
+				vertical-align:middle;
+				margin:-7px 10px 0 0;
+			}
+		}
+
+		.main-slider{
+			padding:0 30px;
+
+			.wmw-slider-element{
+				padding:0 10px;
+
+				.main-slider-element{
+					border:1px solid $colorgreyxlight;
+					padding:20px;
+					height:410px;
+					position:relative;
+				}
+
+				.main-slider-date{
+					font-family:$fontcantarell;
+					font-size:13px;
+					color:#a2a2a2;
+					margin:0 0 5px 0;
+					letter-spacing:0;
+				}
+
+				.main-slider-title{
+					font-family:$fontdincondreg;
+					font-size:24px;
+					letter-spacing:0.06em;
+					line-height:1em;
+					color:$colorgreen;
+					margin:0 0 10px 0;
+				}
+
+				.main-slider-desc{
+					font-family:$fontcantarell;
+					font-size:15px;
+					color:$colorgrey;
+					line-height:1.2em;
+					margin-bottom:20px;
+					letter-spacing:0;
+				}
+
+				.main-slider-price{
+					text-align:center;
+					font-size:20px;
+					font-family:$fontcantarell;
+					color:$colorgrey;
+
+					strong{
+						font-size:12px;
+						font-weight:normal;
+						color:$colorgreylight;
+						text-transform:uppercase;
+						display:block;
+						margin-bottom:0;
+					}
+
+					small{
+						font-size:12px;
+						color:$colorgreylight;
+						display:block;
+						margin-top:0;
+					}
+				}
+
+				.main-slider-infos{
+					font-size:12px;
+					color:#a2a2a2;
+					margin-top:15px;
+
+					.icon{
+						font-size:14px;
+						margin-top:-3px;
+					}
+
+					span{
+						margin-right:10px;
+					}
+				}
+
+				.main-slider-nopitch{
+					margin-top:60px;
+					padding:70px 0 0 0;
+					background:url(../images/dashboard-nopitch.png) no-repeat top center;
+					font-family:$fontcantarell;
+					font-size:30px;
+					color:#a2a2a2;
+					text-align:center;
+
+					small{
+						display:block;
+						font-family:$fontroboto;
+						font-size:20px;
+					}
+				}
+
+				.main-slider-advice{
+					display:block;
+					position:absolute;
+					bottom:0; left:0;
+					padding:20px;
+					width:100%;
+					color:#a2a2a2;
+				}
+
+				.wmw-button{
+					position:absolute;
+					bottom:20px; left:20px;
+				}
+			}
+		}
+
+		.main-missions{
+
+			.main-missions-el{
+				position:relative;
+				display:flex;
+				align-items:center;
+				border:1px solid $colorgreyxlight;
+				border-right:none;
+				margin:0 0 25px 0;
+
+				.main-missions-el-content{
+					padding:20px;
+					border-right:1px solid $colorgreyxlight;
+
+					.content-date{
+						font-family:$fontcantarell;
+						font-size:13px;
+						color:#a2a2a2;
+						margin:0 0 5px 0;
+						letter-spacing:0;
+					}
+
+					.content-title{
+						font-family:$fontdincondreg;
+						font-size:24px;
+						letter-spacing:0.06em;
+						line-height:1em;
+						color:$colorpurple;
+						margin:0 0 10px 0;
+					}
+
+					.content-desc{
+						font-family:$fontcantarell;
+						font-size:15px;
+						color:$colorgrey;
+						line-height:1.2em;
+						margin-bottom:20px;
+						letter-spacing:0;
+					}
+
+					.content-delete{
+						position:absolute;
+						bottom:35px;
+						right:20px;
+					}
+				}
+
+				.main-missions-el-price{
+					text-align:center;
+					font-size:32px;
+					font-family:$fontcantarell;
+					color:$colorgrey;
+
+					strong{
+						font-size:16px;
+						font-weight:normal;
+						color:$colorgreylight;
+						text-transform:uppercase;
+						display:block;
+						margin-bottom:20px;
+					}
+
+					small{
+						font-size:16px;
+						color:$colorgreylight;
+						display:block;
+						margin-top:20px;
+					}
+				}
+
+				.main-missions-el-infos{
+					position:absolute;
+					height:100%;
+					top:0; right:0;
+					border-left:1px solid $colorgreyxlight;
+
+					.infos-el{
+						display:flex;
+						align-items:center;
+						justify-content:center;
+						height:50%;
+						position:relative;
+						font-size:14px;
+						line-height:13px;
+						color:$colorgreylight;
+						text-align:center;
+						padding:0 10px;
+						border:1px solid $colorgreyxlight;
+						border-top:none;
+						border-left:none;
+
+						.icon{
+							font-size:40px;
+							margin-bottom:5px;
+							color:#a2a2a2;
+						}
+
+						a{
+							display:block;
+							position:absolute;
+							bottom:0; left:0;
+							width:100%;
+							text-align:center;
+							padding:4px 0;
+							text-decoration:underline;
+							font-family:$fontcantarell;
+							font-size:10px;
+							color:$colorgreylight;
+							letter-spacing:0;
+						}
+
+						&.infos-el--status{
+							background:#eee9fa;
+
+							.icon,
+							.status{
+								color:$colorpurple;
+							}
+
+							.status{
+								font-weight:bold;
+							}
+
+							small{
+								font-size:9px;
+								text-transform:uppercase;
+								color:$colorgrey;
+							}
+						}
+
+						&:nth-child(3),
+						&:last-child{
+							border-bottom:none;
+						}
+					}
+				}
+
+				&.main-missions-el--toanswer{
+
+					.main-missions-el-content{
+
+						.content-title{
+							color:$colorred;
+						}
+					}
+
+					.main-missions-el-infos{
+
+						.infos-el{
+
+							&.infos-el--status{
+								background:#fdf0ee;
+
+								.icon,
+								.status{
+									color:$colorred;
+								}
+
+								a{
+									background:$colorred;
+									color:white;
+								}
+							}
+						}
+					}
+				}
+
+				&.main-missions-el--waiting{
+
+					.main-missions-el-content{
+
+						.content-title{
+							color:#a2a2a2;
+						}
+					}
+
+					.main-missions-el-infos{
+
+						.infos-el{
+
+							a{
+								background:#f6f6f6;
+								color:$colorgrey;
+							}
+
+							&.infos-el--status{
+								background:#f6f6f6;
+
+								.icon,
+								.status{
+									color:#a2a2a2;
+								}
+							}
+						}
+					}
+				}
+
+				&.main-missions-el--selected{
+
+					.main-missions-el-content{
+
+						.content-title{
+							color:$colorgreen;
+						}
+					}
+
+					.main-missions-el-infos{
+
+						.infos-el{
+
+							a{
+								background:transparent;
+								color:$colorgrey;
+							}
+
+							&.infos-el--status{
+								background:#ebf9f8;
+
+								.icon,
+								.status{
+									color:$colorgreen;
+								}
+							}
+						}
+					}
+				}
+
+				&.main-missions-el--closed{
+
+					.main-missions-el-content{
+						padding-right:200px;
+						border-right:none;
+
+						.content-title{
+							color:#a2a2a2;
+						}
+
+						.content-links{
+							float:right;
+							white-space:nowrap;
+							position:absolute;
+							right:20px;
+							top:25px;
+
+							a{
+								position:relative;
+								bottom:auto;
+								right:auto;
+								margin-left:10px;
+							}
+						}
+					}
+
+					.main-missions-el-infos{
+
+						.infos-el{
+							height:100%;
+
+							a{
+								background:transparent;
+								color:$colorgrey;
+							}
+
+							&.infos-el--status{
+								background:transparent;
+								border-bottom:none;
+
+								.icon,
+								.status{
+									color:#a2a2a2;
+								}
+							}
+						}
+					}
+				}
+			}
+
+			.main-missions-more{
+				font-size:20px;
+				text-transform:uppercase;
+				color:#a2a2a2;
+				text-decoration:underline;
+				margin:10px 0 30px 0;
+
+				.icon{
+					margin:-3px 0 0 5px;
+				}
+
+				&:hover{
+					text-decoration:none;
+				}
+			}
+		}
+	}
+}

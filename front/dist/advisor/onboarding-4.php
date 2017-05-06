@@ -88,7 +88,7 @@
 		</form>
 
 		<form class="wmw-overlay" id="wmw-overlay-ob-4">
-			<div class="wmw-overlay-inner col-xs-10 col-md-6 col-xl-4" data-simplebar>
+			<div class="wmw-overlay-inner col-xs-10 col-md-6 col-xl-4">
 				<div class="wmw-overlay-title">Project Management Office</div>
 				<div class="wmw-overlay-content">
 					<div class="row">
