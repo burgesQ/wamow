@@ -2,7 +2,7 @@
 
 		<div class="wmw-dashboard col-xs-10 col-xs-offset-1 row">
 			
-			<div class="wmw-dashboard-sidebar col-xs-2">
+			<div class="wmw-dashboard-sidebar col-xs-12 col-lg-2">
 
 				<div class="sidebar-progress">
 					Profil<br />
@@ -27,14 +27,14 @@
 
 			</div>
 
-			<div class="wmw-dashboard-main col-xs-10">
+			<div class="wmw-dashboard-main col-xs-12 col-lg-10">
 
 				<h2 class="main-title"><i class="icon icon--star"></i>You may be interested in...</h2>
 
 				<div class="main-slider wmw-slider">
 					<div class="wmw-slider-inner row">
 						
-						<div class="wmw-slider-element col-xs-4">
+						<div class="wmw-slider-element wmw-slider-element--active col-xs-12 col-md-4">
 							<div class="main-slider-element">
 								<div class="main-slider-date">Pitched at 26/12/2015</div>
 								<div class="main-slider-title">Consultant(e) in collaborative innovation management</div>
@@ -56,7 +56,7 @@
 							</div>
 						</div>
 
-						<div class="wmw-slider-element col-xs-8">
+						<div class="wmw-slider-element wmw-slider-element--special col-xs-12 col-md-8">
 							<div class="main-slider-element">
 								<div class="main-slider-nopitch">
 									No other pitch yet
@@ -80,7 +80,7 @@
 				<div class="main-missions">
 
 					<div class="main-missions-el main-missions-el--interested row">
-						<div class="main-missions-el-content col-xs-6">
+						<div class="main-missions-el-content col-xs-12 col-md-6">
 							<div class="content-date">Pitched at 26/12/2015</div>
 							<div class="content-title">
 								Consultant(e) in collaborative innovation management
@@ -96,14 +96,14 @@
 								<i class="icon icon--trashbin"></i> Delete
 							</a>
 						</div>
-						<div class="main-missions-el-price col-xs-3">
+						<div class="main-missions-el-price col-xs-12 col-md-3">
 							<span>
 								<strong>RETAIL</strong>
 								$15,000
 								<small>Sales &amp; Business Developement</small>
 							</span>
 						</div>
-						<div class="main-missions-el-infos col-xs-3 row">
+						<div class="main-missions-el-infos col-xs-12 col-md-3 row">
 							<span class="infos-el col-xs-6">
 								<span>
 									<i class="icon icon--clock"></i><br />4 days left
@@ -130,7 +130,7 @@
 					</div>
 
 					<div class="main-missions-el main-missions-el--toanswer row">
-						<div class="main-missions-el-content col-xs-6">
+						<div class="main-missions-el-content col-xs-12 col-md-6">
 							<div class="content-date">Pitched at 26/12/2015</div>
 							<div class="content-title">
 								Consultant(e) in collaborative innovation management
@@ -146,12 +146,12 @@
 								<i class="icon icon--trashbin"></i> Delete
 							</a>
 						</div>
-						<div class="main-missions-el-price col-xs-3">
+						<div class="main-missions-el-price col-xs-12 col-md-3">
 							<strong>RETAIL</strong>
 							$15,000
 							<small>Sales &amp; Business Developement</small>
 						</div>
-						<div class="main-missions-el-infos col-xs-3 row">
+						<div class="main-missions-el-infos col-xs-12 col-md-3 row">
 							<span class="infos-el col-xs-6">
 								<span>
 									<i class="icon icon--clock"></i><br />4 days left
@@ -179,7 +179,7 @@
 					</div>
 
 					<div class="main-missions-el main-missions-el--waiting row">
-						<div class="main-missions-el-content col-xs-6">
+						<div class="main-missions-el-content col-xs-12 col-md-6">
 							<div class="content-date">Pitched at 26/12/2015</div>
 							<div class="content-title">
 								Consultant(e) in collaborative innovation management
@@ -195,12 +195,12 @@
 								<i class="icon icon--trashbin"></i> Delete
 							</a>
 						</div>
-						<div class="main-missions-el-price col-xs-3">
+						<div class="main-missions-el-price col-xs-12 col-md-3">
 							<strong>Finance</strong>
 							$15,000
 							<small>Sales &amp; Business Developement</small>
 						</div>
-						<div class="main-missions-el-infos col-xs-3 row">
+						<div class="main-missions-el-infos col-xs-12 col-md-3 row">
 							<span class="infos-el col-xs-6">
 								<span>
 									<i class="icon icon--clock"></i><br />4 days left
@@ -228,7 +228,7 @@
 					</div>
 
 					<div class="main-missions-el main-missions-el--selected row">
-						<div class="main-missions-el-content col-xs-6">
+						<div class="main-missions-el-content col-xs-12 col-md-6">
 							<div class="content-date">Pitched at 26/12/2015</div>
 							<div class="content-title">
 								Consultant(e) in collaborative innovation management
@@ -244,12 +244,12 @@
 								<i class="icon icon--trashbin"></i> Delete
 							</a>
 						</div>
-						<div class="main-missions-el-price col-xs-3">
+						<div class="main-missions-el-price col-xs-12 col-md-3">
 							<strong>Tourism</strong>
 							$15,000
 							<small>Sales &amp; Business Developement</small>
 						</div>
-						<div class="main-missions-el-infos col-xs-3 row">
+						<div class="main-missions-el-infos col-xs-12 col-md-3 row">
 							<span class="infos-el col-xs-6">
 								<span>
 									<i class="icon icon--clock"></i><br />4 days left
@@ -278,7 +278,7 @@
 					</div>
 
 					<div class="main-missions-el main-missions-el--closed row">
-						<div class="main-missions-el-content col-xs-10">
+						<div class="main-missions-el-content col-xs-12 col-md-10">
 							<div class="content-title">
 								Consultant(e) in collaborative innovation management
 							</div>
@@ -291,7 +291,7 @@
 								</a>
 							</div>
 						</div>
-						<div class="main-missions-el-infos col-xs-2">
+						<div class="main-missions-el-infos col-xs-12 col-md-2">
 							<span class="infos-el infos-el--status">
 								<span>
 									<small>Mission status</small><br />
