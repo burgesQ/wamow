@@ -1,4 +1,4 @@
-<?php include "inc/header-onboarding.inc.php"; ?>
+<?php include "inc/header-index.inc.php"; ?>
 
 		<div class="col-xs-10 col-xs-offset-1" style="text-align:center;">
 
@@ -46,4 +46,4 @@
 
 		</div>
 
-<?php include "inc/footer.inc.php"; ?>
+<?php include "inc/footer-index.inc.php"; ?>
