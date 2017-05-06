@@ -487,10 +487,17 @@
 
 				.wmw-onboard-businesses{
 
+					&:after{
+						content:'';
+						display:block;
+						clear:both;
+					}
+
 					a{
 						width:18.3%;
 						margin:1% 2% 1% 0;
-					
+						float:left;
+
 						&:nth-child(9),
 						&:nth-child(19){
 							margin-right:0;
