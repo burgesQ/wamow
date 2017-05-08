@@ -144,6 +144,15 @@
 						<a href="#" class="wmw-button-more">+</a>
 					</div>
 
+					<div class="wmw-fieldrow row">
+						<label for="wmw-pitch-experience" class="wmw-label wmw-label--topmobile col-xs-10 col-sm-5">Valuable work experience</label>
+						<select id="wmw-pitch-experience" name="languages[]" class="col-xs-10 col-md-6 required">
+							<option value="1">Choice 1</option>
+							<option value="2">Choice 2</option>
+							<option value="3">Choice 3</option>
+						</select>
+					</div>
+
 				</div>
 
 				<div class="wmw-onboard-price">
