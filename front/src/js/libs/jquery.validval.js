@@ -1023,10 +1023,14 @@
 			'onValid'		: function()
 			{
 				$(this).add( $(this).parent() ).removeClass( 'invalid' );
+				if($(this).hasClass('vv-gparent'))
+					$(this).add( $(this).parent().parent() ).removeClass( 'gp-invalid' );
 			},
 			'onInvalid'		: function()
 			{
 				$(this).add( $(this).parent() ).addClass( 'invalid' );
+				if($(this).hasClass('vv-gparent'))
+					$(this).add( $(this).parent().parent() ).addClass( 'gp-invalid' );
 			}
 		},
 		'form'	: {

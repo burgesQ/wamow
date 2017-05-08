@@ -65,16 +65,8 @@ var Master = {
             $val.val( $(this).val() );
         });
 
-    	$('.wmw-checklinks a').on('click', function(e){
-    		e.preventDefault();
-    		
-    		var $field = $(this).next('input');
-    		$field.trigger( 'click' );
-
-    		if($field.is(':checked'))
-    			$(this).addClass('active');
-    		else
-    			$(this).removeClass('active');
+    	$('.wmw-iconfield input').on('change', function(e){
+    		console.log('yo');
     	}); 
 
         $('.wmw-checklistfield button').on('click', function(){

@@ -59,6 +59,7 @@ input[type="password"]{
 	color:$colorgreylight;
 	//float:none !important;
 	font-size:14px;
+	transition:border .3s; 
 
 	&.invalid{
 		border-color:$colorinvalid;
@@ -73,7 +74,8 @@ select{
 	font-family:$fontroboto;
 	font-size:14px;
 	color:$colorgreylight;
-	padding:0 15px !important;
+	padding:0 0 0 15px !important;
+	transition:border .3s; 
 
 	&.invalid{
 		border-color:$colorinvalid;
@@ -447,7 +449,7 @@ input[type=range]::-ms-thumb {
 	}
 }
 
-.wmw-switchfield.invalid{
+.gp-invalid .wmw-switchfield.invalid{
 
 	input[type=checkbox] + label,
 	input[type=radio] +label{
@@ -462,6 +464,93 @@ input[type=range]::-ms-thumb {
 	}
 }
 
+.wmw-iconfield{
+	padding:8px 6px;
+	height:115px;
+	position:relative;
+
+	label{
+		display:flex !important;
+		position:relative;
+		width:100%;
+		height:100%;
+		text-align:center;
+		text-decoration:none;
+		align-items:center;
+		color:$colorpurple;
+		border:1px solid $colorgreyxlight;
+		box-shadow:0 0 5px rgba(0,0,0,0.1);
+		transition:color .3s, background .3s, border .3s;
+		cursor:pointer;
+		font-family:$fontroboto;
+		font-size:14px;
+		line-height:1.1em;
+		display:block;
+		padding:0 15px;
+
+		span{
+			display:block;
+			width:100%;
+		}
+
+		.icon{
+			font-size:40px;
+			margin:0 0 12px 0;
+		}
+
+		&:hover{
+			color:white;
+			background:$colorgreen;
+		}
+	}
+
+	&.wmw-iconfield--small{
+		height:90px;
+		padding:5px;
+
+		label{
+			color:$colorgreylight;
+			border:1px solid $colorgreyxlight;
+			box-shadow:none;
+			font-size:10px;
+			line-height:1em;
+			text-transform:uppercase;
+			font-weight:bold;
+			padding:0 10px;
+
+			.icon{
+				font-size:25px;
+				margin:0 0 5px 0;
+				font-weight:normal;
+			}
+
+			&:hover{
+				color:white;
+				background:$colorgreen;
+			}
+		}
+	}
+
+	input[type=checkbox],
+	input[type=radio]{
+		width:0;
+		height:0;
+		position:absolute;
+		visibility:hidden;
+	}
+
+	input[type=checkbox]:checked + label,
+	input[type=radio]:checked + label{	
+		color:white;
+		background:$colorgreen;
+	}
+}
+
+.gp-invalid .wmw-iconfield input[type=checkbox].invalid + label,
+.gp-invalid .wmw-iconfield input[type=radio].invalid + label{	
+	border-color:$colorinvalid;
+}
+
 
 /* ------------------------------------------------------------------------------ */
 /* ----------- MEDIUM SCREENS --------------------------------------------------- */
@@ -474,6 +563,22 @@ input[type=range]::-ms-thumb {
 		&.wmw-label--topmobile{
 			border:1px solid $colorgreyxlight;
 			border-right:none;
+		}
+	}
+
+	.wmw-iconfield{
+
+		&.wmw-iconfield--small{
+
+			label{
+				font-size:11px;
+				padding:0 12px;
+
+				.icon{
+					font-size:30px;
+					margin:0 0 8px 0;
+				}
+			}
 		}
 	}
 }
