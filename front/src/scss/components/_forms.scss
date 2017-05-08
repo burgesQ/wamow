@@ -449,10 +449,10 @@ input[type=range]::-ms-thumb {
 	}
 }
 
-.gp-invalid .wmw-switchfield.invalid{
+.ggp-invalid .wmw-switchfield{
 
-	input[type=checkbox] + label,
-	input[type=radio] +label{
+	input[type=checkbox].invalid + label,
+	input[type=radio].invalid +label{
 
 		&:before{
 			background:$colorinvalid;

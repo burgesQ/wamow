@@ -1029,13 +1029,17 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 			{
 				$(this).add( $(this).parent() ).removeClass( 'invalid' );
 				if($(this).hasClass('vv-gparent'))
-					$(this).add( $(this).parent().parent() ).removeClass( 'gp-invalid' );
+					$(this).parent().parent().removeClass( 'gp-invalid' );
+				if($(this).hasClass('vv-ggparent'))
+					$(this).parent().parent().parent().removeClass( 'ggp-invalid' );
 			},
 			'onInvalid'		: function()
 			{
 				$(this).add( $(this).parent() ).addClass( 'invalid' );
 				if($(this).hasClass('vv-gparent'))
-					$(this).add( $(this).parent().parent() ).addClass( 'gp-invalid' );
+					$(this).parent().parent().addClass( 'gp-invalid' );
+				if($(this).hasClass('vv-ggparent'))
+					$(this).parent().parent().parent().addClass( 'ggp-invalid' );
 			}
 		},
 		'form'	: {
@@ -3155,7 +3159,7 @@ var Master = {
             var val =  $('.wmw-onboard-switches-el[data-num='+num+'] input[type=hidden]').val();
 
             if(val == '')
-                $('.wmw-onboard-switches-el[data-num='+num+'] input[type=checkbox]').trigger('click');
+                $('.wmw-onboard-switches-el[data-num='+num+'] input[type=checkbox]').trigger('click').removeClass('invalid');
 
             Master.close_mission_overlay();
         });

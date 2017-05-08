@@ -11,7 +11,7 @@
 
 				<div class="wmw-onboard-businesses row">
 
-					<div class="wmw-iconfield">
+					<div class="wmw-iconfield col-xs-6 col-sm-4">
 						<input type="checkbox" name="businesses[]" id="business-1" class="requiredgroup:businesses vv-gparent" />
 						<label for="business-1">
 							<span>
@@ -20,7 +20,7 @@
 							</span>
 						</label>
 					</div>
-					<div class="wmw-iconfield">
+					<div class="wmw-iconfield col-xs-6 col-sm-4">
 						<input type="checkbox" name="businesses[]" id="business-2" class="requiredgroup:businesses vv-gparent" />
 						<label for="business-2">
 							<span>
@@ -29,7 +29,7 @@
 							</span>
 						</label>
 					</div>
-					<div class="wmw-iconfield">
+					<div class="wmw-iconfield col-xs-6 col-sm-4">
 						<input type="checkbox" name="businesses[]" id="business-3" class="requiredgroup:businesses vv-gparent" />
 						<label for="business-3">
 							<span>
@@ -38,7 +38,7 @@
 							</span>
 						</label>
 					</div>
-					<div class="wmw-iconfield">
+					<div class="wmw-iconfield col-xs-6 col-sm-4">
 						<input type="checkbox" name="businesses[]" id="business-4" class="requiredgroup:businesses vv-gparent" />
 						<label for="business-4">
 							<span>
@@ -47,7 +47,7 @@
 							</span>
 						</label>
 					</div>
-					<div class="wmw-iconfield">
+					<div class="wmw-iconfield col-xs-6 col-sm-4">
 						<input type="checkbox" name="businesses[]" id="business-5" class="requiredgroup:businesses vv-gparent" />
 						<label for="business-5">
 							<span>
@@ -56,7 +56,7 @@
 							</span>
 						</label>
 					</div>
-					<div class="wmw-iconfield">
+					<div class="wmw-iconfield col-xs-6 col-sm-4">
 						<input type="checkbox" name="businesses[]" id="business-6" class="requiredgroup:businesses vv-gparent" />
 						<label for="business-6">
 							<span>
@@ -65,7 +65,7 @@
 							</span>
 						</label>
 					</div>
-					<div class="wmw-iconfield">
+					<div class="wmw-iconfield col-xs-6 col-sm-4">
 						<input type="checkbox" name="businesses[]" id="business-7" class="requiredgroup:businesses vv-gparent" />
 						<label for="business-7">
 							<span>
@@ -74,7 +74,7 @@
 							</span>
 						</label>
 					</div>
-					<div class="wmw-iconfield">
+					<div class="wmw-iconfield col-xs-6 col-sm-4">
 						<input type="checkbox" name="businesses[]" id="business-8" class="requiredgroup:businesses vv-gparent" />
 						<label for="business-8">
 							<span>
@@ -83,7 +83,7 @@
 							</span>
 						</label>
 					</div>
-					<div class="wmw-iconfield">
+					<div class="wmw-iconfield col-xs-6 col-sm-4">
 						<input type="checkbox" name="businesses[]" id="business-9" class="requiredgroup:businesses vv-gparent" />
 						<label for="business-9">
 							<span>
@@ -92,7 +92,7 @@
 							</span>
 						</label>
 					</div>
-					<div class="wmw-iconfield">
+					<div class="wmw-iconfield col-xs-6 col-sm-4">
 						<input type="checkbox" name="businesses[]" id="business-10" class="requiredgroup:businesses vv-gparent" />
 						<label for="business-10">
 							<span>
