@@ -14,130 +14,132 @@
 					<div class="wmw-onboard-domains row">
 						<div class="wmw-onboard-domains-col col-xs-12 col-sm-6">
 							<div class="wmw-switchfield wmw-switchfield--small">
-								<input type="checkbox" id="wmw-pitch-domain-1" />
+								<input type="checkbox" id="wmw-pitch-domain-1" class="requiredgroup:domains vv-ggparent" />
 								<label for="wmw-pitch-domain-1">Conseil en stratégie</label>
 							</div>
 							<div class="wmw-onboard-domains-title">Conseil en SI</div>
 							<div class="wmw-onboard-domains-subs">
 								<div class="wmw-switchfield wmw-switchfield--small">
-									<input type="checkbox" id="wmw-pitch-domain-2" />
+									<input type="checkbox" id="wmw-pitch-domain-2" class="requiredgroup:domains vv-ggparent" />
 									<label for="wmw-pitch-domain-2">en CSP</label>
 								</div>
 								<div class="wmw-switchfield wmw-switchfield--small">
-									<input type="checkbox" id="wmw-pitch-domain-3" />
+									<input type="checkbox" id="wmw-pitch-domain-3" class="requiredgroup:domains vv-ggparent" />
 									<label for="wmw-pitch-domain-3">en MOA</label>
 								</div>
 								<div class="wmw-switchfield wmw-switchfield--small">
-									<input type="checkbox" id="wmw-pitch-domain-4" />
+									<input type="checkbox" id="wmw-pitch-domain-4" class="requiredgroup:domains vv-ggparent" />
 									<label for="wmw-pitch-domain-4">en MOE</label>
 								</div>
 								<div class="wmw-switchfield wmw-switchfield--small">
-									<input type="checkbox" id="wmw-pitch-domain-5" />
+									<input type="checkbox" id="wmw-pitch-domain-5" class="requiredgroup:domains vv-ggparent" />
 									<label for="wmw-pitch-domain-5">en TMA</label>
 								</div>
 								<div class="wmw-switchfield wmw-switchfield--small">
-									<input type="checkbox" id="wmw-pitch-domain-6" />
+									<input type="checkbox" id="wmw-pitch-domain-6" class="requiredgroup:domains vv-ggparent" />
 									<label for="wmw-pitch-domain-6">en infrastructure</label>
 								</div>
 								<div class="wmw-switchfield wmw-switchfield--small">
-									<input type="checkbox" id="wmw-pitch-domain-7" />
+									<input type="checkbox" id="wmw-pitch-domain-7" class="requiredgroup:domains vv-ggparent" />
 									<label for="wmw-pitch-domain-7">en migration</label>
 								</div>
 								<div class="wmw-switchfield wmw-switchfield--small">
-									<input type="checkbox" id="wmw-pitch-domain-8" />
+									<input type="checkbox" id="wmw-pitch-domain-8" class="requiredgroup:domains vv-ggparent" />
 									<label for="wmw-pitch-domain-8">en implémentation</label>
 								</div>
 							</div>
 							<div class="wmw-onboard-domains-title">Conseil en organisation</div>
 							<div class="wmw-onboard-domains-subs">
 								<div class="wmw-switchfield wmw-switchfield--small">
-									<input type="checkbox" id="wmw-pitch-domain-9" />
+									<input type="checkbox" id="wmw-pitch-domain-9" class="requiredgroup:domains vv-ggparent" />
 									<label for="wmw-pitch-domain-9">opérationelle</label>
 								</div>
 								<div class="wmw-switchfield wmw-switchfield--small">
-									<input type="checkbox" id="wmw-pitch-domain-10" />
+									<input type="checkbox" id="wmw-pitch-domain-10" class="requiredgroup:domains vv-ggparent" />
 									<label for="wmw-pitch-domain-10">en transformation</label>
 								</div>
 								<div class="wmw-switchfield wmw-switchfield--small">
-									<input type="checkbox" id="wmw-pitch-domain-11" />
+									<input type="checkbox" id="wmw-pitch-domain-11" class="requiredgroup:domains vv-ggparent" />
 									<label for="wmw-pitch-domain-11">en reeingeneering</label>
 								</div>
 								<div class="wmw-switchfield wmw-switchfield--small">
-									<input type="checkbox" id="wmw-pitch-domain-12" />
+									<input type="checkbox" id="wmw-pitch-domain-12" class="requiredgroup:domains vv-ggparent" />
 									<label for="wmw-pitch-domain-12">en change / accompagnement du changement</label>
 								</div>
 							</div>
 							<div class="wmw-switchfield wmw-switchfield--small">
-								<input type="checkbox" id="wmw-pitch-domain-13" />
+								<input type="checkbox" id="wmw-pitch-domain-13" class="requiredgroup:domains vv-ggparent" />
 								<label for="wmw-pitch-domain-13">Intérim Management</label>
 							</div>
 						</div>
 						<div class="wmw-onboard-domains-col col-xs-12 col-sm-6">
 							<div class="wmw-switchfield wmw-switchfield--small">
-								<input type="checkbox" id="wmw-pitch-domain-14" />
+								<input type="checkbox" id="wmw-pitch-domain-14" class="requiredgroup:domains vv-ggparent" />
 								<label for="wmw-pitch-domain-14">Conseil en recrutement / Chasses de Têtes</label>
 							</div>
 							<div class="wmw-switchfield wmw-switchfield--small">
-								<input type="checkbox" id="wmw-pitch-domain-15" />
+								<input type="checkbox" id="wmw-pitch-domain-15" class="requiredgroup:domains vv-ggparent" />
 								<label for="wmw-pitch-domain-15">Conseil en change / accompagnement du changement</label>
 							</div>
 							<div class="wmw-switchfield wmw-switchfield--small">
-								<input type="checkbox" id="wmw-pitch-domain-16" />
+								<input type="checkbox" id="wmw-pitch-domain-16" class="requiredgroup:domains vv-ggparent" />
 								<label for="wmw-pitch-domain-16">Coaching</label>
 							</div>
 							<div class="wmw-switchfield wmw-switchfield--small">
-								<input type="checkbox" id="wmw-pitch-domain-17" />
+								<input type="checkbox" id="wmw-pitch-domain-17" class="requiredgroup:domains vv-ggparent" />
 								<label for="wmw-pitch-domain-17">Formation</label>
 							</div>
 							<div class="wmw-switchfield wmw-switchfield--small">
-								<input type="checkbox" id="wmw-pitch-domain-18" />
+								<input type="checkbox" id="wmw-pitch-domain-18" class="requiredgroup:domains vv-ggparent" />
 								<label for="wmw-pitch-domain-18">Audit</label>
 							</div>
 							<div class="wmw-switchfield wmw-switchfield--small">
-								<input type="checkbox" id="wmw-pitch-domain-19" />
+								<input type="checkbox" id="wmw-pitch-domain-19" class="requiredgroup:domains vv-ggparent" />
 								<label for="wmw-pitch-domain-19">Conseil en réduction de coûts</label>
 							</div>
 							<div class="wmw-switchfield wmw-switchfield--small">
-								<input type="checkbox" id="wmw-pitch-domain-20" />
+								<input type="checkbox" id="wmw-pitch-domain-20" class="requiredgroup:domains vv-ggparent" />
 								<label for="wmw-pitch-domain-20">Out-Placement</label>
 							</div>
 							<div class="wmw-switchfield wmw-switchfield--small">
-								<input type="checkbox" id="wmw-pitch-domain-21" />
+								<input type="checkbox" id="wmw-pitch-domain-21" class="requiredgroup:domains vv-ggparent" />
 								<label for="wmw-pitch-domain-21">Certification</label>
 							</div>
 							<div class="wmw-switchfield wmw-switchfield--small">
-								<input type="checkbox" id="wmw-pitch-domain-22" />
+								<input type="checkbox" id="wmw-pitch-domain-22" class="requiredgroup:domains vv-ggparent" />
 								<label for="wmw-pitch-domain-22">Outsourcing et externalisation</label>
 							</div>
 							<div class="wmw-switchfield wmw-switchfield--small">
-								<input type="checkbox" id="wmw-pitch-domain-23" />
+								<input type="checkbox" id="wmw-pitch-domain-23" class="requiredgroup:domains vv-ggparent" />
 								<label for="wmw-pitch-domain-23">Médiation</label>
 							</div>
 							<div class="wmw-switchfield wmw-switchfield--small">
-								<input type="checkbox" id="wmw-pitch-domain-24" />
+								<input type="checkbox" id="wmw-pitch-domain-24" class="requiredgroup:domains vv-ggparent" />
 								<label for="wmw-pitch-domain-24">Communication</label>
 							</div>
 							<div class="wmw-switchfield wmw-switchfield--small">
-								<input type="checkbox" id="wmw-pitch-domain-25" />
+								<input type="checkbox" id="wmw-pitch-domain-25" class="requiredgroup:domains vv-ggparent" />
 								<label for="wmw-pitch-domain-25">Knowledge Management Certification</label>
 							</div>
 							<div class="wmw-switchfield wmw-switchfield--small">
-								<input type="checkbox" id="wmw-pitch-domain-26" />
+								<input type="checkbox" id="wmw-pitch-domain-26" class="requiredgroup:domains vv-ggparent" />
 								<label for="wmw-pitch-domain-26">CRM</label>
 							</div>
 						</div>
 					</div>
 					
-					<div class="wmw-fieldrow row">
-						<label for="wmw-pitch-certification" class="wmw-label wmw-label--topmobile col-xs-10 col-sm-5">Certification <small>(optionnel)</small></label>
-						<input type="text" id="wmw-pitch-certification" class="col-xs-10 col-md-6" />
+					<div class="wmw-fieldrow wmw-copyfield row">
+						<label for="wmw-pitch-certification-1" class="wmw-label wmw-label--topmobile col-xs-10 col-sm-5">Certification <small>(optionnel)</small></label>
+						<input data-copy-nb="1" data-copy-name="wmw-pitch-certification" type="text" id="wmw-pitch-certification-1" class="col-xs-10 col-md-6" />
 						<a href="#" class="wmw-button-more">+</a>
 					</div>
 
-					<div class="wmw-fieldrow row">
-						<label for="wmw-pitch-language" class="wmw-label wmw-label--topmobile col-xs-10 col-sm-5">Langue de travail</label>
-						<select id="wmw-pitch-language" class="col-xs-10 col-md-6">
-							<option>Français</option>
+					<div class="wmw-fieldrow wmw-copyfield row">
+						<label for="wmw-pitch-language-1" class="wmw-label wmw-label--topmobile col-xs-10 col-sm-5">Langue de travail</label>
+						<select data-copy-nb="1" data-copy-name="wmw-pitch-language" id="wmw-pitch-language-1" name="languages[]" class="col-xs-10 col-md-6 required">
+							<option value="fr">Français</option>
+							<option value="en">Anglais</option>
+							<option value="es">Espagnol</option>
 						</select>
 						<a href="#" class="wmw-button-more">+</a>
 					</div>
@@ -148,7 +150,7 @@
 					<label class="wmw-label wmw-label--top">Prix</label>
 					<div class="wmw-onboard-price-inner">
 						<div class="wmw-onboard-price-input">
-							<input type="text" id="wmw-pitch-price" value="400" />$
+							<input type="text" id="wmw-pitch-price" value="400" readonly />$
 						</div> /jour
 						<div class="wmw-range-gradient">
 							<input type="range" min="100" max="1000" value="400" />
