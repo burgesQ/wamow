@@ -9,77 +9,99 @@
 					<small>Select industry you've already worked on</small>
 				</h1>
 
-				<div class="wmw-onboard-businesses wmw-checklinks">
-					<a href="#">
-						<span>
-							<i class="icon icon--business-manufacturing"></i>
-							<strong>Manufacturing</strong>
-						</span>
-					</a>
-					<input type="checkbox" name="wmw-ob-business[]" class="requiredgroup:wmw-ob-businesses" />
-					<a href="#">
-						<span>
-							<i class="icon icon--business-sport"></i>
-							<strong>Sport</strong>
-						</span>
-					</a>
-					<input type="checkbox" name="wmw-ob-business[]" class="requiredgroup:wmw-ob-businesses" />
-					<a href="#">
-						<span>
-							<i class="icon icon--business-hotel"></i>
-							<strong>Hotel</strong>
-						</span>
-					</a>
-					<input type="checkbox" name="wmw-ob-business[]" class="requiredgroup:wmw-ob-businesses" />
-					<a href="#">
-						<span>
-							<i class="icon icon--business-food-beverage"></i>
-							<strong>Food &amp; Beverage</strong>
-						</span>
-					</a>
-					<input type="checkbox" name="wmw-ob-business[]" class="requiredgroup:wmw-ob-businesses" />
-					<a href="#">
-						<span>
-							<i class="icon icon--business-construction"></i>
-							<strong>Construction</strong>
-						</span>
-					</a>
-					<input type="checkbox" name="wmw-ob-business[]" class="requiredgroup:wmw-ob-businesses" />
-					<a href="#">
-						<span>
-							<i class="icon icon--business-media-telco-entertainment"></i>
-							<strong>Media-Telco / Entertainment</strong>
-						</span>
-					</a>
-					<input type="checkbox" name="wmw-ob-business[]" class="requiredgroup:wmw-ob-businesses" />
-					<a href="#">
-						<span>
-							<i class="icon icon--business-finance"></i>
-							<strong>Finance</strong>
-						</span>
-					</a>
-					<input type="checkbox" name="wmw-ob-business[]" class="requiredgroup:wmw-ob-businesses" />
-					<a href="#">
-						<span>
-							<i class="icon icon--business-retail"></i>
-							<strong>Retail</strong>
-						</span>
-					</a>
-					<input type="checkbox" name="wmw-ob-business[]" class="requiredgroup:wmw-ob-businesses" />
-					<a href="#">
-						<span>
-							<i class="icon icon--business-tourisme"></i>
-							<strong>Tourisme</strong>
-						</span>
-					</a>
-					<input type="checkbox" name="wmw-ob-business[]" class="requiredgroup:wmw-ob-businesses" />
-					<a href="#">
-						<span>
-							<i class="icon icon--business-leisure"></i>
-							<strong>Leisure</strong>
-						</span>
-					</a>
-					<input type="checkbox" name="wmw-ob-business[]" class="requiredgroup:wmw-ob-businesses" />
+				<div class="wmw-onboard-businesses row">
+
+					<div class="wmw-iconfield">
+						<input type="checkbox" name="businesses[]" id="business-1" class="requiredgroup:businesses vv-gparent" />
+						<label for="business-1">
+							<span>
+								<i class="icon icon--business-manufacturing"></i><br />
+								Manufacturing
+							</span>
+						</label>
+					</div>
+					<div class="wmw-iconfield">
+						<input type="checkbox" name="businesses[]" id="business-2" class="requiredgroup:businesses vv-gparent" />
+						<label for="business-2">
+							<span>
+								<i class="icon icon--business-sport"></i><br />
+								Sport
+							</span>
+						</label>
+					</div>
+					<div class="wmw-iconfield">
+						<input type="checkbox" name="businesses[]" id="business-3" class="requiredgroup:businesses vv-gparent" />
+						<label for="business-3">
+							<span>
+								<i class="icon icon--business-hotel"></i><br />
+								Hotel
+							</span>
+						</label>
+					</div>
+					<div class="wmw-iconfield">
+						<input type="checkbox" name="businesses[]" id="business-4" class="requiredgroup:businesses vv-gparent" />
+						<label for="business-4">
+							<span>
+								<i class="icon icon--business-food-beverage"></i><br />
+								Food &amp; Beverage
+							</span>
+						</label>
+					</div>
+					<div class="wmw-iconfield">
+						<input type="checkbox" name="businesses[]" id="business-5" class="requiredgroup:businesses vv-gparent" />
+						<label for="business-5">
+							<span>
+								<i class="icon icon--business-construction"></i><br />
+								Construction
+							</span>
+						</label>
+					</div>
+					<div class="wmw-iconfield">
+						<input type="checkbox" name="businesses[]" id="business-6" class="requiredgroup:businesses vv-gparent" />
+						<label for="business-6">
+							<span>
+								<i class="icon icon--business-media-telco-entertainment"></i><br />
+								Media-Telco / Entertainment
+							</span>
+						</label>
+					</div>
+					<div class="wmw-iconfield">
+						<input type="checkbox" name="businesses[]" id="business-7" class="requiredgroup:businesses vv-gparent" />
+						<label for="business-7">
+							<span>
+								<i class="icon icon--business-finance"></i><br />
+								Finance
+							</span>
+						</label>
+					</div>
+					<div class="wmw-iconfield">
+						<input type="checkbox" name="businesses[]" id="business-8" class="requiredgroup:businesses vv-gparent" />
+						<label for="business-8">
+							<span>
+								<i class="icon icon--business-retail"></i><br />
+								Retail
+							</span>
+						</label>
+					</div>
+					<div class="wmw-iconfield">
+						<input type="checkbox" name="businesses[]" id="business-9" class="requiredgroup:businesses vv-gparent" />
+						<label for="business-9">
+							<span>
+								<i class="icon icon--business-tourisme"></i><br />
+								Tourisme
+							</span>
+						</label>
+					</div>
+					<div class="wmw-iconfield">
+						<input type="checkbox" name="businesses[]" id="business-10" class="requiredgroup:businesses vv-gparent" />
+						<label for="business-10">
+							<span>
+								<i class="icon icon--business-leisure"></i><br />
+								Leisure
+							</span>
+						</label>
+					</div>
+
 				</div>
 
 				<div class="wmw-progressbar">

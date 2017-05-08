@@ -1028,10 +1028,14 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 			'onValid'		: function()
 			{
 				$(this).add( $(this).parent() ).removeClass( 'invalid' );
+				if($(this).hasClass('vv-gparent'))
+					$(this).add( $(this).parent().parent() ).removeClass( 'gp-invalid' );
 			},
 			'onInvalid'		: function()
 			{
 				$(this).add( $(this).parent() ).addClass( 'invalid' );
+				if($(this).hasClass('vv-gparent'))
+					$(this).add( $(this).parent().parent() ).addClass( 'gp-invalid' );
 			}
 		},
 		'form'	: {
@@ -3028,16 +3032,8 @@ var Master = {
             $val.val( $(this).val() );
         });
 
-    	$('.wmw-checklinks a').on('click', function(e){
-    		e.preventDefault();
-    		
-    		var $field = $(this).next('input');
-    		$field.trigger( 'click' );
-
-    		if($field.is(':checked'))
-    			$(this).addClass('active');
-    		else
-    			$(this).removeClass('active');
+    	$('.wmw-iconfield input').on('change', function(e){
+    		console.log('yo');
     	}); 
 
         $('.wmw-checklistfield button').on('click', function(){
