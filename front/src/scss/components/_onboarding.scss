@@ -83,23 +83,32 @@
 				box-shadow:0 0 10px rgba(0,0,0,0.2);
 				margin:0 0 15px 0;
 				height:50px;
-				padding:0 75px 0 20px;
+				padding:0 85px 0 20px;
 				color:$colorpurple;
-				font-size:16px;
+				font-size:14px;
 				font-family:$fontroboto;
 				text-align:left;
+				display:flex;
+				align-items:center;
 
 				label{
 					display:block;
-					height:48px;
-					line-height:48px;
+					line-height:1.1em;
 					cursor:pointer;
 					font-weight:bold;
+					text-overflow:ellipsis;
+					overflow:hidden;
+					width:100%;
 				}
 
 				.wmw-switchfield{
 					position:absolute;
-					top:0; right:0;
+					top:50%; right:0;
+					margin-top:-10px;
+
+					label{
+						line-height:20px;
+					}
 				}
 			}
 		}

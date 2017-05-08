@@ -14,49 +14,49 @@
 					<div class="wmw-onboard-switches-el">
 						<label for="switch-1">Advisory Strategic</label>
 						<div class="wmw-switchfield">
-							<input type="checkbox" id="switch-1" class="requiredgroup:wmw-ob-missions">
+							<input type="checkbox" id="switch-1" class="requiredgroup:wmw-ob-missions vv-ggparent">
 							<label for="switch-1"><span>No</span><span>Yes</span></label>
 						</div>
 					</div>
 					<div class="wmw-onboard-switches-el">
 						<label for="switch-2">Advisory Execution</label>
 						<div class="wmw-switchfield">
-							<input type="checkbox" id="switch-2" class="requiredgroup:wmw-ob-missions">
+							<input type="checkbox" id="switch-2" class="requiredgroup:wmw-ob-missions vv-ggparent">
 							<label for="switch-2"><span>No</span><span>Yes</span></label>
 						</div>
 					</div>
 					<div class="wmw-onboard-switches-el">
 						<label for="switch-3">Advisory Organisation - Transformation</label>
 						<div class="wmw-switchfield">
-							<input type="checkbox" id="switch-3" class="requiredgroup:wmw-ob-missions">
+							<input type="checkbox" id="switch-3" class="requiredgroup:wmw-ob-missions vv-ggparent">
 							<label for="switch-3"><span>No</span><span>Yes</span></label>
 						</div>
 					</div>
 					<div class="wmw-onboard-switches-el">
 						<label for="switch-4">Advisory Business Reingeniering</label>
 						<div class="wmw-switchfield">
-							<input type="checkbox" id="switch-4" class="requiredgroup:wmw-ob-missions">
+							<input type="checkbox" id="switch-4" class="requiredgroup:wmw-ob-missions vv-ggparent">
 							<label for="switch-4"><span>No</span><span>Yes</span></label>
 						</div>
 					</div>
 					<div class="wmw-onboard-switches-el">
 						<label for="switch-5">Systems Information CSP</label>
 						<div class="wmw-switchfield">
-							<input type="checkbox" id="switch-5" class="requiredgroup:wmw-ob-missions">
+							<input type="checkbox" id="switch-5" class="requiredgroup:wmw-ob-missions vv-ggparent">
 							<label for="switch-5"><span>No</span><span>Yes</span></label>
 						</div>
 					</div>
 					<div class="wmw-onboard-switches-el">
 						<label for="switch-6">Systems Information MOA</label>
 						<div class="wmw-switchfield">
-							<input type="checkbox" id="switch-6" class="requiredgroup:wmw-ob-missions">
+							<input type="checkbox" id="switch-6" class="requiredgroup:wmw-ob-missions vv-ggparent">
 							<label for="switch-6"><span>No</span><span>Yes</span></label>
 						</div>
 					</div>
 					<div class="wmw-onboard-switches-el">
 						<label for="switch-7">Systems Information MOE</label>
 						<div class="wmw-switchfield">
-							<input type="checkbox" id="switch-7" class="requiredgroup:wmw-ob-missions">
+							<input type="checkbox" id="switch-7" class="requiredgroup:wmw-ob-missions vv-ggparent">
 							<label for="switch-7"><span>No</span><span>Yes</span></label>
 						</div>
 					</div>

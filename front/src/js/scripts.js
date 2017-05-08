@@ -188,7 +188,7 @@ var Master = {
             var val =  $('.wmw-onboard-switches-el[data-num='+num+'] input[type=hidden]').val();
 
             if(val == '')
-                $('.wmw-onboard-switches-el[data-num='+num+'] input[type=checkbox]').trigger('click');
+                $('.wmw-onboard-switches-el[data-num='+num+'] input[type=checkbox]').trigger('click').removeClass('invalid');
 
             Master.close_mission_overlay();
         });

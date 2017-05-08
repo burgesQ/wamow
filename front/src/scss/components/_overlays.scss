@@ -3,20 +3,15 @@
 	top:0; left:0;
 	width:100%;
 	height:100%;
-	background:rgba(255,255,255,0.7);
+	background:rgba(255,255,255,0.8);
 	display:flex;
 	align-items:center;
 	flex-direction: column;
 	justify-content: center;
 	z-index:100;
 	opacity:0;
-	transform:scale(0);
+	transform:scale(1) translateY(100%);
 	transition: all 1s $easeinout;
-
-	&.wmw-overlay--active{
-		opacity:1;
-		transform:scale(1);
-	}
 
 	&:before{
 		content:'';
@@ -35,6 +30,8 @@
 		max-height:calc(80% - 100px);
 		float:none;
 		overflow:hidden;
+		transform:translateY(25%);
+		transition: all 1s $easeinout;
 
 		&:before{
 			content:'';
@@ -42,6 +39,15 @@
 			width:100%;
 			height:5px;
 			background: linear-gradient(to right, $colorpurple, $colorgreen);
+		}
+	}
+
+	&.wmw-overlay--active{
+		opacity:1;
+		transform:scale(1) translateY(0);
+
+		.wmw-overlay-inner{
+			transform:translateY(0);
 		}
 	}
 

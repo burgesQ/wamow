@@ -15,7 +15,7 @@
 						<label for="wmw-ob-mission-1">Advisory Strategic</label>
 						<div class="wmw-switchfield">
 							<input type="hidden" id="wmw-ob-mission-1-val" value="" />
-							<input type="checkbox" id="wmw-ob-mission-1" name="wmw-ob-missions[]" value="advisory-strategic" class="requiredgroup:wmw-ob-missions">
+							<input type="checkbox" id="wmw-ob-mission-1" name="wmw-ob-missions[]" value="advisory-strategic" class="requiredgroup:wmw-ob-missions vv-ggparent">
 							<label for="wmw-ob-mission-1"><span>add</span><span><a href="#">edit</a></span></label>
 						</div>
 					</div>
@@ -23,7 +23,7 @@
 						<label for="wmw-ob-mission-2">Advisory Execution</label>
 						<div class="wmw-switchfield">
 							<input type="hidden" id="wmw-ob-mission-2-val" value="" />
-							<input type="checkbox" id="wmw-ob-mission-2" name="wmw-ob-missions[]" value="advisory-execution" class="requiredgroup:wmw-ob-missions">
+							<input type="checkbox" id="wmw-ob-mission-2" name="wmw-ob-missions[]" value="advisory-execution" class="requiredgroup:wmw-ob-missions vv-ggparent">
 							<label for="wmw-ob-mission-2"><span>add</span><span><a href="#">edit</a></span></label>
 						</div>
 					</div>
@@ -31,7 +31,7 @@
 						<label for="wmw-ob-mission-3">Advisory Organisation - Transformation</label>
 						<div class="wmw-switchfield">
 							<input type="hidden" id="wmw-ob-mission-3-val" value="" />
-							<input type="checkbox" id="wmw-ob-mission-3" name="wmw-ob-missions[]" value="advisory-orga" class="requiredgroup:wmw-ob-missions">
+							<input type="checkbox" id="wmw-ob-mission-3" name="wmw-ob-missions[]" value="advisory-orga" class="requiredgroup:wmw-ob-missions vv-ggparent">
 							<label for="wmw-ob-mission-3"><span>add</span><span><a href="#">edit</a></span></label>
 						</div>
 					</div>
@@ -39,7 +39,7 @@
 						<label for="wmw-ob-mission-4">Advisory Business Reingeniering</label>
 						<div class="wmw-switchfield">
 							<input type="hidden" id="wmw-ob-mission-4-val" value="" />
-							<input type="checkbox" id="wmw-ob-mission-4" name="wmw-ob-missions[]" value="advisory-business" class="requiredgroup:wmw-ob-missions">
+							<input type="checkbox" id="wmw-ob-mission-4" name="wmw-ob-missions[]" value="advisory-business" class="requiredgroup:wmw-ob-missions vv-ggparent">
 							<label for="wmw-ob-mission-4"><span>add</span><span><a href="#">edit</a></span></label>
 						</div>
 					</div>
@@ -47,7 +47,7 @@
 						<label for="wmw-ob-mission-5">Systems Information CSP</label>
 						<div class="wmw-switchfield">
 							<input type="hidden" id="wmw-ob-mission-5-val" value="" />
-							<input type="checkbox" id="wmw-ob-mission-5" name="wmw-ob-missions[]" value="sysinfo-csp" class="requiredgroup:wmw-ob-missions">
+							<input type="checkbox" id="wmw-ob-mission-5" name="wmw-ob-missions[]" value="sysinfo-csp" class="requiredgroup:wmw-ob-missions vv-ggparent">
 							<label for="wmw-ob-mission-5"><span>add</span><span><a href="#">edit</a></span></label>
 						</div>
 					</div>
@@ -55,7 +55,7 @@
 						<label for="wmw-ob-mission-6">Systems Information MOA</label>
 						<div class="wmw-switchfield">
 							<input type="hidden" id="wmw-ob-mission-6-val" value="" />
-							<input type="checkbox" id="wmw-ob-mission-6" name="wmw-ob-missions[]" value="sysinfo-moa" class="requiredgroup:wmw-ob-missions">
+							<input type="checkbox" id="wmw-ob-mission-6" name="wmw-ob-missions[]" value="sysinfo-moa" class="requiredgroup:wmw-ob-missions vv-ggparent">
 							<label for="wmw-ob-mission-6"><span>add</span><span><a href="#">edit</a></span></label>
 						</div>
 					</div>
@@ -63,7 +63,7 @@
 						<label for="wmw-ob-mission-7">Systems Information MOE</label>
 						<div class="wmw-switchfield">
 							<input type="hidden" id="wmw-ob-mission-7-val" value="" />
-							<input type="checkbox" id="wmw-ob-mission-7" name="wmw-ob-missions[]" value="sysinfo-moe" class="requiredgroup:wmw-ob-missions">
+							<input type="checkbox" id="wmw-ob-mission-7" name="wmw-ob-missions[]" value="sysinfo-moe" class="requiredgroup:wmw-ob-missions vv-ggparent">
 							<label for="wmw-ob-mission-7"><span>add</span><span><a href="#">edit</a></span></label>
 						</div>
 					</div>
