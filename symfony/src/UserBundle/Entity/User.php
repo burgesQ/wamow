@@ -325,6 +325,13 @@ class User extends BaseUser implements ParticipantInterface
      */
     private $userMission;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="bonus_points", type="integer")
+     */
+    private $bonusPoints;
+
     public function __construct()
     {
         parent::__construct();
@@ -350,6 +357,7 @@ class User extends BaseUser implements ParticipantInterface
         $this->experienceShaping = new ArrayCollection();
         $this->languages = new ArrayCollection();
         $this->userMission = new ArrayCollection();
+        $this->bonusPoints = 5;
     }
 
     /**
@@ -1309,5 +1317,41 @@ class User extends BaseUser implements ParticipantInterface
     public function getUserMission()
     {
         return $this->userMission;
+    }
+
+    /**
+     * Set bonusPoints
+     *
+     * @param integer $bonusPoints
+     * @return User
+     */
+    public function setBonusPoints($bonusPoints)
+    {
+        $this->bonusPoints = $bonusPoints;
+
+        return $this;
+    }
+
+    /**
+     * Get bonusPoints
+     *
+     * @return integer
+     */
+    public function getBonusPoints()
+    {
+        return $this->bonusPoints;
+    }
+
+    /**
+     * Add resumes
+     *
+     * @param \ToolsBundle\Entity\UploadResume $resumes
+     * @return User
+     */
+    public function addResume(\ToolsBundle\Entity\UploadResume $resumes)
+    {
+        $this->resumes[] = $resumes;
+
+        return $this;
     }
 }

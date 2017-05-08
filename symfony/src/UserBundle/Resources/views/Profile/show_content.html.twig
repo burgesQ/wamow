@@ -22,8 +22,8 @@
   <p>
     {{ 'profile.show.image'|trans }}:
     {% if image != null and image.name != null %}
-      {{ image.name }} is a {{ image.type }} upload the {{ image.uploadDate|date("m/d/Y") }} 
-      <img src="{{ asset(image.webPath()) }}"/> 
+      {{ image.name }} is a {{ image.type }} upload the {{ image.uploadDate|date("m/d/Y") }}
+      <img src="{{ asset(image.webPath()) }}"/>
     {% endif %}
   </p>
 
@@ -55,14 +55,16 @@
       {{ user.company.name}}
     {% endif %} </p>
 
-  <p> {{ 'profile.show.resume'|trans }}:
-    {% if user.userData != null %}
-      {{ user.userData.cvResume }}
-    {% endif %} </p>
+    <p> {{ 'profile.show.userResume'|trans }}:
+      {% if user.resumes != null %}
+      {% for resume in user.resumes %}
+        {{ resume.content }}
+      {% endfor %}
+      {% endif %} </p>
 
   <p> {{ 'profile.show.userResume'|trans }}:
     {% if user.userResume != null %}
-      {{ user.userData.userResume }}
+      {{ user.userResume }}
     {% endif %} </p>
 
   <p> {{ 'profile.show.professionalExpertise'|trans }}:

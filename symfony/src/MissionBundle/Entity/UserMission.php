@@ -17,10 +17,11 @@ class UserMission
     const GIVEUP     = -3;
     const REFUSED    = -2;
     const NEW        = -1;
-    const INTERESTED = 0;
-    const ONGOING    = 1;
-    const SHORTLIST  = 2;
-    const FINALIST   = 3;
+    const ACTIVATED   = 1;
+    const INTERESTED = 2;
+    const ONGOING    = 3;
+    const SHORTLIST  = 4;
+    const FINALIST   = 5;
 
 
     /**
@@ -75,6 +76,12 @@ class UserMission
      * @ORM\JoinColumn(nullable=true)
      */
     private $thread;
+
+    /**
+     * @var int
+     * @ORM\Column(name="score", type="integer", nullable=true)
+     */
+    private $score;
 
 
     /**
@@ -247,4 +254,27 @@ class UserMission
         return $this;
     }
 
+
+    /**
+     * Set score
+     *
+     * @param integer $score
+     * @return UserMission
+     */
+    public function setScore($score)
+    {
+        $this->score = $score;
+
+        return $this;
+    }
+
+    /**
+     * Get score
+     *
+     * @return integer
+     */
+    public function getScore()
+    {
+        return $this->score;
+    }
 }

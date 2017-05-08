@@ -38,3 +38,7 @@ services:
     mission_matching:
         class: MissionBundle\Service\MissionMatching
         arguments: ['@service_container', '@doctrine.orm.entity_manager']
+
+    scoring:
+        class: MissionBundle\Service\Scoring
+        arguments: ['@doctrine.orm.entity_manager']

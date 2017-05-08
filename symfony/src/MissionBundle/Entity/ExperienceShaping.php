@@ -400,4 +400,3 @@ class ExperienceShaping
         return $this->peremption;
     }
 }
-

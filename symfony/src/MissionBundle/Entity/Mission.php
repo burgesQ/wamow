@@ -255,6 +255,11 @@ class Mission
      */
     private $steps;
 
+    /**
+     * @ORM\Column(name="scoring_history", type="json_array", nullable=true)
+     */
+    private $scoringHistory;
+
 
     /**
      * Mission constructor.
@@ -1072,5 +1077,26 @@ class Mission
     public function removeStep(\MissionBundle\Entity\Step $step)
     {
         $this->steps->removeElement($step);
+    }
+
+    /**
+     * Set scoringHistory
+     *
+     * @return Mission
+     */
+    public function setScoringHistory($scoringHistory)
+    {
+        $this->scoringHistory = $scoringHistory;
+
+        return $this;
+    }
+
+    /**
+     * Get scoringHistory
+     *
+     */
+    public function getScoringHistory()
+    {
+        return $this->scoringHistory;
     }
 }

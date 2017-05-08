@@ -364,4 +364,14 @@ class Step
     {
         $this->setUpdateDate(new \Datetime());
     }
+
+    /**
+     * Get mission
+     *
+     * @return \MissionBundle\Entity\Mission 
+     */
+    public function getMission()
+    {
+        return $this->mission;
+    }
 }

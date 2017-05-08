@@ -16,7 +16,7 @@
 
   <h5>{{ 'mission.view.details'|trans }} :</h5>
     {{ mission.professionalExpertise.name|trans }}
-    {% for missionKind in mission.missionKind %}
+    {% for missionKind in mission.missionKinds %}
       <li>{{ missionKind.name | trans }}</li>
     {% endfor %}
   </p>
