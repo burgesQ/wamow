@@ -46,21 +46,14 @@
 					</div>
 				</div>
 
-				<div class="wmw-fieldrow wmw-checklistfield row">
-					<button type="button" class="col-xs-12 col-sm-6 col-md-5">Select your languages</button>
-					<div class="wmw-checklistfield-wrapper col-xs-12 col-sm-6 col-md-5">
-						<input type="checkbox" id="language-fr" value="fr" />
-						<label for="language-fr">French</label><br />
-						<input type="checkbox" id="language-en" value="en" />
-						<label for="language-en">English</label><br />
-						<input type="checkbox" id="language-de" value="de" />
-						<label for="language-de">German</label><br />
-						<input type="checkbox" id="language-it" value="it" />
-						<label for="language-it">Italian</label><br />
-						<input type="checkbox" id="language-sp" value="sp" />
-						<label for="language-sp">Spanish</label>
-					</div>
-					<div class="wmw-tags"></div>
+				<div class="wmw-fieldrow wmw-copyfield row">
+					<label for="wmw-ob-language-1" class="wmw-label wmw-label--topmobile col-xs-10 col-sm-5">Langue de travail</label>
+					<select data-copy-nb="1" data-copy-name="wmw-ob-language" id="wmw-ob-language-1" name="languages[]" class="col-xs-10 col-md-5 required">
+						<option value="fr">Français</option>
+						<option value="en">Anglais</option>
+						<option value="es">Espagnol</option>
+					</select>
+					<a href="#" class="wmw-button-more">+</a>
 				</div>
 
 				<div class="wmw-uploadfield">

@@ -3071,7 +3071,25 @@ var Master = {
             console.log($field, id);
             $field.prop('checked', false);
             $(this).remove();
-        })
+        });
+
+        $('body').on('click', '.wmw-copyfield .wmw-button-more', function(e){
+            e.preventDefault();
+            var $field = $(this).parent().find('input, select');
+            
+            var nb = $field.attr('data-copy-nb');
+            var name = $field.attr('data-copy-name');
+
+            $(this).parent().after($(this).parent().clone());
+            $(this).remove();
+
+            var $next = $(this).parent().next();
+            var $next_field = $next.find('input, select');
+            var $next_label = $next.find('label');
+
+            $next_field.attr('id', name+'-'+nb);
+            $next_label.attr('for', name+'-'+nb);
+        });
 
         $('.wmw-cdashboard-sidebar .sidebar-button').on('click', function(e){
             e.preventDefault();
