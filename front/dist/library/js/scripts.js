@@ -3098,9 +3098,9 @@ var Master = {
                 $('#wmw-pitch-onsite-wrapper select').hide()
         });
 
-        $('.wmw-cdashboard-sidebar .sidebar-button').on('click', function(e){
+        $('.wmw-mission-sidebar .sidebar-button').on('click', function(e){
             e.preventDefault();
-            $('.wmw-cdashboard-sidebar').toggleClass('wmw-cdashboard-sidebar--active');
+            $('.wmw-mission-sidebar').toggleClass('wmw-mission-sidebar--active');
         });
 
         Master.init_pitch_finder();
@@ -3108,7 +3108,9 @@ var Master = {
 
         $('.wmw-overlay-inner').perfectScrollbar({ suppressScrollX:true });  
         $('.mail-content-chat').perfectScrollbar({ suppressScrollX:true });  
-        $('.wmw-cdashboard-element .element-notes').perfectScrollbar({ suppressScrollX:true }); 
+        $('.wmw-mission-element .element-content').perfectScrollbar({ suppressScrollX:true }); 
+        $('.wmw-mission-element .element-notes').perfectScrollbar({ suppressScrollX:true }); 
+        $('.wmw-mission-sidebar .sidebar-wrapper').perfectScrollbar({ suppressScrollX:true }); 
     },
 
     onload : function(){
