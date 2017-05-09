@@ -171,10 +171,14 @@
 			font-size:0;
 			margin:0 0 25px 0;
 			border-right:1px solid $colorgreyxlight;
+			display:flex;
+			align-items:stretch;
+			flex-wrap:wrap;
 
 			.wmw-onboard-blocks-el{
 				font-size:14px;
 				padding:10px 25px 5px 25px;
+				margin-top:-1px;
 				border:1px solid $colorgreyxlight;
 				border-right:none;
 				color:$colorgrey;
@@ -185,6 +189,10 @@
 					cursor:pointer;
 				}
 			}
+		}
+
+		#wmw-pitch-onsite-wrapper select{
+			display:none;
 		}
 
 		.wmw-onboard-price{

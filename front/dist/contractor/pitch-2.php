@@ -127,28 +127,28 @@
 					<div class="wmw-onboard-blocks-el col-xs-6 col-md-3">
 						<label for="wmw-pitch-region-1">North America</label>
 						<div class="wmw-switchfield">
-							<input type="radio" name="wmw-pitch-region" id="wmw-pitch-region-1" class="requiredgroup:wmw-pitch-region" />
+							<input type="radio" name="wmw-pitch-region" id="wmw-pitch-region-1" class="requiredgroup:wmw-pitch-region vv-ggparent" />
 							<label for="wmw-pitch-region-1"></label>
 						</div>
 					</div>
 					<div class="wmw-onboard-blocks-el col-xs-6 col-md-3">
 						<label for="wmw-pitch-region-2">South America</label>
 						<div class="wmw-switchfield">
-							<input type="radio" name="wmw-pitch-region" id="wmw-pitch-region-2" class="requiredgroup:wmw-pitch-region" />
+							<input type="radio" name="wmw-pitch-region" id="wmw-pitch-region-2" class="requiredgroup:wmw-pitch-region vv-ggparent" />
 							<label for="wmw-pitch-region-2"></label>
 						</div>
 					</div>
 					<div class="wmw-onboard-blocks-el col-xs-6 col-md-3">
 						<label for="wmw-pitch-region-3">EMEA</label>
 						<div class="wmw-switchfield">
-							<input type="radio" name="wmw-pitch-region" id="wmw-pitch-region-3" class="requiredgroup:wmw-pitch-region" />
+							<input type="radio" name="wmw-pitch-region" id="wmw-pitch-region-3" class="requiredgroup:wmw-pitch-region vv-ggparent" />
 							<label for="wmw-pitch-region-3"></label>
 						</div>
 					</div>
 					<div class="wmw-onboard-blocks-el col-xs-6 col-md-3">
 						<label for="wmw-pitch-region-4">Asia Pacific</label>
 						<div class="wmw-switchfield">
-							<input type="radio" name="wmw-pitch-region" id="wmw-pitch-region-4" class="requiredgroup:wmw-pitch-region" />
+							<input type="radio" name="wmw-pitch-region" id="wmw-pitch-region-4" class="requiredgroup:wmw-pitch-region vv-ggparent" />
 							<label for="wmw-pitch-region-4"></label>
 						</div>
 					</div>
@@ -159,12 +159,15 @@
 					<div class="col-xs-12 col-md-6 row">
 						<select class=" col-xs-4 required">
 							<option value="">Jour</option>
+							<option value="01">01</option>
 						</select>
 						<select class=" col-xs-4 required">
 							<option value="">Mois</option>
+							<option value="01">Janvier</option>
 						</select>
 						<select class=" col-xs-4 required">
 							<option value="">Année</option>
+							<option value="2017">2017</option>
 						</select>
 					</div>
 				</div>
@@ -174,12 +177,15 @@
 					<div class="col-xs-12 col-md-6 row">
 						<select class=" col-xs-4 required">
 							<option value="">Jour</option>
+							<option value="01">01</option>
 						</select>
 						<select class=" col-xs-4 required">
 							<option value="">Mois</option>
+							<option value="01">Janvier</option>
 						</select>
 						<select class=" col-xs-4 required">
 							<option value="">Année</option>
+							<option value="2017">2017</option>
 						</select>
 					</div>
 				</div>
@@ -189,12 +195,15 @@
 					<div class="col-xs-12 col-md-6 row">
 						<select class=" col-xs-4 required">
 							<option value="">Jour</option>
+							<option value="01">01</option>
 						</select>
 						<select class=" col-xs-4 required">
 							<option value="">Mois</option>
+							<option value="01">Janvier</option>
 						</select>
 						<select class=" col-xs-4 required">
 							<option value="">Année</option>
+							<option value="2017">2017</option>
 						</select>
 					</div>
 				</div>
@@ -207,18 +216,17 @@
 							<label for="wmw-pitch-anonymous"></label>
 						</div>
 					</div>
-					<div class="wmw-onboard-blocks-el col-xs-12 col-md-6">
+					<div class="wmw-onboard-blocks-el col-xs-12 col-md-6" id="wmw-pitch-onsite-wrapper">
 						<label for="wmw-pitch-onsite">Présence requise sur le site</label>
 						<div class="wmw-switchfield">
 							<input type="checkbox" id="wmw-pitch-onsite" />
 							<label for="wmw-pitch-onsite"></label>
 						</div>
+						<select class="required">
+							<option value="">Pays</option>
+						</select>
 					</div>
 				</div>
-
-				<select class="required">
-					<option value="">Pays</option>
-				</select>
 
 				<div class="wmw-progressbar">
 					<span class="active"></span>
