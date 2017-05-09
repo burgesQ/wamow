@@ -140,6 +140,7 @@ var Master = {
 
         Master.init_pitch_finder();
         Master.init_mission_overlay();
+        Master.init_mission_notes();
 
         $('.wmw-overlay-inner').perfectScrollbar({ suppressScrollX:true });  
         $('.mail-content-chat').perfectScrollbar({ suppressScrollX:true });  
@@ -159,6 +160,30 @@ var Master = {
 
     onscroll : function(){
 
+    },
+
+    init_mission_notes : function(){
+
+        function record_notes( notes, id ){
+
+            var data = { "notes" : notes, "id" : id };
+
+            $.ajax( '../ajax/set-notes.php', {
+                method : 'post',
+                data : data,
+                dataType : 'json'
+            }).done( function( response ){
+
+                var $status = $('#wmw-mission-notes-status');
+                $status.text(response.status).stop(true, true).fadeIn(500).delay(5000).fadeOut(500); 
+            });
+        }
+
+        $('#wmw-mission-notes').on('blur', function(){
+            var val = $(this).val();
+            var id = $("#wmw-mission-id").val();
+            record_notes(val, id);
+        });
     },
 
     init_pitch_finder : function(){
