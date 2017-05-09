@@ -132,6 +132,12 @@ var Master = {
             $('.wmw-mission-sidebar').toggleClass('wmw-mission-sidebar--active');
         });
 
+        $('.wmw-mission-summarybtn .wmw-button').on('click', function(e){
+            e.preventDefault();
+            $('.wmw-mission-summary').toggleClass('wmw-mission-summary--active');
+            $(this).parent().toggleClass('wmw-mission-summarybtn--active');
+        });
+
         Master.init_pitch_finder();
         Master.init_mission_overlay();
 
@@ -140,6 +146,7 @@ var Master = {
         $('.wmw-mission-element .element-content').perfectScrollbar({ suppressScrollX:true }); 
         $('.wmw-mission-element .element-notes').perfectScrollbar({ suppressScrollX:true }); 
         $('.wmw-mission-sidebar .sidebar-wrapper').perfectScrollbar({ suppressScrollX:true }); 
+        $('.wmw-mission-content').perfectScrollbar({ suppressScrollY:true }); 
     },
 
     onload : function(){

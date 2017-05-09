@@ -3,6 +3,7 @@
 	border-left:1px solid $colorgreyxlight;
 	border-right:1px solid $colorgreyxlight;
 	border-bottom:1px solid $colorgreyxlight;
+	background:#fdfdfd;
 
 	&:before{
 		content:'';
@@ -13,17 +14,17 @@
 	}
 
 	.wmw-mission-close{
-		position:absolute;
-		top:17px; right:15px;
+		display:inline-block;
 		font-size:10px;
 		text-transform:uppercase;
 		letter-spacing:0.06em;
 		color:$colorgreylight;
 		text-decoration:none;
+		margin:15px;
 
 		.icon{
-			font-size:18px;
-			margin:0 10px 0 0;
+			font-size:16px;
+			margin:0 6px 0 0;
 		}
 	}
 
@@ -35,14 +36,14 @@
 		.breadcrumbs-el{
 			display:inline-block;
 			position:relative;
-			line-height:45px;
+			line-height:30px;
 			color:#b7b7bc;
 			font-family:$fontdincondmed;	
 			color:$colorgreylight;
-			font-size:20px;	
+			font-size:10px;	
 			text-decoration:none;
 			text-transform:uppercase;
-			padding:0 12px 0 35px;
+			padding:0 12px 0 15px;
 
 			.wmw-button{
 				top:-3px;
@@ -53,18 +54,17 @@
 			&:after{
 				content:'';
 				display:block;
-				border-left:20px solid white;
-				border-top:22.5px solid transparent;
-				border-bottom:22.5px solid transparent;
+				border-left:7px solid white;
+				border-top:15px solid transparent;
+				border-bottom:15px solid transparent;
 				position:absolute;
-				top:0; right:-19px;
+				top:0; right:-6px;
 				z-index:100;
 			}
 
 			&:before{
-				border-left:20px solid $colorgreyxlight;
-
-				right:-20px;
+				border-left-color:$colorgreyxlight;
+				right:-7px;
 			}
 
 			&.active{
@@ -72,13 +72,7 @@
 				background:$colorgreen;
 
 				&:after{
-					content:'';
-					display:block;
-					border-left:20px solid $colorgreen;
-					border-top:22.5px solid transparent;
-					border-bottom:22.5px solid transparent;
-					position:absolute;
-					top:0; right:-19px;
+					border-left-color:$colorgreen;
 				}
 			}
 
@@ -94,92 +88,132 @@
 
 	.wmw-mission-header{
 		position:relative;
-		border-bottom:1px solid $colorgreyxlight;
 		
 		h1{
 			font-family:$fontdincondmed;
 			color:$colorgrey;
-			font-size:37px;
-			padding:10px 35px;
+			font-size:25px;
+			line-height:1.1em;
+			padding:10px 15px;
 			margin:0;
 			display:block;
 			font-weight:normal;
-		
+			border-bottom:1px solid $colorgreyxlight;
+
 			small{
 				display:block;
 				font-family:$fontcantarell;
 				color:$colorgreylight;
-				font-size:14px;
+				font-size:12px;
 				letter-spacing:0;
-				margin-top:5px;
+				margin-top:0;
 			
 				.icon{
-					font-size:22px;
+					font-size:16px;
+				}
+			}
+		}
+
+		.wmw-mission-summarybtn{
+			display:block;
+			border-bottom:1px solid $colorgreyxlight;
+			text-align:center;
+			padding:6px 10px;
+
+			.wmw-button{
+				vertical-align:middle;
+
+				.off{ display:inline; }
+				.on{ display:none; }
+			}
+
+			&.wmw-mission-summarybtn--active{
+
+				.wmw-button{
+
+					.off{ display:none; }
+					.on{ display:inline; }
 				}
 			}
 		}
 
 		.wmw-mission-summary{
-			position:absolute;
-			top:0; right:0;
-			width:auto;
-			height:100%;
+			display:flex;
+			align-items:stretch;
+			flex-wrap:wrap;
+			overflow:hidden;
+			max-height:0;
+			transition:max-height .3s $easeinout;
 
-			span{
+			&.wmw-mission-summary--active{
+				max-height:500px;
+			}
+
+			.summary-el{
 				position:relative;
-				height:100%;
-				display:inline-block;
+				width:50%;
+				display:flex;
+				align-items:center;
+				justify-content:center;
 				vertical-align:top;
 				border-left:1px solid $colorgreyxlight;
+				border-bottom:1px solid $colorgreyxlight;
 				font-family:$fontcantarell;
-				font-size:12px;
+				font-size:10px;
 				letter-spacing:0;
 				text-align:center;
-				padding:20px 10px;
+				padding:10px;
+				text-overflow:ellipsis;
+				overflow:hidden;
+
+
 
 				.icon{
-					font-size:30px;
+					font-size:16px;
 					margin-bottom:5px;
 					color:#b8b8bd;
 				}
-			}
+			
+				&.summary-el--salary{
+					padding:12px 10px;
+					width:100%;
 
-			.summary-salary{
-				padding:12px 10px;
-
-				strong{
-					font-size:25px;
+					strong{
+						font-size:25px;
+					}
 				}
-			}
 
-			.summary-answer{
-				background:#fdf0ee;
-				color:$colorred;
-				padding:15px 25px;
-				font-size:16px;
-
-				.icon{
+				&.summary-el--answer{
+					background:#fdf0ee;
 					color:$colorred;
-					font-size:35px;
+					padding:15px 25px;
+					font-size:16px;
+					width:100%;
+
+					.icon{
+						color:$colorred;
+						font-size:35px;
+					}
 				}
-			}
 
-			.summary-selected{
-				background:#ebf9f8;
-				color:$colorgreen;
-				padding:12px 25px;
-				font-size:16px;
-				line-height:13px;
-
-				.icon{
+				&.summary-el--selected{
+					background:#ebf9f8;
 					color:$colorgreen;
-					font-size:35px;
-				}
+					padding:12px 25px;
+					font-size:16px;
+					line-height:13px;
+					width:100%;
 
-				small{
-					font-size:9px;
-					color:$colorgreylight;
-					text-transform:uppercase;
+					.icon{
+						color:$colorgreen;
+						font-size:35px;
+					}
+
+					small{
+						font-size:9px;
+						color:$colorgreylight;
+						text-transform:uppercase;
+					}
 				}
 			}
 		}
@@ -187,9 +221,8 @@
 
 	.wmw-mission-body{
 		position:relative;
-		padding:50px 25px 25px 25px;
+		padding:50px 15px 15px 15px;
 		overflow:hidden;
-		background:#fdfdfd;
 
 		&.wmw-mission-body--mail{
 			padding:0;
@@ -198,11 +231,12 @@
 		.wmw-mission-pagination{
 			display:block;
 			position:absolute;
-			top:10px; right:15px;
+			top:13px; right:15px;
+			z-index:100;
 		
 			a{
 				display:inline-block;
-				width:20px;
+				padding:0 10px;
 				height:20px;
 				line-height:18px;
 				border:1px solid $colorgreylight;
@@ -220,10 +254,18 @@
 			}
 		}
 
+		.wmw-mission-content{
+			overflow-x:auto;
+			white-space:nowrap;
+			padding:0 10px 20px 10px;
+			position:relative;
+		}
+
 		.wmw-mission-element{
-			width:18%;
-			margin:0 1%;
-			float:left;
+			width:100%;
+			margin:0 25px 0 0;
+			display:inline-block;
+			white-space:normal;
 
 			.element-title{
 				display:block;
@@ -249,7 +291,7 @@
 				padding:15px;
 				color:$colorgreylight;
 				position:relative;
-				height:400px;
+				height:250px;
 				font-size:14px;
 				overflow:auto;
 
@@ -379,13 +421,13 @@
 		.wmw-mission-sidebar{
 			display:block;
 			position:absolute;
-			top:0; left:0;
-			width:380px;
+			top:3px; left:0;
+			width:80%;
 			height:100%;
 			background:white;
 			border-right:3px solid $colorgreen;
 			z-index:100;
-			transform:translateX(-378px);
+			transform:translateX(-100%);
 			transition:transform .5s $easeinout;
 			font-size:14px;
 
@@ -410,7 +452,7 @@
 				height: 41px;
 				background:url(../images/mission-sidebar-button.png) no-repeat;
 				position:absolute;
-				top:40px; right:-32px;
+				top:0; right:-32px;
 			}
 
 			.sidebar-date{
@@ -614,6 +656,185 @@
 						border:none;
 					}
 				}
+			}
+		}
+	}
+}
+
+/* ------------------------------------------------------------------------------ */
+/* ----------- SMALL SCREENS ---------------------------------------------------- */
+/* ------------------------------------------------------------------------------ */
+
+@media screen and (min-width: $screen-sm-min){
+
+	.wmw-mission{
+
+		.wmw-mission-body{
+
+			&:after{
+				content:'';
+				display: block;
+				position:absolute;
+				top:0; right:10px;
+				width:100px;
+				height:100%;
+				background: linear-gradient(to right, transparent, #fdfdfd); /* Standard syntax */
+			}
+
+			.wmw-mission-content{
+
+				
+			}
+
+			.wmw-mission-element{
+				width:48%;
+			}
+
+			.wmw-mission-sidebar{
+				width:380px;
+			}
+		}
+	}
+}
+
+/* ------------------------------------------------------------------------------ */
+/* ----------- MEDIUM SCREENS --------------------------------------------------- */
+/* ------------------------------------------------------------------------------ */
+
+@media screen and (min-width: $screen-md-min){
+
+	.wmw-mission{
+
+		.wmw-mission-close{
+			position:absolute;
+			top:17px; right:15px;
+			margin:0;
+		}
+
+		.wmw-mission-breadcrumbs{
+
+			.breadcrumbs-el{
+				line-height:45px;
+				font-size:20px;	
+				padding:0 12px 0 35px;
+
+				.wmw-button{
+					top:-3px;
+					margin:0 0 0 10px;
+				}
+
+				&:before,
+				&:after{
+					border-left:20px solid white;
+					border-top:22.5px solid transparent;
+					border-bottom:22.5px solid transparent;
+					top:0; right:-19px;
+				}
+
+				&:before{
+					border-left-color:$colorgreyxlight;
+					right:-20px;
+				}
+
+				&.active{
+					color:white;
+					background:$colorgreen;
+
+					&:after{
+						border-left-color:$colorgreen;
+					}
+				}
+			}
+		}
+
+		.wmw-mission-header{
+			border-bottom:1px solid $colorgreyxlight;
+			
+			h1{
+				font-size:35px;
+				padding:10px 35px;
+			
+				small{
+					font-size:14px;
+				
+					.icon{
+						font-size:22px;
+					}
+				}
+			}
+
+			.wmw-mission-summarybtn{
+				display:none !important;
+			}
+
+			.wmw-mission-summary{
+				max-height:none !important;
+
+				.summary-el{
+					font-size:12px;
+					padding:20px 10px;
+					border-bottom:none;
+					width:10%;
+
+					&:first-child{
+						border-left:none;
+					}
+
+					.icon{
+						font-size:30px;
+					}
+				
+					&.summary-el--salary{
+						width:22%;
+					}
+
+					&.summary-el--answer,
+					&.summary-el--selected{
+						width:18%;
+					}
+				}
+			}
+		}
+
+		.wmw-mission-body{
+
+			.wmw-mission-element{
+				width:23%;
+
+				.element-content{
+					height:400px;
+				}
+			}
+		}
+	}
+}
+
+/* ------------------------------------------------------------------------------ */
+/* ----------- LARGE SCREENS ---------------------------------------------------- */
+/* ------------------------------------------------------------------------------ */
+
+@media screen and (min-width: $screen-lg-min){
+
+	.wmw-mission{
+
+		.wmw-mission-header{
+
+			h1{
+				border-bottom:0;
+			}
+
+			.wmw-mission-summary{
+
+				.summary-el:first-child{
+					border-left:1px solid $colorgreyxlight;
+				}
+			}
+		}
+
+		.wmw-mission-body{
+
+			.wmw-mission-element{
+				width:18%;
 			}
 		}
 	}

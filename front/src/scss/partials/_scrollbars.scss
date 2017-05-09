@@ -29,6 +29,7 @@
   .ps > .ps__scrollbar-x-rail {
     display: none;
     position: absolute;
+    z-index:100;
     /* please don't change 'position' */
     opacity: 0;
     -webkit-transition: background-color .2s linear, opacity .2s linear;
@@ -59,6 +60,7 @@
   .ps > .ps__scrollbar-y-rail {
     display: none;
     position: absolute;
+    z-index:100;
     /* please don't change 'position' */
     opacity: 0;
     -webkit-transition: background-color .2s linear, opacity .2s linear;
