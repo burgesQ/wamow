@@ -175,6 +175,14 @@
 					margin-bottom:5px;
 					color:#b8b8bd;
 				}
+
+				&.summary-el--purple{
+					color:$colorpurple;
+
+					.icon{
+						color:$colorpurple;
+					}
+				}
 			
 				&.summary-el--salary{
 					padding:12px 10px;
@@ -759,6 +767,48 @@
 						&:hover{
 							background:transparent;
 							color:$colorgreen;
+						}
+					}
+
+					.mail-content-answer-bottom{
+						position:absolute;
+						top:100%;
+						padding:17px 0 0 0;
+
+						a{
+							display:inline-block;
+							vertical-align:middle;
+						}
+
+						.bottom-proposal{
+							color:$colorgreen;
+							text-decoration:none;
+							margin:0 10px 0 0;
+							font-size:14px;
+
+							.icon{
+								vertical-align:baseline;
+							}
+
+							&:hover{
+								text-decoration:underline;
+							}
+						}
+
+						.bottom-delete{
+							color:$colorgreylight;
+							text-decoration:none;
+							text-transform:uppercase;
+							font-size:11px;
+							margin:0 0 0 10px;
+
+							.icon{
+								vertical-align:baseline;
+							}
+
+							&:hover{
+								text-decoration:underline;
+							}
 						}
 					}
 

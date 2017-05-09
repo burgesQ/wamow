@@ -13,7 +13,7 @@
 						<i></i>
 					</a>
 				</div>
-				<div class="wmw-mission-summary wmw-mission-summary--left col-xs-12 row">
+				<div class="wmw-mission-summary wmw-mission-summary--left col-xs-12 col-md-10 row">
 					<span class="summary-el summary-el--answer">
 						<span>
 							<i class="icon icon--pen"></i><br />
@@ -49,6 +49,12 @@
 						<span>
 							<i class="icon icon--world"></i><br />
 							On the site
+						</span>
+					</span>
+					<span class="summary-el summary-el--purple">
+						<span>
+							<i class="icon icon--flag"></i><br />
+							Shortlist
 						</span>
 					</span>
 					
@@ -114,6 +120,23 @@
 							<form action="" method="post" class="mail-content-answer mail-content-answer--red">
 								<textarea class="required"></textarea>
 								<button type="submit">Send</button>
+								
+								<!-- Case 1 -->
+								<!--
+								<div class="mail-content-answer-bottom">
+									<a href="#" class="wmw-button wmw-button--small"><i></i><span>Add my proposal</span><i></i></a>
+								</div>
+								-->
+
+								<!-- Case 2 -->
+								<div class="mail-content-answer-bottom">
+									<a href="#" class="bottom-proposal"><i class="icon icon--document"></i> My proposal</a>
+									<a href="#" class="wmw-button wmw-button--grey wmw-button--border wmw-button--small">
+										<i></i><span><i class="icon icon--eye"></i>See</span><i></i>
+									</a>
+									<a href="#" class="bottom-delete"><i class="icon icon--trashbin"></i> Delete</a>
+								</div>
+
 							</form>
 
 						</div>
