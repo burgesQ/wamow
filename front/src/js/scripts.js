@@ -147,8 +147,10 @@ var Master = {
         $('.wmw-overlay-inner').perfectScrollbar({ suppressScrollX:true });  
         
         var $chat    = $('.mail-content-chat');
-        $chat.perfectScrollbar({ suppressScrollX:true });
-        $chat.scrollTop( $chat[0].scrollHeight );
+        if($chat.get().length>0){
+            $chat.perfectScrollbar({ suppressScrollX:true });
+            $chat.scrollTop( $chat[0].scrollHeight );
+        }
 
         $('.wmw-mission-element .element-content').perfectScrollbar({ suppressScrollX:true }); 
         $('.wmw-mission-element .element-notes').perfectScrollbar({ suppressScrollX:true }); 
