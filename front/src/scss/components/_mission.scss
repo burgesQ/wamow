@@ -21,6 +21,8 @@
 		color:$colorgreylight;
 		text-decoration:none;
 		margin:15px;
+		position:relative;
+		z-index:100;
 
 		.icon{
 			font-size:16px;
@@ -505,7 +507,7 @@
 			}
 
 			.mail-content{
-				padding:60px 60px 220px 400px;
+				padding:0 0 220px 400px;
 				position:relative;
 
 				.mail-content-profile{
@@ -610,11 +612,69 @@
 					}
 				}
 
+				.mail-content-sidebar{
+					position:absolute;
+					top:0; left:0;
+					width:340px;
+					height:100%;
+					background:white;
+					border-right:1px solid $colorgreyxlight;
+
+					.sidebar-date{
+						font-family:$fontcantarell;
+						font-size:13px;
+						color:#a2a2a2;
+						margin:0 0 5px 0;
+						letter-spacing:0;
+						padding:20px 20px 0 20px;
+					}
+
+					.sidebar-title{
+						font-family:$fontdincondreg;
+						font-size:24px;
+						letter-spacing:0.06em;
+						line-height:1em;
+						color:$colorpurple;
+						padding:0 20px 15px 20px;
+						border-bottom:1px solid $colorgreyxlight;
+
+						&.sidebar-title--red{
+							color:$colorred;
+						}
+
+						small{
+							display:block;
+							font-family:$fontcantarell;
+							color:$colorgreylight;
+							font-size:12px;
+							letter-spacing:0;
+							margin-top:0;
+						
+							.icon{
+								font-size:16px;
+							}
+						}
+					}
+
+					.sidebar-content{
+						font-size:14px;
+						color:$colorgrey;
+						line-height:1.2em;
+						margin-bottom:20px;
+						letter-spacing:0.06em;
+						padding:20px;
+
+						p{
+							margin:0 0 15px 0;
+						}
+					}
+				}
+
 				.mail-content-chat{
 					position:relative;
 					height:500px;
 					overflow:auto;
-					padding:0 40px 0 0;
+					padding:60px 60px 0 0;
 					font-size:14px;
 
 					.chatbox{
@@ -623,6 +683,7 @@
 						width:80%;
 						border:1px solid $colorgreyxlight;
 						padding:20px;
+						background:white;
 
 						.chatbox-name{
 							font-weight:bold;
@@ -657,6 +718,13 @@
 							}
 						}
 					}
+
+					&.mail-content-chat--red{
+
+						.chatbox .chatbox-name{
+							color:$colorred;
+						}
+					}
 				}
 
 				.mail-content-answer{
@@ -678,13 +746,33 @@
 						padding:0 10px;
 						color:white;
 						font-family:$fontcantarell;
-						font-size:12px;
+						font-size:11px;
 						text-decoration:none;
+						text-transform:uppercase;
 						position:absolute;
 						bottom:-24px;
 						right:0;
 						background:$colorgreen;
-						border:none;
+						border:1px solid $colorgreen;
+						transition:color .3s, background .3s;
+					
+						&:hover{
+							background:transparent;
+							color:$colorgreen;
+						}
+					}
+
+					&.mail-content-answer--red{
+
+						button{
+							background:$colorred;
+							border-color:$colorred;
+
+							&:hover{
+								background:transparent;
+								color:$colorred;
+							}
+						}
 					}
 				}
 			}
@@ -829,6 +917,15 @@
 					&.summary-el--answer,
 					&.summary-el--selected{
 						width:18%;
+					}
+				}
+
+				&.wmw-mission-summary--left{
+
+					.summary-el{
+
+						&:first-child{ border-left: none !important; }
+						&:last-child{ border-right: 1px solid $colorgreyxlight !important; }
 					}
 				}
 			}
