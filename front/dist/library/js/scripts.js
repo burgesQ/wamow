@@ -3121,6 +3121,7 @@ var Master = {
         $('.wmw-mission-sidebar .sidebar-wrapper').perfectScrollbar({ suppressScrollX:true }); 
         $('.wmw-mission-content').perfectScrollbar({ suppressScrollY:true }); 
         $('.main-slider-element-wrapper').perfectScrollbar({ suppressScrollX:true });
+        $('.mail-content-sidebar').perfectScrollbar({ suppressScrollX:true });
 
         Master.init_slider('.main-slider', '.wmw-slider-inner', '.wmw-slider-navigation', false, '.wmw-slider-element', false, false);
     },

@@ -135,10 +135,10 @@
 
 							</div>
 
-							<div class="mail-content-answer">
-								<textarea></textarea>
-								<button>Send</button>
-							</div>
+							<form action="" method="post" class="mail-content-answer">
+								<textarea class="required"></textarea>
+								<button type="submit">Send</button>
+							</form>
 
 						</div>
 
