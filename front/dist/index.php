@@ -40,6 +40,9 @@
 			<a href="contractor/pitch-4.php" class="wmw-button">
 				<i></i><span>Contractor - Pitch 4</span><i></i>
 			</a><br /><br />
+			<a href="contractor/dashboard.php" class="wmw-button">
+				<i></i><span>Contractor - Dashboard</span><i></i>
+			</a><br /><br />
 			<a href="contractor/mission-list.php" class="wmw-button">
 				<i></i><span>Contractor - Mission list</span><i></i>
 			</a><br /><br />

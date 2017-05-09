@@ -1,6 +1,8 @@
 /*include /libs/jquery.core.js*/
 /*include /libs/jquery.validval.js*/
 /*include /libs/jquery.scrollbars.js*/
+/*include /libs/jquery.autocomplete.js*/
+/*include /auditors.js*/
 
 // --------------------- MASTER PART -------------------------- //
 // ------------------------------------------------------------ //
@@ -65,10 +67,6 @@ var Master = {
             $val.val( $(this).val() );
         });
 
-    	$('.wmw-iconfield input').on('change', function(e){
-    		console.log('yo');
-    	}); 
-
         $('.wmw-checklistfield button').on('click', function(){
             $(this).parent().find('.wmw-checklistfield-wrapper').toggleClass('wmw-checklistfield-wrapper--active');
         });
@@ -94,30 +92,41 @@ var Master = {
 
         $('.wmw-checklistfield').on('click', 'a.wmw-tag', function(e){
             e.preventDefault();
-            console.log('allo');
             var id = $(this).attr('href');
             var $field = $(this).parent().find( id );
-            console.log($field, id);
             $field.prop('checked', false);
             $(this).remove();
         });
 
+        $('.wmw-autocomplete').each( function(){
+            Master.init_autocomplete( $(this), Auditors );
+        });
+
         $('body').on('click', '.wmw-copyfield .wmw-button-more', function(e){
             e.preventDefault();
+
             var $field = $(this).parent().find('input, select');
             
-            var nb = $field.attr('data-copy-nb');
+            var nb = parseInt($field.attr('data-copy-nb'))+1;
             var name = $field.attr('data-copy-name');
 
             $(this).parent().after($(this).parent().clone());
-            $(this).remove();
+
+            $('form').validVal();
 
             var $next = $(this).parent().next();
+
             var $next_field = $next.find('input, select');
             var $next_label = $next.find('label');
 
+            Master.init_autocomplete( $next_field, Auditors );
+
+            $next_field.attr('data-copy-nb', nb);
             $next_field.attr('id', name+'-'+nb);
+            $next_field.val('');
             $next_label.attr('for', name+'-'+nb);
+
+            $(this).remove();
         });
 
         $('#wmw-pitch-onsite-wrapper input[type=checkbox]').on('change', function(){
@@ -172,6 +181,22 @@ var Master = {
 
     onscroll : function(){
 
+    },
+
+    init_autocomplete : function( field, lookup ){
+
+      $(field).autocomplete({
+          lookup: lookup,
+          preserveInput: true,
+          minLength: 0,
+          formatResult: function(suggestion, currentValue) {
+
+              return suggestion.value;
+          },
+          onSelect: function (suggestion) {
+              $(field).val( suggestion.value );
+          }
+      });
     },
 
     init_dashboard_mission_slider: function(){

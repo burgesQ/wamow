@@ -1,6 +1,6 @@
 <?php include "../inc/header.inc.php"; ?>
 
-		<form method="post" action="pitch-4.php" class="wmw-onboard wmw-onboard--pitch col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+		<form method="post" action="pitch-5.php" class="wmw-onboard wmw-onboard--pitch col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
 
 			<div class="wmw-onboard-body">
 
