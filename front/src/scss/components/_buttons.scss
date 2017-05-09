@@ -23,8 +23,9 @@
 .wmw-button{
 	position:relative;
 	display:inline-block;
+	text-align:center;
 	height:45px;
-	padding:0 35px;
+	padding:0 25px;
 	line-height:45px;
 	color:white;
 	overflow:hidden;
@@ -285,6 +286,47 @@
 				&:before,
 				&:after{
 					background:#a2a2a2;
+				}
+			}
+		}
+	}
+
+	&.wmw-button--white{
+		color:$colorgreen;
+
+		&:before,
+		&:after{
+			background-color:white;
+			border-color:white;
+		}
+
+		i{
+			background:white;
+		}
+
+		&:hover{
+			color:white;
+
+			&:before,
+			&:after{
+				background:transparent;
+			}
+		}
+
+		&.wmw-button--border{
+			color:white;
+
+			&:before,
+			&:after{
+				background:transparent;
+			}
+
+			&:hover{
+				color:$colorgreen;
+
+				&:before,
+				&:after{
+					background:white;
 				}
 			}
 		}

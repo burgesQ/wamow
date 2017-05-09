@@ -36,27 +36,133 @@
 						
 						<div class="wmw-slider-element wmw-slider-element--active col-xs-12 col-md-4">
 							<div class="main-slider-element">
-								<div class="main-slider-date">Pitched at 26/12/2015</div>
-								<div class="main-slider-title">Consultant(e) in collaborative innovation management</div>
-								<div class="main-slider-desc">
-									The jobholder will be close to the business and to the learning and to the HR Community, will be responsible of improving the current  [...]
+								<div class="main-slider-element-wrapper">
+									<div class="main-slider-date">Pitched at 26/12/2015</div>
+									<div class="main-slider-title">Consultant(e) in collaborative innovation management</div>
+									<div class="main-slider-desc">
+										The jobholder will be close to the business and to the learning and to the HR Community, will be responsible of improving the current  [...]
+									</div>
+									<div class="main-slider-price">
+										<strong>FINANCE</strong>
+										$15,000
+										<small>Sales &amp; Business Developement</small>
+									</div>
+									<div class="main-slider-infos">
+										<span><i class="icon icon--clock"></i> 4 days left</span><br />
+										<span><i class="icon icon--pointer"></i> New York - USA</span>
+									</div>
 								</div>
-								<div class="main-slider-price">
-									<strong>FINANCE</strong>
-									$15,000
-									<small>Sales &amp; Business Developement</small>
-								</div>
-								<div class="main-slider-infos">
-									<span><i class="icon icon--clock"></i> 4 days left</span>
-									<span><i class="icon icon--pointer"></i> New York - USA</span>
-								</div>
-								<a href="#" class="wmw-button wmw-button--green">
+								<button type="button" data-mission-id="01" class="main-slider-interested wmw-button wmw-button--green">
 									<i></i><span>I am interested</span><i></i>
-								</a>
+								</button>
+								<div class="main-slider-hover">
+									<span>
+										<i class="icon icon--tick"></i>
+										<strong>Added to your missions</strong>
+										<a href="#" class="wmw-button wmw-button--white"><i></i><span>Submit a proposal</span><i></i></a><br />
+										<a href="#" class="main-slider-hover-all">See all missions</a>
+									</span>
+								</div>
 							</div>
 						</div>
 
-						<div class="wmw-slider-element wmw-slider-element--special col-xs-12 col-md-8">
+						<div class="wmw-slider-element col-xs-12 col-md-4">
+							<div class="main-slider-element">
+								<div class="main-slider-element-wrapper">
+									<div class="main-slider-date">Pitched at 26/12/2015</div>
+									<div class="main-slider-title">Consultant(e) in collaborative innovation management</div>
+									<div class="main-slider-desc">
+										The jobholder will be close to the business and to the learning and to the HR Community, will be responsible of improving the current  [...]
+									</div>
+									<div class="main-slider-price">
+										<strong>FINANCE</strong>
+										$15,000
+										<small>Sales &amp; Business Developement</small>
+									</div>
+									<div class="main-slider-infos">
+										<span><i class="icon icon--clock"></i> 4 days left</span><br />
+										<span><i class="icon icon--pointer"></i> New York - USA</span>
+									</div>
+								</div>
+								<button type="button" data-mission-id="02" class="main-slider-interested wmw-button wmw-button--green">
+									<i></i><span>I am interested</span><i></i>
+								</button>
+								<div class="main-slider-hover">
+									<span>
+										<i class="icon icon--tick"></i>
+										<strong>Added to your missions</strong>
+										<a href="#" class="wmw-button wmw-button--white"><i></i><span>Submit a proposal</span><i></i></a><br />
+										<a href="#" class="main-slider-hover-all">See all missions</a>
+									</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="wmw-slider-element col-xs-12 col-md-4">
+							<div class="main-slider-element">
+								<div class="main-slider-element-wrapper">
+									<div class="main-slider-date">Pitched at 26/12/2015</div>
+									<div class="main-slider-title">Consultant(e) in collaborative innovation management</div>
+									<div class="main-slider-desc">
+										The jobholder will be close to the business and to the learning and to the HR Community, will be responsible of improving the current  [...]
+									</div>
+									<div class="main-slider-price">
+										<strong>FINANCE</strong>
+										$15,000
+										<small>Sales &amp; Business Developement</small>
+									</div>
+									<div class="main-slider-infos">
+										<span><i class="icon icon--clock"></i> 4 days left</span><br />
+										<span><i class="icon icon--pointer"></i> New York - USA</span>
+									</div>
+								</div>
+								<button type="button" data-mission-id="03" class="main-slider-interested wmw-button wmw-button--green">
+									<i></i><span>I am interested</span><i></i>
+								</button>
+								<div class="main-slider-hover">
+									<span>
+										<i class="icon icon--tick"></i>
+										<strong>Added to your missions</strong>
+										<a href="#" class="wmw-button wmw-button--white"><i></i><span>Submit a proposal</span><i></i></a><br />
+										<a href="#" class="main-slider-hover-all">See all missions</a>
+									</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="wmw-slider-element col-xs-12 col-md-4">
+							<div class="main-slider-element">
+								<div class="main-slider-element-wrapper">
+									<div class="main-slider-date">Pitched at 26/12/2015</div>
+									<div class="main-slider-title">Consultant(e) in collaborative innovation management</div>
+									<div class="main-slider-desc">
+										The jobholder will be close to the business and to the learning and to the HR Community, will be responsible of improving the current  [...]
+									</div>
+									<div class="main-slider-price">
+										<strong>FINANCE</strong>
+										$15,000
+										<small>Sales &amp; Business Developement</small>
+									</div>
+									<div class="main-slider-infos">
+										<span><i class="icon icon--clock"></i> 4 days left</span><br />
+										<span><i class="icon icon--pointer"></i> New York - USA</span>
+									</div>
+								</div>
+								<button type="button" data-mission-id="04" class="main-slider-interested wmw-button wmw-button--green">
+									<i></i><span>I am interested</span><i></i>
+								</button>
+								<div class="main-slider-hover">
+									<span>
+										<i class="icon icon--tick"></i>
+										<strong>Added to your missions</strong>
+										<a href="#" class="wmw-button wmw-button--white"><i></i><span>Submit a proposal</span><i></i></a><br />
+										<a href="#" class="main-slider-hover-all">See all missions</a>
+									</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="wmw-slider-element wmw-slider-element--special col-xs-12 col-md-4">
 							<div class="main-slider-element">
 								<div class="main-slider-nopitch">
 									No other pitch yet

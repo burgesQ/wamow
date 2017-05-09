@@ -3112,6 +3112,7 @@ var Master = {
         Master.init_pitch_finder();
         Master.init_mission_overlay();
         Master.init_mission_notes();
+        Master.init_dashboard_mission_slider();
 
         $('.wmw-overlay-inner').perfectScrollbar({ suppressScrollX:true });  
         $('.mail-content-chat').perfectScrollbar({ suppressScrollX:true });  
@@ -3119,6 +3120,9 @@ var Master = {
         $('.wmw-mission-element .element-notes').perfectScrollbar({ suppressScrollX:true }); 
         $('.wmw-mission-sidebar .sidebar-wrapper').perfectScrollbar({ suppressScrollX:true }); 
         $('.wmw-mission-content').perfectScrollbar({ suppressScrollY:true }); 
+        $('.main-slider-element-wrapper').perfectScrollbar({ suppressScrollX:true });
+
+        Master.init_slider('.main-slider', '.wmw-slider-inner', '.wmw-slider-navigation', false, '.wmw-slider-element', false, false);
     },
 
     onload : function(){
@@ -3131,6 +3135,32 @@ var Master = {
 
     onscroll : function(){
 
+    },
+
+    init_dashboard_mission_slider: function(){
+
+        function i_am_interested( id ){
+
+            var data = { "id" : id };
+
+            $.ajax( '../ajax/interested.php', {
+                method : 'post',
+                data : data,
+                dataType : 'json'
+            }).done( function( response ){
+
+                if(response.status = 'ok'){
+                    $('.main-slider-interested[data-mission-id='+id+']')
+                        .parent().find('.main-slider-hover')
+                        .addClass('main-slider-hover--interested');
+                }
+            });
+        }
+
+        $('.main-slider-interested').on('click', function(){
+            var mission_id = $(this).attr('data-mission-id');
+            i_am_interested( mission_id );
+        });
     },
 
     init_mission_notes : function(){
@@ -3280,7 +3310,166 @@ var Master = {
         $overlay.attr('data-num', '');
         $overlay[0].reset();
         Master.close_overlay( $overlay );
-    }
+    },
+
+    // Fonction d'initialisation de slider
+    // slider (str) le sélecteur du slider
+    // list (str) le sélecteur du wrapper
+    // listController (str) le sélecteur du wrapper de navigation
+    // listPagination (str) le sélecteur du wrapper de pagination
+    // listElement (str) le sélecteur des slides
+    // callback (function) la fonction de callback
+    // touch (boolean) touch actif (nécessite jquery swipe events) || (function) callback
+    // touchPrev (function) callback
+
+    init_slider : function(slider, list, listController, listPagination, listElement, touch, touchPrev) {
+
+        if(typeof(callback)=='undefined')
+            callback = function(){};
+
+        if(typeof(touch)=='undefined')
+            touch = true;
+
+        if(typeof(touchPrev)=='undefined')
+            touchPrev = false;
+
+        var prev = slider+' '+listController+'--prev';
+        var next = slider+' '+listController+'--next';
+
+        var pagination = slider+' '+listPagination;
+        var paginationItem = pagination + ' a';
+
+        var element = slider+' '+listElement;
+
+        var activeClass = 'wmw-slider-element--active';
+        var activeElement = element + '.' + activeClass;
+
+        if(!$(paginationItem).length){
+
+            $(element).each(function() {
+                $(pagination).append('<a href="#"></a>');
+            });
+        }
+
+        $(element + ':first-child').addClass(activeClass);
+        $(paginationItem + ':first-child').addClass(activeClass);
+
+        $(prev).click(function(e) {
+
+            e.preventDefault();
+
+            if($(element + ':first-child').hasClass(activeClass)) {
+
+                $(activeElement).removeClass(activeClass);
+                $(element + ':last-child').addClass(activeClass);
+            }
+
+            else {
+
+                $(activeElement).removeClass(activeClass).prev().addClass(activeClass);
+            }
+
+            coordinatePagination();
+        });
+
+        $(next).click(function(e) {
+
+            e.preventDefault();
+
+            if($(element + ':last-child').hasClass(activeClass)) {
+
+              $(activeElement)
+                .removeClass(activeClass);
+
+              $(element + ':first-child')
+                  .addClass(activeClass);
+            }
+            else{
+
+              $(activeElement)
+                .removeClass(activeClass)
+                .next()
+                  .addClass(activeClass);
+            }
+
+            coordinatePagination();
+        });
+
+        if(touch === true && typeof(touch) != 'function'){
+
+            $(slider).on('swipeleft',function(){
+              if($(next).get().length>0)
+                $(next).trigger('click');
+
+              else{
+
+                var $btn = false;
+                $btn = $(paginationItem+'.active').next('a:visible');
+
+                if($btn === false){
+                  $btn = $(paginationItem+':first-child');
+                }
+
+                $btn.trigger('click'); 
+              }
+            });
+            $(slider).on('swiperight',function(){
+              if($(prev).get().length>0)
+                $(prev).trigger('click');
+
+              else{
+                
+                var $btn = false;
+                $btn = $(paginationItem+'.active').next('a:visible');
+
+                if($btn === false){
+                  $btn = $last;
+                }
+
+                $btn.trigger('click'); 
+              }
+            }); 
+
+        }else{
+
+            if(typeof(touch) === 'function'){
+                $(slider).on('swipeleft',function(){
+                    touch();
+                });
+            }
+
+            if(typeof(touchPrev) === 'function'){
+                $(slider).on('swiperight',function(){
+                    touchPrev();
+                }); 
+            }
+        }
+
+        $(paginationItem).click(function(e) {
+
+            e.preventDefault();
+
+            $(paginationItem)
+              .removeClass(activeClass);
+            $(this)
+              .addClass(activeClass);
+
+            $(activeElement)
+              .removeClass(activeClass);
+            $(element + ':nth-child(' + ($(paginationItem + '.' + activeClass).index() + 1) + ')')
+              .addClass(activeClass);
+        });
+
+        function coordinatePagination() {
+
+            $(paginationItem)
+              .removeClass(activeClass);
+            $(paginationItem + ':nth-child(' + ($(activeElement).index() + 1) + ')')
+              .addClass(activeClass);
+
+            callback($(activeElement));
+        }
+    },
 };
 
 $(document).ready( function(){

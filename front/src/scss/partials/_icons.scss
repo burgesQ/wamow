@@ -2,11 +2,11 @@
 
 @font-face {
     font-family:"icons";
-    src: url("../fonts/icons.eot?63bc720e476f3f4cf2d1cc5767a2a634");
+    src: url("../fonts/icons.eot?e4fd634c9d9c31eb6a80240bbd4f4dba");
     src: url("../fonts/icons.eot?#iefix") format("embedded-opentype"),
-		url("../fonts/icons.woff?63bc720e476f3f4cf2d1cc5767a2a634") format("woff"),
-		url("../fonts/icons.ttf?63bc720e476f3f4cf2d1cc5767a2a634") format("truetype"),
-		url("../fonts/icons.svg?63bc720e476f3f4cf2d1cc5767a2a634#icons") format("svg");
+		url("../fonts/icons.woff?e4fd634c9d9c31eb6a80240bbd4f4dba") format("woff"),
+		url("../fonts/icons.ttf?e4fd634c9d9c31eb6a80240bbd4f4dba") format("truetype"),
+		url("../fonts/icons.svg?e4fd634c9d9c31eb6a80240bbd4f4dba#icons") format("svg");
     font-weight:normal;
     font-style:normal;
     }
@@ -61,7 +61,8 @@
 .icon--rocket:before { content:"\f124"; }
 .icon--selected:before { content:"\f125"; }
 .icon--star:before { content:"\f126"; }
-.icon--trashbin:before { content:"\f127"; }
-.icon--twitter:before { content:"\f128"; }
-.icon--typology:before { content:"\f129"; }
-.icon--world:before { content:"\f12a"; }
+.icon--tick:before { content:"\f127"; }
+.icon--trashbin:before { content:"\f128"; }
+.icon--twitter:before { content:"\f129"; }
+.icon--typology:before { content:"\f12a"; }
+.icon--world:before { content:"\f12b"; }
