@@ -278,10 +278,9 @@
 				border:1px solid $colorgreyxlight;
 				background:white;
 				box-shadow:0 0 6px rgba(0,0,0,0.1);
-				padding:0 15px;
-				height:44px;
-				line-height:44px;
-				font-size:23px;
+				padding:10px 15px;
+				min-height:44px;
+				font-size:20px;
 				font-family:$fontdincondmed;
 				text-transform:uppercase;
 				color:$colorgrey;
@@ -396,23 +395,36 @@
 			}
 
 			&.wmw-mission-element--shortlist{
-				width:31.3333%;
-				margin:0 1%;
 
 				.element-title{
-					padding-right:0;
+					position:relative;
+					padding:10px 160px 10px 15px;
+
+					.element-title-links{
+						top:0; right:0;
+						position:absolute;
+					}
 
 					.wmw-simple-button{
-						float:right;
+						font-size:16px;
+						vertical-align:top;
+						height:44px;
+						line-height:44px;
+						
+						.icon{
+							font-size:20px;
+						}
 					}
 
 					.element-title-link{
-						float:right;
+						display:inline-block;
+						vertical-align:top;
+						line-height:44px;
 						font-size:10px;
 						text-transform:uppercase;
 						text-decoration:none;
 						color:$colorgreylight;
-						margin:0 12px 0 0;
+						margin:0 6px 0 0;
 						font-family:$fontcantarell;
 
 						&:hover{
@@ -814,6 +826,10 @@
 			.wmw-mission-element{
 				width:23%;
 
+				&.wmw-mission-element--shortlist{
+					width:48%;
+				}
+
 				.element-content{
 					height:400px;
 				}
@@ -848,6 +864,10 @@
 
 			.wmw-mission-element{
 				width:18%;
+
+				&.wmw-mission-element--shortlist{
+					width:31%;
+				}
 			}
 		}
 	}
