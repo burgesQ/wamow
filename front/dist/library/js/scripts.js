@@ -3116,7 +3116,11 @@ var Master = {
         Master.init_dashboard_mission_slider();
 
         $('.wmw-overlay-inner').perfectScrollbar({ suppressScrollX:true });  
-        $('.mail-content-chat').perfectScrollbar({ suppressScrollX:true });  
+        
+        var $chat    = $('.mail-content-chat');
+        $chat.perfectScrollbar({ suppressScrollX:true });
+        $chat.scrollTop( $chat[0].scrollHeight );
+
         $('.wmw-mission-element .element-content').perfectScrollbar({ suppressScrollX:true }); 
         $('.wmw-mission-element .element-notes').perfectScrollbar({ suppressScrollX:true }); 
         $('.wmw-mission-sidebar .sidebar-wrapper').perfectScrollbar({ suppressScrollX:true }); 
