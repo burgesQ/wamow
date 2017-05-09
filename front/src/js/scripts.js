@@ -141,6 +141,7 @@ var Master = {
         Master.init_pitch_finder();
         Master.init_mission_overlay();
         Master.init_mission_notes();
+        Master.init_mission_pitch();
         Master.init_dashboard_mission_slider();
 
         $('.wmw-overlay-inner').perfectScrollbar({ suppressScrollX:true });  
@@ -214,6 +215,20 @@ var Master = {
             var val = $(this).val();
             var id = $("#wmw-mission-id").val();
             record_notes(val, id);
+        });
+    },
+
+    init_mission_pitch : function(){
+
+        $('.mail-content-pitch form').on('submit', function(){
+
+            if( !$('.mail-content-pitch-payment').hasClass('mail-content-pitch-payment--active') &&
+                $('.mail-content-pitch form .invalid').length == 0){
+
+                $('.mail-content-pitch-payment').addClass('mail-content-pitch-payment--active');
+
+                return false;
+            }
         });
     },
 
