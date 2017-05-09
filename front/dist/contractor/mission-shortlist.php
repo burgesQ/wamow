@@ -88,8 +88,10 @@
 					<div class="wmw-mission-element wmw-mission-element--shortlist">
 						<div class="element-title">
 							Albilan François
-							<a href="#" class="wmw-simple-button wmw-simple-button--green"><i class="icon icon--download"></i> Proposal</a>
-							<a href="#" class="element-title-link">Profile</a>
+							<div class="element-title-links">
+								<a href="#" class="element-title-link">Profile</a>
+								<a href="#" class="wmw-simple-button wmw-simple-button--green"><i class="icon icon--download"></i> Proposal</a>
+							</div>
 						</div>
 						<div class="element-content">
 							<div class="element-content-title">Advisor 1</div>
@@ -129,7 +131,9 @@
 					<div class="wmw-mission-element wmw-mission-element--shortlist">
 						<div class="element-title">
 							Jack Turner
-							<a href="#" class="element-title-link">Profile</a>
+							<div class="element-title-links">
+								<a href="#" class="element-title-link">Profile</a>
+							</div>
 						</div>
 						<div class="element-content element-content--newmessage">
 							<div class="element-content-title">Advisor 1</div>
@@ -170,8 +174,10 @@
 					<div class="wmw-mission-element wmw-mission-element--shortlist">
 						<div class="element-title">
 							Marie Solame
-							<a href="#" class="wmw-simple-button wmw-simple-button--green"><i class="icon icon--download"></i> Proposal</a>
-							<a href="#" class="element-title-link">Profile</a>
+							<div class="element-title-links">
+								<a href="#" class="element-title-link">Profile</a>
+								<a href="#" class="wmw-simple-button wmw-simple-button--green"><i class="icon icon--download"></i> Proposal</a>
+							</div>
 						</div>
 						<div class="element-content">
 							<div class="element-content-title">Advisor 1</div>
