@@ -105,7 +105,6 @@
 					<div class="wmw-mission-element wmw-mission-element--shortlist">
 						<div class="element-title">
 							Jack Turner
-							<a href="#" class="wmw-simple-button wmw-simple-button--green"><i class="icon icon--download"></i> Proposal</a>
 							<a href="#" class="element-title-link">Profile</a>
 						</div>
 						<div class="element-content element-content--newmessage">
@@ -114,7 +113,7 @@
 							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,  occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore. accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.
 							<div class="element-content-bottom">
 								Today, 15h20
-								<a href="#"><i class="icon icon--eye"></i> Show</a>
+								<a href="#"><i class="icon icon--eye"></i> Read</a>
 							</div>
 						</div>
 						<div class="element-notes">
