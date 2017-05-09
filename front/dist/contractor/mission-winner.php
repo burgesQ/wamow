@@ -117,8 +117,9 @@
 							</div>
 
 							<div class="mail-content-notes mail-content-notes--semi">
-								<strong>Notes</strong>
-								<textarea></textarea>
+								<label for="wmw-mission-notes">Notes</label>
+								<textarea id="wmw-mission-notes"></textarea>
+								<div id="wmw-mission-notes-status">Enregistré</div>
 							</div>
 
 							<div class="mail-content-chat">

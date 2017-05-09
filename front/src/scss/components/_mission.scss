@@ -577,7 +577,7 @@
 						height:calc(50% - 120px);
 					}
 
-					strong{
+					label{
 						font-size:35px;
 						font-family:$fontdincondmed;
 						color:#b7b7bc;
@@ -585,6 +585,7 @@
 						top:20px; left:20px;
 						letter-spacing:0;
 						font-weight:normal;
+						cursor:pointer;
 
 					}
 
@@ -594,6 +595,18 @@
 						height:100%;
 						padding:20px;
 						color:$colorgrey;
+					}
+
+					#wmw-mission-notes-status{
+						display:none;
+						position:absolute;
+						text-align:right;
+						color:$colorgreen;
+						font-size:12px;
+						font-style:italic;
+						font-weight:bold;
+						letter-spacing:0;
+						top:10px; right:15px;
 					}
 				}
 
