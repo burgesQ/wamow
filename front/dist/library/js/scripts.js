@@ -3091,6 +3091,13 @@ var Master = {
             $next_label.attr('for', name+'-'+nb);
         });
 
+        $('#wmw-pitch-onsite-wrapper input[type=checkbox]').on('change', function(){
+            if($(this).is(':checked'))
+                $('#wmw-pitch-onsite-wrapper select').show();
+            else
+                $('#wmw-pitch-onsite-wrapper select').hide()
+        });
+
         $('.wmw-cdashboard-sidebar .sidebar-button').on('click', function(e){
             e.preventDefault();
             $('.wmw-cdashboard-sidebar').toggleClass('wmw-cdashboard-sidebar--active');

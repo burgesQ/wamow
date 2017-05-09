@@ -99,7 +99,7 @@
 								<a href="#" class="wmw-tip">?</a>
 							</label>
 							<div class="wmw-switchfield">
-								<input type="checkbox" id="company-small" name="company-small" class="requiredgroup:company-size">
+								<input type="checkbox" id="company-small" name="company-small" class="requiredgroup:company-size vv-ggparent">
 								<label for="company-small"></label>
 							</div>
 						</div>
@@ -110,7 +110,7 @@
 								<a href="#" class="wmw-tip">?</a>
 							</label>
 							<div class="wmw-switchfield">
-								<input type="checkbox" id="company-medium" name="company-medium" class="requiredgroup:company-size">
+								<input type="checkbox" id="company-medium" name="company-medium" class="requiredgroup:company-size vv-ggparent">
 								<label for="company-medium"></label>
 							</div>
 						</div>
@@ -121,7 +121,7 @@
 								<a href="#" class="wmw-tip">?</a>
 							</label>
 							<div class="wmw-switchfield">
-								<input type="checkbox" id="company-large" name="company-large" class="requiredgroup:company-size">
+								<input type="checkbox" id="company-large" name="company-large" class="requiredgroup:company-size vv-ggparent">
 								<label for="company-large"></label>
 							</div>
 						</div>
@@ -132,7 +132,7 @@
 								North America
 							</label>
 							<div class="wmw-switchfield">
-								<input type="checkbox" id="region-1" name="company-regions-1" class="requiredgroup:company-region">
+								<input type="checkbox" id="region-1" name="company-regions-1" class="requiredgroup:company-region vv-ggparent">
 								<label for="region-1"></label>
 							</div>
 						</div>
@@ -141,7 +141,7 @@
 								South America
 							</label>
 							<div class="wmw-switchfield">
-								<input type="checkbox" id="region-2" name="company-regions-2" class="requiredgroup:company-region">
+								<input type="checkbox" id="region-2" name="company-regions-2" class="requiredgroup:company-region vv-ggparent">
 								<label for="region-2"></label>
 							</div>
 						</div>
@@ -150,7 +150,7 @@
 								EMEA
 							</label>
 							<div class="wmw-switchfield">
-								<input type="checkbox" id="region-3" name="company-regions-3" class="requiredgroup:company-region">
+								<input type="checkbox" id="region-3" name="company-regions-3" class="requiredgroup:company-region vv-ggparent">
 								<label for="region-3"></label>
 							</div>
 						</div>
@@ -159,7 +159,7 @@
 								Asia - Pacific
 							</label>
 							<div class="wmw-switchfield">
-								<input type="checkbox" id="region-4" name="company-regions-4" class="requiredgroup:company-region">
+								<input type="checkbox" id="region-4" name="company-regions-4" class="requiredgroup:company-region vv-ggparent">
 								<label for="region-4"></label>
 							</div>
 						</div>
