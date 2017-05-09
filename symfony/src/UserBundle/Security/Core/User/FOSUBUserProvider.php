@@ -85,10 +85,9 @@ class FOSUBUserProvider extends BaseClass
             // set user data
             $user
                 ->setEmail($username)
-                ->setPassword($username)
                 ->setEnabled(true)
+                ->setPassword('password')
                 ->setRoles(['ROLE_ADVISOR'])
-                ->setPasswordSet(false)
             ;
 
             if (array_key_exists('firstName', $data))
@@ -104,9 +103,7 @@ class FOSUBUserProvider extends BaseClass
                 $this->container->get('doctrine')->getManager()->persist($address);
                 $user->addAddress($address);
             }
-
             $user->setLinkedinData($data);
-
             $dispatcher = $this->container->get('event_dispatcher');
             $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, null);
         } else {

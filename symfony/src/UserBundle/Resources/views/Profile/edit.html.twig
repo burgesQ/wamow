@@ -1,5 +1,14 @@
-{% extends "UserBundle::layout.html.twig" %}
+{% extends "::base.html.twig" %}
+{% set roleAdvisor = (user.roles[0] == 'ROLE_ADVISOR') %}
 
-{% block fos_user_content %}
-{% include "FOSUserBundle:Profile:edit_content.html.twig" %}
-{% endblock fos_user_content %}
+{% set roleAdvisor = (user.roles[0] == 'ROLE_ADVISOR') %}
+
+{% block body %}
+    {% include "UserBundle:Profile:profile_sidebar.html.twig" %}
+    {% if roleAdvisor %}
+        {% include "UserBundle:Profile:edit_content_advisor.html.twig" %}
+    {% else %}
+        {% include "UserBundle:Profile:edit_content_contractor.html.twig" %}
+    {% endif %}
+    {% include "UserBundle:Profile:profile_content_bottom.html.twig" %}
+{% endblock body %}

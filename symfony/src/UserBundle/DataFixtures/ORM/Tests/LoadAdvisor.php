@@ -2525,6 +2525,7 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             $i = 0;
             foreach ($oneData[11] as $oneExpShap) {
 
+                /** @var ExperienceShaping $shap */
                 $shap = new ExperienceShaping();
 
                 $shap
@@ -2533,6 +2534,30 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                     ->setDailyFees($oneExpShap[8])
                     ->setPeremption($oneExpShap[9])
                 ;
+
+                switch ($oneExpShap) {
+                    case 0:
+                        $shap->addCompanySize($smallComp);
+                        break;
+                    case 1:
+                        $shap->addCompanySize($mediumComp);
+                        break;
+                    case 2:
+                        $shap->addCompanySize($largeComp);
+                        break;
+                    case 3:
+                        $shap->addContinent($southAmerica);
+                        break;
+                    case 4:
+                        $shap->addContinent($northAmerica);
+                        break;
+                    case 5:
+                        $shap->addContinent($asia);
+                        break;
+                    case 6:
+                        $shap->addContinent($emea);
+                        break;
+                }
 
                 $manager->persist($shap);
                 $newUser->addExperienceShaping($shap);

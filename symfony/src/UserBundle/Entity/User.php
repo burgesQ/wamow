@@ -251,27 +251,6 @@ class User extends BaseUser implements ParticipantInterface
     private $businessPractice;
 
     /**
-     * @ORM\Column(name="email_emergency", type="string", length=255, nullable=true)
-     * @Assert\Email(
-     *     message = "The email '{{ value }}' is not a valid email."
-     * )
-     */
-    protected $emergencyEmail;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="nb_load", type="smallint", nullable=false)
-     * @Assert\Range(
-     *      min = 10,
-     *      max = 1000,
-     *      minMessage = "You must load at least {{ limit }} messages",
-     *      maxMessage = "You cannot load more than {{ limit }} messaxges"
-     * )
-     */
-    private $nbLoad;
-
-    /**
      * @var ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="\MissionBundle\Entity\WorkExperience", cascade={"persist"})
@@ -293,6 +272,14 @@ class User extends BaseUser implements ParticipantInterface
      * )
      */
     private $userMission;
+
+    /**
+     * @ORM\Column(name="emergency_email", type="string", length=255, nullable=true)
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email."
+     * )
+     */
+    protected $emergencyEmail;
 
     /**
      * @var boolean
@@ -1215,6 +1202,19 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
+     * Set emailNotification
+     *
+     * @param boolean $emailNotification
+     * @return User
+     */
+    public function setEmailNotification($emailNotification)
+    {
+        $this->emailNotification = $emailNotification;
+
+        return $this;
+    }
+
+    /**
      * Remove address
      *
      * @param \ToolsBundle\Entity\Address $address
@@ -1236,20 +1236,7 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Set emailNotification
-     *
-     * @param boolean $emailNotification
-     * @return User
-     */
-    public function setEmailNotification($emailNotification)
-    {
-        $this->emailNotification = $emailNotification;
-
-        return $this;
-    }
-
-    /**
-     * Get linkedinData
+     * Get LinkedinData
      *
      * @return array 
      */

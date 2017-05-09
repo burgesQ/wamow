@@ -28,6 +28,7 @@
             {% if user.phone %}
                 ({{ user.phone.prefix.prefix }}){{ user.phone.number }}
             {% endif %}
+            &nbsp;&nbsp;&nbsp;&nbsp;
             BubleIcon
             {% for language in user.languages %}
                 {% if loop.last %}
@@ -42,6 +43,7 @@
             {% if user.addresses is not empty %}
                 {% set address = user.addresses|last %}
                 {{ address.street }}{{ address.street2 }} - {{ address.zipcode }} {{ address.city }}
+                &nbsp;&nbsp;&nbsp;&nbsp;
                 EarthIcon
                 {{ address.country }}
             {% endif %}

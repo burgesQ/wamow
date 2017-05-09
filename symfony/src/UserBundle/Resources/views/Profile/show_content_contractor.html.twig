@@ -41,6 +41,7 @@
             {% if user.addresses is not empty %}
                 {% set address = user.addresses|last %}
                 {{ address.street }}{{ address.street2 }} - {{ address.zipcode }} {{ address.city }}
+                &nbsp;&nbsp;&nbsp;&nbsp;
                 EarthIcon
                 {{ address.country }}
             {% endif %}
@@ -49,6 +50,7 @@
             MapsCompanyIcon
             {% if company.address is not null %}
                 {{ company.address.street }}{{ company.address.street2 }} - {{ company.address.zipcode }} {{ company.address.city }}
+                &nbsp;&nbsp;&nbsp;&nbsp;
                 EarthIcon
                 {{ company.address.country }}
             {% endif %}

@@ -2,36 +2,32 @@
 
 namespace ToolsBundle\Form;
 
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
-use ToolsBundle\Entity\PrefixNumber;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\AbstractType;
 
 class PhoneNumberType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('prefix', 'entity', array(
-                'class' => 'ToolsBundle:PrefixNumber',
-                'property' => 'country',
-                'multiple' => false,
+            ->add('prefix', EntityType::class, [
                 'placeholder' => 'form.phone.chooseprefix',
-                'label'=>'form.phone.prefix',
-                'translation_domain' => 'tools',
-            ))
-            ->add('number', null,
-                array(
-                'label'=>'form.phone.number',
-                'required'=>true,
-                'translation_domain' => 'tools'
-            ))
-            ;
+                'property'    => 'country',
+                'class'       => 'ToolsBundle\Entity\PrefixNumber',
+                'label'       => false,
+            ])
+            ->add('number', null, [
+                'required' => true,
+                'label'    => false
+                // TODO ADD REGEX CONSTRAINT
+            ])
+        ;
     }
 
     /**
@@ -39,8 +35,8 @@ class PhoneNumberType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'ToolsBundle\Entity\PhoneNumber'
-        ));
+        ]);
     }
 }

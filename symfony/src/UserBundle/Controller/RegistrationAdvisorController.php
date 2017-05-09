@@ -46,7 +46,6 @@ class RegistrationAdvisorController extends Controller
             $user = $userManager->createUser();
             $user->setEnabled(true);
             $user->setRoles(["ROLE_ADVISOR"]);
-            $user->setPasswordSet(true);
         } else if (($url = $this->get('signedup')->checkIfSignedUp($user->getStatus()))) {
             $this->redirectToRoute($url);
         }
