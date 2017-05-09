@@ -5,7 +5,7 @@
 			<a href="#" class="wmw-mission-close"><i class="icon icon--cross"></i> Back to board</a>
 
 			<div class="wmw-mission-breadcrumbs">
-				<a href="#" class="breadcrumbs-el active">1. All advisors</a>
+				<span class="breadcrumbs-el active">1. All advisors</span>
 				<span class="breadcrumbs-el">
 					2. Shortlist 
 					<button class="wmw-button wmw-button--black wmw-button--border wmw-button--small">
