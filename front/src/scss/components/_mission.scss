@@ -224,10 +224,6 @@
 		padding:50px 15px 15px 15px;
 		overflow:hidden;
 
-		&.wmw-mission-body--mail{
-			padding:0;
-		}
-
 		.wmw-mission-pagination{
 			display:block;
 			position:absolute;
@@ -259,6 +255,15 @@
 			white-space:nowrap;
 			padding:0 10px 20px 10px;
 			position:relative;
+		}
+
+		&.wmw-mission-body--mail{
+			padding:0;
+
+			.wmw-mission-content{
+				overflow:hidden;
+				white-space:normal;
+				padding:0;			}
 		}
 
 		.wmw-mission-element{
@@ -465,6 +470,7 @@
 		.wmw-mission-mail{
 			display:block;
 			position:relative;
+			white-space:normal;
 		
 			.mail-toolbar{
 				display:block;
@@ -679,6 +685,13 @@
 				width:100px;
 				height:100%;
 				background: linear-gradient(to right, transparent, #fdfdfd); /* Standard syntax */
+			}
+
+			&.wmw-mission-body--mail{
+
+				&:after{
+					content:none;
+				}
 			}
 
 			.wmw-mission-content{

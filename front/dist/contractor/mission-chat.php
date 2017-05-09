@@ -5,7 +5,7 @@
 			<a href="#" class="wmw-mission-close"><i class="icon icon--cross"></i> Back to board</a>
 
 			<div class="wmw-mission-breadcrumbs">
-				<a href="#" class="breadcrumbs-el active">1. All advisors</a>
+				<span class="breadcrumbs-el active">1. All advisors</span>
 				<span class="breadcrumbs-el">
 					2. Shortlist 
 					<button class="wmw-button wmw-button--black wmw-button--border wmw-button--small">
@@ -14,45 +14,69 @@
 				</span>
 				<span class="breadcrumbs-el">3. Finalist</span>
 			</div>
-		
-			<div class="wmw-mission-header">
-				<h1>
+
+			<div class="wmw-mission-header row">
+				<h1 class="col-xs-12 col-lg-4">
 					Exercitation ullamco
 					<small><i class="icon icon--certification"></i> Certification : CIA</small>
 				</h1>
-				<div class="wmw-mission-summary">
-					<span>
-						<i class="icon icon--avatar"></i><br />
-						9 Interested
+				<div class="wmw-mission-summarybtn col-xs-12">
+					<a href="#" class="wmw-button wmw-button--small">
+						<i></i>
+						<span class='off'>More details</span>
+						<span class='on'>Less details</span>
+						<i></i>
+					</a>
+				</div>
+				<div class="wmw-mission-summary col-xs-12 col-lg-8 row">
+					<span class="summary-el">
+						<span>
+							<i class="icon icon--avatar"></i><br />
+							9 Interested
+						</span>
 					</span>
-					<span>
-						<i class="icon icon--star"></i><br />
-						0/3 Selected
+					<span class="summary-el">
+						<span>
+							<i class="icon icon--star"></i><br />
+							0/3 Selected
+						</span>
 					</span>
-					<span class="summary-salary">
-						Sales &amp; Business Developement<br />
-						<strong>$ 15,000</strong><br />
-						Conseil en stratégie, CSP
+					<span class="summary-el summary-el--salary">
+						<span>
+							Sales &amp; Business Developement<br />
+							<strong>$ 15,000</strong><br />
+							Conseil en stratégie, CSP
+						</span>
 					</span>
-					<span>
-						<i class="icon icon--calendar"></i><br />
-						4 days left
+					<span class="summary-el">
+						<span>
+							<i class="icon icon--calendar"></i><br />
+							4 days left
+						</span>
 					</span>
-					<span>
-						<i class="icon icon--pointer"></i><br />
-						New York USA
+					<span class="summary-el">
+						<span>
+							<i class="icon icon--pointer"></i><br />
+							New York USA
+						</span>
 					</span>
-					<span>
-						<i class="icon icon--language"></i><br />
-						FR, EN
+					<span class="summary-el">
+						<span>
+							<i class="icon icon--language"></i><br />
+							FR, EN
+						</span>
 					</span>
-					<span>
-						<i class="icon icon--world"></i><br />
-						On the site
+					<span class="summary-el">
+						<span>
+							<i class="icon icon--world"></i><br />
+							On the site
+						</span>
 					</span>
-					<span class="summary-answer">
-						<i class="icon icon--pen"></i><br />
-						To answer
+					<span class="summary-el summary-el--answer">
+						<span>
+							<i class="icon icon--pen"></i><br />
+							To answer
+						</span>
 					</span>
 				</div>
 			</div>
