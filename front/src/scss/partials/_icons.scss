@@ -2,11 +2,11 @@
 
 @font-face {
     font-family:"icons";
-    src: url("../fonts/icons.eot?fab74a8303c33d3a37fdd6dc74cdcbe5");
+    src: url("../fonts/icons.eot?a441d69302a14201033ead67d2fef60c");
     src: url("../fonts/icons.eot?#iefix") format("embedded-opentype"),
-		url("../fonts/icons.woff?fab74a8303c33d3a37fdd6dc74cdcbe5") format("woff"),
-		url("../fonts/icons.ttf?fab74a8303c33d3a37fdd6dc74cdcbe5") format("truetype"),
-		url("../fonts/icons.svg?fab74a8303c33d3a37fdd6dc74cdcbe5#icons") format("svg");
+		url("../fonts/icons.woff?a441d69302a14201033ead67d2fef60c") format("woff"),
+		url("../fonts/icons.ttf?a441d69302a14201033ead67d2fef60c") format("truetype"),
+		url("../fonts/icons.svg?a441d69302a14201033ead67d2fef60c#icons") format("svg");
     font-weight:normal;
     font-style:normal;
     }
@@ -38,32 +38,33 @@
 .icon--business-sport:before { content:"\f10d"; }
 .icon--business-tourisme:before { content:"\f10e"; }
 .icon--calendar:before { content:"\f10f"; }
-.icon--certification:before { content:"\f110"; }
-.icon--chair:before { content:"\f111"; }
-.icon--clock:before { content:"\f112"; }
-.icon--company-large:before { content:"\f113"; }
-.icon--company-medium:before { content:"\f114"; }
-.icon--company-small:before { content:"\f115"; }
-.icon--consultant:before { content:"\f116"; }
-.icon--cross:before { content:"\f117"; }
-.icon--document:before { content:"\f118"; }
-.icon--download:before { content:"\f119"; }
-.icon--eye:before { content:"\f11a"; }
-.icon--facebook:before { content:"\f11b"; }
-.icon--flag:before { content:"\f11c"; }
-.icon--handshake:before { content:"\f11d"; }
-.icon--language:before { content:"\f11e"; }
-.icon--linkedin:before { content:"\f11f"; }
-.icon--locker:before { content:"\f120"; }
-.icon--mail:before { content:"\f121"; }
-.icon--notes:before { content:"\f122"; }
-.icon--pen:before { content:"\f123"; }
-.icon--pointer:before { content:"\f124"; }
-.icon--rocket:before { content:"\f125"; }
-.icon--selected:before { content:"\f126"; }
-.icon--star:before { content:"\f127"; }
-.icon--tick:before { content:"\f128"; }
-.icon--trashbin:before { content:"\f129"; }
-.icon--twitter:before { content:"\f12a"; }
-.icon--typology:before { content:"\f12b"; }
-.icon--world:before { content:"\f12c"; }
+.icon--cb:before { content:"\f110"; }
+.icon--certification:before { content:"\f111"; }
+.icon--chair:before { content:"\f112"; }
+.icon--clock:before { content:"\f113"; }
+.icon--company-large:before { content:"\f114"; }
+.icon--company-medium:before { content:"\f115"; }
+.icon--company-small:before { content:"\f116"; }
+.icon--consultant:before { content:"\f117"; }
+.icon--cross:before { content:"\f118"; }
+.icon--document:before { content:"\f119"; }
+.icon--download:before { content:"\f11a"; }
+.icon--eye:before { content:"\f11b"; }
+.icon--facebook:before { content:"\f11c"; }
+.icon--flag:before { content:"\f11d"; }
+.icon--handshake:before { content:"\f11e"; }
+.icon--language:before { content:"\f11f"; }
+.icon--linkedin:before { content:"\f120"; }
+.icon--locker:before { content:"\f121"; }
+.icon--mail:before { content:"\f122"; }
+.icon--notes:before { content:"\f123"; }
+.icon--pen:before { content:"\f124"; }
+.icon--pointer:before { content:"\f125"; }
+.icon--rocket:before { content:"\f126"; }
+.icon--selected:before { content:"\f127"; }
+.icon--star:before { content:"\f128"; }
+.icon--tick:before { content:"\f129"; }
+.icon--trashbin:before { content:"\f12a"; }
+.icon--twitter:before { content:"\f12b"; }
+.icon--typology:before { content:"\f12c"; }
+.icon--world:before { content:"\f12d"; }
