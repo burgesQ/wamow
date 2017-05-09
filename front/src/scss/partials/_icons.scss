@@ -2,11 +2,11 @@
 
 @font-face {
     font-family:"icons";
-    src: url("../fonts/icons.eot?e4fd634c9d9c31eb6a80240bbd4f4dba");
+    src: url("../fonts/icons.eot?fab74a8303c33d3a37fdd6dc74cdcbe5");
     src: url("../fonts/icons.eot?#iefix") format("embedded-opentype"),
-		url("../fonts/icons.woff?e4fd634c9d9c31eb6a80240bbd4f4dba") format("woff"),
-		url("../fonts/icons.ttf?e4fd634c9d9c31eb6a80240bbd4f4dba") format("truetype"),
-		url("../fonts/icons.svg?e4fd634c9d9c31eb6a80240bbd4f4dba#icons") format("svg");
+		url("../fonts/icons.woff?fab74a8303c33d3a37fdd6dc74cdcbe5") format("woff"),
+		url("../fonts/icons.ttf?fab74a8303c33d3a37fdd6dc74cdcbe5") format("truetype"),
+		url("../fonts/icons.svg?fab74a8303c33d3a37fdd6dc74cdcbe5#icons") format("svg");
     font-weight:normal;
     font-style:normal;
     }
@@ -50,19 +50,20 @@
 .icon--download:before { content:"\f119"; }
 .icon--eye:before { content:"\f11a"; }
 .icon--facebook:before { content:"\f11b"; }
-.icon--handshake:before { content:"\f11c"; }
-.icon--language:before { content:"\f11d"; }
-.icon--linkedin:before { content:"\f11e"; }
-.icon--locker:before { content:"\f11f"; }
-.icon--mail:before { content:"\f120"; }
-.icon--notes:before { content:"\f121"; }
-.icon--pen:before { content:"\f122"; }
-.icon--pointer:before { content:"\f123"; }
-.icon--rocket:before { content:"\f124"; }
-.icon--selected:before { content:"\f125"; }
-.icon--star:before { content:"\f126"; }
-.icon--tick:before { content:"\f127"; }
-.icon--trashbin:before { content:"\f128"; }
-.icon--twitter:before { content:"\f129"; }
-.icon--typology:before { content:"\f12a"; }
-.icon--world:before { content:"\f12b"; }
+.icon--flag:before { content:"\f11c"; }
+.icon--handshake:before { content:"\f11d"; }
+.icon--language:before { content:"\f11e"; }
+.icon--linkedin:before { content:"\f11f"; }
+.icon--locker:before { content:"\f120"; }
+.icon--mail:before { content:"\f121"; }
+.icon--notes:before { content:"\f122"; }
+.icon--pen:before { content:"\f123"; }
+.icon--pointer:before { content:"\f124"; }
+.icon--rocket:before { content:"\f125"; }
+.icon--selected:before { content:"\f126"; }
+.icon--star:before { content:"\f127"; }
+.icon--tick:before { content:"\f128"; }
+.icon--trashbin:before { content:"\f129"; }
+.icon--twitter:before { content:"\f12a"; }
+.icon--typology:before { content:"\f12b"; }
+.icon--world:before { content:"\f12c"; }
