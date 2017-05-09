@@ -1,26 +1,21 @@
 <?php include "../inc/header.inc.php"; ?>
 
-		<div class="wmw-cdashboard col-xs-10 col-xs-offset-1">
+		<div class="wmw-mission col-xs-10 col-xs-offset-1">
 			
-			<a href="#" class="wmw-cdashboard-close"><i class="icon icon--cross"></i> Back to board</a>
+			<a href="#" class="wmw-mission-close"><i class="icon icon--cross"></i> Back to board</a>
 
-			<div class="wmw-cdashboard-breadcrumbs">
+			<div class="wmw-mission-breadcrumbs">
 				<a href="#" class="breadcrumbs-el active">1. All advisors</a>
-				<span class="breadcrumbs-el">
-					2. Shortlist 
-					<button class="wmw-button wmw-button--black wmw-button--border wmw-button--small">
-						<i></i><span>Proceed to checklist</span><i></i>
-					</button>
-				</span>
-				<span class="breadcrumbs-el">3. Finalist</span>
+				<a href="#" class="breadcrumbs-el active">2. Shortlist</a>
+				<a href="#" class="breadcrumbs-el active">3. Finalist</a>
 			</div>
 		
-			<div class="wmw-cdashboard-header">
+			<div class="wmw-mission-header">
 				<h1>
 					Exercitation ullamco
 					<small><i class="icon icon--certification"></i> Certification : CIA</small>
 				</h1>
-				<div class="wmw-cdashboard-summary">
+				<div class="wmw-mission-summary">
 					<span>
 						<i class="icon icon--avatar"></i><br />
 						9 Interested
@@ -50,18 +45,19 @@
 						<i class="icon icon--world"></i><br />
 						On the site
 					</span>
-					<span class="summary-answer">
-						<i class="icon icon--pen"></i><br />
-						To answer
+					<span class="summary-selected">
+						<i class="icon icon--handshake"></i><br />
+						Selected<br />
+						<small>Mission status</small>
 					</span>
 				</div>
 			</div>
 
-			<div class="wmw-cdashboard-body wmw-cdashboard-body--mail">
+			<div class="wmw-mission-body wmw-mission-body--mail">
 
-				<div class="wmw-cdashboard-content row">
+				<div class="wmw-mission-content row">
 
-					<div class="wmw-cdashboard-mail">
+					<div class="wmw-mission-mail">
 
 						<div class="mail-toolbar">
 							<div class="mail-toolbar-buttons">
@@ -83,7 +79,20 @@
 
 						<div class="mail-content">
 
-							<div class="mail-content-notes">
+							<div class="mail-content-profile">
+								<div class="mail-content-profile-picture" style="background-image:url(../library/images/_tmp/michael-flanagan-large.jpg);"></div>
+								<div class="mail-content-profile-name">Franck Dellage</div>
+								<div class="mail-content-profile-coords">
+									<a href="mailto:franckdellage@gmail.com">franckdellage@gmail.com</a><br />
+									+33659259562
+								</div>
+								<div class="mail-content-profile-buttons row">
+									<a href="#" class="wmw-simple-button"><i class="icon icon--download"></i> CV</a>
+									<a href="#" class="wmw-simple-button wmw-simple-button--green"><i class="icon icon--download"></i> Proposal</a>
+								</div>
+							</div>
+
+							<div class="mail-content-notes mail-content-notes--semi">
 								<strong>Notes</strong>
 								<textarea></textarea>
 							</div>
@@ -121,7 +130,7 @@
 				
 				</div>
 
-				<div class="wmw-cdashboard-sidebar">
+				<div class="wmw-mission-sidebar">
 					<div class="sidebar-wrapper" >
 						<div class="sidebar-date">Pitched at 26/12/2015</div>
 						<p>

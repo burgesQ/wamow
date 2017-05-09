@@ -1,10 +1,10 @@
 <?php include "../inc/header.inc.php"; ?>
 
-		<div class="wmw-cdashboard col-xs-10 col-xs-offset-1">
+		<div class="wmw-mission col-xs-10 col-xs-offset-1">
 			
-			<a href="#" class="wmw-cdashboard-close"><i class="icon icon--cross"></i> Back to board</a>
+			<a href="#" class="wmw-mission-close"><i class="icon icon--cross"></i> Back to board</a>
 
-			<div class="wmw-cdashboard-breadcrumbs">
+			<div class="wmw-mission-breadcrumbs">
 				<a href="#" class="breadcrumbs-el active">1. All advisors</a>
 				<span class="breadcrumbs-el">
 					2. Shortlist 
@@ -15,12 +15,12 @@
 				<span class="breadcrumbs-el">3. Finalist</span>
 			</div>
 		
-			<div class="wmw-cdashboard-header">
+			<div class="wmw-mission-header">
 				<h1>
 					Exercitation ullamco
 					<small><i class="icon icon--certification"></i> Certification : CIA</small>
 				</h1>
-				<div class="wmw-cdashboard-summary">
+				<div class="wmw-mission-summary">
 					<span>
 						<i class="icon icon--avatar"></i><br />
 						9 Interested
@@ -57,16 +57,16 @@
 				</div>
 			</div>
 
-			<div class="wmw-cdashboard-body">
+			<div class="wmw-mission-body">
 
-				<div class="wmw-cdashboard-pagination">
+				<div class="wmw-mission-pagination">
 					<a href="#" class="current">1</a>
 					<a href="#">2</a>
 				</div>
 
-				<div class="wmw-cdashboard-content row">
+				<div class="wmw-mission-content row">
 
-					<div class="wmw-cdashboard-element">
+					<div class="wmw-mission-element">
 						<div class="element-title">Advisor 1</div>
 						<div class="element-content">
 							<div class="element-content-title">Advisor 1</div>
@@ -100,7 +100,7 @@
 						</div>
 					</div>
 
-					<div class="wmw-cdashboard-element">
+					<div class="wmw-mission-element">
 						<div class="element-title">Advisor 2</div>
 						<div class="element-content">
 							<div class="element-content-title">Advisor 1</div>
@@ -129,7 +129,7 @@
 						</div>
 					</div>
 
-					<div class="wmw-cdashboard-element">
+					<div class="wmw-mission-element">
 						<div class="element-title">Advisor 3</div>
 						<div class="element-content">
 							<div class="element-content-title">Advisor 1</div>
@@ -163,7 +163,7 @@
 						</div>
 					</div>
 
-					<div class="wmw-cdashboard-element">
+					<div class="wmw-mission-element">
 						<div class="element-title">Advisor 4</div>
 						<div class="element-content">
 							<div class="element-content-title">Advisor 1</div>
@@ -197,7 +197,7 @@
 						</div>
 					</div>
 
-					<div class="wmw-cdashboard-element">
+					<div class="wmw-mission-element">
 						<div class="element-title">Advisor 5</div>
 						<div class="element-content">
 							<div class="element-content-title">Advisor 1</div>
@@ -233,7 +233,7 @@
 				
 				</div>
 
-				<div class="wmw-cdashboard-sidebar">
+				<div class="wmw-mission-sidebar">
 					<div class="sidebar-wrapper" >
 						<div class="sidebar-date">Pitched at 26/12/2015</div>
 						<p>

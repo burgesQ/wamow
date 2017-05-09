@@ -1,21 +1,21 @@
 <?php include "../inc/header.inc.php"; ?>
 
-		<div class="wmw-cdashboard col-xs-10 col-xs-offset-1">
+		<div class="wmw-mission col-xs-10 col-xs-offset-1">
 			
-			<a href="#" class="wmw-cdashboard-close"><i class="icon icon--cross"></i> Back to board</a>
+			<a href="#" class="wmw-mission-close"><i class="icon icon--cross"></i> Back to board</a>
 
-			<div class="wmw-cdashboard-breadcrumbs">
+			<div class="wmw-mission-breadcrumbs">
 				<a href="#" class="breadcrumbs-el active">1. All advisors</a>
 				<a href="#" class="breadcrumbs-el active">2. Shortlist</a>
 				<span class="breadcrumbs-el">3. Finalist</span>
 			</div>
 		
-			<div class="wmw-cdashboard-header">
+			<div class="wmw-mission-header">
 				<h1>
 					Exercitation ullamco
 					<small><i class="icon icon--certification"></i> Certification : CIA</small>
 				</h1>
-				<div class="wmw-cdashboard-summary">
+				<div class="wmw-mission-summary">
 					<span>
 						<i class="icon icon--avatar"></i><br />
 						9 Interested
@@ -52,16 +52,16 @@
 				</div>
 			</div>
 
-			<div class="wmw-cdashboard-body">
+			<div class="wmw-mission-body">
 
-				<div class="wmw-cdashboard-pagination">
+				<div class="wmw-mission-pagination">
 					<a href="#" class="current">1</a>
 					<a href="#">2</a>
 				</div>
 
-				<div class="wmw-cdashboard-content row">
+				<div class="wmw-mission-content row">
 
-					<div class="wmw-cdashboard-element wmw-cdashboard-element--shortlist">
+					<div class="wmw-mission-element wmw-mission-element--shortlist">
 						<div class="element-title">
 							Albilan François
 							<a href="#" class="wmw-simple-button wmw-simple-button--green"><i class="icon icon--download"></i> Proposal</a>
@@ -102,7 +102,7 @@
 						</div>
 					</div>
 
-					<div class="wmw-cdashboard-element wmw-cdashboard-element--shortlist">
+					<div class="wmw-mission-element wmw-mission-element--shortlist">
 						<div class="element-title">
 							Jack Turner
 							<a href="#" class="wmw-simple-button wmw-simple-button--green"><i class="icon icon--download"></i> Proposal</a>
@@ -144,7 +144,7 @@
 						</div>
 					</div>
 
-					<div class="wmw-cdashboard-element wmw-cdashboard-element--shortlist">
+					<div class="wmw-mission-element wmw-mission-element--shortlist">
 						<div class="element-title">
 							Marie Solame
 							<a href="#" class="wmw-simple-button wmw-simple-button--green"><i class="icon icon--download"></i> Proposal</a>
@@ -187,7 +187,7 @@
 
 				</div>
 
-				<div class="wmw-cdashboard-sidebar">
+				<div class="wmw-mission-sidebar">
 					<div class="sidebar-wrapper" >
 						<div class="sidebar-date">Pitched at 26/12/2015</div>
 						<p>
