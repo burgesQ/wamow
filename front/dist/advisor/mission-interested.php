@@ -6,7 +6,7 @@
 
 			<div class="wmw-mission-header row">
 				<div class="wmw-mission-summarybtn col-xs-12">
-					<a href="#" class="wmw-button wmw-button--red wmw-button--small">
+					<a href="#" class="wmw-button wmw-button--small">
 						<i></i>
 						<span class='off'>More details</span>
 						<span class='on'>Less details</span>
