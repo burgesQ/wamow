@@ -67,7 +67,7 @@
 
 					<div class="wmw-mission-mail">
 
-						<div class="mail-content">
+						<div class="mail-content mail-content--toanswer">
 
 							<div class="mail-content-sidebar">
 								<div class="sidebar-date">Pitched at 26/12/2015</div>

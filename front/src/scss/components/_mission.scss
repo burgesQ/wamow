@@ -31,7 +31,7 @@
 	}
 
 	.wmw-mission-breadcrumbs{
-		display:block;
+		display:none;
 		font-size:0;
 		border-bottom:1px solid $colorgreyxlight;
 
@@ -100,6 +100,7 @@
 			margin:0;
 			display:block;
 			font-weight:normal;
+			border-top:1px solid $colorgreyxlight;
 			border-bottom:1px solid $colorgreyxlight;
 
 			small{
@@ -421,11 +422,14 @@
 
 				.element-title{
 					position:relative;
-					padding:10px 160px 10px 15px;
+					padding:10px 15px 54px 15px;
 
 					.element-title-links{
-						top:0; right:0;
+						border-top:1px solid $colorgreyxlight;
+						bottom:0; right:0;
 						position:absolute;
+						width:100%;
+						text-align:right;
 					}
 
 					.wmw-simple-button{
@@ -509,15 +513,16 @@
 		
 			.mail-toolbar{
 				display:block;
-				padding:15px 20px;
+				padding:15px 20px 45px 20px;
 				position:relative;
 				text-align:center;
 				border-bottom:1px solid $colorgreyxlight;
 
 				.mail-toolbar-buttons{
 					position:absolute;
-					top: 17px;
-    				left: 60px;
+					width:100%;
+					bottom:6px;
+    				left: 0;
 				}
 
 				.mail-toolbar-title{
@@ -528,7 +533,7 @@
 			}
 
 			.mail-content{
-				padding:0 0 220px 400px;
+				padding:30px 15px;
 				position:relative;
 
 				&.mail-content--nopadding{
@@ -536,13 +541,12 @@
 				}
 
 				.mail-content-profile{
-					position:absolute;
-					top:60px; left:60px;
+					position:relative;
 					background:white;
 					border:1px solid $colorgreyxlight;
-					width:280px;
-					height:calc(50% - 60px);
-					padding:30px 20px 0 20px;
+					width:100%;
+					height:auto;
+					padding:30px 20px 80px 20px;
 
 					.mail-content-profile-picture{
 						display:block;
@@ -590,18 +594,15 @@
 				}
 
 				.mail-content-notes{
-					position:absolute;
-					top:60px; left:60px;
+					position:relative;
 					background:white;
 					border:1px solid $colorgreyxlight;
 					padding:60px 0 0 0;
-					width:280px;
-					height:calc(100% - 120px);
+					width:100%;
+					height:200px;
 
 					&.mail-content-notes--semi{
-						top:50%;
-						margin-top:60px;
-						height:calc(50% - 120px);
+						margin-top:30px;
 					}
 
 					label{
@@ -638,16 +639,11 @@
 				}
 
 				.mail-content-sidebar{
-					position:absolute;
-					top:0; left:0;
-					width:340px;
-					height:100%;
+					position:relative;
+					width:100%;
+					height:250px;
 					background:white;
-					border-right:1px solid $colorgreyxlight;
-
-					&.mail-content-sidebar--large{
-						width:60%;
-					}
+					border-bottom:1px solid $colorgreyxlight;
 
 					.sidebar-date{
 						font-family:$fontcantarell;
@@ -701,18 +697,22 @@
 
 				.mail-content-chat{
 					position:relative;
-					height:600px;
+					height:350px;
 					overflow:auto;
-					padding:60px 60px 0 0;
+					margin:30px 0;
 					font-size:14px;
 
 					.chatbox{
 						display:block;
-						margin:0 0 25px 0;
+						margin:25px 0 2px 0;
 						width:80%;
 						border:1px solid $colorgreyxlight;
 						padding:20px;
 						background:white;
+
+						&:first-child{
+							margin-top:0;
+						}
 
 						.chatbox-name{
 							font-weight:bold;
@@ -757,11 +757,10 @@
 				}
 
 				.mail-content-answer{
-					position:absolute;
-					bottom:60px;
-					right:60px;
-					width:calc(100% - 460px);
+					position:relative;
+					width:100%;
 					height:100px;
+					margin:30px 0 50px 0;
 
 					textarea{
 						display:block;
@@ -847,10 +846,26 @@
 					}
 				}
 
+				&.mail-content--toanswer{
+					padding:0;
+
+					.mail-content-chat{
+						padding:0 15px;
+					}
+
+					.mail-content-answer{
+						padding:0 15px;
+						margin-bottom:80px;
+
+						button{
+							right:15px;
+						}
+					}
+				}
+
 				.mail-content-pitch{
-					width:40%;
-					float:right;
-					padding:60px;
+					width:100%;
+					padding:20px 20px 60px 20px;
 					position:relative;
 
 					.mail-content-pitch-writer{
@@ -858,7 +873,7 @@
 
 						textarea{
 							width:100%;
-							height:450px;
+							height:250px;
 						}
 
 						button{
@@ -1041,6 +1056,7 @@
 		}
 
 		.wmw-mission-breadcrumbs{
+			display:block;
 
 			.breadcrumbs-el{
 				line-height:45px;
@@ -1082,6 +1098,7 @@
 			h1{
 				font-size:35px;
 				padding:10px 35px;
+				border-top:none;
 			
 				small{
 					font-size:14px;
@@ -1146,6 +1163,122 @@
 
 				.element-content{
 					height:400px;
+				}
+			}
+
+			.wmw-mission-element{
+
+				&.wmw-mission-element--shortlist{
+
+					.element-title{
+						padding:10px 160px 10px 15px;
+
+						.element-title-links{
+							position:absolute;
+							width:auto;
+							border:none;
+						}
+					}
+				}
+			}
+
+			.wmw-mission-mail{
+
+				.mail-toolbar{
+					padding:15px 20px;
+
+					.mail-toolbar-buttons{
+						bottom:auto;
+						top: 17px;
+	    				left: 60px;
+	    				width:auto;
+					}
+				}
+
+				.mail-content{
+					padding:0 0 220px 400px;
+
+					.mail-content-profile{
+						position:absolute;
+						top:60px; left:60px;
+						width:280px;
+						height:calc(50% - 60px);
+						padding:30px 20px 0 20px;
+					}
+
+					.mail-content-notes{
+						position:absolute;
+						top:60px; left:60px;
+						width:280px;
+						height:calc(100% - 120px);
+
+						&.mail-content-notes--semi{
+							margin-top:60px;
+							top:50%;
+							height:calc(50% - 120px);
+						}
+					}
+
+					.mail-content-sidebar{
+						width:340px;
+					}
+
+					.mail-content-chat{
+						height:600px;
+						padding:60px 60px 0 0;
+						margin:0;
+					}
+
+					.mail-content-answer{
+						position:absolute;
+						bottom:60px;
+						right:60px;
+						width:calc(100% - 460px);
+						margin:0;
+					}
+
+					&.mail-content--toanswer{
+						padding:0 0 220px 400px;
+
+						.mail-content-chat{
+							padding:60px 60px 0 0;
+						}
+
+						.mail-content-answer{
+							padding:0;
+							margin-bottom:0;
+
+							button{
+								right:0;
+							}
+						}
+					}
+
+					.mail-content-sidebar{
+						position:absolute;
+						top:0; left:0;
+						width:300px;
+						height:100%;
+						border-bottom:none;
+						border-right:1px solid $colorgreyxlight;
+
+						&.mail-content-sidebar--large{
+							width:60%;
+						}
+					}
+
+					.mail-content-pitch{
+						width:40%;
+						float:right;
+						padding:60px;
+
+						.mail-content-pitch-writer{
+
+							textarea{
+								height:450px;
+							}
+						}
+					}
 				}
 			}
 		}
