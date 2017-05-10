@@ -11,7 +11,7 @@
 
 				<div class="wmw-onboard-resume row">
 
-					<div class="wmw-onboard-resume-sidebar col-xs-4">
+					<div class="wmw-onboard-resume-sidebar col-xs-12 col-md-4">
 
 						<div class="sidebar-block">
 							<div class="sidebar-block-business">
@@ -107,7 +107,7 @@
 
 					</div>
 
-					<div class="wmw-onboard-resume-content col-xs-8">
+					<div class="wmw-onboard-resume-content col-xs-12 col-md-8">
 
 						<a href="#" class="wmw-button wmw-button--border wmw-button--green wmw-button--small">
 							<i></i><span><i class="icon icon--pen"></i> Edit</span><i></i>
