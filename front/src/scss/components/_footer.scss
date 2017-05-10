@@ -18,9 +18,13 @@
 
 	.wmw-footer-nav{
 		display:block;
-		padding:50px 0;
+		margin:30px 0;
+		border-top:1px solid $colorgreyxlight;
 
 		a{
+			display:block;
+			padding:8px;
+			border-bottom:1px solid $colorgreyxlight;
 			color:$colorgrey;
 			text-decoration:none;
 			text-transform:uppercase;
@@ -32,7 +36,20 @@
 	}
 
 	.wmw-footer-social{
+		display:inline-block;
+		vertical-align:middle;
+		font-size:20px;
 
+		a{
+			color:$colorpurple;
+			text-decoration:underline;
+			margin:0 20px 0 0;
+			transition:color .3s;
+
+			&:hover{
+				color:$colorpurplelight;
+			}
+		}
 	}
 }
 
@@ -55,10 +72,13 @@
 			padding:0;
 			white-space:nowrap;
 			margin:0 50px;
+			border:none;
 
 			a{
 				display:inline-block;
 				margin:0 10px 0 0;
+				padding:0;
+				border:none;
 
 				&:after{
 					content: ' /';
@@ -67,18 +87,10 @@
 				&:last-child{
 					margin:0;
 				}
-			}
-		}
 
-		.wmw-footer-social{
-			display:inline-block;
-			vertical-align:middle;
-			font-size:20px;
-
-			a{
-				color:$colorpurple;
-				text-decoration:underline;
-				margin:0 20px 0 0;
+				&:hover{
+					text-decoration:underline;
+				}
 			}
 		}
 	}
