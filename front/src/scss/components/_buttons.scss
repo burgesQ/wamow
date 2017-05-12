@@ -345,6 +345,37 @@
 	}
 }
 
+.wmw-checkbutton .wmw-button:hover{
+	color:white !important;
+	cursor:default;
+
+	i,	
+	&:before,
+	&:after{
+		border-color:$colorgreen !important;
+		background:$colorgreen !important;
+	}
+
+	.icon{
+		background:transparent !important;
+	}
+}
+
+.wmw-checkbutton .wmw-button--border:hover{
+	cursor:pointer;
+
+	i,	
+	&:before,
+	&:after{
+		border-color:$colorgrey !important;
+		background:$colorgrey !important;
+	}
+
+	.icon{
+		background:transparent !important;
+	}
+}
+
 .wmw-simple-button{
 	display:inline-block;
 	vertical-align:middle;

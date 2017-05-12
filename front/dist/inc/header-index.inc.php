@@ -24,6 +24,7 @@
 
 </head>
 <body>
+<div class="wmw-wrapper">
 
 	<header class="wmw-header wmw-header--ob row">
 		<a href="#" class="wmw-header-logo"><img src="library/images/header-logo.png" alt="WMW" /></a>
