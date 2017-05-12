@@ -121,6 +121,7 @@ textarea{
 input[type=range] {
   -webkit-appearance: none;
   margin: 8px 0;
+  padding:0;
   width: 100%;
 }
 input[type=range]:focus {
@@ -171,13 +172,13 @@ input[type=range]::-moz-range-thumb {
 }
 input[type=range]::-ms-track {
   width: 100%;
-  height: 9px;
+  height: 18px;
   cursor: pointer;
   animate: 0.2s;
   background: $colorgreyxlight;
   border-color: transparent;
   border-width: 0;
-  border-radius: 4px;
+  border-radius: 9px;
   color: transparent;
 }
 input[type=range]::-ms-fill-lower {
@@ -200,7 +201,7 @@ input[type=range]::-ms-thumb {
   border-radius:50%;
   background: white;
   cursor: pointer;
-  margin:1px 0 0 0;
+  margin:0 0 0 0;
 }
 
 .wmw-range-gradient{
@@ -242,6 +243,8 @@ input[type=range]::-ms-thumb {
 		font-family:$fontroboto;
 		font-size:12px;
 		font-weight:bold;
+		margin:0;
+		padding:0;
 	}
 }
 
