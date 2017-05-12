@@ -1120,7 +1120,7 @@
 					font-size:12px;
 					padding:20px 10px;
 					border-bottom:none;
-					width:10%;
+					width:12%;
 
 					&:first-child{
 						border-left:none;
@@ -1294,6 +1294,7 @@
 	.wmw-mission{
 
 		.wmw-mission-header{
+			display:flex;
 
 			h1{
 				border-bottom:0;

@@ -16,7 +16,7 @@
 			</div>
 
 			<div class="wmw-mission-header row">
-				<h1 class="col-xs-12 col-lg-4">
+				<h1 class="col-xs-12 col-lg-5">
 					Exercitation ullamco
 					<small><i class="icon icon--certification"></i> Certification : CIA</small>
 				</h1>
@@ -28,7 +28,7 @@
 						<i></i>
 					</a>
 				</div>
-				<div class="wmw-mission-summary col-xs-12 col-lg-8 row">
+				<div class="wmw-mission-summary col-xs-12 col-lg-7 row">
 					<span class="summary-el">
 						<span>
 							<i class="icon icon--avatar"></i><br />
@@ -66,12 +66,12 @@
 							FR, EN
 						</span>
 					</span>
-					<span class="summary-el">
+					<!--<span class="summary-el">
 						<span>
 							<i class="icon icon--world"></i><br />
 							On the site
 						</span>
-					</span>
+					</span>-->
 					<span class="summary-el summary-el--answer">
 						<span>
 							<i class="icon icon--pen"></i><br />
