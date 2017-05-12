@@ -475,10 +475,6 @@
 			transition:transform .5s $easeinout;
 			font-size:14px;
 
-			&.wmw-mission-sidebar--active{
-				transform:translateX(0);
-			}
-
 			.sidebar-wrapper{
 				display:block;
 				width:100%;
@@ -494,7 +490,7 @@
 				display:block;
 				width: 32px;
 				height: 41px;
-				background:url(../images/mission-sidebar-button.png) no-repeat;
+				background:url(../images/mission-sidebar-button.png) no-repeat right;
 				position:absolute;
 				top:0; right:-32px;
 			}
@@ -503,6 +499,14 @@
 				margin:0 0 15px 0;
 				color:#a2a2a2;
 				font-weight:bold;
+			}
+
+			&.wmw-mission-sidebar--active{
+				transform:translateX(0);
+
+				.sidebar-button{
+					background-position:left;
+				}
 			}
 		}
 
