@@ -35,10 +35,10 @@
 							9 Interested
 						</span>
 					</span>
-					<span class="summary-el">
+					<span class="summary-el summary-el--shortlist">
 						<span>
 							<i class="icon icon--star"></i><br />
-							0/3 Selected
+							<span class="number">0</span>/3 Selected
 						</span>
 					</span>
 					<span class="summary-el summary-el--salary">
@@ -117,12 +117,15 @@
 									Refuse
 								</span><i></i>
 							</button>
-							<button type="button" class="wmw-button wmw-button--green wmw-button--border wmw-button--small">
-								<i></i><span>
-									<i class="icon icon--star"></i>
-									Add to shortlist
-								</span><i></i>
-							</button>
+							<div class="wmw-checkbutton">
+								<button type="button" class="wmw-button wmw-button--green wmw-button--border wmw-button--small">
+									<i></i><span>
+										<i class="icon icon--star"></i>
+										Add to shortlist
+									</span><i></i>
+								</button>
+								<input type="checkbox" name="wmw-shortlist[]" />
+							</div>
 						</div>
 					</div>
 
@@ -149,12 +152,15 @@
 									Refuse
 								</span><i></i>
 							</button>
-							<button type="button" class="wmw-button wmw-button--green wmw-button--border wmw-button--small">
-								<i></i><span>
-									<i class="icon icon--star"></i>
-									Add to shortlist
-								</span><i></i>
-							</button>
+							<div class="wmw-checkbutton">
+								<button type="button" class="wmw-button wmw-button--green wmw-button--border wmw-button--small">
+									<i></i><span>
+										<i class="icon icon--star"></i>
+										Add to shortlist
+									</span><i></i>
+								</button>
+								<input type="checkbox" name="wmw-shortlist[]" />
+							</div>
 						</div>
 					</div>
 
@@ -186,12 +192,15 @@
 									Refuse
 								</span><i></i>
 							</button>
-							<button type="button" class="wmw-button wmw-button--green wmw-button--border wmw-button--small">
-								<i></i><span>
-									<i class="icon icon--star"></i>
-									Add to shortlist
-								</span><i></i>
-							</button>
+							<div class="wmw-checkbutton">
+								<button type="button" class="wmw-button wmw-button--green wmw-button--border wmw-button--small">
+									<i></i><span>
+										<i class="icon icon--star"></i>
+										Add to shortlist
+									</span><i></i>
+								</button>
+								<input type="checkbox" name="wmw-shortlist[]" />
+							</div>
 						</div>
 					</div>
 
@@ -223,12 +232,15 @@
 									Refuse
 								</span><i></i>
 							</button>
-							<button type="button" class="wmw-button wmw-button--green wmw-button--border wmw-button--small">
-								<i></i><span>
-									<i class="icon icon--star"></i>
-									Add to shortlist
-								</span><i></i>
-							</button>
+							<div class="wmw-checkbutton">
+								<button type="button" class="wmw-button wmw-button--green wmw-button--border wmw-button--small">
+									<i></i><span>
+										<i class="icon icon--star"></i>
+										Add to shortlist
+									</span><i></i>
+								</button>
+								<input type="checkbox" name="wmw-shortlist[]" />
+							</div>
 						</div>
 					</div>
 
@@ -260,12 +272,15 @@
 									Refuse
 								</span><i></i>
 							</button>
-							<button type="button" class="wmw-button wmw-button--green wmw-button--border wmw-button--small">
-								<i></i><span>
-									<i class="icon icon--star"></i>
-									Add to shortlist
-								</span><i></i>
-							</button>
+							<div class="wmw-checkbutton">
+								<button type="button" class="wmw-button wmw-button--green wmw-button--border wmw-button--small">
+									<i></i><span>
+										<i class="icon icon--star"></i>
+										Add to shortlist
+									</span><i></i>
+								</button>
+								<input type="checkbox" name="wmw-shortlist[]" />
+							</div>
 						</div>
 					</div>
 				

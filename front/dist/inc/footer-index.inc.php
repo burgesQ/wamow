@@ -18,5 +18,6 @@
 
 	<script type="text/javascript" src="library/js/scripts.js"></script>
 
+</div>
 </body>
 </html>

@@ -151,6 +151,7 @@ var Master = {
         Master.init_mission_overlay();
         Master.init_mission_notes();
         Master.init_mission_pitch();
+        Master.init_mission_shortlist_buttons();
         Master.init_dashboard_mission_slider();
 
         $('.wmw-overlay-inner').perfectScrollbar({ suppressScrollX:true });  
@@ -259,6 +260,51 @@ var Master = {
                 $('.mail-content-pitch-payment').addClass('mail-content-pitch-payment--active');
 
                 return false;
+            }
+        });
+    },
+
+    init_mission_shortlist_buttons : function(){
+
+        function shortlist( $field ){
+
+            var data = { "id" : $field.val() };
+
+            $.ajax( '../ajax/set-shortlist.php', {
+                method : 'post',
+                data : data,
+                dataType : 'json'
+            }).done( function( response ){
+
+                if(response.status == "ok"){;
+
+                    var $el = $('.wmw-mission-summary .summary-el--shortlist .number');
+                    var num = parseInt($el.text());
+
+                    $field.prop('checked', true);
+                    $field.parent().find('.wmw-button').removeClass('wmw-button--border');
+
+                    $el.text( num+1 );
+                }
+            });
+        }
+
+        $('.wmw-mission-element .wmw-checkbutton .wmw-button').on('click', function(e){
+             e.preventDefault();
+            var $field = $(this).parent().find('input[type=checkbox]');
+
+            if($field.is(':checked')){
+                alert("Advisor was successfully alerted, this action can't be cancelled");
+            }else{
+
+                if($('.wmw-mission-element .wmw-checkbutton input[type=checkbox]:checked').get().length < 3){
+
+                    shortlist( $field );
+
+                }else{
+
+                    alert("You already choosed your 3 advisors");
+                }
             }
         });
     },
