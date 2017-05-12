@@ -3,6 +3,8 @@
 	text-align:left;
 	height:60px;
 	line-height:60px;
+	position:relative;
+	z-index:400;
 
 	.wmw-header-logo{
 		display:inline-block;
@@ -43,11 +45,65 @@
 			}
 		}
 
-		.wmw-button{
-			padding:0 20px;
+		.wmw-header-profile-button{
+			position:relative;
+			display:inline-block;
 
-			.name{
-				display:none;
+			.wmw-button{
+				padding:0 20px;
+
+				.name{
+					display:none;
+				}
+			}
+
+			.wmw-header-profile-menu{
+				display:block;
+				position:absolute;
+				top:51px;
+				right:13px;
+				text-align:center;
+				background:white;
+				border:1px solid $colorpurple;
+				padding:20px;
+				transform:scaleY(0);
+				transform-origin:top;
+				opacity:0;
+				transition:opacity .3s, transform .3s $easeinout;
+
+				a{
+					display:block;
+					padding:5px 15px;
+					color:$colorgrey;
+					text-transform:uppercase;
+					font-size:14px;
+					font-family:$fontcantarell;
+					text-decoration:none;
+					letter-spacing:0.06em;
+					transition:background .3s, color .3s;
+
+					&:hover{
+						background:$colorpurple;
+						color:white;
+					}
+				}
+			}
+
+			&.wmw-header-profile-button--active{
+
+				.wmw-button{
+					color:white;
+
+					&:before,
+					&:after{
+						background:$colorpurple;
+					}
+				}
+
+				.wmw-header-profile-menu{
+					transform:scale(1);
+					opacity:1;
+				}
 			}
 		}
 	}
@@ -81,10 +137,50 @@
 		.wmw-header-profile{
 			top:35px;
 
-			.wmw-button{
+			.wmw-header-profile-button{
 
-				.name{
-					display:inline;
+				.wmw-button{
+
+					.name{
+						display:inline;
+					}
+
+					&:after{
+						transition:transform .2s $easeinout, background .3s, border .3s;;
+					}
+				}
+
+				.wmw-header-profile-menu{
+					top:44px;
+					right:0;
+					width:100%;
+					border-top:none;
+					padding-top:0;
+
+					&:before{
+						content:'';
+						background:$colorgreyxlight;
+						width:100%;
+						height:1px;
+						display:block;
+						margin-bottom:20px;
+					}
+				}
+			
+				&.wmw-header-profile-button--active{
+
+					.wmw-button{
+						color:$colorpurplelight;
+
+						&:before,
+						&:after{
+							background:transparent;
+						}
+
+						&:after{
+							transform:skew(0deg);
+						}
+					}
 				}
 			}
 		}

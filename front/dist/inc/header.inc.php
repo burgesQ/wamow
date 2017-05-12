@@ -30,12 +30,19 @@
 		<a href="#" class="wmw-header-logo"><img src="../library/images/header-logo.png" alt="WMW" /></a>
 		<div class="wmw-header-profile">
 			<span class="wmw-header-profile-picture"><img src="../library/images/_tmp/michael-flanagan.jpg" /></span>
-			<button type="button" class="wmw-button wmw-button--border">
-				<i></i><span>
-					<span class="name">Michael Flanagan</span> 
-					<i class="icon icon--arrow"></i>
-				</span><i></i>
-			</button>
+			<div class="wmw-header-profile-button">
+				<button type="button" class="wmw-button wmw-button--border">
+					<i></i><span>
+						<span class="name">Michael Flanagan</span> 
+						<i class="icon icon--arrow"></i>
+					</span><i></i>
+				</button>
+				<div class="wmw-header-profile-menu">
+					<a href="#">Profil</a>
+					<a href="#">Billing</a>
+					<a href="#">Log out</a>
+				</div>
+			</div>
 		</div>
 	</header>
 

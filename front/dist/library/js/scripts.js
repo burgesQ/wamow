@@ -3031,6 +3031,19 @@ var Master = {
 
     onready : function(){
 
+        $('.wmw-header-profile-button .wmw-button').on('click', function(e){
+            e.preventDefault();
+            $(this).parent().toggleClass('wmw-header-profile-button--active');
+        });
+
+        $('body').on('click', function(){
+             $('.wmw-header-profile-button').removeClass('wmw-header-profile-button--active');
+        });
+
+        $('.wmw-header-profile-button a, .wmw-header-profile-button .wmw-button').on('click', function(e){
+            e.stopPropagation();
+        });
+
     	$('form').validVal({
     	});
 
