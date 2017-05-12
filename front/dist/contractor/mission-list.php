@@ -94,7 +94,10 @@
 						<div class="element-content">
 							<div class="element-content-title">Advisor 1</div>
 							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,  occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore. accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.
-							<div class="element-content-bottom">Today, 15h20</div>
+							<div class="element-content-bottom">
+								Today, 15h20
+								<a href="#"><i class="icon icon--eye"></i> Show</a>
+							</div>
 						</div>
 						<div class="element-notes">
 							- Excepteur sint<br />
@@ -128,7 +131,10 @@
 						<div class="element-content">
 							<div class="element-content-title">Advisor 1</div>
 							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,  occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore. accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.
-							<div class="element-content-bottom">Today, 15h20</div>
+							<div class="element-content-bottom">
+								Today, 15h20
+								<a href="#"><i class="icon icon--eye"></i> Show</a>
+							</div>
 						</div>
 						<div class="element-notes">
 							<div class="element-notes-empty">
@@ -157,7 +163,10 @@
 						<div class="element-content">
 							<div class="element-content-title">Advisor 1</div>
 							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,  occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore. accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.
-							<div class="element-content-bottom">Today, 15h20</div>
+							<div class="element-content-bottom">
+								Today, 15h20
+								<a href="#"><i class="icon icon--eye"></i> Show</a>
+							</div>
 						</div>
 						<div class="element-notes">
 							- Excepteur sint<br />
@@ -191,7 +200,10 @@
 						<div class="element-content">
 							<div class="element-content-title">Advisor 1</div>
 							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,  occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore. accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.
-							<div class="element-content-bottom">Today, 15h20</div>
+							<div class="element-content-bottom">
+								Today, 15h20
+								<a href="#"><i class="icon icon--eye"></i> Show</a>
+							</div>
 						</div>
 						<div class="element-notes">
 							- Excepteur sint<br />
@@ -225,7 +237,10 @@
 						<div class="element-content">
 							<div class="element-content-title">Advisor 1</div>
 							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,  occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore. accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.
-							<div class="element-content-bottom">Today, 15h20</div>
+							<div class="element-content-bottom">
+								Today, 15h20
+								<a href="#"><i class="icon icon--eye"></i> Show</a>
+							</div>
 						</div>
 						<div class="element-notes">
 							- Excepteur sint<br />
