@@ -1,0 +1,49 @@
+.wmw-tip{
+	display:inline-block;
+	width:20px;
+	height:20px;
+	border-radius:50%;
+	background:$colorpurple;
+	color:white;
+	text-decoration:none;
+	font-size:14px;
+	text-align:center;
+	line-height:20px;
+	position:relative;
+	z-index:200;
+	transition:background .3s;
+
+	.wmw-tip-box{
+		background:rgba(0,0,0,0.95);
+		padding:10px;
+		color:white;
+		font-size:11px;
+		line-height: 1.2em;
+		width:150px;
+		position:absolute;
+		top:30px;
+		left:50%;
+		margin-left:-75px;
+		opacity:0;
+		transform:scale(0);
+		transform-origin:top;
+		transition:opacity .3s, transform .3s $easeinout;
+	}
+
+	&.wmw-tip--left .wmw-tip-box{
+		margin-left:-30px;
+	}
+
+	&.wmw-tip--right .wmw-tip-box{
+		margin-left:-120px;
+	}
+
+	&:hover{
+		background:$colorgreen;
+
+		.wmw-tip-box{
+			opacity:1;
+			transform:scale(1);
+		}
+	}
+}

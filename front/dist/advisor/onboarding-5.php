@@ -96,7 +96,7 @@
 							<label for="company-small">
 								<i class="icon icon--company-small"></i><br />
 								Small companies
-								<a href="#" class="wmw-tip">?</a>
+								<a href="#" class="wmw-tip wmw-tip--left">?<span class="wmw-tip-box">Lorem ipsum dolor sit amet</span></a>
 							</label>
 							<div class="wmw-switchfield">
 								<input type="checkbox" id="company-small" name="company-small" class="requiredgroup:company-size vv-ggparent">
@@ -107,7 +107,7 @@
 							<label for="company-medium">
 								<i class="icon icon--company-medium"></i><br />
 								Medium companies
-								<a href="#" class="wmw-tip">?</a>
+								<a href="#" class="wmw-tip">?<span class="wmw-tip-box">Lorem ipsum dolor sit amet</span></a>
 							</label>
 							<div class="wmw-switchfield">
 								<input type="checkbox" id="company-medium" name="company-medium" class="requiredgroup:company-size vv-ggparent">
@@ -118,7 +118,7 @@
 							<label for="company-large">
 								<i class="icon icon--company-large"></i><br />
 								Large companies
-								<a href="#" class="wmw-tip">?</a>
+								<a href="#" class="wmw-tip wmw-tip--right">?<span class="wmw-tip-box">Lorem ipsum dolor sit amet</span></a>
 							</label>
 							<div class="wmw-switchfield">
 								<input type="checkbox" id="company-large" name="company-large" class="requiredgroup:company-size vv-ggparent">
