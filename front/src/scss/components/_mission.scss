@@ -1171,12 +1171,20 @@
 				&.wmw-mission-element--shortlist{
 
 					.element-title{
-						padding:10px 160px 10px 15px;
+						padding:10px 180px 10px 15px;
 
 						.element-title-links{
 							position:absolute;
 							width:auto;
+							height:100%;
 							border:none;
+						
+							a{
+								position:relative;
+								height:100%;
+								display:inline-flex;
+								align-items:center;
+							}
 						}
 					}
 				}
