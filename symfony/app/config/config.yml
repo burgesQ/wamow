@@ -116,7 +116,6 @@ assetic:
         jquery:
             inputs:
               -       '%kernel.root_dir%/../vendor/components/jquery/jquery.js'
-
     debug:            "%kernel.debug%"
     use_controller:   true
     bundles:          [ToolsBundle]
