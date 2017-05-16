@@ -128,20 +128,26 @@
 						</div>
 					</div>
 					
-					<div class="wmw-fieldrow wmw-copyfield row">
-						<label for="wmw-pitch-certification-1" class="wmw-label wmw-label--topmobile col-xs-10 col-sm-5">Certification <small>(optionnel)</small></label>
-						<input data-copy-nb="1" data-copy-name="wmw-pitch-certification" type="text" id="wmw-pitch-certification-1" class="col-xs-10 col-md-6" />
-						<a href="#" class="wmw-button-more">+</a>
+					<div class="wmw-copyfields">
+						<div class="wmw-fieldrow wmw-copyfield row">
+							<label for="wmw-pitch-certification-1" class="wmw-label wmw-label--topmobile col-xs-10 col-sm-5">Certification <small>(optionnel)</small></label>
+							<input data-copy-nb="1" data-copy-name="wmw-pitch-certification" type="text" id="wmw-pitch-certification-1" class="col-xs-10 col-md-6" />
+							<a href="#" class="wmw-button-less">-</a>
+							<a href="#" class="wmw-button-more">+</a>
+						</div>
 					</div>
 
-					<div class="wmw-fieldrow wmw-copyfield row">
-						<label for="wmw-pitch-language-1" class="wmw-label wmw-label--topmobile col-xs-10 col-sm-5">Langue de travail</label>
-						<select data-copy-nb="1" data-copy-name="wmw-pitch-language" id="wmw-pitch-language-1" name="languages[]" class="col-xs-10 col-md-6 required">
-							<option value="fr">Français</option>
-							<option value="en">Anglais</option>
-							<option value="es">Espagnol</option>
-						</select>
-						<a href="#" class="wmw-button-more">+</a>
+					<div class="wmw-copyfields">
+						<div class="wmw-fieldrow wmw-copyfield row">
+							<label for="wmw-pitch-language-1" class="wmw-label wmw-label--topmobile col-xs-10 col-sm-5">Langue de travail</label>
+							<select data-copy-nb="1" data-copy-name="wmw-pitch-language" id="wmw-pitch-language-1" name="languages[]" class="col-xs-10 col-md-6 required">
+								<option value="fr">Français</option>
+								<option value="en">Anglais</option>
+								<option value="es">Espagnol</option>
+							</select>
+							<a href="#" class="wmw-button-less">-</a>
+							<a href="#" class="wmw-button-more">+</a>
+						</div>
 					</div>
 
 					<div class="wmw-fieldrow row">

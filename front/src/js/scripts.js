@@ -115,33 +115,6 @@ var Master = {
             Master.init_autocomplete( $(this), Auditors );
         });
 
-        $('body').on('click', '.wmw-copyfield .wmw-button-more', function(e){
-            e.preventDefault();
-
-            var $field = $(this).parent().find('input, select');
-            
-            var nb = parseInt($field.attr('data-copy-nb'))+1;
-            var name = $field.attr('data-copy-name');
-
-            $(this).parent().after($(this).parent().clone());
-
-            $('form').validVal();
-
-            var $next = $(this).parent().next();
-
-            var $next_field = $next.find('input, select');
-            var $next_label = $next.find('label');
-
-            Master.init_autocomplete( $next_field, Auditors );
-
-            $next_field.attr('data-copy-nb', nb);
-            $next_field.attr('id', name+'-'+nb);
-            $next_field.val('');
-            $next_label.attr('for', name+'-'+nb);
-
-            $(this).remove();
-        });
-
         $('#wmw-pitch-onsite-wrapper input[type=checkbox]').on('change', function(){
             if($(this).is(':checked'))
                 $('#wmw-pitch-onsite-wrapper select').show();
@@ -166,6 +139,7 @@ var Master = {
         Master.init_mission_pitch();
         Master.init_mission_shortlist_buttons();
         Master.init_dashboard_mission_slider();
+        Master.init_copyfields();
 
         $('.wmw-overlay-inner').perfectScrollbar({ suppressScrollX:true });  
         
@@ -211,6 +185,64 @@ var Master = {
               $(field).val( suggestion.value );
           }
       });
+    },
+
+    init_copyfields: function(){
+
+        function add_copyfield( $copyfield ){
+
+            var $gparent        = $copyfield.parent(),
+                $field          = $copyfield.find('input, select'),
+                field_nb        = parseInt($field.attr('data-copy-nb'))+1,
+                field_name      = $field.attr('data-copy-name');
+
+            $copyfield.after( $copyfield.clone() );
+
+            var $next           = $copyfield.next(),
+                $next_field     = $next.find('input, select'),
+                $next_label     = $next.find('label');
+
+            $next_field.attr('data-copy-nb', field_nb)
+                       .attr('id', field_name+'-'+field_nb)
+                       .val('');
+
+            $next_label.attr('for', field_name+'-'+field_nb);
+
+            $('form').validVal();
+            if($copyfield.hasClass('wmw-copyfield--autocomplete'))
+                Master.init_autocomplete( $next_field, Auditors );
+
+            if($gparent.find('.wmw-copyfield').get().length > 1)
+                $gparent.addClass('wmw-copyfields--multiple');
+            else
+                $gparent.removeClass('wmw-copyfields--multiple');
+        }
+
+        function remove_copyfield( $copyfield ){
+
+            var $gparent = $copyfield.parent();
+
+            $copyfield.remove();
+
+            if($gparent.find('.wmw-copyfield').get().length > 1)
+                $gparent.addClass('wmw-copyfields--multiple');
+            else
+                $gparent.removeClass('wmw-copyfields--multiple');
+        }
+
+        $('body').on('click', '.wmw-copyfield .wmw-button-more', function(e){
+            e.preventDefault();
+
+            var $copyfield = $(this).parent();
+            add_copyfield( $copyfield );
+        });
+
+        $('body').on('click', '.wmw-copyfield .wmw-button-less', function(e){
+            e.preventDefault();
+
+            var $copyfield = $(this).parent();
+            remove_copyfield( $copyfield );
+        });
     },
 
     init_dashboard_mission_slider: function(){

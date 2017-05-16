@@ -41,9 +41,12 @@
 					et voir déclaré comme commissaires aux comptes
 				</p>
 
-				<div class="wmw-fieldrow wmw-copyfield row">
-					<input type="text" data-copy-nb="1" data-copy-name="wmw-ob-responsible" id="wmw-ob-responsible-1" name="languages[]" placeholder="Nom" class="wmw-autocomplete col-xs-10 col-md-5 required" />
-					<a href="#" class="wmw-button-more">+</a>
+				<div class="wmw-copyfields">
+					<div class="wmw-fieldrow wmw-copyfield wmw-copyfield--autocomplete row">
+						<input type="text" data-copy-nb="1" data-copy-name="wmw-ob-responsible" id="wmw-ob-responsible-1" name="languages[]" placeholder="Nom" class="wmw-autocomplete col-xs-10 col-md-5 required" />
+						<a href="#" class="wmw-button-less">-</a>
+						<a href="#" class="wmw-button-more">+</a>
+					</div>
 				</div>
 
 				<p class="wmw-onboard-mentions">
