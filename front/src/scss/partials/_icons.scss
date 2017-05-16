@@ -2,11 +2,11 @@
 
 @font-face {
     font-family:"icons";
-    src: url("../fonts/icons.eot?cd778b689adc32759887fe14a4e91ec4");
+    src: url("../fonts/icons.eot?72da87d415f7fd10bba6737b3e1ffd8c");
     src: url("../fonts/icons.eot?#iefix") format("embedded-opentype"),
-		url("../fonts/icons.woff?cd778b689adc32759887fe14a4e91ec4") format("woff"),
-		url("../fonts/icons.ttf?cd778b689adc32759887fe14a4e91ec4") format("truetype"),
-		url("../fonts/icons.svg?cd778b689adc32759887fe14a4e91ec4#icons") format("svg");
+		url("../fonts/icons.woff?72da87d415f7fd10bba6737b3e1ffd8c") format("woff"),
+		url("../fonts/icons.ttf?72da87d415f7fd10bba6737b3e1ffd8c") format("truetype"),
+		url("../fonts/icons.svg?72da87d415f7fd10bba6737b3e1ffd8c#icons") format("svg");
     font-weight:normal;
     font-style:normal;
     }
@@ -23,48 +23,53 @@
     }
 
 // Icons
-.icon--arrow:before { content:"\f101"; }
-.icon--avatar:before { content:"\f102"; }
-.icon--bell:before { content:"\f103"; }
-.icon--budget:before { content:"\f104"; }
-.icon--business-construction:before { content:"\f105"; }
-.icon--business-finance:before { content:"\f106"; }
-.icon--business-food-beverage:before { content:"\f107"; }
-.icon--business-hotel:before { content:"\f108"; }
-.icon--business-leisure:before { content:"\f109"; }
-.icon--business-manufacturing:before { content:"\f10a"; }
-.icon--business-media-telco-entertainment:before { content:"\f10b"; }
-.icon--business-retail:before { content:"\f10c"; }
-.icon--business-sport:before { content:"\f10d"; }
-.icon--business-tourisme:before { content:"\f10e"; }
-.icon--calendar:before { content:"\f10f"; }
-.icon--cb:before { content:"\f110"; }
-.icon--certification:before { content:"\f111"; }
-.icon--chair:before { content:"\f112"; }
-.icon--clock:before { content:"\f113"; }
-.icon--company-large:before { content:"\f114"; }
-.icon--company-medium:before { content:"\f115"; }
-.icon--company-small:before { content:"\f116"; }
-.icon--consultant:before { content:"\f117"; }
-.icon--cross:before { content:"\f118"; }
-.icon--document:before { content:"\f119"; }
-.icon--download:before { content:"\f11a"; }
-.icon--eye:before { content:"\f11b"; }
-.icon--facebook:before { content:"\f11c"; }
-.icon--flag:before { content:"\f11d"; }
-.icon--handshake:before { content:"\f11e"; }
-.icon--language:before { content:"\f11f"; }
-.icon--linkedin:before { content:"\f120"; }
-.icon--locker:before { content:"\f121"; }
-.icon--mail:before { content:"\f122"; }
-.icon--notes:before { content:"\f123"; }
-.icon--pen:before { content:"\f124"; }
-.icon--pointer:before { content:"\f125"; }
-.icon--rocket:before { content:"\f126"; }
-.icon--selected:before { content:"\f127"; }
-.icon--star:before { content:"\f128"; }
-.icon--tick:before { content:"\f129"; }
-.icon--trashbin:before { content:"\f12a"; }
-.icon--twitter:before { content:"\f12b"; }
-.icon--typology:before { content:"\f12c"; }
-.icon--world:before { content:"\f12d"; }
+.icon--address:before { content:"\f101"; }
+.icon--arrow:before { content:"\f102"; }
+.icon--avatar:before { content:"\f103"; }
+.icon--bell:before { content:"\f104"; }
+.icon--budget:before { content:"\f105"; }
+.icon--business-construction:before { content:"\f106"; }
+.icon--business-finance:before { content:"\f107"; }
+.icon--business-food-beverage:before { content:"\f108"; }
+.icon--business-hotel:before { content:"\f109"; }
+.icon--business-leisure:before { content:"\f10a"; }
+.icon--business-manufacturing:before { content:"\f10b"; }
+.icon--business-media-telco-entertainment:before { content:"\f10c"; }
+.icon--business-retail:before { content:"\f10d"; }
+.icon--business-sport:before { content:"\f10e"; }
+.icon--business-tourisme:before { content:"\f10f"; }
+.icon--calendar:before { content:"\f110"; }
+.icon--cb:before { content:"\f111"; }
+.icon--certification:before { content:"\f112"; }
+.icon--chair:before { content:"\f113"; }
+.icon--clock:before { content:"\f114"; }
+.icon--company-large:before { content:"\f115"; }
+.icon--company-medium:before { content:"\f116"; }
+.icon--company-small:before { content:"\f117"; }
+.icon--company:before { content:"\f118"; }
+.icon--consultant:before { content:"\f119"; }
+.icon--cross:before { content:"\f11a"; }
+.icon--document:before { content:"\f11b"; }
+.icon--download:before { content:"\f11c"; }
+.icon--email:before { content:"\f11d"; }
+.icon--eye:before { content:"\f11e"; }
+.icon--facebook:before { content:"\f11f"; }
+.icon--flag:before { content:"\f120"; }
+.icon--handshake:before { content:"\f121"; }
+.icon--language:before { content:"\f122"; }
+.icon--linkedin-thin:before { content:"\f123"; }
+.icon--linkedin:before { content:"\f124"; }
+.icon--locker:before { content:"\f125"; }
+.icon--mail:before { content:"\f126"; }
+.icon--notes:before { content:"\f127"; }
+.icon--pen:before { content:"\f128"; }
+.icon--phone:before { content:"\f129"; }
+.icon--pointer:before { content:"\f12a"; }
+.icon--rocket:before { content:"\f12b"; }
+.icon--selected:before { content:"\f12c"; }
+.icon--star:before { content:"\f12d"; }
+.icon--tick:before { content:"\f12e"; }
+.icon--trashbin:before { content:"\f12f"; }
+.icon--twitter:before { content:"\f130"; }
+.icon--typology:before { content:"\f131"; }
+.icon--world:before { content:"\f132"; }
