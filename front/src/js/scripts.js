@@ -133,6 +133,10 @@ var Master = {
             $(this).parent().toggleClass('wmw-mission-summarybtn--active');
         });
 
+        $('.wmw-mission-close').on('click', function(){
+            $('.wmw-wrapper').animate({"opacity":"0"}, 300);
+        });
+
         Master.init_pitch_finder();
         Master.init_mission_overlay();
         Master.init_mission_notes();
