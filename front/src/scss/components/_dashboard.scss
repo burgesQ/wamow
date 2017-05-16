@@ -99,7 +99,7 @@
 					border:1px solid $colorgreyxlight;
 					position:relative;
 					height: 100%;
-					padding-bottom:80px;
+					padding-bottom:190px;
 
 					.wmw-button--green{
 						position:absolute;
@@ -120,7 +120,6 @@
 				}
 
 				.main-slider-element-wrapper{
-					position:relative;
 					max-height: 100%;
 					padding:20px 20px 0 20px;
 					overflow:auto;
@@ -157,6 +156,10 @@
 					font-size:20px;
 					font-family:$fontcantarell;
 					color:$colorgrey;
+					position: absolute;
+				    bottom: 110px;
+				    left: 0;
+				    width: 100%;
 
 					strong{
 						font-size:12px;
@@ -179,7 +182,12 @@
 				.main-slider-infos{
 					font-size:12px;
 					color:#a2a2a2;
-					margin-top:20px;
+					position: absolute;
+				    left: 0;
+				    bottom: 80px;
+				    padding: 0;
+				    width:100%;
+				    text-align:center;
 
 					.icon{
 						font-size:14px;
@@ -267,6 +275,10 @@
 
 				.wmw-slider-element{
 					height:300px;
+
+					.main-slider-element{
+						padding-bottom:80px;
+					}
 
 					.main-slider-title{
 						color:$colorgreylight;
@@ -578,6 +590,44 @@
 }
 
 /* ------------------------------------------------------------------------------ */
+/* ----------- SMALL SCREENS ---------------------------------------------------- */
+/* ------------------------------------------------------------------------------ */
+
+@media screen and (min-width: $screen-sm-min){
+
+	.wmw-dashboard{
+
+		.wmw-dashboard-main{
+
+			.main-slider{
+				padding:0 30px;
+
+		        .wmw-slider-element{
+		            transform: translate(-200%, 0);
+		            padding:0 10px;
+
+		            &.wmw-slider-element--active {
+		                transform: translate(0%);
+		                opacity:1;
+		          
+		            }
+
+		            &.wmw-slider-element--active + * {
+		                transform: translate(100%);
+		                opacity:1;
+		           
+		            }
+
+		            &.wmw-slider-element--active + * ~ * {
+		                transform: translate(200%, 0);
+		            }
+		        }
+		    }
+		}
+	}
+}
+
+/* ------------------------------------------------------------------------------ */
 /* ----------- MEDIUM SCREENS --------------------------------------------------- */
 /* ------------------------------------------------------------------------------ */
 
@@ -596,11 +646,9 @@
 			}
 
 			.main-slider{
-				padding:0 30px;
 
 		        .wmw-slider-element{
 		            transform: translate(-300%, 0);
-		            padding:0 10px;
 
 		            &.wmw-slider-element--active {
 		                transform: translate(0%);
@@ -626,16 +674,6 @@
 
 		            &.wmw-slider-element--active + * + * ~ * {
 		                transform: translate(300%, 0);
-		            }
-
-		            .main-slider-element{
-
-		            	.main-slider-infos{
-		            		
-		            		br{
-		            			display:none;
-		            		}
-		            	}
 		            }
 		        }
 			}

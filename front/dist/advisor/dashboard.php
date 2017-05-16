@@ -34,7 +34,7 @@
 				<div class="main-slider wmw-slider">
 					<div class="wmw-slider-inner row">
 						
-						<div class="wmw-slider-element wmw-slider-element--active col-xs-12 col-md-4">
+						<div class="wmw-slider-element wmw-slider-element--active col-xs-12 col-sm-6 col-md-4">
 							<div class="main-slider-element">
 								<div class="main-slider-element-wrapper">
 									<div class="main-slider-date">Pitched at 26/12/2015</div>
@@ -48,7 +48,7 @@
 										<small>Sales &amp; Business Developement</small>
 									</div>
 									<div class="main-slider-infos">
-										<span><i class="icon icon--clock"></i> 4 days left</span><br />
+										<span><i class="icon icon--clock"></i> 4 days left</span>
 										<span><i class="icon icon--pointer"></i> New York - USA</span>
 									</div>
 								</div>
@@ -66,7 +66,7 @@
 							</div>
 						</div>
 
-						<div class="wmw-slider-element col-xs-12 col-md-4">
+						<div class="wmw-slider-element col-xs-12 col-sm-6 col-md-4">
 							<div class="main-slider-element">
 								<div class="main-slider-element-wrapper">
 									<div class="main-slider-date">Pitched at 26/12/2015</div>
@@ -80,7 +80,7 @@
 										<small>Sales &amp; Business Developement</small>
 									</div>
 									<div class="main-slider-infos">
-										<span><i class="icon icon--clock"></i> 4 days left</span><br />
+										<span><i class="icon icon--clock"></i> 4 days left</span>
 										<span><i class="icon icon--pointer"></i> New York - USA</span>
 									</div>
 								</div>
@@ -98,7 +98,7 @@
 							</div>
 						</div>
 
-						<div class="wmw-slider-element col-xs-12 col-md-4">
+						<div class="wmw-slider-element col-xs-12 col-sm-6 col-md-4">
 							<div class="main-slider-element">
 								<div class="main-slider-element-wrapper">
 									<div class="main-slider-date">Pitched at 26/12/2015</div>
@@ -112,7 +112,7 @@
 										<small>Sales &amp; Business Developement</small>
 									</div>
 									<div class="main-slider-infos">
-										<span><i class="icon icon--clock"></i> 4 days left</span><br />
+										<span><i class="icon icon--clock"></i> 4 days left</span>
 										<span><i class="icon icon--pointer"></i> New York - USA</span>
 									</div>
 								</div>
@@ -130,7 +130,7 @@
 							</div>
 						</div>
 
-						<div class="wmw-slider-element col-xs-12 col-md-4">
+						<div class="wmw-slider-element col-xs-12 col-sm-6 col-md-4">
 							<div class="main-slider-element">
 								<div class="main-slider-element-wrapper">
 									<div class="main-slider-date">Pitched at 26/12/2015</div>
@@ -144,7 +144,7 @@
 										<small>Sales &amp; Business Developement</small>
 									</div>
 									<div class="main-slider-infos">
-										<span><i class="icon icon--clock"></i> 4 days left</span><br />
+										<span><i class="icon icon--clock"></i> 4 days left</span>
 										<span><i class="icon icon--pointer"></i> New York - USA</span>
 									</div>
 								</div>
@@ -162,7 +162,7 @@
 							</div>
 						</div>
 
-						<div class="wmw-slider-element wmw-slider-element--special col-xs-12 col-md-4">
+						<div class="wmw-slider-element wmw-slider-element--special col-xs-12 col-sm-6 col-md-4">
 							<div class="main-slider-element">
 								<div class="main-slider-nopitch">
 									No other pitch yet
