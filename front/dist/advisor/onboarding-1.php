@@ -46,14 +46,19 @@
 					</div>
 				</div>
 
-				<div class="wmw-fieldrow wmw-copyfield row">
-					<label for="wmw-ob-language-1" class="wmw-label wmw-label--topmobile col-xs-10 col-sm-5">Langue de travail</label>
-					<select data-copy-nb="1" data-copy-name="wmw-ob-language" id="wmw-ob-language-1" name="languages[]" class="col-xs-10 col-md-5 required">
-						<option value="fr">Français</option>
-						<option value="en">Anglais</option>
-						<option value="es">Espagnol</option>
-					</select>
-					<a href="#" class="wmw-button-more">+</a>
+				<div class="wmw-copyfields">
+
+					<div class="wmw-fieldrow wmw-copyfield row">
+						<label for="wmw-ob-language-1" class="wmw-label wmw-label--topmobile col-xs-10 col-sm-5">Langue de travail</label>
+						<select data-copy-nb="1" data-copy-name="wmw-ob-language" id="wmw-ob-language-1" name="languages[]" class="col-xs-10 col-md-5 required">
+							<option value="fr">Français</option>
+							<option value="en">Anglais</option>
+							<option value="es">Espagnol</option>
+						</select>
+						<a href="#" class="wmw-button-less">-</a>
+						<a href="#" class="wmw-button-more">+</a>
+					</div>
+
 				</div>
 
 				<div class="wmw-uploadfield">

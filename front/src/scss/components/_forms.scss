@@ -555,10 +555,40 @@ input[type=range]::-ms-thumb {
 	border-color:$colorinvalid;
 }
 
-.wmw-copyfield{
+.wmw-copyfields{
 
-	.wmw-button-more{
-		margin-top:5px;
+	.wmw-copyfield{
+		white-space:nowrap;
+
+		input, select{
+			margin-right:5px;
+		}
+
+		.wmw-button-less,
+		.wmw-button-more{
+			margin-top:5px;
+			margin-right:0;
+			margin-left:5px;
+		}
+
+		.wmw-button-more{
+			display:none;
+		}
+	
+		&:first-child .wmw-button-less{
+			display:none;
+		}
+
+		&:last-child .wmw-button-more{
+			display:inline-block;
+		}
+	}
+
+	&.wmw-copyfields--multiple{
+
+		.wmw-copyfield:first-child .wmw-button-less{
+			display:inline-block !important;
+		}
 	}
 }
 
