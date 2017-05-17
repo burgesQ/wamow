@@ -1,21 +1,37 @@
 {% extends '::base.html.twig' %}
-{% trans_default_domain 'FOSUserBundle' %}
+{% trans_default_domain 'tools' %}
+
+{% block stylesheets %}
+{% endblock %}
 
 {% block body %}
-    <div id="wrapper">
-        <div id="container">
-            <a href="{{ path('setlocale', {'language': 'fr'}) }}">FR</a>
-            <a href="{{ path('setlocale', {'language': 'en'}) }}">EN</a>
-        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-        {% else %}
-            <div>
-                <a href="{{ path('fos_user_registration_register_expert') }}">{{ 'layout.sign_up'|trans }}</a>
-            </div>
-            <div>
-                <a href="{{ path('home_page_seeker') }}">{{ 'layout.seeker_access'|trans }}</a>
-            </div>
-        {% endif %}
+<a href="{{ path('home_page_seeker') }}">{{ 'home.advisor.contractorlink' | trans | upper }}</a><br>
+<a href="{{ path('setlocale', {'language': 'en'}) }}">{{ 'header.lang.en' | trans | upper }}</a><br>
+<a href="{{ path('setlocale', {'language': 'fr'}) }}">{{ 'header.lang.fr' | trans | upper }}</a><br>
+<a href="">{{ 'header.news' | trans | upper }}</a><br>
+<a href="{{ path('fos_user_security_login') }}">{{ 'home.advisor.login' | trans }}</a><br>
+<a href="{{ path('fos_user_registration_register_expert') }}">{{ 'home.advisor.signup' | trans }}</a><br>
 
-        </div>
-    </div>
+{{ 'home.advisor.title' | trans }}<br>
+{{ 'home.advisor.valueproposition.first' | trans | upper }}<br>
+{{ 'home.advisor.valueproposition.second' | trans | upper }}<br>
+{{ 'home.advisor.howdoesitwork' | trans }}<br>
+{{ 'home.advisor.start.text' | trans }}<br>
+{{ 'home.advisor.play.text' | trans }}<br>
+{{ 'home.advisor.improve.text' | trans }}<br>
+{{ 'home.advisor.pay.text' | trans }}<br>
+
+<a href="{{ path('fos_user_registration_register_expert') }}">{{ 'home.advisor.open' | trans | upper }}</a><br>
+
+<a href="">{{ 'footer.mission' | trans | upper }}/</a><br>
+<a href="">{{ 'footer.about' | trans | upper }}/</a><br>
+<a href="{{ path('home_page_seeker') }}">{{ 'footer.contractor' | trans | upper }}/</a><br>
+<a href="">{{ 'footer.agreement' | trans | upper }}/</a><br>
+<a href="">{{ 'footer.legal' | trans | upper }}/</a><br>
+<a href="{{ facebook_link }}">logo facebook</a><br>
+<a href="{{ twitter_link }}">logo twitter</a><br>
+<a href="{{ linkedin_link }}">logo linkedin</a><br>
+{% endblock %}
+
+{% block javascripts %}
 {% endblock %}

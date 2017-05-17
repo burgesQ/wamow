@@ -1,19 +1,66 @@
 {% extends '::base.html.twig' %}
-{% trans_default_domain 'FOSUserBundle' %}
+{% trans_default_domain 'tools' %}
+
+{% block stylesheets %}
+{% endblock %}
 
 {% block body %}
-    <div id="wrapper">
-        <div id="container">
-            <a href="{{ path('setlocale', {'language': 'fr'}) }}">FR</a>
-            <a href="{{ path('setlocale', {'language': 'en'}) }}">EN</a>
-        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-        {% else %}
-            <div>
-                <a href="{{ path('fos_user_registration_register_seeker') }}">{{ 'layout.sign_up'|trans }}</a>
-                <a href="{{ path('home_page_expert') }}">{{ 'layout.expert_access'|trans }}</a>
-            </div>
-        {% endif %}
+<br>
+<a href="{{ path('setlocale', {'language': 'en'}) }}">{{ 'header.lang.en' | trans | upper }}</a><br>
+<a href="{{ path('setlocale', {'language': 'fr'}) }}">{{ 'header.lang.fr' | trans | upper }}</a><br>
+<a href="">{{ 'home.contractor.signup' | trans | upper }}</a><br>
+<a href="{{ path('fos_user_security_login') }}">{{ 'home.contractor.login' | trans | upper }}</a><br>
+{{ 'home.contractor.title' | trans }}<br>
+{{ 'home.contractor.valueproposition.first' | trans | upper }}<br>
+{{ 'home.contractor.valueproposition.second' | trans | upper }}<br>
 
-        </div>
-    </div>
+{{ 'home.contractor.howdoesitwork' | trans }}<br>
+{{ 'home.contractor.start.text' | trans }}<br>
+{{ 'home.contractor.play.text' | trans }}<br>
+{{ 'home.contractor.improve.text' | trans }}<br>
+{{ 'home.contractor.pay.text' | trans }}<br>
+
+{{ form_start(form, {'attr': {'class': 'form-contact'}}) }}
+
+    {{ form_errors(form.email) }}
+    {{ form_widget(form.email) }}
+    <br>
+    {{ form_errors(form.firstname) }}
+    {{ form_widget(form.firstname) }}
+    <br>
+    {{ form_errors(form.lastname) }}
+    {{ form_widget(form.lastname) }}
+    <br>
+    {{ form_errors(form.company) }}
+    {{ form_widget(form.company) }}
+    <br>
+    {{ form_errors(form.country) }}
+    {{ form_widget(form.country) }}
+    <br>
+    {{ form_errors(form.phone.prefix) }}
+    {{ form_widget(form.phone.prefix) }}
+    <br>
+    {{ form_errors(form.phone.number) }}
+    {{ form_widget(form.phone.number) }}
+    <br>
+    {{ form_errors(form.comment) }}
+    {{ form_widget(form.comment, {'onKeyUp': 'checkPasswordMatch()'}) }}
+    <br>
+    {{ form_widget(form.submit) }}
+
+{{ form_end(form) }}
+
+
+<a href="">{{ 'footer.mission' | trans | upper }}/</a><br>
+<a href="">{{ 'footer.about' | trans | upper }}/</a><br>
+<a href="{{ path('home_page_expert') }}">{{ 'footer.advisor' | trans | upper }}/</a><br>
+<a href="">{{ 'footer.agreement' | trans | upper }}/</a><br>
+<a href="">{{ 'footer.legal' | trans | upper }}/</a><br>
+<a href="{{ facebook_link }}">logo facebook</a><br>
+<a href="{{ twitter_link }}">logo twitter</a><br>
+<a href="{{ linkedin_link }}">logo linkedin</a><br>
+
+{% endblock %}
+
+{% block javascripts %}
 {% endblock %}

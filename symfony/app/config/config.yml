@@ -43,6 +43,10 @@ twig:
     form:
         resources:
             - 'TetranzSelect2EntityBundle:Form:fields.html.twig'
+    globals:
+        facebook_link: "%facebook_link%"
+        twitter_link: "%twitter_link%"
+        linkedin_link: "%linkedin_link%"
 
 services:
     twig.extension.text:

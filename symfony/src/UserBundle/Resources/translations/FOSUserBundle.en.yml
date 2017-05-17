@@ -165,8 +165,6 @@ layout:
     register: "Register"
     logged_in_as: "Hello %first_name% %last_name%"
     sign_up: "Sign Up"
-    seeker_access: "Contractor Access"
-    expert_access: "Advisor Access"
 
 form:
     group_name: "Group name"
