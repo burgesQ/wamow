@@ -77,7 +77,7 @@ class MissionController extends Controller
             }
 
             switch ($userMissionStatus) {
-                case (UserMission::NEW && !$user->getPayement()) :
+                case (UserMission::NEW && !$user->getPayment()) :
                 case (UserMission::INTERESTED) :
                     $form = $this->createForm(MessageMissionFormType::class);
                     if ($form->handleRequest($request)->isSubmitted() && $form->isValid()) {
@@ -138,7 +138,7 @@ class MissionController extends Controller
         switch (($userMissionStatus = $userMission->getStatus())) {
             case (UserMission::NEW) :
 
-                if ($user->getPayement()) {
+                if ($user->getPayment()) {
                     // mark user as interested for the mission
                     $userMission->setStatus(UserMission::INTERESTED)->setInterestedAt(new \DateTime());
                     $em->flush();

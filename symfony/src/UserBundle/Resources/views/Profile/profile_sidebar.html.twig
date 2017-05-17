@@ -1,16 +1,39 @@
 {% trans_default_domain 'tools' %}
 
+{% set roleAdvisor = (user.roles[0] == 'ROLE_ADVISOR') %}
+
 <div class="side_bar">
     <div class="ring">
         {% if roleAdvisor %}
+            {% set ringLevel = 50 %}
+            {% if user.images is not empty %}
+                {% set ringLevel = ringLevel + 25 %}
+            {% endif %}
+            {% if user.linkedinId is not null %}
+                {% set ringLevel = ringLevel + 25 %}
+            {% endif %}
             <h5>
-
+                RingLevel = {{ ringLevel }}%
             </h5>
         {% endif %}
     </div>
     <div class="notification_switch">
         <h5>
-
+            RingIcon {{ 'user.profile_show.advisor.email_notification' | trans }}<input type="checkbox" id="switch_notification"
+                                                                                        {% if user.notification %}checked{% endif %}/>
         </h5>
     </div>
 </div>
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#switch_notification').change(function () {
+                $.ajax({
+                    url: "{{ path('user_switch_notification') }}",
+                    method: "put"
+                });
+            });
+        });
+    </script>
+{% endblock %}

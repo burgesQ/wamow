@@ -4,7 +4,6 @@ namespace UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Asset\Context\ContextInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use FOS\UserBundle\Model\User as BaseUser;
@@ -307,16 +306,15 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * @var boolean
      *
-     * @ORM\Column(nullable=false, name="email_notification", type="boolean")
+     * @orm\Column(nullable=false, name="payment", type="boolean")
      */
-    private $emailNotification;
+    private $payment;
 
     /**
-     * @var boolean
-     *
-     * @orm\Column(nullable=false, name="payement", type="boolean")
+     * @var bool
+     * @ORM\Column(name="notification", type="boolean", nullable=false)
      */
-    private $payement;
+    private $notification;
 
     /**
      * User constructor.
@@ -338,15 +336,16 @@ class User extends BaseUser implements ParticipantInterface
         $this->secretMail            = new ArrayCollection();
         $this->userMission           = new ArrayCollection();
         $this->confidentiality       = false;
-        $this->payement              = false;
+        $this->payment               = false;
         $this->remoteWork            = false;
         $this->newsletter            = true;
-        $this->emailNotification     = true;
+        $this->notification          = true;
         $this->userResume            = null;
         $this->company               = null;
         $this->publicId              = "";
         $this->giveUpCount           = 0;
         $this->secretMail            = [];
+        $this->linkedinData          = [];
     }
 
     /**
@@ -359,7 +358,7 @@ class User extends BaseUser implements ParticipantInterface
 
     /**
      * @Assert\Callback
-     * @param ExecutionContextInterface $context
+     * @param \Symfony\Component\Validator\Context\ExecutionContextInterface $context
      */
     public function isValidate(ExecutionContextInterface $context)
     {
@@ -637,7 +636,7 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * Add images
      *
-     * @param \ToolsBundle\Entity\ProfilePicture image
+     * @param \ToolsBundle\Entity\ProfilePicture $image
      * @return User
      */
     public function addImage($image)
@@ -1194,51 +1193,13 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Set emailNotification
-     *
-     * @param boolean $emailNotification
-     * @return User
-     */
-    public function setEmailNotification($emailNotification)
-    {
-        $this->emailNotification = $emailNotification;
-
-        return $this;
-    }
-
-    /**
-     * Get emailNotification
-     *
-     * @return boolean
-     */
-    public function getEmailNotification()
-    {
-        return $this->emailNotification;
-    }
-
-    /**
-     * Get linkedinData
+     * Get LinkedinData
      *
      * @return array
      */
     public function getLinkedinData()
     {
         return $this->linkedinData;
-    }
-
-
-    /**
-     * Add address
-     *
-     * @param \ToolsBundle\Entity\Address $address
-     * @return User
-     */
-    public function addAddress($address)
-    {
-        $address->setUser($this);
-        $this->addresses[] = $address;
-
-        return $this;
     }
 
     /**
@@ -1267,25 +1228,62 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Set payement
+     * Add address
      *
-     * @param boolean $payement
+     * @param \ToolsBundle\Entity\Address $address
      * @return User
      */
-    public function setPayement($payement)
+    public function addAddress($address)
     {
-        $this->payement = $payement;
+        $address->setUser($this);
+        $this->addresses[] = $address;
 
         return $this;
     }
 
     /**
-     * Get payement
+     * Set payement
+     *
+     * @param boolean $payment
+     * @return User
+     */
+    public function setPayment($payment)
+    {
+        $this->payment = $payment;
+
+        return $this;
+    }
+
+    /**
+     * Get payment
      *
      * @return boolean
      */
-    public function getPayement()
+    public function getPayment()
     {
-        return $this->payement;
+        return $this->payment;
+    }
+
+    /**
+     * Set notification
+     *
+     * @param boolean $notification
+     * @return User
+     */
+    public function setNotification($notification)
+    {
+        $this->notification = $notification;
+
+        return $this;
+    }
+
+    /**
+     * Get notification
+     *
+     * @return boolean
+     */
+    public function getNotification()
+    {
+        return $this->notification;
     }
 }

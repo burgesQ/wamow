@@ -2,6 +2,8 @@
 {% trans_default_domain "tools" %}
 
 {% block body %}
+
+    {% include "UserBundle:Profile:profile_sidebar.html.twig" %}
     <div>
         <p>
             {{ 'dashboard.advisor.fyi.title' | trans | upper }}

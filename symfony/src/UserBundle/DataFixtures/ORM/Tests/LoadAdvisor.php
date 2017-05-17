@@ -2476,8 +2476,6 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
         $asia         = $continentRepo->findOneBy(['name' => 'continent.asia']);
         $emea         = $continentRepo->findOneBy(['name' => 'continent.emea']);
 
-        $j = 42;
-
         foreach ($this->arrayDatas as $oneData) {
 
             // create Entity with fName, lName, email, country
@@ -2561,6 +2559,12 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 $manager->persist($shap);
                 $manager->flush();
                 $newUser->addExperienceShaping($shap);
+            }
+
+            if (key_exists(12, $oneData)) {
+                $userManager->updateUser($newUser, true);
+                $this->linkPhone($oneData[12], $newUser, $manager);
+                $this->linkAddress($oneData[12], $newUser, $manager);
             }
 
             if (key_exists(12, $oneData)) {

@@ -2,7 +2,6 @@
 
 namespace MissionBundle\DataFixtures\ORM\Tests;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use CompanyBundle\Entity\Company;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;

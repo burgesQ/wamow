@@ -34,3 +34,10 @@ fos_user_resetting:
 fos_user_change_password:
     resource: "@UserBundle/Resources/config/routing/change_password.xml"
     prefix: /profile
+
+## AJAX Action
+user_switch_notification:
+    path: /user/notification/switch
+    defaults:
+        _controller: UserBundle:Action:switchNotification
+

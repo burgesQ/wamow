@@ -20,23 +20,6 @@ form:
     file:
         file: "File"
 
-## Users
-user:
-    profile_show:
-        wait_subscription_plan: SUBSCRIPTION PLAN, WAIT FOR #98
-        linkedin_stuff: LinkeDin stuff's
-        resume_stuff: Resume stuff's
-        advisor:
-            link_back_to_board: back to board
-            link_edit_profile: edit profile
-            link_general: GENERALE
-            link_billing: BILLING
-            title_algorithm_improvment: algorythm improvment
-            title_subscription: subscription
-    profile_edit:
-        advisor:
-            btn_save_change: SAVE CHANGE
-
 ## Common error
 error:
     forbidden: You have no access to this page
@@ -156,6 +139,24 @@ registration:
             cumuledmonth: "How many cumulted years?"
             dailyfees: "Average daily fees"
             peremption: "Was the last mission of this kind within the last 2 years?"
+
+## Users
+user:
+    profile_show:
+        wait_subscription_plan: "SUBSCRIPTION PLAN, WAIT FOR #98"
+        linkedin_stuff: LinkeDin stuff's
+        resume_stuff: Resume stuff's
+        advisor:
+            link_back_to_board: back to board
+            link_edit_profile: edit profile
+            link_general: GENERALE
+            link_billing: BILLING
+            title_algorithm_improvment: algorythm improvment
+            title_subscription: subscription
+            email_notification: email notification
+    profile_edit:
+        advisor:
+            btn_save_change: SAVE CHANGE
 
 ## Mission
 mission:

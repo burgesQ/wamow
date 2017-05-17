@@ -4,6 +4,7 @@ namespace UserBundle\Controller;
 
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use FOS\UserBundle\Controller\ProfileController as BaseController;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use UserBundle\Form\EditProfileMergedFormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,7 +13,7 @@ use FOS\UserBundle\Model\UserInterface;
 use ToolsBundle\Entity\ProfilePicture;
 use UserBundle\Entity\User;
 
-class ProfileController extends BaseController
+class ProfileController extends Controller
 {
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response

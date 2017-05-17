@@ -108,14 +108,19 @@ fos_user:
 
 ## Assetic Configuration
 assetic:
-    debug:          "%kernel.debug%"
-    use_controller: true
-    bundles:        [ToolsBundle]
+    assets:
+        jquery:
+            inputs:
+              -       '%kernel.root_dir%/../vendor/components/jquery/jquery.js'
+
+    debug:            "%kernel.debug%"
+    use_controller:   true
+    bundles:          [ToolsBundle]
     filters:
         lessphp:
-            file: %kernel.root_dir%/../vendor/oyejorge/less.php/lessc.inc.php
+            file:     %kernel.root_dir%/../vendor/oyejorge/less.php/lessc.inc.php
             apply_to: "\.less$"
-        cssrewrite: ~
+        cssrewrite:   ~
 
 ## BrainCraftedBootsrap Configuration
 braincrafted_bootstrap:

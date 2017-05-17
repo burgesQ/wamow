@@ -1,8 +1,6 @@
 {% extends "::base.html.twig" %}
 {% set roleAdvisor = (user.roles[0] == 'ROLE_ADVISOR') %}
 
-{% set roleAdvisor = (user.roles[0] == 'ROLE_ADVISOR') %}
-
 {% block body %}
     {% include "UserBundle:Profile:profile_sidebar.html.twig" %}
     {% if roleAdvisor %}
