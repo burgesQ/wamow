@@ -8,9 +8,43 @@ use MissionBundle\Entity\UserMission;
 {
     protected $em;
 
-    public function __construct(\Doctrine\ORM\EntityManager $em)
+    protected $weightBusinessPractice, $weightProfessionalExpertise, $weightCompanySize, $weightMissionKind, $weightLocation;
+
+    public function __construct(\Doctrine\ORM\EntityManager $em, $weightBusinessPractice, $weightProfessionalExpertise, $weightCompanySize, $weightMissionKind, $weightLocation)
     {
         $this->em = $em;
+        $this->weightBusinessPractice = $weightBusinessPractice;
+        $this->weightProfessionalExpertise = $weightProfessionalExpertise;
+        $this->weightCompanySize = $weightCompanySize;
+        $this->weightMissionKind = $weightMissionKind;
+        $this->weightLocation = $weightLocation;
+    }
+
+    private function getScoringRules()
+    {
+        return array(0 => array(0, 50), 1 => array(2, 100), 2 => array(4, 200), 3 => array(6, null));
+    }
+
+    private function getScoringStep($mission)
+    {
+        return count($mission->getScoringHistory()) ? count($mission->getScoringHistory()) - 1 : 0;
+    }
+
+    private function updateNextScoring($mission)
+    {
+        $scoringRules = $this->getScoringRules();
+        $scoringStep = $this->getScoringStep($mission);
+        if (isset($scoringRules[$scoringStep + 1])) {
+            $nbDays = $scoringRules[$scoringStep + 1][0];
+            $mission->setNextUpdateScoring(strtotime("+".$nbDays." days"));
+        } else {
+            $mission->setNextUpdateScoring(null);
+        }
+    }
+    public function initializeMission($mission)
+    {
+        $this->updateActivated($mission);
+        $mission->setNextUpdateScoring(strtotime("+".." days"))
     }
 
     public function getScoring($mission, $userMission)
@@ -49,7 +83,7 @@ use MissionBundle\Entity\UserMission;
             }
         }
         // certifications
-        // TODO ! == MissionKind 'typemissions.certification' ? How ?
+        // TODO ! == MissionKind 'typemissions.certification' ? How ? => quentin
 
         // type mission
         foreach ($mission->getMissionKinds() as $missionKind) {
@@ -74,7 +108,7 @@ use MissionBundle\Entity\UserMission;
         $score += $user->getBonusPoints();
 
         // archétype mission
-        // TODO : kesako ?
+        // TODO : kesako ? = valuable work experience
         return $score;
     }
 
@@ -90,23 +124,22 @@ use MissionBundle\Entity\UserMission;
 
     public function updateActivated($mission) {
         $scoringHistory = $mission->getScoringHistory();
-        // TODO : Activation step in Mission ?
-        $activationStep = count($scoringHistory) ? count($scoringHistory) - 1 : 0;
+        $this->updateNextScoring($mission);
+        $scoringStep = $this->getScoringStep($mission);
         // TODO : Step Entity ? Config ?
-        $nbSelected = array(0 => 50, 1 => 100, 2 => 200, 3 => null);
-        // TODO : Reset previous Activated ? Only if status == ACTIVATED ? => not necessary ?
+        $scoringRules = $this->getScoringRules();
         // $activatedUserMissions = $this->em->getRepository("MissionBundle:UserMission")->findBy("mission" => $mission, "status" => UserMission::ACTIVATED);
-        $userMissions = $this->em->getRepository("MissionBundle:UserMission")->findOrderedByMission($mission, $nbSelected[$activationStep]);
+        $userMissions = $this->em->getRepository("MissionBundle:UserMission")->findOrderedByMission($mission, $scoringRules[$scoringStep][1]);
         // for JSON
-        $scoringHistory[$activationStep] = array();
+        $scoringHistory[$scoringStep] = array();
         $scorings = array();
         foreach ($userMissions as $userMission) {
             $userMission->setStatus(UserMission::ACTIVATED);
             $scorings[$userMission->getUser()->getId()] = $userMission->getScore();
         }
-        $scoringHistory[$activationStep] = $scorings;
+        $scoringHistory[$scoringStep] = $scorings;
         $mission->setScoringHistory($scoringHistory);
         $this->em->flush();
-
+        return count($userMissions);
     }
 }

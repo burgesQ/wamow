@@ -181,3 +181,11 @@ fos_message:
         handler:            fos_message.new_thread_multiple_form.handler
         model:              FOS\MessageBundle\FormModel\NewThreadMultipleMessage
         name:               message
+
+parameters:
+    scoring_weight.user_subscribe: 5
+    scoring_weight.business_practice: 5
+    scoring_weight.professional_expertise: 5
+    scoring_weight.company_size: 1
+    scoring_weight.mission_kind: 2
+    scoring_weight.location: 1

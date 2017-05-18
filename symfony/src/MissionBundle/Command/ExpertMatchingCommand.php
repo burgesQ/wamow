@@ -42,7 +42,8 @@ class ExpertMatchingCommand extends ContainerAwareCommand
         $em = $this->getContainer()->get('doctrine')->getManager();
 
         $io->section('Update Matching');
-        $missions = $em->getRepository("MissionBundle:Mission")->getExpertMissionsAvailables();
+        $missions = $em->getRepository("MissionBundle:Mission")->getMissionsToScore();
+        die(dump($missions));
         $progress = new ProgressBar($output, count($missions));
         $progress->start();
         $nbUserMissions = 0;

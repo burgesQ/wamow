@@ -13,14 +13,17 @@ use UserBundle\Entity\User;
  */
 class MissionRepository extends EntityRepository
 {
-    public function getExpertMissionsAvailables()
+    public function getMissionsToScore()
     {
         // TODO : Exclude already SHORTLIST / FINALIST / etc missions
         $qb = $this->_em->createQueryBuilder();
         $qb->select('m')
         ->from('MissionBundle:Mission', 'm')
-        ->where('m.status >= 1')
-            ->orderBy('m.applicationEnding', 'DESC');
+        ->where('m.status = '.Mission::PUBLISHED)
+        ->andWhere('m.nextUpdateScoring <= :currentDate')
+        ->setParameter("currentDate", date('Y-m-d'))
+        ;
+        // die($qb->getQuery()->getSql());
         return $qb->getQuery()->getResult();
     }
 
@@ -156,10 +159,10 @@ class MissionRepository extends EntityRepository
             // NOTE : only in Scoring ?
             // ->andWhere("mk.id IN(:missionKinds)")
             ->andWhere("pe = :professionalExpertise OR bp = :businessPractice")
+            ->andWhere("m.telecommuting = ".($mission->getTelecommuting() ? "1" : "0"))
             // TODO : No result, normal ? Column medium price needed ?
             // ->andWhere("((u.dailyFeesMin + u.dailyFeesMax)/2.0) <= m.budget")
         ;
-        // TODO : "présence sur site"  mission => onsite ; consultant => mobile // Where ?
 
         $parameters = array(
             "userRoles" => "a:1:{i:0;s:12:\"ROLE_ADVISOR\";}",

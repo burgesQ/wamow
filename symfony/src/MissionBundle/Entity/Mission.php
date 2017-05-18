@@ -260,6 +260,12 @@ class Mission
      */
     private $scoringHistory;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="next_update_scoring", type="date", nullable=true)
+     */
+    private $nextUpdateScoring;
 
     /**
      * Mission constructor.
@@ -1098,5 +1104,28 @@ class Mission
     public function getScoringHistory()
     {
         return $this->scoringHistory;
+    }
+
+    /**
+     * Set nextUpdateScoring
+     *
+     * @param \DateTime $nextUpdateScoring
+     * @return Mission
+     */
+    public function setNextUpdateScoring($nextUpdateScoring)
+    {
+        $this->nextUpdateScoring = $nextUpdateScoring;
+
+        return $this;
+    }
+
+    /**
+     * Get nextUpdateScoring
+     *
+     * @return \DateTime
+     */
+    public function getNextUpdateScoring()
+    {
+        return $this->nextUpdateScoring;
     }
 }

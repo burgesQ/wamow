@@ -20,9 +20,7 @@ class UserMissionRepository extends EntityRepository
             ->from('MissionBundle:UserMission', 't')
             ->where('t.mission = :mission')
                 ->setParameter('mission', $mission)
-            // NOTE : Status position...?
-            // ->andWhere('t.status = :position')
-            //     ->setParameter('position', $step->getPosition());
+            ->andWhere('t.status = '.UserMission::NEW)
             ->orderBy("t.score", "desc");
         if ($max) {
             $qb->setMaxResults($max);

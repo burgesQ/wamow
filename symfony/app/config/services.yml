@@ -41,4 +41,4 @@ services:
 
     scoring:
         class: MissionBundle\Service\Scoring
-        arguments: ['@doctrine.orm.entity_manager']
+        arguments: ['@doctrine.orm.entity_manager', '%scoring_weight.business_practice%', '%scoring_weight.professional_expertise%', '%scoring_weight.company_size%', '%scoring_weight.mission_kind%', '%scoring_weight.location%']
