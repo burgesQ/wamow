@@ -19,6 +19,9 @@ form:
     file:
         file: "File"
 
+    btn:
+        send: send
+
 ## Base
 header:
     lang:
@@ -241,8 +244,8 @@ mission:
     view:
         contractor:
             status_advisor: all advisor
-            stats_shortlist: shortlist
-            status_finalit: finalit
+            status_shortlist: shortlist
+            status_finalit: finalist
             btn_refuse: REFUSE
             btn_proced_to_shortlist: Proceed to shortlist
             btn_add_to_shortlist: add to shortlist
@@ -566,3 +569,14 @@ company_size:
     small:  Small Companies
     medium: Medium Companies
     large:  Large Companies
+
+## Mails template
+mails:
+    hello: Hello %f_name %l_name !
+    inbox:
+        new_message_mission: |
+         You've got a new message on the mission %title.
+
+         The team.
+    subject:
+         new_message: You've got a new message !

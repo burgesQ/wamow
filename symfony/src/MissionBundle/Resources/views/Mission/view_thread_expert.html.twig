@@ -1,0 +1,24 @@
+{% trans_default_domain "tools" %}
+
+{% if thread != null %}
+    <h2>{{ thread.subject }}</h2>
+    {% for message in thread.messages %}
+        <div class="messenger_thread_message">
+            <div class="messenger_thread_message_info">
+                {% if anonymous == 0 %}
+                    {% if message.sender.id  == userId %}
+                        {% trans with {'%sender%': 'You', '%date%': message.createdAt|date} from 'FOSMessageBundle' %}message_info{% endtrans %}
+                    {% else %}
+                        {% trans with {'%sender%': 'Contractor', '%date%': message.createdAt|date} from 'FOSMessageBundle' %}message_info{% endtrans %}
+                    {% endif %}
+                {% else %}
+                    {% trans with {'%sender%': message.sender|e, '%date%': message.createdAt|date} from 'FOSMessageBundle' %}message_info{% endtrans %}
+                {% endif %}
+            </div>
+
+            <div class="messenger_thread_message_body" id="message_{{ message.id }}">
+                {{ message.body }}
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}

@@ -31,3 +31,6 @@ parameters:
     facebook_link: "https://www.facebook.com/wantmorework/"
     twitter_link: "https://twitter.com/WantMoreWork/"
     linkedin_link: "https://www.linkedin.com/groups/7052605/"
+
+    # Email Sneder
+    email_sender: want@more.work

@@ -85,7 +85,7 @@ class MissionController extends Controller
 
             // return the view in function of uesrMission::Status
             switch ($userMissionStatus) {
-                case (UserMission::NEW && !$user->getPayment()) :
+                case ($userMissionStatus === UserMission::NEW && !$user->getPayment()) :
                 case (UserMission::INTERESTED) :
                     $form = $this->createForm(MessageMissionFormType::class);
                     if ($form->handleRequest($request)->isSubmitted() && $form->isValid()) {
@@ -96,10 +96,17 @@ class MissionController extends Controller
 
                         return $this->redirectToRoute('mission_view', ['missionId' => $missionId]);
                     }
-
-                    return $this->render('@Mission/Mission/Advisor/mission_interested.html.twig', [
+                return $this->render('@Mission/Mission/Advisor/mission_interested.html.twig', [
+                    'user_mission' => $userMission,
+                    'form'         => $form->createView()
+                ]);
+                case ($userMissionStatus === UserMission::NEW && $user->getPayment()) :
+                    return $this->interestedAction($missionId);
+                case (UserMission::ONGOING) :
+                    return $this->render('@Mission/Mission/Advisor/mission_to_answer.html.twig', [
                         'user_mission' => $userMission,
-                        'form'         => $form->createView()
+                        'userId'       => $userMission->getUser()->getId(),
+                        'anonymous'    => $step->getAnonymousMode()
                     ]);
                 default :
                     throw new NotFoundHttpException('No view for this UserMission status defined (' .
@@ -155,7 +162,6 @@ class MissionController extends Controller
                     $userMission->setStatus(UserMission::INTERESTED)->setInterestedAt(new \DateTime());
                     $em->flush();
                 }
-                //TODO when strip ok; lil thing to passe userMission to interested
                 return $this->redirectToRoute('mission_view', [
                     'missionId' => $mission->getId()
                 ]);

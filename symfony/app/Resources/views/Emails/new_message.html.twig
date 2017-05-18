@@ -1,0 +1,5 @@
+{% trans_default_domain 'tools' %}
+<h3>{{ 'mails.hello' | trans({ '%f_name': f_name, '%l_name': l_name }, 'tools') }}</h3>
+
+{{ 'mails.inbox.new_message_mission' | trans({ '%title': title}, 'tools') | nl2br }}
+{# TODO put a link to the mission_view_advisor #}

@@ -108,6 +108,8 @@ class ActionController extends Controller
             throw new NotFoundHttpException($trans->trans('error.logged', [], 'tools'));
         } elseif (!$this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR')) {
             throw new NotFoundHttpException($trans->trans('error.forbidden', [], 'tools'));
+        } elseif (!$request->request->has('id')) {
+            throw new \HttpHeaderException('Missing id parameters');
         }
 
         // Get Check UserMission
