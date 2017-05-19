@@ -5,8 +5,7 @@
 			<div class="wmw-dashboard-sidebar col-xs-12 col-lg-2">
 
 				<div class="sidebar-progress">
-					Profil<br />
-					100%
+					<a href="#" class="sidebar-progress-button"><i class="icon icon--document-more"></i><br />Write pitch</a>
 				</div>
 
 				<div class="sidebar-notifications">
