@@ -28,6 +28,7 @@
 		transform:scale(0);
 		transform-origin:top;
 		transition:opacity .3s, transform .3s $easeinout;
+		white-space:normal;
 	}
 
 	&.wmw-tip--left .wmw-tip-box{
