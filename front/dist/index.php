@@ -22,6 +22,9 @@
 			<a href="advisor/dashboard.php" class="wmw-button">
 				<i></i><span>Advisor - Dashboard</span><i></i>
 			</a><br /><br />
+			<a href="advisor/profile.php" class="wmw-button">
+				<i></i><span>Advisor - Profile</span><i></i>
+			</a><br /><br />
 			<a href="advisor/mission-interested.php" class="wmw-button">
 				<i></i><span>Advisor - Mission (interested)</span><i></i>
 			</a><br /><br />
