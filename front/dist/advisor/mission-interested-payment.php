@@ -63,7 +63,7 @@
 
 						<div class="mail-content mail-content--nopadding row">
 
-							<div class="mail-content-sidebar mail-content-sidebar--large">
+							<div class="mail-content-sidebar mail-content-sidebar--large mail-content-sidebar--noscroll">
 								<div class="sidebar-date">Pitched at 26/12/2015</div>
 								<div class="sidebar-title">
 									Consultant(e) in collaborative innovation management
@@ -87,20 +87,37 @@
 										Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia  consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
 									</p>
 								</div>
+								<div class="sidebar-mask"></div>
 							</div>
 
 							<div class="mail-content-pitch">
-								<form action="mission-interested.php" method="post">
 
-									<div class="mail-content-pitch-writer">
-										<textarea class="required" placeholder="Write your message here"></textarea>
-										<button type="submit">Accept the pitch and send</button>
-										<div class="writer-bottom">
-											<i class="icon icon--tick"></i>draft saved at 16h02
+								<div class="mail-content-pitch-writer">
+									<textarea class="required" placeholder="Write your message here"></textarea>
+								</div>
+								
+								<div class="mail-content-pitch-payment">
+									<form action="mission-interested.php" method="post" class="payment-box">
+										<div class="payment-box-title">Participate</div>
+										<div class="payment-box-desc">
+											Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 										</div>
-									</div>
+										<div class="row">
+											<div class="payment-box-field col-xs-12">
+												<label for="wmw-payment-cbnum"><i class="icon icon--cb"></i> Card Number</label>
+												<input type="text" id="wmw-payment-cbnum" class="required" />
+											</div>
+											<div class="payment-box-field col-xs-6">
+												<input type="text" id="wmw-payment-cbdate" class="required" placeholder="MM / YY" />
+											</div>
+											<div class="payment-box-field col-xs-6">
+												<input type="text" id="wmw-payment-cbscrypt" class="required" placeholder="CVC" />
+											</div>
+										</div>
+										<button type="submit" class="wmw-button wmw-button--grey"><i></i><span>Unlock</span><i></i></button>
+									</form>
+								</div>
 
-								</form>
 							</div>
 
 						</div>
