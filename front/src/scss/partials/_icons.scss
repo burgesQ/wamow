@@ -2,11 +2,11 @@
 
 @font-face {
     font-family:"icons";
-    src: url("../fonts/icons.eot?72da87d415f7fd10bba6737b3e1ffd8c");
+    src: url("../fonts/icons.eot?11acc25a717d36382021d6fa6eb245aa");
     src: url("../fonts/icons.eot?#iefix") format("embedded-opentype"),
-		url("../fonts/icons.woff?72da87d415f7fd10bba6737b3e1ffd8c") format("woff"),
-		url("../fonts/icons.ttf?72da87d415f7fd10bba6737b3e1ffd8c") format("truetype"),
-		url("../fonts/icons.svg?72da87d415f7fd10bba6737b3e1ffd8c#icons") format("svg");
+		url("../fonts/icons.woff?11acc25a717d36382021d6fa6eb245aa") format("woff"),
+		url("../fonts/icons.ttf?11acc25a717d36382021d6fa6eb245aa") format("truetype"),
+		url("../fonts/icons.svg?11acc25a717d36382021d6fa6eb245aa#icons") format("svg");
     font-weight:normal;
     font-style:normal;
     }
@@ -49,27 +49,28 @@
 .icon--company:before { content:"\f118"; }
 .icon--consultant:before { content:"\f119"; }
 .icon--cross:before { content:"\f11a"; }
-.icon--document:before { content:"\f11b"; }
-.icon--download:before { content:"\f11c"; }
-.icon--email:before { content:"\f11d"; }
-.icon--eye:before { content:"\f11e"; }
-.icon--facebook:before { content:"\f11f"; }
-.icon--flag:before { content:"\f120"; }
-.icon--handshake:before { content:"\f121"; }
-.icon--language:before { content:"\f122"; }
-.icon--linkedin-thin:before { content:"\f123"; }
-.icon--linkedin:before { content:"\f124"; }
-.icon--locker:before { content:"\f125"; }
-.icon--mail:before { content:"\f126"; }
-.icon--notes:before { content:"\f127"; }
-.icon--pen:before { content:"\f128"; }
-.icon--phone:before { content:"\f129"; }
-.icon--pointer:before { content:"\f12a"; }
-.icon--rocket:before { content:"\f12b"; }
-.icon--selected:before { content:"\f12c"; }
-.icon--star:before { content:"\f12d"; }
-.icon--tick:before { content:"\f12e"; }
-.icon--trashbin:before { content:"\f12f"; }
-.icon--twitter:before { content:"\f130"; }
-.icon--typology:before { content:"\f131"; }
-.icon--world:before { content:"\f132"; }
+.icon--document-more:before { content:"\f11b"; }
+.icon--document:before { content:"\f11c"; }
+.icon--download:before { content:"\f11d"; }
+.icon--email:before { content:"\f11e"; }
+.icon--eye:before { content:"\f11f"; }
+.icon--facebook:before { content:"\f120"; }
+.icon--flag:before { content:"\f121"; }
+.icon--handshake:before { content:"\f122"; }
+.icon--language:before { content:"\f123"; }
+.icon--linkedin-thin:before { content:"\f124"; }
+.icon--linkedin:before { content:"\f125"; }
+.icon--locker:before { content:"\f126"; }
+.icon--mail:before { content:"\f127"; }
+.icon--notes:before { content:"\f128"; }
+.icon--pen:before { content:"\f129"; }
+.icon--phone:before { content:"\f12a"; }
+.icon--pointer:before { content:"\f12b"; }
+.icon--rocket:before { content:"\f12c"; }
+.icon--selected:before { content:"\f12d"; }
+.icon--star:before { content:"\f12e"; }
+.icon--tick:before { content:"\f12f"; }
+.icon--trashbin:before { content:"\f130"; }
+.icon--twitter:before { content:"\f131"; }
+.icon--typology:before { content:"\f132"; }
+.icon--world:before { content:"\f133"; }
