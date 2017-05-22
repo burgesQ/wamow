@@ -43,7 +43,7 @@ class DashboardController extends Controller
 
             return $this->render('DashboardBundle:Seeker:dashboard.html.twig', [
                 'missions' => $missions,
-                'drafts'   => $drafts,
+                'drafts'   => $drafts
             ]);
         }
         throw new NotFoundHttpException($trans->trans('dashboard.error.logged', [], 'tools'));

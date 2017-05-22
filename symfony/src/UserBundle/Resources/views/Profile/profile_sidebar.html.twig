@@ -15,6 +15,10 @@
             <h5>
                 RingLevel = {{ ringLevel }}%
             </h5>
+        {% else %}
+            <h5>
+                <a href="{{ path('mission_new_step_one')}}">{{ 'dashboard.contractor.new.button' | trans | upper }}</a>
+            </h5>
         {% endif %}
     </div>
     <div class="notification_switch">
