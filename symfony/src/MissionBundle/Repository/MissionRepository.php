@@ -2,6 +2,7 @@
 
 namespace MissionBundle\Repository;
 
+use MissionBundle\Entity\UserMission;
 use Doctrine\ORM\EntityRepository;
 use MissionBundle\Entity\Mission;
 use UserBundle\Entity\User;
@@ -18,7 +19,7 @@ class MissionRepository extends EntityRepository
         $qb = $this->_em->createQueryBuilder();
         $qb->select('m')
             ->from('MissionBundle:Mission', 'm')
-            ->where('m.status >= 1')
+            ->where('m.status >= ' . Mission::PUBLISHED)
             ->orderBy('m.applicationEnding', 'DESC');
         return $qb->getQuery()->getResult();
     }
@@ -57,8 +58,8 @@ class MissionRepository extends EntityRepository
                 LEFT JOIN m.missionKinds k
                 LEFT JOIN m.userMission um
                 WHERE     um.user = :user
-                AND       um.status >= 0
-                AND       m.status = 1";
+                AND       um.status >= " . UserMission::ACTIVATED ."
+                AND       m.status = " . Mission::PUBLISHED;
 
         // add each user language in the query
         $i = 0;
@@ -158,7 +159,7 @@ class MissionRepository extends EntityRepository
                 LEFT JOIN u.missionKind k
                 LEFT JOIN u.businessPractice b
                 LEFT JOIN u.userMission um
-                WHERE     u.status = 5
+                WHERE     u.status = " . User::REGISTER_NO_STEP ."
                 AND       u.roles = :userRoles";
 
         // add language filter
@@ -195,7 +196,7 @@ class MissionRepository extends EntityRepository
         if ($ignored)
             $base = $base . '
                 AND       um.mission = :mission
-                AND       um.status >= -1';
+                AND       um.status >= ' . UserMIssion::ACTIVATED;
         // order user by id
         $base = $base . '
                 ORDER BY  u.id ASC';

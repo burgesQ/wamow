@@ -52,19 +52,23 @@
                 {{ days }} days
             {% endif %}
             {{ wip.mission.address.city }} - {{ wip.mission.address.country | upper }}</br>
-            {% if wip.status == 0 %}
+            {% if wip.status == constant('ACTIVATED', wip) or wip.status == constant('MATCHED', wip) or wip.status == constant('INTERESTED', wip) %}
                 {{ 'dashboard.advisor.wip.interested' | trans }}</br>
-            {% elseif wip.status == 1 %}
+            {% elseif wip.status == constant('ONGOING', wip) %}
                 {{ 'dashboard.advisor.wip.ongoing' | trans }}</br>
-            {% elseif wip.status == 2 %}
+            {% elseif wip.status == constant('SHORTLIST', wip) %}
                 {{ 'dashboard.advisor.wip.shortlist' | trans }}</br>
-            {% elseif wip.status == 3 %}
+            {% elseif wip.status == constant('FINALIST', wip) %}
                 {{ 'dashboard.advisor.wip.finalist' | trans }}</br>
-            {% elseif wip.status == -3 %}
-                {{ 'dashboard.advisor.wip.givup' | trans }}</br>
-            {% elseif wip.status == -4 %}
+            {% elseif wip.status == constant('FULL', wip) %}
+                {{ 'dashboard.advisor.wip.full' | trans }}</br>
+            {% elseif wip.status == constant('GIVEUP', wip) %}
+                {{ 'dashboard.advisor.wip.giveup' | trans }}</br>
+            {% elseif wip.status == constant('DISMISS', wip) %}
                 {{ 'dashboard.advisor.wip.dismiss' | trans }}</br>
-            {% elseif wip.status == -5 %}
+            {% elseif wip.status == constant('ENDDATE', wip) %}
+                {{ 'dashboard.advisor.wip.ended' | trans }}</br>
+            {% elseif wip.status == constant('DELETED', wip) %}
                 {{ 'dashboard.advisor.wip.delete' | trans }}</br>
             {% endif %}
 

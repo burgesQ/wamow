@@ -13,8 +13,15 @@ use MissionBundle\Entity\UserMission;
  */
 class UserMissionRepository extends EntityRepository
 {
-    // Query get users availables for a specific step
-    //$full is a boolean : false => getAvailablesUsers; true => get All availables users in Array form.
+    /**
+     * Query get users availables for a specific step
+     * $full is a boolean : false => getAvailablesUsers; true => get All availables users in Array form.
+     *
+     * @param $missionId
+     * @param \MissionBundle\Entity\Step $step
+     * @param $arrayForm
+     * @return array|\Doctrine\ORM\QueryBuilder
+     */
     public function getAvailablesUsers($missionId, $step, $arrayForm)
     {
         $qb = $this->_em->createQueryBuilder();
@@ -42,10 +49,8 @@ class UserMissionRepository extends EntityRepository
             ->leftjoin('t.mission', 'm')
             ->where('u.id = :userId')
                 ->setParameter('userId', $userId)
-            ->andWhere('t.status != :status1')
-                ->setParameter('status1', UserMission::NEW)
-            ->andWhere('t.status != :status2')
-                ->setParameter('status2', UserMission::REFUSED)
+            ->andWhere('t.status > :status1')
+                ->setParameter('status1', UserMission::MATCHED)
             ->orderBy('m.applicationEnding', 'ASC');
         return $qb->getQuery()->getResult();
     }
@@ -60,13 +65,13 @@ class UserMissionRepository extends EntityRepository
             ->where('u.id = :userId')
                 ->setParameter('userId', $userId)
             ->andWhere('t.status < :status')
-                ->setParameter('status', UserMission::NEW)
+                ->setParameter('status', UserMission::ACTIVATED)
             ->orderBy('m.applicationEnding', 'ASC');
         return $qb->getQuery()->getResult();
     }
 
     /**
-     * @param $mission
+     * @param \MissionBundle\Entity\Mission $mission
      * @param $status
      * @return array
      */

@@ -94,7 +94,7 @@ class MissionMatching
                 $this->em->flush($mission);
 
                 $newArray[] = $userMission;
-            } elseif ($one->getStatus() >= UserMission::NEW) {
+            } elseif ($one->getStatus() >= UserMission::ACTIVATED) {
                 $newArray[] = $one;
             }
         }

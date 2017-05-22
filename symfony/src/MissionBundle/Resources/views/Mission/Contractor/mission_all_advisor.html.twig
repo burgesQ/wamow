@@ -7,9 +7,9 @@
     {% set interested = 0 %}
     {% set selected = 0 %}
     {% for advisor in userMissions %}
-        {% if advisor.status >= 1 %}
+        {% if advisor.status >= constant('INTERESTED', advisor)  %}
             {% set interested = interested + 1  %}
-            {% if advisor.status >= 2 %}
+            {% if advisor.status >= constant('SHORTLIST', advisor) %}
                 {% set selected = selected + 1 %}
             {% endif %}
         {% endif %}
@@ -128,8 +128,8 @@
                 </div>
                 <div class="button_action">
                     <button id="refuse_{{ userMission.id }}">{{ 'mission.view.contractor.btn_refuse' | trans }}</button>
-                    <button id="shortlist_{{ userMission.id }}" {% if userMission.status == 2 %}hidden{% endif %}>{{ 'mission.view.contractor.btn_add_to_shortlist' | trans | upper }}</button>
-                    <button id="remove_from_shortlist_{{ userMission.id }}" {% if userMission.status < 2 %}hidden{% endif %}>{{ 'mission.view.contractor.btn_remove_from_shortlist' | trans | upper }}</button>
+                    <button id="shortlist_{{ userMission.id }}" {% if userMission.status == constant('SHORTLIST', userMission) %}hidden{% endif %}>{{ 'mission.view.contractor.btn_add_to_shortlist' | trans | upper }}</button>
+                    <button id="remove_from_shortlist_{{ userMission.id }}" {% if userMission.status < constant('SHORTLIST', userMission) %}hidden{% endif %}>{{ 'mission.view.contractor.btn_remove_from_shortlist' | trans | upper }}</button>
                 </div>
                 {% set i = i + 1 %}
             {% endfor %}

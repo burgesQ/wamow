@@ -13,16 +13,17 @@ use Doctrine\ORM\Mapping as ORM;
 class UserMission
 {
     // USER_MISSION STATUS
-    const DELETED    = -6;
-    const ENDDATE    = -5;
-    const DISMISS    = -4;
-    const GIVEUP     = -3;
-    const REFUSED    = -2;
-    const NEW        = -1;
+    const DELETED    = -70;
+    const ENDDATE    = -60;
+    const DISMISS    = -50;
+    const GIVEUP     = -40;
+    const FULL       = -30;
+    const ACTIVATED  = -20;
+    const MATCHED    = -10;
     const INTERESTED = 0;
-    const ONGOING    = 1;
-    const SHORTLIST  = 2;
-    const FINALIST   = 3;
+    const ONGOING    = 10;
+    const SHORTLIST  = 20;
+    const FINALIST   = 30;
 
     /**
      * @var int
@@ -97,7 +98,7 @@ class UserMission
      */
     public function __construct($user, $mission)
     {
-        $this->status       = self::NEW;
+        $this->status       = self::ACTIVATED;
         $this->creationDate = new \DateTime();
         $this->updateDate   = new \DateTime();
         $this->user         = $user;

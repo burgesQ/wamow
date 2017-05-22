@@ -24,35 +24,44 @@
                 {% set selected = 0 %}
                 {% set proposal = 0 %}
                 {% set finisher = 0 %}
+                {% set stepPosition = null %}
 
                 {% for advisor in advisors %}
-                    {% if advisor.status >= 1 %}
+                    {% if advisor.status >= constant('INTERESTED', advisor) %}
                         {% set interested = interested + 1  %}
-                        {% if advisor.status >= 2 %}
+                        {% if advisor.status >= constant('SHORTLIST', advisor) %}
                             {% set selected = selected + 1 %}
                             {% if advisor.thread.proposals.count > 0 %}
                                 {% set proposal = proposal + 1 %}
                             {% endif %}
-                            {% if advisor.status >= 3 %}
+                            {% if advisor.status >= constant('FINALIST', advisor) %}
                                 {% set finisher = finisher + 1 %}
                             {% endif  %}
                         {% endif %}
                     {% endif %}
                 {% endfor %}
+
+                {% for step in mission.steps %}
+                    {% if step.status == 1 %}
+                        {% set stepPosition = step.position %}
+                    {% endif %}
+                {% endfor %}
+
+
                 {{ 'dashboard.contractor.mission.date' | trans }} {{ mission.creationDate | date("m/d/Y") }}</br>
                 {{ mission.title }}</br>
                 {{ mission.resume | truncate(20, false, '[...]') }}</br>
 
-                {% if mission.status == 1 %}
+                {% if stepPosition == 1 %}
                     {% if selected == 0 %}
                         <a href="{{ path('mission_view', {'missionId': mission.id}) }}">{{ 'dashboard.contractor.mission.seethepitchbutton' | trans | upper }}</a></br>
                         <a href="{{ path('mission_delete', {'missionId': mission.id}) }}">{{ 'dashboard.contractor.mission.deletebutton' | trans | upper }}</a></br>
                     {% else %}
                         <a href="{{ path('mission_view', {'missionId': mission.id}) }}">{{ 'dashboard.contractor.mission.answerbutton' | trans | upper }}</a></br>
                     {% endif %}
-                {% elseif mission.status == 2 %}
+                {% elseif stepPosition == 2 %}
                     <a href="{{ path('mission_view', {'missionId': mission.id}) }}">{{ 'dashboard.contractor.mission.selectfinalistbutton' | trans | upper }}</a></br>
-                {% elseif mission.status == 3 %}
+                {% elseif stepPosition == 3 %}
                     <a href="{{ path('mission_view', {'missionId': mission.id}) }}">{{ 'dashboard.contractor.mission.contactbutton' | trans | upper }}</a></br>
                 {% endif %}
 
@@ -65,7 +74,7 @@
 
 
 
-                {% if mission.status == 1 %}
+                {% if stepPosition == 1 %}
                     {{ interested }} {{ 'dashboard.contractor.mission.interested' | trans }}</br>
                     {{ selected }}/3 {{ 'dashboard.contractor.mission.selected' | trans }}</br>
                     {% if selected == 0 %}
@@ -79,7 +88,7 @@
                     {% else %}
                         {{ 'dashboard.contractor.mission.mustbefinish' | trans }}</br>
                     {% endif %}
-                {% elseif mission.status == 2 %}
+                {% elseif stepPosition == 2 %}
                     {{ proposal }}/3 {{ 'dashboard.contractor.mission.proposal' | trans }}</br>
                     {{ finisher }}/1 {{ 'dashboard.contractor.mission.finisher' | trans }}</br>
                     {{ 'dashboard.contractor.mission.shortlist' | trans }}</br>
@@ -88,7 +97,7 @@
                     {% else %}
                         {{ 'dashboard.contractor.mission.mustbefinish' | trans }}</br>
                     {% endif %}
-                {% elseif mission.status == 3 %}
+                {% elseif stepPosition == 3 %}
                     {{ proposal }}/3 {{ 'dashboard.contractor.mission.proposal' | trans }}</br>
                     {{ finisher }}/1 {{ 'dashboard.contractor.mission.finisher' | trans }}</br>
                     {{ 'dashboard.contractor.mission.finish' | trans }}</br>
