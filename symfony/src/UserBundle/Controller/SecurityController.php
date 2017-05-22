@@ -9,6 +9,10 @@ class SecurityController extends BaseController
 {
     public function loginAction(Request $request)
     {
+        if ($this->getUser() !== null) {
+            return $this->redirectToRoute('dashboard');
+        }
+
         return $this->render('@User/Security/login.html.twig', [
             'last_username' => null,
             'error'         => null,

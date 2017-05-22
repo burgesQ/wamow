@@ -15,6 +15,10 @@ class DefaultController extends Controller
 {
     public function expertAction(Request $request)
     {
+        if ($this->getUser() !== null) {
+            return $this->redirectToRoute('dashboard');
+        }
+
         $session = new Session(new PhpBridgeSessionStorage());
         $session->start();
         $session->set('role', 'ADVISOR');
