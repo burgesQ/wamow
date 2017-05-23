@@ -1,6 +1,5 @@
 /logs
 /.data
-**/composer.lock
 **/.DS_Store
 /.idea
 app/cache/
