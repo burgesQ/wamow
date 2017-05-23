@@ -284,9 +284,9 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * @var int
      *
-     * @ORM\Column(name="bonus_points", type="integer")
+     * @ORM\Column(name="scoring_bonus", type="integer")
      */
-    private $bonusPoints;
+    private $scoringBonus;
 
     /**
      * @var boolean
@@ -354,7 +354,7 @@ class User extends BaseUser implements ParticipantInterface
         $this->giveUpCount           = 0;
         $this->secretMail            = [];
         $this->linkedinData          = [];
-        $this->bonusPoints = 5;
+        $this->scoringBonus = 5;
     }
 
     /**
@@ -1143,26 +1143,26 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Set bonusPoints
+     * Set scoringBonus
      *
-     * @param integer $bonusPoints
+     * @param integer $scoringBonus
      * @return User
      */
-    public function setBonusPoints($bonusPoints)
+    public function setScoringBonus($scoringBonus)
     {
-        $this->bonusPoints = $bonusPoints;
+        $this->scoringBonus = $scoringBonus;
 
         return $this;
     }
 
     /**
-     * Get bonusPoints
+     * Get scoringBonus
      *
      * @return integer
      */
-    public function getBonusPoints()
+    public function getScoringBonus()
     {
-        return $this->bonusPoints;
+        return $this->scoringBonus;
     }
 
 

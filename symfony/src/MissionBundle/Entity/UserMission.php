@@ -19,6 +19,7 @@ class UserMission
     const GIVEUP     = -3;
     const REFUSED    = -2;
     const NEW        = -1;
+    const ACTIVATED        = -1;
     const INTERESTED = 0;
     const ONGOING    = 1;
     const SHORTLIST  = 2;

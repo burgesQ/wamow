@@ -17,14 +17,14 @@ use Symfony\Component\Console\Helper\ProgressBar;
 
 use MissionBundle\Entity\UserMission;
 
-class ExpertMatchingCommand extends ContainerAwareCommand
+class AdvisorMatchingCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
         $this
-            ->setName('expert:matching')
-            ->setDescription('Match experts with missions.')
-
+            ->setName('advisor:matching')
+            ->setDescription('Match advisors with missions.')
+            ->setHelp('This command select all missions needing to be re-match (using nextUpdateScoring date), re-match them, update scores, and finally update activated')
         ;
     }
 
@@ -37,13 +37,12 @@ class ExpertMatchingCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $io = new SymfonyStyle($input, $output);
-        $io->title('Expert Matching command');
+        $io->title('Advisor Matching command');
 
         $em = $this->getContainer()->get('doctrine')->getManager();
 
         $io->section('Update Matching');
         $missions = $em->getRepository("MissionBundle:Mission")->getMissionsToScore();
-        die(dump($missions));
         $progress = new ProgressBar($output, count($missions));
         $progress->start();
         $nbUserMissions = 0;

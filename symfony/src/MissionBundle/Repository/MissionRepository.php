@@ -20,8 +20,8 @@ class MissionRepository extends EntityRepository
         $qb->select('m')
         ->from('MissionBundle:Mission', 'm')
         ->where('m.status = '.Mission::PUBLISHED)
-        ->andWhere('m.nextUpdateScoring <= :currentDate')
-        ->setParameter("currentDate", date('Y-m-d'))
+        // ->andWhere('m.nextUpdateScoring <= :currentDate')
+        // ->setParameter("currentDate", date('Y-m-d'))
         ;
         // die($qb->getQuery()->getSql());
         return $qb->getQuery()->getResult();

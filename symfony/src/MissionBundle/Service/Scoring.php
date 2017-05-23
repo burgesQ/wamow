@@ -36,7 +36,7 @@ use MissionBundle\Entity\UserMission;
         $scoringStep = $this->getScoringStep($mission);
         if (isset($scoringRules[$scoringStep + 1])) {
             $nbDays = $scoringRules[$scoringStep + 1][0];
-            $mission->setNextUpdateScoring(strtotime("+".$nbDays." days"));
+            $mission->setNextUpdateScoring(new \DateTime("+".$nbDays." days"));
         } else {
             $mission->setNextUpdateScoring(null);
         }
@@ -44,7 +44,7 @@ use MissionBundle\Entity\UserMission;
     public function initializeMission($mission)
     {
         $this->updateActivated($mission);
-        $mission->setNextUpdateScoring(strtotime("+".." days"))
+        $mission->updateNextScoring($mission);
     }
 
     public function getScoring($mission, $userMission)
@@ -93,19 +93,16 @@ use MissionBundle\Entity\UserMission;
         }
 
         // zone géographique
+        $missionContinents = $mission->getContinents();
         foreach ($experiences as $experience) {
-            if ($mission->getAsia() && $experience->getAsia()) {
-                $score += 1;
-            } elseif ($mission->getNorthAmerica() && $experience->getNorthAmerica()) {
-                $score += 1;
-            } elseif ($mission->getEmea() && $experience->getEmea()) {
-                $score += 1;
-            } elseif ($mission->getSouthAmerica() && $experience->getSouthAmerica()) {
-                $score += 1;
+            foreach ($experience->getContinents() as $userContinent) {
+                if ($missionContinents->contains($userContinent)) {
+                    $score += 1;
+                }
             }
         }
         // rotation
-        $score += $user->getBonusPoints();
+        $score += $user->getScoringBonus();
 
         // archétype mission
         // TODO : kesako ? = valuable work experience
