@@ -76,6 +76,7 @@ class MissionMatching
 
         /** @var User $oneUser */
         foreach ($userArray as $oneUser) {
+            /** @var \MissionBundle\Entity\UserMission $one */
             if (!($one = $userMissionRepo->findBy(['user' => $oneUser, 'mission' => $mission]))) {
                 // create a user_mission entity for user $oneUser
                 $userMission = new UserMission($oneUser, $mission);
@@ -93,16 +94,16 @@ class MissionMatching
                 $this->em->flush($mission);
 
                 $newArray[] = $userMission;
-            } else {
+            } elseif ($one->getStatus() >= UserMission::NEW) {
                 $newArray[] = $one;
             }
         }
 
         // remove user_mission that was on the previous version of the mission and not anymore
-        if ($edit) {
+        if ($edit && isset($oldArray)) {
             foreach ($oldArray as $oneUserMission) {
                 if (!in_array($oneUserMission, $newArray)) {
-                    $this->em->remove($oneUserMission);
+                    $oneUserMission->setStatus(UserMission::DELETED);
                 }
             }
             // flush removed user_mission

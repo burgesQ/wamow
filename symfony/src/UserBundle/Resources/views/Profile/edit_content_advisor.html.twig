@@ -1,0 +1,64 @@
+{% trans_default_domain 'tools' %}
+
+<div class="content">
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    {% set address = form.user.addresses|last %}
+    <div class="user_edit_head">
+        {% if user.images is not empty %}
+            {% set image = user.images|last %}
+            {% if image.name is not null %}
+                <img src="{{ asset(image.webPath()) }}"/>
+                <br>
+            {% endif %}
+        {% endif %}
+        {{ form_widget(form.image.file) }}
+        <h2>
+            {{ user.lastName }}
+        </h2>
+        <h2>
+            {{ user.firstName|upper }}
+        </h2>
+        <a href="{{ path('user_profile_show') }}">{{ 'user.profile_show.advisor.link_edit_profile'|trans|upper }}</a>
+        <a href="{{ path('dashboard') }}">{{ 'user.profile_show.advisor.link_back_to_board'|trans|upper }}</a>
+        <a href="{{ path('user_profile_show') }}">{{ 'user.profile_show.advisor.link_general'|trans|upper }}</a>
+        <a href="{{ path('user_profile_show') }}">{{ 'user.profile_show.advisor.link_billing'|trans|upper }}</a>
+    </div>
+    <div class="user_edit_content">
+        <h4>
+            @Icon {{ form_widget(form.user.email) }}
+        </h4>
+        <h4>
+            @*Icon {{ form_widget(form.user.emergencyEmail) }}
+        </h4>
+        <h4>
+            PhoneIcon
+            {{ form_widget(form.user.phone.prefix) }}{{ form_widget(form.user.phone.number) }}
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            BubleIcon {{ form_widget(form.user.languages) }}
+        </h4>
+        <h4>
+            MapsIcon
+            {{ form_widget(address.number) }}
+            {{ form_widget(address.street) }}
+            {{ form_widget(address.street2) }}
+            {{ form_widget(address.zipcode) }}
+            {{ form_widget(address.city) }}
+            {{ form_widget(address.state) }}
+            EarthIcon
+            {{ form_widget(address.country) }}
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+        </h4>
+        {{ form_end(form) }}
+    </div>
+    <div class="profile_change_password">
+        {{ form_start(formPassword) }}
+            {{ form_errors(formPassword) }}
+            {{ form_row(formPassword.current_password) }}
+            {{ form_row(formPassword.plainPassword.first) }}
+            {{ form_row(formPassword.plainPassword.second) }}
+            {{ form_row(formPassword.submit) }}
+        {{ form_end(formPassword) }}
+    </div>
+</div>

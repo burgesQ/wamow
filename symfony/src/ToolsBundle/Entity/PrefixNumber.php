@@ -90,4 +90,15 @@ class PrefixNumber
     {
         return $this->country;
     }
+
+
+    /**
+     * Get country and prefix for form
+     *
+     * @return string
+     */
+    public function getCountryAndPrefix()
+    {
+        return $this->country . ' (' . $this->prefix . ')';
+    }
 }

@@ -23,7 +23,7 @@ class DashboardController extends Controller
 
         if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR'))
         {
-            if (($url = $this->get('signedUp')->checkIfSignedUp($this)))
+            if (($url = $this->get('signed_up')->checkIfSignedUp($user->getStatus())))
             {
                 return $this->redirectToRoute($url);
             }
@@ -42,7 +42,8 @@ class DashboardController extends Controller
         {
             $missionRepo = $em->getRepository('MissionBundle:Mission');
             $missions = $missionRepo->getContractorMissions($user->getId(), $user->getCompany()->getId(), Mission::DRAFT);
-            $drafts = $missionRepo->findBy(array('contact' => $user, 'company' => $user->getCompany(), 'status' => Mission::DRAFT));
+            $drafts = $missionRepo->findBy(array('contact' => $user, 'company' => $user->getCompany(), 'status' =>
+                Mission::DRAFT));
             return $this->render('DashboardBundle:Seeker:dashboard.html.twig', array(
                 'missions' => $missions,
                 'drafts'   => $drafts

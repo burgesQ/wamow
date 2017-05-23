@@ -12,3 +12,28 @@ tools:
         state: 'The state must contain only letters or dash.'
     upload:
         badFormat: "This fils doesn't match the good format"
+    number:
+        reauired: "Please enter a valid number"
+
+user:
+    companysize:
+        min: "Please select at least one Company size"
+    continent:
+        min: "Please select at least one Area"
+    fname:
+        blank: 'Please enter your first name.'
+        short: 'The first name is too short.'
+        long: 'The first name is too long.'
+        illegale: 'This first name contains illegal characters'
+    lname:
+        blank: 'Please enter your last name.'
+        short: 'The last name is too short.'
+        long: 'The last name is too long.'
+        illegale: 'This last name contains illegal characters'
+
+company:
+    name:
+        blank: 'Please enter your company.'
+        short: 'Company name is too short'
+        long: 'Company name is too long.'
+        illegale: 'This company name contains illegal characters'

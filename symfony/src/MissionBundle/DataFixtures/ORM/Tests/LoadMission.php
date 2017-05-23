@@ -1,6 +1,6 @@
 <?php
 
-namespace MissionBundle\DataFixtures\ORM;
+namespace MissionBundle\DataFixtures\ORM\Tests;
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -10,6 +10,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Finder\Finder;
 use MissionBundle\Entity\Mission;
 use ToolsBundle\Entity\Address;
+use MissionBundle\Entity\Step;
 
 class LoadMission extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
@@ -28,6 +29,7 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface, Co
 
     /**
      * @param ObjectManager $manager
+     * @return int
      */
     public function load(ObjectManager $manager)
     {
@@ -46,41 +48,48 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface, Co
 
         // if nothing was found exit
         if (empty($string) || !($json = json_decode($string))) {
-            exit;
+            return -1;
         }
 
         $missionKindRepo = $manager->getRepository('MissionBundle:MissionKind');
         $practiceRepo    = $manager->getRepository('MissionBundle:BusinessPractice');
-        $missionRepo     = $manager->getRepository('MissionBundle:Mission');
+        $continentRepo   = $manager->getRepository('MissionBundle:Continent');
         $proExpRepo      = $manager->getRepository('MissionBundle:ProfessionalExpertise');
         $langRepo        = $manager->getRepository('ToolsBundle:Language');
+        $config          = $manager->getRepository('ToolsBundle:Config')->findAll()[0];
 
-        // get a Company entity
-        $company = $manager->getRepository('CompanyBundle:Company')->findOneBy(['name' => 'Esso']);
+        $southAmerica   = $continentRepo->findOneBy(['name' => 'continent.south_america']);
+        $northAmerica   = $continentRepo->findOneBy(['name' => 'continent.north_america']);
+        $asia           = $continentRepo->findOneBy(['name' => 'continent.asia']);
+        $emea           = $continentRepo->findOneBy(['name' => 'continent.emea']);
+
+
+        $jsonConfig      = json_decode($config->getValue());
 
         // get contractor one
         $contractorOne = $manager->getRepository('UserBundle:User')->findOneBy(['lastName' => "One"]);
 
-        $i = 42;
+        $i = 1;
         // foreach mission
         foreach ($json as $oneMission) {
-            // get all kind of repo
+            // get a Company entity
+            $company = $manager->getRepository('CompanyBundle:Company')->findOneBy([
+                'name' => $oneMission->companyName
+            ]);
 
-            // create mission w/ random token
-            while ($i++ && $missionRepo->findOneBy(['token' => $i]));
-            $mission = new Mission(3, $contractorOne, $i, $company);
+            // create mission
+            $mission = new Mission($jsonConfig->nbStep, $contractorOne, $company);
 
             // set mission datas
             $mission
-                ->setInternational(false)
-                ->setStatus(1)
-                ->setConfidentiality(true)
+                ->setStatus(Mission::PUBLISHED)
+                ->setConfidentiality($oneMission->confidentiality)
             ;
 
             // set mission deadLines
-            $mission->setApplicationEnding(new \DateTime("01-01-2018"));
-            $mission->setMissionBeginning(new \DateTime("01-01-2019"));
-            $mission->setMissionEnding(new \DateTime("01-01-2020"));
+            $mission->setApplicationEnding(new \DateTime($oneMission->applicationEnding));
+            $mission->setMissionBeginning(new \DateTime($oneMission->missionBeginning));
+            $mission->setMissionEnding(new \DateTime($oneMission->missionEnding));
 
             // set mission title and content
             $mission->setTitle($oneMission->title);
@@ -101,27 +110,34 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface, Co
             }
 
             // set languages
-            foreach ($oneMission->languages as $lang)
+            foreach ($oneMission->languages as $lang) {
                 $mission->addLanguage($langRepo->findOneBy(['name' => $lang]));
+            }
 
             // set budget
-            $mission->setBudget(10);
+            $mission->setBudget($oneMission->budget);
 
             // set address
             $mission->setAddress($this->createAddress($manager, $oneMission->address));
-
             // set area
-            $mission->setNorthAmerica(false);
-            $mission->setSouthAmerica(false);
-            $mission->setAsia(false);
-            $mission->setEmea(false);
+            switch ($oneMission) {
+                case ($oneMission->northAmerica) :
+                    $mission->addContinent($northAmerica);
+                case ($oneMission->southAmerica) :
+                    $mission->addContinent($southAmerica);
+                case ($oneMission->asia) :
+                    $mission->addContinent($asia);
+                case ($oneMission->emea) :
+                    $mission->addContinent($emea);
+                default :
+                    break;
+            };
 
-            // persist mission
+            $mission->setPublicId(md5(uniqid().$i));
+            $this->loadStep($manager, $mission, $jsonConfig);
             $manager->persist($mission);
-            $manager->flush();
-            $manager->flush();
-
             $this->container->get('mission_matching')->setUpPotentialUser($mission);
+            $i++;
         }
 
         // save all that shit
@@ -131,26 +147,54 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface, Co
     /**
      * @param ObjectManager $manager
      * @param               $oneAddress
+     * @param bool          $array
      *
-     * @return Address
+     * @return \ToolsBundle\Entity\Address
      */
-    private function createAddress($manager, $oneAddress)
+    private function createAddress($manager, $oneAddress, $array = false)
     {
         $address = new Address();
 
-        $address
-            ->setCity($oneAddress->city)
-            ->setCountry($oneAddress->country)
-        ;
-
+        if (!$array) {
+            $address->setCity($oneAddress->city)->setCountry($oneAddress->country);
+        } else {
+            $address->setCity($oneAddress['city'])->setCountry($oneAddress['country']);
+        }
         $manager->persist($address);
-        $manager->flush();
 
         return $address;
     }
 
+    /**
+     * @param ObjectManager                 $manager
+     * @param \MissionBundle\Entity\Mission $mission
+     * @param                               $jsonConfig
+     */
+    private function loadStep($manager, $mission, $jsonConfig)
+    {
+        $i = 0;
+        while ($i < $jsonConfig->nbStep) {
+            $i++;
+            $step     = 'step' . $i;
+            $jsonStep = $jsonConfig->$step;
+            $step     = new Step($jsonStep->nbMaxUser, $jsonStep->reallocUser);
+            $step
+                ->setMission($mission)
+                ->setUpdateDate(new \DateTime())
+                ->setPosition($i)
+                ->setAnonymousMode($jsonStep->anonymousMode)
+            ;
+
+            if ($i == 1) {
+                $step->setStatus(1);
+            }
+
+            $manager->persist($step);
+        }
+    }
+
     public function getOrder()
     {
-        return 11;
+        return 14;
     }
 }

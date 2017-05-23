@@ -9,7 +9,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class GetUserForMissionCommand extends ContainerAwareCommand
 {
-
     protected function configure()
     {
         $this
@@ -47,7 +46,7 @@ class GetUserForMissionCommand extends ContainerAwareCommand
         $missionRepo = $this->getContainer()->get('doctrine')
             ->getManager()->getRepository('MissionBundle:Mission');
 
-        $mission = $missionRepo->findOneById($input->getArgument('missionId'));
+        $mission = $missionRepo->findOneBy([ 'id' => $input->getArgument('missionId')]);
 
         $output->writeln([
             "",
@@ -58,18 +57,17 @@ class GetUserForMissionCommand extends ContainerAwareCommand
             'Mission kind (k)          : '
         ]);
 
-        foreach ($mission->getMissionKinds() as $oneKind) {
-            $output->writeln(' - '.$oneKind->getName());
+        foreach ($mission->getMissionKinds() as $oneMissionKind) {
+            $output->writeln(['                           - ' . $oneMissionKind->getName()]);
         }
 
         $output->writeln([
             'And Speak (l)             : '
-        ]);
+            ]);
 
         foreach ($mission->getLanguages() as $oneLanguage) {
-            $output->writeln(' - '.$oneLanguage->getName());
+            $output->writeln(' - ' . $oneLanguage->getName());
         }
-
 
         $users = $missionRepo->getUsersByMission($mission, true, true);
 
@@ -84,5 +82,4 @@ class GetUserForMissionCommand extends ContainerAwareCommand
         }
         $output->writeln('Well, their is only '.count($users[0]).' user that match the mission '.$mission->getTitle());
     }
-
 }

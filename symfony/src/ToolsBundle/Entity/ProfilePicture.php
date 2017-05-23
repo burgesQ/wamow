@@ -4,9 +4,6 @@ namespace ToolsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-use ToolsBundle\Entity\Upload;
-
-
 /**
  * ProfilePicture
  *
@@ -50,7 +47,7 @@ class ProfilePicture extends Upload
      * @param \UserBundle\Entity\User $user
      * @return Upload
      */
-    public function setUser(\UserBundle\Entity\User $user = null)
+    public function setUser($user = null)
     {
         $this->user = $user;
 
@@ -66,5 +63,4 @@ class ProfilePicture extends Upload
     {
         return $this->user;
     }
-
 }

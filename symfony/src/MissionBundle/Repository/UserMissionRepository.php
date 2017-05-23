@@ -79,4 +79,25 @@ class UserMissionRepository extends EntityRepository
             ->orderBy('m.applicationEnding', 'ASC');
         return $qb->getQuery()->getResult();
     }
+
+    /**
+     * @param $mission
+     * @param $status
+     * @return array
+     */
+    public function findAllAtLeastThan($mission, $status)
+    {
+        $qb = $this->_em->createQueryBuilder();
+
+        $qb->select('um')
+            ->from('MissionBundle:UserMission', 'um')
+            ->leftjoin('um.mission', 'm')
+            ->where('m.id = :mId')
+            ->setParameter('mId', $mission->getId())
+            ->andWhere('um.status >= :status')
+            ->setParameter('status', $status)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
 }

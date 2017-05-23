@@ -1,29 +1,65 @@
-{% trans_default_domain 'FOSUserBundle' %}
+{% trans_default_domain 'tools' %}
 
-{{ 'registration.step.zero'|trans }}
+{{ 'registration.advisor.zero.subtitle' | trans | upper }}
+</br>
+{{ 'registration.advisor.zero.title' | trans }}
+</br>
+{{ 'registration.advisor.zero.howtotitle' | trans | upper }}
 <br>
-{{ 'registration.cat.zero'|trans }}
+{{ 'registration.advisor.zero.howtotext' | trans }}
+<br><br>
+<a href="{{ path('hwi_oauth_service_redirect', {'service': 'linkedin' }) }}">{{ 'registration.advisor.zero.linkedinbutton' | trans | upper }}</a>
 <br>
-{{ 'registration.consign.zero'|trans }}
-<br><br>
-<a href="{{ path('hwi_oauth_service_redirect', {'service': 'linkedin' }) }}">{{ 'registration.linkedin'|trans }}</a>
-<br><br>
-{{ 'registration.or'|trans }}
-<br><br>
-{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register_expert'), 'attr': {'class': 'fos_user_registration_register_expert'}}) }}
+<br>
+{{ 'registration.advisor.zero.or' | trans | upper }}
+<br>
+<br>
+{{ form_start(form) }}
+    {{ form_errors(form) }}
+    {{ form_errors(form.user) }}
+    {{ form_errors(form.user.firstName) }}
+    {{ form_errors(form.user.lastName) }}
+    {{ form_errors(form.user.email) }}
+    {{ form_errors(form.user.plainPassword) }}
+    {{ form_errors(form.user.plainPassword.first) }}
+    {% set address = form.user.addresses | last %}
+    {{ form_errors(address) }}
+    {{ form_errors(address.country) }}
+    {{ form_errors(form.user.plainPassword.second) }}
+    {{ form_errors(form.user.languages) }}
+    {{ form_errors(form.resume) }}
+    {{ form_errors(form.resume.file) }}
 
-{{ form_errors(form) }}
+    {{ form_widget(form.user.firstName) }}
+    {{ form_label(form.user.firstName) }}
+    <br>
+    {{ form_widget(form.user.lastName) }}
+    {{ form_label(form.user.lastName) }}
+    <br>
+    {{ form_widget(form.user.email) }}
+    {{ form_label(form.user.email) }}
+    <br>
+    {{ form_widget(form.user.plainPassword.first) }}
+    {{ form_label(form.user.plainPassword.first) }}
+    <br>
+    {{ form_widget(form.user.plainPassword.second) }}
+    {{ form_label(form.user.plainPassword.second) }}
+    <br>
 
-{{ form_row(form.user.firstName) }}
-{{ form_row(form.user.lastName) }}
-{{ form_row(form.user.email) }}
-{{ form_row(form.user.country) }}
-{{ form_row(form.resume.file) }}
-
-{{ form_row(form.user.plainPassword) }}
-
-{{ form_row(form.save) }}
-
+    <br>
+    {{ form_widget(address.country) }}
+    {{ form_label(address.country) }}
+    <br>
+    {{ form_label(form.user.remoteWork) }}
+    {{ form_widget(form.user.remoteWork) }}
+    <br>
+    {{ form_label(form.user.languages) }}
+    <br>
+    {% for lang in form.user.languages %}
+        {{ form_label(lang) }}{{ form_widget(lang) }}
+    {% endfor %}
+    <br>
+    {{ form_widget(form.resume.file) }}
+    <br>
+    {{ form_row(form.save) }}
 {{ form_end(form) }}
-
-<br>

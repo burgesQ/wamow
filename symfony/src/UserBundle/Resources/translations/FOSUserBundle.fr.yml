@@ -1,0 +1,3 @@
+# Global strings
+layout:
+    logged_in_as: "Bonjour %first_name% %last_name%"

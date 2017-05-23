@@ -2,6 +2,8 @@
 {% trans_default_domain "tools" %}
 
 {% block body %}
+
+    {% include "UserBundle:Profile:profile_sidebar.html.twig" %}
     <div>
         <p>
             {{ 'dashboard.advisor.fyi.title' | trans | upper }}
@@ -14,7 +16,7 @@
     <div>
         {% for new in news %}
             <li>
-                <a href="{{ path('mission_view', {'missionId': new.mission.id}) }}">{{ new.mission.title }}</a></br>
+                {{ new.mission.title }}</br>
                 {{ 'dashboard.advisor.new.date' | trans }} {{ new.mission.creationDate | date("m/d/Y") }}</br>
                 {{ new.mission.resume | truncate(20, false, '[...]') }}</br>
                 {{ new.mission.professionalExpertise.name | trans }}</br>
@@ -33,7 +35,7 @@
         </p>
         {% for wip in wips %}
         <li>
-            <a href="{{ path('mission_view', {'missionId': wip.mission.id}) }}">{{ wip.mission.title }}</a></br>
+            {{ wip.mission.title }}</br>
             {{ 'dashboard.advisor.wip.date' | trans }} {{ wip.mission.creationDate | date("m/d/Y") }}</br>
             {{ wip.mission.resume | truncate(20, false, '[...]') }}</br>
             <a href="{{ path('mission_view', {'missionId': wip.mission.id}) }}">{{ 'dashboard.advisor.wip.showmore' | trans | upper }}</a></br>

@@ -1,0 +1,23 @@
+{% trans_default_domain 'tools' %}
+
+<div class="user_profile_footer">
+    {% if roleAdvisor %}
+        <div class="algorythm_improvment">
+            <h3>
+                {{ 'user.profile_show.advisor.title_algorithm_improvment'|trans|upper }}
+            </h3>
+            <h4>
+                {{ 'user.profile_show.linkedin_stuff' | trans }} <br>
+                {{ 'user.profile_show.resume_stuff' | trans }}
+            </h4>
+        </div>
+    {% endif %}
+    <div class="biling">
+        <h3>
+            {{ 'user.profile_show.advisor.title_subscription'|trans|upper }}
+        </h3>
+        <h4>
+            {{ 'user.profile_show.wait_subscription_plan' | trans }}
+        </h4>
+    </div>
+</div>

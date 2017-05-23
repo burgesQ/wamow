@@ -2,29 +2,20 @@
 
 namespace UserBundle\Services;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-
+use UserBundle\Entity\User;
 
 class SignedUp
 {
+    private $array = [
+        'expert_registration_step_zero',
+        'expert_registration_step_one',
+        'expert_registration_step_two',
+        'expert_registration_step_three',
+        'expert_registration_step_four'
+    ];
 
-    public function checkIfSignedUp($context)
+    public function checkIfSignedUp($status)
     {
-        if (($status = $context->getUser()->getStatus()) == 5)
-            return null;
-
-        // if ($status < 0) {}       
-
-        if ($status == 42)
-            return  'fos_user_registration_register_expert';
-
-        $array = [ 'expert_registration_step_one',
-                   'expert_registration_step_two',
-                   'expert_registration_step_three',
-                   'expert_registration_step_four',
-                   'expert_registration_step_five' ];
-
-        return $array[$status];
+        return  ($status == User::REGISTER_NO_STEP) ? null : $this->array[$status];
     }
-    
 }

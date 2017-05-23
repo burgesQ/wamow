@@ -1,0 +1,42 @@
+{% extends '::base.html.twig' %}
+{% trans_default_domain "MissionBundle" %}
+
+{% block body %}
+
+    <br><br><div>
+        <h3>{{ 'mission.new.step_five.title'|trans }}</h3>
+        <h4>{{ 'mission.new.step_five.subtitle'|trans }}</h4>
+        {{ 'mission.new.step_five.hint'|trans|striptags('<br>')|raw }}
+    </div><br>
+    <div>
+        {{ 'mission.view.step_five.introduction'|trans|raw }}<br><br>
+
+
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        <div>
+            {{ form_label(form.lastName)}}
+            {{ form_widget(form.lastName)}}
+            {{ form_widget(form.firstName)}}
+        </div>
+        <div>
+            {{ 'mission.view.step_five.company'|trans({'%company': user.company}, 'MissionBundle') }}
+        </div>
+        <div>
+            {{ form_label(form.share) }}
+            {{ form_widget(form.share) }}
+            {{ form_label(form.reference) }}
+            {{ form_widget(form.reference) }}
+        </div><br>
+        <div>
+            {{ form_row(form.inspectors) }}
+        </div><br><br>
+        {{ 'mission.view.step_five.ending'|trans|raw }}
+
+        </div><br>
+        {{ form_widget(form.back, {attr: {formnovalidate: 'formnovalidate'}}) }}
+        {{ form_widget(form.sharePitch) }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

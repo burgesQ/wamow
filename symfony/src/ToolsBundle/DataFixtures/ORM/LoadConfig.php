@@ -28,7 +28,7 @@ class LoadConfig extends AbstractFixture implements OrderedFixtureInterface
           "step3" => [
               'nbMaxUser' => 1,
               'reallocUser' => 0,
-              'anonymousMode' => 2
+              'anonymousMode' => 1
           ]
       ];
 

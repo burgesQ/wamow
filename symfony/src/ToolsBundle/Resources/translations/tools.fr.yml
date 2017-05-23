@@ -31,7 +31,17 @@ language:
     italian: "Italien"
     korean: "Coréen"
 
-
 dashboard:
     advisor:
         interested:
+
+## Mails template
+mails:
+    hello: Bonjour %f_name %l_name !
+    inbox:
+        new_message_mission: |
+         Vous avez un nouveau messge sur la mission %title.
+
+         L'équipe.
+    subject:
+        new_message: Vous avez un nouveau message !

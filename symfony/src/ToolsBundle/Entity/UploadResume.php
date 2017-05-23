@@ -22,8 +22,9 @@ class UploadResume extends Upload
     private $id;
    
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="resumes", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User",
+     *     inversedBy="resumes", cascade={"remove"})
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     private $user;
 
@@ -44,6 +45,10 @@ class UploadResume extends Upload
     public function __construct()
     {
         parent::__construct();
+
+        $this->addFormat('docx')
+            ->addFormat('doc')
+            ->addFormat('pdf');
     }
 
     /**
@@ -62,7 +67,7 @@ class UploadResume extends Upload
      * @param \UserBundle\Entity\User $user
      * @return Upload
      */
-    public function setUser(\UserBundle\Entity\User $user = null)
+    public function setUser($user = null)
     {
         $this->user = $user;
 

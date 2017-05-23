@@ -12,17 +12,17 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class UserMission
 {
-    const DELETED    = -5;
+    // USER_MISSION STATUS
+    const DELETED    = -6;
+    const ENDDATE    = -5;
     const DISMISS    = -4;
     const GIVEUP     = -3;
     const REFUSED    = -2;
     const NEW        = -1;
-    const ACTIVATED   = 1;
-    const INTERESTED = 2;
-    const ONGOING    = 3;
-    const SHORTLIST  = 4;
-    const FINALIST   = 5;
-
+    const INTERESTED = 0;
+    const ONGOING    = 1;
+    const SHORTLIST  = 2;
+    const FINALIST   = 3;
 
     /**
      * @var int
@@ -40,13 +40,13 @@ class UserMission
 
     /**
      * @var \DateTime
-     * @ORM\Column(name="creationDate", type="datetime", nullable=false)
+     * @ORM\Column(name="creation_date", type="datetime", nullable=false)
      */
     private $creationDate;
 
     /**
      * @var \DateTime
-     * @ORM\Column(name="updateDate", type="datetime", nullable=false)
+     * @ORM\Column(name="update_date", type="datetime", nullable=false)
      */
     private $updateDate;
 
@@ -83,6 +83,17 @@ class UserMission
      */
     private $score;
 
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="interested_at", type="datetime", nullable=true)
+     */
+    private $interestedAt;
+
+    /**
+     * @var string
+     * @ORM\Column(name="note", type="text", nullable=false)
+     */
+    private $note;
 
     /**
      * UserMission constructor.
@@ -97,6 +108,7 @@ class UserMission
         $this->updateDate   = new \DateTime();
         $this->user         = $user;
         $this->mission      = $mission;
+        $this->note         = "";
     }
 
     /**
@@ -233,7 +245,7 @@ class UserMission
 
     /**
      * Get thread
-     * @return \ToolsBundle\Entity\Thread
+     * @return \InboxBundle\Entity\Thread
      */
     public function getThread()
     {
@@ -243,7 +255,7 @@ class UserMission
     /**
      * Set thread
      *
-     * @param \ToolsBundle\Entity\Thread $thread
+     * @param \InboxBundle\Entity\Thread $thread
      *
      * @return UserMission
      */
@@ -276,5 +288,51 @@ class UserMission
     public function getScore()
     {
         return $this->score;
+    }
+
+     /**
+     * Set interestedAt
+     *
+     * @param \DateTime $interestedAt
+     * @return UserMission
+     */
+    public function setInterestedAt($interestedAt)
+    {
+        $this->interestedAt = $interestedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get interestedAt
+     *
+     * @return \DateTime
+     */
+    public function getInterestedAt()
+    {
+        return $this->interestedAt;
+    }
+
+    /**
+     * Set note
+     *
+     * @param string $note
+     * @return UserMission
+     */
+    public function setNote($note)
+    {
+        $this->note = $note;
+
+        return $this;
+    }
+
+    /**
+     * Get note
+     *
+     * @return string
+     */
+    public function getNote()
+    {
+        return $this->note;
     }
 }

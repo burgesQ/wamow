@@ -85,10 +85,21 @@ class Company
      */
     private $businessPractice;
 
+    /**
+     * @var Address
+     * @ORM\OneToOne(targetEntity="ToolsBundle\Entity\Address", cascade={"persist"})
+     */
+    private $address;
+
     public function __construct()
     {
         $this->creationDate = new \Datetime();
         $this->status = 0;
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
     }
 
     /**
@@ -291,5 +302,28 @@ class Company
     public function updateDate()
     {
         $this->setUpdateDate(new \Datetime());
+    }
+
+    /**
+     * Set address
+     *
+     * @param \ToolsBundle\Entity\Address $address
+     * @return Company
+     */
+    public function setAddress($address = null)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return \ToolsBundle\Entity\Address 
+     */
+    public function getAddress()
+    {
+        return $this->address;
     }
 }

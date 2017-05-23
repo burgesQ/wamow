@@ -2,8 +2,8 @@
 
 namespace MissionBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * WorkExperience
@@ -28,6 +28,14 @@ class WorkExperience
      * @ORM\Column(name="name", type="string", length=255, unique=true)
      */
     private $name;
+
+    /**
+     * @ORM\OneToMany(
+     *     targetEntity="MissionBundle\Entity\ExperienceShaping",
+     *     mappedBy="workExperience"
+     * )
+     */
+    private $experienceShaping;
 
     /**
      * Get id
@@ -60,5 +68,45 @@ class WorkExperience
     public function getName()
     {
         return $this->name;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->experienceShaping = new ArrayCollection();
+    }
+
+    /**
+     * Add experienceShaping
+     *
+     * @param \MissionBundle\Entity\ExperienceShaping $experienceShaping
+     * @return WorkExperience
+     */
+    public function addExperienceShaping($experienceShaping)
+    {
+        $this->experienceShaping[] = $experienceShaping;
+
+        return $this;
+    }
+
+    /**
+     * Remove experienceShaping
+     *
+     * @param \MissionBundle\Entity\ExperienceShaping $experienceShaping
+     */
+    public function removeExperienceShaping($experienceShaping)
+    {
+        $this->experienceShaping->removeElement($experienceShaping);
+    }
+
+    /**
+     * Get experienceShaping
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getExperienceShaping()
+    {
+        return $this->experienceShaping;
     }
 }

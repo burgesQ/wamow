@@ -10,3 +10,9 @@ company_leave:
     path:      /company/leave
     defaults:
         _controller: CompanyBundle:Company:leave
+
+inspector_autocomplete:
+    path:            /inspectors/autocomplete
+    defaults:
+        _controller: CompanyBundle:Action:inspectorsAutocomplete
+        methode:     GET

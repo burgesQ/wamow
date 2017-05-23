@@ -1,0 +1,83 @@
+{% extends '::base.html.twig' %}
+{% trans_default_domain "MissionBundle" %}
+
+{% block body %}
+    <br><br>
+    <div>
+        <h3>{{ 'mission.new.step_three.title'|trans }}</h3>
+        <h4>{{ 'mission.new.step_three.subtitle'|trans }}</h4>
+        {{ 'mission.new.step_three.hint'|trans|striptags('<br>')|raw }}
+    </div>
+    <br>
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    <div>
+        {{ form_errors(form.missionKinds) }}
+        {% for oneMissionKind in form.missionKinds %}
+            {{ form_label(oneMissionKind) }}
+            {{ form_widget(oneMissionKind) }}
+            {% if (loop.index0 + 1) % 4 == 0 %}
+                <br>
+            {% endif %}
+        {% endfor %}
+    </div><br>
+    <div>
+        {{ form_row(form.certifications) }}
+    </div><br>
+    <div>
+        {{ form_row(form.languages) }}
+    </div><br>
+    <div>
+        <h3> {{ 'mission.view.price_day'|trans({'%price':mission.price}, 'MissionBundle') }} </h3>
+        {{ form_row(form.price) }}
+    </div><br>
+    {{ form_widget(form.back, {attr: {formnovalidate: 'formnovalidate'}}) }}
+    {{ form_widget(form.forLater, {attr: {formnovalidate: 'formnovalidate'}}) }}
+    {{ form_widget(form.next) }}
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            multiLang();
+
+            function multiLang() {
+                var container = $('div#step_three_form_languages');
+                var addButton = $('<button id="add_language">+</button>');
+                addButton.click(function (e) {
+                    addLanguage(container);
+                    e.preventDefault();
+                    return false;
+                });
+                container.html(addButton);
+                var index = container.find(':input').length;
+                if (index === 1) {
+                    addLanguage(container, index);
+                } else {
+                    container.children('div').each(function () {
+                        addDeleteButton($(this));
+                    });
+                }
+            }
+
+            function addLanguage(container, index) {
+                var prototype = $(container.attr('data-prototype')
+                    .replace(/__name__label__/g, '')
+                    .replace(/__name__/g, index));
+                addDeleteButton(prototype);
+                container.append(prototype);
+            }
+
+            function addDeleteButton(prototype) {
+                deleteButton = $('<button >-</button>');
+                prototype.append(deleteButton);
+                deleteButton.click(function (e) {
+                    prototype.remove();
+                    e.preventDefault();
+                    return false
+                });
+            }
+        });
+    </script>
+{% endblock %}
