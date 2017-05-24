@@ -368,7 +368,7 @@ class Step
     /**
      * Get mission
      *
-     * @return \MissionBundle\Entity\Mission 
+     * @return \MissionBundle\Entity\Mission
      */
     public function getMission()
     {

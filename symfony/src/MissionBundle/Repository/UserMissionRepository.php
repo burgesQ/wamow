@@ -18,9 +18,12 @@ class UserMissionRepository extends EntityRepository
         $qb = $this->_em->createQueryBuilder();
         $qb->select('t')
             ->from('MissionBundle:UserMission', 't')
+            ->join('t.mission', 'm')
+            ->join('m.steps', 's')
             ->where('t.mission = :mission')
                 ->setParameter('mission', $mission)
             ->andWhere('t.status = '.UserMission::ACTIVATED)
+            ->andWhere('s.status = 1 and s.position = 1')
             ->orderBy("t.score", "desc");
         if ($max) {
             $qb->setMaxResults($max);

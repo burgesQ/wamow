@@ -913,6 +913,48 @@ class Mission
         return $this->continents;
     }
 
+    public function getActualStep()
+    {
+        foreach ($this->steps as $step) {
+            if ($step->getStatus() === 1) {
+                return $step;
+            }
+        }
+        return null;
+    }
+
+    public function passNextStep()
+    {
+        $actualStep = $this->getActualStep();
+        $position = $actualStep->getPosition() + 1;
+        $actualStep->setStatus(0);
+        foreach ($this->steps as $step) {
+            if ($position === $step->getPosition()) {
+                $step->setStatus(1);
+                // Cleaning userMissions
+                $userMissions = $this->getUserMission();
+                foreach ($userMissions as $userMission) {
+                    switch ($position) {
+                        case 2:
+                            # SHORTLIST
+                            if ($userMission->getStatus() == UserMission::ONGOING) {
+                                $userMission->setStatus(UserMission::DISMISS);
+                            }
+                            break;
+                        case 3:
+                            # FINALIST
+                            if ($userMission->getStatus() == UserMission::SHORTLIST) {
+                                $userMission->setStatus(UserMission::DISMISS);
+                            }
+                            break;
+                    }
+                }
+                return;
+            }
+        }
+        throw new \Exception("No step found after position ".$actualStep->getPosition());
+    }
+
     /**
      * Get steps
      *

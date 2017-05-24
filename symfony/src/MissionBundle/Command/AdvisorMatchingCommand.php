@@ -50,18 +50,10 @@ class AdvisorMatchingCommand extends ContainerAwareCommand
         // TODO (?) : clear previous UserMissions (can a matching change..? should we remove "obsolete" ones..?)
         foreach ($missions as $mission) {
             $progress->advance();
-            $users = $em->getRepository("MissionBundle:Mission")->findUsersByMission($mission);
-            foreach ($users as $user) {
-                $userMission = $em->getRepository("MissionBundle:UserMission")->findOneBy(array("user" => $user, "mission" => $mission));
-                if (!$userMission) {
-                    $nbNewUserMissions++;
-                    $userMission = new UserMission($user, $mission);
-                }
-                $nbUserMissions++;
-                $em->persist($userMission);
-            }
+            $nbNewUserMissions += $this->getContainer()->get("scoring")->updateUserMissions($mission);
         }
         $progress->finish();
+        $em->flush();
 
         $io->newLine(2);
         $io->section('Update Scoring');
@@ -71,6 +63,7 @@ class AdvisorMatchingCommand extends ContainerAwareCommand
             $this->getContainer()->get("scoring")->updateScorings($mission);
         }
         $progress->finish();
+        $em->flush();
 
         $io->newLine(2);
         $io->section('Update Activated');
@@ -80,11 +73,10 @@ class AdvisorMatchingCommand extends ContainerAwareCommand
             $this->getContainer()->get("scoring")->updateActivated($mission);
         }
         $progress->finish();
-
-
         $em->flush();
+
         $io->newLine(2);
-        $io->success($nbUserMissions.' userMissions mis à jour dont '.$nbNewUserMissions.' créés.');
+        $io->success(count($missions).' Missions mises à jour avec '.$nbNewUserMissions.' UserMissions créés.');
 
     }
 

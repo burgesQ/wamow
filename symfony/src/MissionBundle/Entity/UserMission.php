@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="user_mission")
  * @ORM\Entity(repositoryClass="MissionBundle\Repository\UserMissionRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @ORM\EntityListeners({"MissionBundle\Listener\UserMissionListener"})
  */
 class UserMission
 {
