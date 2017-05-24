@@ -85,7 +85,8 @@ class MissionController extends Controller
 
             // return the view in function of uesrMission::Status
             switch ($userMissionStatus) {
-                case ($userMissionStatus === UserMission::NEW && !$user->getPayment()) :
+                case ($userMissionStatus === UserMission::MATCHED && !$user->getPayment()) :
+                case ($userMissionStatus === UserMission::ACTIVATED && !$user->getPayment()) :
                 case (UserMission::INTERESTED) :
                     $form = $this->createForm(MessageMissionFormType::class);
                     if ($form->handleRequest($request)->isSubmitted() && $form->isValid()) {
@@ -100,7 +101,8 @@ class MissionController extends Controller
                     'user_mission' => $userMission,
                     'form'         => $form->createView()
                 ]);
-                case ($userMissionStatus === UserMission::NEW && $user->getPayment()) :
+                case (($userMissionStatus === UserMission::ACTIVATED || $userMissionStatus === UserMission::MATCHED)
+                    && $user->getPayment()) :
                     return $this->interestedAction($missionId);
                 case (UserMission::ONGOING) :
                     return $this->render('@Mission/Mission/Advisor/mission_to_answer.html.twig', [
@@ -156,7 +158,8 @@ class MissionController extends Controller
             throw new NotFoundHttpException($trans->trans('error.mission.limit_reach', [], 'tools'));
         }
         switch (($userMissionStatus = $userMission->getStatus())) {
-            case (UserMission::NEW) :
+            case (UserMission::ACTIVATED) :
+            case (UserMission::ONGOING) :
                 if ($user->getPayment()) {
                     // mark user as interested for the mission
                     $userMission->setStatus(UserMission::INTERESTED)->setInterestedAt(new \DateTime());
@@ -217,61 +220,5 @@ class MissionController extends Controller
         $em->flush();
 
         return $this->redirectToRoute('mission_view', ['missionId' => $missionId]);
-    }
-
-    /*
-    **  Give up
-    */
-    public function giveUpAction($missionId)
-    {
-        $trans = $this->get('translator');
-        $notification = $this->container->get('notification');
-        $em = $this->getDoctrine()->getManager();
-        $mission = $em->getRepository('MissionBundle:Mission')->findOneById($missionId);
-        $user = $this->getUser();
-        $userMission = $em->getRepository('MissionBundle:UserMission')->findOneBy(array('user' => $user, 'mission' => $mission));
-        if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')
-            && $mission != null && $mission->getStatus() >= Mission::PUBLISHED && $userMission != null)
-        {
-            switch ($userMission->getStatus()) {
-                case UserMission::GIVEUP:
-                    throw new NotFoundHttpException($trans->trans('mission.error.alreadygiveup', array(), 'MissionBundle'));
-                    break;
-                case UserMission::DELETED:
-                case UserMission::REFUSED:
-                case UserMission::DISMISS:
-                    throw new NotFoundHttpException($trans->trans('mission.error.cantgiveup', array(), 'MissionBundle'));
-                    break;
-                case UserMission::NEW:
-                case UserMission::INTERESTED:
-                    $userMission->setStatus(UserMission::REFUSED);
-                    $em->persist($userMission);
-                    $em->persist($user);
-                    $em->flush();
-                    return $this->redirectToRoute('dashboard', array());
-                    break;
-                case UserMission::WIP:
-                    $userMission->setStatus(UserMission::GIVEUP);
-                    $em->persist($userMission);
-                    $em->persist($user);
-                    $em->flush();
-                    $param = array(
-                        'mission' => $mission->getId(),
-                        'user'    => $user->getId(),
-                    );
-                    // Add notification for advisor
-                    $notification->new($user, 1, 'notification.expert.mission.giveup', $param);
-                    // Add notification for contractors
-                    $param = array(
-                        'mission' => $mission->getId(),
-                        'user'    => $user->getId(),
-                    );
-                    $contractor = $mission->getContact();
-                    $notification->new($contractor, 1, 'notification.seeker.mission.empty', $param);
-                    return $this->redirectToRoute('dashboard', array());
-                    break;
-            }
-        }
-        throw new NotFoundHttpException($trans->trans('mission.error.forbiddenAccess', array(), 'MissionBundle'));
     }
 }

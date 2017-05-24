@@ -131,7 +131,7 @@ use MissionBundle\Entity\UserMission;
         $scoringHistory[$scoringStep] = array();
         $scorings = array();
         foreach ($userMissions as $userMission) {
-            $userMission->setStatus(UserMission::ACTIVATED);
+            $userMission->setStatus(UserMission::MATCHED);
             $scorings[$userMission->getUser()->getId()] = $userMission->getScore();
         }
         $scoringHistory[$scoringStep] = $scorings;
