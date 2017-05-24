@@ -19,9 +19,11 @@ class MissionRepository extends EntityRepository
         // TODO : Exclude already SHORTLIST / FINALIST / etc missions
         $qb = $this->_em->createQueryBuilder();
         $qb->select('m')
-            ->from('MissionBundle:Mission', 'm')
-            ->where('m.status >= ' . Mission::PUBLISHED)
-            ->orderBy('m.applicationEnding', 'DESC');
+        ->from('MissionBundle:Mission', 'm')
+        ->where('m.status = '.Mission::PUBLISHED)
+        ->andWhere('m.nextUpdateScoring <= :currentDate')
+        ->setParameter("currentDate", date('Y-m-d'))
+        ;
         return $qb->getQuery()->getResult();
     }
 
