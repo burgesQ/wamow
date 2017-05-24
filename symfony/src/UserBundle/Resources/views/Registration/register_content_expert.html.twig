@@ -1,20 +1,89 @@
 {% trans_default_domain 'tools' %}
+{% set address = form.user.addresses | last %}
 
-{{ 'registration.advisor.zero.subtitle' | trans | upper }}
-</br>
-{{ 'registration.advisor.zero.title' | trans }}
-</br>
-{{ 'registration.advisor.zero.howtotitle' | trans | upper }}
-<br>
-{{ 'registration.advisor.zero.howtotext' | trans }}
-<br><br>
-<a href="{{ path('hwi_oauth_service_redirect', {'service': 'linkedin' }) }}">{{ 'registration.advisor.zero.linkedinbutton' | trans | upper }}</a>
-<br>
-<br>
-{{ 'registration.advisor.zero.or' | trans | upper }}
-<br>
-<br>
-{{ form_start(form) }}
+{{ form_start(form, {'attr': {'class': 'wmw-onboard col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 col-xl-4 col-xl-offset-4'}}) }}
+
+			<div class="wmw-onboard-body">
+
+				<h1>
+					<small>{{ 'registration.advisor.zero.subtitle' | trans }}</small>
+					{{ 'registration.advisor.zero.title' | trans }}
+				</h1>
+
+				<a href="{{ path('hwi_oauth_service_redirect', {'service': 'linkedin' }) }}">
+				<button class="wmw-button">
+					<i></i><span>{{ 'registration.advisor.zero.linkedinbutton' | trans }}</span><i></i>
+				</button>
+				</a>
+
+				<div class="wmw-onboard-or">{{ 'registration.advisor.zero.or' | trans | upper }}</div>
+
+				<div class="wmw-fieldrow row">
+					{{ form_widget(form.user.firstName, {'attr' : {'class': 'required col-xs-7'}}) }}
+					<label class="wmw-label wmw-label--right col-xs-5" for="wmw-ob-firstname">{{ form_label(form.user.firstName) }}</label>
+				</div>
+
+				<div class="wmw-fieldrow row">
+					{{ form_widget(form.user.lastName, {'attr' : {'class': 'required col-xs-7'}}) }}
+					<label class="wmw-label wmw-label--right col-xs-5" for="wmw-ob-lastname">{{ form_label(form.user.lastName) }}</label>
+				</div>
+
+				<div class="wmw-fieldrow row">
+					{{ form_widget(form.user.email, {'attr' : {'class': 'required email col-xs-7'}}) }}
+					<label class="wmw-label wmw-label--right col-xs-5" for="wmw-ob-email">{{ form_label(form.user.email) }}</label>
+				</div>
+
+				<div class="wmw-fieldrow row">
+					{{ form_widget(address.country, {'attr' : {'class': 'col-xs-12 col-sm-6 col-md-5 required'}}) }}
+				</div>
+
+				<div class="wmw-fieldrow">
+					<div class="wmw-switchfield">
+
+						{{ form_widget(form.user.remoteWork) }}
+						{{ form_label(form.user.remoteWork) }}
+					</div>
+				</div>
+
+				<div class="wmw-copyfields">
+
+					<div class="wmw-fieldrow wmw-copyfield row">
+
+						<br>
+
+						<label for="wmw-ob-language-1" class="wmw-label wmw-label--topmobile col-xs-10 col-sm-5">{{ form_label(form.user.languages) }}</label>
+						{{ form_widget(form.user.languages, {'attr' : {'class': 'col-xs-10 col-md-5 required'}}) }}
+						<a href="#" class="wmw-button-less">-</a>
+						<a href="#" class="wmw-button-more">+</a>
+					</div>
+
+				</div>
+
+				<div class="wmw-uploadfield">
+					{{ form_widget(form.resume.file) }}
+					<button type="button" class="wmw-button wmw-button--green"><i></i><span>Upload your cv</span><i></i></button>
+					<div class="wmw-uploadfield-val"></div>
+				</div>
+
+			</div>
+
+			<button type="submit" class="wmw-button wmw-button--green wmw-button--border"><i></i><span>Next</span><i></i></button>
+
+		</form>
+
+		<div class="wmw-onboard-text col-md-3 col-xl-2">
+			<p>
+				{{ 'registration.advisor.zero.howtotitle' | trans | upper }}
+			</p>
+			<p>
+				{{ 'registration.advisor.zero.howtotext' | trans }}
+			</p>
+		</div>
+
+<!-- <?php include "../inc/footer.inc.php"; ?> -->
+
+
+
     {{ form_errors(form) }}
     {{ form_errors(form.user) }}
     {{ form_errors(form.user.firstName) }}
@@ -22,7 +91,6 @@
     {{ form_errors(form.user.email) }}
     {{ form_errors(form.user.plainPassword) }}
     {{ form_errors(form.user.plainPassword.first) }}
-    {% set address = form.user.addresses | last %}
     {{ form_errors(address) }}
     {{ form_errors(address.country) }}
     {{ form_errors(form.user.plainPassword.second) }}
@@ -30,36 +98,10 @@
     {{ form_errors(form.resume) }}
     {{ form_errors(form.resume.file) }}
 
-    {{ form_widget(form.user.firstName) }}
-    {{ form_label(form.user.firstName) }}
-    <br>
-    {{ form_widget(form.user.lastName) }}
-    {{ form_label(form.user.lastName) }}
-    <br>
-    {{ form_widget(form.user.email) }}
-    {{ form_label(form.user.email) }}
-    <br>
     {{ form_widget(form.user.plainPassword.first) }}
     {{ form_label(form.user.plainPassword.first) }}
-    <br>
     {{ form_widget(form.user.plainPassword.second) }}
     {{ form_label(form.user.plainPassword.second) }}
-    <br>
 
-    <br>
-    {{ form_widget(address.country) }}
-    {{ form_label(address.country) }}
-    <br>
-    {{ form_label(form.user.remoteWork) }}
-    {{ form_widget(form.user.remoteWork) }}
-    <br>
-    {{ form_label(form.user.languages) }}
-    <br>
-    {% for lang in form.user.languages %}
-        {{ form_label(lang) }}{{ form_widget(lang) }}
-    {% endfor %}
-    <br>
-    {{ form_widget(form.resume.file) }}
-    <br>
     {{ form_row(form.save) }}
 {{ form_end(form) }}
