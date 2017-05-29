@@ -6,8 +6,10 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use MissionBundle\Form\MessageMissionFormType;
 use Symfony\Component\HttpFoundation\Request;
+use ToolsBundle\Form\ProposalFromType;
 use MissionBundle\Entity\UserMission;
 use MissionBundle\Entity\Mission;
+use ToolsBundle\Entity\Proposal;
 
 class MissionController extends Controller
 {
@@ -42,26 +44,32 @@ class MissionController extends Controller
             switch ($step->getPosition()) {
                 case (1) :
                     return $this->render('@Mission/Mission/Contractor/mission_all_advisor.html.twig', [
-                        'missionId'             => $missionId,
-                        'title'                 => $mission->getTitle(),
-                        'certifications'        => $mission->getCertifications(),
-                        'missionKinds'          => $mission->getMissionKinds(),
-                        'price'                 => $mission->getPrice() * 1000,
-                        'professionalExpertise' => $mission->getProfessionalExpertise()->getName(),
-                        'applicationEnding'     => $mission->getApplicationEnding(),
-                        'missionBeginning'      => $mission->getMissionEnding(),
-                        'missionEnding'         => $mission->getMissionEnding(),
-                        'address'               => $mission->getAddress(),
-                        'languages'             => $mission->getLanguages(),
-                        'telecommuting'         => $mission->getTelecommuting(),
-                        'updateDate'            => $mission->getUpdateDate(),
-                        'resume'                => $mission->getResume(),
-                        'userMissions'          => $em->getRepository('MissionBundle:UserMission')->findAllAtLeastThan($mission, UserMission::ONGOING)
+                        'mission'      => $mission,
+                        'interested'   => count($this->getDoctrine()->getRepository('MissionBundle:UserMission')->findAllAtLeastThan($mission, UserMission::ONGOING)),
+                        'shortlisted'  => count($this->getDoctrine()->getRepository('MissionBundle:UserMission')->findAllAtLeastThan($mission, UserMission::SHORTLIST)),
+                        'userMissions' => $em->getRepository('MissionBundle:UserMission')->findAllAtLeastThan($mission, UserMission::ONGOING),
                     ]);
+
+                case (2) :
+                    $userMissions = $em->getRepository('MissionBundle:UserMission')->findAllAtLeastThan($mission, UserMission::SHORTLIST);
+                    $nbProposale = 0;
+                    /** @var UserMission $userMission */
+                    foreach ($userMissions as $userMission) {
+                        if (!$userMission->getThread()->getProposals()->isEmpty()) {
+                            $nbProposale++;
+                        }
+                    }
+
+                    return $this->render('@Mission/Mission/Contractor/mission_shortlist.html.twig', [
+                        'mission'      => $mission,
+                        'interested'   => count($this->getDoctrine()->getRepository('MissionBundle:UserMission')->findAllAtLeastThan($mission, UserMission::ONGOING)),
+                        'shortlisted'  => count($this->getDoctrine()->getRepository('MissionBundle:UserMission')->findAllAtLeastThan($mission, UserMission::SHORTLIST)),
+                        'userMissions' => $userMissions,
+                        'nbProposale'  => $nbProposale
+                    ]);
+
                 default :
-                    throw new NotFoundHttpException('No view for this Mission with the step (' .
-                                                    $step->getStatus() . ')');
-                    break;
+                    throw new NotFoundHttpException('No view for this Mission with the step ' . $step->getPosition());
             }
         } elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')) {
             // check if user fully registred
@@ -70,10 +78,13 @@ class MissionController extends Controller
             }
             $userMissionRepo = $em->getRepository('MissionBundle:UserMission');
 
+            /** @var UserMission $userMission */
             if (!($userMission = $userMissionRepo->findOneBy(['user' => $user, 'mission' => $mission]))) {
                 throw new NotFoundHttpException();
             }
 
+
+            $messageService    = $this->get('fos_message.message_reader');
             $inboxService      = $this->get('inbox.services');
             $userMissionStatus = $userMission->getStatus();
 
@@ -108,11 +119,29 @@ class MissionController extends Controller
                     && $user->getPayment()) :
                     return $this->interestedAction($missionId);
                 case (UserMission::ONGOING) :
-                case (UserMission::SHORTLIST) :
+                    $messageService->markAsRead($userMission->getThread()->getLastMessage());
                     return $this->render('@Mission/Mission/Advisor/mission_to_answer.html.twig', [
                         'user_mission' => $userMission,
                         'userId'       => $userMission->getUser()->getId(),
-                        'anonymous'    => $step->getAnonymousMode()
+                        'step'         => $step
+                    ]);
+                case (UserMission::SHORTLIST) :
+                    $messageService->markAsRead($userMission->getThread()->getLastMessage());
+                    $proposal = new Proposal();
+                    $form = $this->createForm(ProposalFromType::class, $proposal)->handleRequest($request);
+                    if ($form->isSubmitted() && $form->isValid()) {
+                        $proposal->setThread($userMission->getThread());
+                        $em->persist($proposal);
+                        $em->flush();
+
+                        return $this->redirectToRoute('mission_view', ['missionId' => $missionId]);
+                    }
+
+                    return $this->render('@Mission/Mission/Advisor/mission_to_answer.html.twig', [
+                        'user_mission' => $userMission,
+                        'userId'       => $userMission->getUser()->getId(),
+                        'step'         => $step,
+                        'form'         => $form->createView()
                     ]);
                 default :
                     throw new NotFoundHttpException('No view for this UserMission status defined (' .
@@ -153,10 +182,7 @@ class MissionController extends Controller
 
         // Get Check UserMission
         $userMissionRepo = $em->getRepository('MissionBundle:UserMission');
-        $step            = $em->getRepository('MissionBundle:Step')->findOneby([
-            'mission' => $mission,
-            'status'  => 1
-        ]);
+        $step            = $em->getRepository('MissionBundle:Step')->findOneby(['mission' => $mission, 'status'  => 1]);
         if (!($userMission = $userMissionRepo->findOneby(['mission' => $mission, 'user' => $user]))
             || count($userMissionRepo->findAllAtLeastThan($mission, UserMission::INTERESTED)) >= $step->getNbMaxUser()) {
             throw new NotFoundHttpException($trans->trans('error.mission.limit_reach', [], 'tools'));
@@ -210,12 +236,11 @@ class MissionController extends Controller
 
         // Get Check Count UserMission
         $userMissionRepo = $em->getRepository('MissionBundle:UserMission');
-
         if (!($step = $em->getRepository('MissionBundle:Step')->findOneby([
             'mission' => $mission, 'status'  => 1]))
             || !($nextStep = $em->getRepository('MissionBundle:Step')->findOneby([
                 'mission'  => $mission, 'position' => $step->getPosition() + 1]))
-            || count($userMissionRepo->findAllAtLeastThan($mission, UserMission::SHORTLIST)) >= $nextStep->getNbMaxUser()) {
+            || count($userMissionRepo->findAllAtLeastThan($mission, UserMission::SHORTLIST)) < $nextStep->getNbMaxUser()) {
             throw new NotFoundHttpException($trans->trans('error.mission.not_enough', [], 'tools'));
         }
 
@@ -230,6 +255,7 @@ class MissionController extends Controller
      * @param $userMissionId
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \HttpHeaderException
      */
     public function answerToAdvisorAction($userMissionId)
     {
@@ -241,42 +267,53 @@ class MissionController extends Controller
             throw new NotFoundHttpException($trans->trans('error.mission.not_found', [], 'tools'));
         }
 
-        if (!($userMission =  $this->getDoctrine()->getRepository('MissionBundle:UserMission')->findoneBy(['id' => $userMissionId]))
-            || $userMission->getMission()->getcompany() !== $user->getcompany()) {
-            throw new NotFoundHttpException($trans->trans('error.user_mission.not_found', ['id' => $userMissionId] , 'tools'));
+        /** @var UserMission $userMission */
+        if (!($userMission = $this->getDoctrine()->getRepository('MissionBundle:UserMission')->findOneBy(['id' => $userMissionId]))
+            || $userMission->getMission()->getCompany() !== $user->getcompany()) {
+            throw new NotFoundHttpException($trans->trans('error.user_mission.not_found', ['id' => $userMissionId], 'tools'));
         }
 
         /** @var \MissionBundle\Entity\Mission $mission */
         $mission = $userMission->getMission();
-
-        if (!($step = $this->getDoctrine()->getRepository('MissionBundle:Step')
-            ->findOneBy(['mission' => $mission, 'status' => 1]))) {
-            throw new NotFoundHttpException('No step found.');
+        /** @var \MissionBundle\Entity\Step $step */
+        if (!($step = $this->getDoctrine()->getRepository('MissionBundle:Step')->findOneBy(['mission' => $mission, 'status'  => 1]))) {
+            throw new \HttpHeaderException('No next step');
         }
 
-        return $this->render('@Mission/Mission/Contractor/mission_answer_to_advisor.html.twig', [
-            'title'                 => $mission->getTitle(),
-            'certifications'        => $mission->getCertifications(),
-            'missionKinds'          => $mission->getMissionKinds(),
-            'price'                 => $mission->getPrice() * 1000,
-            'professionalExpertise' => $mission->getProfessionalExpertise()->getName(),
-            'applicationEnding'     => $mission->getApplicationEnding(),
-            'missionBeginning'      => $mission->getMissionEnding(),
-            'missionEnding'         => $mission->getMissionEnding(),
-            'address'               => $mission->getAddress(),
-            'languages'             => $mission->getLanguages(),
-            'telecommuting'         => $mission->getTelecommuting(),
-            'updateDate'            => $mission->getUpdateDate(),
-            'resume'                => $mission->getResume(),
-            'interested'            => count($this->getDoctrine()->getRepository('MissionBundle:UserMission')
-                ->findAllAtLeastThan($mission,UserMission::ONGOING)),
-            'shortlisted'           => count($this->getDoctrine()->getRepository('MissionBundle:UserMission')
-                ->findAllAtLeastThan($mission,UserMission::SHORTLIST)),
-            'userMission'           => $userMission,
-            'anonymous'             => $step->getAnonymousMode(),
-            'userId'                => $user->getId(),
-            'nbAdvisor'             => $userMission->getIdForContractor()
-        ]);
+        $messageService = $this->get('fos_message.message_reader');
+        switch ($step->getPosition()) {
+            case (1) :
+                $messageService->markAsRead($userMission->getThread()->getLastMessage());
+                return $this->render('@Mission/Mission/Contractor/mission_answer_to_advisor.html.twig', [
+                    'userMission' => $userMission,
+                    'anonymous'   => $step->getAnonymousMode(),
+                    'userId'      => $user->getId(),
+                    'mission'     => $mission,
+                    'interested'  => count($this->getDoctrine()->getRepository('MissionBundle:UserMission')->findAllAtLeastThan($mission, UserMission::ONGOING)),
+                    'shortlisted' => count($this->getDoctrine()->getRepository('MissionBundle:UserMission')->findAllAtLeastThan($mission, UserMission::SHORTLIST)),
+                    'nbAdvisor'   => $userMission->getIdForContractor()
+                ]);
+            case (2):
+                $messageService->markAsRead($userMission->getThread()->getLastMessage());
+                $userMissions = $this->getDoctrine()->getRepository('MissionBundle:UserMission')->findAllAtLeastThan($mission, UserMission::SHORTLIST);
+                $nbProposale = 0;
+                /** @var UserMission $userMission */
+                foreach ($userMissions as $userMission) {
+                    if (!$userMission->getThread()->getProposals()->isEmpty()) {
+                        $nbProposale++;
+                    }
+                }
+
+                return $this->render('@Mission/Mission/Contractor/mission_answer_to_advisor_shortlist.html.twig', [
+                    'userMission' => $userMission,
+                    'anonymous'   => $step->getAnonymousMode(),
+                    'userId'      => $user->getId(),
+                    'mission'     => $mission,
+                    'nbProposale' => $nbProposale
+                ]);
+            default:
+                throw new NotFoundHttpException($trans->trans('mission.error.forbiddenAccess', [], 'MissionBundle'));
+        }
     }
 
     /**
@@ -290,8 +327,7 @@ class MissionController extends Controller
         $em           = $this->getDoctrine()->getManager();
         $mission      = $em->getRepository('MissionBundle:Mission')->findOneBy(['id' => $missionId]);
         $user         = $this->getUser();
-        $userMission  = $em->getRepository('MissionBundle:UserMission')
-            ->findOneBy(['user' => $user, 'mission' => $mission]);
+        $userMission  = $em->getRepository('MissionBundle:UserMission')->findOneBy(['user' => $user, 'mission' => $mission]);
 
         if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')
             && $mission  && $mission->getStatus() >= Mission::PUBLISHED && $userMission) {
@@ -307,7 +343,7 @@ class MissionController extends Controller
                 case UserMission::INTERESTED:
                     $userMission->setStatus(UserMission::GIVEUP);
                     $em->flush();
-                    return $this->redirectToRoute('dashboard', array());
+                    return $this->redirectToRoute('dashboard');
                 case UserMission::ONGOING:
                     $userMission->setStatus(UserMission::GIVEUP);
                     $em->flush();
@@ -327,6 +363,6 @@ class MissionController extends Controller
                     return $this->redirectToRoute('dashboard', []);
             }
         }
-        throw new NotFoundHttpException($trans->trans('mission.error.forbiddenAccess', array(), 'MissionBundle'));
+        throw new NotFoundHttpException($trans->trans('mission.error.forbiddenAccess', [], 'MissionBundle'));
     }
 }

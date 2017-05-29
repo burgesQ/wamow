@@ -275,6 +275,19 @@ class Mission
     private $steps;
 
     /**
+     * @ORM\Column(name="scoring_history", type="json_array", nullable=true)
+     */
+    private $scoringHistory;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="next_update_scoring", type="date", nullable=true)
+     */
+    private $nextUpdateScoring;
+
+    /**
+
      * @var string
      * @ORM\Column(name="public_id", type="string", nullable=true, unique=true)
      */
@@ -900,6 +913,48 @@ class Mission
         return $this->continents;
     }
 
+    public function getActualStep()
+    {
+        foreach ($this->steps as $step) {
+            if ($step->getStatus() === 1) {
+                return $step;
+            }
+        }
+        return null;
+    }
+
+    public function passNextStep()
+    {
+        $actualStep = $this->getActualStep();
+        $position = $actualStep->getPosition() + 1;
+        $actualStep->setStatus(0);
+        foreach ($this->steps as $step) {
+            if ($position === $step->getPosition()) {
+                $step->setStatus(1);
+                // Cleaning userMissions
+                $userMissions = $this->getUserMission();
+                foreach ($userMissions as $userMission) {
+                    switch ($position) {
+                        case 2:
+                            # SHORTLIST
+                            if ($userMission->getStatus() == UserMission::ONGOING) {
+                                $userMission->setStatus(UserMission::DISMISS);
+                            }
+                            break;
+                        case 3:
+                            # FINALIST
+                            if ($userMission->getStatus() == UserMission::SHORTLIST) {
+                                $userMission->setStatus(UserMission::DISMISS);
+                            }
+                            break;
+                    }
+                }
+                return;
+            }
+        }
+        throw new \Exception("No step found after position ".$actualStep->getPosition());
+    }
+
     /**
      * Get steps
      *
@@ -934,6 +989,50 @@ class Mission
     }
 
     /**
+     * Set scoringHistory
+     *
+     * @return Mission
+     */
+    public function setScoringHistory($scoringHistory)
+    {
+        $this->scoringHistory = $scoringHistory;
+
+        return $this;
+    }
+
+    /**
+     * Get scoringHistory
+     *
+     */
+    public function getScoringHistory()
+    {
+        return $this->scoringHistory;
+    }
+
+    /**
+     * Set nextUpdateScoring
+     *
+     * @param \DateTime $nextUpdateScoring
+     * @return Mission
+     */
+    public function setNextUpdateScoring($nextUpdateScoring)
+    {
+        $this->nextUpdateScoring = $nextUpdateScoring;
+
+        return $this;
+    }
+
+    /**
+     * Get nextUpdateScoring
+     *
+     * @return \DateTime
+     */
+    public function getNextUpdateScoring()
+    {
+        return $this->nextUpdateScoring;
+    }
+
+     /**
      * Set Price
      *
      * @param integer $price
@@ -1080,7 +1179,7 @@ class Mission
     /**
      * Get languages
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getLanguages()
     {
@@ -1137,7 +1236,7 @@ class Mission
     /**
      * Get inspectors
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getInspectors()
     {
@@ -1170,7 +1269,7 @@ class Mission
     /**
      * Get certifications
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getCertifications()
     {
@@ -1193,7 +1292,7 @@ class Mission
     /**
      * Get publicId
      *
-     * @return string 
+     * @return string
      */
     public function getPublicId()
     {
@@ -1216,7 +1315,7 @@ class Mission
     /**
      * Get confidentiality
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getConfidentiality()
     {
@@ -1239,7 +1338,7 @@ class Mission
     /**
      * Get onDraft
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getOnDraft()
     {

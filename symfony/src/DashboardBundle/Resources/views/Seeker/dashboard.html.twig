@@ -2,9 +2,8 @@
 {% trans_default_domain "tools" %}
 
 {% block body %}
-    <div>
-        <a href="{{ path('mission_new_step_one')}}">{{ 'dashboard.contractor.new.button' | trans | upper }}</a></br>
-    </div>
+
+    {% include '@User/Profile/profile_sidebar.html.twig' %}
     <div>
         <p>
             {{ 'dashboard.contractor.fyi.title' | trans | upper }}

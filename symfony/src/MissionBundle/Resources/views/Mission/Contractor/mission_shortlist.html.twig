@@ -9,9 +9,8 @@
         {# set up trail #}
         <div class="trail">
             <h4>1. {{ 'mission.view.contractor.status_advisor' | trans | upper }} >
-                2. {{ 'mission.view.contractor.status_shortlist' | trans | upper }} <a
-                        href="{{ path('mission_shortlist', {'missionId' : mission.id}) }}">{{ 'mission.view.contractor.btn_proced_to_shortlist' | trans }}</a>
-                > 3. {{ 'mission.view.contractor.status_finalit' | trans | upper }}
+                2. {{ 'mission.view.contractor.status_shortlist' | trans | upper }} >
+                3. {{ 'mission.view.contractor.status_finalit' | trans | upper }}
                 &nbsp;&nbsp;&nbsp;
                 CrossIcon
                 <a href="{{ path('dashboard') }}">{{ 'mission.view.advisor.btn_back_to_board' | trans | upper }}</a>
@@ -19,7 +18,7 @@
         </div>
         <p>
 
-            {# set up header #}
+        {# set up header #}
         <div class="header">
             <div class="info">
                 {{ mission.title }}<br>
@@ -31,12 +30,12 @@
                 {% endif %}
                 {% endfor %}<br>
             </div>
-            <div class="intereted">
-                OnterestedIcon<br>
-                {{ interested }} {{ 'dashboard.contractor.mission.interested' | trans }}
-            </div>
             <div class="selected">
-                {{ shortlisted }}/3 {{ 'dashboard.contractor.mission.selected' | trans }}
+                SElectedIcon<br>
+                {{ nbProposale }}/3 {{ 'dashboard.contractor.mission.proposal' | trans }}
+            </div>
+            <div class="proposal">
+                3/3 {{ 'dashboard.contractor.mission.selected' | trans }}
             </div>
             <div class="finance">
                 {% for kind in mission.missionKinds %}
@@ -101,20 +100,42 @@
         <div class="user_mission">
             {% for userMission in userMissions %}
                 <div class="user_pseudo">
-                    <a href="{{ path('mission_answer_to_advisor', { 'userMissionId' : userMission.id}) }}">Advisor {{ userMission.idForContractor }}</a>
+                    {{ userMission.user.firstName }} {{ userMission.user.lastName }}
+                    <div class="dl_proposal">
+                        {% if userMission.thread.proposals is not empty %}
+                            {% set proposal = userMission.thread.proposals | last %}
+                            {# TODO find a better methode #}
+                            {%  set path = "http://symfony.dev/" ~ proposal.getUploadRootDir %}
+                            <a href="{{ path }}" download="{{ proposal.downloadName }}">{{ 'form.btn.download_proposal' | trans }}</a><br>
+                        {% endif %}
+                    </div>
                 </div>
                 <div class="last_msg">
                     {% set lastMsg = userMission.thread.messages | last %}
+                    {% set read = lastMsg.metadata[0].isRead %}
+                    {% if lastMsg.sender.id == userMission.user.id %}
+                        {% if not read %}
+                            {{ 'inbox.new_message' | trans }}
+                        {% endif %}
+                    {% else %}
+                        {{ 'inbox.you' | trans | upper }}<br>
+                    {% endif %}
                     {{ lastMsg.body }}<br>
                     {{ lastMsg.createdAt | date('D d M h\\hm') }}
+                    <a href="{{ path('mission_answer_to_advisor', {'userMissionId': userMission.id}) }}">
+                        {% if read %}
+                            {{ 'inbox.read' | trans | upper }}<br>
+                        {% else %}
+                            {{ 'inbox.show' | trans | upper }}<br>
+                        {% endif %}
+                    </a>
                 </div>
                 <div class="edit" id="{{ userMission.id }}">
                     {{ userMission.note }}
                 </div>
                 <div class="button_action">
                     <button id="refuse_{{ userMission.id }}">{{ 'mission.view.contractor.btn_refuse' | trans }}</button>
-                    <button id="shortlist_{{ userMission.id }}" {% if userMission.status == constant('SHORTLIST', userMission) %}hidden{% endif %}>{{ 'mission.view.contractor.btn_add_to_shortlist' | trans | upper }}</button>
-                    <button id="remove_from_shortlist_{{ userMission.id }}" {% if userMission.status < constant('SHORTLIST', userMission) %}hidden{% endif %}>{{ 'mission.view.contractor.btn_remove_from_shortlist' | trans | upper }}</button>
+                    <button id="contract_{{ userMission.id }}">{{ 'mission.view.contractor.btn_contract' | trans | upper }}</button>
                 </div>
             {% endfor %}
         </div>
@@ -122,12 +143,10 @@
 {% endblock %}
 
 {% block javascripts %}
-
     <script src="http://www.appelsiini.net/download/jquery.jeditable.js"></script>
     <script src="http://www.appelsiini.net/download/jquery.jeditable.mini.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-
             $('.edit').editable('{{ path('user_mission_notes') }}', {
                 type: 'textarea',
                 submit: 'Save',
@@ -136,34 +155,15 @@
                 id: $(this).attr('id')
             });
 
-            $('[id^="shortlist_"]').each(function () {
+            $('[id^="contract_"]').each(function () {
                 $(this).click(function () {
                     var id = $(this).attr('id').split('_')[1];
                     $.ajax({
-                        url: "{{ path('user_mission_add_to_shortlist') }}",
+                        url: "{{ path('user_mission_add_to_contract') }}",
                         method: "put",
                         data: {id: id}
                     }).done(function (msg) {
-                        alert("{{ 'mission.action.add_to_shortlist' | trans }}");
-                        $('#shortlist_' + id).hide();
-                        $('#remove_from_shortlist_' + id).show();
-                    }).fail(function () {
-                        alert("{{ 'error.action.failed' | trans }}");
-                    });
-                });
-            });
-
-            $('[id^="remove_from_shortlist_"]').each(function () {
-                $(this).click(function () {
-                    var id = $(this).attr('id').split('_')[3];
-                    $.ajax({
-                        url: "{{ path('user_mission_remove_from_shortlist') }}",
-                        method: "put",
-                        data: {id: id}
-                    }).done(function (msg) {
-                        alert("{{ 'mission.action.remove_from_shortlist' | trans }}");
-                        $('#remove_from_shortlist_' + id).hide();
-                        $('#shortlist_' + id).show();
+                        alert("{{ 'mission.action.add_to_contract' | trans }}");
                     }).fail(function () {
                         alert("{{ 'error.action.failed' | trans }}");
                     });
@@ -185,6 +185,5 @@
                 });
             });
         });
-
     </script>
 {% endblock %}

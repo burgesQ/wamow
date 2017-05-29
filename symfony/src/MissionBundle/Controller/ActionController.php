@@ -94,6 +94,61 @@ class ActionController extends Controller
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      * @throws \HttpHeaderException
      */
+    public function addToContractAction(Request $request)
+    {
+        if (!$request->isXmlHttpRequest()) {
+            throw new HttpException('Not a xml request');
+        }
+
+        $trans = $this->get('translator');
+        $em    = $this->getDoctrine()->getManager();
+
+        // Get Check User
+        /** @var \UserBundle\Entity\User $user */
+        if (($user = $this->getUser()) === null) {
+            throw new NotFoundHttpException($trans->trans('error.logged', [], 'tools'));
+        } elseif (!$this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR')) {
+            throw new NotFoundHttpException($trans->trans('error.forbidden', [], 'tools'));
+        }
+
+        // Get Check UserMission
+        $id              = $request->request->get('id');
+        /** @var \MissionBundle\Repository\UserMissionRepository $userMissionRepo */
+        $userMissionRepo = $em->getRepository('MissionBundle:UserMission');
+        if (!($userMission = $userMissionRepo->findOneBy(['id' => $id]))
+            || $userMission->getStatus() !== UserMission::SHORTLIST) {
+            throw new NotFoundHttpException($trans->trans('error.user_mission.not_found', [], 'tools'));
+        }
+
+        // Get Check Mission And Step
+        /** @var \MissionBundle\Entity\Mission $mission */
+        if (($mission = $userMission->getMission()) === null
+            || $mission->getStatus() !== Mission::PUBLISHED
+            || $user->getCompany() !== $mission->getCompany()) {
+            throw new NotFoundHttpException($trans->trans('error.mission.not_found', [], 'tools'));
+        }
+
+        // Count UserMission By the Step
+        if (($step = $em->getRepository('MissionBundle:Step')->findOneby([
+                'mission' => $mission, 'status'  => 1]))
+            && ($nStep = $em->getRepository('MissionBundle:Step')->findOneby([
+                'mission'  => $mission, 'position' => $step->getPosition() + 1]))
+            && count($userMissionRepo->findAllAtLeastThan($mission, UserMission::FINALIST)) < $nStep->getNbMaxUser()) {
+            $userMission->setStatus(UserMission::FINALIST);
+            $nStep->setStatus(1);
+            $step->setStatus(0);
+            $em->flush();
+
+            return new JsonResponse(['data' => json_encode('Ok')]);
+        }
+        throw new NotFoundHttpException($trans->trans('error.mission.already', [], 'tools'));
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     * @throws \HttpHeaderException
+     */
     public function removeFromShortlistAction(Request $request)
     {
         if (!$request->isXmlHttpRequest()) {

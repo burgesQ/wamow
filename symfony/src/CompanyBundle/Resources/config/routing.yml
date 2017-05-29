@@ -1,16 +1,3 @@
-company_create:
-    path:      /company/create
-    defaults:
-        _controller: CompanyBundle:Company:create
-company_join:
-    path:      /company/join
-    defaults:
-        _controller: CompanyBundle:Company:join
-company_leave:
-    path:      /company/leave
-    defaults:
-        _controller: CompanyBundle:Company:leave
-
 inspector_autocomplete:
     path:            /inspectors/autocomplete
     defaults:

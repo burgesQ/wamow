@@ -23,7 +23,7 @@ class Upload
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var \DateTime
@@ -72,6 +72,13 @@ class Upload
      */
     private $file;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="download_name", type="string", length=255, nullable=true)
+     */
+    private $downloadName;
+
     public function __construct()
     {
         $this->uploadDate = new \Datetime();
@@ -93,6 +100,7 @@ class Upload
         $this->addFormat($info[1]);
         $this->setName($this->kind.$this->id.time().'.'.$info[1]);
         $this->setPath($this->getUploadRootDir().$this->getName());
+        $this->setDownloadName($this->getFile()->getClientOriginalName());
     }
 
     /**
@@ -325,5 +333,41 @@ class Upload
     public function getFile()
     {
         return $this->file;
+    }
+
+    /**
+     * Set format
+     *
+     * @param array $format
+     * @return Upload
+     */
+    public function setFormat($format)
+    {
+        $this->format = $format;
+
+        return $this;
+    }
+
+    /**
+     * Set downloadName
+     *
+     * @param string $downloadName
+     * @return Upload
+     */
+    public function setDownloadName($downloadName)
+    {
+        $this->downloadName = $downloadName;
+
+        return $this;
+    }
+
+    /**
+     * Get downloadName
+     *
+     * @return string 
+     */
+    public function getDownloadName()
+    {
+        return $this->downloadName;
     }
 }

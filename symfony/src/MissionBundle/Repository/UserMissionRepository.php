@@ -13,6 +13,26 @@ use MissionBundle\Entity\UserMission;
  */
 class UserMissionRepository extends EntityRepository
 {
+    public function findOrderedByMission($mission, $max)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('t')
+            ->from('MissionBundle:UserMission', 't')
+            ->join('t.mission', 'm')
+            ->join('m.steps', 's')
+            ->where('t.mission = :mission')
+                ->setParameter('mission', $mission)
+            ->andWhere('t.status = '.UserMission::ACTIVATED)
+            ->andWhere('s.status = 1 and s.position = 1')
+            ->orderBy("t.score", "desc");
+        if ($max) {
+            $qb->setMaxResults($max);
+        }
+        return $qb->getQuery()->getResult();
+    }
+
+    // Query get users availables for a specific step
+    //$full is a boolean : false => getAvailablesUsers; true => get All availables users in Array form.
     /**
      * Query get users availables for a specific step
      * $full is a boolean : false => getAvailablesUsers; true => get All availables users in Array form.

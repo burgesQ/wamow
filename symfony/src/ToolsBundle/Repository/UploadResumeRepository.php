@@ -32,5 +32,4 @@ class UploadResumeRepository extends EntityRepository
 
         return (empty($resume)) ? null : $resume[0];
     }
-
 }

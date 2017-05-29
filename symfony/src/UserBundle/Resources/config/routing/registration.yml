@@ -1,0 +1,35 @@
+fos_user_registration_register_expert:
+    path:            /advisor/register
+    methods:         GET
+    defaults:
+        _controller: UserBundle:Registration:registerExpert
+
+expert_registration_step_zero:
+    path:            /advisor/register/0
+    methods:         GET|POST
+    defaults:
+        _controller: UserBundle:RegistrationAdvisor:stepZero
+
+expert_registration_step_one:
+    path:            /advisor/register/1
+    methods:         GET|POST
+    defaults:
+        _controller: UserBundle:RegistrationAdvisor:stepOne
+
+expert_registration_step_two:
+    path:            /advisor/register/2
+    methods:         GET|POST
+    defaults:
+        _controller: UserBundle:RegistrationAdvisor:stepTwo
+
+expert_registration_step_three:
+    path:            /advisor/register/3
+    methods:         GET|POST
+    defaults:
+        _controller: UserBundle:RegistrationAdvisor:stepThree
+
+expert_registration_step_four:
+    path:            /advisor/register/4
+    methods:         GET|POST
+    defaults:
+        _controller: UserBundle:RegistrationAdvisor:stepFour

@@ -169,3 +169,12 @@ tetranz_select2_entity:
     cache_timeout:        15000
     scroll:               true
     width:                500
+
+parameters:
+    scoring_weight.user_subscribe: 5
+    scoring_weight.business_practice: 5
+    scoring_weight.professional_expertise: 5
+    scoring_weight.company_size: 1
+    scoring_weight.mission_kind: 2
+    scoring_weight.location: 1
+    scoring_weight.certification: 3

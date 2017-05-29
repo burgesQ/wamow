@@ -51,6 +51,14 @@ $ emacs -nw symfony/web/app_dev.php
     $ sf doctrine:schema:update --force
     $ sf doctrine:fixtures:load --no-interaction
     ```
+3Bis. Alternatively you can run the genDb script
+
+    ```bash
+    $ cp script/genData.sh symfony
+    $ docker-compose exec php zsh
+    $ composer update -vvv
+    $ ./genData.sh
+    ```
 
 ## Usage
 
