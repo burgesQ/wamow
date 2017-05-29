@@ -20,12 +20,9 @@
     {{ form_errors(form.user.firstName) }}
     {{ form_errors(form.user.lastName) }}
     {{ form_errors(form.user.email) }}
-    {{ form_errors(form.user.plainPassword) }}
-    {{ form_errors(form.user.plainPassword.first) }}
     {% set address = form.user.addresses | last %}
     {{ form_errors(address) }}
     {{ form_errors(address.country) }}
-    {{ form_errors(form.user.plainPassword.second) }}
     {{ form_errors(form.user.languages) }}
     {{ form_errors(form.resume) }}
     {{ form_errors(form.resume.file) }}
@@ -38,12 +35,6 @@
     <br>
     {{ form_widget(form.user.email) }}
     {{ form_label(form.user.email) }}
-    <br>
-    {{ form_widget(form.user.plainPassword.first) }}
-    {{ form_label(form.user.plainPassword.first) }}
-    <br>
-    {{ form_widget(form.user.plainPassword.second) }}
-    {{ form_label(form.user.plainPassword.second) }}
     <br>
 
     <br>

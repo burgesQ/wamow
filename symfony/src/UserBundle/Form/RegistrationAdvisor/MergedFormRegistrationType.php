@@ -6,8 +6,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractType;
 use ToolsBundle\Form\UploadResumeType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use UserBundle\Form\RegistrationAdvisor\RegistrationType;
 
 class MergedFormRegistrationType extends AbstractType
 {

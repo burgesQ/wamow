@@ -596,9 +596,12 @@ company_size:
 ## Mails template
 mails:
     hello: Hello %f_name %l_name !
+    registration:
+        new_password: "Her your new password : %password"
     inbox:
         new_message_mission: You've got a new message on the mission %title.
         link: Go there to check it.
         the_team: The team.
     subject:
          new_message: You've got a new message !
+         new_password: Welcome !
