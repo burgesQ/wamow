@@ -1,7 +1,7 @@
 ################################
 ################################
 ##
-##  OVH WMW SERVEUR1 :STAGING SETTINGS
+##  OVH WMW SERVEUR1 :PRODUCTION SETTINGS
 ##  support@ovh.com
 ## 
 ################################
