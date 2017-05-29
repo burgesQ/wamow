@@ -46,7 +46,7 @@ class RegistrationAdvisorController extends Controller
             $user = $userManager->createUser();
             $user->setEnabled(true);
             $user->setRoles(["ROLE_ADVISOR"]);
-        } else if (($url = $this->get('signedup')->checkIfSignedUp($user->getStatus()))) {
+        } else if (($url = $this->get('signed_up')->checkIfSignedUp($user->getStatus()))) {
             $this->redirectToRoute($url);
         }
 
@@ -120,7 +120,7 @@ class RegistrationAdvisorController extends Controller
         if (!($user = $this->getUser())) {
             return $this->redirectToRoute('fos_user_registration_register_expert');
         } elseif ($user->getStatus() !== User::REGISTER_STEP_ONE) {
-            return $this->redirectToRoute($this->get('signedup')->checkIfSignedUp($user->getStatus()));
+            return $this->redirectToRoute($this->get('signed_up')->checkIfSignedUp($user->getStatus()));
         }
 
         /** @var \Symfony\Component\Form\Form $form */
@@ -157,7 +157,7 @@ class RegistrationAdvisorController extends Controller
         if (!($user = $this->getUser())) {
             return $this->redirectToRoute('fos_user_registration_register_expert');
         } elseif ($user->getStatus() !== User::REGISTER_STEP_TWO) {
-            return $this->redirectToRoute($this->get('signedup')->checkIfSignedUp($user->getStatus()));
+            return $this->redirectToRoute($this->get('signed_up')->checkIfSignedUp($user->getStatus()));
         }
 
         /** @var \Symfony\Component\Form\Form $form */
@@ -192,7 +192,7 @@ class RegistrationAdvisorController extends Controller
         if (!($user = $this->getUser())) {
             return $this->redirectToRoute('fos_user_registration_register_expert');
         } elseif ($user->getStatus() !== User::REGISTER_STEP_THREE) {
-            return $this->redirectToRoute($this->get('signedup')->checkIfSignedUp($user->getStatus()));
+            return $this->redirectToRoute($this->get('signed_up')->checkIfSignedUp($user->getStatus()));
         }
 
         /** @var \Symfony\Component\Form\Form $form */
@@ -227,7 +227,7 @@ class RegistrationAdvisorController extends Controller
         if (!($user = $this->getUser())) {
             return $this->redirectToRoute('fos_user_registration_register_expert');
         } elseif ($user->getStatus() !== User::REGISTER_STEP_FOUR) {
-            return $this->redirectToRoute($this->get('signedup')->checkIfSignedUp($user->getStatus()));
+            return $this->redirectToRoute($this->get('signed_up')->checkIfSignedUp($user->getStatus()));
         }
 
         $em = $this->getDoctrine()->getManager();
