@@ -11,7 +11,7 @@
 set :application, "WantMoreWork-Plateform"
 set :app_path,    "app"
 # Server conf
-set :domain,      "app@platform.wantmore.work"
+set :domain,      "app@staging.consultants.wantmore.work"
 set :use_sudo,    false
 
 role :web,        domain                         # Your HTTP server, Apache/etc
