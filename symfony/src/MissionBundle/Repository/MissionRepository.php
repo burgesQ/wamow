@@ -14,13 +14,18 @@ use UserBundle\Entity\User;
  */
 class MissionRepository extends EntityRepository
 {
-    public function getExpertMissionsAvailables()
+    public function getMissionsToScore()
     {
+        // TODO : Exclude already SHORTLIST / FINALIST / etc missions
         $qb = $this->_em->createQueryBuilder();
         $qb->select('m')
-            ->from('MissionBundle:Mission', 'm')
-            ->where('m.status >= ' . Mission::PUBLISHED)
-            ->orderBy('m.applicationEnding', 'DESC');
+        ->from('MissionBundle:Mission', 'm')
+        ->where('m.status = '.Mission::PUBLISHED)
+        ->join('m.steps', 's')
+        ->andWhere('s.status = 1 and s.position = 1')
+        ->andWhere('m.nextUpdateScoring <= :currentDate')
+        ->setParameter("currentDate", date('Y-m-d'))
+        ;
         return $qb->getQuery()->getResult();
     }
 
@@ -138,6 +143,42 @@ class MissionRepository extends EntityRepository
         return $query->getResult();
     }
 
+    public function findUsersByMission($mission)
+    {
+        $qb = $this->_em->createQueryBuilder()
+            ->select('u')
+            ->from('UserBundle:User', 'u')
+            ->join("u.languages", "l")
+            ->join("u.professionalExpertise", "pe")
+            ->leftJoin("u.missionKind", "mk")
+            ->leftJoin("u.businessPractice", "bp")
+            ->leftJoin("u.userMission", "um")
+            ->leftJoin("um.mission", "m")
+            // NOTE : user status, no CONST ?!
+            ->where("u.status = 5")
+            ->andWhere("u.roles = :userRoles")
+            ->andWhere("l.id IN(:languageIds)")
+            // NOTE : only in Scoring ?
+            // ->andWhere("mk.id IN(:missionKinds)")
+            ->andWhere("pe = :professionalExpertise OR bp = :businessPractice")
+            ->andWhere("m.telecommuting = ".($mission->getTelecommuting() ? "1" : "0"))
+            // TODO : No result, normal ? Column medium price needed ?
+            // ->andWhere("((u.dailyFeesMin + u.dailyFeesMax)/2.0) <= m.budget")
+        ;
+
+        $parameters = array(
+            "userRoles" => "a:1:{i:0;s:12:\"ROLE_ADVISOR\";}",
+            "languageIds" => $mission->getLanguages()->toArray(),
+            "professionalExpertise" => $mission->getProfessionalExpertise(),
+            // "missionKinds" => $mission->getMissionKinds()->toArray(),
+            "businessPractice" => $mission->getBusinessPractice()
+        );
+        $qb->setParameters($parameters);
+        $qb->groupBy("u.id");
+        $qb->orderBy("u.id", "asc");
+
+        return $qb->getQuery()->getResult();
+    }
     /**
      * A magic query that return a array of potential user for a mission
      * Need to refacto that shit, that burn my eyes
@@ -150,6 +191,7 @@ class MissionRepository extends EntityRepository
      */
     public function getUsersByMission($mission, $ignored = true, $dql = false)
     {
+        // NOTE : $ignored param ?!
         // select all advisor fully register
         // left join necessary table
         $base = "SELECT   u
@@ -199,7 +241,7 @@ class MissionRepository extends EntityRepository
                 AND       um.status >= ' . UserMIssion::ACTIVATED;
         // order user by id
         $base = $base . '
-                ORDER BY  u.id ASC';
+                GROUP BY u.id ORDER BY  u.id ASC';
 
         // create DQL query
         $query = $this->_em->createQuery($base);

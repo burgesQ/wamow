@@ -282,6 +282,13 @@ class User extends BaseUser implements ParticipantInterface
     private $userMission;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="scoring_bonus", type="integer")
+     */
+    private $scoringBonus;
+
+    /**
      * @var boolean
      *
      * @ORM\Column(name="remote_work", type="boolean", nullable=false)
@@ -347,6 +354,7 @@ class User extends BaseUser implements ParticipantInterface
         $this->giveUpCount           = 0;
         $this->secretMail            = [];
         $this->linkedinData          = [];
+        $this->scoringBonus = 5;
     }
 
     /**
@@ -1135,6 +1143,30 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
+     * Set scoringBonus
+     *
+     * @param integer $scoringBonus
+     * @return User
+     */
+    public function setScoringBonus($scoringBonus)
+    {
+        $this->scoringBonus = $scoringBonus;
+
+        return $this;
+    }
+
+    /**
+     * Get scoringBonus
+     *
+     * @return integer
+     */
+    public function getScoringBonus()
+    {
+        return $this->scoringBonus;
+    }
+
+
+    /**
      * Set remoteWork
      *
      * @param boolean $remoteWork
@@ -1173,7 +1205,7 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * Get publicId
      *
-     * @return string 
+     * @return string
      */
     public function getPublicId()
     {

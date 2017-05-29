@@ -1,0 +1,159 @@
+<?php
+
+namespace MissionBundle\Service;
+
+use MissionBundle\Entity\UserMission;
+
+ class Scoring
+{
+    protected $em;
+
+    protected $weightBusinessPractice, $weightProfessionalExpertise, $weightCompanySize, $weightMissionKind, $weightLocation, $weightCertification;
+
+    public function __construct(\Doctrine\ORM\EntityManager $em, $weightBusinessPractice, $weightProfessionalExpertise, $weightCompanySize, $weightMissionKind, $weightLocation, $weightCertification)
+    {
+        $this->em = $em;
+        $this->weightBusinessPractice = $weightBusinessPractice;
+        $this->weightProfessionalExpertise = $weightProfessionalExpertise;
+        $this->weightCompanySize = $weightCompanySize;
+        $this->weightMissionKind = $weightMissionKind;
+        $this->weightLocation = $weightLocation;
+        $this->weightCertification = $weightCertification;
+    }
+
+    private function getScoringRules()
+    {
+        return array(0 => array(0, 50), 1 => array(2, 100), 2 => array(4, 200), 3 => array(6, null));
+    }
+
+    private function getScoringStep($mission)
+    {
+        return count($mission->getScoringHistory()) ? count($mission->getScoringHistory()) : 0;
+    }
+
+    private function updateNextScoring($mission)
+    {
+        $scoringRules = $this->getScoringRules();
+        $scoringStep = $this->getScoringStep($mission);
+        if (isset($scoringRules[$scoringStep + 1])) {
+            $nbDays = $scoringRules[$scoringStep + 1][0];
+            $mission->setNextUpdateScoring(new \DateTime("+".$nbDays." days"));
+        } else {
+            $mission->setNextUpdateScoring(null);
+        }
+    }
+    public function initializeMission($mission)
+    {
+        $this->updateActivated($mission);
+        $this->updateScorings($mission);
+    }
+
+    public function getScoring($mission, $userMission)
+    {
+        $score = 0;
+        $user = $userMission->getUser();
+        // secteur activité
+        if ($user->getBusinessPractice()->contains($mission->getBusinessPractice())) {
+            $score += $this->weightBusinessPractice;
+        }
+        // experience technique
+        if ($user->getProfessionalExpertise()->contains($mission->getProfessionalExpertise())) {
+            $score += $this->weightProfessionalExpertise;
+        }
+        // taille entreprise
+        $experiences = $user->getExperienceShaping();
+        $size = $mission->getCompany()->getSize();
+        foreach ($experiences as $experience) {
+            switch ($size) {
+                case 0:
+                    if ($experience->getSmallCompany()) {
+                        $score += $this->weightCompanySize;
+                    }
+                    break;
+                case 1:
+                    if ($experience->getMediumCompany()) {
+                        $score += $this->weightCompanySize;
+                    }
+                    break;
+                case 2:
+                    if ($experience->getLargeCompany()) {
+                        $score += $this->weightCompanySize;
+                    }
+                    break;
+            }
+        }
+
+        foreach ($user->getMissionKind() as $missionKind) {
+            // TODO : certifications => No link with User
+            // foreach ($missionKind->getCertifications() as $certification) {
+            //     if ($mission->getCertifications()->contains($certification)) {
+            //         $score += $this->weightCertification;
+            //     }
+            // }
+            // type mission
+            if ($mission->getMissionKinds()->contains($missionKind)) {
+                $score += $this->weightMissionKind;
+            }
+        }
+
+        // zone géographique
+        $missionContinents = $mission->getContinents();
+        foreach ($experiences as $experience) {
+            foreach ($experience->getContinents() as $userContinent) {
+                if ($missionContinents->contains($userContinent)) {
+                    $score += $this->weightContinent;
+                }
+            }
+        }
+        // rotation
+        $score += $user->getScoringBonus();
+
+        // archétype mission
+        // TODO : Valuable work experience => No link with Mission
+        return $score;
+    }
+
+    public function updateUserMissions($mission)
+    {
+        $nbNewUserMissions = 0;
+        $users = $this->em->getRepository("MissionBundle:Mission")->findUsersByMission($mission);
+        foreach ($users as $user) {
+            $userMission = $this->em->getRepository("MissionBundle:UserMission")->findOneBy(array("user" => $user, "mission" => $mission));
+            if (!$userMission) {
+                $nbNewUserMissions++;
+                $userMission = new UserMission($user, $mission);
+            }
+            $this->em->persist($userMission);
+        }
+        return $nbNewUserMissions;
+    }
+    public function updateScorings($mission)
+    {
+        foreach ($mission->getUserMission() as $userMission) {
+            $score = $this->getScoring($mission, $userMission);
+            $userMission->setScore($score);
+        }
+        $this->em->flush();
+        return;
+    }
+
+    public function updateActivated($mission) {
+        $scoringHistory = $mission->getScoringHistory();
+        $scoringStep = $this->getScoringStep($mission);
+        $scoringRules = $this->getScoringRules();
+        // $matchedUserMissions = $this->em->getRepository("MissionBundle:UserMission")->findBy("mission" => $mission, "status" => UserMission::MATCHED);
+        $userMissions = $this->em->getRepository("MissionBundle:UserMission")->findOrderedByMission($mission, $scoringRules[$scoringStep][1]);
+        // for JSON
+        $scoringHistory[$scoringStep] = array();
+        $scorings = array();
+        foreach ($userMissions as $userMission) {
+            $userMission->setStatus(UserMission::MATCHED);
+            $scorings[$userMission->getUser()->getId()] = $userMission->getScore();
+        }
+        $scoringHistory[$scoringStep] = $scorings;
+        $this->updateNextScoring($mission);
+        $mission->setScoringHistory($scoringHistory);
+        $this->em->flush();
+        return count($userMissions);
+    }
+}

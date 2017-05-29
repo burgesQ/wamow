@@ -9,10 +9,12 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="user_mission")
  * @ORM\Entity(repositoryClass="MissionBundle\Repository\UserMissionRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @ORM\EntityListeners({"MissionBundle\Listener\UserMissionListener"})
  */
 class UserMission
 {
     // USER_MISSION STATUS
+
     const DELETED    = -70;
     const ENDDATE    = -60;
     const DISMISS    = -50;
@@ -77,6 +79,12 @@ class UserMission
      * @ORM\JoinColumn(nullable=true)
      */
     private $thread;
+
+    /**
+     * @var int
+     * @ORM\Column(name="score", type="integer", nullable=true)
+     */
+    private $score;
 
     /**
      * @var \DateTime
@@ -269,6 +277,29 @@ class UserMission
 
 
     /**
+     * Set score
+     *
+     * @param integer $score
+     * @return UserMission
+     */
+    public function setScore($score)
+    {
+        $this->score = $score;
+
+        return $this;
+    }
+
+    /**
+     * Get score
+     *
+     * @return integer
+     */
+    public function getScore()
+    {
+        return $this->score;
+    }
+
+     /**
      * Set interestedAt
      *
      * @param \DateTime $interestedAt
@@ -307,7 +338,7 @@ class UserMission
     /**
      * Get note
      *
-     * @return string 
+     * @return string
      */
     public function getNote()
     {

@@ -31,6 +31,7 @@ class AppKernel extends Kernel
             new FOS\MessageBundle\FOSMessageBundle(),
             new InboxBundle\InboxBundle(),
             new BlogBundle\BlogBundle(),
+            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
             new Tetranz\Select2EntityBundle\TetranzSelect2EntityBundle()
         );
