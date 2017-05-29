@@ -4,3 +4,5 @@
 /.idea
 app/cache/
 components/
+.bundle/
+/bin/
