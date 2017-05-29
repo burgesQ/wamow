@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use MissionBundle\Entity\UserMission;
 use MissionBundle\Entity\Mission;
+use MissionBundle\Entity\Step;
 
 class MissionGeneratorController extends Controller
 {
@@ -375,6 +376,27 @@ class MissionGeneratorController extends Controller
                 ]);
             }
             $newMission->setStatus(Mission::PUBLISHED)->setStatusGenerator(Mission::DONE);
+
+            $jsonConfig = json_decode($em->getRepository('ToolsBundle:Config')->findAll()[0]);
+            $i          = 0;
+            while ($i < $jsonConfig->nbStep) {
+                $i++;
+                $step     = 'step' . $i;
+                $jsonStep = $jsonConfig->$step;
+                $step     = new Step($jsonStep->nbMaxUser, $jsonStep->reallocUser);
+                $step
+                    ->setMission($newMission)
+                    ->setUpdateDate(new \DateTime())
+                    ->setPosition($i)
+                    ->setAnonymousMode($jsonStep->anonymousMode)
+                ;
+
+                if ($i === 1) {
+                    $step->setStatus(1);
+                }
+                $em->persist($step);
+            }
+
             $em->flush();
 
             return $this->redirectToRoute('dashboard');

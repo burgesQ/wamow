@@ -1,0 +1,437 @@
+*{
+	outline:0;
+}
+
+.wmw-tinylink{
+	font-family:$fontcantarell;
+	font-size:10px;
+	text-transform:uppercase;
+	color:#a2a2a2;
+	text-decoration:none;
+
+	.icon{
+		font-size:14px;
+		vertical-align:middle;
+		margin-top:-3px;
+	}
+
+	&:hover{
+		text-decoration:underline;
+	}
+}
+
+.wmw-button{
+	position:relative;
+	display:inline-block;
+	text-align:center;
+	height:45px;
+	padding:0 25px;
+	line-height:45px;
+	color:white;
+	overflow:hidden;
+	border:none;
+	background:transparent;
+	transition:color .3s;
+	text-decoration:none;
+	font-family:$fontcantarell;
+	font-size:14px;
+	letter-spacing:0.06em;
+	text-transform:uppercase;
+	white-space:nowrap;
+
+	&:before,
+	&:after{
+		content:'';
+		display:block;
+		position:absolute;
+		height:50%;
+		width:125%;
+		background:$colorpurple;
+		transform:skewX(-30deg);
+		transition:background .3s, border .3s;
+	}
+
+	&:before{
+		top:0;
+		left:0;
+		transform-origin:bottom right;
+		border-top:1px solid $colorpurple;
+		border-left:1px solid $colorpurple;
+	}
+
+	&:after{
+		bottom:0;
+		right:0;
+		transform-origin:top right;
+		border-bottom:1px solid $colorpurple;
+		border-right:1px solid $colorpurple;
+	}
+
+	i{
+		display:block;
+		position:absolute;
+		width:1px;
+		height:50%;
+		background:$colorpurple;
+		opacity:1;
+
+		&:first-child{
+			bottom:0; 
+			left:0;
+		}
+
+		&:last-child{
+			top:0; 
+			right:0;
+		}
+	}
+
+	.icon{
+		display:inline-block !important;
+		background:none !important;
+		position:relative !important;
+		vertical-align:baseline !important;
+		font-size:14px;
+		width:auto;
+		height:auto;
+	}
+
+	span{
+		position:relative;
+		z-index:10;
+	}
+
+	&:hover{
+		color:$colorpurple;
+
+		&:before{
+			background:transparent;
+		}
+
+		&:after{
+			background:transparent;
+		}
+	}
+
+	&.wmw-button--border{
+		color:$colorpurple;
+
+		&:before,
+		&:after{
+			background:transparent;
+		}
+
+		&:hover{
+			color:white;
+
+			&:before,
+			&:after{
+				background:$colorpurple;
+			}
+		}
+	}
+
+	&.wmw-button--green{
+
+		&:before,
+		&:after{
+			background-color:$colorgreen;
+			border-color:$colorgreen;
+		}
+
+		i{
+			background:$colorgreen;
+		}
+
+		&:hover{
+			color:$colorgreen;
+
+			&:before,
+			&:after{
+				background:transparent;
+			}
+		}
+
+		&.wmw-button--border{
+			color:$colorgreen;
+
+			&:before,
+			&:after{
+				background:transparent;
+			}
+
+			&:hover{
+				color:white;
+
+				&:before,
+				&:after{
+					background:$colorgreen;
+				}
+			}
+		}
+	}
+
+	&.wmw-button--black{
+
+		&:before,
+		&:after{
+			background-color:$colorgrey;
+			border-color:$colorgrey;
+		}
+
+		i{
+			background:$colorgrey;
+		}
+
+		&:hover{
+			color:$colorgrey;
+
+			&:before,
+			&:after{
+				background:transparent;
+			}
+		}
+
+		&.wmw-button--border{
+			color:$colorgrey;
+
+			&:before,
+			&:after{
+				background:transparent;
+			}
+
+			&:hover{
+				color:white;
+
+				&:before,
+				&:after{
+					background:$colorgrey;
+				}
+			}
+		}
+	}
+
+	&.wmw-button--red{
+
+		&:before,
+		&:after{
+			background-color:$colorred;
+			border-color:$colorred;
+		}
+
+		i{
+			background:$colorred;
+		}
+
+		&:hover{
+			color:$colorred;
+
+			&:before,
+			&:after{
+				background:transparent;
+			}
+		}
+
+		&.wmw-button--border{
+			color:$colorred;
+
+			&:before,
+			&:after{
+				background:transparent;
+			}
+
+			&:hover{
+				color:white;
+
+				&:before,
+				&:after{
+					background:$colorred;
+				}
+			}
+		}
+	}
+
+	&.wmw-button--grey{
+
+		&:before,
+		&:after{
+			background-color:#a2a2a2;
+			border-color:#a2a2a2;
+		}
+
+		i{
+			background:#a2a2a2;
+		}
+
+		&:hover{
+			color:#a2a2a2;
+
+			&:before,
+			&:after{
+				background:transparent;
+			}
+		}
+
+		&.wmw-button--border{
+			color:#a2a2a2;
+
+			&:before,
+			&:after{
+				background:transparent;
+			}
+
+			&:hover{
+				color:white;
+
+				&:before,
+				&:after{
+					background:#a2a2a2;
+				}
+			}
+		}
+	}
+
+	&.wmw-button--white{
+		color:$colorgreen;
+
+		&:before,
+		&:after{
+			background-color:white;
+			border-color:white;
+		}
+
+		i{
+			background:white;
+		}
+
+		&:hover{
+			color:white;
+
+			&:before,
+			&:after{
+				background:transparent;
+			}
+		}
+
+		&.wmw-button--border{
+			color:white;
+
+			&:before,
+			&:after{
+				background:transparent;
+			}
+
+			&:hover{
+				color:$colorgreen;
+
+				&:before,
+				&:after{
+					background:white;
+				}
+			}
+		}
+	}
+
+	&.wmw-button--small{
+		height:25px;
+		padding:0 15px;
+		line-height:26px;
+		font-size:10px;
+
+		.icon{
+			font-size:11px;
+			margin:0 2px;
+		}
+	}
+}
+
+.wmw-checkbutton .wmw-button:hover{
+	color:white !important;
+	cursor:default;
+
+	i,	
+	&:before,
+	&:after{
+		border-color:$colorgreen !important;
+		background:$colorgreen !important;
+	}
+
+	.icon{
+		background:transparent !important;
+	}
+}
+
+.wmw-checkbutton .wmw-button--border:hover{
+	cursor:pointer;
+
+	i,	
+	&:before,
+	&:after{
+		border-color:$colorgrey !important;
+		background:$colorgrey !important;
+	}
+
+	.icon{
+		background:transparent !important;
+	}
+}
+
+.wmw-simple-button{
+	display:inline-block;
+	vertical-align:middle;
+	height:43px;
+	line-height:43px;
+	padding:0 15px;
+	color:white;
+	text-decoration:none;
+	border:1px solid $colorpurple;
+	background:$colorpurple;
+	font-size:20px;
+	color:white;
+	font-family:$fontdincondreg;
+	transition:background .3s, color .3s;
+	text-transform:none;
+
+	.icon{
+		font-size:26px;
+	}
+
+	&:hover{
+		background:transparent;
+		color:$colorpurple;
+	}
+
+	&.wmw-simple-button--green{
+		background:$colorgreen;
+		border-color:$colorgreen;
+
+		&:hover{
+			background:transparent;
+			color:$colorgreen;
+		}
+	}
+}
+
+.wmw-button-less,
+.wmw-button-more{
+	display:inline-block;
+	width:22px;
+	height:22px;
+	border-radius:50%;
+	border:1px solid $colorgreen;
+	color:$colorgreen;
+	text-decoration:none;
+	text-align:center;
+	line-height:18px;
+	padding-left:1px;
+	font-size:22px;
+	vertical-align:middle;
+	font-family:$fontcantarell;
+	margin:0 10px;
+	transition:background .3s, color .3s;
+
+	&:hover{
+		background:$colorgreen;
+		color:white;
+	}
+}

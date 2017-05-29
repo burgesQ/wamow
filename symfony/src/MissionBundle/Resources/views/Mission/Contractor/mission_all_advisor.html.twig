@@ -1,0 +1,203 @@
+{% extends '::base.html.twig' %}
+{% trans_default_domain "tools" %}
+
+{% block body %}
+
+    {# set up var #}
+    {% set interested = 0 %}
+    {% set selected = 0 %}
+    {% for advisor in userMissions %}
+        {% if advisor.status >= constant('ONGOING', advisor)  %}
+            {% set interested = interested + 1  %}
+            {% if advisor.status >= constant('SHORTLIST', advisor) %}
+                {% set selected = selected + 1 %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+
+
+    {# set up top #}
+    <div class="top">
+
+        {# set up trail #}
+        <div class="trail">
+            <h4>1. {{ 'mission.view.contractor.status_advisor' | trans | upper }} >
+                2. {{ 'mission.view.contractor.status_shortlist' | trans | upper }} <a
+                        href="{{ path('mission_shortlist', {'missionId' : missionId}) }}">{{ 'mission.view.contractor.btn_proced_to_shortlist' | trans }}</a>
+                > 3. {{ 'mission.view.contractor.status_finalit' | trans | upper }}
+                &nbsp;&nbsp;&nbsp;
+                CrossIcon
+                <a href="{{ path('dashboard') }}">{{ 'mission.view.advisor.btn_back_to_board' | trans | upper }}</a>
+            </h4>
+        </div>
+        <p>
+
+            {# set up header #}
+        <div class="header">
+            <div class="info">
+                {{ title }}<br>
+                CertificationIcon Certification:
+                {% for certif in certifications %}
+                {{ certif.name }}
+                {% if not loop.last %}
+                    ,
+                {% endif %}
+                {% endfor %}<br>
+            </div>
+            <div class="intereted">
+                OnterestedIcon<br>
+                {{ interested }} {{ 'dashboard.contractor.mission.interested' | trans }}
+            </div>
+            <div class="selected">
+                {{ selected }}/3 {{ 'dashboard.contractor.mission.selected' | trans }}
+            </div>
+            <div class="finance">
+                {% for kind in missionKinds %}
+                {{ kind.name | trans }}
+                {% if not loop.last %}
+                    ,
+                {% endif %}
+                {% endfor %}<br>
+                {{ 'mission.view.contractor.finance' | trans({ '%price': price, '%professionalExpertise': professionalExpertise | trans }, 'tools') | nl2br }}
+            </div>
+            <div class="day_left">
+                ClockIcon<br>
+                {{ applicationEnding | time_diff }}
+            </div>
+            <div class="calendar">
+                CalendarIcon<br>
+                {{ missionBeginning | date("M d") }}<br>
+                {{ missionEnding | date("M d") }}
+            </div>
+            <div class="address">
+                PinPointIcon<br>
+                {% if address %}
+                    {% if address.city %}
+                        {{ address.city }}<br>
+                    {% endif %}
+                    {{ address.country | countryName }}
+                {% endif %}
+            </div>
+            <div class="lang">
+                BubleIcon<br>
+                {% for lang in languages %}
+                    {{ lang.name | trans }}
+                    {% if not loop.last %}
+                        ,
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="on_site">
+                EarthIcon<br>
+                {% if telecommuting %}
+                    {{ 'mission.view.advisor.on_site' | trans }}
+                {% else %}
+                    {{ 'mission.view.advisor.not_on_site' | trans }}
+                {% endif %}
+            </div>
+            PencilIcon<br>
+            {{ 'mission.view.to_answer' | trans }}
+        </div>
+    </div>
+    <p>
+
+    {#set up content #}
+    <div class="content">
+
+        {#set up left content#}
+        <div class="resume">
+            Pitched at {{ updateDate | date('d/m/Y') }} <br>
+            {{ resume | nl2br }}
+        </div>
+
+        {# set up right content #}
+        <div class="user_mission">
+            {% for userMission in userMissions %}
+                <div class="user_pseudo">
+                    <a href="{{ path('mission_answer_to_advisor', { 'userMissionId' : userMission.id}) }}">Advisor {{ userMission.idForContractor }}</a>
+                </div>
+                <div class="last_msg">
+                    {% set lastMsg = userMission.thread.messages | last %}
+                    {{ lastMsg.body }}<br>
+                    {{ lastMsg.createdAt | date('D d M h\\hm') }}
+                </div>
+                <div class="edit" id="{{ userMission.id }}">
+                    {{ userMission.note }}
+                </div>
+                <div class="button_action">
+                    <button id="refuse_{{ userMission.id }}">{{ 'mission.view.contractor.btn_refuse' | trans }}</button>
+                    <button id="shortlist_{{ userMission.id }}" {% if userMission.status == constant('SHORTLIST', userMission) %}hidden{% endif %}>{{ 'mission.view.contractor.btn_add_to_shortlist' | trans | upper }}</button>
+                    <button id="remove_from_shortlist_{{ userMission.id }}" {% if userMission.status < constant('SHORTLIST', userMission) %}hidden{% endif %}>{{ 'mission.view.contractor.btn_remove_from_shortlist' | trans | upper }}</button>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+
+    <script src="http://www.appelsiini.net/download/jquery.jeditable.js"></script>
+    <script src="http://www.appelsiini.net/download/jquery.jeditable.mini.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.edit').editable('{{ path('user_mission_notes') }}', {
+                type: 'textarea',
+                submit: 'Save',
+                indicator: 'Saving...',
+                tooltip: 'Click to edit note',
+                id: $(this).attr('id')
+            });
+
+            $('[id^="shortlist_"]').each(function () {
+                $(this).click(function () {
+                    var id = $(this).attr('id').split('_')[1];
+                    $.ajax({
+                        url: "{{ path('user_mission_add_to_shortlist') }}",
+                        method: "put",
+                        data: {id: id}
+                    }).done(function (msg) {
+                        alert("{{ 'mission.action.add_to_shortlist' | trans }}");
+                        $('#shortlist_' + id).hide();
+                        $('#remove_from_shortlist_' + id).show();
+                    }).fail(function () {
+                        alert("{{ 'error.action.failed' | trans }}");
+                    });
+                });
+            });
+
+            $('[id^="remove_from_shortlist_"]').each(function () {
+                $(this).click(function () {
+                    var id = $(this).attr('id').split('_')[3];
+                    $.ajax({
+                        url: "{{ path('user_mission_remove_from_shortlist') }}",
+                        method: "put",
+                        data: {id: id}
+                    }).done(function (msg) {
+                        alert("{{ 'mission.action.remove_from_shortlist' | trans }}");
+                        $('#remove_from_shortlist_' + id).hide();
+                        $('#shortlist_' + id).show();
+                    }).fail(function () {
+                        alert("{{ 'error.action.failed' | trans }}");
+                    });
+                });
+            });
+
+            $('[id^="refuse_"]').each(function () {
+                $(this).click(function () {
+                    var id = $(this).attr('id').split('_')[1];
+                    $.ajax({
+                        url: "{{ path('user_mission_refuse') }}",
+                        method: "put",
+                        data: {id: id}
+                    }).done(function (msg) {
+                        alert("{{ 'mission.action.refuse_user' | trans }}");
+                    }).fail(function () {
+                        alert("{{ 'error.action.failed' | trans }}");
+                    });
+                });
+            });
+        });
+
+    </script>
+{% endblock %}

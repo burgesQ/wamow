@@ -1,0 +1,129 @@
+.wmw-footer{
+	background:white;
+	padding:45px 0;
+	margin:50px 0 0 0;
+	box-shadow:0 0 10px rgba(0,0,0,0.15);
+	text-align:center;
+
+	.wmw-footer-logo{
+		display:inline-block;
+		width:240px;
+
+		img{
+			width:100%;
+			height:auto;
+			display:block;
+		}
+	}
+
+	.wmw-footer-nav{
+		display:block;
+		margin:30px 0;
+		border-top:1px solid $colorgreyxlight;
+
+		a{
+			display:block;
+			padding:8px;
+			border-bottom:1px solid $colorgreyxlight;
+			color:$colorgrey;
+			text-decoration:none;
+			text-transform:uppercase;
+			font-family:$fontcantarell;
+			font-size:12px;
+			letter-spacing:0.06em;
+			display:block;
+		}
+	}
+
+	.wmw-footer-social{
+		display:inline-block;
+		vertical-align:middle;
+		font-size:20px;
+
+		a{
+			color:$colorpurple;
+			text-decoration:underline;
+			margin:0 20px 0 0;
+			transition:color .3s;
+
+			&:hover{
+				color:$colorpurplelight;
+			}
+		}
+	}
+}
+
+/* ------------------------------------------------------------------------------ */
+/* ----------- MEDIUM SCREENS --------------------------------------------------- */
+/* ------------------------------------------------------------------------------ */
+
+@media screen and (min-width: $screen-md-min){
+
+	.wmw-footer{
+
+		.wmw-footer-logo{
+			vertical-align:middle;
+			width:180px;
+		}
+
+		.wmw-footer-nav{
+			display:inline-block;
+			vertical-align:middle;
+			padding:0;
+			white-space:nowrap;
+			margin:0 50px;
+			border:none;
+
+			a{
+				display:inline-block;
+				margin:0 10px 0 0;
+				padding:0;
+				border:none;
+
+				&:after{
+					content: ' /';
+				}
+
+				&:last-child{
+					margin:0;
+				}
+
+				&:hover{
+					text-decoration:underline;
+				}
+			}
+		}
+	}
+}
+
+
+/* ------------------------------------------------------------------------------ */
+/* ----------- XLARGE SCREENS --------------------------------------------------- */
+/* ------------------------------------------------------------------------------ */
+
+@media screen and (min-width: $screen-xl-min){
+
+	.wmw-footer{
+
+		.wmw-footer-logo{
+			width:240px;
+		}
+
+		.wmw-footer-nav{
+			margin:0 80px;
+
+			a{
+				font-size:13px;
+				margin:0 35px 0 0;
+			}
+		}
+
+		.wmw-footer-social{
+			font-size:25px;
+
+			a{
+				margin:0 40px 0 0;
+			}
+		}
+	}
+}

@@ -1,45 +1,24 @@
-{% trans_default_domain "MissionBundle" %}
-
-{% block start %}
-{% endblock %}
+{% trans_default_domain "tools" %}
 
 {% if thread != null %}
     <h2>{{ thread.subject }}</h2>
-
-    {% set lastMsg = null %}
-    {% for message in arrayMessage %}
+    {% for message in thread.messages %}
         <div class="messenger_thread_message">
             <div class="messenger_thread_message_info">
-                {% if step.anonymousMode == 2 and thread.userMission.status == step.position %}
-                    {{ 'message_info'|trans({'%sender%': message.sender, '%date%': message.createdAt|date}, 'FOSMessageBundle') }}
-                {% else %}
-                    {% if message.sender.roles[0] == "ROLE_CONTRACTOR" %}
-                        {{ 'message_info'|trans({'%sender%': 'Contractor', '%date%': message.createdAt|date}, 'FOSMessageBundle') }}
+                {% if anonymous == 0 %}
+                    {% if message.sender.id  == userId %}
+                        {% trans with {'%sender%': 'You', '%date%': message.createdAt|date} from 'FOSMessageBundle' %}message_info{% endtrans %}
                     {% else %}
-                        {{ 'message_info'|trans({'%sender%': user.id, '%date%': message.createdAt|date}, 'FOSMessageBundle') }}
+                        {% trans with {'%sender%': 'Contractor', '%date%': message.createdAt|date} from 'FOSMessageBundle' %}message_info{% endtrans %}
                     {% endif %}
-                {% endif %}</div>
-            <div class="messenger_thread_message_body" id="message_{{ message.id }}">{{ message.body }}</div></div>
-        {% set lastMsg = message %}
+                {% else %}
+                    {% trans with {'%sender%': message.sender|e, '%date%': message.createdAt|date} from 'FOSMessageBundle' %}message_info{% endtrans %}
+                {% endif %}
+            </div>
+
+            <div class="messenger_thread_message_body" id="message_{{ message.id }}">
+                {{ message.body }}
+            </div>
+        </div>
     {% endfor %}
-
-    {% set sender = lastMsg.getSender() %}
-    {% if sender == user %}
-        {% if lastMsg.metadata[1].isRead == true %}
-            {{ 'message.readReport.read'|trans({}, 'InboxBundle') }}
-        {% else %}
-            {{ 'message.readReport.receive'|trans({}, 'InboxBundle') }}
-        {% endif %}
-    {% endif %}
-
-    {% if (thread.userMission.status) == step.position %}
-        <h3>{% trans from 'FOSMessageBundle' %}reply{% endtrans %}</h3>
-        <form action="{{ url('mission_view', {'missionId': mission.id}) }}" method="post">
-            {{ form_widget(replyForm) }}
-            <input type="submit" />
-        </form>
-    {% endif %}
 {% endif %}
-
-{% block end %}
-{% endblock %}

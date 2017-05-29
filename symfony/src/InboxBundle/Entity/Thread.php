@@ -107,12 +107,13 @@ class Thread extends BaseThread
     /**
      * Set Mission
      *
-     * @param $mission
+     * @param \MissionBundle\Entity\Mission $mission
      *
      * @return Thread
      */
     public function setMission($mission)
     {
+        $mission->addThread($this);
         $this->mission = $mission;
 
         return $this;

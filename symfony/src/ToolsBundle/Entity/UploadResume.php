@@ -45,6 +45,10 @@ class UploadResume extends Upload
     public function __construct()
     {
         parent::__construct();
+
+        $this->addFormat('docx')
+            ->addFormat('doc')
+            ->addFormat('pdf');
     }
 
     /**
@@ -63,7 +67,7 @@ class UploadResume extends Upload
      * @param \UserBundle\Entity\User $user
      * @return Upload
      */
-    public function setUser(\UserBundle\Entity\User $user = null)
+    public function setUser($user = null)
     {
         $this->user = $user;
 

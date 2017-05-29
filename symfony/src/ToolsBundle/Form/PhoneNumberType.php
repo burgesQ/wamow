@@ -17,15 +17,22 @@ class PhoneNumberType extends AbstractType
     {
         $builder
             ->add('prefix', EntityType::class, [
-                'placeholder' => 'form.phone.chooseprefix',
-                'property'    => 'country',
-                'class'       => 'ToolsBundle\Entity\PrefixNumber',
-                'label'       => false,
+                'class'              => 'ToolsBundle:PrefixNumber',
+                'property'           => 'countryAndPrefix',
+                'multiple'           => false,
+                'placeholder'        => 'form.phone.prefix',
+                'label'              => false,
+                'translation_domain' => 'tools',
+                'required'           => true,
             ])
             ->add('number', null, [
-                'required' => true,
-                'label'    => false
-                // TODO ADD REGEX CONSTRAINT
+                'required'           => true,
+                'label'              => false,
+                'translation_domain' => 'tools',
+                'pattern'            => '/^\(0\)[0-9]*$',
+                'attr'               => [
+                    'placeholder' => 'form.phone.number',
+                ]
             ])
         ;
     }

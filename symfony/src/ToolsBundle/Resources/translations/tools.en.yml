@@ -12,13 +12,39 @@ form:
         label: "Add a label if required"
         number: Street Number
 
+    btn:
+        send: send
+        save: save
+
+    note:
+        indicator: Saving ...
+        tooltip: Click to edit note
+
     phone:
         prefix: "Prefix"
-        chooseprefix: "Choose a prefix"
         number: "Phone"
 
     file:
         file: "File"
+
+    btn:
+        send: send
+
+## Base
+header:
+    lang:
+        en: "Eng"
+        fr: "Fr"
+    news: "News"
+
+footer:
+    mission: "Mission"
+    about: "About"
+    advisor: "Advisor"
+    agreement: "User agreement"
+    legal: "Legal notice"
+    contractor: "Contractor"
+
 
 ## Common error
 error:
@@ -28,6 +54,71 @@ error:
         not_found: The asked mission dosen't exist
     user:
         subscribe: Please Subscribe
+    user_mission:
+        not_found: No such userMission entity (%id)
+        cant_giveup: Uou can't give up this mission.
+        already_giveup: You alredy give_up this mission.
+    mission:
+        pitch:
+            contractor: A contractor cannot pitch
+        available: This mission isn't available
+        user_mission: You cannot pitch that mission
+        interested_twice: You already mark youreself as inetrested
+        available: The mission %id is not available.
+        limit_reach: The advisor answer limit was reached for this mission. The mission is closed
+        wrong_company: You don't belong tothe right company
+        not_enough: Not enough user selected to proceed to next step
+    action:
+        failed: Action failed.
+
+
+## Home
+home:
+    contractor:
+        login: "Log In"
+        signup: "Sign Up"
+        title: "Get matched."
+        valueproposition:
+            first: "Value your time"
+            second: "Build a world of opportunities"
+        howdoesitwork: "How does it work?"
+        start:
+            text: "Create your profile with very few information. Highlight your work experience. Select some of your most characteristic projects and work experiences."
+        play:
+            text: "Receive targeted pitches fitting your expertise and profile. Answer or ask for more information. Challenge the contractor! Give the best of yourself! Get selected!"
+        improve:
+            text: "Receive your first pitch. Only when opt-in for your first one, subscribe an annual plan."
+        pay:
+            text: "Get the contractors detailed feedback. Improve your impact, matchup your rating to succeed again! Be recommended by the contractor."
+        preregister:
+            email: "Email"
+            firstname: "First name"
+            lastname: "Last name"
+            company: "Company"
+            country: "Country"
+            phone: "Direct line"
+            comment: "Comment"
+            submit: "PLEASE CONTACT ME"
+            registered: "You request was submitted"
+    advisor:
+        contractorlink: "Contractor"
+        login: "Log In"
+        signup: "Sign Up"
+        seeker: "Contractor"
+        open: "Open your account"
+        title: "Get matched."
+        valueproposition:
+            first: "VALUE YOUR TIME"
+            second: "BUILD A WORLD OF OPPORTUNITIES"
+        howdoesitwork: "How does it work?"
+        start:
+            text: "Create your profile with very few information. Highlight your work experience. Select some of your most characteristic projects and work experiences."
+        play:
+            text: "Receive targeted pitches fitting your expertise and profile. Answer or ask for more information. Challenge the contractor! Give the best of yourself! Get selected!"
+        improve:
+            text: "Receive your first pitch. Only when opt-in for your first one, subscribe an annual plan."
+        pay:
+            text: "Get the contractors detailed feedback. Improve your impact, matchup your rating to succeed again! Be recommended by the contractor."
 
 ## Dashboard
 dashboard:
@@ -51,6 +142,8 @@ dashboard:
             giveup: "Giveup"
             dismiss: "Dismiss"
             delete: "Delete"
+            ended: "Ended"
+            full: "Mission Full"
             unread: "{0}No new message|{1}You have %unread% new message|]1,Inf]You have %unread% new messages"
         close:
             showmore: "Show more"
@@ -160,17 +253,21 @@ user:
 
 ## Mission
 mission:
-    error:
-        pitch:
-            contractor: A contractor cannot pitch
-        available: This mission isn't available
-        user_mission: You cannot pitch that mission
-        interested_twice: You already mark youreself as inetrested
-        available: The mission %id is not available.
-        limit_reach: The advisor answer limit was reached for this mission. The mission is closed
     view:
+        contractor:
+            status_advisor: all advisor
+            status_shortlist: shortlist
+            status_finalit: finalist
+            btn_refuse: REFUSE
+            btn_proced_to_shortlist: Proceed to shortlist
+            btn_add_to_shortlist: add to shortlist
+            btn_remove_from_shortlist: remove from shortlist
+            finance: |
+                $ %price
+                %professionalExpertise
         advisor:
             btn_back_to_board: back to board
+            btn_back_to_global_view: back to global view
             intrested: Intrested
             finance: |
                 FINANCE
@@ -178,7 +275,11 @@ mission:
                 %professionalExpertise
             on_site: On site
             not_on_site: Not on site
-            to_answer: To Answer
+        to_answer: To Answer
+    action:
+        add_to_shortlist: User added to shortlist !
+        remove_from_shortlist: User removed from shortlist !
+        refuse_user: User refused.
 
 ## Inbox
 inbox:
@@ -481,3 +582,13 @@ company_size:
     small:  Small Companies
     medium: Medium Companies
     large:  Large Companies
+
+## Mails template
+mails:
+    hello: Hello %f_name %l_name !
+    inbox:
+        new_message_mission: You've got a new message on the mission %title.
+        link: Go there to check it.
+        the_team: The team.
+    subject:
+         new_message: You've got a new message !

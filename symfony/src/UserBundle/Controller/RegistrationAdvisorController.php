@@ -59,7 +59,7 @@ class RegistrationAdvisorController extends Controller
 
         // create Resume entity
         $resume = new UploadResume($user);
-        $resume->setKind(2)->setFormat("pdf");
+        $resume->setKind(2);
 
         // create a Address entity
         if ($user->getAddresses()->isEmpty()) {

@@ -15,4 +15,4 @@ inspector_autocomplete:
     path:            /inspectors/autocomplete
     defaults:
         _controller: CompanyBundle:Action:inspectorsAutocomplete
-        methode:     GET
+    methods:     [GET]

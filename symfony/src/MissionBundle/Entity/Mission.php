@@ -28,8 +28,6 @@ class Mission
     const DELETED   = -1;
     const DRAFT     = 0;
     const PUBLISHED = 1;
-    const STEP2     = 2;
-    const STEP3     = 3;
 
     /**
      * @var int
@@ -1105,7 +1103,7 @@ class Mission
     /**
      * Get contact
      *
-     * @return \UserBundle\Entity\User 
+     * @return \UserBundle\Entity\User
      */
     public function getContact()
     {
