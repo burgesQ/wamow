@@ -33,7 +33,8 @@ class AppKernel extends Kernel
             new BlogBundle\BlogBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
-            new Tetranz\Select2EntityBundle\TetranzSelect2EntityBundle()
+            new Tetranz\Select2EntityBundle\TetranzSelect2EntityBundle(),
+            new Hackzilla\Bundle\PasswordGeneratorBundle\HackzillaPasswordGeneratorBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

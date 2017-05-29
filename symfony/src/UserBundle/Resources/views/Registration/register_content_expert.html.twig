@@ -67,9 +67,20 @@
 
 			</div>
 
-			<button type="submit" class="wmw-button wmw-button--green wmw-button--border"><i></i><span>Next</span><i></i></button>
+			{{ form_row(form.save, {'attr' : {'class': 'wmw-button wmw-button--green wmw-button--border'}}) }}
 
-		</form>
+			{{ form_errors(form) }}
+		    {{ form_errors(form.user) }}
+		    {{ form_errors(form.user.firstName) }}
+		    {{ form_errors(form.user.lastName) }}
+		    {{ form_errors(form.user.email) }}
+		    {{ form_errors(address) }}
+		    {{ form_errors(address.country) }}
+		    {{ form_errors(form.user.languages) }}
+		    {{ form_errors(form.resume) }}
+		    {{ form_errors(form.resume.file) }}
+
+		{{ form_end(form) }}
 
 		<div class="wmw-onboard-text col-md-3 col-xl-2">
 			<p>
@@ -81,27 +92,3 @@
 		</div>
 
 <!-- <?php include "../inc/footer.inc.php"; ?> -->
-
-
-
-    {{ form_errors(form) }}
-    {{ form_errors(form.user) }}
-    {{ form_errors(form.user.firstName) }}
-    {{ form_errors(form.user.lastName) }}
-    {{ form_errors(form.user.email) }}
-    {{ form_errors(form.user.plainPassword) }}
-    {{ form_errors(form.user.plainPassword.first) }}
-    {{ form_errors(address) }}
-    {{ form_errors(address.country) }}
-    {{ form_errors(form.user.plainPassword.second) }}
-    {{ form_errors(form.user.languages) }}
-    {{ form_errors(form.resume) }}
-    {{ form_errors(form.resume.file) }}
-
-    {{ form_widget(form.user.plainPassword.first) }}
-    {{ form_label(form.user.plainPassword.first) }}
-    {{ form_widget(form.user.plainPassword.second) }}
-    {{ form_label(form.user.plainPassword.second) }}
-
-    {{ form_row(form.save) }}
-{{ form_end(form) }}

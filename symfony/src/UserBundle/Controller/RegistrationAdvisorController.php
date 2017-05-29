@@ -20,6 +20,7 @@ use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\FOSUserEvents;
 use ToolsBundle\Entity\Address;
 use UserBundle\Entity\User;
+use Swift_Message;
 
 class RegistrationAdvisorController extends Controller
 {
@@ -87,11 +88,31 @@ class RegistrationAdvisorController extends Controller
                 $user->setFirstName(ucwords($user->getFirstName()));
                 $user->setLastName(ucwords($user->getLastName()));
                 $user->setStatus(User::REGISTER_STEP_ONE);
+
+                $password = $this->get('hackzilla.password_generator.computer')
+                    ->setLowercase()->setUppercase()->setNumbers()->setSymbols()
+                    ->setAvoidSimilar()->setLength(10)->generatePassword();
+
+                $user->setPassword($password);
+                $trans = $this->get('translator');
+                $message = Swift_Message::newInstance()
+                    ->setSubject($trans->trans('mails.subject.new_password', [], 'tools'))
+                    ->setFrom($this->container->getParameter('email_sender'))
+                    ->setTo($user->getEmail())/* put a valid email address there to test */
+                    ->setBody($this->renderView('Emails/new_password.html.twig', [
+                        'f_name'   => $user->getFirstName(),
+                        'l_name'   => $user->getLastName(),
+                        'password' => $password
+                    ]), 'text/html');
+                $this->get('mailer')->send($message);
+
                 $userManager->updateUser($user);
+
                 $user->setPublicId(md5(uniqid() . $user->getUserResume() . $user->getId()));
                 $resume->setUser($user);
                 $em->persist($resume);
                 $em->flush();
+
                 if (null === $response = $event->getResponse()) {
                     $response = new RedirectResponse($this->generateUrl('expert_registration_step_one'));
                 }

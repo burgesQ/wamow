@@ -10,7 +10,6 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use ToolsBundle\Form\AddressCountryFormType;
 use Symfony\Component\Form\AbstractType;
-use FOS\UserBundle\Util\LegacyFormHelper;
 
 class RegistrationType extends AbstractType
 {
@@ -19,6 +18,8 @@ class RegistrationType extends AbstractType
         parent::buildForm($builder, $options);
         $builder
             ->remove('username')
+            ->remove('plainPassword')
+
             ->add('firstName', TextType::class, [
                 'translation_domain'        => 'tools',
                 'required'                  => true,
@@ -33,13 +34,6 @@ class RegistrationType extends AbstractType
                 'translation_domain'        => 'tools',
                 'required'                  => true,
                 'label'                     => 'registration.advisor.zero.email',
-            ])
-            ->add('plainPassword', LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\RepeatedType'), [
-                'type' => LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\PasswordType'),
-                'options' => array('translation_domain' => 'tools'),
-                'first_options' => array('label' => 'registration.advisor.zero.password'),
-                'second_options' => array('label' => 'registration.advisor.zero.repeatpassord'),
-                'invalid_message' => 'registration.advisor.zero.mismatchpassword',
             ])
             ->add('addresses', CollectionType::class, [
                 'type'         => AddressCountryFormType::class,
