@@ -5,13 +5,7 @@
 {% set user = user_mission.user %}
 {% set mission = user_mission.mission %}
 {% set thread = user_mission.thread %}
-{% set steps = mission.steps %}
-{% set step = '' %}
-{% for oneStep in steps and step == '' %}
-    {% if oneStep.status == 1 %}
-        {% set step = oneStep %}
-    {% endif %}
-{% endfor %}
+{% set anonymous = step.getAnonymousMode %}
 
 {% block body %}
 
@@ -95,13 +89,23 @@
         {# set up right content #}
         <div class="chat_box"><p>
             <div class="message" id="thread_message">
-                {% include '@Mission/Mission/view_thread_expert.html.twig' %}
+                {% include '@Mission/Mission/Advisor/view_thread_advisor.html.twig' %}
             </div>
             <div class="answer">
                 <form>
-                    <textarea id="inbox_input_message" name="inbox[inout_message]" required="required"></textarea>
+                    <textarea id="inbox_input_message" name="inbox[inout_message]"></textarea>
                     <input type="button" id="submit_text" value="{{ 'form.btn.send' | trans | upper }}" onClick="sendMessage()"/>
                 </form>
+            </div>
+            <div class="upload_proposal">
+                {% if step.position == 2 %}
+                    {{ form_start(form) }}
+                    {{ form_errors(form) }}
+                    {{ form_errors(form.file) }}
+                    {{ form_widget(form.file) }}
+                    {{ form_widget(form.submit) }}
+                    {{ form_end(form) }}
+                {% endif %}
             </div>
         </div>
     </div>
@@ -110,17 +114,19 @@
 {% block javascripts %}
     <script type="text/javascript">
         function sendMessage() {
-            $.ajax({
-                url: "{{ path('send_message_to_contractor') }}",
-                method: "post",
-                data: {
-                    id: {{ user_mission.id }},
-                    message: $('textarea#inbox_input_message').val()
-                }
-            }).done(function (msg) {
-                $('textarea#inbox_input_message').val('');
-                $('#thread_message').html(msg);
-            });
+            if ($('textarea#inbox_input_message').val()) {
+                $.ajax({
+                    url: "{{ path('send_message_to_contractor') }}",
+                    method: "post",
+                    data: {
+                        id: {{ user_mission.id }},
+                        message: $('textarea#inbox_input_message').val()
+                    }
+                }).done(function (msg) {
+                    $('textarea#inbox_input_message').val('');
+                    $('#thread_message').html(msg);
+                });
+            }
         }
     </script>
 {% endblock %}

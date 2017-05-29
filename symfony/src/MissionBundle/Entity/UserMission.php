@@ -2,10 +2,12 @@
 
 namespace MissionBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * UserMission
+ *
  * @ORM\Table(name="user_mission")
  * @ORM\Entity(repositoryClass="MissionBundle\Repository\UserMissionRepository")
  * @ORM\HasLifecycleCallbacks()
@@ -105,7 +107,13 @@ class UserMission
     private $idForContractor;
 
     /**
-     * UserMission constructor.
+     * @ORM\OneToMany(targetEntity="ToolsBundle\Entity\UploadResume",
+     *     mappedBy="userMission", cascade={"remove"})
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
+     */
+    private $proposals;
+
+    /**
      *
      * @param $user
      * @param $mission
@@ -118,6 +126,7 @@ class UserMission
         $this->user         = $user;
         $this->mission      = $mission;
         $this->note         = "";
+        $this->proposals    = new ArrayCollection();
     }
 
     /**
@@ -366,5 +375,39 @@ class UserMission
     public function getIdForContractor()
     {
         return $this->idForContractor;
+    }
+
+    /**
+     * Add proposal
+     *
+     * @param \ToolsBundle\Entity\UploadResume $proposal
+     * @return UserMission
+     */
+    public function addProposale($proposal)
+    {
+        $proposal->setUserMission($this);
+        $this->proposals[] = $proposal;
+
+        return $this;
+    }
+
+    /**
+     * Remove proposal
+     *
+     * @param \ToolsBundle\Entity\UploadResume $proposal
+     */
+    public function removeProposale($proposal)
+    {
+        $this->proposals->removeElement($proposal);
+    }
+
+    /**
+     * Get proposals
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProposals()
+    {
+        return $this->proposals;
     }
 }

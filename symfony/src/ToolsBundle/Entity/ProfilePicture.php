@@ -19,7 +19,7 @@ class ProfilePicture extends Upload
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
    
     /**
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="images", cascade={"persist"})
