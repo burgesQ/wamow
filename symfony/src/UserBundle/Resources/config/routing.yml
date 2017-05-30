@@ -1,10 +1,10 @@
 ## HWI OAuthBundle routes, Must Be First Import
 hwi_oauth_connect:
-    resource: @HWIOAuthBundle/Resources/config/routing/connect.xml
+    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
     prefix:   /service/login
 
 hwi_oauth_redirect:
-    resource: @HWIOAuthBundle/Resources/config/routing/redirect.xml
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
     prefix:   /service/login
 
 linkedin_login:
@@ -12,18 +12,18 @@ linkedin_login:
 
 ## FOS UserBundle Routes
 fos_user_security:
-    resource: @UserBundle/Resources/config/routing/security.yml
+    resource: "@UserBundle/Resources/config/routing/security.yml"
 
 fos_user_profile:
-    resource: @UserBundle/Resources/config/routing/profile.yml
+    resource: "@UserBundle/Resources/config/routing/profile.yml"
     prefix:   /profile
 
 fos_user_register:
-    resource: @UserBundle/Resources/config/routing/registration.yml
+    resource: "@UserBundle/Resources/config/routing/registration.yml"
     prefix:   /
 
 fos_user_resetting:
-    resource: @UserBundle/Resources/config/routing/resetting.yml
+    resource: "@UserBundle/Resources/config/routing/resetting.yml"
     prefix:   /resetting
 
 fos_user_change_password:
