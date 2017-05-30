@@ -29,6 +29,16 @@ class CompanySize
      */
     private $name;
 
+   /**
+    * @var ArrayCollection
+    *
+    * @ORM\ManyToMany(
+    *     targetEntity="MissionBundle\Entity\UserWorkExperience",
+    *     mappedBy="companySize"
+    * )
+    */
+   private $userWorkExperiences;
+
     /**
      * Continent constructor.
      *
@@ -36,7 +46,8 @@ class CompanySize
      */
     public function __construct($name)
     {
-        $this->name = $name;
+        $this->name                = $name;
+        $this->userWorkExperiences = new ArrayCollection();
     }
 
     /**
@@ -70,5 +81,38 @@ class CompanySize
         $this->name = $name;
 
         return $this;
+    }
+
+    /**
+     * Add userWorkExperiences
+     *
+     * @param \MissionBundle\Entity\UserWorkExperience $userWorkExperiences
+     * @return CompanySize
+     */
+    public function addUserWorkExperience($userWorkExperiences)
+    {
+        $this->userWorkExperiences[] = $userWorkExperiences;
+
+        return $this;
+    }
+
+    /**
+     * Remove userWorkExperiences
+     *
+     * @param \MissionBundle\Entity\UserWorkExperience $userWorkExperiences
+     */
+    public function removeUserWorkExperience($userWorkExperiences)
+    {
+        $this->userWorkExperiences->removeElement($userWorkExperiences);
+    }
+
+    /**
+     * Get userWorkExperiences
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserWorkExperiences()
+    {
+        return $this->userWorkExperiences;
     }
 }

@@ -30,12 +30,22 @@ class WorkExperience
     private $name;
 
     /**
+     * @var ArrayCollection
+     *
      * @ORM\OneToMany(
-     *     targetEntity="MissionBundle\Entity\ExperienceShaping",
+     *     targetEntity="MissionBundle\Entity\UserWorkExperience",
      *     mappedBy="workExperience"
      * )
      */
-    private $experienceShaping;
+    private $userWorkExperiences;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -69,44 +79,70 @@ class WorkExperience
     {
         return $this->name;
     }
+
     /**
-     * Constructor
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function __construct()
+    public function getUsers()
     {
-        $this->experienceShaping = new ArrayCollection();
+        return $this->users;
     }
 
     /**
-     * Add experienceShaping
+     * Add users
      *
-     * @param \MissionBundle\Entity\ExperienceShaping $experienceShaping
+     * @param \MissionBundle\Entity\UserWorkExperience $users
      * @return WorkExperience
      */
-    public function addExperienceShaping($experienceShaping)
+    public function addUser($users)
     {
-        $this->experienceShaping[] = $experienceShaping;
+        $this->users[] = $users;
 
         return $this;
     }
 
     /**
-     * Remove experienceShaping
+     * Remove users
      *
-     * @param \MissionBundle\Entity\ExperienceShaping $experienceShaping
+     * @param \MissionBundle\Entity\UserWorkExperience $users
      */
-    public function removeExperienceShaping($experienceShaping)
+    public function removeUser($users)
     {
-        $this->experienceShaping->removeElement($experienceShaping);
+        $this->users->removeElement($users);
     }
 
     /**
-     * Get experienceShaping
+     * Add userWorkExperiences
+     *
+     * @param \MissionBundle\Entity\UserWorkExperience $userWorkExperiences
+     * @return WorkExperience
+     */
+    public function addUserWorkExperience($userWorkExperiences)
+    {
+        $this->userWorkExperiences[] = $userWorkExperiences;
+
+        return $this;
+    }
+
+    /**
+     * Remove userWorkExperiences
+     *
+     * @param \MissionBundle\Entity\UserWorkExperience $userWorkExperiences
+     */
+    public function removeUserWorkExperience($userWorkExperiences)
+    {
+        $this->userWorkExperiences->removeElement($userWorkExperiences);
+    }
+
+    /**
+     * Get userWorkExperiences
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getExperienceShaping()
+    public function getUserWorkExperiences()
     {
-        return $this->experienceShaping;
+        return $this->userWorkExperiences;
     }
 }
