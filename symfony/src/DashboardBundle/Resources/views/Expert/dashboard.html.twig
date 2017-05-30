@@ -88,6 +88,9 @@
         {% endfor %}
     </div>
     <div>
+        <p>
+            {{ 'dashboard.advisor.close.title' | trans }}
+        </p>
         {% for close in closes %}
         <li>
             {{ close.mission.title }} <a href="{{ path('mission_view', {'missionId': close.mission.id}) }}">{{ 'dashboard.advisor.wip.showmore' | trans | upper }}</a></br>
