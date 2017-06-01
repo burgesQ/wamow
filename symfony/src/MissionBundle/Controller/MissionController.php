@@ -29,20 +29,20 @@ class MissionController extends Controller
 
         // check all kind off stuffs
         if (($user = $this->getUser()) === null) {
-            throw new NotFoundHttpException($trans->trans('error.logged', [], 'tools'));
+            throw $this->createNotFoundException($trans->trans('error.logged', [], 'tools'));
         } elseif (($mission = $em->getRepository('MissionBundle:Mission')->findOneBy(['id' => $missionId])) === null) {
-            throw new NotFoundHttpException($trans->trans('error.mission.not_found', [], 'tools'));
+            throw $this->createNotFoundException($trans->trans('error.mission.not_found', [], 'tools'));
         } elseif ($mission->getStatus() !== Mission::PUBLISHED) {
-            throw new NotFoundHttpException($trans->trans('error.mission.available', ['%id' => $missionId], 'tools'));
+            throw $this->createNotFoundException($trans->trans('error.mission.available', ['%id' => $missionId], 'tools'));
         } elseif (!($step = $em->getRepository('MissionBundle:Step')->findOneBy(['mission' => $mission, 'status' => 1]))) {
-            throw new NotFoundHttpException($trans->trans('error.mission.not_found', [], 'tools'));
+            throw $this->createNotFoundException($trans->trans('error.mission.not_found', [], 'tools'));
         }
 
         // if user is a contractor
         if ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR')) {
             // check if contractor is in the same company as the mission
             if ($user->getCompany() !== $mission->getCompany()) {
-                throw new NotFoundHttpException($trans->trans('error.mission.wrong_company', [], 'tools'));
+                throw $this->createNotFoundException($trans->trans('error.mission.wrong_company', [], 'tools'));
             }
             switch ($step->getPosition()) {
                 // if mission is step 1
@@ -81,7 +81,7 @@ class MissionController extends Controller
                         'userMissionId' => $userMission->getId()
                     ]);
                 default :
-                    throw new NotFoundHttpException('No view for this Mission with the step ' . $step->getPosition());
+                    throw $this->createNotFoundException('No view for this Mission with the step ' . $step->getPosition());
             }
         // if user is a advisor
         } elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')) {
@@ -93,7 +93,7 @@ class MissionController extends Controller
             // get associated userMission
             /** @var UserMission $userMission */
             if (!($userMission = $userMissionRepo->findOneBy(['user' => $user, 'mission' => $mission]))) {
-                throw new NotFoundHttpException();
+                throw $this->createNotFoundException();
             }
 
             // get all kind of data / services
@@ -104,7 +104,7 @@ class MissionController extends Controller
             // if the maximum number of advisor have been reached
             if (count($userMissionRepo->findAllAtLeastThan($mission, UserMission::ONGOING)) >= $step->getNbMaxUser()
                 && $userMissionStatus < UserMission::ONGOING) {
-                throw new NotFoundHttpException($trans->trans('error.mission.limit_reach', [], 'tools'));
+                throw $this->createNotFoundException($trans->trans('error.mission.limit_reach', [], 'tools'));
             }
 
             // return the view in function of uesrMission::Status
@@ -158,7 +158,7 @@ class MissionController extends Controller
                         'form'         => $form->createView()
                     ]);
                 default :
-                    throw new NotFoundHttpException('No view for this UserMission status defined (' .
+                    throw $this->createNotFoundException('No view for this UserMission status defined (' .
                                                     $userMissionStatus . ')');
             }
         }
@@ -258,9 +258,9 @@ class MissionController extends Controller
         // Get Check User
         /** @var \UserBundle\Entity\User $user */
         if (($user = $this->getUser()) === null) {
-            throw new NotFoundHttpException($trans->trans('error.logged', [], 'tools'));
+            throw $this->createNotFoundException($trans->trans('error.logged', [], 'tools'));
         } elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR')) {
-            throw new NotFoundHttpException($trans->trans('error.mission.pitch.contractor', [], 'tools'));
+            throw $this->createNotFoundException($trans->trans('error.mission.pitch.contractor', [], 'tools'));
         } elseif (($url = $this->get('signed_up')->checkIfSignedUp($user->getStatus()))) {
             return $this->redirectToRoute($url);
         }
@@ -269,7 +269,7 @@ class MissionController extends Controller
         $missionRepo = $em->getRepository('MissionBundle:Mission');
         if (!($mission = $missionRepo->findOneBy(['id' => $missionId]))
             || $mission->getStatus() !== Mission::PUBLISHED) {
-            throw new NotFoundHttpException($trans->trans('error.mission.not_found', [], 'tools'));
+            throw $this->createNotFoundException($trans->trans('error.mission.not_found', [], 'tools'));
         }
 
         // Get Check UserMission
@@ -277,7 +277,7 @@ class MissionController extends Controller
         $step            = $em->getRepository('MissionBundle:Step')->findOneby(['mission' => $mission, 'status'  => 1]);
         if (!($userMission = $userMissionRepo->findOneby(['mission' => $mission, 'user' => $user]))
             || count($userMissionRepo->findAllAtLeastThan($mission, UserMission::INTERESTED)) >= $step->getNbMaxUser()) {
-            throw new NotFoundHttpException($trans->trans('error.mission.limit_reach', [], 'tools'));
+            throw $this->createNotFoundException($trans->trans('error.mission.limit_reach', [], 'tools'));
         }
         switch (($userMissionStatus = $userMission->getStatus())) {
             case (UserMission::ACTIVATED) :
@@ -291,11 +291,11 @@ class MissionController extends Controller
                     'missionId' => $mission->getId()
                 ]);
             case (UserMission::INTERESTED) :
-                throw new NotFoundHttpException($trans->trans('error.mission.interested_twice', [], 'tools'));
+                throw $this->createNotFoundException($trans->trans('error.mission.interested_twice', [], 'tools'));
             default :
                 break;
         };
-        throw new NotFoundHttpException($trans->trans('error.forbidden', [], 'tools'));
+        throw $this->createNotFoundException($trans->trans('error.forbidden', [], 'tools'));
     }
 
     /**
@@ -313,9 +313,9 @@ class MissionController extends Controller
         // Get Check User
         /** @var \UserBundle\Entity\User $user */
         if (($user = $this->getUser()) === null) {
-            throw new NotFoundHttpException($trans->trans('error.logged', [], 'tools'));
+            throw $this->createNotFoundException($trans->trans('error.logged', [], 'tools'));
         } elseif (!$this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR')) {
-            throw new NotFoundHttpException($trans->trans('error.forbidden', [], 'tools'));
+            throw $this->createNotFoundException($trans->trans('error.forbidden', [], 'tools'));
         }
 
         // Get Check Mission
@@ -323,7 +323,7 @@ class MissionController extends Controller
         if (!($mission = $missionRepo->findOneBy(['id' => $missionId]))
             || $mission->getStatus() !== Mission::PUBLISHED
             || $user->getCompany() !== $mission->getCompany()) {
-            throw new NotFoundHttpException($trans->trans('error.mission.not_found', [], 'tools'));
+            throw $this->createNotFoundException($trans->trans('error.mission.not_found', [], 'tools'));
         }
 
         // Get Check Count UserMission
@@ -363,11 +363,11 @@ class MissionController extends Controller
             && $mission  && $mission->getStatus() >= Mission::PUBLISHED && $userMission) {
             switch ($userMission->getStatus()) {
                 case UserMission::GIVEUP:
-                    throw new NotFoundHttpException($trans->trans('error.user_mission.already_giveup', [], 'tools'));
+                    throw $this->createNotFoundException($trans->trans('error.user_mission.already_giveup', [], 'tools'));
                 case UserMission::DELETED:
                 case UserMission::ENDDATE:
                 case UserMission::DISMISS:
-                    throw new NotFoundHttpException($trans->trans('error.user_mission.cant_giveup', [], 'tools'));
+                    throw $this->createNotFoundException($trans->trans('error.user_mission.cant_giveup', [], 'tools'));
                 case UserMission::ACTIVATED:
                 case UserMission::MATCHED:
                 case UserMission::INTERESTED:
@@ -393,6 +393,6 @@ class MissionController extends Controller
                     return $this->redirectToRoute('dashboard', []);
             }
         }
-        throw new NotFoundHttpException($trans->trans('mission.error.forbiddenAccess', [], 'MissionBundle'));
+        throw $this->createNotFoundException($trans->trans('mission.error.forbiddenAccess', [], 'MissionBundle'));
     }
 }
