@@ -42,6 +42,7 @@ class DashboardController extends Controller
                 ]);
 
             return $this->render('DashboardBundle:Seeker:dashboard.html.twig', [
+                'user'     => $user,
                 'missions' => $missions,
                 'drafts'   => $drafts
             ]);

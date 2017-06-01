@@ -73,6 +73,8 @@ error:
         limit_reach: The advisor answer limit was reached for this mission. The mission is closed
         wrong_company: You don't belong tothe right company
         already: You already execute this action.
+        finalist:
+            no_advisor: No advisor selected for the Finalist step.
     action:
         failed: Action failed.
 
@@ -152,6 +154,8 @@ dashboard:
         close:
             showmore: "Show more"
             title: "Deleted Mission"
+            mission: Mission Closed
+
     contractor:
         new:
             button: "Write pitch"
@@ -283,6 +287,15 @@ mission:
             on_site: On site
             not_on_site: Not on site
         to_answer: To Answer
+        interested: |
+            Interested
+            MISSION STATUS
+        shortlisted: |
+            Shortlisted
+            MISSION STATUS
+        selected: |
+            Selected
+            MISSION STATUS
     action:
         add_to_shortlist: User added to shortlist !
         add_to_contract: User added to contract !

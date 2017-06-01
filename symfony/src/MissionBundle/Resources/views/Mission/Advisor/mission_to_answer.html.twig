@@ -53,6 +53,15 @@
                 {{ 'mission.view.advisor.not_on_site' | trans }}
             {% endif %}
         </div>
+        <div class="mission_status">
+            {% if step.position == 2 %}
+                FlagIcon<br>
+                {{ 'mission.view.shortlisted' | trans | nl2br }}
+            {% elseif step.position == 3 %}
+                HandShackIcon<br>
+                {{ 'mission.view.selected' | trans | nl2br }}
+            {% endif %}
+        </div>
         <p>
         <div class="btn_back">
             CrossIcon<br>
@@ -98,7 +107,7 @@
                 </form>
             </div>
             <div class="upload_proposal">
-                {% if step.position == 2 %}
+                {% if form is defined %}
                     {{ form_start(form) }}
                     {{ form_errors(form) }}
                     {{ form_errors(form.file) }}
