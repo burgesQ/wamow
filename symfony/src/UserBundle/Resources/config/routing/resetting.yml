@@ -1,0 +1,23 @@
+fos_user_resetting_request:
+    path:            /request
+    methods:         GET
+    defaults:
+        _controller: FOSUserBundle:Resetting:request
+
+fos_user_resetting_send_email:
+    path:            /send-email
+    methods:         POST
+    defaults:
+        _controller: FOSUserBundle:Resetting:sendEmail
+
+fos_user_resetting_check_email:
+    path:            /check-email
+    methods:         GET
+    defaults:
+        _controller: UserBundle:Resetting:checkEmail
+
+fos_user_resetting_reset:
+    path:            /reset/{token}
+    methods:         GET|POST
+    defaults:
+        _controller: FOSUserBundle:Resetting:reset

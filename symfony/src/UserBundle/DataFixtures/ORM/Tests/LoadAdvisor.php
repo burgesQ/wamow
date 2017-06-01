@@ -2,6 +2,7 @@
 
 namespace MissionBundle\DataFixtures\ORM\Tests;
 
+use MissionBundle\Entity\UserWorkExperience;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -60,6 +61,12 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.digitalstrategy"
             ],
             [
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, true],
                 [false, true, false, false, false, false, true, 12, 2000, false],
                 [false, false, true, false, false, false, true, 24, 2000, false],
                 [false, false, true, false, false, false, true, 24, 2000, true]
@@ -2519,53 +2526,49 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 $newUser->addProfessionalExpertise($proExpRepo->findOneBy(['name' => $oneProExp]));
             }
 
-            foreach ($oneData[10] as $oneWorkExp) {
-                $newUser->addWorkExperience($workExpRepo->findOneBy(['name' => $oneWorkExp]));
-            }
-
             $userManager->updateUser($newUser, true);
 
-
             // gen Experience shaping
-            $i = 0;
+            $j = 0;
             foreach ($oneData[11] as $oneExpShap) {
 
-                /** @var ExperienceShaping $shap */
-                $shap = new ExperienceShaping();
+                /** @var \MissionBundle\Entity\UserWorkExperience $workExp */
+                $workExp = new UserWorkExperience();
 
-                $shap
-                    ->setWorkExperience($workExpRepo->findOneBy(['name' => $oneData[11][$i]]))
+                $workExp
+                    ->setWorkExperience($workExpRepo->findOneBy(['name' => $oneData[10][$j]]))
                     ->setCumuledMonth($oneExpShap[7])
                     ->setDailyFees($oneExpShap[8])
                     ->setPeremption($oneExpShap[9])
+                    ->setUser($newUser)
                 ;
 
                 switch ($oneExpShap) {
                     case $oneExpShap[0] == true:
-                        $shap->addCompanySize($smallComp);
+                        $workExp->addCompanySize($smallComp);
                         break;
                     case $oneExpShap[1] == true:
-                        $shap->addCompanySize($mediumComp);
+                        $workExp->addCompanySize($mediumComp);
                         break;
                     case $oneExpShap[2] == true:
-                        $shap->addCompanySize($largeComp);
+                        $workExp->addCompanySize($largeComp);
                         break;
                     case $oneExpShap[3] == true:
-                        $shap->addContinent($southAmerica);
+                        $workExp->addContinent($southAmerica);
                         break;
                     case $oneExpShap[4] == true:
-                        $shap->addContinent($northAmerica);
+                        $workExp->addContinent($northAmerica);
                         break;
                     case $oneExpShap[5] == true:
-                        $shap->addContinent($asia);
+                        $workExp->addContinent($asia);
                         break;
                     case $oneExpShap[6] == true:
-                        $shap->addContinent($emea);
+                        $workExp->addContinent($emea);
                         break;
                 }
 
-                $manager->persist($shap);
-                $newUser->addExperienceShaping($shap);
+                $manager->persist($workExp);
+                $j++;
             }
 
             if (key_exists(12, $oneData)) {

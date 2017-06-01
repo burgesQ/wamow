@@ -92,8 +92,6 @@ class RegistrationAdvisorController extends Controller
                 $password = $this->get('hackzilla.password_generator.computer')
                     ->setLowercase()->setUppercase()->setNumbers()->setSymbols()
                     ->setAvoidSimilar()->setLength(10)->generatePassword();
-
-                $user->setPassword($password);
                 $trans = $this->get('translator');
                 $message = Swift_Message::newInstance()
                     ->setSubject($trans->trans('mails.subject.new_password', [], 'tools'))
@@ -105,7 +103,7 @@ class RegistrationAdvisorController extends Controller
                         'password' => $password
                     ]), 'text/html');
                 $this->get('mailer')->send($message);
-
+                $user->setPlainPassword($password);
                 $userManager->updateUser($user);
 
                 $user->setPublicId(md5(uniqid() . $user->getUserResume() . $user->getId()));
@@ -261,9 +259,13 @@ class RegistrationAdvisorController extends Controller
 
                 return $this->redirectToRoute('expert_registration_step_three');
             }
-            foreach ($user->getWorkExperience() as $oneWorkExp) {
+
+            /** @var \MissionBundle\Entity\UserWorkExperience $oneWorkExp*/
+            foreach ($user->getUserWorkExperiences() as $oneWorkExp) {
+                $oneWorkExp->setUser($user);
                 $em->persist($oneWorkExp);
             }
+
             $user->setStatus(User::REGISTER_NO_STEP);
             $this->get('fos_user.user_manager')->updateUser($user);
             $em->flush();

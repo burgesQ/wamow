@@ -3,23 +3,19 @@
 
 {% block body %}
 
-{{ 'registration.advisor.four.title' | trans }}
-<br>
-{{ 'registration.advisor.four.subtitle' | trans | upper }}
-<br>
-{{ 'registration.advisor.four.howtotitle' | trans | upper }}
-<br>
-{{ 'registration.advisor.four.howtotext' | trans }}
+    {{ 'registration.advisor.four.title' | trans }}
+    <br>
+    {{ 'registration.advisor.four.subtitle' | trans | upper }}
+    <br>
+    {{ 'registration.advisor.four.howtotitle' | trans | upper }}
+    <br>
+    {{ 'registration.advisor.four.howtotext' | trans }}
 
-<div id="well">
-    {{ form_start(form, {'attr': {'id': 'form_work_experience'}}) }}
-        {{ form_errors(form.workExperience) }}
-        {% for workExperience in form.workExperience %}
-            <div id={{ workExperience.vars.value }}>
-                {{ form_row(workExperience) }}
-            </div>
-        {% endfor %}
-        {{ form_widget(form.experienceShaping) }}
+    <div id="well">
+        {{ form_start(form, {'attr': {'id': 'form_work_experience'}}) }}
+        {{ form_errors(form.userWorkExperiences) }}
+        {{ form_widget(form.workExperience) }}
+        {{ form_widget(form.userWorkExperiences) }}
         {{ form_widget(form.back) }}
         {{ form_widget(form.submit) }}
         {{ form_end(form) }}
@@ -40,18 +36,24 @@
             // add the AddEdit btn and the expShap form to the page
             function addExpShapForm(i) {
                 var $checkbox = $('input#app_user_profile_workExperience_' + i);
-                var $container = $('div#app_user_profile_experienceShaping');
+                var $container = $('div#app_user_profile_userWorkExperiences');
                 var $prototype = $($container.attr('data-prototype')
                     .replace(/__name__label__/g, '')
                     .replace(/__name__/g, i));
+                console.log(i);
+
                 $container.append($prototype);
+
+                jQuery("#app_user_profile_userWorkExperiences_" + i + "_workExperience option:selected").removeAttr("selected");
+                jQuery("#app_user_profile_userWorkExperiences_" + i + "_workExperience option[value='" + i + "']").attr('selected', 'selected');
+
                 var $btn = '<input type="button" id="add_edit_' + i + '" value="AddEdit">';
                 $checkbox.after($btn);
             }
 
             // add the AddEdit btn and the expShap form to the page
             function removeExpShapForm(i) {
-                var $container = $('div#app_user_profile_experienceShaping_' + i);
+                var $container = $('div#app_user_profile_userWorkExperiences_' + i);
                 var $btn = $('input#add_edit_' + i);
                 $container.remove();
                 $btn.remove();

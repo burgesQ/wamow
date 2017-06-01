@@ -52,8 +52,6 @@ footer:
 error:
     forbidden: You have no access to this page
     logged: You're not logged
-    mission:
-        not_found: The asked mission dosen't exist
     user:
         subscribe: Please Subscribe
     user_mission:
@@ -62,18 +60,23 @@ error:
         already_giveup: You alredy give_up this mission.
     mission:
         pitch:
-            contractor: A contractor cannot pitch
+            contractor: A contractor cannot pitch.
+        shortlist:
+            to_much: you havent selected any advisor.
+            not_enough: Not enough user selected to proceed to shortlist.
+        step_error: There was a error while managing the step.
+        not_found: The asked mission dosen't exist
         available: This mission isn't available
         user_mission: You cannot pitch that mission
         interested_twice: You already mark youreself as inetrested
         available: The mission %id is not available.
         limit_reach: The advisor answer limit was reached for this mission. The mission is closed
         wrong_company: You don't belong tothe right company
-        not_enough: Not enough user selected to proceed to next step
         already: You already execute this action.
+        finalist:
+            no_advisor: No advisor selected for the Finalist step.
     action:
         failed: Action failed.
-
 
 ## Home
 home:
@@ -150,6 +153,9 @@ dashboard:
             unread: "{0}No new message|{1}You have %unread% new message|]1,Inf]You have %unread% new messages"
         close:
             showmore: "Show more"
+            title: "Deleted Mission"
+            mission: Mission Closed
+
     contractor:
         new:
             button: "Write pitch"
@@ -281,6 +287,15 @@ mission:
             on_site: On site
             not_on_site: Not on site
         to_answer: To Answer
+        interested: |
+            Interested
+            MISSION STATUS
+        shortlisted: |
+            Shortlisted
+            MISSION STATUS
+        selected: |
+            Selected
+            MISSION STATUS
     action:
         add_to_shortlist: User added to shortlist !
         add_to_contract: User added to contract !

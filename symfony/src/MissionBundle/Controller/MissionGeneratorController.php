@@ -128,7 +128,8 @@ class MissionGeneratorController extends Controller
         }
 
         return $this->render('MissionBundle:MissionGenerator:mission_step_one.html.twig', [
-            'form' => $formStepOne->createView()
+            'form' => $formStepOne->createView(),
+            'user' => $user
         ]);
     }
 
@@ -196,7 +197,8 @@ class MissionGeneratorController extends Controller
         }
 
         return $this->render('MissionBundle:MissionGenerator:mission_step_two.html.twig', [
-            'form' => $formStepTwo->createView()
+            'form' => $formStepTwo->createView(),
+            'user' => $user
         ]);
     }
 
@@ -263,7 +265,8 @@ class MissionGeneratorController extends Controller
 
         return $this->render('MissionBundle:MissionGenerator:mission_step_three.html.twig', [
             'form'    => $formStepThree->createView(),
-            'mission' => $newMission
+            'mission' => $newMission,
+            'user'    => $user
         ]);
     }
 
@@ -333,7 +336,8 @@ class MissionGeneratorController extends Controller
         return $this->render('MissionBundle:MissionGenerator:mission_step_four.html.twig', [
             'form'       => $formStepFour->createView(),
             'mission'    => $newMission,
-            'nbAdvisors' => count($missionRepository->getUsersByMission($newMission, false, false))
+            'nbAdvisors' => count($missionRepository->getUsersByMission($newMission, false, false)),
+            'user'       => $user
         ]);
 
     }

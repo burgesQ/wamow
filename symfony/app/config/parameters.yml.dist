@@ -23,14 +23,15 @@ parameters:
     secret:            ThisTokenIsNotSoSecretChangeIt
 
     # Social network
-    linkedin_id: 776pub3xfccsot
+    linkedin_id:     776pub3xfccsot
     linkedin_secret: obJyeyCHu5W4zxa4
-    linkedin_scope: 'r_basicprofile r_emailaddress'
+    linkedin_scope:  'r_basicprofile r_emailaddress'
 
     # Link
     facebook_link: "https://www.facebook.com/wantmorework/"
-    twitter_link: "https://twitter.com/WantMoreWork/"
+    twitter_link:  "https://twitter.com/WantMoreWork/"
     linkedin_link: "https://www.linkedin.com/groups/7052605/"
 
     # Email Sneder
-    email_sender: want@more.work
+    email_sender:       want@more.work
+    email_pre_register: want@more.work
