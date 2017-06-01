@@ -2,13 +2,11 @@
 
 namespace UserBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use FOS\UserBundle\Model\User as BaseUser;
 use FOS\MessageBundle\Model\ParticipantInterface;
-use CompanyBundle\Entity\Company;
+use Doctrine\Common\Collections\ArrayCollection;
+use FOS\UserBundle\Model\User as BaseUser;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * User
@@ -321,6 +319,14 @@ class User extends BaseUser implements ParticipantInterface
     private $notification;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="MissionBundle\Entity\Certification", cascade={"persist"}, inversedBy="users")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $certifications;
+
+    /**
      * User constructor.
      */
     public function __construct()
@@ -338,6 +344,7 @@ class User extends BaseUser implements ParticipantInterface
         $this->addresses             = new ArrayCollection();
         $this->secretMail            = new ArrayCollection();
         $this->userMission           = new ArrayCollection();
+        $this->certifications        = new ArrayCollection();
         $this->confidentiality       = false;
         $this->payment               = false;
         $this->remoteWork            = false;
@@ -349,7 +356,7 @@ class User extends BaseUser implements ParticipantInterface
         $this->giveUpCount           = 0;
         $this->secretMail            = [];
         $this->linkedinData          = [];
-        $this->scoringBonus = 5;
+        $this->scoringBonus          = 5;
     }
 
     /**
@@ -364,7 +371,7 @@ class User extends BaseUser implements ParticipantInterface
      * @Assert\Callback
      * @param \Symfony\Component\Validator\Context\ExecutionContextInterface $context
      */
-    public function isValidate(ExecutionContextInterface $context)
+    public function isValidate($context)
     {
         $feesMin = $this->getDailyFeesMin();
         $feesMax = $this->getDailyFeesMax();
@@ -420,7 +427,7 @@ class User extends BaseUser implements ParticipantInterface
      * @param \CompanyBundle\Entity\Company $company
      * @return User
      */
-    public function setCompany(Company $company = null)
+    public function setCompany($company = null)
     {
         $this->company = $company;
         return $this;
@@ -1280,5 +1287,40 @@ class User extends BaseUser implements ParticipantInterface
     public function getNotification()
     {
         return $this->notification;
+    }
+
+    /**
+     * Add certifications
+     *
+     * @param \MissionBundle\Entity\Certification $certifications
+     * @return User
+     */
+    public function addCertification($certifications)
+    {
+        $certifications->addUser($this);
+        $this->certifications[] = $certifications;
+
+        return $this;
+    }
+
+    /**
+     * Remove certifications
+     *
+     * @param \MissionBundle\Entity\Certification $certifications
+     */
+    public function removeCertification($certifications)
+    {
+        $certifications->removeUser($this);
+        $this->certifications->removeElement($certifications);
+    }
+
+    /**
+     * Get certifications
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCertifications()
+    {
+        return $this->certifications;
     }
 }

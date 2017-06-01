@@ -38,6 +38,14 @@ class Certification
     private $missions;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="UserBundle\Entity\User", cascade={"persist"}, mappedBy="certifications")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $users;
+
+    /**
      * Constructor
      *
      * @param null $name
@@ -46,6 +54,7 @@ class Certification
     {
         $this->name     = $name;
         $this->missions = new ArrayCollection();
+        $this->users    = new ArrayCollection();
     }
 
     /**
@@ -121,5 +130,37 @@ class Certification
     {
         return $this->missions;
     }
-}
 
+    /**
+     * Add users
+     *
+     * @param \UserBundle\Entity\User $users
+     * @return Certification
+     */
+    public function addUser($users)
+    {
+        $this->users[] = $users;
+
+        return $this;
+    }
+
+    /**
+     * Remove users
+     *
+     * @param \UserBundle\Entity\User $users
+     */
+    public function removeUser($users)
+    {
+        $this->users->removeElement($users);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
+}
