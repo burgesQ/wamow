@@ -17,6 +17,7 @@ form:
         save: save
         upload_proposal: Upload Porposal
         download_proposal: Download Porposal
+        save_certif: Save cecrtification
 
     note:
         indicator: Saving ...
