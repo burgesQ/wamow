@@ -239,9 +239,12 @@ class MissionController extends Controller
         if (!($step = $em->getRepository('MissionBundle:Step')->findOneby([
             'mission' => $mission, 'status'  => 1]))
             || !($nextStep = $em->getRepository('MissionBundle:Step')->findOneby([
-                'mission'  => $mission, 'position' => $step->getPosition() + 1]))
-            || count($userMissionRepo->findAllAtLeastThan($mission, UserMission::SHORTLIST)) < $nextStep->getNbMaxUser()) {
-            throw new NotFoundHttpException($trans->trans('error.mission.not_enough', [], 'tools'));
+                'mission'  => $mission, 'position' => $step->getPosition() + 1]))){
+            throw new NotFoundHttpException($trans->trans('error.mission.step_error', [], 'tools'));
+        } elseif (($nbUser = count($userMissionRepo->findAllAtLeastThan($mission, UserMission::SHORTLIST))) < 1) {
+            throw new NotFoundHttpException($trans->trans('error.mission.shortlist.not_enough', [], 'tools'));
+        } elseif ($nbUser > $nextStep->getNbMaxUser()) {
+            throw new NotFoundHttpException($trans->trans('error.mission.shortlist.to_much', [], 'tools'));
         }
 
         $step->setStatus(0);
