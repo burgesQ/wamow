@@ -18,6 +18,13 @@ form:
         upload_proposal: Upload Porposal
         download_proposal: Download Porposal
         save_certif: Save cecrtification
+        download_resume: Download User Resume
+        cancel_mission: CANCEL MISSION
+        back: BACK
+        next: NEXT
+        later: FINISH LATER
+        edit: EDIT
+        print: PRINT
 
     note:
         indicator: Saving ...
@@ -265,6 +272,8 @@ user:
 ## Mission
 mission:
     view:
+        price_day: $ / days
+        currency_k: K $
         contractor:
             status_advisor: all advisor
             status_shortlist: shortlist
@@ -302,6 +311,61 @@ mission:
         add_to_contract: User added to contract !
         remove_from_shortlist: User removed from shortlist !
         refuse_user: User refused.
+
+    new:
+        step_one:
+            title: The pitch
+            subtitle: Let's start with the begining
+            hint: "FIRST STEP : "
+        step_two:
+            title: Mission Specification
+            subtitle: Tell us more !
+            hint: "SECOND STEP : "
+        step_three:
+            title: Mission Kind
+            subtitle: And what about your futur collaborator ?
+            hint: "THIRED STEP : "
+        step_four:
+            title: Resume
+            subtitle: Ok, let's make a point
+            hint: "FOURTH STEP : "
+        step_five:
+            title: Final Step
+            subtitle: Last Step And we're good !
+            hint: "FINAL STEP : "
+
+        label:
+            title: TITLE OF THE PITCH
+            resume: DESCRIPTION OF THE PROJECT (500 WORDS)
+            later: FINISH LATER
+            budget: ESTIMED BUDGET
+            confidentiality: Anonymous corporate
+            telecommuting: On site presence required
+            country: COUNTRY
+            applicationEnding: END DATE FOR POSTULING TO THE PITCH
+            missionBeginning: START DATE OF THE MISSION
+            missionEnding: ESIMATE END DATE OF THE MISSION
+            chooseDay: Days
+            chooseMonth: Month
+            chooseYear: Year
+            certification: CERTIFICATION / SPECIAL SKILLS
+            language: LANGUAGE(S)
+            range: PRICE
+            step_four:
+                professional_expertise: DOMAINE FONCTIONNEL
+                end_pitch: FIN DU PITCH
+                start_mission: DATE DE MISSION
+                mission_kind: TYPOLOGIE
+                telecommuting: SUR SITE
+                confidentiality: ANONYME
+                languages: LANGUES
+                certif: CERTIFICATION
+                budget: BUDGET
+                price: PRIX
+                concerned: CONSULTANT CONCERNÉS
+                languages: LANGUES
+                finance: Finance
+                date_range: "%startDate au %endDate"
 
 ## Inbox
 inbox:

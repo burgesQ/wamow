@@ -39,6 +39,7 @@ class UserWorkExperience
      *     cascade={"persist"},
      *     inversedBy="userWorkExperiences"
      * )
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     private $user;
 

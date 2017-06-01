@@ -339,6 +339,14 @@ class MissionController extends Controller
             throw new NotFoundHttpException($trans->trans('error.mission.shortlist.to_much', [], 'tools'));
         }
 
+        /** @var UserMission $oneUserMission */
+        foreach ($userMissionRepo->findAllAtLeastThan($mission, UserMission::ACTIVATED) as $oneUserMission) {
+            if ($oneUserMission->getStatus() >= UserMission::ACTIVATED
+                && $oneUserMission->getStatus() < UserMission::SHORTLIST) {
+                $oneUserMission->setStatus(UserMission::DISMISS);
+            }
+        }
+
         $step->setStatus(0);
         $nextStep->setStatus(1);
         $em->flush();

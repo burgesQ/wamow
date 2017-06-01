@@ -92,7 +92,17 @@ class RegistrationAdvisorController extends Controller
                 $password = $this->get('hackzilla.password_generator.computer')
                     ->setLowercase()->setUppercase()->setNumbers()->setSymbols()
                     ->setAvoidSimilar()->setLength(10)->generatePassword();
+
                 $trans = $this->get('translator');
+
+                $user->setPlainPassword($password);
+                $userManager->updateUser($user);
+
+                $user->setPublicId(md5(uniqid() . $user->getUserResume() . $user->getId()));
+                $resume->setUser($user);
+                $em->persist($resume);
+                $em->flush();
+
                 $message = Swift_Message::newInstance()
                     ->setSubject($trans->trans('mails.subject.new_password', [], 'tools'))
                     ->setFrom($this->container->getParameter('email_sender'))
@@ -101,15 +111,9 @@ class RegistrationAdvisorController extends Controller
                         'f_name'   => $user->getFirstName(),
                         'l_name'   => $user->getLastName(),
                         'password' => $password
-                    ]), 'text/html');
+                    ]), 'text/html')
+                ;
                 $this->get('mailer')->send($message);
-                $user->setPlainPassword($password);
-                $userManager->updateUser($user);
-
-                $user->setPublicId(md5(uniqid() . $user->getUserResume() . $user->getId()));
-                $resume->setUser($user);
-                $em->persist($resume);
-                $em->flush();
 
                 if (null === $response = $event->getResponse()) {
                     $response = new RedirectResponse($this->generateUrl('expert_registration_step_one'));

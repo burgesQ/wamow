@@ -12,4 +12,20 @@ use Doctrine\ORM\EntityRepository;
  */
 class ConfigRepository extends EntityRepository
 {
+    /**
+     * Return the last config entity entred in dB
+     *
+     * @return \ToolsBundle\Entity\Config
+     */
+    public function findOneConfig()
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb
+            ->select('c')
+            ->from('ToolsBundle:Config', 'c')
+            ->orderBy('c.id', 'ASC')
+            ->setMaxResults(1)
+        ;
+        return $qb->getQuery()->getResult()[0];
+    }
 }

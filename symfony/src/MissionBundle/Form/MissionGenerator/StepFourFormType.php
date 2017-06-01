@@ -14,48 +14,48 @@ class StepFourFormType extends AbstractType
     {
         $builder
             ->add('confidentiality', CheckboxType::class, [
-                'translation_domain' => 'MissionBundle',
+                'translation_domain' => 'tools',
                 'label'              => 'mission.view.step_four.confidentiality',
                 'required'           => false
             ])
             ->add('telecommuting', CheckboxType::class, [
-                'translation_domain' => 'MissionBundle',
+                'translation_domain' => 'tools',
                 'required'           => false,
                 'label'              => 'mission.view.step_four.telecommuting'
             ])
             ->add('edit', SubmitType::class, [
-                'translation_domain' => 'MissionBundle',
+                'translation_domain' => 'tools',
                 'validation_groups'  => false,
-                'label'              => 'mission.new.form.edit'
+                'label'              => 'form.btn.edit'
             ])
             ->add('edit_1', SubmitType::class, [
-                'translation_domain' => 'MissionBundle',
+                'translation_domain' => 'tools',
                 'validation_groups'  => false,
-                'label'              => 'mission.new.form.edit'
+                'label'              => 'form.btn.edit'
             ])
             ->add('edit_2', SubmitType::class, [
-                'translation_domain' => 'MissionBundle',
+                'translation_domain' => 'tools',
                 'validation_groups'  => false,
-                'label'              => 'mission.new.form.edit'
+                'label'              => 'form.btn.edit'
             ])
             ->add('print', SubmitType::class, [
-                'translation_domain' => 'MissionBundle',
+                'translation_domain' => 'tools',
                 'validation_groups'  => false,
-                'label'              => 'mission.new.form.print'
+                'label'              => 'form.btn.print'
             ])
             ->add('forLater', SubmitType::class, [
-                'translation_domain' => 'MissionBundle',
+                'translation_domain' => 'tools',
                 'validation_groups'  => false,
-                'label'              => 'mission.new.form.later'
+                'label'              => 'form.btn.later'
             ])
             ->add('back', SubmitType::class, [
-                'translation_domain' => 'MissionBundle',
+                'translation_domain' => 'tools',
                 'validation_groups'  => false,
-                'label'              => 'mission.new.form.back'
+                'label'              => 'form.btn.back'
             ])
             ->add('next', SubmitType::class, [
-                'translation_domain' => 'MissionBundle',
-                'label'              => 'mission.new.form.next'
+                'translation_domain' => 'tools',
+                'label'              => 'form.btn.next'
             ])
         ;
     }
