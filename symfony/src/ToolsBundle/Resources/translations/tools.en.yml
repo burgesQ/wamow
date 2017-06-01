@@ -151,6 +151,7 @@ dashboard:
             unread: "{0}No new message|{1}You have %unread% new message|]1,Inf]You have %unread% new messages"
         close:
             showmore: "Show more"
+            title: "Deleted Mission"
     contractor:
         new:
             button: "Write pitch"
