@@ -26,9 +26,9 @@ security:
             form_login:
                 provider:             fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
-                login_path:           /
+                login_path:           /dashboard
                 check_path:           /login_check
-                failure_path:         /
+                failure_path:         /login
 
             oauth:
                 resource_owners:

@@ -23,7 +23,7 @@ fos_user_register:
     prefix:   /
 
 fos_user_resetting:
-    resource: @FOSUserBundle/Resources/config/routing/resetting.xml
+    resource: @UserBundle/Resources/config/routing/resetting.yml
     prefix:   /resetting
 
 fos_user_change_password:
