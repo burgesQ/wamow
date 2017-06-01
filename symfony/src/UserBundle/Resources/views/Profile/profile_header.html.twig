@@ -1,0 +1,38 @@
+{% trans_default_domain 'tools' %}
+
+{% if user is defined %}
+    {% if user.images is not empty %}
+        {% set image = user.images|last %}
+        {% if image.name is not null %}
+            <img src="{{ asset(image.webPath()) }}"/>
+        {% endif %}
+    {% else %}
+        <img src="{{ asset('images/' ~ random(['placeholder-pp-0.png', 'placeholder-pp-1.png', 'placeholder-pp-2.png', 'placeholder-pp-3.png'])) }}"/>
+    {% endif %}
+
+    <button id="hide_logout">
+        {% if (user.firstName ~ user.LastName) | length < 20 %}
+            {{ user.firstName }} {{ user.lastName }}
+        {% else %}
+            {{ (user.firstName) | truncate(1, false, '.') }} {{ user.lastName | truncate(18, false, '') }}
+        {% endif %}
+    </button>
+    <a id="logout_link" href="{{ path('fos_user_security_logout') }}" style="display: none;">
+        {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+    </a>
+{% endif %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            $('#hide_logout').click(function () {
+                console.log($('#logout_link').is(':visible'));
+                if (!$('#logout_link').is(':visible')) {
+                    $('#logout_link').show();
+                } else {
+                    $('#logout_link').hide();
+                }
+            })
+        });
+    </script>
+{% endblock %}
