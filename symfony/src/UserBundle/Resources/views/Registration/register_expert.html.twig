@@ -1,5 +1,16 @@
 {% extends "UserBundle::layout.html.twig" %}
-
+{% block javascripts %}
+   {{parent()}}
+   <script src="{{asset('bundles/user/js/select2/js/select2.min.js')}}"></script>
+   <script type="text/javascript">
+   //   $('#merged_form_registration_user_languages').select2();
+   // NOTE : Select2 non compatible avec le CSS actuel
+   </script>
+{% endblock %}
+{% block stylesheets %}
+   {{parent()}}
+   <link rel="stylesheet" href="{{asset('bundles/user/js/select2/css/select2.min.css')}}" />
+{% endblock %}
 {% block fos_user_content %}
 {% include "UserBundle:Registration:register_content_expert.html.twig" %}
 {% endblock fos_user_content %}
