@@ -3,20 +3,40 @@
 namespace MissionBundle\Form;
 
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Count;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
-use MissionBundle\Entity\ExperienceShaping;
+use MissionBundle\Entity\UserWorkExperience;
 use Symfony\Component\Form\AbstractType;
+use Doctrine\ORM\EntityRepository;
 
-class ExperienceShapingType extends AbstractType
+class UserWorkExperienceType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->remove('workExperience')
+            ->add('workExperience', EntityType::class, [
+                'class'         => 'MissionBundle:WorkExperience',
+                'attr'          => [
+                    'type' => ChoiceType::class,
+
+                ],
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->orderBy('u.id', 'ASC');
+                },
+
+                'property'                  => 'name',
+                'multiple'                  => false,
+                'required'                  => true,
+                'expanded'                  => false,
+                'label'                     => false,
+                'translation_domain'        => 'tools',
+                'choice_translation_domain' => 'tools'
+            ])
             ->add('companySize', EntityType::class, [
                 'class'                     => 'MissionBundle:CompanySize',
                 'property'                  => 'name',
@@ -27,7 +47,7 @@ class ExperienceShapingType extends AbstractType
                 'translation_domain'        => 'tools',
                 'choice_translation_domain' => 'tools',
                 'constraints'               => new Count([
-                    'min' => 1,
+                    'min'        => 1,
                     'minMessage' => 'user.companysize.min',
                 ])
             ])
@@ -41,7 +61,7 @@ class ExperienceShapingType extends AbstractType
                 'translation_domain'        => 'tools',
                 'choice_translation_domain' => 'tools',
                 'constraints'               => new Count([
-                    'min' => 1,
+                    'min'        => 1,
                     'minMessage' => 'user.continent.min',
                 ])
             ])
@@ -65,14 +85,13 @@ class ExperienceShapingType extends AbstractType
                 'translation_domain' => 'tools',
                 'label'              => 'registration.advisor.four.peremption',
                 'required'           => false
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => ExperienceShaping::class,
+            'data_class' => UserWorkExperience::class,
         ]);
     }
 }

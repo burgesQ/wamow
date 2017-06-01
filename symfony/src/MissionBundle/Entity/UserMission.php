@@ -102,7 +102,7 @@ class UserMission
 
     /**
      * @var int
-     * @ORM\Column(name="id_for_conrtarctor", type="integer", nullable=true)
+     * @ORM\Column(name="id_for_contractor", type="integer", nullable=true)
      */
     private $idForContractor;
 

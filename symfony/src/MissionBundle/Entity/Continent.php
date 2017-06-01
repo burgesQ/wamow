@@ -30,13 +30,24 @@ class Continent
     private $name;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(
+     *     targetEntity="MissionBundle\Entity\UserWorkExperience",
+     *     mappedBy="continents"
+     * )
+     */
+    private $userWorkExperiences;
+
+    /**
      * Continent constructor.
      *
      * @param $name
      */
     public function __construct($name)
     {
-        $this->name = $name;
+        $this->name                = $name;
+        $this->userWorkExperiences = new ArrayCollection();
     }
 
     /**
@@ -70,5 +81,38 @@ class Continent
         $this->name = $name;
 
         return $this;
+    }
+
+    /**
+     * Add userWorkExperiences
+     *
+     * @param \MissionBundle\Entity\UserWorkExperience $userWorkExperiences
+     * @return Continent
+     */
+    public function addUserWorkExperience($userWorkExperiences)
+    {
+        $this->userWorkExperiences[] = $userWorkExperiences;
+
+        return $this;
+    }
+
+    /**
+     * Remove userWorkExperiences
+     *
+     * @param \MissionBundle\Entity\UserWorkExperience $userWorkExperiences
+     */
+    public function removeUserWorkExperience($userWorkExperiences)
+    {
+        $this->userWorkExperiences->removeElement($userWorkExperiences);
+    }
+
+    /**
+     * Get userWorkExperiences
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUserWorkExperiences()
+    {
+        return $this->userWorkExperiences;
     }
 }

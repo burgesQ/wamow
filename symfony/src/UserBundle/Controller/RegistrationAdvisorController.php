@@ -259,9 +259,13 @@ class RegistrationAdvisorController extends Controller
 
                 return $this->redirectToRoute('expert_registration_step_three');
             }
-            foreach ($user->getWorkExperience() as $oneWorkExp) {
+
+            /** @var \MissionBundle\Entity\UserWorkExperience $oneWorkExp*/
+            foreach ($user->getUserWorkExperiences() as $oneWorkExp) {
+                $oneWorkExp->setUser($user);
                 $em->persist($oneWorkExp);
             }
+
             $user->setStatus(User::REGISTER_NO_STEP);
             $this->get('fos_user.user_manager')->updateUser($user);
             $em->flush();
