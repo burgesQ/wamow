@@ -57,7 +57,7 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface, Co
         $continentRepo   = $manager->getRepository('MissionBundle:Continent');
         $proExpRepo      = $manager->getRepository('MissionBundle:ProfessionalExpertise');
         $langRepo        = $manager->getRepository('ToolsBundle:Language');
-        $config          = $manager->getRepository('ToolsBundle:Config')->findAll()[0];
+        $config          = $manager->getRepository('ToolsBundle:Config')->findOneConfig();
 
         $southAmerica   = $continentRepo->findOneBy(['name' => 'continent.south_america']);
         $northAmerica   = $continentRepo->findOneBy(['name' => 'continent.north_america']);

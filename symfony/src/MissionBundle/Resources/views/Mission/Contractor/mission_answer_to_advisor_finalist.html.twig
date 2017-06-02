@@ -122,7 +122,7 @@
                     {% set resume = user.resumes | last %}
                     {#TODO find a better methode #}
                     {%  set path = "http://symfony.dev/" ~ resume.getUploadRootDir %}
-                    <a href="{{ path }}" download="{{ resume.downloadName }}">{{ 'form.btn.download_proposal' | trans }}</a><br>
+                    <a href="{{ path }}" download="{{ resume.downloadName }}">{{ 'form.btn.download_resume' | trans }}</a><br>
                 {% endif %}
             </div>
         </div>

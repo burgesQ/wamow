@@ -37,3 +37,17 @@ company:
         short: 'Company name is too short'
         long: 'Company name is too long.'
         illegale: 'This company name contains illegal characters'
+error:
+    mission_kind:
+        one: Select at least one missionKind
+    language:
+        one: Select at least one language
+    resume:
+        max_words: Your resume cannot contain more than 500 words
+    date:
+        past_date: You can't pick a past date
+        after_end_date: The mission cannot start after the end date
+        before_start_date: The application end date cannot be before the start date of the mission
+    wolrd:
+        continent: Please select at least one continent
+        country: PLeas select at least one country

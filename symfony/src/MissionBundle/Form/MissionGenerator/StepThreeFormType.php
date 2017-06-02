@@ -3,6 +3,7 @@
 namespace MissionBundle\Form\MissionGenerator;
 
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Validator\Constraints\Count;
 use Tetranz\Select2EntityBundle\Form\Type\Select2EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\RangeType;
@@ -21,8 +22,8 @@ class StepThreeFormType extends AbstractType
     {
         $builder
             ->add('missionKinds', EntityType::class, [
-                'choice_translation_domain' => 'MissionBundle',
-                'translation_domain'        => 'MissionBundle',
+                'choice_translation_domain' => 'tools',
+                'translation_domain'        => 'tools',
                 'placeholder'               => 'typemissions.title',
                 'choice_label'              => 'name',
                 'multiple'                  => true,
@@ -32,30 +33,30 @@ class StepThreeFormType extends AbstractType
                 'label'                     => false,
             ])
             ->add('certifications', Select2EntityType::class, [
-                'translation_domain' => 'MissionBundle',
-                'text_property' => 'name',
-                'remote_route'  => 'certifications_autocomplete',
-                'primary_key'   => 'id',
-                'allow_add'     => [
+                'translation_domain' => 'tools',
+                'text_property'      => 'name',
+                'remote_route'       => 'certifications_autocomplete',
+                'primary_key'        => 'id',
+                'allow_add'          => [
                     'enabled'        => true,
                     'new_tag_text'   => ' (NEW)',
                     'new_tag_prefix' => '__',
                     'tag_separators' => '[""]'
                 ],
-                'multiple'      => true,
-                'class'         => 'MissionBundle\Entity\Certification',
-                'label'         => 'mission.new.form.certification'
+                'multiple'           => true,
+                'class'              => 'MissionBundle\Entity\Certification',
+                'label'              => 'mission.new.label.certification'
             ])
             ->add('languages', CollectionType::class, [
                 'allow_add'          => true,
                 'allow_delete'       => true,
                 'entry_type'         => EntityType::class,
-                'translation_domain' => 'MissionBundle',
+                'translation_domain' => 'tools',
                 'required'           => true,
-                'label'              => 'mission.new.form.language',
+                'label'              => 'mission.new.label.language',
                 'entry_options'      => [
                     'choice_translation_domain' => 'tools',
-                    'translation_domain'        => 'MissionBundle',
+                    'translation_domain'        => 'tools',
                     'choice_label'              => 'name',
                     'required'                  => true,
                     'class'                     => 'ToolsBundle:Language',
@@ -63,27 +64,26 @@ class StepThreeFormType extends AbstractType
                 ]
             ])
             ->add('price', RangeType::class, [
-                'translation_domain' => 'MissionBundle',
-                'label'              => 'mission.new.form.range'
+                'translation_domain' => 'tools',
+                'label'              => 'mission.new.label.range'
             ])
             ->add('forLater', SubmitType::class, [
-                'translation_domain' => 'MissionBundle',
+                'translation_domain' => 'tools',
                 'validation_groups'  => false,
-                'label'              => 'mission.new.form.later',
+                'label'              => 'mission.new.label.later',
                 'attr'               => [
                     'style' => $options['stepFour']
                 ]
             ])
             ->add('back', SubmitType::class, [
-                'translation_domain' => 'MissionBundle',
+                'translation_domain' => 'tools',
                 'validation_groups'  => false,
                 'label'              => $options['labelBack']
             ])
             ->add('next', SubmitType::class, [
-                'translation_domain' => 'MissionBundle',
+                'translation_domain' => 'tools',
                 'label'              => $options['labelNext']
-            ])
-        ;
+            ]);
     }
 
     /**
@@ -93,9 +93,9 @@ class StepThreeFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => 'MissionBundle\Entity\Mission',
-            'stepFour'   => 'display: all;M',
-            'labelBack'  => 'mission.new.form.back',
-            'labelNext'  => 'mission.new.form.next'
+            'stepFour'   => 'display: all;',
+            'labelBack'  => 'form.btn.back',
+            'labelNext'  => 'form.btn.next'
         ]);
     }
 }
