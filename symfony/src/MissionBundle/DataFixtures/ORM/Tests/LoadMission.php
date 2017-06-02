@@ -134,7 +134,6 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface, Co
             $mission->setPublicId(md5(uniqid().$i));
             $this->loadStep($manager, $mission, $jsonConfig);
             $manager->persist($mission);
-            $this->container->get('mission_matching')->setUpPotentialUser($mission);
             $i++;
         }
 
@@ -213,7 +212,6 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface, Co
 
             // persist mission
             $this->loadStep($manager, $mission, $jsonConfig);
-            $this->container->get('mission_matching')->setUpPotentialUser($mission);
 
             $manager->persist($mission);
 

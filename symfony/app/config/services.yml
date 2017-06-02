@@ -43,14 +43,20 @@ services:
         class: MissionBundle\Service\Scoring
         arguments:
             - '@doctrine.orm.entity_manager'
-            - %scoring_weight.business_practice%'
+            - '%scoring_weight.business_practice%'
             - '%scoring_weight.professional_expertise%'
             - '%scoring_weight.company_size%'
             - '%scoring_weight.mission_kind%'
             - '%scoring_weight.location%'
             - '%scoring_weight.certification%'
+            - '%scoring_weight.work_experience%'
 
     app.user_mission_listener:
         class: MissionBundle\Services\UserMissionListener
         tags:
             -  { name: doctrine.entity_listener, entity_manager: default  }
+    app.mission_listener:
+        class: MissionBundle\Listener\MissionListener
+        arguments: ['@scoring']
+        tags:
+            - { name: doctrine.event_listener, event: postPersist }

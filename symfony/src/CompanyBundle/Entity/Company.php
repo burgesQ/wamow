@@ -48,15 +48,10 @@ class Company
     private $updateDate;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="size", type="integer", nullable=false)
-     * @Assert\Range(
-     *      min = 0,
-     *      max=3
-     *)
+     * @ORM\ManyToOne(targetEntity="MissionBundle\Entity\CompanySize")
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $size;
+    private $companySize;
 
     /**
      * @var string
@@ -251,29 +246,6 @@ class Company
     }
 
     /**
-     * Set size
-     *
-     * @param integer $size
-     * @return Company
-     */
-    public function setSize($size)
-    {
-        $this->size = $size;
-
-        return $this;
-    }
-
-    /**
-     * Get size
-     *
-     * @return integer
-     */
-    public function getSize()
-    {
-        return $this->size;
-    }
-
-    /**
      * Set businessPractice
      *
      * @param \MissionBundle\Entity\BusinessPractice $businessPractice
@@ -320,10 +292,33 @@ class Company
     /**
      * Get address
      *
-     * @return \ToolsBundle\Entity\Address 
+     * @return \ToolsBundle\Entity\Address
      */
     public function getAddress()
     {
         return $this->address;
+    }
+
+    /**
+     * Set companySize
+     *
+     * @param \MissionBundle\Entity\CompanySize $companySize
+     * @return Company
+     */
+    public function setCompanySize(\MissionBundle\Entity\CompanySize $companySize = null)
+    {
+        $this->companySize = $companySize;
+
+        return $this;
+    }
+
+    /**
+     * Get companySize
+     *
+     * @return \MissionBundle\Entity\CompanySize 
+     */
+    public function getCompanySize()
+    {
+        return $this->companySize;
     }
 }

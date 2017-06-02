@@ -265,6 +265,12 @@ class Mission
     private $certifications;
 
     /**
+     * @ORM\OneToOne(targetEntity="MissionBundle\Entity\WorkExperience", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $workExperience;
+
+    /**
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="MissionBundle\Entity\Step",
@@ -1343,5 +1349,28 @@ class Mission
     public function getOnDraft()
     {
         return $this->onDraft;
+    }
+
+    /**
+     * Set workExperience
+     *
+     * @param \MissionBundle\Entity\WorkExperience $workExperience
+     * @return Mission
+     */
+    public function setWorkExperience(\MissionBundle\Entity\WorkExperience $workExperience = null)
+    {
+        $this->workExperience = $workExperience;
+
+        return $this;
+    }
+
+    /**
+     * Get workExperience
+     *
+     * @return \MissionBundle\Entity\WorkExperience
+     */
+    public function getWorkExperience()
+    {
+        return $this->workExperience;
     }
 }

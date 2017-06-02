@@ -152,26 +152,22 @@ class MissionRepository extends EntityRepository
             ->join("u.professionalExpertise", "pe")
             ->leftJoin("u.missionKind", "mk")
             ->leftJoin("u.businessPractice", "bp")
-            ->leftJoin("u.userMission", "um")
-            ->leftJoin("um.mission", "m")
-            // NOTE : user status, no CONST ?!
-            ->where("u.status = 5")
+            ->where("u.status = :userStatus")
             ->andWhere("u.roles = :userRoles")
             ->andWhere("l.id IN(:languageIds)")
-            // NOTE : only in Scoring ?
-            // ->andWhere("mk.id IN(:missionKinds)")
             ->andWhere("pe = :professionalExpertise OR bp = :businessPractice")
-            ->andWhere("m.telecommuting = ".($mission->getTelecommuting() ? "1" : "0"))
+            ->andWhere("u.remoteWork = ".($mission->getTelecommuting() ? "1" : "0"))
             // TODO : No result, normal ? Column medium price needed ?
-            // ->andWhere("((u.dailyFeesMin + u.dailyFeesMax)/2.0) <= m.budget")
+            ->andWhere("((u.dailyFeesMin + u.dailyFeesMax)/2.0) <= :missionBudget")
         ;
 
         $parameters = array(
             "userRoles" => "a:1:{i:0;s:12:\"ROLE_ADVISOR\";}",
             "languageIds" => $mission->getLanguages()->toArray(),
             "professionalExpertise" => $mission->getProfessionalExpertise(),
-            // "missionKinds" => $mission->getMissionKinds()->toArray(),
-            "businessPractice" => $mission->getBusinessPractice()
+            "businessPractice" => $mission->getBusinessPractice(),
+            "missionBudget" => $mission->getBudget(),
+            "userStatus" => User::REGISTER_NO_STEP
         );
         $qb->setParameters($parameters);
         $qb->groupBy("u.id");

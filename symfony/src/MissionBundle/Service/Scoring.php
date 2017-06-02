@@ -8,9 +8,9 @@ use MissionBundle\Entity\UserMission;
 {
     protected $em;
 
-    protected $weightBusinessPractice, $weightProfessionalExpertise, $weightCompanySize, $weightMissionKind, $weightLocation, $weightCertification;
+    protected $weightBusinessPractice, $weightProfessionalExpertise, $weightCompanySize, $weightMissionKind, $weightLocation, $weightCertification, $weightWorkExperience;
 
-    public function __construct(\Doctrine\ORM\EntityManager $em, $weightBusinessPractice, $weightProfessionalExpertise, $weightCompanySize, $weightMissionKind, $weightLocation, $weightCertification)
+    public function __construct(\Doctrine\ORM\EntityManager $em, $weightBusinessPractice, $weightProfessionalExpertise, $weightCompanySize, $weightMissionKind, $weightLocation, $weightCertification, $weightWorkExperience)
     {
         $this->em = $em;
         $this->weightBusinessPractice = $weightBusinessPractice;
@@ -19,6 +19,7 @@ use MissionBundle\Entity\UserMission;
         $this->weightMissionKind = $weightMissionKind;
         $this->weightLocation = $weightLocation;
         $this->weightCertification = $weightCertification;
+        $this->weightWorkExperience = $weightWorkExperience;
     }
 
     private function getScoringRules()
@@ -60,56 +61,43 @@ use MissionBundle\Entity\UserMission;
         if ($user->getProfessionalExpertise()->contains($mission->getProfessionalExpertise())) {
             $score += $this->weightProfessionalExpertise;
         }
-        // taille entreprise
-        $experiences = $user->getExperienceShaping();
-        $size = $mission->getCompany()->getSize();
+
+        $experiences = $user->getUserWorkExperiences();
+        $companySize = $mission->getCompany()->getCompanySize();
         foreach ($experiences as $experience) {
-            switch ($size) {
-                case 0:
-                    if ($experience->getSmallCompany()) {
-                        $score += $this->weightCompanySize;
-                    }
-                    break;
-                case 1:
-                    if ($experience->getMediumCompany()) {
-                        $score += $this->weightCompanySize;
-                    }
-                    break;
-                case 2:
-                    if ($experience->getLargeCompany()) {
-                        $score += $this->weightCompanySize;
-                    }
-                    break;
+            // taille entreprise
+            if ($experience->getCompanySizes()->contains($companySize)) {
+                $score += $this->weightCompanySize;
+            }
+            // zone géographique
+            foreach ($experience->getContinents() as $userContinent) {
+                if ($mission->getContinents()->contains($userContinent)) {
+                    $score += $this->weightContinent;
+                }
+            }
+            // archétype mission
+            if ($mission->getWorkExperience() && $mission->getWorkExperience() == $experience->getWorkExperience()) {
+
+            }
+        }
+
+        // Certifications
+        foreach ($user->getCertifications() as $certification) {
+            if ($mission->getCertifications()->contains($certification)) {
+                $score += $this->weightCertification;
             }
         }
 
         foreach ($user->getMissionKind() as $missionKind) {
-            // TODO : certifications => No link with User
-            // foreach ($missionKind->getCertifications() as $certification) {
-            //     if ($mission->getCertifications()->contains($certification)) {
-            //         $score += $this->weightCertification;
-            //     }
-            // }
             // type mission
             if ($mission->getMissionKinds()->contains($missionKind)) {
                 $score += $this->weightMissionKind;
             }
         }
 
-        // zone géographique
-        $missionContinents = $mission->getContinents();
-        foreach ($experiences as $experience) {
-            foreach ($experience->getContinents() as $userContinent) {
-                if ($missionContinents->contains($userContinent)) {
-                    $score += $this->weightContinent;
-                }
-            }
-        }
         // rotation
         $score += $user->getScoringBonus();
 
-        // archétype mission
-        // TODO : Valuable work experience => No link with Mission
         return $score;
     }
 
