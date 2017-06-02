@@ -21,7 +21,6 @@ class LoadCompany extends AbstractFixture implements OrderedFixtureInterface
         $company = new Company();
         $company
             ->setName('Esso')
-            ->setCompanySize($manager->getRepository("MissionBundle:CompanySize")->findOneByName('company_size.large'))
             ->setResume('Gasoil')
             ->setBusinessPractice($businessPractice)
             ->setAddress($address)

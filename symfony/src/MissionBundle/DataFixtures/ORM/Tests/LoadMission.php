@@ -84,6 +84,7 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface, Co
             $mission
                 ->setTelecommuting($oneMission->telecommuting)
                 ->setStatus(Mission::PUBLISHED)
+                ->setCompanySize($manager->getRepository("MissionBundle:CompanySize")->findOneByName('company_size.large'))
                 ->setConfidentiality($oneMission->confidentiality)
             ;
 
