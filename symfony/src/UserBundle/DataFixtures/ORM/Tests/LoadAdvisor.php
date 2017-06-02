@@ -20,8 +20,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
      */
     private $arrayDatas = [
         [
-            "Albek", "Vanessa", "vanessa.albek@test.com",
-            "vanessa.albeck@test.com",
+            "Albek", "Vanessa", "vanessa.albek@gt-executive.com",
+            "vanessa.albeck@gmail.com",
             ['language.french', 'language.english'], "password",
             "Directeur Digital
             V.A. Conseil Directrice Générale Adjointe
@@ -73,8 +73,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             ],
             [ '+33', '612345678', '19', 'rue Vasco de Gama', '', '75015', 'Paris', 'FR']
          ], [
-            "Anfriani", "Christophe", "chirstophe.anfriani@test.com",
-            "c.anfriani@test.com",
+            "Anfriani", "Christophe", "chirstophe.anfriani@gt-executive.com",
+            "c.anfriani@orange.fr",
             ['language.french'], "password",
             "Directeur du Développement (Afrique & Europe) Safran Morpho
             Directeur du Développement (Afrique & Océan Indien) Oberthur Fiduciaire
@@ -103,8 +103,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Bailly-Turchi", "Maud", "maud.bailly-turchi@test.com",
-            "mbturchi@test.com",
+            "Bailly-Turchi", "Maud", "maud.bailly-turchi@gt-executive.com",
+            "mbturchi@gmail.com",
             ['language.french'], "password",
             "Directeur de ministère
             Président des Houillères du Nord Pas de Calais
@@ -138,8 +138,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
 
             ]
         ], [
-            "Ballu", "Yann", "yann.ballu@test.com",
-            "yann1ballu@test.com",
+            "Ballu", "Yann", "yann.ballu@gt-executive.com",
+            "yann1ballu@gmail.com",
             ['language.french', 'language.english'], "password",
             "Cabinet BALLU, Directeur
             DAF SPB
@@ -164,7 +164,7 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, true]
             ]
         ], [
-            "Bellone", "Noelle", "nbellone@test.com",
+            "Bellone", "Noelle", "nbellone@gt-executive.com",
             "",
             ['language.french'], "password",
             "DG leader Jet Service
@@ -194,8 +194,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Benoit", "Olivier", "olivier.benoit@test.com",
-            "olivier.benoit@test.com",
+            "Benoit", "Olivier", "olivier.benoit@gt-executive.com",
+            "olivier.benoit@delcrea.com",
             ['language.french'], "password",
             "Dirigeant actuel de Delcrea et Crossngo Production
             Président de Cube Research ltd
@@ -226,8 +226,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, true, false, false, false, false, true, 12, 2000, false]
             ]
         ], [
-            "Berge", "Gerald", "gerald.berge@test.com",
-            "berge.gerald@test.com",
+            "Berge", "Gerald", "gerald.berge@gt-executive.com",
+            "berge.gerald@gmail.com",
             ['language.french'], "password",
             "Directeur Financier de transition- Groupe Devoteam (SSII)
             Directeur Financier Groupe Altran
@@ -255,8 +255,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, true]
             ]
         ], [
-            "Bergeret", "Anne", "ann.bergeret@test.com",
-            "anne.bergeret@test.com",
+            "Bergeret", "Anne", "ann.bergeret@gt-executive.com",
+            "anne.bergeret@gmail.com",
             ['language.french'], "password",
             "Entreprenariat et intérim Management, Bike and Spa, Stade de France, Fortuneo Banque
             Directrice Marketing et Communication, Groupe Pierre et Vacances Center Parcs
@@ -284,8 +284,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Berrebi", "Franklin", "franklin.berrebi@test.com",
-            "franklin.berrebi@test.com",
+            "Berrebi", "Franklin", "franklin.berrebi@gt-executive.com",
+            "franklin.berrebi@orange.fr",
             ['language.french'], "password",
             "Directeur Général Europe l'Oréal
             Responsable clients Publicis
@@ -313,8 +313,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, true]
             ]
         ], [
-            "Bizien", "Marc", "marc.bizien@test.com",
-            "marc.bizien@test.com",
+            "Bizien", "Marc", "marc.bizien@gt-executive.com",
+            "marc.bizien@gmail.com",
             ['language.french'], "password",
             "DG EUROPORTE (ex VEOLIA CARGO France)
             DG DB Schenker Rail France
@@ -342,8 +342,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, true, false, false, false, false, true, 12, 2000, false]
             ]
         ], [
-            "Blond", "Frederic", "frederic.blond@test.com",
-            "blond.frederic@test.com",
+            "Blond", "Frederic", "frederic.blond@gt-executive.com",
+            "blond.frederic@gmail.com",
             ['language.french'], "password",
             "Directeur Financier et juridique – Groupe Editions Atlas
             Directeur de la Division B2C – Groupe 3 Suisses international
@@ -374,8 +374,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Bonnafont", "Jacques", "jacques.bonnafont@test.com",
-            "jacques.bonnafont@test.com",
+            "Bonnafont", "Jacques", "jacques.bonnafont@gt-executive.com",
+            "jacques.bonnafont@gmail.com",
             ['language.french'], "password",
             "Auditeur (PWC), consultant (EY)
             DAF, Secrétaire général (Chargeurs, DHL, CapGemini, Triangle Interim
@@ -404,8 +404,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Bouchet", "Clotilde", "clotilde.bouchet@test.com",
-            "clobouchet@test.com",
+            "Bouchet", "Clotilde", "clotilde.bouchet@gt-executive.com",
+            "clobouchet@hotmail.com",
             ['language.french'], "password",
             "DAF (COMEX): AXA IM, AMUNDI, ABN Amro/Neuflize OBC, CBP, Isodev
             Directeur de la Stratégie Crédit Agricole SA
@@ -439,8 +439,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Broders", "Olivier", "olivier.broders@test.com",
-            "olivier.broders@test.com",
+            "Broders", "Olivier", "olivier.broders@gt-executive.com",
+            "olivier.broders@gmail.com",
             ['language.french'], "password",
             "Directeur Général Opérationnel  Mc Company Monaco
             Directeur Général Dorotennis  Paris",
@@ -466,8 +466,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Caloni", "Edouard-Vincent", "edouard-vincent.caloni@test.com",
-            "caloniev@test.com",
+            "Caloni", "Edouard-Vincent", "edouard-vincent.caloni@gt-executive.com",
+            "caloniev@yahoo.fr",
             ['language.french'], "password",
             "Directeur du marketing Roland-Garros/Directeur communication FFT
             Directeur général adjoint Harrison&Wolf
@@ -496,8 +496,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Cappe", "Charles", "charles.cappe@test.com",
-            "charlescappe@test.com",
+            "Cappe", "Charles", "charles.cappe@gt-executive.com",
+            "charlescappe@gmail.com",
             ['language.french', 'language.english'], "password",
             "CFO Findus, CFO Apogee (ex Sagem Com),
             DG Finance APV ( Invensys puis SPX Corp.)
@@ -531,7 +531,7 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Caufman", "Olivier", "olivier.caufman@test.com",
+            "Caufman", "Olivier", "olivier.caufman@gt-executive.com",
             "",
             ['language.french'], "password",
             "Trader Banque Shearson Lehman (New-York)
@@ -561,8 +561,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Chauvin", "Jacques-Olivier", "jacques-olivier.chauvin@test.com",
-            "jo.chauvin@test.com",
+            "Chauvin", "Jacques-Olivier", "jacques-olivier.chauvin@gt-executive.com",
+            "jo.chauvin@gmail.com",
             ['language.french'], "password",
             "Président fondateur - Colbert Management et Conseil
             Vice Président Europe – Van Cleef & Arpels
@@ -597,8 +597,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Chene Nordin", "Delphine", "delphine.chene@test.com",
-            "delphinechene@test.com",
+            "Chene Nordin", "Delphine", "delphine.chene@gt-executive.com",
+            "delphinechene@hotmail.com",
             ['language.french'], "password",
             "Directrice Générale Groupe VLA  (Le Moci, La Vie du Rail)
             Directrice du Développement Groupe VLA
@@ -640,8 +640,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, true]
             ]
         ], [
-            "Citroen", "Philippe", "philippe.citroen@test.com",
-            "phi.citroen@test.com",
+            "Citroen", "Philippe", "philippe.citroen@gt-executive.com",
+            "phi.citroen@gmail.com",
             ['language.french'], "password",
             "Directeur Général de SONY France
             Vice-président Consumer Marketing SONY Europe (Londres)
@@ -679,8 +679,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Colin", "Paul", "paul.colin@test.com",
-            "paul.colin@test.com",
+            "Colin", "Paul", "paul.colin@gt-executive.com",
+            "paul.colin@wanadoo.fr",
             ['language.french'], "password",
             "Président Fondateur agence Komando
             Directeur Général Saatchi&Saatchi Paris
@@ -711,7 +711,7 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Culleron", "Paul", "paul.culleron@test.com",
+            "Culleron", "Paul", "paul.culleron@fr.gt.com",
             "",
             ['language.french'], "password",
             "Directeur Financier Heuliez, Helice (SSII)
@@ -749,8 +749,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "de Genne", "Frederic", "frederic.degennes@test.com",
-            "fdegennes@test.com",
+            "de Genne", "Frederic", "frederic.degennes@gt-executive.com",
+            "fdegennes@hotmail.fr",
             ['language.french'], "password",
             "DGA Omega TV - communication vidéo
             Consulting performance commerciale et alignement stratégique
@@ -783,8 +783,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "de Lambilly", "Patrick", "patrick.delambilly@test.com",
-            "pdelambilly@test.com",
+            "de Lambilly", "Patrick", "patrick.delambilly@gt-executive.com",
+            "pdelambilly@gmail.com",
             ['language.french'], "password",
             "CEO Radical Beauty
             Président Coty Asie
@@ -816,8 +816,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "de Zelicourt", "Hubert", "hubert.dezelicourt@test.com",
-            "hubert.de-zelicourt@test.com",
+            "de Zelicourt", "Hubert", "hubert.dezelicourt@gt-executive.com",
+            "hubert.de-zelicourt@orange.fr",
             ['language.french'], "password",
             "DRH, IBA Molecular
             Senior VP Projets RH Europe, Abbot Products
@@ -831,8 +831,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             []
 
         ], [
-            "Delorme d'Armaille", "Carole", "carole.delorme-darmaille@test.com",
-            "cdarmaille@test.com",
+            "Delorme d'Armaille", "Carole", "carole.delorme-darmaille@gt-executive.com",
+            "cdarmaille@ocbf.com",
             ['language.french'], "password",
             "Présidente Fondatrice Athys Finances
             Directeur de la Communication, Paris Europlace
@@ -874,8 +874,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, true, false, false, false, false, true, 12, 2000, false]
             ]
         ], [
-            "Deveau", "Olivier", "olivier.deveaud@test.com",
-            "odeveaud@test.com",
+            "Deveau", "Olivier", "olivier.deveaud@gt-executive.com",
+            "odeveaud@hotmail.com",
             ['language.french'], "password",
             "Direction du développement et Key accounts (Fraikin, Rentokil)
             Direction opérationnelle (Rentokil, Elior)
@@ -905,7 +905,7 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Dodin", "Arnaud", "arnaud.dodin@test.com",
+            "Dodin", "Arnaud", "arnaud.dodin@fr.gt.com",
             "",
             ['language.french'], "password",
             "DAF de Transition - DI Finances Grant Thornton (Daher Aérostructures, PCAS, Mikit, Afic, Cornilleau, Visiomed, Direct Energie…)
@@ -943,7 +943,7 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Doiteau", "Jean-Rene", "jrd@test.com",
+            "Doiteau", "Jean-Rene", "jrd@niel-mcp.com",
             "",
             ['language.french'], "password",
             "PDG Fondateur associé du Groupe France - Manutention
@@ -978,8 +978,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Duban", "Gregoire", "gregoire.duban@test.com",
-            "g.duban@test.com",
+            "Duban", "Gregoire", "gregoire.duban@gt-executive.com",
+            "g.duban@live.fr",
             ['language.french', 'language.english'], "password",
             "Management de transition, Alvarez & Marsal
             DAF Dekra Automotive SA, Diana Ingredients, Seviver Groupe Intek
@@ -1020,8 +1020,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Dumas", "Laurent", "laurent.dumas@test.com",
-            "dumaslaurent@test.com",
+            "Dumas", "Laurent", "laurent.dumas@gt-executive.com",
+            "dumaslaurent@orange.fr",
             ['language.french'], "password",
             "Directeur Financier : SNCF Geodis, Sony France
             Consultant : KPMG Peat Marwick Consultants",
@@ -1062,8 +1062,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Dupuy", "Emmanuel", "emmanuel.dupuy@test.com",
-            "dupuy_eo@test.com",
+            "Dupuy", "Emmanuel", "emmanuel.dupuy@gt-executive.com",
+            "dupuy_eo@yahoo.fr",
             ['language.french'], "password",
             "Consultant Senior Strategy and Transformation CapGemini : BNPParibas, Natixis, LCL, HSBC, CDC, … : direction de projets, conception de systèmes ou d’architectures, due diligences, réorganisations, …
             DSI Apax Partners et conseil digital aux sociétés du portefeuille du fonds
@@ -1098,8 +1098,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Etienne", "Francis", "francis.etienne@test.com",
-            "francisetienne57@test.com",
+            "Etienne", "Francis", "francis.etienne@gt-executive.com",
+            "francisetienne57@gmail.com",
             ['language.french'], "password",
             "Directeur des relations humaines Daher
             Directeur des ressources humaines Bormiolli Rocco
@@ -1135,8 +1135,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Faure", "Hubert", "hubert.faure@test.com",
-            "faurehubert@test.com",
+            "Faure", "Hubert", "hubert.faure@gt-executive.com",
+            "faurehubert@free.fr",
             ['language.french', 'language.english'], "password",
             "AIRBUS, SVP Corporate Communication, VP Engineering Opérations
             AEROSPATIALE, Directeur Controlling, Organisation & SI,
@@ -1168,8 +1168,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Fenouil", "Alain", "alain.fenouil@test.com",
-            "alainfenouil@test.com",
+            "Fenouil", "Alain", "alain.fenouil@gt-executive.com",
+            "alainfenouil@yahoo.fr",
             ['language.french'], "password",
             "Vice Président Logistics & Opérations , Groupe ARROW
             Directeur Supply Chain et Facilities, GEMALTO
@@ -1202,8 +1202,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Gannevast", "Arnaud", "arnaud.gannevast@test.com",
-            "gannevast.arnaud@test.com",
+            "Gannevast", "Arnaud", "arnaud.gannevast@gt-executive.com",
+            "gannevast.arnaud@9online.fr",
             ['language.french'], "password",
             "Associé, Red2Green, DI Finances Grant Thornton
             DG Finances Nexus Technologies
@@ -1239,8 +1239,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Gautier", "Emmanuelle", "emmanuelle.gautier@test.com",
-            "gautier.emmanuelle@test.com",
+            "Gautier", "Emmanuelle", "emmanuelle.gautier@gt-executive.com",
+            "gautier.emmanuelle@gmail.com",
             ['language.french', 'language.english'], "password",
             "Directeur Business Unit Automobile monde, Acome
             Directeur R&D/ Innovation, Valeo, Yazaki,
@@ -1272,8 +1272,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Giraud", "Emmanuel", "emmanuel.giraud@test.com",
-            "emgiraud92@test.com",
+            "Giraud", "Emmanuel", "emmanuel.giraud@gt-executive.com",
+            "emgiraud92@gmail.com",
             ['language.french'], "password",
             "Directeur marketing et communication, Photomaton
             Dirigeant Repreneur, ATP (objets publicitaires)
@@ -1305,8 +1305,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Gregoire", "Jean-Louis", "jean-louis.gregoire@test.com",
-            "jl.gregoire@test.com",
+            "Gregoire", "Jean-Louis", "jean-louis.gregoire@gt-executive.com",
+            "jl.gregoire@orange.fr",
             ['language.french', 'language.english'], "password",
             "VP EMEA and Chief of Corporate Strategy, Canon Europe
             PDG (bureautique) Canon France et Gestetner
@@ -1336,8 +1336,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Guillemin", "Jean-Roch", "jean-roch.guillemin@test.com",
-            "jr.guillemin@test.com",
+            "Guillemin", "Jean-Roch", "jean-roch.guillemin@gt-executive.com",
+            "jr.guillemin@bbox.fr",
             ['language.french'], "password",
             "Gestion des Ressources Humaines
             Accompagnement du Changement
@@ -1364,8 +1364,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Hua", "Olivier", "olivier.hua@test.com",
-            "ohua@test.com",
+            "Hua", "Olivier", "olivier.hua@gt-executive.com",
+            "ohua@orange.fr",
             ['language.french', 'language.english'], "password",
             "Dirigeant de fonds d’investissement (Oddo PE, Turenne Capital)
             DG de PME industrielles (Dürr, Sietam, GMM)
@@ -1400,8 +1400,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Jordan", "Isabelle", "isabelle.jordan@test.com",
-            "ijg@test.com",
+            "Jordan", "Isabelle", "isabelle.jordan@gt-executive.com",
+            "ijg@free.fr",
             ['language.french'], "password",
             "Marketing chez l’OREAL et DANONE
             Communication internationale ( Louis Vuitton, Lancôme, Chanel)
@@ -1428,8 +1428,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Juteau", "Jean-Pierre", "jean-pierre.juteau@test.com",
-            "juteau.jean-pierre@test.com",
+            "Juteau", "Jean-Pierre", "jean-pierre.juteau@gt-executive.com",
+            "juteau.jean-pierre@orange.fr", ['language.french', 'language.english'], "password",
             "SNCF Geodis, Directeur des Opérations, Directeur International.
              Compass Group France, Directeur de l’Intégration
              Otis, Directeur Organisation et SI
@@ -1466,8 +1466,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Kaiser", "Andre", "andre.kaiser@test.com",
-            "ankaiser@test.com",
+            "Kaiser", "Andre", "andre.kaiser@gt-executive.com",
+            "ankaiser@hotmail.com",
             ['language.french', 'language.german'], "password",
             "Manager de transition, Steiner, Qualis-Akerys, FVS, Eurazeo
             CFO/CRO Groupee Altimate
@@ -1504,8 +1504,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Lafargue", "Yves", "yves.lafargue@test.com",
-            "yves.lafargue@test.com",
+            "Lafargue", "Yves", "yves.lafargue@gt-executive.com",
+            "yves.lafargue@cofinter.com", ['language.french'], "password",
             "Ingénieur recherche, CEA
             Directeur Central, Groupe Promodis
             Directeur Général, FDS groupe Bolloré",
@@ -1534,8 +1534,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Larzilliere", "Franck", "franck.larzilliere@test.com",
-            "franck.larzilliere@test.com",
+            "Larzilliere", "Franck", "franck.larzilliere@gt-executive.com",
+            "franck.larzilliere@sfr.fr",
             ['language.french'], "password",
             "Groupe SEB: Vice-president Retailing Networks
             LA REDOUTE: Directeur Général de la Vente Directe
@@ -1575,8 +1575,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "le Chevalier", "Patrick", "patrick.lechevalier@test.com",
-            "patrick.le.chevalier@test.com",
+            "le Chevalier", "Patrick", "patrick.lechevalier@gt-executive.com",
+            "patrick.le.chevalier@wanadoo.fr",
             ['language.french'], "password",
             "Conseil en Gestion de Patrimoine
             Accompagnement dirigeant propriétaire petite et moyenne entreprise
@@ -1606,8 +1606,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "le Gouvello", "Eric", "eric.legouvello@test.com",
-            "legouvello@test.com",
+            "le Gouvello", "Eric", "eric.legouvello@gt-executive.com",
+            "legouvello@edaxis.com",
             ['language.french'], "password",
             "Gérant, Edaxis Sarl
             Président de transition, Financière GOA
@@ -1644,8 +1644,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Lecca", "Stephane", "stephane.lecca@test.com",
-            "stephane.lecca@test.com",
+            "Lecca", "Stephane", "stephane.lecca@gt-executive.com",
+            "stephane.lecca@yahoo.fr",
             ['language.french'], "password",
             "DG de Publicis Events – Filiale Evénementielle du Groupe Publicis
             DG associé et créateur de Byzance Communication, conseil en Evénement
@@ -1674,8 +1674,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Lemaire", "Pierre", "pierre.lemaire@test.com",
-            "p.lemaireroquette@test.com",
+            "Lemaire", "Pierre", "pierre.lemaire@gt-executive.com",
+            "p.lemaireroquette@gmail.com",
             ['language.french'], "password",
             "DGD de Holding et Directeur Financier, Juridique et Informatique
             Directeur Unité Opérationnelle \"Pharmacie Cosmétologie\"
@@ -1715,8 +1715,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Levy", "Laurent", "laurent.levy@test.com",
-            "laurentxlevy@test.com",
+            "Levy", "Laurent", "laurent.levy@gt-executive.com",
+            "laurentxlevy@hotmail.fr",
             ['language.french'], "password",
             "Secrétaire Général en charge des M&A, Photo-Me International plc
             Directeur Financier Groupe (participation Eurazeo)
@@ -1755,8 +1755,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Lointier", "Claude", "claude.lointier@test.com",
-            "cllointier@test.com",
+            "Lointier", "Claude", "claude.lointier@gt-executive.com",
+            "cllointier@gmail.com",
             ['language.french'], "password",
             "Directeur Financier, Daher Aerospace
             Directeur du Contrôle de Gestion Groupe, Daher
@@ -1797,8 +1797,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Lopez", "Jacques", "jacques.lopez@test.com",
-            "jaclopez@test.com",
+            "Lopez", "Jacques", "jacques.lopez@gt-executive.com",
+            "jaclopez@gmail.com",
             ['language.french'], "password",
             "Manager de Transition, groupe H3O et Groupe L'Occitane
             DAF puis Directeur Général, AXIOHM
@@ -1828,8 +1828,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Mamet", "Alexandre", "alexandre.mamet@test.com",
-            "alexandre_mamet@test.com",
+            "Mamet", "Alexandre", "alexandre.mamet@gt-executive.com",
+            "alexandre_mamet@yahoo.com",
             ['language.french'], "password",
             "Président Directeur Général - Holding Financière Goa
             Directeur Général - Groupe La Brosse et Dupont (LVMH)
@@ -1861,8 +1861,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Marques", "Thierry", "thierry.marques@test.com",
-            "thierry.marques@test.com",
+            "Marques", "Thierry", "thierry.marques@gt-executive.com",
+            "thierry.marques@ponts.org", ['language.french', 'language.english'], "password",
             "Directeur Général, Swiss Life Immobilier
             Directeur Général en charge de l'international, Foncia
             Directeur Général du réseau de salles, Pathé
@@ -1904,8 +1904,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Mellerio", "Olivier", "olivier.mellerio@test.com",
-            "mellerio.olivier@test.com",
+            "Mellerio", "Olivier", "olivier.mellerio@gt-executive.com",
+            "mellerio.olivier@wanadoo.fr",
             ['language.french', 'language.english'], "password",
             "Directeur Général
             Chef d'entreprise
@@ -1935,8 +1935,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Misteli", "Philippe", "philippe.misteli@test.com",
-            "philippe.misteli@test.com",
+            "Misteli", "Philippe", "philippe.misteli@gt-executive.com",
+            "philippe.misteli@gmail.com", ['language.french'], "password",
             "DAF AkzoNobel Trade France
             DGA, Kaufman&Broard, EuroDisney
             DAF Unilever ( Paris, Amsterdam, NYC et Londres",
@@ -1970,8 +1970,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Nouveau", "Jacques-Edouard", "jacques-edouard.nouveau@test.com",
-            "jacques-edouard.nouveau@test.com",
+            "Nouveau", "Jacques-Edouard", "jacques-edouard.nouveau@gt-executive.com",
+            "jacques-edouard.nouveau@fr.gt.com",
             ['language.french', 'language.english'], "password",
             "Directeur Général, Associé Grant Thornton
             DAF,  Groupe Daher
@@ -2022,8 +2022,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             ]
 
         ], [
-            "Pankwoski", "Eric-Jean", "eric-jean.pankowski@test.com",
-            "ejpankowski@test.com",
+            "Pankwoski", "Eric-Jean", "eric-jean.pankowski@gt-executive.com",
+            "ejpankowski@steering3.fr",
             ['language.french'], "password",
             "VP Finances & organisation groupe LEOSPHERE
             Directeur associé CSC Peat Marwick
@@ -2051,8 +2051,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Petrou", "Philippe", "philippe.petrou@test.com",
-            "ppetrou@test.com",
+            "Petrou", "Philippe", "philippe.petrou@gt-executive.com",
+            "ppetrou@mytikas.fr",
             ['language.french', 'language.english'], "password",
             "Country Manager Groupe ALPHA BANK
             Membre du Directoire de Neuflize Schlumberger Mallet Demachy
@@ -2080,8 +2080,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Pinot", "Eric", "eric.pinot@test.com",
-            "ericpinot@test.com",
+            "Pinot", "Eric", "eric.pinot@gt-executive.com",
+            "ericpinot@orange.fr",
             ['language.french'], "password",
             "Président du Directoire, SIA International
             PDG, Textiles Well S.A.
@@ -2111,8 +2111,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Puchois", "Bernard", "bernard.puchois@test.com",
-            "bpuchois@test.com",
+            "Puchois", "Bernard", "bernard.puchois@gt-executive.com",
+            "bpuchois@wanadoo.fr",
             ['language.french', 'language.english'], "password",
             "DAF, DGA Finances (Comex) : Afone, Zucchi, Jalla
             DG, DGA : O2I, Descamps group
@@ -2152,8 +2152,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Reisz", "Frederic", "frederic.reisz@test.com",
-            "frederic.reisz@test.com",
+            "Reisz", "Frederic", "frederic.reisz@gt-executive.com",
+            "frederic.reisz@incomeo.com", ['language.french'], "password",
             "Directeur Général ENERGIA-DGEM
             Cabinet du Président et du Directeur Général SNCF
             Directeur des participations COMELEC
@@ -2194,8 +2194,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Renondin", "Guillaume", "guillaume.renondin@test.com",
-            "g.renondin@test.com",
+            "Renondin", "Guillaume", "guillaume.renondin@gt-executive.com",
+            "g.renondin@yahoo.fr",
             ['language.french'], "password",
             "Clinvest
             Daher
@@ -2227,8 +2227,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Rodriguez-Vigil", "Alicia", "alicia.rodriguez-vigil@test.com",
-            "arvigilg@test.com",
+            "Rodriguez-Vigil", "Alicia", "alicia.rodriguez-vigil@gt-executive.com",
+            "arvigilg@gmail.com",
             ['language.french'], "password",
             "Directeur Expert Contrôle de Gestion – GTE (Eutelsat, Lafarge)
             Partner OnetoOne (Parclick.com)
@@ -2276,7 +2276,7 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Rongiere", "Philippe", "philippe.rongieres@test.com",
+            "Rongiere", "Philippe", "philippe.rongieres@fr.gt.com",
             "",
             ['language.french'], "password",
             "DAF de transition DI Finances – Grant Thornton
@@ -2317,8 +2317,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Schricke", "Herve", "herve.schricke@test.com",
-            "herve.schricke@test.com",
+            "Schricke", "Herve", "herve.schricke@gt-executive.com",
+            "herve.schricke@gmail.com ",
             ['language.french'], "password",
             "Fondateur XAnge Private Equity/ capital innovation et capital Developpement
             Co-fondateur Meilleurtaux.com (courtier CREDIT immobilier)
@@ -2354,8 +2354,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Simon", "Bernard", "bernard.simon@test.com",
-            "bh.simon@test.com",
+            "Simon", "Bernard", "bernard.simon@gt-executive.com",
+            "bh.simon@free.fr",
             ['language.french'], "password",
             "DAF de transition, DI Finances-Grant Thornton
             Responsable Diversification, Giat Industries
@@ -2398,8 +2398,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             ]
         ],
         [
-            "Stroe", "Madalina", "madalina.stroe@test.com",
-            "madalina_stroe@test.com",
+            "Stroe", "Madalina", "madalina.stroe@gt-executive.com",
+            "madalina_stroe@yahoo.com",
             ['language.french'], "password",
             "Entrepreneur & CEO Eliad Technologies, Silicon Valley, brevets US, solutions mobilité Nokia, Vodafone, Telefonica, Otis, Dalkia, Veolia, Kiabi
             Manager de transition  JP Morgan, Deutsche Bank Londres
@@ -2433,8 +2433,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             ]
         ],
         [
-            "Taieb", "Florence", "florence.taieb@test.com",
-            "taieb.florence@test.com",
+            "Taieb", "Florence", "florence.taieb@gt-executive.com",
+            "taieb.florence@wanadoo.fr",
             ['language.french'], "password",
             "Directrice conseil et création d’un pôle corporate en agence
             Directrice de la communication et du marketing de Paris Première
@@ -2465,8 +2465,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Terrasson", "Vincent", "vincent.terrasson@test.com",
-            "vincent.terrasson@test.com",
+            "Terrasson", "Vincent", "vincent.terrasson@gt-executive.com",
+            "vincent.terrasson@m4x.org",
             ['language.french'], "password",
             "Apave - Directeur du Développement International
             Egis International - Directeur Général Délégué
@@ -2496,8 +2496,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Thoumyre", "Etienne", "etienne.thoumyre@test.com",
-            "etienne.thoumyre@test.com",
+            "Thoumyre", "Etienne", "etienne.thoumyre@gt-executive.com",
+            "etienne.thoumyre@orange.fr",
             ['language.french', 'language.english'], "password",
             "DAF de transition DI Finances – Grant Thornton
             CFO France - BAXI GROUPE Ltd
@@ -2532,8 +2532,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Torres", "Daniel", "daniel.torres@test.com",
-            "daniel.torres@test.com",
+            "Torres", "Daniel", "daniel.torres@gt-executive.com",
+            "daniel.torres@dixhuit-agence.fr",
             ['language.french'], "password",
             "Création agence conseil Dix-Huit/Lyan
             Création groupe 15-30 : création, production, stratégie média (radio et films pub)
@@ -2559,8 +2559,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Trolliet", "Marie-Laure", "marie-laure.trolliet@test.com",
-            "marielaure.trolliet@test.com",
+            "Trolliet", "Marie-Laure", "marie-laure.trolliet@gt-executive.com",
+            "marielaure.trolliet@yahoo.fr",
             ['language.french'], "password",
             "DAF et Directeur des Risques – ICARE Groupe Europ Assistance, Cardif
             Directeur Financier Régional AXA Travel, Groupe Axa Assistance
@@ -2589,8 +2589,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Velot", "Jacques", "jacques.velot@test.com",
-            "velot@test.com",
+            "Velot", "Jacques", "jacques.velot@gt-executive.com",
+            "velot@icloud.com",
             ['language.french'], "password",
             "Directeur Général Xerox Business Solutions France
             Directeur Général Asie Pacifique IER (Groupe Bolloré)
@@ -2623,8 +2623,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, false]
             ]
         ], [
-            "Wams", "Nanno", "nanno.wams@test.com",
-            "nanno.wams@test.com",
+            "Wams", "Nanno", "nanno.wams@gt-executive.com",
+            "nanno.wams@gmail.com",
             ['language.french', 'language.german', 'language.english'], "password",
             "Directeur Financier et IT de Pays/Région : - DS Smith France –Espagne
                   - Lafarge Allemagne, Benelux, Pologne, Corée du Sud
