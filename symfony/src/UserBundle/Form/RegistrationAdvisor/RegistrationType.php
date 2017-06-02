@@ -51,7 +51,7 @@ class RegistrationType extends AbstractType
                 'translation_domain'        => 'tools',
                 'choice_label'              => 'name',
                 'multiple'                  => true,
-                'expanded'                  => true,
+                'expanded'                  => false,
                 'required'                  => true,
 
                 'class'                     => 'ToolsBundle:Language',
