@@ -160,3 +160,8 @@ parameters:
     scoring_weight.location: 1
     scoring_weight.certification: 3
     scoring_weight.work_experience: 8
+    scoring_rules:
+        0: [0, 5]
+        1: [2, 10]
+        2: [4, 20]
+        3: [6, null]

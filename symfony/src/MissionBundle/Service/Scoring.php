@@ -7,12 +7,13 @@ use MissionBundle\Entity\UserMission;
  class Scoring
 {
     protected $em;
-
+    protected $scoringRules;
     protected $weightBusinessPractice, $weightProfessionalExpertise, $weightCompanySize, $weightMissionKind, $weightLocation, $weightCertification, $weightWorkExperience;
 
-    public function __construct(\Doctrine\ORM\EntityManager $em, $weightBusinessPractice, $weightProfessionalExpertise, $weightCompanySize, $weightMissionKind, $weightLocation, $weightCertification, $weightWorkExperience)
+    public function __construct(\Doctrine\ORM\EntityManager $em, $scoringRules, $weightBusinessPractice, $weightProfessionalExpertise, $weightCompanySize, $weightMissionKind, $weightLocation, $weightCertification, $weightWorkExperience)
     {
         $this->em = $em;
+        $this->scoringRules = $scoringRules;
         $this->weightBusinessPractice = $weightBusinessPractice;
         $this->weightProfessionalExpertise = $weightProfessionalExpertise;
         $this->weightCompanySize = $weightCompanySize;
@@ -22,11 +23,6 @@ use MissionBundle\Entity\UserMission;
         $this->weightWorkExperience = $weightWorkExperience;
     }
 
-    private function getScoringRules()
-    {
-        return array(0 => array(0, 50), 1 => array(2, 100), 2 => array(4, 200), 3 => array(6, null));
-    }
-
     private function getScoringStep($mission)
     {
         return count($mission->getScoringHistory()) ? count($mission->getScoringHistory()) : 0;
@@ -34,7 +30,7 @@ use MissionBundle\Entity\UserMission;
 
     private function updateNextScoring($mission)
     {
-        $scoringRules = $this->getScoringRules();
+        $scoringRules = $this->scoringRules;
         $scoringStep = $this->getScoringStep($mission);
         if (isset($scoringRules[$scoringStep + 1])) {
             $nbDays = $scoringRules[$scoringStep + 1][0];
@@ -128,7 +124,7 @@ use MissionBundle\Entity\UserMission;
     public function updateActivated($mission) {
         $scoringHistory = $mission->getScoringHistory();
         $scoringStep = $this->getScoringStep($mission);
-        $scoringRules = $this->getScoringRules();
+        $scoringRules = $this->scoringRules;
         // $matchedUserMissions = $this->em->getRepository("MissionBundle:UserMission")->findBy("mission" => $mission, "status" => UserMission::MATCHED);
         $userMissions = $this->em->getRepository("MissionBundle:UserMission")->findOrderedByMission($mission, $scoringRules[$scoringStep][1]);
         // for JSON

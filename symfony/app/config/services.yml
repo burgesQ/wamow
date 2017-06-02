@@ -43,6 +43,7 @@ services:
         class: MissionBundle\Service\Scoring
         arguments:
             - '@doctrine.orm.entity_manager'
+            - '%scoring_rules%'
             - '%scoring_weight.business_practice%'
             - '%scoring_weight.professional_expertise%'
             - '%scoring_weight.company_size%'
