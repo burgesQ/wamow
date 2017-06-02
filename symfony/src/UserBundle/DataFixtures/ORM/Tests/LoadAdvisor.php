@@ -72,8 +72,7 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 [false, false, true, false, false, false, true, 24, 2000, true]
             ],
             [ '+33', '612345678', '19', 'rue Vasco de Gama', '', '75015', 'Paris', 'FR']
-
-        ], [
+         ], [
             "Anfriani", "Christophe", "chirstophe.anfriani@gt-executive.com",
             "c.anfriani@orange.fr",
             ['language.french'], "password",
@@ -99,8 +98,10 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.implementationofnewtechnologies",
                 "workexperience.management"
             ],
-            []
-
+            [
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Bailly-Turchi", "Maud", "maud.bailly-turchi@gt-executive.com",
             "mbturchi@gmail.com",
@@ -130,8 +131,12 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.humanressourcescommunication",
                 "workexperience.changemanagement"
             ],
-            []
+            [
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
 
+            ]
         ], [
             "Ballu", "Yann", "yann.ballu@gt-executive.com",
             "yann1ballu@gmail.com",
@@ -155,8 +160,9 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             [
                 "workexperience.cashandinvestmentmanagement"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, true]
+            ]
         ], [
             "Bellone", "Noelle", "nbellone@gt-executive.com",
             "",
@@ -184,8 +190,9 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             [
                 "workexperience.salesgotomarketstrategy"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Benoit", "Olivier", "olivier.benoit@gt-executive.com",
             "olivier.benoit@delcrea.com",
@@ -214,8 +221,10 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.implementationofnewtechnologies",
                 "workexperience.informationsystem"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false]
+            ]
         ], [
             "Berge", "Gerald", "gerald.berge@gt-executive.com",
             "berge.gerald@gmail.com",
@@ -242,8 +251,9 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             [
                 "workexperience.restructuringplan"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, true]
+            ]
         ], [
             "Bergeret", "Anne", "ann.bergeret@gt-executive.com",
             "anne.bergeret@gmail.com",
@@ -269,8 +279,10 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.strategicmarketingplan",
                 "workexperience.e-commercestrategy"
             ],
-            []
-
+            [
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Berrebi", "Franklin", "franklin.berrebi@gt-executive.com",
             "franklin.berrebi@orange.fr",
@@ -297,8 +309,9 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             [
                 "workexperience.strategicmarketingplan"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, true]
+            ]
         ], [
             "Bizien", "Marc", "marc.bizien@gt-executive.com",
             "marc.bizien@gmail.com",
@@ -325,8 +338,9 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             [
                 "workexperience.humanressourcescommunication"
             ],
-            []
-
+            [
+                [false, true, false, false, false, false, true, 12, 2000, false]
+            ]
         ], [
             "Blond", "Frederic", "frederic.blond@gt-executive.com",
             "blond.frederic@gmail.com",
@@ -353,8 +367,12 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.e-commercestrategy",
                 "workexperience.informationsystem"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Bonnafont", "Jacques", "jacques.bonnafont@gt-executive.com",
             "jacques.bonnafont@gmail.com",
@@ -381,8 +399,10 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.currentitsystemlayout",
                 "workexperience.restructuringplan"
             ],
-            []
-
+            [
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Bouchet", "Clotilde", "clotilde.bouchet@gt-executive.com",
             "clobouchet@hotmail.com",
@@ -413,8 +433,11 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.cashoptimization",
                 "workexperience.riskmanagement"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Broders", "Olivier", "olivier.broders@gt-executive.com",
             "olivier.broders@gmail.com",
@@ -439,8 +462,9 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             [
                 "workexperience.operationalprocessredesign",
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Caloni", "Edouard-Vincent", "edouard-vincent.caloni@gt-executive.com",
             "caloniev@yahoo.fr",
@@ -467,8 +491,10 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.strategicmarketingplan",
                 "workexperience.crisiscommunication",
             ],
-            []
-
+            [
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Cappe", "Charles", "charles.cappe@gt-executive.com",
             "charlescappe@gmail.com",
@@ -500,8 +526,10 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.reengineeringprocess",
                 "workexperience.processdesign",
             ],
-            []
-
+            [
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Caufman", "Olivier", "olivier.caufman@gt-executive.com",
             "",
@@ -529,8 +557,9 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             [
                 "workexperience.bankregulatorycompliance",
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Chauvin", "Jacques-Olivier", "jacques-olivier.chauvin@gt-executive.com",
             "jo.chauvin@gmail.com",
@@ -561,8 +590,12 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.brandstrategy",
                 "workexperience.management"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Chene Nordin", "Delphine", "delphine.chene@gt-executive.com",
             "delphinechene@hotmail.com",
@@ -598,8 +631,14 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.transitionplan",
                 "workexperience.outsourcing",
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, true]
+            ]
         ], [
             "Citroen", "Philippe", "philippe.citroen@gt-executive.com",
             "phi.citroen@gmail.com",
@@ -633,8 +672,12 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.itstrategy",
                 "workexperience.actionplan",
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Colin", "Paul", "paul.colin@gt-executive.com",
             "paul.colin@wanadoo.fr",
@@ -662,8 +705,11 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.targetanalysis",
                 "workexperience.brandstrategy"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Culleron", "Paul", "paul.culleron@fr.gt.com",
             "",
@@ -696,8 +742,12 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.actionplan",
                 "workexperience.packaging"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "de Genne", "Frederic", "frederic.degennes@gt-executive.com",
             "fdegennes@hotmail.fr",
@@ -727,8 +777,11 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.changemanagement",
                 "workexperience.management"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "de Lambilly", "Patrick", "patrick.delambilly@gt-executive.com",
             "pdelambilly@gmail.com",
@@ -758,8 +811,10 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.retaildigitalisation",
                 "workexperience.targetanalysis"
             ],
-            []
-
+            [
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "de Zelicourt", "Hubert", "hubert.dezelicourt@gt-executive.com",
             "hubert.de-zelicourt@orange.fr",
@@ -810,8 +865,14 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.management",
                 "workexperience.actionplan"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, true, false, false, false, false, true, 12, 2000, false]
+            ]
         ], [
             "Deveau", "Olivier", "olivier.deveaud@gt-executive.com",
             "odeveaud@hotmail.com",
@@ -839,7 +900,10 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.management",
                 "workexperience.scope"
             ],
-            []
+            [
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Dodin", "Arnaud", "arnaud.dodin@fr.gt.com",
             "",
@@ -872,8 +936,12 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.restructuringplan",
                 "workexperience.cashoptimization"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Doiteau", "Jean-Rene", "jrd@niel-mcp.com",
             "",
@@ -903,8 +971,12 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.crisiscommunication",
                 "workexperience.restructuringplan"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Duban", "Gregoire", "gregoire.duban@gt-executive.com",
             "g.duban@live.fr",
@@ -940,8 +1012,13 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.redesignfunction",
                 "workexperience.changemanagement"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Dumas", "Laurent", "laurent.dumas@gt-executive.com",
             "dumaslaurent@orange.fr",
@@ -975,8 +1052,15 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.postmerger",
                 "workexperience.scope"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Dupuy", "Emmanuel", "emmanuel.dupuy@gt-executive.com",
             "dupuy_eo@yahoo.fr",
@@ -1008,8 +1092,11 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.internalmobility",
                 "workexperience.systemsecurity"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Etienne", "Francis", "francis.etienne@gt-executive.com",
             "francisetienne57@gmail.com",
@@ -1041,8 +1128,12 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.postacquisitionroadmap",
                 "workexperience.postmerger"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Faure", "Hubert", "hubert.faure@gt-executive.com",
             "faurehubert@free.fr",
@@ -1072,8 +1163,10 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.chainvalueoptimization",
                 "workexperience.redesignfunction"
             ],
-            []
-
+            [
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Fenouil", "Alain", "alain.fenouil@gt-executive.com",
             "alainfenouil@yahoo.fr",
@@ -1102,8 +1195,12 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.changemanagement",
                 "workexperience.talentmanagement"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Gannevast", "Arnaud", "arnaud.gannevast@gt-executive.com",
             "gannevast.arnaud@9online.fr",
@@ -1135,8 +1232,12 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.diagnosisfunction",
                 "workexperience.restructuringplan"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Gautier", "Emmanuelle", "emmanuelle.gautier@gt-executive.com",
             "gautier.emmanuelle@gmail.com",
@@ -1165,8 +1266,11 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.crisiscommunication",
                 "workexperience.management"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Giraud", "Emmanuel", "emmanuel.giraud@gt-executive.com",
             "emgiraud92@gmail.com",
@@ -1194,8 +1298,12 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.strategicmarketingplan",
                 "workexperience.automatisation"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Gregoire", "Jean-Louis", "jean-louis.gregoire@gt-executive.com",
             "jl.gregoire@orange.fr",
@@ -1222,8 +1330,11 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.restructuringplan",
                 "workexperience.management"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Guillemin", "Jean-Roch", "jean-roch.guillemin@gt-executive.com",
             "jr.guillemin@bbox.fr",
@@ -1248,8 +1359,10 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.strategyorganization",
                 "workexperience.talentmanagement"
             ],
-            []
-
+            [
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Hua", "Olivier", "olivier.hua@gt-executive.com",
             "ohua@orange.fr",
@@ -1282,8 +1395,10 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.acquisitionstrategyandexternalgrowthopportunities",
                 "workexperience.investmentstrategy"
             ],
-            []
-
+            [
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Jordan", "Isabelle", "isabelle.jordan@gt-executive.com",
             "ijg@free.fr",
@@ -1309,8 +1424,9 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             [
                 "workexperience.strategicmarketingplan"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Juteau", "Jean-Pierre", "jean-pierre.juteau@gt-executive.com",
             "juteau.jean-pierre@orange.fr", ['language.french', 'language.english'], "password",
@@ -1341,8 +1457,14 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.cessionsstrategy",
                 "workexperience.management"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Kaiser", "Andre", "andre.kaiser@gt-executive.com",
             "ankaiser@hotmail.com",
@@ -1374,8 +1496,13 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.cessionsstrategy",
                 "workexperience.transitionplan"
             ],
-            []
-
+            [
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Lafargue", "Yves", "yves.lafargue@gt-executive.com",
             "yves.lafargue@cofinter.com", ['language.french'], "password",
@@ -1401,8 +1528,11 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.management",
                 "workexperience.scope"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Larzilliere", "Franck", "franck.larzilliere@gt-executive.com",
             "franck.larzilliere@sfr.fr",
@@ -1438,8 +1568,12 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.management",
                 "workexperience.postmerger"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "le Chevalier", "Patrick", "patrick.lechevalier@gt-executive.com",
             "patrick.le.chevalier@wanadoo.fr",
@@ -1466,8 +1600,11 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.cessionsstrategy",
                 "workexperience.successionplan"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "le Gouvello", "Eric", "eric.legouvello@gt-executive.com",
             "legouvello@edaxis.com",
@@ -1500,8 +1637,12 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.transitionplan",
                 "workexperience.postmerger"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Lecca", "Stephane", "stephane.lecca@gt-executive.com",
             "stephane.lecca@yahoo.fr",
@@ -1528,8 +1669,10 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.administration",
                 "workexperience.management"
             ],
-            []
-
+            [
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Lemaire", "Pierre", "pierre.lemaire@gt-executive.com",
             "p.lemaireroquette@gmail.com",
@@ -1564,8 +1707,13 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.postmerger",
                 "workexperience.management"
             ],
-            []
-
+            [
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Levy", "Laurent", "laurent.levy@gt-executive.com",
             "laurentxlevy@hotmail.fr",
@@ -1600,8 +1748,12 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.postacquisitionroadmap",
                 "workexperience.postmerger"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Lointier", "Claude", "claude.lointier@gt-executive.com",
             "cllointier@gmail.com",
@@ -1635,8 +1787,15 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.performance",
                 "workexperience.postmerger"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Lopez", "Jacques", "jacques.lopez@gt-executive.com",
             "jaclopez@gmail.com",
@@ -1664,8 +1823,10 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.crisiscommunication",
                 "workexperience.restructuringplan"
             ],
-            []
-
+            [
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Mamet", "Alexandre", "alexandre.mamet@gt-executive.com",
             "alexandre_mamet@yahoo.com",
@@ -1694,8 +1855,11 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.strategicmarketingplan",
                 "workexperience.restructuringplan"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Marques", "Thierry", "thierry.marques@gt-executive.com",
             "thierry.marques@ponts.org", ['language.french', 'language.english'], "password",
@@ -1732,8 +1896,13 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.assetallocation",
                 "workexperience.postmerger"
             ],
-            []
-
+            [
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Mellerio", "Olivier", "olivier.mellerio@gt-executive.com",
             "mellerio.olivier@wanadoo.fr",
@@ -1760,8 +1929,11 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.postacquisitionroadmap",
                 "workexperience.postmerger",
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Misteli", "Philippe", "philippe.misteli@gt-executive.com",
             "philippe.misteli@gmail.com", ['language.french'], "password",
@@ -1790,8 +1962,13 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.transitionplan",
                 "workexperience.postmerger"
             ],
-            []
+            [
 
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Nouveau", "Jacques-Edouard", "jacques-edouard.nouveau@gt-executive.com",
             "jacques-edouard.nouveau@fr.gt.com",
@@ -1831,7 +2008,18 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.iriskmanagement",
                 "workexperience.postmerger"
             ],
-            []
+            [
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+
+            ]
 
         ], [
             "Pankwoski", "Eric-Jean", "eric-jean.pankowski@gt-executive.com",
@@ -1859,8 +2047,9 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             [
                 "workexperience.privatefinanceinitiative"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Petrou", "Philippe", "philippe.petrou@gt-executive.com",
             "ppetrou@mytikas.fr",
@@ -1886,8 +2075,10 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.businessdevelopmentpriorities",
                 "workexperience.restructuringplan"
             ],
-            []
-
+            [
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Pinot", "Eric", "eric.pinot@gt-executive.com",
             "ericpinot@orange.fr",
@@ -1914,8 +2105,11 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.strategicmarketingplan",
                 "workexperience.restructuringplan"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Puchois", "Bernard", "bernard.puchois@gt-executive.com",
             "bpuchois@wanadoo.fr",
@@ -1951,8 +2145,12 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.rationalisation",
                 "workexperience.management"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Reisz", "Frederic", "frederic.reisz@gt-executive.com",
             "frederic.reisz@incomeo.com", ['language.french'], "password",
@@ -1985,8 +2183,16 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.socialclimate",
                 "workexperience.postmerger"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Renondin", "Guillaume", "guillaume.renondin@gt-executive.com",
             "g.renondin@yahoo.fr",
@@ -2016,8 +2222,10 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.privatefinanceinitiative",
                 "workexperience.investmentstrategy"
             ],
-            []
-
+            [
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Rodriguez-Vigil", "Alicia", "alicia.rodriguez-vigil@gt-executive.com",
             "arvigilg@gmail.com",
@@ -2056,8 +2264,17 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.management",
                 "workexperience.audit"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Rongiere", "Philippe", "philippe.rongieres@fr.gt.com",
             "",
@@ -2090,8 +2307,15 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.postmerger",
                 "workexperience.budgetplan"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, true],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Schricke", "Herve", "herve.schricke@gt-executive.com",
             "herve.schricke@gmail.com ",
@@ -2123,8 +2347,12 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.assetallocation",
                 "workexperience.outsourcing"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Simon", "Bernard", "bernard.simon@gt-executive.com",
             "bh.simon@free.fr",
@@ -2161,8 +2389,13 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.redesignfunction",
                 "workexperience.management"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ],
         [
             "Stroe", "Madalina", "madalina.stroe@gt-executive.com",
@@ -2195,8 +2428,9 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             [
                 "workexperience.transformation"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ],
         [
             "Taieb", "Florence", "florence.taieb@gt-executive.com",
@@ -2225,8 +2459,11 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.strategicmarketingplan",
                 "workexperience.management"
             ],
-            []
-
+            [
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Terrasson", "Vincent", "vincent.terrasson@gt-executive.com",
             "vincent.terrasson@m4x.org",
@@ -2255,8 +2492,9 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             [
                 "workexperience.masterplan",
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Thoumyre", "Etienne", "etienne.thoumyre@gt-executive.com",
             "etienne.thoumyre@orange.fr",
@@ -2287,8 +2525,12 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.cashoptimization",
                 "workexperience.management"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Torres", "Daniel", "daniel.torres@gt-executive.com",
             "daniel.torres@dixhuit-agence.fr",
@@ -2313,8 +2555,9 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             [
                 "workexperience.implementcommunicationplan",
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Trolliet", "Marie-Laure", "marie-laure.trolliet@gt-executive.com",
             "marielaure.trolliet@yahoo.fr",
@@ -2342,8 +2585,9 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             [
                 "workexperience.iriskmanagement"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Velot", "Jacques", "jacques.velot@gt-executive.com",
             "velot@icloud.com",
@@ -2374,8 +2618,10 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.implementationofnewtechnologies",
                 "workexperience.outsourcing"
             ],
-            []
-
+            [
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ], [
             "Wams", "Nanno", "nanno.wams@gt-executive.com",
             "nanno.wams@gmail.com",
@@ -2413,8 +2659,16 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 "workexperience.transformation",
                 "workexperience.management"
             ],
-            []
-
+            [
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, true, false, false, false, false, true, 12, 2000, false],
+                [false, false, true, false, false, false, true, 24, 2000, false]
+            ]
         ],
 //        [
 //            "FName", "LName", "Email",
@@ -2423,23 +2677,23 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
 //            "UserResume",
 //
 //            [
-//                "businesspractice."
+//                ("businesspractice.")+
 //            ],
 //            [
-//                "typemissions."
+//                ("typemissions.")+
 //            ],
 //            [
-//                "professionalexpertises."
+//                ("professionalexpertises.)+
 //            ],
 //            [
-//                "workexperience."
+//                ("workexperience.")+
 //            ],
 //            [
-//                 [
+//                 ([
 //                   smallCompany, mediumCompany, largeCompany,
 //                   southAmerica, northAmerica, asia, emea,
 //                   cumuledMonth, dailyFees, peremption
-//                 ]
+//                 ])+
 //            ]
 //        ],
 
@@ -2478,8 +2732,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
         $smallComp    = $companySizeRepo->findOneBy(['name' => 'company_size.small']);
         $mediumComp   = $companySizeRepo->findOneBy(['name' => 'company_size.medium']);
         $largeComp    = $companySizeRepo->findOneBy(['name' => 'company_size.large']);
-        $southAmerica = $continentRepo->findOneBy(['name' => 'continent.southAmerica']);
-        $northAmerica = $continentRepo->findOneBy(['name' => 'continent.northAmerica']);
+        $southAmerica = $continentRepo->findOneBy(['name' => 'continent.south_america']);
+        $northAmerica = $continentRepo->findOneBy(['name' => 'continent.north_america']);
         $asia         = $continentRepo->findOneBy(['name' => 'continent.asia']);
         $emea         = $continentRepo->findOneBy(['name' => 'continent.emea']);
 
@@ -2546,25 +2800,18 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 switch ($oneExpShap) {
                     case $oneExpShap[0] == true:
                         $workExp->addCompanySize($smallComp);
-                        break;
                     case $oneExpShap[1] == true:
                         $workExp->addCompanySize($mediumComp);
-                        break;
                     case $oneExpShap[2] == true:
                         $workExp->addCompanySize($largeComp);
-                        break;
                     case $oneExpShap[3] == true:
                         $workExp->addContinent($southAmerica);
-                        break;
                     case $oneExpShap[4] == true:
                         $workExp->addContinent($northAmerica);
-                        break;
                     case $oneExpShap[5] == true:
                         $workExp->addContinent($asia);
-                        break;
                     case $oneExpShap[6] == true:
                         $workExp->addContinent($emea);
-                        break;
                 }
 
                 $manager->persist($workExp);

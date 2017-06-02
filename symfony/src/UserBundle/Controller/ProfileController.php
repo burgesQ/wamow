@@ -5,6 +5,7 @@ namespace UserBundle\Controller;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use UserBundle\Form\EditCertificationFormType;
 use UserBundle\Form\EditProfileMergedFormType;
 use Symfony\Component\HttpFoundation\Request;
 use UserBundle\Form\EditPasswordFormType;
@@ -16,15 +17,31 @@ use UserBundle\Entity\User;
 class ProfileController extends Controller
 {
     /**
+     * Display data about user
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function showAction()
+    public function showAction(Request $request)
     {
         if (!is_object(($user = $this->getUser())) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
-        } elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')
-                  && ($url = $this->get('signed_up')->checkIfSignedUp($user->getStatus()))) {
-            return $this->redirectToRoute($url);
+        } elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')) {
+            if ($url = $this->get('signed_up')->checkIfSignedUp($user->getStatus())) {
+                return $this->redirectToRoute($url);
+            }
+            $form = $this->createForm(new EditCertificationFormType(), $user);
+            if ($form->handleRequest($request)->isSubmitted() && $form->isValid()) {
+                $this->get('fos_user.user_manager')->updateUser($user);
+
+                return $this->redirectToRoute('user_profile_show');
+            }
+
+            return $this->render('UserBundle:Profile:show.html.twig', [
+                'user' => $user,
+                'form' => $form->createView()
+            ]);
         }
 
         return $this->render('UserBundle:Profile:show.html.twig', [
