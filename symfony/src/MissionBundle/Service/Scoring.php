@@ -63,7 +63,7 @@ use MissionBundle\Entity\UserMission;
         }
 
         $experiences = $user->getUserWorkExperiences();
-        $companySize = $mission->getCompany()->getCompanySize();
+        $companySize = $mission->getCompanySize();
         foreach ($experiences as $experience) {
             // taille entreprise
             if ($experience->getCompanySizes()->contains($companySize)) {

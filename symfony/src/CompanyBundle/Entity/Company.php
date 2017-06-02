@@ -48,12 +48,6 @@ class Company
     private $updateDate;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MissionBundle\Entity\CompanySize")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $companySize;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="logo", type="string", length=255, nullable=false)
@@ -297,28 +291,5 @@ class Company
     public function getAddress()
     {
         return $this->address;
-    }
-
-    /**
-     * Set companySize
-     *
-     * @param \MissionBundle\Entity\CompanySize $companySize
-     * @return Company
-     */
-    public function setCompanySize(\MissionBundle\Entity\CompanySize $companySize = null)
-    {
-        $this->companySize = $companySize;
-
-        return $this;
-    }
-
-    /**
-     * Get companySize
-     *
-     * @return \MissionBundle\Entity\CompanySize 
-     */
-    public function getCompanySize()
-    {
-        return $this->companySize;
     }
 }

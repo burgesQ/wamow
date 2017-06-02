@@ -145,6 +145,12 @@ class Mission
     private $budget;
 
     /**
+     * @ORM\ManyToOne(targetEntity="MissionBundle\Entity\CompanySize")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $companySize;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="beginning", type="datetime", nullable=true)
@@ -1372,5 +1378,28 @@ class Mission
     public function getWorkExperience()
     {
         return $this->workExperience;
+    }
+    
+    /**
+     * Set companySize
+     *
+     * @param \MissionBundle\Entity\CompanySize $companySize
+     * @return Company
+     */
+    public function setCompanySize(\MissionBundle\Entity\CompanySize $companySize = null)
+    {
+        $this->companySize = $companySize;
+
+        return $this;
+    }
+
+    /**
+     * Get companySize
+     *
+     * @return \MissionBundle\Entity\CompanySize
+     */
+    public function getCompanySize()
+    {
+        return $this->companySize;
     }
 }
