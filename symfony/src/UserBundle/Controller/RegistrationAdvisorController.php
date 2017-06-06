@@ -81,7 +81,7 @@ class RegistrationAdvisorController extends Controller
         if ($form->handleRequest($request)->isSubmitted() && $form->isValid()) {
             if (!$user->getLinkedinId() && !$form->get('resume')->getData()->getFile()) {
                 $form->get('resume')->addError(new FormError($trans->trans('error.upload_resume_or_linkedin', [], 'tools')));
-            } elseif($userManager->findUserBy(['email' => $form->get('user')->get('email')->getData()]) !== null) {
+            } elseif($userManager->findUserBy(['email' => $form->get('user')->get('email')->getData()]) !== null && !$user->getLinkedinId()) {
                 $form->get('user')->addError(new FormError($trans->trans('error.user.email_in_use', [], 'tools')));
             } else {
                 $event = new FormEvent($form, $request);
@@ -164,8 +164,25 @@ class RegistrationAdvisorController extends Controller
             return $this->redirectToRoute('expert_registration_step_two');
         }
 
+        $arrayImg = [
+            "businesspractice.industry" => "manufacturing",
+            "businesspractice.finance" => "",
+            "businesspractice.retail" => "retail",
+            "businesspractice.media" => "media-telco-entertainment",
+            "businesspractice.tourism" => "tourisme",
+            "businesspractice.construction" => "construction",
+            "businesspractice.realestate" => "finance",
+            "businesspractice.hotel" => "hotel",
+            "businesspractice.services" => "food-beverage",
+            "businesspractice.energy" => "manufacturing",
+            "businesspractice.it" => "",
+            "businesspractice.public" => "",
+            "businesspractice.ngo" => ""
+        ];
+
         return $this->render('UserBundle:Registration:register_expert_step_one.html.twig', [
-            'form' => $form->createView()
+            'form'     => $form->createView(),
+            'arrayImg' => $arrayImg
         ]);
     }
 

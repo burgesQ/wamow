@@ -239,8 +239,17 @@ registration:
         one:
             title: "Business practice?"
             subtitle: "Select industry you've already worked on"
-            howtotitle: "First step:"
-            howtotext: "We need to know where you acquired your experience and / or did your missions. What does www.consultants.wantmore.work mean by Business Practices? We have identified 13 different business sectors. You can make several choices."
+            how_to_label: |
+                85% OF PITCHES ARE FINDING EXPERTS
+                WITHIN 15 DAYS.
+            how_to_text: |
+                Having a good matching profile will invrease
+                your succès !So fill in your profile details
+                with attention.
+                Be aware that the User Agreement of www.
+                consultants.wantmore.work require a ID
+                background check.
+
             backbutton: "BACK"
             nextbutton: "NEXT"
         two:
