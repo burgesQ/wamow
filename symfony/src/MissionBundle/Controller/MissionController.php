@@ -150,6 +150,7 @@ class MissionController extends Controller
                 case (UserMission::SHORTLIST) :
                 case (UserMission::FINALIST) :
                     $messageService->markAsRead($userMission->getThread()->getLastMessage());
+                    $em->flush();
                     $proposal = new Proposal();
                     $form = $this->createForm(ProposalFromType::class, $proposal)->handleRequest($request);
                     if ($form->isSubmitted() && $form->isValid()) {
@@ -280,6 +281,7 @@ class MissionController extends Controller
                 if ($user->getPayment()) {
                     // mark user as interested for the mission
                     $userMission->setStatus(UserMission::INTERESTED)->setInterestedAt(new \DateTime());
+                    $mission->setNbOngoing($mission->getNbOngoing() + 1);
                     $em->flush();
                 }
                 return $this->redirectToRoute('mission_view', [
@@ -334,16 +336,20 @@ class MissionController extends Controller
             throw new NotFoundHttpException($trans->trans('error.mission.shortlist.to_much', [], 'tools'));
         }
 
+        $nbOngoing = $mission->getNbOngoing();
+
         /** @var UserMission $oneUserMission */
         foreach ($userMissionRepo->findAllAtLeastThan($mission, UserMission::ACTIVATED) as $oneUserMission) {
             if ($oneUserMission->getStatus() >= UserMission::ACTIVATED
                 && $oneUserMission->getStatus() < UserMission::SHORTLIST) {
                 $oneUserMission->setStatus(UserMission::DISMISS);
+                $nbOngoing -= 1;
             }
         }
 
         $step->setStatus(0);
         $nextStep->setStatus(1);
+        $mission->setNbOngoing($nbOngoing);
         $em->flush();
 
         return $this->redirectToRoute('mission_view', ['missionId' => $missionId]);
@@ -374,10 +380,12 @@ class MissionController extends Controller
                 case UserMission::ACTIVATED:
                 case UserMission::MATCHED:
                 case UserMission::INTERESTED:
+                    $mission->setNbOngoing($mission->getNbOngoing() - 1);
                     $userMission->setStatus(UserMission::GIVEUP);
                     $em->flush();
                     return $this->redirectToRoute('dashboard');
                 case UserMission::ONGOING:
+                    $mission->setNbOngoing($mission->getNbOngoing() - 1);
                     $userMission->setStatus(UserMission::GIVEUP);
                     $em->flush();
                     $param = [

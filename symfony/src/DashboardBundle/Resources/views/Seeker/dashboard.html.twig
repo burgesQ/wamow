@@ -120,14 +120,16 @@
 
                             {% set unread = 0 %}
                             {% for thread in mission.threads %}
-                                {% set break = false %}
-                                {% for message in thread.messages | reverse if not break %}
-                                    {% if message.metadata[1].isRead == false %}
-                                        {% set unread = unread + 1 %}
-                                    {% else %}
-                                        {% set break = true %}
-                                    {% endif %}
-                                {% endfor %}
+                                {% if thread.userMission.status == (stepPosition * 10) %}
+                                    {% set break = false %}
+                                    {% for message in thread.messages | reverse if not break %}
+                                        {% if message.metadata[1].isRead == false %}
+                                            {% set unread = unread + 1 %}
+                                        {% else %}
+                                            {% set break = true %}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
                             {% endfor %}
 
                             {% if stepPosition == 1 %}
@@ -150,7 +152,7 @@
                                             {{ 'mission.view.interested' | trans | raw }}
                                         </span>
                                         {% if unread > 0 %}
-                                            <a href="#">{% transchoice unread with {'%unread%': unread} %}dashboard.contractor.mission.unread{% endtranschoice %}</a>
+                                            <a href="#">{{ 'dashboard.unread' | trans({'unread': unread}) }}</a>
                                         {% endif %}
                                     </span>
                                 {% endif %}
@@ -169,11 +171,11 @@
                                 </span>
                                 <span class="infos-el infos-el--status col-xs-6">
                                     <span>
-                                        <i class="icon icon--flag"></i><br />
+                                        <i class="icon icon--selected"></i><br />
                                         {{ 'mission.view.shortlisted' | trans | raw }}
                                     </span>
                                     {% if unread > 0 %}
-                                        <a href="#">{% transchoice unread with {'%unread%': unread} %}dashboard.contractor.mission.unread{% endtranschoice %}</a>
+                                        <a href="#">{{ 'dashboard.unread' | trans({'unread': unread}) }}</a>
                                     {% endif %}
                                 </span>
                                 <span class="infos-el col-xs-6">
@@ -196,7 +198,7 @@
                                         {{ 'mission.view.shortlisted' | trans | raw }}
                                     </span>
                                     {% if unread > 0 %}
-                                        <a href="#">{% transchoice unread with {'%unread%': unread} %}dashboard.contractor.mission.unread{% endtranschoice %}</a>
+                                        <a href="#">{{ 'dashboard.unread' | trans({'unread': unread}) }}</a>
                                     {% endif %}
                                 </span>
                                 <span class="infos-el col-xs-6">

@@ -313,6 +313,14 @@ class Mission
     private $onDraft;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="nb_ongoing", type="integer", nullable=false)
+     * @Assert\Range(min = 1)
+     */
+    private $nbOngoing;
+
+    /**
      * Mission constructor.
      *
      * @param $nbStep
@@ -341,6 +349,7 @@ class Mission
         $this->reference       = true;
         $this->address         = null;
         $this->price           = 1;
+        $this->nbOngoing       = 0;
         $this->onDraft         = false;
     }
 
@@ -1401,5 +1410,28 @@ class Mission
     public function getCompanySize()
     {
         return $this->companySize;
+    }
+
+    /**
+     * Set nbOngoing
+     *
+     * @param integer $nbOngoing
+     * @return Mission
+     */
+    public function setNbOngoing($nbOngoing)
+    {
+        $this->nbOngoing = $nbOngoing;
+
+        return $this;
+    }
+
+    /**
+     * Get nbOngoing
+     *
+     * @return integer 
+     */
+    public function getNbOngoing()
+    {
+        return $this->nbOngoing;
     }
 }

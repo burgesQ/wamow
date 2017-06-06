@@ -159,6 +159,7 @@ home:
 
 ## Dashboard
 dashboard:
+    unread: unread message(s)
     advisor:
         fyi:
             title: "Your dashboard:"
@@ -203,7 +204,7 @@ dashboard:
             answer: Answer
             mission_status: Mission status
             show_all_pitch: Show all pitch
-
+            echange: echange
     contractor:
         new:
             button: "Write pitch"

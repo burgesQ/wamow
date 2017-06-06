@@ -22,7 +22,7 @@ class DashboardController extends Controller
 
             /** @var \MissionBundle\Repository\UserMissionRepository $userMissionRepo */
             $userMissionRepo = $em->getRepository('MissionBundle:UserMission');
-            $news            = $userMissionRepo->findBy(['user' => $user, 'status' => UserMission::MATCHED]);
+            $news            = $userMissionRepo->findAllNewMission($user);
             $wips            = $userMissionRepo->getMyMissions($user->getId());
             $closes          = $userMissionRepo->getMyOldMissions($user->getId());
 
