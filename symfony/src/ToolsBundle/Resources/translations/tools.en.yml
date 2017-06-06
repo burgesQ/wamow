@@ -25,6 +25,7 @@ form:
         later: FINISH LATER
         edit: EDIT
         print: PRINT
+        send: send
 
     note:
         indicator: Saving ...
@@ -37,18 +38,19 @@ form:
     file:
         file: "File"
 
-    btn:
-        send: send
 
 ## Base
 header:
-    lang:
-        en: "Eng"
-        fr: "Fr"
     news: "News"
     profile: Profile
     billing: Billing
     logout: Logout
+
+side_bar:
+    email_notification: |
+        email
+        notifications
+    profile: "profile\n"
 
 footer:
     mission: "Mission"
@@ -158,7 +160,7 @@ dashboard:
     advisor:
         fyi:
             title: "Your dashboard:"
-            text: ''
+            text: 'Blablabla'
         new:
             title: "You may be interested..."
             date: "Pitched at "
@@ -171,6 +173,9 @@ dashboard:
             interested: "Interested"
             ongoing: "On going"
             shortlist: "Shortlist"
+            waiting: waiting
+            selected: selected
+            to_answer: To answer
             finalist: "Finalist"
             giveup: "Giveup"
             dismiss: "Dismiss"
@@ -179,9 +184,23 @@ dashboard:
             full: "Mission Full"
             unread: "{0}No new message|{1}You have %unread% new message|]1,Inf]You have %unread% new messages"
         close:
-            showmore: "Show more"
+            show_more: "Show more"
             title: "Deleted Mission"
             mission: Mission Closed
+            delete: Delete
+            close: Closed
+        other:
+            none: No other pitch yes
+            none_leg: Other pitch will be available soone
+            advice: Advice
+            in_fact: You are more likely to be selected...
+            get_in_touch: Getting touch
+            contact: Contact
+            see_the_pitch: See the pitch
+            waiting: Waiting
+            answer: Answer
+            mission_status: Mission status
+            show_all_pitch: Show all pitch
 
     contractor:
         new:
@@ -292,7 +311,6 @@ user:
             link_billing: BILLING
             title_algorithm_improvment: algorythm improvment
             title_subscription: subscription
-            email_notification: email notification
     profile_edit:
         advisor:
             btn_save_change: SAVE CHANGE

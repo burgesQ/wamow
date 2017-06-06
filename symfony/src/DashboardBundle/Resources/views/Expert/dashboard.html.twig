@@ -2,100 +2,289 @@
 {% trans_default_domain "tools" %}
 
 {% block body %}
+    <div class="wmw-dashboard col-xs-10 col-xs-offset-1 row">
 
-    {% include "UserBundle:Profile:profile_sidebar.html.twig" %}
-    <div>
-        <p>
-            {{ 'dashboard.advisor.fyi.title' | trans | upper }}
-            {{ 'dashboard.advisor.fyi.text' | trans | upper }}
-        </p>
-        <p>
-            {{ 'dashboard.advisor.new.title' | trans }}
-        </p>
-    </div>
-    <div>
-        {% for new in news %}
-            <li>
-                {{ new.mission.title }}</br>
-                {{ 'dashboard.advisor.new.date' | trans }} {{ new.mission.creationDate | date("m/d/Y") }}</br>
-                {{ new.mission.resume | truncate(20, false, '[...]') }}</br>
-                {{ new.mission.professionalExpertise.name | trans }}</br>
-                $ {{ new.mission.budget }}</br>
-                {{ new.mission.businessPractice.name | trans }}</br>
-                {{ new.mission.applicationEnding | time_diff }}</br>
-                {{ new.mission.address.city }} - {{ new.mission.address.country | upper }}</br>
-                <a href="{{ path('mission_interested', {'missionId': new.mission.id}) }}">{{ 'dashboard.advisor.new.interestedbutton' | trans | upper }}</a>
-            </li>
-        {% endfor %}
-    </div>
+        {# sidebar #}
+        <div class="wmw-dashboard-sidebar col-xs-12 col-lg-2">
+            <div class="sidebar-progress">
+                {% set ringLevel = 50 %}
+                {% if user.images is not empty %}
+                    {% set ringLevel = ringLevel + 25 %}
+                {% endif %}
+                {% if user.linkedinId is not null %}
+                    {% set ringLevel = ringLevel + 25 %}
+                {% endif %}
+                Profil<br/>
+                {{ ringLevel }}%
+            </div>
 
-    <div>
-        <p>
-            {{ 'dashboard.advisor.wip.title' | trans }}
-        </p>
-        {% for wip in wips %}
-        <li>
-            {{ wip.mission.title }}</br>
-            {{ 'dashboard.advisor.wip.date' | trans }} {{ wip.mission.creationDate | date("m/d/Y") }}</br>
-            {{ wip.mission.resume | truncate(20, false, '[...]') }}</br>
-            <a href="{{ path('mission_view', {'missionId': wip.mission.id}) }}">{{ 'dashboard.advisor.wip.showmore' | trans | upper }}</a></br>
-            <a href="{{ path('mission_giveup', {'missionId': wip.mission.id}) }}">{{ 'dashboard.advisor.wip.giveupbutton' | trans | upper }}</a></br>
-            {{ wip.mission.professionalExpertise.name | trans }}</br>
-            $ {{ wip.mission.budget }}</br>
-            {{ wip.mission.businessPractice.name | trans }}</br>
-            {{ wip.mission.applicationEnding | time_diff }}</br>
-            {% set difference = date(wip.mission.missionEnding).diff(date(wip.mission.missionBeginning)) %}
-            {% set days = difference.days %}
-            {% if days > 30 %}
-                {{ (days / 30) | number_format(0) }} months
-            {% else %}
-                {{ days }} days
-            {% endif %}
-            {{ wip.mission.address.city }} - {{ wip.mission.address.country | upper }}</br>
-            {% if wip.status == constant('ACTIVATED', wip) or wip.status == constant('MATCHED', wip) or wip.status == constant('INTERESTED', wip) %}
-                {{ 'dashboard.advisor.wip.interested' | trans }}</br>
-            {% elseif wip.status == constant('ONGOING', wip) %}
-                {{ 'dashboard.advisor.wip.ongoing' | trans }}</br>
-            {% elseif wip.status == constant('SHORTLIST', wip) %}
-                {{ 'dashboard.advisor.wip.shortlist' | trans }}</br>
-            {% elseif wip.status == constant('FINALIST', wip) %}
-                {{ 'dashboard.advisor.wip.finalist' | trans }}</br>
-            {% elseif wip.status == constant('FULL', wip) %}
-                {{ 'dashboard.advisor.wip.full' | trans }}</br>
-            {% elseif wip.status == constant('GIVEUP', wip) %}
-                {{ 'dashboard.advisor.wip.giveup' | trans }}</br>
-            {% elseif wip.status == constant('DISMISS', wip) %}
-                {{ 'dashboard.advisor.wip.dismiss' | trans }}</br>
-            {% elseif wip.status == constant('ENDDATE', wip) %}
-                {{ 'dashboard.advisor.wip.ended' | trans }}</br>
-            {% elseif wip.status == constant('DELETED', wip) %}
-                {{ 'dashboard.advisor.wip.delete' | trans }}</br>
-            {% endif %}
+            <div class="sidebar-notifications">
+                <label for="wmw-profile-notifications">
+                    <i class="icon icon--bell"></i>
+                    Email<br/>notifications
+                </label>
+                <div class="wmw-switchfield wmw-switchfield--small">
+                    <input type="checkbox" id="wmw-profile-notifications" {% if user.notification %}checked{% endif %}
+                           onclick="switchNotification()"/>
+                    <label for="wmw-profile-notifications"></label>
+                </div>
+            </div>
 
-            {% if wip.thread != NULL %}
-                {% set unread = 0 %}
-                {% set break = false %}
-                {% for message in wip.thread.messages | reverse if not break %}
-                    {% if message.metadata[0].isRead == false %}
-                        {% set unread = unread + 1 %}
-                    {% else %}
-                        {% set break = true %}
+            <div class="sidebar-text">
+                <div class="sidebar-text">
+                    <strong>{{ 'dashboard.advisor.fyi.title' | trans | upper }}</strong>
+                    {{ 'dashboard.advisor.fyi.text' | trans | upper }}
+                </div>
+            </div>
+        </div>
+
+        {# new missions #}
+        <div class="wmw-dashboard-main col-xs-12 col-lg-10">
+            <h2 class="main-title"><i class="icon icon--star"></i>{{ 'dashboard.advisor.new.title' | trans }}</h2>
+            <div class="main-slider wmw-slider">
+                <div class="wmw-slider-inner row">
+                    {% for new in news %}
+                        <div class="wmw-slider-element wmw-slider-element--active col-xs-12 col-sm-6 col-md-4">
+                            <div class="main-slider-element">
+                                <div class="main-slider-element-wrapper">
+                                    <div class="main-slider-date">
+                                        {{ 'dashboard.advisor.new.date' | trans }} {{ new.mission.creationDate | date("m/d/Y") }}
+                                        <br></div>
+                                    <div class="main-slider-title">
+                                        {{ new.mission.title }}
+                                    </div>
+                                    <div class="main-slider-desc">
+                                        {{ new.mission.resume | truncate(100, false, '[...]') }}
+                                    </div>
+                                    <div class="main-slider-price">
+                                        <strong>
+                                            {{ new.mission.professionalExpertise.name | trans }}
+                                        </strong>
+                                        ${{ new.mission.budget | trans }}
+                                        <small>
+                                            {{ new.mission.businessPractice.name | trans }}
+                                        </small>
+                                    </div>
+                                    <div class="main-slider-infos">
+                                    <span><i class="icon icon--clock"></i>
+                                        {{ new.mission.applicationEnding | time_diff }}
+                                    </span>
+                                        <span><i class="icon icon--pointer"></i>
+                                            {{ new.mission.address.city }} - {{ new.mission.address.country | upper }}
+                                    </span>
+                                    </div>
+                                </div>
+                                {# ACTION K-C #}
+                                {#<a href="{{ path('mission_interested', {'missionId': new.mission.id}) }}">{{ 'dashboard.advisor.new.interestedbutton' | trans | upper }}</a>#}
+                                <button type="button" data-mission-id="{{ new.mission.id }}"
+                                        class="main-slider-interested wmw-button wmw-button--green">
+                                    <i></i><span>
+                                    {{ 'dashboard.advisor.new.interestedbutton' | trans }}
+                                    </span><i></i>
+                                </button>
+                                {# CKOI CA ? hoover on select ? #}
+                                <div class="main-slider-hover">
+                                <span>
+                                    <i class="icon icon--tick"></i>
+                                    <strong>Added to your missions</strong>
+                                    <a href="#"
+                                       class="wmw-button wmw-button--white"><i></i><span>Submit a proposal</span><i></i></a><br/>
+                                    <a href="#" class="main-slider-hover-all">See all missions</a>
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    <div class="wmw-slider-element wmw-slider-element--special col-xs-12 col-sm-6 col-md-4">
+                        <div class="main-slider-element">
+                            <div class="main-slider-nopitch">
+                                {{ 'dashboard.advisor.other.none' | trans }}
+                                <small>{{ 'dashboard.advisor.other.none_leg' | trans }}</small>
+                            </div>
+                            <div class="main-slider-advice">
+                                <strong>{{ 'dashboard.advisor.other.advice' | trans }}:</strong>
+                                {{ 'dashboard.advisor.other.in_fact' | trans }}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="wmw-slider-navigation">
+                    <a href="#" class="wmw-slider-navigation--prev"><i class="icon icon--arrow"></i></a>
+                    <a href="#" class="wmw-slider-navigation--next"><i class="icon icon--arrow"></i></a>
+                </div>
+            </div>
+
+            {# wip missions #}
+            <h2 class="main-title"><i class="icon icon--document"></i>{{ 'dashboard.advisor.wip.title' | trans }}</h2>
+            <div class="main-missions">
+                {% for wip in wips %}
+                    {% set unread = 0 %}
+                    {% set break = false %}
+                    {% if wip.thread != null %}
+                        {% for message in wip.thread.messages | reverse if not break %}
+                            {% if message.metadata[0].isRead == false %}
+                                {% set unread = unread + 1 %}
+                            {% else %}
+                                {% set break = true %}
+                            {% endif %}
+                        {% endfor %}
                     {% endif %}
-                {% endfor %}
-                {% transchoice unread with {'%unread%': unread} %}dashboard.advisor.wip.unread{% endtranschoice %}
-            {% endif %}
-        </li>
-        {% endfor %}
-    </div>
-    <div>
-        <p>
-            {{ 'dashboard.advisor.close.title' | trans }}
-        </p>
-        {% for close in closes %}
-        <li>
-            {{ close.mission.title }} <a href="{{ path('mission_view', {'missionId': close.mission.id}) }}">{{ 'dashboard.advisor.wip.showmore' | trans | upper }}</a></br>
-        </li>
-        {% endfor %}
-    <div>
 
+                    <div class="main-missions-el main-missions-el--interested row">
+                        <div class="main-missions-el-content col-xs-12 col-md-6">
+                            <div class="content-date">
+                                {{ 'dashboard.advisor.wip.date' | trans }} {{ wip.mission.creationDate | date("m/d/Y") }}
+                            </div>
+                            <div class="content-title">
+                                {{ wip.mission.title }}
+                            </div>
+                            <div class="content-desc">
+                                {{ wip.mission.resume | truncate(100, false, '[...]') }}<br>
+                                <a href="{{ path('mission_view', {'missionId': wip.mission.id}) }}"
+                                   class="wmw-tinylink">{{ 'dashboard.advisor.wip.showmore' | trans | upper }}</a>
+                            </div>
+                            <a href="{{ path('mission_view', {'missionId': wip.mission.id}) }}"
+                               class="content-button wmw-button">
+                                <i></i><span>
+                                    {% if wip.status == constant('MATCHED', wip) or wip.status == constant('INTERESTED', wip) %}
+                                        {{ 'dashboard.advisor.other.get_in_touch' | trans | upper }}
+                                    {% elseif unread > 0 %}
+                                        {{ 'dashboard.advisor.other.answer' | trans | upper }}<br>
+                                    {% elseif wip.status == constant('ONGOING', wip) %}
+                                        {{ 'dashboard.advisor.other.waiting' | trans | upper }}<br>
+                                    {% elseif wip.status == constant('SHORTLIST', wip) %}
+                                        {{ 'dashboard.advisor.other.contact' | trans }}<br>
+                                    {% elseif wip.status == constant('FINALIST', wip) %}
+                                        {{ 'dashboard.advisor.other.contact' | trans }}<br>
+                                    {% endif %}
+                                </span><i></i>
+                            </a>
+                            <a href="{{ path('mission_giveup', {'missionId': wip.mission.id}) }}"
+                               class="content-delete wmw-tinylink">
+                                <i class="icon icon--trashbin"></i> {{ 'dashboard.advisor.wip.giveupbutton' | trans | upper }}
+                            </a>
+                        </div>
+                        <div class="main-missions-el-price col-xs-12 col-md-3">
+                            <span>
+                                <strong>{{ wip.mission.professionalExpertise.name | trans }}</strong>
+                                $ {{ wip.mission.budget }}
+                                <small>{{ wip.mission.businessPractice.name | trans }}</small>
+                            </span>
+                        </div>
+                        <div class="main-missions-el-infos col-xs-12 col-md-3 row">
+                            <span class="infos-el col-xs-6">
+                                <span>
+                                    <i class="icon icon--clock"></i><br/>
+                                    {{ wip.mission.applicationEnding | time_diff }}
+                                </span>
+                            </span>
+                            <span class="infos-el infos-el--status col-xs-6">
+                                <span>
+                                    {% if wip.status == constant('ACTIVATED', wip) or wip.status == constant('MATCHED', wip) or wip.status == constant('INTERESTED', wip) %}
+                                        <i class="icon icon--rocket"></i><br/>
+                                        <small>
+                                            {{ 'dashboard.advisor.other.mission_status' | trans }}
+                                        </small><br/>
+                                        <span class="status">
+                                            {{ 'dashboard.advisor.wip.interested' | trans }}
+                                        </span>
+                                    {% elseif unread > 0 %}
+                                    <i class="icon icon--pen"></i><br />
+                                        <small>
+                                            {{ 'dashboard.advisor.other.mission_status' | trans }}
+                                        </small><br />
+                                        <span class="status">
+                                            {{ 'dashboard.advisor.wip.to_answer' | trans | upper }}
+                                        </span>
+                                        <a href="#">
+                                            {% transchoice unread with {'%unread%': unread} %}dashboard.advisor.wip.unread{% endtranschoice %}
+                                        </a>
+                                    {% elseif wip.status == constant('ONGOING', wip) %}
+                                        <i class="icon icon--chair"></i><br />
+                                        <small>
+                                            {{ 'dashboard.advisor.other.mission_status' | trans }}
+                                        </small><br />
+                                        <span class="status">
+                                                {{ 'dashboard.advisor.wip.waiting' | trans | upper }}
+                                        </span>
+                                    {% elseif wip.status == constant('SHORTLIST', wip) or  wip.status == constant('FINALIST', wip) %}
+                                        <i class="icon icon--selected"></i><br />
+                                        <small>
+                                            {{ 'dashboard.advisor.other.mission_status' | trans }}
+                                        </small><br />
+                                        <span class="status">
+                                                {{ 'dashboard.advisor.wip.selected' | trans | upper }}
+                                        </span>
+                                    {% endif %}
+                                </span>
+                            </span>
+                            <span class="infos-el col-xs-6">
+                                <span>
+                                    <i class="icon icon--calendar"></i><br/>
+                                    {{ wip.mission.missionBeginning | date('M d Y') }}<br/>
+                                    {{ wip.mission.missionEnding | date('M d Y') }}
+                                </span>
+                            </span>
+                            <span class="infos-el col-xs-6">
+                                <span>
+                                    <i class="icon icon--pointer"></i><br/>
+                                    {{ wip.mission.address.city }}<br/>
+                                    {{ wip.mission.address.country }}
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                {% endfor %}
+
+                {# ko mission #}
+                <div class="main-missions-el main-missions-el--closed row">
+                    {% for close in closes %}
+                    <div class="main-missions-el-content col-xs-12 col-md-10">
+                        <div class="content-title">
+                            {{ close.mission.title }}
+                        </div>
+                        <div class="content-links">
+                            <a href="{{ path('mission_view', {'missionId': close.mission.id}) }}" class="content-showmore wmw-tinylink">
+                                <i class="icon icon--eye"></i> {{ 'dashboard.advisor.close.show_more' | trans }}
+                            </a>
+                            <a href="#" class="content-delete wmw-tinylink">
+                                <i class="icon icon--trashbin"></i> {{ 'dashboard.advisor.close.delete' | trans }}
+                            </a>
+                        </div>
+                    </div>
+                    <div class="main-missions-el-infos col-xs-12 col-md-2">
+                        <span class="infos-el infos-el--status">
+                            <span>
+                                <small>
+                                    {{ 'dashboard.advisor.other.mission_status' | trans }}
+                                </small><br/>
+                                <span class="status">
+                                    {{ 'dashboard.advisor.close.close' | trans }}
+                                </span>
+                            </span>
+                        </span>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <a href="#" class="main-missions-more">
+                    {{ 'dashboard.advisor.other.show_all_pitch' | trans }}<i class="icon icon--arrow"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        function switchNotification() {
+            $.ajax({
+                url: "{{ path('user_switch_notification') }}",
+                method: "put"
+            });
+        }
+    </script>
 {% endblock %}
