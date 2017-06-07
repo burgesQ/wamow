@@ -34,7 +34,7 @@ class CompanySize
     *
     * @ORM\ManyToMany(
     *     targetEntity="MissionBundle\Entity\UserWorkExperience",
-    *     mappedBy="companySize"
+    *     mappedBy="companySizes"
     * )
     */
    private $userWorkExperiences;
