@@ -15,30 +15,30 @@ class StepOneFormType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-                'translation_domain' => 'MissionBundle',
-                'label'              => 'mission.new.form.title',
+                'translation_domain' => 'tools',
+                'label'              => 'mission.new.label.title',
                 'required'           => true
             ])
             ->add('resume', TextareaType::class, [
-                'translation_domain' => 'MissionBundle',
-                'label'              => 'mission.new.form.resume',
+                'translation_domain' => 'tools',
+                'label'              => 'mission.new.label.resume',
                 'required'           => true
             ])
             ->add('forLater', SubmitType::class, [
-                'translation_domain' => 'MissionBundle',
+                'translation_domain' => 'tools',
                 'validation_groups'  => false,
-                'label'              => 'mission.new.form.later',
-                'attr'           =>[
+                'label'              => 'form.btn.later',
+                'attr'               => [
                     'style' => $options['stepFour']
                 ]
             ])
             ->add('back', SubmitType::class, [
-                'translation_domain' => 'MissionBundle',
+                'translation_domain' => 'tools',
                 'validation_groups'  => false,
                 'label'              => $options['labelBack']
             ])
             ->add('next', SubmitType::class, [
-                'translation_domain' => 'MissionBundle',
+                'translation_domain' => 'tools',
                 'label'              => $options['labelNext']
             ]);
     }
@@ -51,8 +51,8 @@ class StepOneFormType extends AbstractType
         $resolver->setDefaults([
             'data_class' => 'MissionBundle\Entity\Mission',
             'stepFour'   => 'display: all;',
-            'labelBack'  => 'mission.new.form.cancel',
-            'labelNext'  => 'mission.new.form.next'
+            'labelBack'  => 'form.btn.cancel_mission',
+            'labelNext'  => 'form.btn.next'
         ]);
     }
 }

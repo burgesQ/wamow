@@ -19,8 +19,8 @@ class StepTwoFormType extends AbstractType
     {
         $builder
             ->add('businessPractice', EntityType::class, [
-                'choice_translation_domain' => 'MissionBundle',
-                'translation_domain'        => 'MissionBundle',
+                'choice_translation_domain' => 'tools',
+                'translation_domain'        => 'tools',
                 'choice_label'              => 'name',
                 'placeholder'               => 'businesspractice.title',
                 'multiple'                  => false,
@@ -29,17 +29,17 @@ class StepTwoFormType extends AbstractType
                 'label'                     => true
             ])
             ->add('professionalExpertise', EntityType::class, [
-                'choice_translation_domain' => 'MissionBundle',
-                'translation_domain'        => 'MissionBundle',
+                'choice_translation_domain' => 'tools',
+                'translation_domain'        => 'tools',
                 'choice_label'              => 'name',
                 'placeholder'               => '',
                 'multiple'                  => false,
                 'class'                     => 'MissionBundle:ProfessionalExpertise',
-                'label'                     => 'mission.new.form.professional_expertise'
+                'label'                     => 'professionalexpertises.title'
             ])
             ->add('budget', IntegerType::class, [
-                'translation_domain' => 'MissionBundle',
-                'label'              => 'mission.new.form.budget'
+                'translation_domain' => 'tools',
+                'label'              => 'mission.new.label.budget'
             ])
             ->add('continents', EntityType::class, [
                 'class'                     => 'MissionBundle:Continent',
@@ -56,71 +56,69 @@ class StepTwoFormType extends AbstractType
                 ])
             ])
             ->add('missionBeginning', DateType::class, [
-                'translation_domain' => 'MissionBundle',
+                'translation_domain' => 'tools',
                 'placeholder'        => [
-                    'month' => 'mission.new.form.chooseMonth',
-                    'year'  => 'mission.new.form.chooseYear',
-                    'day'   => 'mission.new.form.chooseDay'
+                    'month' => 'mission.new.label.chooseMonth',
+                    'year'  => 'mission.new.label.chooseYear',
+                    'day'   => 'mission.new.label.chooseDay'
                 ],
                 'pattern'            => "{{ month }}/{{ day }}/{{ year }}",
                 'format'             => 'MMddyyyy',
-                'label'              => 'mission.new.form.missionBeginning',
+                'label'              => 'mission.new.label.missionBeginning',
                 'years'              => range(date('Y'), date('Y') + 5)
             ])
             ->add('missionEnding', DateType::class, [
-                'translation_domain' => 'MissionBundle',
+                'translation_domain' => 'tools',
                 'placeholder'        => [
-                    'month' => 'mission.new.form.chooseMonth',
-                    'year'  => 'mission.new.form.chooseYear',
-                    'day'   => 'mission.new.form.chooseDay'
+                    'month' => 'mission.new.label.chooseMonth',
+                    'year'  => 'mission.new.label.chooseYear',
+                    'day'   => 'mission.new.label.chooseDay'
                 ],
                 'pattern'            => "{{ month }}/{{ day }}/{{ year }}",
                 'format'             => 'MMddyyyy',
-                'label'              => 'mission.new.form.missionEnding',
+                'label'              => 'mission.new.label.missionEnding',
                 'years'              => range(date('Y'), date('Y') + 5)
             ])
             ->add('applicationEnding', DateType::class, [
-                'translation_domain' => 'MissionBundle',
+                'translation_domain' => 'tools',
                 'placeholder'        => [
-                    'month' => 'mission.new.form.chooseMonth',
-                    'year'  => 'mission.new.form.chooseYear',
-                    'day'   => 'mission.new.form.chooseDay'
+                    'month' => 'mission.new.label.chooseMonth',
+                    'year'  => 'mission.new.label.chooseYear',
+                    'day'   => 'mission.new.label.chooseDay'
                 ],
                 'pattern'            => "{{ month }}/{{ day }}/{{ year }}",
                 'format'             => 'MMddyyyy',
-                'label'              => 'mission.new.form.applicationEnding',
+                'label'              => 'mission.new.label.applicationEnding',
                 'years'              => range(date('Y'), date('Y') + 5)
             ])
             ->add('confidentiality', CheckboxType::class, [
-                'translation_domain' => 'MissionBundle',
+                'translation_domain' => 'tools',
                 'required'           => false,
-                'label'              => 'mission.new.form.confidentiality'
+                'label'              => 'mission.new.label.confidentiality'
             ])
             ->add('telecommuting', CheckboxType::class, [
-                'translation_domain' => 'MissionBundle',
+                'translation_domain' => 'tools',
                 'required'           => false,
-                'label'              => 'mission.new.form.telecommuting'
+                'label'              => 'mission.new.label.telecommuting'
             ])
             ->add('address', AddressCountryFormType::class)
-
             ->add('forLater', SubmitType::class, [
-                'translation_domain' => 'MissionBundle',
+                'translation_domain' => 'tools',
                 'validation_groups'  => false,
-                'label'              => 'mission.new.form.later',
+                'label'              => 'mission.new.label.later',
                 'attr'               => [
                     'style' => $options['stepFour']
                 ]
             ])
             ->add('back', SubmitType::class, [
-                'translation_domain' => 'MissionBundle',
+                'translation_domain' => 'tools',
                 'validation_groups'  => false,
                 'label'              => $options['labelBack']
             ])
             ->add('next', SubmitType::class, [
-                'translation_domain' => 'MissionBundle',
+                'translation_domain' => 'tools',
                 'label'              => $options['labelNext']
-            ])
-        ;
+            ]);
     }
 
     /**
@@ -131,8 +129,8 @@ class StepTwoFormType extends AbstractType
         $resolver->setDefaults([
             'data_class' => 'MissionBundle\Entity\Mission',
             'stepFour'   => 'display: all;',
-            'labelBack'  => 'mission.new.form.back',
-            'labelNext'  => 'mission.new.form.next'
+            'labelBack'  => 'form.btn.back',
+            'labelNext'  => 'form.btn.next'
         ]);
     }
 }

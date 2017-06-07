@@ -145,6 +145,12 @@ class Mission
     private $budget;
 
     /**
+     * @ORM\ManyToOne(targetEntity="MissionBundle\Entity\CompanySize")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $companySize;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="beginning", type="datetime", nullable=true)
@@ -263,6 +269,12 @@ class Mission
      * @ORM\JoinColumn(nullable=false)
      */
     private $certifications;
+
+    /**
+     * @ORM\OneToOne(targetEntity="MissionBundle\Entity\WorkExperience", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $workExperience;
 
     /**
      * @var ArrayCollection
@@ -1343,5 +1355,51 @@ class Mission
     public function getOnDraft()
     {
         return $this->onDraft;
+    }
+
+    /**
+     * Set workExperience
+     *
+     * @param \MissionBundle\Entity\WorkExperience $workExperience
+     * @return Mission
+     */
+    public function setWorkExperience(\MissionBundle\Entity\WorkExperience $workExperience = null)
+    {
+        $this->workExperience = $workExperience;
+
+        return $this;
+    }
+
+    /**
+     * Get workExperience
+     *
+     * @return \MissionBundle\Entity\WorkExperience
+     */
+    public function getWorkExperience()
+    {
+        return $this->workExperience;
+    }
+    
+    /**
+     * Set companySize
+     *
+     * @param \MissionBundle\Entity\CompanySize $companySize
+     * @return Company
+     */
+    public function setCompanySize(\MissionBundle\Entity\CompanySize $companySize = null)
+    {
+        $this->companySize = $companySize;
+
+        return $this;
+    }
+
+    /**
+     * Get companySize
+     *
+     * @return \MissionBundle\Entity\CompanySize
+     */
+    public function getCompanySize()
+    {
+        return $this->companySize;
     }
 }

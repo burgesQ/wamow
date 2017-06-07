@@ -381,7 +381,7 @@ class MissionGeneratorController extends Controller
             }
             $newMission->setStatus(Mission::PUBLISHED)->setStatusGenerator(Mission::DONE);
 
-            $jsonConfig = json_decode($em->getRepository('ToolsBundle:Config')->findAll()[0]);
+            $jsonConfig = json_decode($em->getRepository('ToolsBundle:Config')->findOneConfig()->getValue());
             $i          = 0;
             while ($i < $jsonConfig->nbStep) {
                 $i++;

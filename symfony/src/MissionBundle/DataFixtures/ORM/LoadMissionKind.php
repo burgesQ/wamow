@@ -13,7 +13,6 @@ class LoadMissionKind extends AbstractFixture implements OrderedFixtureInterface
   public function load(ObjectManager $manager)
   {
     $names = array(
-        'typemissions.title',
         'typemissions.strategic',
         'typemissions.execution',
         'typemissions.organisationtransformation',

@@ -129,11 +129,18 @@ class ActionController extends Controller
         }
 
         // Count UserMission By the Step
-        if (($step = $em->getRepository('MissionBundle:Step')->findOneby([
-                'mission' => $mission, 'status'  => 1]))
+        if (($step = $em->getRepository('MissionBundle:Step')->findOneby(['mission' => $mission, 'status'  => 1]))
             && ($nStep = $em->getRepository('MissionBundle:Step')->findOneby([
                 'mission'  => $mission, 'position' => $step->getPosition() + 1]))
             && count($userMissionRepo->findAllAtLeastThan($mission, UserMission::FINALIST)) < $nStep->getNbMaxUser()) {
+
+            /** @var UserMission $oneUserMission */
+            foreach ($userMissionRepo->findAllAtLeastThan($mission, UserMission::SHORTLIST) as $oneUserMission) {
+                if ($oneUserMission->getStatus() === UserMission::SHORTLIST) {
+                    $oneUserMission->setStatus(UserMission::DISMISS);
+                }
+            }
+
             $userMission->setStatus(UserMission::FINALIST);
             $nStep->setStatus(1);
             $step->setStatus(0);

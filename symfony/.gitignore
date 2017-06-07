@@ -14,9 +14,6 @@
 /genData.sh
 /web/assetic
 /web/uploads
-/web/css
-/web/js
-/web/uploads
 /web/fonts
 /.idea
 /components

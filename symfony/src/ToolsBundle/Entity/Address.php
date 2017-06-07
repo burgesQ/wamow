@@ -127,6 +127,7 @@ class Address
      *     targetEntity="UserBundle\Entity\User",
      *     inversedBy="addresses"
      * )
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     private $user;
 

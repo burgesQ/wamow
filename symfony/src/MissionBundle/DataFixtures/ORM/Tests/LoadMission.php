@@ -57,7 +57,7 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface, Co
         $continentRepo   = $manager->getRepository('MissionBundle:Continent');
         $proExpRepo      = $manager->getRepository('MissionBundle:ProfessionalExpertise');
         $langRepo        = $manager->getRepository('ToolsBundle:Language');
-        $config          = $manager->getRepository('ToolsBundle:Config')->findAll()[0];
+        $config          = $manager->getRepository('ToolsBundle:Config')->findOneConfig();
 
         $southAmerica   = $continentRepo->findOneBy(['name' => 'continent.south_america']);
         $northAmerica   = $continentRepo->findOneBy(['name' => 'continent.north_america']);
@@ -84,6 +84,7 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface, Co
             $mission
                 ->setTelecommuting($oneMission->telecommuting)
                 ->setStatus(Mission::PUBLISHED)
+                ->setCompanySize($manager->getRepository("MissionBundle:CompanySize")->findOneByName('company_size.large'))
                 ->setConfidentiality($oneMission->confidentiality)
             ;
 
@@ -134,7 +135,6 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface, Co
             $mission->setPublicId(md5(uniqid().$i));
             $this->loadStep($manager, $mission, $jsonConfig);
             $manager->persist($mission);
-            $this->container->get('mission_matching')->setUpPotentialUser($mission);
             $i++;
         }
 
@@ -213,7 +213,6 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface, Co
 
             // persist mission
             $this->loadStep($manager, $mission, $jsonConfig);
-            $this->container->get('mission_matching')->setUpPotentialUser($mission);
 
             $manager->persist($mission);
 

@@ -24,6 +24,8 @@ class StepFourType extends AbstractType
                 'class'                     => 'MissionBundle:WorkExperience',
                 'query_builder'             => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')
+                        ->where('u.name != :create')
+                        ->setParameter('create', 'workexperience.create')
                         ->orderBy('u.id', 'ASC');
                 },
                 'property'                  => 'name',
@@ -41,7 +43,7 @@ class StepFourType extends AbstractType
                 ])
             ])
             ->add('userWorkExperiences', CollectionType::class, [
-                'type'               => new UserWorkEXperienceType(),
+                'type'               => new UserWorkExperienceType(),
                 'allow_add'          => true,
                 'allow_delete'       => true,
                 'allow_extra_fields' => true

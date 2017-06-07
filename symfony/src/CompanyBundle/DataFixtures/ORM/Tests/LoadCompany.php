@@ -21,7 +21,6 @@ class LoadCompany extends AbstractFixture implements OrderedFixtureInterface
         $company = new Company();
         $company
             ->setName('Esso')
-            ->setSize(3)
             ->setResume('Gasoil')
             ->setBusinessPractice($businessPractice)
             ->setAddress($address)

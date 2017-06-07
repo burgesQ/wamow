@@ -39,6 +39,7 @@ class UserWorkExperience
      *     cascade={"persist"},
      *     inversedBy="userWorkExperiences"
      * )
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     private $user;
 
@@ -48,7 +49,7 @@ class UserWorkExperience
      *     inversedBy="userWorkExperiences"
      * )
      */
-    private $companySize;
+    private $companySizes;
 
     /**
      * @ORM\ManyToMany(
@@ -96,7 +97,7 @@ class UserWorkExperience
      */
     public function __construct()
     {
-        $this->companySize    = new ArrayCollection();
+        $this->companySizes    = new ArrayCollection();
         $this->continents     = new ArrayCollection();
         $this->cumuledMonth   = 1;
         $this->dailyFees      = 0;
@@ -238,7 +239,7 @@ class UserWorkExperience
     public function addCompanySize($companySize)
     {
         $companySize->addUserWorkExperience($this);
-        $this->companySize[] = $companySize;
+        $this->companySizes[] = $companySize;
 
         return $this;
     }
@@ -251,7 +252,7 @@ class UserWorkExperience
     public function removeCompanySize($companySize)
     {
         $companySize->removeUserWorkExperience($this);
-        $this->companySize->removeElement($companySize);
+        $this->companySizes->removeElement($companySize);
     }
 
     /**
@@ -259,9 +260,9 @@ class UserWorkExperience
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getCompanySize()
+    public function getCompanySizes()
     {
-        return $this->companySize;
+        return $this->companySizes;
     }
 
     /**

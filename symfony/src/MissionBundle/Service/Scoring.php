@@ -7,23 +7,20 @@ use MissionBundle\Entity\UserMission;
  class Scoring
 {
     protected $em;
+    protected $scoringRules;
+    protected $weightBusinessPractice, $weightProfessionalExpertise, $weightCompanySize, $weightMissionKind, $weightLocation, $weightCertification, $weightWorkExperience;
 
-    protected $weightBusinessPractice, $weightProfessionalExpertise, $weightCompanySize, $weightMissionKind, $weightLocation, $weightCertification;
-
-    public function __construct(\Doctrine\ORM\EntityManager $em, $weightBusinessPractice, $weightProfessionalExpertise, $weightCompanySize, $weightMissionKind, $weightLocation, $weightCertification)
+    public function __construct(\Doctrine\ORM\EntityManager $em, $scoringRules, $weightBusinessPractice, $weightProfessionalExpertise, $weightCompanySize, $weightMissionKind, $weightLocation, $weightCertification, $weightWorkExperience)
     {
         $this->em = $em;
+        $this->scoringRules = $scoringRules;
         $this->weightBusinessPractice = $weightBusinessPractice;
         $this->weightProfessionalExpertise = $weightProfessionalExpertise;
         $this->weightCompanySize = $weightCompanySize;
         $this->weightMissionKind = $weightMissionKind;
         $this->weightLocation = $weightLocation;
         $this->weightCertification = $weightCertification;
-    }
-
-    private function getScoringRules()
-    {
-        return array(0 => array(0, 50), 1 => array(2, 100), 2 => array(4, 200), 3 => array(6, null));
+        $this->weightWorkExperience = $weightWorkExperience;
     }
 
     private function getScoringStep($mission)
@@ -33,7 +30,7 @@ use MissionBundle\Entity\UserMission;
 
     private function updateNextScoring($mission)
     {
-        $scoringRules = $this->getScoringRules();
+        $scoringRules = $this->scoringRules;
         $scoringStep = $this->getScoringStep($mission);
         if (isset($scoringRules[$scoringStep + 1])) {
             $nbDays = $scoringRules[$scoringStep + 1][0];
@@ -60,56 +57,43 @@ use MissionBundle\Entity\UserMission;
         if ($user->getProfessionalExpertise()->contains($mission->getProfessionalExpertise())) {
             $score += $this->weightProfessionalExpertise;
         }
-        // taille entreprise
-        $experiences = $user->getExperienceShaping();
-        $size = $mission->getCompany()->getSize();
+
+        $experiences = $user->getUserWorkExperiences();
+        $companySize = $mission->getCompanySize();
         foreach ($experiences as $experience) {
-            switch ($size) {
-                case 0:
-                    if ($experience->getSmallCompany()) {
-                        $score += $this->weightCompanySize;
-                    }
-                    break;
-                case 1:
-                    if ($experience->getMediumCompany()) {
-                        $score += $this->weightCompanySize;
-                    }
-                    break;
-                case 2:
-                    if ($experience->getLargeCompany()) {
-                        $score += $this->weightCompanySize;
-                    }
-                    break;
+            // taille entreprise
+            if ($experience->getCompanySizes()->contains($companySize)) {
+                $score += $this->weightCompanySize;
+            }
+            // zone géographique
+            foreach ($experience->getContinents() as $userContinent) {
+                if ($mission->getContinents()->contains($userContinent)) {
+                    $score += $this->weightContinent;
+                }
+            }
+            // archétype mission
+            if ($mission->getWorkExperience() && $mission->getWorkExperience() == $experience->getWorkExperience()) {
+
+            }
+        }
+
+        // Certifications
+        foreach ($user->getCertifications() as $certification) {
+            if ($mission->getCertifications()->contains($certification)) {
+                $score += $this->weightCertification;
             }
         }
 
         foreach ($user->getMissionKind() as $missionKind) {
-            // TODO : certifications => No link with User
-            // foreach ($missionKind->getCertifications() as $certification) {
-            //     if ($mission->getCertifications()->contains($certification)) {
-            //         $score += $this->weightCertification;
-            //     }
-            // }
             // type mission
             if ($mission->getMissionKinds()->contains($missionKind)) {
                 $score += $this->weightMissionKind;
             }
         }
 
-        // zone géographique
-        $missionContinents = $mission->getContinents();
-        foreach ($experiences as $experience) {
-            foreach ($experience->getContinents() as $userContinent) {
-                if ($missionContinents->contains($userContinent)) {
-                    $score += $this->weightContinent;
-                }
-            }
-        }
         // rotation
         $score += $user->getScoringBonus();
 
-        // archétype mission
-        // TODO : Valuable work experience => No link with Mission
         return $score;
     }
 
@@ -140,7 +124,7 @@ use MissionBundle\Entity\UserMission;
     public function updateActivated($mission) {
         $scoringHistory = $mission->getScoringHistory();
         $scoringStep = $this->getScoringStep($mission);
-        $scoringRules = $this->getScoringRules();
+        $scoringRules = $this->scoringRules;
         // $matchedUserMissions = $this->em->getRepository("MissionBundle:UserMission")->findBy("mission" => $mission, "status" => UserMission::MATCHED);
         $userMissions = $this->em->getRepository("MissionBundle:UserMission")->findOrderedByMission($mission, $scoringRules[$scoringStep][1]);
         // for JSON

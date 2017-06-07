@@ -127,6 +127,8 @@ class UserMission
         $this->mission      = $mission;
         $this->note         = "";
         $this->proposals    = new ArrayCollection();
+        $mission->addUserMission($this);
+        $user->addUserMission($this);
     }
 
     /**
@@ -370,7 +372,7 @@ class UserMission
     /**
      * Get idForContractor
      *
-     * @return integer 
+     * @return integer
      */
     public function getIdForContractor()
     {
@@ -404,10 +406,33 @@ class UserMission
     /**
      * Get proposals
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getProposals()
     {
         return $this->proposals;
+    }
+
+    /**
+     * Add proposals
+     *
+     * @param \ToolsBundle\Entity\UploadResume $proposals
+     * @return UserMission
+     */
+    public function addProposal(\ToolsBundle\Entity\UploadResume $proposals)
+    {
+        $this->proposals[] = $proposals;
+
+        return $this;
+    }
+
+    /**
+     * Remove proposals
+     *
+     * @param \ToolsBundle\Entity\UploadResume $proposals
+     */
+    public function removeProposal(\ToolsBundle\Entity\UploadResume $proposals)
+    {
+        $this->proposals->removeElement($proposals);
     }
 }

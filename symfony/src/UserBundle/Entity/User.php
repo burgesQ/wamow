@@ -264,6 +264,7 @@ class User extends BaseUser implements ParticipantInterface
      *     mappedBy="user",
      *     cascade={"persist"}
      * )
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     private $userWorkExperiences;
 
@@ -302,6 +303,7 @@ class User extends BaseUser implements ParticipantInterface
      *     mappedBy="user",
      *     cascade={"persist"}
      * )
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     private $addresses;
 

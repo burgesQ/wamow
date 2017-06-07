@@ -2761,6 +2761,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 ->setPlainPassword($oneData[5])
                 ->setRoles(['ROLE_ADVISOR'])
                 ->setEnabled(true)
+                ->setDailyFeesMin(5)
+                ->setDailyFeesMax(15)
             ;
             $newUser->setStatus(User::REGISTER_NO_STEP);
 

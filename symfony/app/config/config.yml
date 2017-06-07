@@ -110,24 +110,6 @@ fos_user:
         address:        server@mail.com # put a valid mail address
         sender_name:    Activation link
 
-## Assetic Configuration
-assetic:
-    assets:
-        jquery:
-            inputs:
-              -       '%kernel.root_dir%/../vendor/components/jquery/jquery.js'
-    debug:            "%kernel.debug%"
-    use_controller:   true
-    bundles:          [ToolsBundle]
-    filters:
-        lessphp:
-            file:     %kernel.root_dir%/../vendor/oyejorge/less.php/lessc.inc.php
-            apply_to: "\.less$"
-        cssrewrite:   ~
-
-## BrainCraftedBootsrap Configuration
-braincrafted_bootstrap:
-    css_preprocessor: lessphp
 
 ## HWIOAuth Configuration
 hwi_oauth:
@@ -177,3 +159,9 @@ parameters:
     scoring_weight.mission_kind: 2
     scoring_weight.location: 1
     scoring_weight.certification: 3
+    scoring_weight.work_experience: 8
+    scoring_rules:
+        0: [0, 5]
+        1: [2, 10]
+        2: [4, 20]
+        3: [6, null]

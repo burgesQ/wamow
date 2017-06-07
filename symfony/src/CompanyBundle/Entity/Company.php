@@ -48,17 +48,6 @@ class Company
     private $updateDate;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="size", type="integer", nullable=false)
-     * @Assert\Range(
-     *      min = 0,
-     *      max=3
-     *)
-     */
-    private $size;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="logo", type="string", length=255, nullable=false)
@@ -251,29 +240,6 @@ class Company
     }
 
     /**
-     * Set size
-     *
-     * @param integer $size
-     * @return Company
-     */
-    public function setSize($size)
-    {
-        $this->size = $size;
-
-        return $this;
-    }
-
-    /**
-     * Get size
-     *
-     * @return integer
-     */
-    public function getSize()
-    {
-        return $this->size;
-    }
-
-    /**
      * Set businessPractice
      *
      * @param \MissionBundle\Entity\BusinessPractice $businessPractice
@@ -320,7 +286,7 @@ class Company
     /**
      * Get address
      *
-     * @return \ToolsBundle\Entity\Address 
+     * @return \ToolsBundle\Entity\Address
      */
     public function getAddress()
     {

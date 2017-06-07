@@ -22,7 +22,7 @@ class UserWorkExperienceType extends AbstractType
                 'class'         => 'MissionBundle:WorkExperience',
                 'attr'          => [
                     'type' => ChoiceType::class,
-
+                    'hidden' => true
                 ],
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')
