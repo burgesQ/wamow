@@ -696,8 +696,19 @@ mails:
         new_password: "Her your new password : %password"
     inbox:
         new_message_mission: You've got a new message on the mission %title.
-        link: Go there to check it.
+        new_pitcher: You've got a new pitcher on the mission %missionName.
+        link: Click there to check it.
         the_team: The team.
+        link: "Go to check it :"
     subject:
          new_message: You've got a new message !
          new_password: Welcome !
+         new_mission: You've got a new potential mission !
+    content:
+        new_contractor: |
+            Hello fName lName
+
+            The new mission missionTitle is a potential mission for your profile.
+            Go on the web site to check it.
+
+            Regards, The Teams.
