@@ -336,7 +336,7 @@ class Mission
         $this->missionKinds    = new ArrayCollection();
         $this->continents      = new ArrayCollection();
         $this->confidentiality = true;
-        $this->telecommuting   = true;
+        $this->telecommuting   = false;
         $this->share           = true;
         $this->reference       = true;
         $this->address         = null;
