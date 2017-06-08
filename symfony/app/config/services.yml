@@ -49,10 +49,10 @@ services:
             - '%scoring_weight.work_experience%'
 
     app.user_mission_listener:
-        class: MissionBundle\Services\UserMissionListener
-          arguments: [ '@mailer', '@translator', %email_sender%' ]
-          tags:
-               - { name: doctrine.event_listener, event: preUpdate, method: preUpdate, entity_manager: default  }
+        class: MissionBundle\Listener\UserMissionListener
+        arguments: [ '@mailer', '@translator', %email_sender%' ]
+        tags:
+            - { name: doctrine.event_listener, event: preUpdate, method: preUpdate, entity_manager: default  }
 
     app.mission_listener:
         class: MissionBundle\Listener\MissionListener

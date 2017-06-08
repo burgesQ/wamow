@@ -6,6 +6,12 @@
     <p>
         <h3>
             The requested page couldn't be located. Checkout for any URL
-            misspelling or <a href="{{ url('dashboard') }}">return to the dashboard</a>.
+            misspelling or
+
+            {% if app.user %}
+                <a href="{{ url('dashboard') }}">return to the dashboard.</a>.
+            {% else %}
+                <a href="{{ url('home_page_expert') }}">return to the homepage.</a>.
+            {% endif %}
         </h3>
 {% endblock %}
