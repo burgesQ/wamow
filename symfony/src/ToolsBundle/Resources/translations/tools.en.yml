@@ -71,7 +71,6 @@ legends:
         background check.
     currency: $
 
-
 ## Common error
 error:
     forbidden: You have no access to this page
