@@ -58,6 +58,18 @@ footer:
     legal: "Legal notice"
     contractor: "Contractor"
 
+legends:
+    title: |
+        85% OF PITCHES ARE FINDING EXPERTS
+        WITHIN 15 DAYS.
+    content: |
+        Having a good matching profile will invrease
+        your succès !So fill in your profile details
+        with attention.
+        Be aware that the User Agreement of www.
+        consultants.wantmore.work require a ID
+        background check.
+
 
 ## Common error
 error:
@@ -279,10 +291,11 @@ mission:
     view:
         more_info: MORE DETIALS
         less_info: LESS DETAILS
-        price_day: $ / days
-        currency_k: K $
         pitched_at: Pitched at date
         certifications: Certification(s)
+        price_day: $ </div> / day
+        currency_k: K $
+        receive_the_pitch: <span> %nb </span> will receive the pitch
         contractor:
             status_advisor: all advisor
             status_shortlist: shortlist
@@ -360,6 +373,9 @@ mission:
             certification: CERTIFICATION / SPECIAL SKILLS
             language: LANGUAGE(S)
             range: PRICE
+            step_three:
+                certif: CERTIFICATION <small> (opptional) </small>
+                lang: work Language
             step_four:
                 professional_expertise: DOMAINE FONCTIONNEL
                 end_pitch: FIN DU PITCH
@@ -368,7 +384,7 @@ mission:
                 telecommuting: SUR SITE
                 confidentiality: ANONYME
                 languages: LANGUES
-                certif: CERTIFICATION
+                certif: CERTIFICATION <small> (opptional) </small>
                 budget: BUDGET
                 price: PRIX
                 concerned: CONSULTANT CONCERNÉS
