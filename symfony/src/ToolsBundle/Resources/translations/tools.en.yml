@@ -46,6 +46,9 @@ header:
         en: "Eng"
         fr: "Fr"
     news: "News"
+    profile: Profile
+    billing: Billing
+    logout: Logout
 
 footer:
     mission: "Mission"
