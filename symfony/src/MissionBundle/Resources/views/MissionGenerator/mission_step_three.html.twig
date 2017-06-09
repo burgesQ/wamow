@@ -105,14 +105,9 @@
 
     {{ form_end(form) }}
 
-            <div class="wmw-onboard-text col-md-2">
-                <p>
-                    {{ 'legends.title' | trans | nl2br }}
-                </p>
-                <p>
-                    {{ 'legends.content' | trans | nl2br }}
-                </p>
-            </div>
+    <div class="wmw-onboard-text col-md-2">
+        {{ 'mission.new.step_three.hint' | trans | raw }}
+    </div>
 {% endblock %}
 
 {% block javascripts %}

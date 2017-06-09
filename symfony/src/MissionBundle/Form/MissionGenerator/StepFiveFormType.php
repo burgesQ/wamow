@@ -18,25 +18,25 @@ class StepFiveFormType extends AbstractType
     {
         $builder
             ->add('lastName', TextType::class, [
-                'translation_domain' => 'MissionBundle',
+                'translation_domain' => 'tools',
                 'empty_data'         => false,
                 'label'              => 'mission.view.step_five.person'
             ])
             ->add('firstName', TextType::class, [
-                'translation_domain' => 'MissionBundle',
+                'translation_domain' => 'tools',
                 'empty_data'         => false,
                 'label'              => false
             ])
             ->add('share', CheckboxType::class, [
-                'translation_domain' => 'MissionBundle',
+                'translation_domain' => 'tools',
                 'label'              => 'mission.new.form.share'
             ])
             ->add('reference', CheckboxType::class, [
-                'translation_domain' => 'MissionBundle',
+                'translation_domain' => 'tools',
                 'label'              => 'mission.new.form.reference'
             ])
             ->add('inspectors', Select2EntityType::class, [
-                'translation_domain' => 'MissionBundle',
+                'translation_domain' => 'tools',
                 'text_property'      => 'name',
                 'remote_route'       => 'inspector_autocomplete',
                 'primary_key'        => 'id',
@@ -51,12 +51,12 @@ class StepFiveFormType extends AbstractType
                 'label'              => 'mission.new.form.cac',
             ])
             ->add('back', SubmitType::class, [
-                'translation_domain' => 'MissionBundle',
+                'translation_domain' => 'tools',
                 'validation_groups'  => false,
                 'label'              => 'mission.new.form.back'
             ])
             ->add('sharePitch', SubmitType::class, [
-                'translation_domain' => 'MissionBundle',
+                'translation_domain' => 'tools',
                 'label'              => 'mission.new.form.share_pitch'
             ])
         ;
