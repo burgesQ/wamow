@@ -38,3 +38,13 @@ user_switch_notification:
     defaults:
         _controller: UserBundle:Action:switchNotification
 
+# Payment
+user_pay_display:
+    path:            /user/topay
+    defaults:
+        _controller: UserBundle:Payment:ToPay
+
+user_pay:
+    path:            /user/pay
+    defaults:
+        _controller: UserBundle:Payment:Pay

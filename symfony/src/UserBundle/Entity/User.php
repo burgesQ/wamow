@@ -329,6 +329,41 @@ class User extends BaseUser implements ParticipantInterface
     private $certifications;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="plan_subscribed_at", type="datetime", nullable=true)
+     */
+    private $planSubscripbedAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="plan_expires_at", type="datetime", nullable=true)
+     */
+    private $planExpiresAt;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="plan_type", type="string", length=255, nullable=true)
+     */
+    private $planType;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="plan_payment_amount", type="integer", nullable=true)
+     */
+    private $planPaymentAmount;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="plan_payment_provider", type="string", length=255, nullable=true)
+     */
+    private $planPaymentProvider;
+
+    /**
      * User constructor.
      */
     public function __construct()
@@ -1324,5 +1359,120 @@ class User extends BaseUser implements ParticipantInterface
     public function getCertifications()
     {
         return $this->certifications;
+    }
+
+    /**
+     * Set planSubscripbedAt
+     *
+     * @param \DateTime $planSubscripbedAt
+     * @return User
+     */
+    public function setPlanSubscripbedAt($planSubscripbedAt)
+    {
+        $this->planSubscripbedAt = $planSubscripbedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get planSubscripbedAt
+     *
+     * @return \DateTime
+     */
+    public function getPlanSubscripbedAt()
+    {
+        return $this->planSubscripbedAt;
+    }
+
+    /**
+     * Set planExpiresAt
+     *
+     * @param \DateTime $planExpiresAt
+     * @return User
+     */
+    public function setPlanExpiresAt($planExpiresAt)
+    {
+        $this->planExpiresAt = $planExpiresAt;
+
+        return $this;
+    }
+
+    /**
+     * Get planExpiresAt
+     *
+     * @return \DateTime
+     */
+    public function getPlanExpiresAt()
+    {
+        return $this->planExpiresAt;
+    }
+
+    /**
+     * Set planType
+     *
+     * @param string $planType
+     * @return User
+     */
+    public function setPlanType($planType)
+    {
+        $this->planType = $planType;
+
+        return $this;
+    }
+
+    /**
+     * Get planType
+     *
+     * @return string
+     */
+    public function getPlanType()
+    {
+        return $this->planType;
+    }
+
+    /**
+     * Set planPaymentAmount
+     *
+     * @param integer $planPaymentAmount
+     * @return User
+     */
+    public function setPlanPaymentAmount($planPaymentAmount)
+    {
+        $this->planPaymentAmount = $planPaymentAmount;
+
+        return $this;
+    }
+
+    /**
+     * Get planPaymentAmount
+     *
+     * @return integer
+     */
+    public function getPlanPaymentAmount()
+    {
+        return $this->planPaymentAmount;
+    }
+
+    /**
+     * Set planPaymentProvider
+     *
+     * @param string $planPaymentProvider
+     * @return User
+     */
+    public function setPlanPaymentProvider($planPaymentProvider)
+    {
+        $this->planPaymentProvider = $planPaymentProvider;
+
+        return $this;
+    }
+
+    /**
+     * Get planPaymentProvider
+     *
+     * @return string
+     */
+    public function getPlanPaymentProvider()
+    {
+        return $this->planPaymentProvider;
     }
 }

@@ -29,7 +29,8 @@
         "oyejorge/less.php": "~1.5",
         "tetranz/select2entity-bundle": "2.*",
         "hackzilla/password-generator-bundle": "^2.0.0",
-        "symfony/assetic-bundle": "^2.8"
+        "symfony/assetic-bundle": "^2.8",
+        "stripe/stripe-php": "^4.12"
     },
     "require-dev": {
         "sensio/generator-bundle": "~3.0",
