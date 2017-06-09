@@ -275,8 +275,12 @@ user:
 ## Mission
 mission:
     view:
+        more_info: MORE DETIALS
+        less_info: LESS DETAILS
         price_day: $ / days
         currency_k: K $
+        pitched_at: Pitched at date
+        certifications: Certification(s)
         contractor:
             status_advisor: all advisor
             status_shortlist: shortlist
@@ -292,10 +296,10 @@ mission:
         advisor:
             btn_back_to_board: back to board
             btn_back_to_global_view: back to global view
-            intrested: Intrested
+            interested: Interested
             finance: |
-                FINANCE
-                $ %price
+                FINANCE <br>
+                <strong>$ %price</strong><br>
                 %professionalExpertise
             on_site: On site
             not_on_site: Not on site

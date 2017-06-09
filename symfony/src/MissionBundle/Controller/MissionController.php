@@ -111,7 +111,6 @@ class MissionController extends Controller
             switch ($userMissionStatus) {
                 // user haven't send any message
                 case ($userMissionStatus === UserMission::MATCHED && !$user->getPayment()) :
-                case ($userMissionStatus === UserMission::ACTIVATED && !$user->getPayment()) :
                 case (UserMission::INTERESTED) :
                     $form = $this->createForm(MessageMissionFormType::class);
                     if ($form->handleRequest($request)->isSubmitted() && $form->isValid()) {
@@ -126,8 +125,7 @@ class MissionController extends Controller
                     'form'         => $form->createView()
                 ]);
                 // user have subscribe, he can send a message
-                case (($userMissionStatus === UserMission::ACTIVATED || $userMissionStatus === UserMission::MATCHED)
-                    && $user->getPayment()) :
+                case ($userMissionStatus === UserMission::MATCHED && $user->getPayment()) :
                     return $this->interestedAction($missionId);
                 // user already have sent a message; the mission isn't shortlisted
                 case (UserMission::ONGOING) :
@@ -280,8 +278,7 @@ class MissionController extends Controller
             throw $this->createNotFoundException($trans->trans('error.mission.limit_reach', [], 'tools'));
         }
         switch (($userMissionStatus = $userMission->getStatus())) {
-            case (UserMission::ACTIVATED) :
-            case (UserMission::ONGOING) :
+            case (UserMission::MATCHED) :
                 if ($user->getPayment()) {
                     // mark user as interested for the mission
                     $userMission->setStatus(UserMission::INTERESTED)->setInterestedAt(new \DateTime());
