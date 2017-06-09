@@ -31,8 +31,6 @@ class StepTwoType extends AbstractType
                 ])
             ])
             ->add('submit', SubmitType::class, [
-                'translation_domain' => 'tools',
-                'label'              => 'registration.advisor.two.nextbutton'
             ])
             ->add('back', SubmitType::class, [
                 'translation_domain' => 'tools',
