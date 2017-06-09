@@ -69,6 +69,7 @@ legends:
         Be aware that the User Agreement of www.
         consultants.wantmore.work require a ID
         background check.
+    currency: $
 
 
 ## Common error
@@ -390,7 +391,12 @@ mission:
                 concerned: CONSULTANT CONCERNÉS
                 languages: LANGUES
                 finance: Finance
-                date_range: "%startDate au %endDate"
+                date_range: "from %startDate to %endDate"
+                on_site: on site
+                not_on_site: not on site
+                confidential: anonymous
+                not_confidential: not anonymous
+                price_day: $ / day
 
 ## Inbox
 inbox:
