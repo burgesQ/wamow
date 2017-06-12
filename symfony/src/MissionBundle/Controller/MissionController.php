@@ -140,6 +140,8 @@ class MissionController extends Controller
                 // user already have sent a message; the mission isn't shortlisted
                 case (UserMission::ONGOING) :
                     $messageService->markAsRead($userMission->getThread()->getLastMessage());
+                    $em->flush();
+
                     return $this->render('@Mission/Mission/Advisor/mission_to_answer.html.twig', [
                         'user_mission' => $userMission,
                         'userId'       => $userMission->getUser()->getId(),
@@ -158,6 +160,7 @@ class MissionController extends Controller
 
                         return $this->redirectToRoute('mission_view', ['missionId' => $missionId]);
                     }
+                    $em->flush();
 
                     return $this->render('@Mission/Mission/Advisor/mission_to_answer.html.twig', [
                         'user_mission' => $userMission,
@@ -207,21 +210,11 @@ class MissionController extends Controller
 
         $messageService = $this->get('fos_message.message_reader');
         switch ($step->getPosition()) {
-            // if mission is in step 1
             case (1) :
+            case (2) :
+            case (3) :
                 $messageService->markAsRead($userMission->getThread()->getLastMessage());
-                return $this->render('@Mission/Mission/Contractor/mission_answer_to_advisor.html.twig', [
-                    'userMission' => $userMission,
-                    'anonymous'   => $step->getAnonymousMode(),
-                    'userId'      => $user->getId(),
-                    'mission'     => $mission,
-                    'interested'  => count($this->getDoctrine()->getRepository('MissionBundle:UserMission')->findAllAtLeastThan($mission, UserMission::ONGOING)),
-                    'shortlisted' => count($this->getDoctrine()->getRepository('MissionBundle:UserMission')->findAllAtLeastThan($mission, UserMission::SHORTLIST)),
-                    'nbAdvisor'   => $userMission->getIdForContractor()
-                ]);
-            // if mission is in step 2
-            case (2):
-                $messageService->markAsRead($userMission->getThread()->getLastMessage());
+                $this->getDoctrine()->getManager()->flush();
                 $userMissions = $this->getDoctrine()->getRepository('MissionBundle:UserMission')->findAllAtLeastThan($mission, UserMission::SHORTLIST);
                 $nbProposale = 0;
                 /** @var UserMission $userMission */
@@ -231,19 +224,15 @@ class MissionController extends Controller
                     }
                 }
 
-                return $this->render('@Mission/Mission/Contractor/mission_answer_to_advisor_shortlist.html.twig', [
+                return $this->render('@Mission/Mission/Contractor/mission_answer_to_advisor.html.twig', [
                     'userMission' => $userMission,
                     'anonymous'   => $step->getAnonymousMode(),
                     'userId'      => $user->getId(),
                     'mission'     => $mission,
-                    'nbProposale' => $nbProposale
-                ]);
-            // if mission is in step 3
-            case (3) :
-
-                return $this->render('@Mission/Mission/Contractor/mission_answer_to_advisor_finalist.html.twig', [
-                    'userMission' => $userMission,
-                    'anonymous'   => $step->getAnonymousMode()
+                    'nbProposale' => $nbProposale,
+                    'interested'  => count($this->getDoctrine()->getRepository('MissionBundle:UserMission')->findAllAtLeastThan($mission, UserMission::ONGOING)),
+                    'shortlisted' => count($this->getDoctrine()->getRepository('MissionBundle:UserMission')->findAllAtLeastThan($mission, UserMission::SHORTLIST)),
+                    'user'        => $user
                 ]);
 
             default:

@@ -105,7 +105,7 @@
         <div class="wmw-mission-body">
             {% for userMission in userMissions %}
                 {% set lastMsg = userMission.thread.messages | last %}
-                {% set read = lastMsg.metadata[0].isRead %}
+                {% set read = lastMsg.metadata[1].isRead %}
                 <div class="wmw-mission-element wmw-mission-element--shortlist">
                     <div class="element-title">
                         {{ userMission.user.firstName }} {{ userMission.user.lastName }}
@@ -140,7 +140,7 @@
                     </div>
                     <div class="element-notes">
                         <div class="edit" id="{{ userMission.id }}">
-                            {{ userMission.note }}
+                            {{ userMission.note | nl2br }}
                         </div>
                     </div>
 
@@ -192,7 +192,13 @@
                 submit: 'Save',
                 indicator: 'Saving...',
                 tooltip: 'Click to edit note',
-                id: $(this).attr('id')
+                id: $(this).attr('id'),
+                data: function(value, settings) {
+                    return value.replace(/<br\s*\/?>\n?/gi, '\n');
+                },
+                callback: function(value, settings) {
+                    $(this).html(value.replace(/\n/g, "<br />"));
+                }
             });
 
             $('[id^="contract_"]').each(function () {

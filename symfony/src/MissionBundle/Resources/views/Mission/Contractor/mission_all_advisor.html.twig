@@ -4,7 +4,6 @@
 {% block body %}
 
     <div class="wmw-mission col-xs-10 col-xs-offset-1">
-
         <a href="{{ path('dashboard') }}" class="wmw-mission-close"><i class="icon icon--cross"></i>{{ 'mission.view.advisor.btn_back_to_board' | trans | upper }}</a>
 
         <div class="wmw-mission-breadcrumbs">
@@ -102,14 +101,20 @@
                     </span>
                 </span>
                 {#<span class="summary-el">#}
-                {#<span>#}
-                {#<i class="icon icon--world"></i><br />#}
-                {#{% if mission.telecommuting %}#}
-                {#{{ 'mission.view.advisor.on_site' | trans }}#}
-                {#{% else %}#}
-                {#{{ 'mission.view.advisor.not_on_site' | trans }}#}
-                {#{% endif %}#}
+                    {#<span>#}
+                        {#<i class="icon icon--world"></i><br />#}
+                        {#{% if mission.telecommuting %}#}
+                            {#{{ 'mission.view.advisor.on_site' | trans }}#}
+                        {#{% else %}#}
+                            {#{{ 'mission.view.advisor.not_on_site' | trans }}#}
+                        {#{% endif %}#}
+                    {#</span>#}
                 {#</span>#}
+                {#<span class="summary-el">#}
+                    {#<span>#}
+                        {#<i class="icon icon--clock"></i><br />#}
+                        {#from {{ mission.missionBeginning | date('m/d/Y') }} to {{ mission.missionEnding | date('m/d/Y') }}#}
+                    {#</span>#}
                 {#</span>#}
                 <span class="summary-el summary-el--answer">
                     <span>
@@ -145,13 +150,14 @@
                                 <a href="{{ path('mission_answer_to_advisor', { 'userMissionId' : userMission.id }) }}"><i class="icon icon--eye"></i> {{ 'inbox.show' | trans }}</a>
                             </div>
                         </div>
+
                         <div class="element-notes">
                             <div class="edit" id="{{ userMission.id }}">
-                                {{ userMission.note }}
+                                {{ userMission.note | nl2br }}
                             </div>
                         </div>
-                        <div class="element-buttons">
 
+                        <div class="element-buttons">
                             {# TODO : HIDE BTN DEPENDING ON THE USERMISSION STATUS #}
                             <button id="refuse_{{ userMission.id }}" type="button" class="wmw-button wmw-button--red wmw-button--border wmw-button--small">
                                 <i></i><span>
@@ -175,8 +181,8 @@
                                 </button>
                                 <input type="checkbox" name="wmw-shortlist[]" />
                             </div>
-
                         </div>
+
                     </div>
                 {% endfor %}
 
@@ -196,7 +202,6 @@
             </div>
 
         </div>
-
     </div>
 
 {% endblock %}
@@ -214,7 +219,13 @@
                 submit: 'Save',
                 indicator: 'Saving...',
                 tooltip: 'Click to edit note',
-                id: $(this).attr('id')
+                id: $(this).attr('id'),
+                data: function(value, settings) {
+                    return value.replace(/<br\s*\/?>\n?/gi, '\n');
+                },
+                callback: function(value, settings) {
+                    $(this).html(value.replace(/\n/g, "<br />"));
+                }
             });
 
             $('[id^="shortlist_"]').each(function () {

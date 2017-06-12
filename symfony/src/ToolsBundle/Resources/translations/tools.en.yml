@@ -290,6 +290,8 @@ user:
 ## Mission
 mission:
     view:
+        more_info: MORE DETAILS
+        less_info: LESS DETAILS
         pitched_at: Pitched at date
         certifications: Certification(s)
         price_day: $ </div> / day
@@ -327,8 +329,8 @@ mission:
             Shortlisted
             MISSION STATUS
         selected: |
-            Selected
-            MISSION STATUS
+            Selected<br>
+            <small>mission status</small>
     action:
         add_to_shortlist: User added to shortlist !
         add_to_contract: User added to contract !
