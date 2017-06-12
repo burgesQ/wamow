@@ -2,8 +2,8 @@
 
 namespace MissionBundle\Form\MissionGenerator;
 
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Validator\Constraints\Count;
 use Tetranz\Select2EntityBundle\Form\Type\Select2EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\RangeType;
@@ -11,6 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractType;
+use Doctrine\ORM\EntityRepository;
 
 class StepThreeFormType extends AbstractType
 {
@@ -31,6 +32,10 @@ class StepThreeFormType extends AbstractType
                 'required'                  => true,
                 'class'                     => 'MissionBundle:MissionKind',
                 'label'                     => false,
+                'query_builder'             => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('e')
+                        ->orderBy('e.id', 'ASC');
+                },
             ])
             ->add('certifications', Select2EntityType::class, [
                 'translation_domain' => 'tools',
@@ -53,15 +58,29 @@ class StepThreeFormType extends AbstractType
                 'entry_type'         => EntityType::class,
                 'translation_domain' => 'tools',
                 'required'           => true,
-                'label'              => 'mission.new.label.language',
+                'label'              => false,
                 'entry_options'      => [
                     'choice_translation_domain' => 'tools',
                     'translation_domain'        => 'tools',
                     'choice_label'              => 'name',
                     'required'                  => true,
                     'class'                     => 'ToolsBundle:Language',
-                    'label'                     => false,
+                    'label'                     => '',
+                ],
+                'attr' => [
+                    'class' => 'col-xs-10 col-md-6 required'
                 ]
+            ])
+            ->add('workExperience', EntityType::class, [
+                'choice_translation_domain' => 'tools',
+                'translation_domain'        => 'tools',
+                'placeholder'               => 'typemissions.title',
+                'choice_label'              => 'name',
+                'multiple'                  => false,
+                'expanded'                  => false,
+                'required'                  => true,
+                'class'                     => 'MissionBundle:WorkExperience',
+                'label'                     => false,
             ])
             ->add('price', RangeType::class, [
                 'translation_domain' => 'tools',

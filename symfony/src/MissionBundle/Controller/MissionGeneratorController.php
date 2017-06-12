@@ -263,9 +263,9 @@ class MissionGeneratorController extends Controller
         }
 
         return $this->render('MissionBundle:MissionGenerator:mission_step_three.html.twig', [
-            'form'    => $formStepThree->createView(),
-            'mission' => $newMission,
-            'user'    => $user
+            'form'      => $formStepThree->createView(),
+            'mission'   => $newMission,
+            'user'      => $user,
         ]);
     }
 

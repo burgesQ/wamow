@@ -80,9 +80,9 @@ class RegistrationAdvisorController extends Controller
         // if form submitted
         if ($form->handleRequest($request)->isSubmitted() && $form->isValid()) {
             if (!$user->getLinkedinId() && !$form->get('resume')->getData()->getFile()) {
-                $form->get('resume')->addError(new FormError($trans->trans('error.upload_resume_or_linkedin', [], 'tools')
+                $form->get('resume')->addError(new FormError($trans->trans('error.upload_resume_or_linkedin', [], 'tools')));
             } elseif($userManager->findUserBy(['email' => $form->get('user')->get('email')->getData()]) !== null) {
-                $form->get('user')->addError(new FormError($trans->trans('error.user.email_in_use', [], 'tools'));
+                $form->get('user')->addError(new FormError($trans->trans('error.user.email_in_use', [], 'tools')));
             } else {
                 $event = new FormEvent($form, $request);
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);

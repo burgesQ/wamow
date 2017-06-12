@@ -32,7 +32,7 @@ class StepTwoFormType extends AbstractType
                 'choice_translation_domain' => 'tools',
                 'translation_domain'        => 'tools',
                 'choice_label'              => 'name',
-                'placeholder'               => '',
+                'placeholder'               => 'professionalexpertises.title',
                 'multiple'                  => false,
                 'class'                     => 'MissionBundle:ProfessionalExpertise',
                 'label'                     => 'professionalexpertises.title'
@@ -92,14 +92,12 @@ class StepTwoFormType extends AbstractType
                 'years'              => range(date('Y'), date('Y') + 5)
             ])
             ->add('confidentiality', CheckboxType::class, [
-                'translation_domain' => 'tools',
-                'required'           => false,
-                'label'              => 'mission.new.label.confidentiality'
+                'required' => false,
+                'label'    => false,
             ])
             ->add('telecommuting', CheckboxType::class, [
-                'translation_domain' => 'tools',
-                'required'           => false,
-                'label'              => 'mission.new.label.telecommuting'
+                'required' => false,
+                'label'    => false,
             ])
             ->add('address', AddressCountryFormType::class)
             ->add('forLater', SubmitType::class, [
