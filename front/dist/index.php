@@ -28,6 +28,9 @@
 			<a href="advisor/mission-interested.php" class="wmw-button">
 				<i></i><span>Advisor - Mission (interested)</span><i></i>
 			</a><br /><br />
+			<a href="advisor/mission-interested-payment.php" class="wmw-button">
+				<i></i><span>Advisor - Mission (interested - payment)</span><i></i>
+			</a><br /><br />
 			<a href="advisor/mission-toanswer.php" class="wmw-button">
 				<i></i><span>Advisor - Mission (to answer)</span><i></i>
 			</a><br /><br />
