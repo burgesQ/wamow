@@ -4,6 +4,7 @@
 {% block body %}
 
     <div class="wmw-mission col-xs-10 col-xs-offset-1">
+
         <a href="{{ path('dashboard') }}" class="wmw-mission-close"><i class="icon icon--cross"></i>{{ 'mission.view.advisor.btn_back_to_board' | trans | upper }}</a>
 
         <div class="wmw-mission-breadcrumbs">
@@ -158,6 +159,7 @@
                         </div>
 
                         <div class="element-buttons">
+
                             {# TODO : HIDE BTN DEPENDING ON THE USERMISSION STATUS #}
                             <button id="refuse_{{ userMission.id }}" type="button" class="wmw-button wmw-button--red wmw-button--border wmw-button--small">
                                 <i></i><span>
@@ -182,7 +184,6 @@
                                 <input type="checkbox" name="wmw-shortlist[]" />
                             </div>
                         </div>
-
                     </div>
                 {% endfor %}
 
@@ -202,6 +203,7 @@
             </div>
 
         </div>
+
     </div>
 
 {% endblock %}
