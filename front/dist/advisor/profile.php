@@ -4,7 +4,7 @@
 			
 			<div class="wmw-dashboard-sidebar col-xs-12 col-lg-2">
 
-				<div class="sidebar-progress">
+				<div class="sidebar-progress sidebar-progress--2">
 					Profil<br />
 					100%
 				</div>
