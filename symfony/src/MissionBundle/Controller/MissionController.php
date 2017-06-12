@@ -44,6 +44,10 @@ class MissionController extends Controller
             if ($user->getCompany() !== $mission->getCompany()) {
                 throw $this->createNotFoundException($trans->trans('error.mission.wrong_company', [], 'tools'));
             }
+
+            $nextMissionId = $this->getDoctrine()->getRepository('MissionBundle:Mission')
+                ->findNextMission($missionId, $mission->getCompany())[0];
+
             switch ($step->getPosition()) {
                 // if mission is step 1
                 case (1) :
@@ -51,8 +55,11 @@ class MissionController extends Controller
                     return $this->render('@Mission/Mission/Contractor/mission_all_advisor.html.twig', [
                         'mission'      => $mission,
                         'interested'   => count($userMissions),
-                        'shortlisted'  => count($userMissionRepo->findAllAtLeastThan($mission, UserMission::SHORTLIST)),
-                        'userMissions' => $userMissions
+                        'shortlisted'  => count($userMissionRepo->findAllAtLeastThan($mission,
+                            UserMission::SHORTLIST)),
+                        'userMissions' => $userMissions,
+                        'nextMission'  => $nextMissionId
+
                     ]);
                 // if mission id step 2
                 case (2) :

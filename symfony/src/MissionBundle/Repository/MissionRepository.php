@@ -19,12 +19,12 @@ class MissionRepository extends EntityRepository
         // TODO : Exclude already SHORTLIST / FINALIST / etc missions
         $qb = $this->_em->createQueryBuilder();
         $qb->select('m')
-        ->from('MissionBundle:Mission', 'm')
-        ->where('m.status = '.Mission::PUBLISHED)
-        ->join('m.steps', 's')
-        ->andWhere('s.status = 1 and s.position = 1')
-        ->andWhere('m.nextUpdateScoring <= :currentDate')
-        ->setParameter("currentDate", date('Y-m-d'))
+            ->from('MissionBundle:Mission', 'm')
+            ->where('m.status = '.Mission::PUBLISHED)
+            ->join('m.steps', 's')
+            ->andWhere('s.status = 1 and s.position = 1')
+            ->andWhere('m.nextUpdateScoring <= :currentDate')
+            ->setParameter("currentDate", date('Y-m-d'))
         ;
         return $qb->getQuery()->getResult();
     }
@@ -263,5 +263,27 @@ class MissionRepository extends EntityRepository
         if ($dql)
             return [$query->getResult(), $query->getDQL()];
         return $query->getResult();
+    }
+
+    /**
+     * Retunr next mission assiocated to the company
+     * (next btn)
+     *
+     * @param integer $missionId
+     * @return array
+     */
+    public function findNextMission($missionId, $company)
+    {
+        $qb = $this->_em->createQueryBuilder();
+
+        $qb->select('m')
+            ->from('MissionBundle:Mission', 'm')
+            ->where('m.id > '.$missionId)
+            ->andWhere('m.company = :company')
+            ->setParameter("company", $company)
+            ->orderBy('m.id', 'ASC')
+        ;
+
+        return $qb->getQuery()->getResult();
     }
 }

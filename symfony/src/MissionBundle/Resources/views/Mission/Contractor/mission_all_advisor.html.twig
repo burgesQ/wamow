@@ -3,126 +3,207 @@
 
 {% block body %}
 
-    {# set up top #}
-    <div class="top">
+    <div class="wmw-mission col-xs-10 col-xs-offset-1">
 
-        {# set up trail #}
-        <div class="trail">
-            <h4>1. {{ 'mission.view.contractor.status_advisor' | trans | upper }} >
-                2. {{ 'mission.view.contractor.status_shortlist' | trans | upper }} <a
-                        href="{{ path('mission_shortlist', {'missionId' : mission.id}) }}">{{ 'mission.view.contractor.btn_proced_to_shortlist' | trans }}</a>
-                > 3. {{ 'mission.view.contractor.status_finalit' | trans | upper }}
-                &nbsp;&nbsp;&nbsp;
-                CrossIcon
-                <a href="{{ path('dashboard') }}">{{ 'mission.view.advisor.btn_back_to_board' | trans | upper }}</a>
-            </h4>
-        </div>
-        <p>
+        <a href="{{ path('dashboard') }}" class="wmw-mission-close"><i class="icon icon--cross"></i>{{ 'mission.view.advisor.btn_back_to_board' | trans | upper }}</a>
 
-            {# set up header #}
-        <div class="header">
-            <div class="info">
-                {{ mission.title }}<br>
-                CertificationIcon Certification:
-                {% for certif in mission.certifications %}
-                {{ certif.name }}
-                {% if not loop.last %}
-                    ,
-                {% endif %}
-                {% endfor %}<br>
-            </div>
-            <div class="intereted">
-                OnterestedIcon<br>
-                {{ interested }} {{ 'dashboard.contractor.mission.interested' | trans }}
-            </div>
-            <div class="selected">
-                {{ shortlisted }}/3 {{ 'dashboard.contractor.mission.selected' | trans }}
-            </div>
-            <div class="finance">
-                {% for kind in mission.missionKinds %}
-                {{ kind.name | trans }}
-                {% if not loop.last %}
-                    ,
-                {% endif %}
-                {% endfor %}<br>
-                {{ 'mission.view.contractor.finance' | trans({ '%price': (mission.price * 1000), '%professionalExpertise': mission.professionalExpertise.name | trans }, 'tools') | nl2br }}
-            </div>
-            <div class="day_left">
-                ClockIcon<br>
-                {{ mission.applicationEnding | time_diff }}
-            </div>
-            <div class="calendar">
-                CalendarIcon<br>
-                {{ mission.missionBeginning | date("M d") }}<br>
-                {{ mission.missionEnding | date("M d") }}
-            </div>
-            <div class="address">
-                PinPointIcon<br>
-                {% if mission.address %}
-                    {% if mission.address.city %}
-                        {{ mission.address.city }}<br>
-                    {% endif %}
-                    {{ mission.address.country | countryName }}
-                {% endif %}
-            </div>
-            <div class="lang">
-                BubleIcon<br>
-                {% for lang in mission.languages %}
-                    {{ lang.name | trans }}
-                    {% if not loop.last %}
-                        ,
-                    {% endif %}
-                {% endfor %}
-            </div>
-            <div class="on_site">
-                EarthIcon<br>
-                {% if mission.telecommuting %}
-                    {{ 'mission.view.advisor.on_site' | trans }}
-                {% else %}
-                    {{ 'mission.view.advisor.not_on_site' | trans }}
-                {% endif %}
-            </div>
-            PencilIcon<br>
-            {{ 'mission.view.to_answer' | trans }}
-        </div>
-    </div>
-    <p>
-
-    {#set up content #}
-    <div class="content">
-
-        {#set up left content#}
-        <div class="resume">
-            Pitched at {{ mission.updateDate | date('d/m/Y') }} <br>
-            {{ mission.resume | nl2br }}
+        <div class="wmw-mission-breadcrumbs">
+            <span class="breadcrumbs-el active">1. {{ 'mission.view.contractor.status_advisor' | trans | upper }}</span>
+            <span class="breadcrumbs-el">
+                2. {{ 'mission.view.contractor.status_shortlist' | trans | upper }}
+                <a href="{{ path('mission_shortlist', { 'missionId' : mission.id }) }}">
+                    <button class="wmw-button wmw-button--black wmw-button--border wmw-button--small">
+                        <i></i><span>
+                            {{ 'mission.view.contractor.btn_proced_to_shortlist' | trans | upper }}
+                        </span><i></i>
+                    </button>
+                </a>
+            </span>
+            <span class="breadcrumbs-el">3. {{ 'mission.view.contractor.status_finalit' | trans | upper }}</span>
         </div>
 
-        {# set up right content #}
-        <div class="user_mission">
-            {% for userMission in userMissions %}
-                <div class="user_pseudo">
-                    <a href="{{ path('mission_answer_to_advisor', { 'userMissionId' : userMission.id}) }}">Advisor {{ userMission.idForContractor }}</a>
+        <div class="wmw-mission-header row">
+            <h1 class="col-xs-12 col-lg-5">
+                {{ mission.title }}
+                <small><i class="icon icon--certification"></i>
+                    {{ 'mission.view.certifications' | trans | humanize }} :
+                    {% for certif in mission.certifications %}
+                        {{ certif.name }}
+                        {% if not loop.last %}
+                            ,
+                        {% endif %}
+                    {% endfor %}
+                </small>
+            </h1>
+
+            <div class="wmw-mission-summarybtn col-xs-12">
+                <a href="#" class="wmw-button wmw-button--small">
+                    <i></i>
+                    <span class='off'>
+                        {{ 'mission.view.more_info' | trans }}
+                    </span>
+                    <span class='on'>
+                        {{ 'mission.view.less_info' | trans }}
+                    </span>
+                    <i></i>
+                </a>
+            </div>
+
+            <div class="wmw-mission-summary col-xs-12 col-lg-7 row">
+                <span class="summary-el">
+                    <span>
+                        <i class="icon icon--avatar"></i><br />
+                        {{ interested }} {{ 'dashboard.contractor.mission.interested' | trans }}
+                    </span>
+                </span>
+                <span class="summary-el summary-el--shortlist">
+                    <span>
+                        <i class="icon icon--star"></i><br />
+                        <span class="number">{{ shortlisted }}</span>/3 {{ 'dashboard.contractor.mission.selected' | trans }}
+                    </span>
+                </span>
+                <span class="summary-el summary-el--salary">
+                    <span>
+                        {{ 'mission.view.contractor.finance' | trans({ '%price': (mission.price * 1000), '%professionalExpertise': mission.professionalExpertise.name | trans }, 'tools') | raw }}
+                        {% for kind in mission.missionKinds %}
+                        {{ kind.name | trans }}
+                        {% if not loop.last %}
+                            ,
+                        {% endif %}
+                        {% endfor %}
+                    </span>
+                </span>
+                <span class="summary-el">
+                    <span>
+                        <i class="icon icon--calendar"></i><br />
+                        {{ mission.applicationEnding | time_diff }}
+                    </span>
+                </span>
+                <span class="summary-el">
+                    <span>
+                        <i class="icon icon--pointer"></i><br />
+                        {% if mission.address %}
+                            {% if mission.address.city %}
+                                {{ mission.address.city }}<br>
+                            {% endif %}
+                            {{ mission.address.country | countryName }}
+                        {% endif %}
+                    </span>
+                </span>
+                <span class="summary-el">
+                    <span>
+                        <i class="icon icon--language"></i><br />
+                        {% for lang in mission.languages %}
+                            {{ lang.name | trans }}
+                            {% if not loop.last %}
+                                ,
+                            {% endif %}
+                        {% endfor %}
+                    </span>
+                </span>
+                {#<span class="summary-el">#}
+                    {#<span>#}
+                        {#<i class="icon icon--world"></i><br />#}
+                        {#{% if mission.telecommuting %}#}
+                            {#{{ 'mission.view.advisor.on_site' | trans }}#}
+                        {#{% else %}#}
+                            {#{{ 'mission.view.advisor.not_on_site' | trans }}#}
+                        {#{% endif %}#}
+                    {#</span>#}
+                {#</span>#}
+                <span class="summary-el summary-el--answer">
+                    <span>
+                        <i class="icon icon--pen"></i><br />
+                        {{ 'mission.view.to_answer' | trans }}
+                    </span>
+                </span>
+            </div>
+        </div>
+
+        <div class="wmw-mission-body">
+
+            {% if nextMission is not null %}
+                <div class="wmw-mission-pagination">
+                    <a href="{{ path('mission_view', { 'missionId' : nextMission.id }) }}">{{ 'mission.view.contractor.next_mission' | trans }}</a>
                 </div>
-                <div class="last_msg">
+            {% endif %}
+
+            <div class="wmw-mission-content row">
+
+                {% for userMission in userMissions %}
                     {% set lastMsg = userMission.thread.messages | last %}
-                    {{ lastMsg.body }}<br>
-                    {{ lastMsg.createdAt | date('D d M h\\hm') }}
+
+                    <div class="wmw-mission-element">
+                        <div class="element-title">
+                            Advisor {{ userMission.idForContractor }}
+                        </div>
+                        <div class="element-content{% if lastMsg.sender.id == userMission.user.id and lastMsg.metadata[1].isRead == false %} element-content--newmessage{% endif %}">
+                            <div class="element-content-title">Advisor {{ userMission.idForContractor }}</div>
+                            {{ lastMsg.body }}
+                            <div class="element-content-bottom">
+                                {{ lastMsg.createdAt | date('D d M h\\hm') }}
+                                <a href="{{ path('mission_answer_to_advisor', { 'userMissionId' : userMission.id }) }}"><i class="icon icon--eye"></i> {{ 'inbox.show' | trans }}</a>
+                            </div>
+                        </div>
+                        <div class="element-notes">
+                            <div class="edit" id="{{ userMission.id }}">
+                                {{ userMission.note }}
+                            </div>
+                        </div>
+                        <div class="element-buttons">
+
+                            {# TODO : HIDE BTN DEPENDING ON THE USERMISSION STATUS #}
+                            <button id="refuse_{{ userMission.id }}" type="button" class="wmw-button wmw-button--red wmw-button--border wmw-button--small">
+                                <i></i><span>
+                                    <i class="icon icon--cross"></i>
+                                    {{ 'mission.view.contractor.btn_refuse' | trans }}
+                                </span><i></i>
+                            </button>
+                            <div class="wmw-checkbutton">
+                                <button type="button" id="shortlist_{{ userMission.id }}" class="wmw-button wmw-button--green wmw-button--border wmw-button--small" {% if userMission.status == constant('SHORTLIST', userMission) %}visibility="hidden"{% endif %}>
+                                    <i></i><span>
+                                        <i class="icon icon--star"></i>
+                                        {{ 'mission.view.contractor.btn_add_to_shortlist' | trans | upper }}
+                                    </span><i></i>
+                                </button>
+
+                                <button id="remove_from_shortlist_{{ userMission.id }}" hidden type="button" class="wmw-button wmw-button--red wmw-button--border wmw-button--small" {% if userMission.status < constant('SHORTLIST', userMission) %}display=none{% endif %}>
+                                    <i></i><span>
+                                        <i class="icon icon--star"></i>
+                                        {{ 'mission.view.contractor.btn_remove_from_shortlist' | trans | upper }}
+                                    </span><i></i>
+                                </button>
+                                <input type="checkbox" name="wmw-shortlist[]" />
+                            </div>
+
+                        </div>
+                    </div>
+                {% endfor %}
+
+
+            </div>
+
+            <div class="wmw-mission-sidebar">
+                <div class="sidebar-wrapper" >
+                    <div class="sidebar-date">
+                        {{ 'mission.view.contractor.pitched_at' | trans({ date : mission.updateDate | date('d/m/Y') }) }}
+                    </div>
+                    <p>
+                        {{ mission.resume | raw }}
+                    </p>
                 </div>
-                <div class="edit" id="{{ userMission.id }}">
-                    {{ userMission.note }}
-                </div>
-                <div class="button_action">
-                    <button id="refuse_{{ userMission.id }}">{{ 'mission.view.contractor.btn_refuse' | trans }}</button>
-                    <button id="shortlist_{{ userMission.id }}" {% if userMission.status == constant('SHORTLIST', userMission) %}hidden{% endif %}>{{ 'mission.view.contractor.btn_add_to_shortlist' | trans | upper }}</button>
-                    <button id="remove_from_shortlist_{{ userMission.id }}" {% if userMission.status < constant('SHORTLIST', userMission) %}hidden{% endif %}>{{ 'mission.view.contractor.btn_remove_from_shortlist' | trans | upper }}</button>
-                </div>
-            {% endfor %}
+                <a href="#" class="sidebar-button"></a>
+            </div>
+
         </div>
+
     </div>
+
 {% endblock %}
 
 {% block javascripts %}
 
+    {{ parent() }}
     <script src="http://www.appelsiini.net/download/jquery.jeditable.js"></script>
     <script src="http://www.appelsiini.net/download/jquery.jeditable.mini.js"></script>
     <script type="text/javascript">
