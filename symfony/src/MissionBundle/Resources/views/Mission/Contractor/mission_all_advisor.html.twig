@@ -66,10 +66,10 @@
                     <span>
                         {{ 'mission.view.contractor.finance' | trans({ '%price': (mission.price * 1000), '%professionalExpertise': mission.professionalExpertise.name | trans }, 'tools') | raw }}
                         {% for kind in mission.missionKinds %}
-                        {{ kind.name | trans }}
-                        {% if not loop.last %}
-                            ,
-                        {% endif %}
+                            {{ kind.name | trans }}
+                            {% if not loop.last %}
+                                ,
+                            {% endif %}
                         {% endfor %}
                     </span>
                 </span>
@@ -102,14 +102,14 @@
                     </span>
                 </span>
                 {#<span class="summary-el">#}
-                    {#<span>#}
-                        {#<i class="icon icon--world"></i><br />#}
-                        {#{% if mission.telecommuting %}#}
-                            {#{{ 'mission.view.advisor.on_site' | trans }}#}
-                        {#{% else %}#}
-                            {#{{ 'mission.view.advisor.not_on_site' | trans }}#}
-                        {#{% endif %}#}
-                    {#</span>#}
+                {#<span>#}
+                {#<i class="icon icon--world"></i><br />#}
+                {#{% if mission.telecommuting %}#}
+                {#{{ 'mission.view.advisor.on_site' | trans }}#}
+                {#{% else %}#}
+                {#{{ 'mission.view.advisor.not_on_site' | trans }}#}
+                {#{% endif %}#}
+                {#</span>#}
                 {#</span>#}
                 <span class="summary-el summary-el--answer">
                     <span>

@@ -58,7 +58,8 @@ class MissionController extends Controller
                         'shortlisted'  => count($userMissionRepo->findAllAtLeastThan($mission,
                             UserMission::SHORTLIST)),
                         'userMissions' => $userMissions,
-                        'nextMission'  => $nextMissionId
+                        'nextMission'  => $nextMissionId,
+                        'user'         => $this->getUser(),
 
                     ]);
                 // if mission id step 2
@@ -75,7 +76,9 @@ class MissionController extends Controller
                         'mission'      => $mission,
                         'shortlisted'  => count($userMissions),
                         'userMissions' => $userMissions,
-                        'nbProposale'  => $nbProposale
+                        'nbProposale'  => $nbProposale,
+                        'nextMission'  => $nextMissionId,
+                        'user'         => $this->getUser()
                     ]);
                 // if mission is step 3
                 case (3) :
