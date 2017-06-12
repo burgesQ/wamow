@@ -256,7 +256,6 @@ class MissionGeneratorController extends Controller
 
             $newMission->setStatusGenerator(Mission::STEP_THREE);
             $em->flush();
-            $this->get('mission_matching')->setUpPotentialUser($newMission);
 
             return $this->redirectToRoute('mission_new_step_four', [
                 'missionId' => $newMission->getId()
@@ -264,9 +263,9 @@ class MissionGeneratorController extends Controller
         }
 
         return $this->render('MissionBundle:MissionGenerator:mission_step_three.html.twig', [
-            'form'    => $formStepThree->createView(),
-            'mission' => $newMission,
-            'user'    => $user
+            'form'      => $formStepThree->createView(),
+            'mission'   => $newMission,
+            'user'      => $user,
         ]);
     }
 

@@ -46,6 +46,9 @@ header:
         en: "Eng"
         fr: "Fr"
     news: "News"
+    profile: Profile
+    billing: Billing
+    logout: Logout
 
 footer:
     mission: "Mission"
@@ -55,6 +58,19 @@ footer:
     legal: "Legal notice"
     contractor: "Contractor"
 
+legends:
+    title: |
+        85% OF PITCHES ARE FINDING EXPERTS
+        WITHIN 15 DAYS.
+    content: |
+        Having a good matching profile will invrease
+        your succès !So fill in your profile details
+        with attention.
+        Be aware that the User Agreement of www.
+        consultants.wantmore.work require a ID
+        background check.
+    currency: $
+
 
 ## Common error
 error:
@@ -62,6 +78,7 @@ error:
     logged: You're not logged
     user:
         subscribe: Please Subscribe
+        email_in_use: Email allready in use.
     user_mission:
         not_found: No such userMission entity (%id)
         cant_giveup: Uou can't give up this mission.
@@ -85,6 +102,7 @@ error:
             no_advisor: No advisor selected for the Finalist step.
     action:
         failed: Action failed.
+    upload_resume_or_linkedin: Please Upload a resume or link your account with Linkedin
 
 ## Home
 home:
@@ -272,8 +290,13 @@ user:
 ## Mission
 mission:
     view:
-        price_day: $ / days
+        more_info: MORE DETIALS
+        less_info: LESS DETAILS
+        pitched_at: Pitched at date
+        certifications: Certification(s)
+        price_day: $ </div> / day
         currency_k: K $
+        receive_the_pitch: <span> %nb </span> will receive the pitch
         contractor:
             status_advisor: all advisor
             status_shortlist: shortlist
@@ -289,10 +312,10 @@ mission:
         advisor:
             btn_back_to_board: back to board
             btn_back_to_global_view: back to global view
-            intrested: Intrested
+            interested: Interested
             finance: |
-                FINANCE
-                $ %price
+                FINANCE <br>
+                <strong>$ %price</strong><br>
                 %professionalExpertise
             on_site: On site
             not_on_site: Not on site
@@ -351,6 +374,9 @@ mission:
             certification: CERTIFICATION / SPECIAL SKILLS
             language: LANGUAGE(S)
             range: PRICE
+            step_three:
+                certif: CERTIFICATION <small> (opptional) </small>
+                lang: work Language
             step_four:
                 professional_expertise: DOMAINE FONCTIONNEL
                 end_pitch: FIN DU PITCH
@@ -359,13 +385,18 @@ mission:
                 telecommuting: SUR SITE
                 confidentiality: ANONYME
                 languages: LANGUES
-                certif: CERTIFICATION
+                certif: CERTIFICATION <small> (opptional) </small>
                 budget: BUDGET
                 price: PRIX
                 concerned: CONSULTANT CONCERNÉS
                 languages: LANGUES
                 finance: Finance
-                date_range: "%startDate au %endDate"
+                date_range: "from %startDate to %endDate"
+                on_site: on site
+                not_on_site: not on site
+                confidential: anonymous
+                not_confidential: not anonymous
+                price_day: $ / day
 
 ## Inbox
 inbox:
@@ -696,8 +727,19 @@ mails:
         new_password: "Her your new password : %password"
     inbox:
         new_message_mission: You've got a new message on the mission %title.
-        link: Go there to check it.
+        new_pitcher: You've got a new pitcher on the mission %missionName.
+        link: Click there to check it.
         the_team: The team.
+        link: "Go to check it :"
     subject:
          new_message: You've got a new message !
          new_password: Welcome !
+         new_mission: You've got a new potential mission !
+    content:
+        new_contractor: |
+            Hello fName lName
+
+            The new mission missionTitle is a potential mission for your profile.
+            Go on the web site to check it.
+
+            Regards, The Teams.

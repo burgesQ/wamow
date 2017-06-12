@@ -35,6 +35,440 @@ dashboard:
     advisor:
         interested:
 
+mission:
+    all_missions:
+        title: "Toutes les missions disponibles"
+        start: "commencer"
+        delete: "supprimer"
+        pitch: "pitch"
+    edit:
+        title: "Edition de la mission"
+        warning: "Vous éditez une mission qui existe déjà."
+        cancel: "Retour à la mission."
+        successEdit: "Mission éditée avec succès."
+
+    new:
+        label:
+            step_three:
+                certif: Certification <small> (optionnel) </small>
+                lang: Langue(s) de travaille
+            range: Prix
+        form:
+            back_resume: REVENIR AU RESUME
+            save_mod: APPLIQUER LES MODIFICATIONS
+            later: FINIR PLUS TARD
+            next: NEXT
+            back: BACK
+            print: PRINT
+            edit: edit
+            share_pitch: DIFFUSER LE PITCH
+            title: TITRE DU PITCH
+            resume: DESCRIPTION DU PROJET (500 MOTS)
+            business_practice: Secteur d'activité
+            professional_expertise: DOMAINE FONCTIONNEL
+            budget: BUDGET ESTIMÉ
+            confidentiality: Entreprise anonyme
+            telecommuting: Présence sur site requise
+            country: PAYS
+            applicationEnding: DATE LIMITE DE RÉPONSE AU PITCH
+            missionBeginning: DÉBUT DE MISSION
+            missionEnding: FIN DE MISSION ESTIMÉE
+            north_america: North America
+            south_america: South AMerica
+            emea: EMEA
+            asia: Asia - Pacific
+            range: PRIX
+            language: LANGUE(S) DE TRAVAILLE
+            company: Société
+            share: diffuser le pitch ci-dessous rédigé a la communauté d'expert consultants.wantmore.work
+            reference: diffuser le nom de l'entreprise comme une référence
+            chooseDay: Jours
+            chooseMonth: Mois
+            chooseYear: Annee
+            first_name: Prenom
+            last_name: Nom
+            +: +
+            certification: Cértification / Compétences Spécifique
+
+        step_one:
+            title: Le pitch
+            subtitle: COMMENCONS PAR LE COMMENCEMENT
+            hint: |
+                <p>FIRST STEP :</p>
+                <p>Commenecez part rédiger le
+                pitch de votre recherche.
+                Exposer vos probléma
+                tique de manière simple et
+                concise.<br>
+                Il est possible de sauvegar
+                der vos brouillons pour y
+                revenir plus tard.<br>
+                Vous pouvez bénéficier
+                d'une assistance si vous le
+                desirez au 01.75.77.52.727
+
+        step_two:
+            title: Caractéristiques de la mission
+            subtitle: DITES-NOUS EN PLUS !
+            hint: |
+                <p>SECOND STEP :</p>
+                Séléctionner le secteur et le
+                domain fonctinonel corres
+                podant  à votre recherche.
+                (1 seul choix possible par
+                catégorie)<br>
+                L'option "entreprise ano
+                nyme", activée par defaut,
+                vous permet de masquez le
+                nom de votre l'entreprise aux
+                advisors.</p>
+
+        step_three:
+            title: Typologie de mission
+            subtitle: ET CONCERNANT VOTRE FUTUR COLLABORATEUR ?
+            hint: |
+                THIRD STEP :<br><br>
+                BLABLAS<br>
+                BLABLA<br>
+            si_consult: Conseil en SI
+            organisation_consult: Conseil en organisation
+
+        step_four:
+            title: Resume
+            subtitle: TRES BIEN, FAISONS UN PETIT POINT
+            hint: |
+                <p>FOURTH STEP :</p>
+                <p>Relisez attentivement les
+                informations avant de confir
+                mez l'envoi.</p>
+
+        step_five:
+            title: Final Step
+            subtitle: DERNIERE ETAPE ET NOUYS Y SOMMES
+            hint: |
+                <p>FINAL STEP:</p>
+                <p>Derniere étape avant l'envoi
+                du pitch aux expert. Vous
+                serez orienté vers un site de
+                payement de ligne.</p>
+
+    view:
+        country: Pays de la mission
+        link: Creer un nouveau Pitch
+        draft: Pitch en cours de creation
+        price_day: € </div> / jour
+        currency_k: 'k€'
+        receive_the_pitch: <span> %nb </span> recevront le pitch
+
+        step_four:
+            professional_expertise: DOMAINE FONCTIONNEL
+            end_pitch: FIN DU PITCH
+            start_mission: DATE DE MISSION
+            mission_kind: TYPOLOGIE
+            telecommuting: SUR SITE
+            confidentiality: ANONYME
+            languages: LANGUES
+            certif: CERTIFICATION
+            budget: BUDGET
+            price: PRIX
+            concerned: CONSULTANT CONCERNÉS
+            languages: LANGUES
+            finance: Finance
+            date_range: "%startDate au %endDate"
+
+        step_five:
+            introduction: |
+                Consultants.wantmore.work est une marque BestAdvizor SAS, Societe au capitale de 51.000 euros - RCS Paris <br>
+                815 362 736 - Siège social : 116 Av Felix Faure 75015 Paris Buraux : 18 avenue Franklin D. Roosvelt 75008 <br>
+                Paris
+            person: "Je sousigné "
+            company: "déclare etre habilité a contractualiser pour la société <big>%company</big> autorise BestAdvizor SAS a :"
+            cac: "et avoir déclaré comme commissaires aux comptes :"
+            name: nom
+            ending: |
+                BestAdvizor met en relation une expression de besoin (Pitch) - en accompagnamt le demandeur dans <br>
+                sa formulation et des experts sur la base de la proposition de solution. BestAdvizor n'est pas un <br>
+                cabinet de conseil et son engagement se limite a cette mise en relation qualifiée. Sa responsabilité <br>
+                ne saurait etre engagé sur le delivrable de la mission en lui meme. Clause attributive de <br>
+                competence: tous les litiges relatif a l'application de la présente seront de la compétence <br>
+                exclusive du Tribunal de Commerce de Paris. <br><br>
+                La Société se reserve le droit de faire état des pitches realisés et des noms des clients, de les divulguer a titre de références.
+
+    registered:
+        success: "Mission sauvegardée !"
+        see: "Voir votre mission"
+        edit: "Editer votre mission"
+        another: "Créer une nouvelle mission"
+    error:
+        authorized: "Vous n'êtes pas autorisé à créer une mission."
+        logged: "Vous n'êtes pas connecté."
+        contractor: "Seul un expert peut éditer une mission."
+        wrongId: "La misssion %id% n'existe pas."
+        notYourMission: "Vous ne pouvez pas éditer une mission que vous n'avez pas crée."
+        available: "La mission %id% n'est pas disponible."
+        right: "Vous n'avez pas crée cette mission."
+        advisor: "Vous n'avez pas accès à cette page."
+        needCompany: "Veuillez rejoindre une entreprise avant de créer une mission"
+        wrongcompany: "Vous n'appartenez pas à la bonne entreprise"
+    pitch:
+        done: "Vous venez de postuler."
+        twice: "Vous avez déjà postulé à cette mission."
+        contractor: "Vous ne pouvez pas pitcher"
+    selection:
+        choose: "Advisors disponibles :"
+        selected: "Advisors selectionnées :"
+        step: "Étape"
+        delete: "Vous devez garder au moins un advisor."
+        counter: "Vous ne pouvez plus supprimer d'advisor."
+        minimum: "Selectionnez entre un et %limit% advisors."
+        takeBack: "Vous en avez supprimez une par erreur ?"
+        takeBackError: "Vous ne pouvez plus reprendre d'advisor."
+        pick: "Choississez en une de l'étape précédente."
+        finish: "Vous avez choisis l'advisor numero %id%, votre mission peut maintenant commencer."
+        saveButton: "Selectionner"
+        saveButton2: "Reprenez ces advisors"
+        saveButton3: "Prochaine étape"
+        saveButton4: "Supprimer"
+        limit: "%limit% suppression(s) disponible(s)"
+    pitch:
+        title: "Mes pitchs"
+        giveUp: "Abandonner"
+
+businesspractice:
+    title: "Secteur d'activité"
+    industry: "Industrie"
+    finance: "Finance - Banque - Assurance"
+    retail: "Commerce - Distribution"
+    media: "Media - Telecom - Industrie des jeux"
+    tourism: "Tourisme"
+    construction: "Construction BTP hors immobilier"
+    realestate: "Immobilier"
+    hotel: "Hôtellerie - Restauration et Loisirs"
+    services: "Services (y compris transports)"
+    energy: "Energie"
+    it: "Systèmes d’information - IT"
+    public: "Administration et opérateurs publics"
+    ngo: "Association et organisation non gouvernementale (ONG)"
+
+professionalexpertises:
+    title: "Expériences Techniques"
+    businessunitmanager: "Direction/gestion d'un centre de profit (Business Unit)"
+    humanresources: "Ressources Humaines/Organisation"
+    purchasing: "Achats"
+    production: "Production"
+    salesbusinessdevelopment: "Commercial et développement"
+    marketinginnovation: "Marketing - Innovation - CRM"
+    communication: "Communication"
+    financeaccounting: "Finance et Comptabilité"
+    controlling: "Contrôle de gestion"
+    it: "IT"
+    customerservicesupport: "Administration des ventes"
+    distribution: "Distribution"
+    researchdevelopment: "R&D"
+    administrativemanagement: "Administration"
+    operations: "Opérations"
+    riskmanagement: "Risk Management"
+    qualitycontrol: "Contrôle Qualité"
+    assetmanagement: "Gestion d'actifs"
+    supplychain: "Logistique"
+    digital: "Digital"
+    law: "Juridique"
+    csr: "RSE"
+
+typemissions:
+    title: "Typologie de mission"
+    strategic: "Conseil en stratégie"
+
+    csp: "Conseil SI CSP"
+    moa: "Conseil SI MOA"
+    moe: "Conseil SI MOE"
+    tma: "Conseil SI TMA"
+    infrastructure: "Conseil SI Infrastructure"
+    migration: "Conseil SI Migration"
+    implementation: "Conseil SI Implementation"
+
+    execution: "Conseil opérationnel"
+    organisationtransformation: "Conseil en Organisation et Transformation"
+    change: "Conseil en change / accompagnement du changement"
+    businessreingeniering: "Conseil en reingeniering"
+
+    interimmanagement: "Interim Management"
+    recruitment: "Conseil en recrutement - Chasses de têtes"
+    coaching: "Coaching"
+    learning: "Formation"
+    audit: "Audit"
+    costkilling: "Conseil en réduction de coûts"
+    outplacement: "Outplacement"
+    certification: "Certification"
+    outsourcing: "Outsourcing et externalisation"
+    mediation: "Médiation"
+    communication: "Communication"
+    knowledgemanagement: "Knowledge management"
+    crm: "CRM"
+
+workexperience:
+    title : "Expériences / Missions"
+    create : "Créer sa propre expérience (soumis à un temps d'approbation - expérience non active immédiatement)"
+    standardization : "Harmonisation des règles et des pratiques"
+    transformation : "Pilotage de la transformation"
+    scope : "Cadrage de mission"
+    management : "Pilotage de projet (Project Management Office)"
+    newfunction : "Création de fonction"
+    redesignfunction : "Réorganisation de fonction"
+    developmentroadmap : "Plan de développement de filiales"
+    actionplan : "Plan d'action"
+    growthdevelopment : "Cadrage d'opportunités et lancement de nouvelles sociétés"
+    diagnosisfunction : "Diagnostic de fonction"
+    postmerger : "Accompagnement au projet de fusion de sites"
+    potentialsynergies : "Etude de synergies potentielles liées à un rapprochement"
+    economicmodelisations : "Modélisation économique"
+    studies : "Etudes"
+    bestpracticesbenchmark : "Benchmark de meilleures pratiques"
+    offshore : "Infogérance Offshore"
+    swap : "Analyse \"SWAP\""
+    outsourcing : "Externalisation"
+    rationalisation : "Rationalisation"
+    riskmanagement : "Gestion des risques"
+    changemanagement : "Mise en œuvre de la conduite du changement"
+    restructuringplan : "Plan de restructuration"
+    performancediagnosis : "Diagnostic d’amélioration de la performance"
+    operationalprocessredesign : "Redéfinition des processus opérationnels"
+    decisionmakingprocess : "Diagnostic décisionnel et organisationnel"
+    kpi : "Mise en place de KPI"
+    acquisitionstrategyandexternalgrowthopportunities : "Stratégie d’acquisition / opportunités de croissance externe"
+    targetanalysis : "Analyse de la cible"
+    strategicduediligences : "Due Diligences stratégiques (ou analyse pré-opérations stratégiques)"
+    postacquisitionroadmap : "Intégration post acquisition"
+    jointventures : "Joint-Ventures"
+    transfertoperationalmanagement : "Cession d’entreprises ou d’entités (désinvestissements)"
+    portfoliovaluation : "Valorisation de portefeuille"
+    cessionsstrategy : "Stratégie de sortie"
+    fundmanagementstrategy : "Stratégie de fonds et stratégie sectorielle"
+    investmentstrategy : "Stratégie des investisseurs institutionnels"
+    transitionplan : "Plan de transition"
+    costevaluation : "Evaluation des coûts"
+    costtransformation : "Transformation pérenne des coûts"
+    cashandinvestmentmanagement : "Gestion des liquidités et des investissements"
+    conceptionofbudgetprocessandimplementationofbudgettools : "Élaboration et mise en place d'outils budgétaires"
+    buildinganalyticalmodel : "Construction de modèle analytique"
+    abcmethod : "Méthode \"ABC\""
+    abmmethod : "Méthode \"ABM\""
+    budgetplan : "Planification budgétaire"
+    budgetprocessredesign : "Redéfinition de cycles budgétaires"
+    reducingreportingprocess : "Réduction des délais de production de reporting"
+    reducingaccountableprocess : "Réduction des délais de production de clôture comptable"
+    cashoptimization : "Cash optimisation"
+    bankregulatorycompliance : "Réglementaire banque"
+    insuranceregulatorycompliance : "Réglementaire assurance"
+    iriskmanagement : "Risk Management (Techniques d'Assurance)"
+    assetallocation : "Allocation d'actifs"
+    audit : "Audit"
+    customerknowledge : "Connaissance clients"
+    categorymanagement : "Gestion de produits ou catégories"
+    pricing : "Politique de prix (pricing)"
+    salespolicyefficiency : "Efficacité des ventes"
+    salesdistributionefficiency : "Efficacité des canaux"
+    customerexperience : "Expérience client"
+    customerrelationshipmanagement : "Loyauté clients ou fidélisation des clients"
+    businessdevelopmentpriorities : "Identification des priorités de développement"
+    strategicmarketingplan : "Plan marketing stratégique"
+    salesgotomarketstrategy : "Stratégie commerciale"
+    newofferlaunches : "Lancement de nouvelles offres"
+    testsandpilots : "Développement de pilotes et tests (lab. clients)"
+    competitorsbenchmarkanalysis : "Analyse de la structure de la concurrence"
+    relationshipofpartnershipsandstockholders : "Partenariats et alliances"
+    marketsegmentation : "Segmentation de marchés"
+    brandstrategy : "Stratégie de marques"
+    coremodel : "Core Model"
+    roadmap : "Road Map"
+    itstrategy : "Stratégie de développement IT"
+    itperformanceimprovement : "Amélioration de la performance IT"
+    projectitefficiency : "Efficacité des projets IT"
+    itpoliciesgovernance : "Gouvernance des SI"
+    implementationofnewtechnologies : "Déploiement des nouvelles technologies en ligne / cloud computing / objets connectés / systèmes embarqués"
+    auditit : "Audit informatique"
+    masterplan : "Schéma directeur"
+    alignsolutionandoperationalneeds : "Cadrer la solution sur les besoins métier"
+    itarchitecture : "Architecture des SI"
+    itriskmanagement : "Risk management des SI"
+    systemsecurity : "Sécurité des systèmes"
+    activitycontinuationplan : "Plan de continuité d'activité"
+    projectmanagementassistance : "Assistance à maîtrise d'ouvrage"
+    specificationandtesting : "Spécification et recettes"
+    currentitsystemlayout : "Cartographie des systèmes existants"
+    businessrequirements : "Expression de besoins"
+    statementofwork : "Rédaction des cahiers des charges"
+    bidsollicitationmanagement : "Gestion des appels d'offres"
+    solutionselection : "Choix de la solution"
+    digitalstrategy : "Stratégie digitale"
+    e-commercestrategy : "Stratégie e-commerce"
+    digitalperformancediagnosis : "Diagnostic de performance digitale"
+    implementationofcollaborativeportalswebsites : "Déploiement de portails collaboratifs"
+    retaildigitalisation : "Digitalisation de centres commerciaux ou de réseaux physiques de distribution"
+    processdesign : "Design de process"
+    reengineeringprocess : "Re ingéniering de process"
+    identificationofbestsupplychainpractices : "Identification de qualification logistique"
+    sharecenterservicesimplementation : "Mise en place de CSP"
+    automatisation : "Automatisation"
+    stockoptimisation : "Optimisation de stocks"
+    deliveryoptimisation : "Optimisation de circuits de livraison"
+    ergonomicstandardofwarehouse : "Ergonomie d'entrepôts"
+    complexityreduction : "Réduction de la complexité (nombre de références)"
+    internalcommunication : "Communication interne"
+    humanressourcescommunication : "Communication sociale"
+    institutionalcommunication : "Communication institutionnelle"
+    evenementialcommunication : "Communication événementielle"
+    crisiscommunication : "Communication de crise"
+    implementcommunicationplan : "Mise en place de plan de communication"
+    chainvalueoptimization : "Optimisation de la chaîne de valeur"
+    packaging : "Packaging"
+    redesigntoreducecost : "Redesign to cost"
+    procurementmanagementoptimisation : "Synergie d'achats lors de rapprochement"
+    costreduction : "Réduction des coûts"
+    leanmanagement : "Lean Management"
+    callcenterimplementation : "Déploiement de centres d'appels"
+    satisfactionsurvey : "Enquêtes de satisfaction de l'usage"
+    qualitymanagementcallcenter : "Suivi de la qualité des centres d'appel"
+    successionplan : "Succession plan"
+    talentevaluation : "Evaluation des compétences"
+    talentdevelopment : "Acquisition des compétences"
+    prospectivetalent : "GPEC"
+    administration : "Gestion administrative"
+    talentmanagement : "Talent management"
+    internalmobility : "Mobilité"
+    recruitment : "Recrutement"
+    organizatiotransformation : "Accompagner la transformation des organisations"
+    strategyorganization : "Définir la stratégie et l'organisation RH"
+    compensationbenefitsplanmanagement : "Gestion administrative et paie"
+    functionimprovement : "Professionnalisation de la fonction RH"
+    payrolloptimisation : "Contrôle de gestion social et maîtrise de la masse salariale"
+    informationsystem : "Systèmes d'information et outils de pilotage"
+    payroll : "Ingénierie de la masse salariale"
+    processimplementation : "Favoriser le développement du capital humain"
+    efficiencyimprovement : "Améliorer l'efficacité et la qualité des services de la fonction RH"
+    performance : "Piloter la performance RH"
+    aligncompensation : "Convergence des dispositifs de rémunération"
+    reward : "Pilotage de la partie variable des rémunérations, et la partie indirecte"
+    compensationbenefitsplan : "Politique de rémunération"
+    workspace : "Organisation des espaces de travail"
+    worklife : "Qualité de vie au travail"
+    psychosocial : "Risques psychosociaux"
+    managementseminar : "Séminaires de formation et d'émulation managériale"
+    learningprogram : "Plan de formation"
+    learningdigitalisation : "COOP (MOOC d'entreprise) - elearning"
+    seriousgames : "Serious game"
+    teambuilding : "Séminaire de team building"
+    employerbranding : "Marque Employeur"
+    assessmentcenter : "Assessment center"
+    employmentprotection : "PSE (Livre 2 et 3)"
+    socialclimate : "Climat social"
+    privatefinanceinitiative : "Partenariat Public Privé"
+    publicpolicyevaluation : "Evaluation de politiques publiques"
+    agenda : "Agenda 21"
+    privatesponsorship : "Mécénat de compétences"
+    standardimplementation : "Déploiement de normes et certification"
+    bigdata : "Big Data / valorisation de l'info"
+
 ## Mails template
 mails:
     hello: Bonjour %f_name %l_name !

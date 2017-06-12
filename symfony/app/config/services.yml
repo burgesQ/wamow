@@ -35,10 +35,6 @@ services:
         class: UserBundle\Services\SignedUp
         arguments: ['@doctrine.orm.entity_manager']
 
-    mission_matching:
-        class: MissionBundle\Service\MissionMatching
-        arguments: ['@service_container', '@doctrine.orm.entity_manager']
-
     scoring:
         class: MissionBundle\Service\Scoring
         arguments:
@@ -53,9 +49,11 @@ services:
             - '%scoring_weight.work_experience%'
 
     app.user_mission_listener:
-        class: MissionBundle\Services\UserMissionListener
+        class: MissionBundle\Listener\UserMissionListener
+        arguments: [ '@mailer', '@translator', %email_sender%' ]
         tags:
-            -  { name: doctrine.entity_listener, entity_manager: default  }
+            - { name: doctrine.event_listener, event: preUpdate, method: preUpdate, entity_manager: default  }
+
     app.mission_listener:
         class: MissionBundle\Listener\MissionListener
         arguments: ['@scoring']
