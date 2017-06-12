@@ -65,6 +65,7 @@ error:
     logged: You're not logged
     user:
         subscribe: Please Subscribe
+        email_in_use: Email allready in use.
     user_mission:
         not_found: No such userMission entity (%id)
         cant_giveup: Uou can't give up this mission.
@@ -88,6 +89,7 @@ error:
             no_advisor: No advisor selected for the Finalist step.
     action:
         failed: Action failed.
+    upload_resume_or_linkedin: Please Upload a resume or link your account with Linkedin
 
 ## Home
 home:
