@@ -256,7 +256,6 @@ class MissionGeneratorController extends Controller
 
             $newMission->setStatusGenerator(Mission::STEP_THREE);
             $em->flush();
-            $this->get('mission_matching')->setUpPotentialUser($newMission);
 
             return $this->redirectToRoute('mission_new_step_four', [
                 'missionId' => $newMission->getId()
