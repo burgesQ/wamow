@@ -20,6 +20,7 @@ use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\FOSUserEvents;
 use ToolsBundle\Entity\Address;
 use UserBundle\Entity\User;
+use MissionBundle\Entity\UserWorkExperience;
 use Swift_Message;
 
 class RegistrationAdvisorController extends Controller
