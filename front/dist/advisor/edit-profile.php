@@ -34,11 +34,6 @@
 					<div class="wmw-profile-header">
 						<div class="wmw-profile-header-picture"><img src="../library/images/_tmp/michael-flanagan-large.jpg" /></div>
 						<div class="wmw-profile-header-name">Mickael<br />FLANAGAN</div>
-						<div class="wmw-profile-header-button">
-							<a href="edit-profile.php" class="wmw-button wmw-button--small wmw-button--border">
-								<i></i><span><i class="icon icon--pen"></i> Edit profile</span><i></i>
-							</a>
-						</div>
 						<a href="#" class="wmw-profile-close"><i class="icon icon--cross"></i> Back to board</a>
 					</div>
 
@@ -47,18 +42,24 @@
 						<a href="#">Billing</a>
 					</div>
 
-					<div class="wmw-profile-content wmw-bgfields--readonly">
+					<div class="wmw-profile-content">
 						<form action="/" method="post" class="row">
 
 							<div class="col-xs-12 col-sm-5 row">
 								<div class="wmw-bgfield col-xs-10">
 									<label for="profile-email">Email</label>
-									<div class="wmw-bgfield-txt">michaelflanagan@gmail.com</div>
+									<input type="email" id="profile-email" name="profile-email" value="michaelflanagan@gmail.com" class="required" />
 									<div class="wmw-bgfield-bg"><i class="icon icon--email"></i></div>
+								</div>
+								<div class="col-xs-1">
+									<div class="wmw-switchfield">
+										<input type="checkbox" id="profile-notifications" name="profile-notifications" />
+										<label for="profile-notifications"></label>
+									</div>
 								</div>
 								<div class="wmw-bgfield col-xs-10">
 									<label for="profile-backup-email">Backup email</label>
-									<div class="wmw-bgfield-txt">michaelflanagan@gmail.com</div>
+									<input type="email" id="profile-backup-email" name="profile-backup-email" value="michaelflanagan@gmail.com" class="required" />
 									<div class="wmw-bgfield-bg"><i class="icon icon--email"></i></div>
 								</div>							
 							</div>
@@ -79,7 +80,7 @@
 							<div class="col-xs-12 col-sm-5 row">
 								<div class="wmw-bgfield col-xs-10">
 									<label for="profile-phone">Phone number</label>
-									<div class="wmw-bgfield-txt">(415) 616-4906</div>
+									<input type="text" id="profile-phone" name="profile-phone" value="(415) 616-4906" class="required" />
 									<div class="wmw-bgfield-bg"><i class="icon icon--phone"></i></div>
 								</div>
 							</div>
@@ -87,7 +88,7 @@
 							<div class="col-xs-12 col-sm-5 col-sm-offset-2">
 								<div class="wmw-bgfield">
 									<label for="profile-languages">Languages</label>
-									<div class="wmw-bgfield-txt">US, FR, ESP</div>
+									<input type="text" id="profile-languages" name="profile-languages" value="US, FR, ESP" class="required" />
 									<div class="wmw-bgfield-bg"><i class="icon icon--language"></i></div>
 								</div>
 							</div>
@@ -95,7 +96,7 @@
 							<div class="col-xs-12 col-sm-6">
 								<div class="wmw-bgfield">
 									<label for="profile-address">Address</label>
-									<div class="wmw-bgfield-txt">88 Kearny Street, Suite 600 - 94108 San Francisco</div>
+									<input type="text" id="profile-address" name="profile-address" value="88 Kearny Street, Suite 600 - 94108 San Francisco" class="required" />
 									<div class="wmw-bgfield-bg"><i class="icon icon--address"></i></div>
 								</div>
 							</div>
@@ -103,7 +104,9 @@
 							<div class="col-xs-12 col-sm-5 col-sm-offset-1">
 								<div class="wmw-bgfield">
 									<label for="profile-country">Country</label>
-									<div class="wmw-bgfield-txt">USA</div>
+									<select id="profile-country" name="profile-country" class="required">
+										<option value="USA">USA</option>
+									</select>
 									<div class="wmw-bgfield-bg"><i class="icon icon--world"></i></div>
 								</div>
 							</div>
@@ -111,7 +114,7 @@
 							<div class="col-xs-12 col-sm-5 row">
 								<div class="wmw-bgfield col-xs-10">
 									<label for="profile-company">Company</label>
-									<div class="wmw-bgfield-txt">Accenture</div>
+									<input type="text" id="profile-company" name="profile-company" value="Accenture" class="required" />
 									<div class="wmw-bgfield-bg"><i class="icon icon--company"></i></div>
 								</div>
 							</div>
@@ -122,12 +125,15 @@
 									<div class="wmw-profile-subtitle col-xs-12"><span>Algorythm improvement</span></div>
 									<div class="wmw-bgfield col-xs-10">
 										<label for="profile-linkedin">LinkedIn Account</label>
-										<div class="wmw-bgfield-txt">http://linkedin.com/in/mickael-flanagan-53697a59</div>
+										<input type="text" id="profile-linkedin" name="profile-linkedin" value="http://linkedin.com/in/mickael-flanagan-53697a59" />
 										<div class="wmw-bgfield-bg"><i class="icon icon--linkedin-thin"></i></div>
 									</div>
 									<div class="wmw-bgfield col-xs-10">
 										<label for="profile-resume">Upload Resume</label>
-										<div class="wmw-bgfield-txt">cv_mickael-flanagan_2017.pdf</div>
+										<input type="text" id="profile-resume" name="profile-resume" value="cv_mickael-flanagan_2017.pdf" />
+										<div class="wmw-bgfield-file-hover">Change my resume</div>
+										<input type="file" name="profile-resume-file" />
+										<div class="wmw-bgfield-bg"><i class="icon icon--document"></i></div>
 									</div>
 									<div class="col-xs-2">
 										<a href="#" class="wmw-profile-seelink"><i class="icon icon--eye"></i> Voir</a>
@@ -148,6 +154,12 @@
 									</div>
 								</div>
 
+							</div>
+
+							<div class="wmw-profile-bottom col-xs-12">
+								<button class="wmw-button wmw-button--green wmw-button--small" type="submit">
+									<i></i><span>Save changes</span><i></i>
+								</button>
 							</div>
 
 						</form>
