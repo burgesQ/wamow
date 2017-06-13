@@ -97,15 +97,7 @@ class MissionGeneratorController extends Controller
 
         if ($formStepOne->handleRequest($request)->isSubmitted() && $formStepOne->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            if ($formStepOne->get('back')->isClicked()) {
-                if ($stepMission === Mission::STEP_THREE) {
-                    return $this->redirectToRoute('mission_edit', [
-                        'missionId' => $newMission->getId()
-                    ]);
-                }
-
-                return $this->redirectToRoute('dashboard');
-            } elseif ($formStepOne->get('forLater')->isClicked()) {
+            if ($formStepOne->get('forLater')->isClicked()) {
                 $newMission->setOnDraft(true);
                 $em->persist($newMission);
                 $em->flush();

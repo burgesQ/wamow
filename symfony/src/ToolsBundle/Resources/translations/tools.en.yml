@@ -169,7 +169,7 @@ dashboard:
             interestedbutton: "I am interested"
         wip:
             title: "My missions"
-            date: "Pitched at "
+            date: Pitched at date
             showmore: "Show more"
             giveupbutton: "Delete"
             interested: "Interested"
@@ -212,7 +212,7 @@ dashboard:
             text: ''
         mission:
             title: "Pitchs published"
-            date: "Pitched at "
+            date: "Pitched on "
             showmore: "Show more"
             seethepitchbutton: "See the pitch"
             answerbutton: "Answer"
@@ -232,7 +232,7 @@ dashboard:
             proposal: Proposal
         draft:
             title: "Drafts"
-            date: "Started at "
+            date: Started on date
             continuebutton: "Continue"
             deletebutton: "Delete"
     error:
@@ -314,6 +314,7 @@ user:
             link_billing: BILLING
             title_algorithm_improvment: algorythm improvment
             title_subscription: subscription
+            email_notification: email<br>notification
     profile_edit:
         advisor:
             btn_save_change: SAVE CHANGE
@@ -353,15 +354,20 @@ mission:
             on_site: On site
             not_on_site: Not on site
         to_answer: To Answer
+
+        waitting: |
+          <small>MISSION STATUS</small><br />
+          <span class="status">Waitting</span>
         interested: |
-            Interested
-            MISSION STATUS
+          <small>MISSION STATUS</small><br />
+          <span class="status">Interested</span>
         shortlisted: |
-            Shortlisted
-            MISSION STATUS
+            <small>MISSION STATUS</small><br />
+            <span class="status">Shortlisted</span>
         selected: |
-            Selected<br>
-            <small>mission status</small>
+            <small>MISSION STATUS</small><br />
+            <span class="status">Selected</span>
+
     action:
         add_to_shortlist: User added to shortlist !
         add_to_contract: User added to contract !

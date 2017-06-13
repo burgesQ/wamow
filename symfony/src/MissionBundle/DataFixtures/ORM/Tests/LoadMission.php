@@ -234,9 +234,7 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface, Co
                 $oneUserMission->setIdForContractor($i);
                 $this->container->get('inbox.services')->createThreadPitch($oneUserMission, "Test " . $i);
             }
-            $i++;
         }
-
         return 0;
     }
 

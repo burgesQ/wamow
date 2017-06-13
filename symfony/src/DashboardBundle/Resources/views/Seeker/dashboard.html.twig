@@ -3,133 +3,277 @@
 
 {% block body %}
 
-    {% include '@User/Profile/profile_sidebar.html.twig' %}
-    <div>
-        <p>
-            {{ 'dashboard.contractor.fyi.title' | trans | upper }}
-            {{ 'dashboard.contractor.fyi.text' | trans | upper }}
-        </p>
-    </div>
-    <div>
-        <p>
-            {{ 'dashboard.contractor.mission.title' | trans }}
-        </p>
-    </div>
-    <p>
-        {% for mission in missions %}
-            <li>
-                {% set advisors = mission.userMission %}
-                {% set interested = 0 %}
-                {% set selected = 0 %}
-                {% set proposal = 0 %}
-                {% set finisher = 0 %}
-                {% set stepPosition = null %}
+    <div class="wmw-dashboard col-xs-10 col-xs-offset-1 row">
 
-                {% for advisor in advisors %}
-                    {% if advisor.status >= constant('ONGOING', advisor) %}
-                        {% set interested = interested + 1  %}
-                        {% if advisor.status >= constant('SHORTLIST', advisor) %}
-                            {% set selected = selected + 1 %}
-                            {% if advisor.thread.proposals.count > 0 %}
-                                {% set proposal = proposal + 1 %}
+        {# sideBar #}
+        <div class="wmw-dashboard-sidebar col-xs-12 col-lg-2">
+            <div class="sidebar-progress">
+                <a href="{{ path('mission_new_step_one') }}" class="sidebar-progress-button"><i class="icon icon--document-more"></i><br />{{ 'dashboard.contractor.new.button' | trans }}</a>
+            </div>
+
+            <div class="sidebar-notifications">
+                <label for="wmw-profile-notifications">
+                    <i class="icon icon--bell"></i>
+                    {{ 'user.profile_show.advisor.email_notification' | trans | raw }}
+                </label>
+                <div class="wmw-switchfield wmw-switchfield--small">
+                    <input type="checkbox" id="wmw-profile-notifications" {% if user.notification %}checked{% endif %}
+                           onclick="switchNotification()"/>
+                    <label for="wmw-profile-notifications"></label>
+                </div>
+            </div>
+
+            <div class="sidebar-text">
+                <div class="sidebar-text">
+                    <strong>{{ 'dashboard.contractor.fyi.title' | trans | upper }}</strong>
+                    {{ 'dashboard.contractor.fyi.text' | trans | upper }}
+                </div>
+            </div>
+        </div>
+
+        {# wip missions #}
+        <div class="wmw-dashboard-main col-xs-12 col-lg-10">
+            <h2 class="main-title"><i class="icon icon--document"></i>{{ 'dashboard.contractor.mission.title' | trans }}</h2>
+            <div class="main-missions">
+                {% for mission in missions %}
+
+                    {% set advisors = mission.userMission %}
+                    {% set interested = 0 %}
+                    {% set selected = 0 %}
+                    {% set proposal = 0 %}
+                    {% set finisher = 0 %}
+                    {% set stepPosition = null %}
+
+                    {% for advisor in advisors %}
+                        {% if advisor.status >= constant('ONGOING', advisor) %}
+                            {% set interested = interested + 1  %}
+                            {% if advisor.status >= constant('SHORTLIST', advisor) %}
+                                {% set selected = selected + 1 %}
+                                {% if advisor.thread.proposals.count > 0 %}
+                                    {% set proposal = proposal + 1 %}
+                                {% endif %}
+                                {% if advisor.status >= constant('FINALIST', advisor) %}
+                                    {% set finisher = finisher + 1 %}
+                                {% endif  %}
                             {% endif %}
-                            {% if advisor.status >= constant('FINALIST', advisor) %}
-                                {% set finisher = finisher + 1 %}
-                            {% endif  %}
-                        {% endif %}
-                    {% endif %}
-                {% endfor %}
-
-                {% for step in mission.steps %}
-                    {% if step.status == 1 %}
-                        {% set stepPosition = step.position %}
-                    {% endif %}
-                {% endfor %}
-
-
-                {{ 'dashboard.contractor.mission.date' | trans }} {{ mission.creationDate | date("m/d/Y") }}</br>
-                {{ mission.title }}</br>
-                {{ mission.resume | truncate(20, false, '[...]') }}</br>
-
-                {% if stepPosition == 1 %}
-                    {% if selected == 0 %}
-                        <a href="{{ path('mission_view', {'missionId': mission.id}) }}">{{ 'dashboard.contractor.mission.seethepitchbutton' | trans | upper }}</a></br>
-                        <a href="{{ path('mission_delete', {'missionId': mission.id}) }}">{{ 'dashboard.contractor.mission.deletebutton' | trans | upper }}</a></br>
-                    {% else %}
-                        <a href="{{ path('mission_view', {'missionId': mission.id}) }}">{{ 'dashboard.contractor.mission.answerbutton' | trans | upper }}</a></br>
-                    {% endif %}
-                {% elseif stepPosition == 2 %}
-                    <a href="{{ path('mission_view', {'missionId': mission.id}) }}">{{ 'dashboard.contractor.mission.selectfinalistbutton' | trans | upper }}</a></br>
-                {% elseif stepPosition == 3 %}
-                    <a href="{{ path('mission_view', {'missionId': mission.id}) }}">{{ 'dashboard.contractor.mission.contactbutton' | trans | upper }}</a></br>
-                {% endif %}
-
-
-
-                {{ mission.professionalExpertise.name | trans }}</br>
-                $ {{ mission.budget }}</br>
-                {{ mission.businessPractice.name | trans }}</br>
-
-
-
-
-                {% if stepPosition == 1 %}
-                    {{ interested }} {{ 'dashboard.contractor.mission.interested' | trans }}</br>
-                    {{ selected }}/3 {{ 'dashboard.contractor.mission.selected' | trans }}</br>
-                    {% if selected == 0 %}
-                        {{ 'dashboard.contractor.mission.waiting' | trans }}</br>
-                        <a href="{{ path('mission_delete', {'missionId': mission.id}) }}">{{ 'dashboard.contractor.mission.deletebutton' | trans }}</a></br>
-                    {% else %}
-                        {{ 'dashboard.contractor.mission.ongoing' | trans }}</br>
-                    {% endif %}
-                    {% if "now" | date('Ymd')  < mission.applicationEnding | date('Ymd') %}
-                        {{ mission.applicationEnding | time_diff }}</br>
-                    {% else %}
-                        {{ 'dashboard.contractor.mission.mustbefinish' | trans }}</br>
-                    {% endif %}
-                {% elseif stepPosition == 2 %}
-                    {{ proposal }}/3 {{ 'dashboard.contractor.mission.proposal' | trans }}</br>
-                    {{ finisher }}/1 {{ 'dashboard.contractor.mission.finisher' | trans }}</br>
-                    {{ 'dashboard.contractor.mission.shortlist' | trans }}</br>
-                    {% if "now" | date('Ymd')  < mission.applicationEnding | date('Ymd') %}
-                        {{ mission.applicationEnding | time_diff }}</br>
-                    {% else %}
-                        {{ 'dashboard.contractor.mission.mustbefinish' | trans }}</br>
-                    {% endif %}
-                {% elseif stepPosition == 3 %}
-                    {{ proposal }}/3 {{ 'dashboard.contractor.mission.proposal' | trans }}</br>
-                    {{ finisher }}/1 {{ 'dashboard.contractor.mission.finisher' | trans }}</br>
-                    {{ 'dashboard.contractor.mission.finish' | trans }}</br>
-                {% endif %}
-
-                {% set unread = 0 %}
-                {% for thread in mission.threads %}
-                    {% set break = false %}
-                    {% for message in thread.messages | reverse if not break %}
-                        {% if message.metadata[1].isRead == false %}
-                            {% set unread = unread + 1 %}
-                        {% else %}
-                            {% set break = true %}
                         {% endif %}
                     {% endfor %}
+
+                    {% for step in mission.steps %}
+                        {% if step.status == 1 %}
+                            {% set stepPosition = step.position %}
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if stepPosition == 1 and interested == 0 %}
+                        <div class="main-missions-el main-missions-el--waiting row">
+                    {% elseif stepPosition == 1 %}
+                        <div class="main-missions-el main-missions-el--toanswer row">
+                    {% elseif stepPosition == 2 %}
+                        <div class="main-missions-el row">
+                    {% elseif stepPosition == 3 %}
+                    <div class="main-missions-el main-missions-el--selected row">
+                    {% endif %}
+
+                        <div class="main-missions-el-content col-xs-12 col-md-6">
+                            <div class="content-date">
+                                {{ 'dashboard.contractor.mission.date' | trans }} {{ mission.creationDate | date("m/d/Y") }}
+                            </div>
+                            <div class="content-title">
+                                {{ mission.title }}
+                            </div>
+                            <div class="content-desc">
+                                {{ mission.resume | truncate(100, false, '[...]') }}
+                                <a href="{{ path('mission_view', {'missionId': mission.id}) }}" class="wmw-tinylink">{{ 'dashboard.contractor.mission.showmore' | trans | upper }}</a>
+                            </div>
+
+                            {% if stepPosition == 1 and interested == 0 %}
+                                <a href="{{ path('mission_view', {'missionId': mission.id}) }}" class="content-button wmw-button wmw-button--grey">
+                                    <i></i><span>{{ 'dashboard.contractor.mission.seethepitchbutton' | trans }}</span><i></i>
+                                </a>
+                            {% elseif stepPosition == 1 %}
+                                <a href="{{ path('mission_view', {'missionId': mission.id}) }}" class="content-button wmw-button wmw-button--red">
+                                    <i></i><span>{{ 'dashboard.contractor.mission.seethepitchbutton' | trans }}</span><i></i>
+                                </a>
+                            {% elseif stepPosition == 2 %}
+                                <a href="{{ path('mission_view', {'missionId': mission.id}) }}" class="content-button wmw-button">
+                                    <i></i><span>{{ 'dashboard.contractor.mission.selectfinalistbutton' | trans | upper }}</span><i></i>
+                                </a>
+                            {% elseif stepPosition == 3 %}
+                                <a href="{{ path('mission_view', {'missionId': mission.id}) }}" class="content-button wmw-button wmw-button--green">
+                                    <i></i><span>{{ 'dashboard.contractor.mission.contactbutton' | trans | upper }}</span><i></i>
+                                </a>
+                            {% endif %}
+
+                            <a href="{{ path('mission_delete', { 'missionId' : mission.id }) }}" class="content-delete wmw-tinylink">
+                                <i class="icon icon--trashbin"></i> {{ 'dashboard.advisor.wip.delete' | trans }}
+                            </a>
+                        </div>
+
+                        <div class="main-missions-el-price col-xs-12 col-md-3">
+                            <strong>{{ mission.professionalExpertise.name | trans }}</strong>
+                            {{ 'legends.currency' | trans }}{{ mission.budget }}
+                            <small>{{ mission.businessPractice.name | trans }}</small>
+                        </div>
+
+                        <div class="main-missions-el-infos col-xs-12 col-md-3 row">
+
+                            {% set unread = 0 %}
+                            {% for thread in mission.threads %}
+                                {% set break = false %}
+                                {% for message in thread.messages | reverse if not break %}
+                                    {% if message.metadata[1].isRead == false %}
+                                        {% set unread = unread + 1 %}
+                                    {% else %}
+                                        {% set break = true %}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+
+                            {% if stepPosition == 1 %}
+                                <span class="infos-el col-xs-6">
+                                    <span>
+                                        <i class="icon icon--avatar"></i><br />{{ interested }} {{ 'dashboard.contractor.mission.interested' | trans }}
+                                    </span>
+                                </span>
+                                {% if interested == 0 %}
+                                    <span class="infos-el infos-el--status col-xs-6">
+                                        <span>
+                                            <i class="icon icon--chair"></i><br />
+                                            {{ 'mission.view.waitting' | trans | raw }}
+                                        </span>
+                                    </span>
+                                {% else %}
+                                    <span class="infos-el infos-el--status col-xs-6">
+                                        <span>
+                                            <i class="icon icon--rocket"></i><br />
+                                            {{ 'mission.view.interested' | trans | raw }}
+                                        </span>
+                                        {% if unread > 0 %}
+                                            <a href="#">{% transchoice unread with {'%unread%': unread} %}dashboard.contractor.mission.unread{% endtranschoice %}</a>
+                                        {% endif %}
+                                    </span>
+                                {% endif %}
+                                <span class="infos-el col-xs-6">
+                                    <span>
+                                        <i class="icon icon--star"></i><br />{{ selected }}/3 {{ 'dashboard.contractor.mission.selected' | trans }}
+                                    </span>
+                                </span>
+
+                            {% elseif stepPosition == 2 %}
+                                <span class="infos-el col-xs-6">
+                                    <span>
+                                        <i class="icon icon--document"></i><br />
+                                        {{ proposal }}/ 3 {{ 'dashboard.contractor.mission.proposal' | trans }}
+                                    </span>
+                                </span>
+                                <span class="infos-el infos-el--status col-xs-6">
+                                    <span>
+                                        <i class="icon icon--flag"></i><br />
+                                        {{ 'mission.view.shortlisted' | trans | raw }}
+                                    </span>
+                                    {% if unread > 0 %}
+                                        <a href="#">{% transchoice unread with {'%unread%': unread} %}dashboard.contractor.mission.unread{% endtranschoice %}</a>
+                                    {% endif %}
+                                </span>
+                                <span class="infos-el col-xs-6">
+                                    <span>
+                                        <i class="icon icon--star"></i><br />
+                                        {{ selected }} / 3  {{ 'dashboard.contractor.mission.shortlist' | trans }}
+                                    </span>
+                                </span>
+
+                             {% elseif stepPosition == 3 %}
+                                <span class="infos-el col-xs-6">
+                                    <span>
+                                        <i class="icon icon--document"></i><br />
+                                        {{ proposal }}/ 3 {{ 'dashboard.contractor.mission.proposal' | trans }}
+                                    </span>
+                                </span>
+                                <span class="infos-el infos-el--status col-xs-6">
+                                    <span>
+                                        <i class="icon icon--handshake"></i><br />
+                                        {{ 'mission.view.shortlisted' | trans | raw }}
+                                    </span>
+                                    {% if unread > 0 %}
+                                        <a href="#">{% transchoice unread with {'%unread%': unread} %}dashboard.contractor.mission.unread{% endtranschoice %}</a>
+                                    {% endif %}
+                                </span>
+                                <span class="infos-el col-xs-6">
+                                    <span>
+                                        <i class="icon icon--star"></i><br />
+                                        {{ selected }} / 1  {{ 'dashboard.contractor.mission.finisher' | trans | raw }}
+                                    </span>
+                                </span>
+
+                            {% endif %}
+
+                            <span class="infos-el col-xs-6">
+                                <span>
+                                    {% if "now" | date('Ymd')  < mission.applicationEnding | date('Ymd') %}
+                                        <i class="icon icon--clock"></i><br />
+                                        {{ mission.applicationEnding | time_diff }}
+                                    {% else %}
+                                        <i class="icon icon--cross"></i><br />
+                                        {{ 'dashboard.contractor.mission.mustbefinish' | trans }}
+                                    {% endif %}
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+
                 {% endfor %}
-                {% transchoice unread with {'%unread%': unread} %}dashboard.contractor.mission.unread{% endtranschoice %}
-            </br>
-            </li>
-        {% endfor %}
 
 
-        <div>
-            <p>
-                {{ 'dashboard.contractor.draft.title' | trans }}
-            </p>
-        </div>
-        {% for draft in drafts %}
-            {{ 'dashboard.contractor.draft.date' | trans }} {{ draft.creationDate | date("m/d/Y") }}</br>
-            {{ draft.title }}
-            {{ draft.resume | truncate(20, false, '[...]') }}</br>
-            <a href="{{ path('mission_edit', {'missionId' : draft.id})}}">{{ 'dashboard.contractor.new.button' | trans | upper }}</a></br>
-            <a href="{{ path('mission_delete', {'missionId': draft.id}) }}">{{ 'dashboard.contractor.draft.deletebutton' | trans | upper }}</a></br>
-        {% endfor %}
-    </p>
+            </div>
+
+            <h2 class="main-title"><i class="icon icon--pen"></i>{{ 'dashboard.contractor.draft.title' | trans }}</h2>
+
+            {# drafts #}
+            <div class="main-slider main-slider--drafts wmw-slider">
+                <div class="wmw-slider-inner row">
+
+                    {% for draft in drafts %}
+                        <div class="wmw-slider-element wmw-slider-element--active col-xs-12 col-md-4">
+                            <div class="main-slider-element">
+                                <div class="main-slider-element-wrapper">
+                                    <div class="main-slider-date">{{ 'dashboard.contractor.draft.date' | trans({ date : draft.creationDate | date }) }}</div>
+                                    <div class="main-slider-title">{{ draft.title }}</div>
+                                    <div class="main-slider-desc">{{ draft.resume | truncate(100, false, '[...]') }}</br></div>
+                                </div>
+                                <a href="{{ path('mission_edit', { 'missionId' : draft.id }) }}" class="wmw-button wmw-button--grey">
+                                    <i></i><span>{{ 'dashboard.contractor.draft.continuebutton' | trans }}</span><i></i>
+                                </a>
+                                <a href="{{ path('mission_delete', {'missionId': draft.id}) }}" class="main-slider-delete wmw-tinylink">
+                                    <i class="icon icon--trashbin"></i>{{ 'dashboard.advisor.wip.delete' | trans }}
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+                <div class="wmw-slider-navigation">
+                    <a href="#" class="wmw-slider-navigation--prev"><i class="icon icon--arrow"></i></a>
+                    <a href="#" class="wmw-slider-navigation--next"><i class="icon icon--arrow"></i></a>
+                </div>
+            </div>
+         </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#wmw-profile-notifications').change(function () {
+                $.ajax({
+                    url: "{{ path('user_switch_notification') }}",
+                    method: "put"
+                });
+            });
+        });
+    </script>
 {% endblock %}
