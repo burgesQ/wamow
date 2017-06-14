@@ -1,6 +1,7 @@
 # tools.en.yml
 form:
     address:
+        address: address
         street: "Address"
         street_2: "Address bis"
         city: "City"
@@ -127,6 +128,7 @@ home:
             text: "Get the contractors detailed feedback. Improve your impact, matchup your rating to succeed again! Be recommended by the contractor."
         preregister:
             email: "Email"
+            emergency_email: Emergency email
             firstname: "First name"
             lastname: "Last name"
             company: "Company"
@@ -306,6 +308,7 @@ user:
         resume_stuff: Resume stuff's
         advisor:
             link_back_to_board: back to board
+            link_show_profile: show profile
             link_edit_profile: edit profile
             link_general: GENERALE
             link_billing: BILLING
