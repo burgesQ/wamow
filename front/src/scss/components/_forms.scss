@@ -43,7 +43,7 @@
 	margin:0 0 25px 0;
 }
 
-
+.wmw-bgfield-txt,
 input[type="text"],
 input[type="email"],
 input[type="number"],
@@ -620,6 +620,11 @@ input[type=range]::-ms-thumb {
 		top:-17px; left:-1px;
 	}
 
+	.wmw-bgfield-txt{
+		line-height:32px;
+	}
+
+	.wmw-bgfield-txt,
 	input[type="text"],
 	input[type="email"],
 	input[type="number"],
@@ -693,6 +698,7 @@ input[type=range]::-ms-thumb {
 			background:none;
 		}
 
+		.wmw-bgfield-txt,
 		input,
 		select{
 			border:none;

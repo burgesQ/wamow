@@ -141,19 +141,6 @@ var Master = {
             $('.wmw-wrapper').animate({"opacity":"0"}, 300);
         });
 
-        $('.wmw-profile-header-button .wmw-button').on('click', function(e){
-            e.preventDefault();
-            if(!$(this).hasClass('wmw-button--border')){
-                $('.wmw-profile-content input, .wmw-profile-content select').prop('disabled', true);
-                $('.wmw-profile-content').addClass('wmw-bgfields--readonly');
-                $(this).addClass('wmw-button--border');
-            }else{
-                $('.wmw-profile-content input, .wmw-profile-content select').prop('disabled', false);
-                $('.wmw-profile-content').removeClass('wmw-bgfields--readonly');
-                $(this).removeClass('wmw-button--border');
-            }
-        });
-
         Master.init_pitch_finder();
         Master.init_mission_overlay();
         Master.init_mission_notes();
