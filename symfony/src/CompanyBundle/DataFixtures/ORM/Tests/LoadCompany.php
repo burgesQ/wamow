@@ -1,12 +1,12 @@
 <?php
 
-namespace MissionBundle\DataFixtures\ORM;
+namespace MissionBundle\DataFixtures\ORM\Tests;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use CompanyBundle\Entity\Company;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\DataFixtures\AbstractFixture;
+use ToolsBundle\Entity\Address;
 
 class LoadCompany extends AbstractFixture implements OrderedFixtureInterface
 {
@@ -15,13 +15,19 @@ class LoadCompany extends AbstractFixture implements OrderedFixtureInterface
         $businessPractice = $manager->getRepository('MissionBundle:BusinessPractice')
             ->findOneBy(array('name' => 'businesspractice.industry'));
 
-        $company = new Company();
-        $company->setName('Esso');
-        $company->setSize(3);
-        $company->setLogo('esso.png');
-        $company->setResume('Gasoil');
-        $company->setBusinessPractice($businessPractice);
+        $address = new Address();
+        $address->setCountry('FR');
 
+        $company = new Company();
+        $company
+            ->setName('Esso')
+            ->setResume('Gasoil')
+            ->setBusinessPractice($businessPractice)
+            ->setAddress($address)
+            ->setLogo('https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Esso_textlogo.svg/1200px-Esso_textlogo.svg.png')
+        ;
+
+        $manager->persist($address);
         $manager->persist($company);
 
         $manager->flush();
@@ -31,6 +37,6 @@ class LoadCompany extends AbstractFixture implements OrderedFixtureInterface
     {
         // the order in which fixtures will be loaded
         // the lower the number, the sooner that this fixture is loaded
-        return 8;
+        return 11;
     }
 }

@@ -7,7 +7,6 @@ imports:
     - { resource: "@HomePageBundle/Resources/config/services.yml" }
     - { resource: "@DashboardBundle/Resources/config/services.yml" }
     - { resource: "@CompanyBundle/Resources/config/services.yml" }
-    - { resource: "@CalendarBundle/Resources/config/services.yml" }
     - { resource: "@NotificationBundle/Resources/config/services.yml" }
     - { resource: "@InboxBundle/Resources/config/services.yml" }
     - { resource: "@BlogBundle/Resources/config/services.yml" }
@@ -41,6 +40,13 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form:
+        resources:
+            - 'TetranzSelect2EntityBundle:Form:fields.html.twig'
+    globals:
+        facebook_link: "%facebook_link%"
+        twitter_link: "%twitter_link%"
+        linkedin_link: "%linkedin_link%"
 
 services:
     twig.extension.text:
@@ -58,13 +64,13 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
-        # if using pdo_sqlite as your database driver:
+        memory: true
+# if using pdo_sqlite as your database driver:
         #   1. add the path in parameters.yml
         #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
         #   2. Uncomment database_path in parameters.yml.dist
         #   3. Uncomment next line:
         #     path:     "%database_path%"
-
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         naming_strategy: doctrine.orm.naming_strategy.underscore
@@ -105,52 +111,8 @@ fos_user:
         address:        server@mail.com # put a valid mail address
         sender_name:    Activation link
 
-# Assetic Configuration
-assetic:
-    assets:
-        chosen_css:
-            inputs:
-              - '@MissionBundle/Resources/public/css/chosen.css'
-        chosen_jquery_js:
-            inputs:
-              - '@MissionBundle/Resources/public/js/jquery-1.6.4.js'
-        chosen_jquery_tag_js:
-            inputs:
-              - '@MissionBundle/Resources/public/js/chosen.jquery.tag.js'
-        chosen_config_tag_js:
-            inputs:
-              - '@MissionBundle/Resources/public/js/chosen.config.tag.js'
-        chosen_prism_js:
-            inputs:
-              - '@MissionBundle/Resources/public/js/prism.js'
-        calendar_jquery_ui_css:
-            inputs:
-              - '@CalendarBundle/Resources/public/css/jquery-ui.css'
-        calendar_full_css:
-            inputs:
-              - '@CalendarBundle/Resources/public/css/fullcalendar.css'
-        calendar_css:
-            inputs:
-              - '@CalendarBundle/Resources/public/css/calendar.css'
-        calendar_settings_js:
-            inputs:
-              - '@CalendarBundle/Resources/public/js/calendar-settings.js'
-        calendar_jquery_js:
-            inputs:
-              - '@CalendarBundle/Resources/public/js/jquery-1.11.3.js'
-        calendar_moment_js:
-            inputs:
-              - '@CalendarBundle/Resources/public/js/moment.js'
-        calendar_full_js:
-            inputs:
-              - '@CalendarBundle/Resources/public/js/fullcalendar.js'
-    debug:          "%kernel.debug%"
-    use_controller: true
-    bundles:        [ToolsBundle, MissionBundle, CalendarBundle, CompanyBundle]
-    #java: /usr/bin/java
-    filters:
-        cssrewrite: ~
 
+## HWIOAuth Configuration
 hwi_oauth:
     connect:
         account_connector: my_user_provider
@@ -167,11 +129,7 @@ hwi_oauth:
             scope:               "%linkedin_scope%"
             infos_url:           "https://api.linkedin.com/v1/people/~:(id,email-address,first-name,last-name,summary,headline,location)?format=json"
 
-# here you will add one (or more) configurations for resource owners
-fos_js_routing:
-    routes_to_expose: [fullcalendar_loader, calendar_booking_get, calendar_booking_add, calendar_booking_remove, calendar_booking_edit]
-
-# FOS MessageBundle Multi User Conf
+## FOS MessageBundle Multi User Conf
 fos_message:
     db_driver:              orm
     thread_class:           InboxBundle\Entity\Thread
@@ -181,3 +139,30 @@ fos_message:
         handler:            fos_message.new_thread_multiple_form.handler
         model:              FOS\MessageBundle\FormModel\NewThreadMultipleMessage
         name:               message
+
+## Select2 Configuration
+tetranz_select2_entity:
+    minimum_input_length: 0
+    page_limit:           10
+    allow_clear:          true
+    delay:                500
+    language:             en
+    cache:                false
+    cache_timeout:        15000
+    scroll:               true
+    width:                500
+
+parameters:
+    scoring_weight.user_subscribe: 5
+    scoring_weight.business_practice: 5
+    scoring_weight.professional_expertise: 5
+    scoring_weight.company_size: 1
+    scoring_weight.mission_kind: 2
+    scoring_weight.location: 1
+    scoring_weight.certification: 3
+    scoring_weight.work_experience: 8
+    scoring_rules:
+        0: [0, 5]
+        1: [2, 10]
+        2: [4, 20]
+        3: [6, null]

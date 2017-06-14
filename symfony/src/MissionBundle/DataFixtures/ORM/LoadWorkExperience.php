@@ -1,7 +1,7 @@
 <?php
 
 
-namespace ToolsBundle\DataFixtures\ORM;
+namespace MissionBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\DataFixtures\AbstractFixture;
@@ -188,6 +188,6 @@ class LoadWorkExperience extends AbstractFixture implements OrderedFixtureInterf
     {
         // the order in which fixtures will be loaded
         // the lower the number, the sooner that this fixture is loaded
-        return 2;
+        return 4;
     }
 }

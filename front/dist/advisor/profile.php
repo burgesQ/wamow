@@ -80,7 +80,6 @@
 								<div class="wmw-bgfield col-xs-10">
 									<label for="profile-phone">Phone number</label>
 									<div class="wmw-bgfield-txt">(415) 616-4906</div>
-									<div class="wmw-bgfield-bg"><i class="icon icon--phone"></i></div>
 								</div>
 							</div>
 
@@ -150,6 +149,11 @@
 
 							</div>
 
+							<div class="wmw-profile-bottom col-xs-12">
+								<button class="wmw-button wmw-button--green wmw-button--small" type="submit">
+									<i></i><span>Save changes</span><i></i>
+								</button>
+							</div>
 						</form>
 					</div>
 

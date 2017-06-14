@@ -2,23 +2,22 @@
 
 namespace UserBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Security;
-use Symfony\Component\Security\Core\SecurityContextInterface;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use FOS\UserBundle\Controller\SecurityController as BaseController;
+use Symfony\Component\HttpFoundation\Request;
 
 class SecurityController extends BaseController
 {
-    public function loginBisAction(Request $request)
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function loginAction(Request $request)
     {
-        $csrfToken = $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate');
+        if ($this->getUser() !== null) {
 
-        return $this->container->get('templating')->renderResponse('UserBundle:Security:login_content.html.twig', array(
-            'last_username' => null,
-            'error'         => null,
-            'csrf_token'    => $csrfToken
-        ));
+            return $this->redirectToRoute('dashboard');
+        }
+
+        return parent::loginAction($request);
     }
 }

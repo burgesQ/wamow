@@ -1,0 +1,53 @@
+{% extends '::base.html.twig' %}
+{% trans_default_domain "tools" %}
+
+{% block body %}
+
+    {# form #}
+    {{ form_start(form, {'attr': {'class': 'wmw-onboard wmw-onboard--pitch col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3'}}) }}
+    {{ form_errors(form) }}
+    {{ form_errors(form.title) }}
+    {{ form_errors(form.resume) }}
+    <div class="wmw-onboard-body">
+        <h1>
+            {{ 'mission.new.step_one.title' | trans }}
+            <small>{{ 'mission.new.step_one.subtitle' | trans }}</small>
+        </h1>
+
+        <div class="wmw-fieldrow row">
+            <label for="wmw-pitch-title" class="wmw-label col-xs-6 col-xl-5">
+                {{ 'mission.new.label.title' | trans }}
+            </label>
+            {{ form_widget(form.title, {'attr': {'class': 'required col-xs-6 col-xl-7'}}) }}
+        </div>
+
+        <div class="wmw-fieldrow row">
+            <label for="wmw-pitch-desc" class="wmw-label wmw-label--top col-xs-12 col-md-6 col-xl-5">
+                {{ 'mission.new.label.resume' | trans }}
+            </label>
+            {{ form_widget(form.resume) }}
+        </div>
+
+        <div class="wmw-progressbar">
+            <span class="active"></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    {# buttons #}
+    <div class="wmw-onboard-bottom">
+        {{ form_widget(form.forLater, {attr: {formnovalidate: 'formnovalidate', class: 'wmw-button wmw-button--black wmw-button--border wmw-onboard-bottom-left'}}) }}
+        {{ form_widget(form.back, {attr: {formnovalidate: 'formnovalidate', class: 'wmw-button wmw-button--border'}}) }}
+        {{ form_widget(form.next, {attr: {class: 'wmw-button wmw-button--green'}}) }}
+    </div>
+    {{ form_end(form) }}
+
+    {# legend #}
+    <div class="wmw-onboard-text col-md-2">
+        {{ 'mission.new.step_one.hint' | trans | raw }}
+    </div>
+
+{% endblock %}

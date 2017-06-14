@@ -2,58 +2,76 @@
 
 namespace ToolsBundle\Form;
 
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\AbstractType;
 
 class AddressType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('street', null,
-                  array(
-                      'label'=>'form.address.street',
-                      'required'=>false,
-                      'translation_domain' => 'tools'
-                  ))
-            ->add('street2', null,
-                  array(
-                      'label'=>'form.address.street',
-                      'required'=>false,
-                      'translation_domain' => 'tools'
-                  ))
-            ->add('city', null,
-                  array(
-                      'label'=>'form.address.city',
-                      'required'=>false,
-                      'translation_domain' => 'tools'
-                  ))
-            ->add('zipcode', null,
-                  array(
-                      'label'=>'form.address.zipcode',
-                      'required'=>false,
-                      'translation_domain' => 'tools'
-                  ))
-            ->add('state', null,
-                  array(
-                      'label'=>'form.address.state',
-                      'required'=>false,
-                      'translation_domain' => 'tools'
-                  ))
-            ->add('country', 'country',
-                  array(
-                      'required' => true,
-                      'label'=>'form.address.country',
-                      'translation_domain' => 'tools',
-                      'placeholder' => 'form.address.choosecountry'
-                  ))
-            ;
+            ->add('number', null, [
+                'translation_domain' => 'tools',
+                'required'           => true,
+                'label'              => 'form.address.number',
+                'attr'               => [
+                    'placeholder' => 'form.address.number'
+                ]
+            ])
+            ->add('street', null, [
+                'translation_domain' => 'tools',
+                'required'           => true,
+                'label'              => 'form.address.street',
+                'attr'               => [
+                    'placeholder' => 'form.address.street'
+                ]
+            ])
+            ->add('street2', null, [
+                'translation_domain' => 'tools',
+                'required'           => false,
+                'label'              => 'form.address.street',
+                'attr'               => [
+                    'placeholder' => 'form.address.street_2'
+                ]
+            ])
+            ->add('city', null, [
+                'translation_domain' => 'tools',
+                'required'           => true,
+                'label'              => 'form.address.city',
+                'attr'               => [
+                    'placeholder' => 'form.address.city'
+                ]
+            ])
+            ->add('zipcode', null, [
+                'translation_domain' => 'tools',
+                'required'           => false,
+                'label'              => 'form.address.zipcode',
+                'attr'               => [
+                    'placeholder' => 'form.address.zipcode'
+                ]
+            ])
+            ->add('state', null, [
+                'translation_domain' => 'tools',
+                'required'           => false,
+                'label'              => 'form.address.state',
+                'attr'               => [
+                    'placeholder' => 'form.address.state'
+                ]
+            ])
+            ->add('country', CountryType::class, [
+                'translation_domain' => 'tools',
+                'required'           => true,
+                'label'              => 'form.address.country',
+                'placeholder'        => 'form.address.choosecountry',
+
+            ])
+        ;
     }
 
     /**
@@ -61,8 +79,8 @@ class AddressType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'ToolsBundle\Entity\Address'
-        ));
+        ]);
     }
 }

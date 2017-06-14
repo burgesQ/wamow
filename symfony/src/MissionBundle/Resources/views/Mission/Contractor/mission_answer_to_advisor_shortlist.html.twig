@@ -1,0 +1,186 @@
+{% extends '::base.html.twig' %}
+{% trans_default_domain "tools" %}
+
+{% block body %}
+
+    {# set up top #}
+    <div class="top">
+
+        {# set up content_top #}
+        <div class="content_top">
+            <div class="info">
+                {{ mission.title }}<br>
+                CertificationIcon {{ 'typemissions.certification' | trans }}:
+                {% for certif in mission.certifications %}
+                {{ certif.name }}
+                {% if not loop.last %}
+                    ,
+                {% endif %}
+                {% endfor %}<br>
+            </div>
+            <div class="selected">
+                SElectedIcon<br>
+                {{ nbProposale }}/3 {{ 'dashboard.contractor.mission.proposal' | trans }}
+            </div>
+            <div class="proposal">
+                3/3 {{ 'dashboard.contractor.mission.selected' | trans }}
+            </div>
+            <div class="finance">
+                {% for kind in mission.missionKinds %}
+                {{ kind.name | trans }}
+                {% if not loop.last %}
+                    ,
+                {% endif %}
+                {% endfor %}<br>
+                {{ 'mission.view.contractor.finance' | trans({ '%price': mission.price, '%professionalExpertise': mission.professionalExpertise.name | trans }, 'tools') | nl2br }}
+            </div>
+            <div class="day_left">
+                ClockIcon<br>
+                {{ mission.applicationEnding | time_diff }}
+            </div>
+            <div class="calendar">
+                CalendarIcon<br>
+                {{ mission.missionBeginning | date("M d") }}<br>
+                {{ mission.missionEnding | date("M d") }}
+            </div>
+            <div class="address">
+                PinPointIcon<br>
+                {% if mission.address %}
+                    {% if mission.address.city %}
+                        {{ mission.address.city }}<br>
+                    {% endif %}
+                    {{ mission.address.country | countryName }}
+                {% endif %}
+            </div>
+            <div class="lang">
+                BubleIcon<br>
+                {% for lang in mission.languages %}
+                    {{ lang.name | trans }}
+                    {% if not loop.last %}
+                        ,
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="on_site">
+                EarthIcon<br>
+                {% if mission.telecommuting %}
+                    {{ 'mission.view.advisor.on_site' | trans }}
+                {% else %}
+                    {{ 'mission.view.advisor.not_on_site' | trans }}
+                {% endif %}
+            </div>
+            PencilIcon<br>
+            {{ 'mission.view.to_answer' | trans }}
+        </div>
+    </div>
+    <br>
+    {# set up left and right content #}
+    <div class="content">
+
+        {# set up left content #}
+        <div class="meta_data">
+            Pitched at {{ mission.updateDate | date('d/m/Y') }} <br>
+                {{ mission.title }}
+        </div>
+        <div class="resume">
+            {{ mission.resume | nl2br }}
+        </div>
+
+        {# set up right content #}
+        <div class="top_chat_box">
+            <div class="button_action">
+                <button id="refuse_{{ userMission.id }}">{{ 'mission.view.contractor.btn_refuse' | trans }}</button>
+                <button id="contract_{{ userMission.id }}">{{ 'mission.view.contractor.btn_contract' | trans | upper }}</button>
+            </div>
+
+            {{ userMission.user.firstName }} {{ userMission.user.lastName }}
+
+            CrossIcon
+            <a href="{{ path('mission_view', {'missionId': mission.id}) }}">{{ 'mission.view.advisor.btn_back_to_global_view' | trans | upper }}</a>
+        </div>
+        <div class="chat_box"><p>
+            <div class="message" id="thread_message">
+                {% include '@Mission/Mission/Contractor/view_thread_contractor.html.twig' %}
+            </div>
+            <div class="answer">
+                <form>
+                    <textarea id="inbox_input_message" name="inbox[inout_message]" required="required" title=''></textarea>
+                    <input type="button" id="submit_text" value="{{ 'form.btn.send' | trans | upper }}"
+                           onClick="sendMessage()"/>
+                </form>
+            </div>
+            <div class="dl_proposal">
+                {% if userMission.thread.proposals is not empty %}
+                    {% set proposal = userMission.thread.proposals | last %}
+                    {# TODO find a better methode #}
+                    {%  set path = "http://symfony.dev/" ~ proposal.getUploadRootDir %}
+                    <a href="{{ path }}" download="{{ proposal.downloadName }}">{{ 'form.btn.download_proposal' | trans }}</a><br>
+                {% endif %}
+            </div>
+            <div class="edit" id="{{ userMission.id }}">
+                {{ userMission.note }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="http://www.appelsiini.net/download/jquery.jeditable.js"></script>
+    <script src="http://www.appelsiini.net/download/jquery.jeditable.mini.js"></script>
+    <script type="text/javascript">
+
+        $('.edit').editable('{{ path('user_mission_notes') }}', {
+            type: 'textarea',
+            submit: '{{ 'form.btn.save' | trans }}',
+            indicator: '{{ 'form.note.indicator' | trans }}',
+            tooltip: '{{ 'form.note.tooltip' | trans }}',
+            id: $(this).attr('id')
+        });
+
+        $('[id^="contract_"]').each(function () {
+            $(this).click(function () {
+                var id = $(this).attr('id').split('_')[1];
+                $.ajax({
+                    url: "{{ path('user_mission_add_to_contract') }}",
+                    method: "put",
+                    data: {id: id}
+                }).done(function (msg) {
+                    alert("{{ 'mission.action.add_to_contract' | trans }}");
+                }).fail(function () {
+                    alert("{{ 'error.action.failed' | trans }}");
+                });
+            });
+        });
+
+        $('[id^="refuse_"]').each(function () {
+            $(this).click(function () {
+                var id = $(this).attr('id').split('_')[1];
+                $.ajax({
+                    url: "{{ path('user_mission_refuse') }}",
+                    method: "put",
+                    data: {id: id}
+                }).done(function (msg) {
+                    alert("{{ 'mission.action.refuse_user' | trans }}");
+                }).fail(function () {
+                    alert("{{ 'error.action.failed' | trans }}");
+                });
+            });
+        });
+
+        function sendMessage() {
+            if ($('textarea#inbox_input_message').val()) {
+                $.ajax({
+                    url: "{{ path('send_message_to_advisor') }}",
+                    method: "post",
+                    data: {
+                        id: {{ userMission.id }},
+                        message: $('textarea#inbox_input_message').val()
+                    }
+                }).done(function (msg) {
+                    $('textarea#inbox_input_message').val('');
+                    $('#thread_message').html(msg);
+                });
+            }
+        }
+        </script>
+{% endblock %}

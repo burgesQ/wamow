@@ -2,6 +2,7 @@
 form:
     address:
         street: "Address"
+        street_2: "Address bis"
         city: "City"
         zipcode: "Zipcode"
         state: "State"
@@ -9,24 +10,154 @@ form:
         choosecountry: "Choose a country"
         name: "Add a name if required"
         label: "Add a label if required"
+        number: Street Number
+
+    btn:
+        send: send
+        save: save
+        upload_proposal: Upload Porposal
+        download_proposal: Download Porposal
+        save_certif: Save cecrtification
+        download_resume: Download User Resume
+        cancel_mission: CANCEL MISSION
+        back: BACK
+        next: NEXT
+        later: FINISH LATER
+        edit: EDIT
+        print: PRINT
+
+    note:
+        indicator: Saving ...
+        tooltip: Click to edit note
 
     phone:
         prefix: "Prefix"
-        chooseprefix: "Choose a prefix"
         number: "Phone"
 
     file:
         file: "File"
 
+    btn:
+        send: send
+
+## Base
+header:
+    lang:
+        en: "Eng"
+        fr: "Fr"
+    news: "News"
+    profile: Profile
+    billing: Billing
+    logout: Logout
+
+footer:
+    mission: "Mission"
+    about: "About"
+    advisor: "Advisor"
+    agreement: "User agreement"
+    legal: "Legal notice"
+    contractor: "Contractor"
+
+legends:
+    title: |
+        85% OF PITCHES ARE FINDING EXPERTS
+        WITHIN 15 DAYS.
+    content: |
+        Having a good matching profile will invrease
+        your succès !So fill in your profile details
+        with attention.
+        Be aware that the User Agreement of www.
+        consultants.wantmore.work require a ID
+        background check.
+    currency: $
 
 
+## Common error
+error:
+    forbidden: You have no access to this page
+    logged: You're not logged
+    user:
+        subscribe: Please Subscribe
+        email_in_use: Email allready in use.
+    user_mission:
+        not_found: No such userMission entity (%id)
+        cant_giveup: Uou can't give up this mission.
+        already_giveup: You alredy give_up this mission.
+    mission:
+        pitch:
+            contractor: A contractor cannot pitch.
+        shortlist:
+            to_much: you havent selected any advisor.
+            not_enough: Not enough user selected to proceed to shortlist.
+        step_error: There was a error while managing the step.
+        not_found: The asked mission dosen't exist
+        available: This mission isn't available
+        user_mission: You cannot pitch that mission
+        interested_twice: You already mark youreself as inetrested
+        available: The mission %id is not available.
+        limit_reach: The advisor answer limit was reached for this mission. The mission is closed
+        wrong_company: You don't belong tothe right company
+        already: You already execute this action.
+        finalist:
+            no_advisor: No advisor selected for the Finalist step.
+    action:
+        failed: Action failed.
+    upload_resume_or_linkedin: Please Upload a resume or link your account with Linkedin
+
+## Home
+home:
+    contractor:
+        login: "Log In"
+        signup: "Sign Up"
+        title: "Get matched."
+        valueproposition:
+            first: "Value your time"
+            second: "Build a world of opportunities"
+        howdoesitwork: "How does it work?"
+        start:
+            text: "Create your profile with very few information. Highlight your work experience. Select some of your most characteristic projects and work experiences."
+        play:
+            text: "Receive targeted pitches fitting your expertise and profile. Answer or ask for more information. Challenge the contractor! Give the best of yourself! Get selected!"
+        improve:
+            text: "Receive your first pitch. Only when opt-in for your first one, subscribe an annual plan."
+        pay:
+            text: "Get the contractors detailed feedback. Improve your impact, matchup your rating to succeed again! Be recommended by the contractor."
+        preregister:
+            email: "Email"
+            firstname: "First name"
+            lastname: "Last name"
+            company: "Company"
+            country: "Country"
+            phone: "Direct line"
+            comment: "Comment"
+            submit: "PLEASE CONTACT ME"
+            registered: "You request was submitted"
+    advisor:
+        contractorlink: "Contractor"
+        login: "Log In"
+        signup: "Sign Up"
+        seeker: "Contractor"
+        open: "Open your account"
+        title: "Get matched."
+        valueproposition:
+            first: "VALUE YOUR TIME"
+            second: "BUILD A WORLD OF OPPORTUNITIES"
+        howdoesitwork: "How does it work?"
+        start:
+            text: "Create your profile with very few information. Highlight your work experience. Select some of your most characteristic projects and work experiences."
+        play:
+            text: "Receive targeted pitches fitting your expertise and profile. Answer or ask for more information. Challenge the contractor! Give the best of yourself! Get selected!"
+        improve:
+            text: "Receive your first pitch. Only when opt-in for your first one, subscribe an annual plan."
+        pay:
+            text: "Get the contractors detailed feedback. Improve your impact, matchup your rating to succeed again! Be recommended by the contractor."
 
 ## Dashboard
 dashboard:
     advisor:
         fyi:
             title: "Your dashboard:"
-            text:
+            text: ''
         new:
             title: "You may be interested..."
             date: "Pitched at "
@@ -43,15 +174,20 @@ dashboard:
             giveup: "Giveup"
             dismiss: "Dismiss"
             delete: "Delete"
-            unread: '{0}No new message|{1}You have %unread% new message|]1,Inf]You have %unread% new messages'
+            ended: "Ended"
+            full: "Mission Full"
+            unread: "{0}No new message|{1}You have %unread% new message|]1,Inf]You have %unread% new messages"
         close:
             showmore: "Show more"
+            title: "Deleted Mission"
+            mission: Mission Closed
+
     contractor:
         new:
             button: "Write pitch"
         fyi:
             title: "Your dashboard:"
-            text:
+            text: ''
         mission:
             title: "Pitchs published"
             date: "Pitched at "
@@ -70,7 +206,8 @@ dashboard:
             waiting: "Waiting"
             finish: "Finish"
             mustbefinish: "Must be finish"
-            unread: '{0}No new message|{1}You have %unread% new message|]1,Inf]You have %unread% new messages'
+            unread: "{0}No new message|{1}You have %unread% new message|]1,Inf]You have %unread% new messages"
+            proposal: Proposal
         draft:
             title: "Drafts"
             date: "Started at "
@@ -79,6 +216,198 @@ dashboard:
     error:
         logged: "You are not logged"
 
+## Registration
+registration:
+    advisor:
+        zero:
+            title: "Firts, let's connect."
+            subtitle: "Get matched in just 5 minutes."
+            howtotitle: "85% of pitches are finding experts within 15 days."
+            howtotext: "Having a good matching profile will increase your succes! So fill in your profile details with attention. Be aware that the User Agreement of www.consultants.wantmore.work require an ID background check."
+            linkedinbutton: "Sign Up with Linkedin"
+            or: "or"
+            firstname: "First name"
+            lastname: "Last name"
+            email: "Email"
+            country: "Country of residence"
+            remote: "I'm mobile"
+            languages: "Select your languages"
+            password: "Password"
+            repeatpassord: "Repeat password"
+            mismatchpassword: "Mismatch password"
+            resume: "Upload your CV"
+            nextbutton: "NEXT"
+        one:
+            title: "Business practice?"
+            subtitle: "Select industry you've already worked on"
+            howtotitle: "First step:"
+            howtotext: "We need to know where you acquired your experience and / or did your missions. What does www.consultants.wantmore.work mean by Business Practices? We have identified 13 different business sectors. You can make several choices."
+            backbutton: "BACK"
+            nextbutton: "NEXT"
+        two:
+            title: "Kind of mission"
+            subtitle: "Select your missions"
+            howtotitle: "Second step:"
+            howtotext: "We need to understand which professional expertises you acquired or did in your missions. What does www.consultants.wantmore.work mean by Professional Expertises? We have identified 22 key functions in organizations. You can make several choices."
+            backbutton: "BACK"
+            nextbutton: "NEXT"
+        three:
+            title: "Professional Expertises"
+            subtitle: "Select wich type of missions"
+            howtotitle: "Third step:"
+            howtotext: "We need to understand what you did or experimented as advisor. What does www.consultants.wantmore.work mean by type of missions? We have identified 25 different consulting positions or levels. You can make several choices."
+            backbutton: "BACK"
+            nextbutton: "NEXT"
+        four:
+            title: "Valuable Work Experience"
+            subtitle: "Select 1 to 10 items"
+            howtotitle: "Fourth step:"
+            howtotext: "To identify your valuable work experience, you need to select between 1 to 10 items. It is important to choose relevant experiences and only proven ones to make your profile unique and bankable!"
+            backbutton: "BACK"
+            nextbutton: "FINISH"
+            cumuledmonth: "How many cumulted years?"
+            dailyfees: "Average daily fees"
+            peremption: "Was the last mission of this kind within the last 2 years?"
+
+## Users
+user:
+    profile_show:
+        wait_subscription_plan: "SUBSCRIPTION PLAN, WAIT FOR #98"
+        linkedin_stuff: LinkeDin stuff's
+        resume_stuff: Resume stuff's
+        advisor:
+            link_back_to_board: back to board
+            link_edit_profile: edit profile
+            link_general: GENERALE
+            link_billing: BILLING
+            title_algorithm_improvment: algorythm improvment
+            title_subscription: subscription
+            email_notification: email notification
+    profile_edit:
+        advisor:
+            btn_save_change: SAVE CHANGE
+
+## Mission
+mission:
+    view:
+        more_info: MORE DETIALS
+        less_info: LESS DETAILS
+        pitched_at: Pitched at date
+        certifications: Certification(s)
+        price_day: $ </div> / day
+        currency_k: K $
+        receive_the_pitch: <span> %nb </span> will receive the pitch
+        contractor:
+            status_advisor: all advisor
+            status_shortlist: shortlist
+            status_finalit: finalist
+            btn_refuse: REFUSE
+            btn_proced_to_shortlist: Proceed to shortlist
+            btn_contract: contract
+            btn_add_to_shortlist: add to shortlist
+            btn_remove_from_shortlist: remove from shortlist
+            finance: |
+                $ %price
+                %professionalExpertise
+        advisor:
+            btn_back_to_board: back to board
+            btn_back_to_global_view: back to global view
+            interested: Interested
+            finance: |
+                FINANCE <br>
+                <strong>$ %price</strong><br>
+                %professionalExpertise
+            on_site: On site
+            not_on_site: Not on site
+        to_answer: To Answer
+        interested: |
+            Interested
+            MISSION STATUS
+        shortlisted: |
+            Shortlisted
+            MISSION STATUS
+        selected: |
+            Selected
+            MISSION STATUS
+    action:
+        add_to_shortlist: User added to shortlist !
+        add_to_contract: User added to contract !
+        remove_from_shortlist: User removed from shortlist !
+        refuse_user: User refused.
+
+    new:
+        step_one:
+            title: The pitch
+            subtitle: Let's start with the begining
+            hint: "FIRST STEP : "
+        step_two:
+            title: Mission Specification
+            subtitle: Tell us more !
+            hint: "SECOND STEP : "
+        step_three:
+            title: Mission Kind
+            subtitle: And what about your futur collaborator ?
+            hint: "THIRED STEP : "
+        step_four:
+            title: Resume
+            subtitle: Ok, let's make a point
+            hint: "FOURTH STEP : "
+        step_five:
+            title: Final Step
+            subtitle: Last Step And we're good !
+            hint: "FINAL STEP : "
+
+        label:
+            title: TITLE OF THE PITCH
+            resume: DESCRIPTION OF THE PROJECT (500 WORDS)
+            later: FINISH LATER
+            budget: ESTIMED BUDGET
+            confidentiality: Anonymous corporate
+            telecommuting: On site presence required
+            country: COUNTRY
+            applicationEnding: END DATE FOR POSTULING TO THE PITCH
+            missionBeginning: START DATE OF THE MISSION
+            missionEnding: ESIMATE END DATE OF THE MISSION
+            chooseDay: Days
+            chooseMonth: Month
+            chooseYear: Year
+            certification: CERTIFICATION / SPECIAL SKILLS
+            language: LANGUAGE(S)
+            range: PRICE
+            step_three:
+                certif: CERTIFICATION <small> (opptional) </small>
+                lang: work Language
+            step_four:
+                professional_expertise: DOMAINE FONCTIONNEL
+                end_pitch: FIN DU PITCH
+                start_mission: DATE DE MISSION
+                mission_kind: TYPOLOGIE
+                telecommuting: SUR SITE
+                confidentiality: ANONYME
+                languages: LANGUES
+                certif: CERTIFICATION <small> (opptional) </small>
+                budget: BUDGET
+                price: PRIX
+                concerned: CONSULTANT CONCERNÉS
+                languages: LANGUES
+                finance: Finance
+                date_range: "from %startDate to %endDate"
+                on_site: on site
+                not_on_site: not on site
+                confidential: anonymous
+                not_confidential: not anonymous
+                price_day: $ / day
+
+## Inbox
+inbox:
+    form:
+        placeholder:
+            empty: Write your message here
+        btn_submit_empty_interested: ACCEPT THE PITCH AND SEND
+    read: read
+    show: show
+    you: you
+    new_message: New Message
 
 ## Business vocabulary
 language:
@@ -86,13 +415,67 @@ language:
     english: "English"
     french: "French"
     german: "German"
-    chinese: "Chinese"
     spanish: "Spanish"
     portuguese: "Portuguese"
     japanese: "Japanese"
     arabic: "Arabic"
     italian: "Italian"
     korean: "Korean"
+    mandarin: "Chinese, Mandarin"
+    bengali: "Bengali"
+    hindi:  "Hindi"
+    russian: "Russian"
+    wu: "Chinese, Wu"
+    javanese: "Javanese"
+    turkish: "Turkish"
+    vietamese: "Vietnamese"
+    telegu: "Telugu"
+    cantonese: "Chinese, Yue(Cantonese)"
+    marathi: "Marathi"
+    tamil: "Tamil"
+    urdu: "Urdu"
+    minman: "Chinese, Min Nan"
+    jinyu: "Chinese, Jinyu"
+    gujarati: "Gujarati"
+    polish: "Polish"
+    ukrainian: "Ukrainian"
+    persian: "Persian"
+    xiang: "Chinese, Xiang"
+    malayalam: "Malayalam"
+    hakka: "Chinese, Hakka"
+    kannada: "Kannada"
+    oriya: "Oriya"
+    panjabi_west: "Panjabi, Western"
+    sunda: "Sunda"
+    panjabi_east: "Panjabi, Eastern"
+    romanian: "Romanian"
+    bhojpuri: "Bhojpuri"
+    azerbaijani: "Azerbaijani, South"
+    maithili: "Maithili"
+    hausa: "Hausa"
+    burmese: "Burmese"
+    serbo: "Serbo-Croatian4"
+    gan: "Chinese, Gan"
+    awadhi: "Awadhi"
+    thai: "Thai"
+    dutch: "Dutch"
+    yoruba: "Yoruba"
+
+continent:
+    emea:          EMEA
+    south_america: South America
+    north_america: North America
+    asia:          Asia - Pacific
+
+company_size:
+    small:  Small Companies
+    medium: Medium Companies
+    large:  Large Companies
+
+experience_shaping:
+    cumuledmonth: How many cumuled month ?
+    daily_fees:   What was you're daily fees for the last mission of this kind ?
+    peremption:   Was the last mission of this kind within the last 2 years ?
 
 businesspractice:
     title: "Business Practice"
@@ -325,3 +708,38 @@ workexperience:
     privatesponsorship : "Private Sponsorship"
     standardimplementation : "Standard Implementation"
     bigdata : "Big Data"
+
+continent:
+    emea:          EMEA
+    south_america: South America
+    north_america: North America
+    asia:          Asia - Pacific
+
+company_size:
+    small:  Small Companies
+    medium: Medium Companies
+    large:  Large Companies
+
+## Mails template
+mails:
+    hello: Hello %f_name %l_name !
+    registration:
+        new_password: "Her your new password : %password"
+    inbox:
+        new_message_mission: You've got a new message on the mission %title.
+        new_pitcher: You've got a new pitcher on the mission %missionName.
+        link: Click there to check it.
+        the_team: The team.
+        link: "Go to check it :"
+    subject:
+         new_message: You've got a new message !
+         new_password: Welcome !
+         new_mission: You've got a new potential mission !
+    content:
+        new_contractor: |
+            Hello fName lName
+
+            The new mission missionTitle is a potential mission for your profile.
+            Go on the web site to check it.
+
+            Regards, The Teams.

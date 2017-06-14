@@ -28,7 +28,6 @@ class MissionKind
      */
     private $name;
 
-
     /**
      * Get id
      *

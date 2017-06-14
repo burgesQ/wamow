@@ -1,29 +1,92 @@
-{% trans_default_domain 'FOSUserBundle' %}
+{% trans_default_domain 'tools' %}
+{% set address = form.user.addresses | last %}
 
-{{ 'registration.step.zero'|trans }}
-<br>
-{{ 'registration.cat.zero'|trans }}
-<br>
-{{ 'registration.consign.zero'|trans }}
-<br><br>
-<a href="{{ path('hwi_oauth_service_redirect', {'service': 'linkedin' }) }}">{{ 'registration.linkedin'|trans }}</a>
-<br><br>
-{{ 'registration.or'|trans }}
-<br><br>
-{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register_expert'), 'attr': {'class': 'fos_user_registration_register_expert'}}) }}
+{{ form_start(form, {'attr': {'class': 'wmw-onboard col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 col-xl-4 col-xl-offset-4'}}) }}
 
-{{ form_errors(form) }}
+			<div class="wmw-onboard-body">
 
-{{ form_row(form.user.firstName) }}
-{{ form_row(form.user.lastName) }}
-{{ form_row(form.user.email) }}
-{{ form_row(form.user.country) }}
-{{ form_row(form.resume.file) }}
+				<h1>
+					<small>{{ 'registration.advisor.zero.subtitle' | trans }}</small>
+					{{ 'registration.advisor.zero.title' | trans }}
+				</h1>
 
-{{ form_row(form.user.plainPassword) }}
+				<a href="{{ path('hwi_oauth_service_redirect', {'service': 'linkedin' }) }}">
+				<button type="button" class="wmw-button">
+					<i></i><span>{{ 'registration.advisor.zero.linkedinbutton' | trans }}</span><i></i>
+				</button>
+				</a>
 
-{{ form_row(form.save) }}
+				<div class="wmw-onboard-or">{{ 'registration.advisor.zero.or' | trans | upper }}</div>
 
-{{ form_end(form) }}
+				<div class="wmw-fieldrow row">
+					{{ form_widget(form.user.firstName, {'attr' : {'class': 'required col-xs-7'}}) }}
+					<label class="wmw-label wmw-label--right col-xs-5" for="wmw-ob-firstname">{{ form_label(form.user.firstName) }}</label>
+				</div>
 
-<br>
+				<div class="wmw-fieldrow row">
+					{{ form_widget(form.user.lastName, {'attr' : {'class': 'required col-xs-7'}}) }}
+					<label class="wmw-label wmw-label--right col-xs-5" for="wmw-ob-lastname">{{ form_label(form.user.lastName) }}</label>
+				</div>
+
+				<div class="wmw-fieldrow row">
+					{{ form_widget(form.user.email, {'attr' : {'class': 'required email col-xs-7'}}) }}
+					<label class="wmw-label wmw-label--right col-xs-5" for="wmw-ob-email">{{ form_label(form.user.email) }}</label>
+				</div>
+
+				<div class="wmw-fieldrow row">
+					{{ form_widget(address.country, {'attr' : {'class': 'col-xs-12 col-sm-6 col-md-5 required'}}) }}
+				</div>
+
+				<div class="wmw-fieldrow">
+					<div class="wmw-switchfield">
+
+						{{ form_widget(form.user.remoteWork) }}
+						{{ form_label(form.user.remoteWork) }}
+					</div>
+				</div>
+
+				<div class="wmw-copyfields">
+
+					<div class="wmw-fieldrow wmw-copyfield row">
+
+						<br>
+
+						<label for="wmw-ob-language-1" class="wmw-label wmw-label--topmobile col-xs-10 col-sm-5">{{ form_label(form.user.languages) }}</label>
+						{{ form_widget(form.user.languages, {'attr' : {'class': 'col-xs-10 col-md-5 required'}}) }}
+						<a href="#" class="wmw-button-less">-</a>
+						<a href="#" class="wmw-button-more">+</a>
+					</div>
+
+				</div>
+
+				<div class="wmw-uploadfield">
+					{{ form_widget(form.resume.file) }}
+					<button type="button" class="wmw-button wmw-button--green"><i></i><span>Upload your cv</span><i></i></button>
+					<div class="wmw-uploadfield-val"></div>
+				</div>
+
+			</div>
+
+			{{ form_row(form.save, {'attr' : {'class': 'wmw-button wmw-button--green wmw-button--border'}}) }}
+
+			{{ form_errors(form) }}
+		    {{ form_errors(form.user) }}
+		    {{ form_errors(form.user.firstName) }}
+		    {{ form_errors(form.user.lastName) }}
+		    {{ form_errors(form.user.email) }}
+		    {{ form_errors(address) }}
+		    {{ form_errors(address.country) }}
+		    {{ form_errors(form.user.languages) }}
+		    {{ form_errors(form.resume) }}
+		    {{ form_errors(form.resume.file) }}
+
+		{{ form_end(form) }}
+
+		<div class="wmw-onboard-text col-md-3 col-xl-2">
+			<p>
+				{{ 'registration.advisor.zero.howtotitle' | trans | upper }}
+			</p>
+			<p>
+				{{ 'registration.advisor.zero.howtotext' | trans }}
+			</p>
+		</div>

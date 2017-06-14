@@ -46,10 +46,11 @@ class Services
      * Create a thread between the user that pitch and the user that created the mission
      *
      * @param UserMission $userMission
+     * @param string        $content
      *
-     * @return Thread|object
+     * @return \InboxBundle\Entity\Thread|object
      */
-    public function createThreadPitch($userMission)
+    public function createThreadPitch($userMission, $content = null)
     {
         if (($thread = $this->em->getRepository('InboxBundle:Thread')
             ->findOneBy(['userMission' => $userMission]))){
@@ -61,11 +62,11 @@ class Services
         $composer = $this->container->get('fos_message.composer');
         $sender   = $this->container->get('fos_message.sender');
 
-        // create a thread
         $title = $mission->getTitle() . " : " . $advisor->getId();
+        // create a thread
         /** @var NewThreadMessageBuilder $message */
         $message = $composer->newThread();
-        $message->setSubject($title)->setBody($title);
+        $message->setSubject($title)->setBody($content ? $content : $title);
 
         // set the advisor as sender
         $message->setSender($advisor);

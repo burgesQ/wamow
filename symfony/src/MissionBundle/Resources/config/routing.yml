@@ -1,49 +1,99 @@
-mission_new:
-    path:      /mission/new
-    defaults:
-        _controller: MissionBundle:Mission:new
-
+# Mission Action
 mission_view:
     path:      /mission/view/{missionId}
     defaults:
         _controller: MissionBundle:Mission:view
-
-mission_edit:
-    path:      /mission/edit/{missionId}
-    defaults:
-        _controller: MissionBundle:Mission:edit
-
-missions_all:
-    path:      /missions
-    defaults:
-        _controller: MissionBundle:Mission:list
-
-mission_delete:
-    path:      /mission/delete/{missionId}
-    defaults:
-        _controller: MissionBundle:Mission:delete
-
-mission_interested:
-    path:      /mission/interested/{missionId}
-    defaults:
-        _controller: MissionBundle:Mission:interested
-
-mission_pitch:
-    path:      /mission/pitch/{missionId}
-    defaults:
-        _controller: MissionBundle:Mission:pitch
 
 mission_giveup:
     path:       /mission/giveup/{missionId}
     defaults:
         _controller: MissionBundle:Mission:giveUp
 
-mission_users_selection:
-    path:      /mission/selection/{missionId}
+mission_interested:
+    path:      /mission/interested/{missionId}
     defaults:
-        _controller: MissionBundle:Mission:selection
+        _controller: MissionBundle:Mission:interested
 
-mission_selection_takeback:
-    path:      /mission/takeback/{missionId}
+mission_shortlist:
+    path:      /mission/shortlist/{missionId}
     defaults:
-        _controller: MissionBundle:Mission:takeBack
+        _controller: MissionBundle:Mission:shortlist
+
+mission_answer_to_advisor:
+    path:            /mission/answer/{userMissionId}
+    defaults:
+        _controller: MissionBundle:Mission:answerToAdvisor
+
+# Mission Generator
+mission_new_step_one:
+    path:      /mission/new/1/{missionId}
+    defaults:
+        missionId:   null
+        _controller: MissionBundle:MissionGenerator:stepOne
+
+mission_new_step_two:
+    path:      /mission/new/2/{missionId}
+    defaults:
+        _controller: MissionBundle:MissionGenerator:stepTwo
+
+mission_new_step_three:
+    path:      /mission/new/3/{missionId}
+    defaults:
+        _controller: MissionBundle:MissionGenerator:stepThree
+
+mission_new_step_four:
+    path:      /mission/new/4/{missionId}
+    defaults:
+        _controller: MissionBundle:MissionGenerator:stepFour
+
+mission_new_step_five:
+    path:      /mission/new/5/{missionId}
+    defaults:
+        _controller: MissionBundle:MissionGenerator:stepFive
+
+mission_edit:
+    path:      /mission/edit/{missionId}
+    defaults:
+        _controller: MissionBundle:MissionGenerator:editMission
+
+mission_delete:
+    path:      /mission/delete/{missionId}
+    defaults:
+        _controller: MissionBundle:MissionGenerator:delete
+
+# AJAX Request
+certifications_autocomplete:
+    path:            /certifications/autocomplete
+    defaults:
+        _controller: MissionBundle:Action:certificationsAutocomplete
+    methods:     [GET]
+
+user_mission_add_to_contract:
+    path:            /contract/add
+    defaults:
+        _controller: MissionBundle:Action:addToContract
+        methode:     PUT
+
+user_mission_add_to_shortlist:
+    path:            /shortlist/add
+    defaults:
+        _controller: MissionBundle:Action:addToShortlist
+    methods:     [PUT]
+
+user_mission_remove_from_shortlist:
+    path:            /shortlist/remove
+    defaults:
+        _controller: MissionBundle:Action:removeFromShortlist
+    methods:     [PUT]
+
+user_mission_refuse:
+    path:            /refuse
+    defaults:
+        _controller: MissionBundle:Action:refuseUserMission
+    methods:     [PUT]
+
+user_mission_notes:
+    path:            /save_notes
+    defaults:
+        _controller: MissionBundle:Action:saveNote
+    methods:     [POST]

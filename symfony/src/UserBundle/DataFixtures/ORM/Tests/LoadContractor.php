@@ -1,12 +1,14 @@
 <?php
 
-namespace MissionBundle\DataFixtures\ORM;
+namespace MissionBundle\DataFixtures\ORM\Tests;
 
-use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\Persistence\ObjectManager;
+use ToolsBundle\Entity\Address;
+use UserBundle\Entity\User;
 
 class LoadContractor extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
@@ -54,6 +56,7 @@ class LoadContractor extends AbstractFixture implements OrderedFixtureInterface,
     public function load(ObjectManager $manager)
     {
         $userManager = $this->container->get('fos_user.user_manager');
+        $userRepo    = $manager->getRepository('UserBundle:User');
         $langRepo    = $manager->getRepository('ToolsBundle:Language');
         $company     = $manager->getRepository('CompanyBundle:Company')->findOneByName('Esso');
 
@@ -67,7 +70,11 @@ class LoadContractor extends AbstractFixture implements OrderedFixtureInterface,
                 ->setLastName($oneData[1])
                 ->setEmail($oneData[2])
                 ->setEmergencyEmail($oneData[3])
-                ->setCountry($oneData[4]);
+            ;
+
+            $address = new Address();
+            $address->setCountry($oneData[4]);
+            $newUser->addAddress($address);
 
             // set languages
             foreach ($oneData[5] as $oneLang)
@@ -76,22 +83,23 @@ class LoadContractor extends AbstractFixture implements OrderedFixtureInterface,
             // set password and status
             $newUser
                 ->setPlainPassword($oneData[6])
-                ->setPasswordSet(true)
                 ->setRoles(['ROLE_CONTRACTOR'])
                 ->setEnabled(true)
-                ->setStatus(5);
+                ->setStatus(User::REGISTER_NO_STEP);
 
             // set User Company
             $newUser->setCompany($company);
 
             // save user in db
             $userManager->updateUser($newUser, true);
+
+            $newUser->setPublicId(md5(uniqid() . $newUser->getUsername() . $newUser->getId()));
+            $userManager->updateUser($newUser, true);
         }
     }
 
     public function getOrder()
     {
-        return 9;
+        return 12;
     }
-
 }

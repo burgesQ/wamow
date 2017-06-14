@@ -2,11 +2,10 @@
 
 namespace ToolsBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
-
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Upload
@@ -24,7 +23,7 @@ class Upload
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var \DateTime
@@ -48,9 +47,9 @@ class Upload
     private $type;
 
     /**
-     * @var string
+     * @var ArrayCollection
      *
-     * @ORM\Column(name="format", type="string", length=255, nullable=true)
+     * @ORM\Column(name="format", type="array", nullable=false)
      */
     private $format;
 
@@ -62,18 +61,29 @@ class Upload
     private $path;
 
     /**
-     * @var smallint
+     * @var int
      *
      * @ORM\Column(name="kind", type="smallint", nullable=false)
      */
     private $kind;
-    
+
+    /**
+     * @var UploadedFile
+     */
     private $file;
-    
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="download_name", type="string", length=255, nullable=true)
+     */
+    private $downloadName;
+
     public function __construct()
     {
         $this->uploadDate = new \Datetime();
-        $this->kind = 0;
+        $this->format     = new ArrayCollection();
+        $this->kind       = 0;
     }
 
     /**
@@ -87,9 +97,28 @@ class Upload
         }
         $info = explode("/", $this->getFile()->getMimeType());
         $this->setType($info[0]);
-        $this->setFormat($info[1]);
+        $this->addFormat($info[1]);
         $this->setName($this->kind.$this->id.time().'.'.$info[1]);
         $this->setPath($this->getUploadRootDir().$this->getName());
+        $this->setDownloadName($this->getFile()->getClientOriginalName());
+    }
+
+    /**
+     * @Assert\Callback
+     * @param \Symfony\Component\Validator\Context\ExecutionContextInterface $context
+     */
+    public function isValidate($context)
+    {
+        if ($this->file) {
+            $info = explode("/", $this->file->getMimeType());
+            if ((!$this->format->isEmpty() && !$this->format->contains($info[1]))
+                || ($this->type && $this->type != $info[0]) ) {
+                $context
+                    ->buildViolation('tools.upload.badFormat')
+                    ->atPath('file')
+                    ->addViolation();
+            }
+        }
     }
 
     /**
@@ -200,15 +229,29 @@ class Upload
         return $this->type;
     }
 
+
     /**
-     * Set format
+     * Add format
      *
      * @param string $format
      * @return Upload
      */
-    public function setFormat($format)
+    public function addFormat($format)
     {
-        $this->format = $format;
+        $this->format[] = $format;
+
+        return $this;
+    }
+
+    /**
+     * Remove Format
+     *
+     * @param string $format
+     * @return Upload
+     */
+    public function removeFormat($format)
+    {
+        $this->format->removeElement($format);
 
         return $this;
     }
@@ -216,7 +259,7 @@ class Upload
     /**
      * Get format
      *
-     * @return string
+     * @return ArrayCollection
      */
     public function getFormat()
     {
@@ -272,7 +315,7 @@ class Upload
     /**
      * Set file
      *
-     * @param string $file
+     * @param UploadedFile $file
      * @return Upload
      */
     public function setFile($file)
@@ -285,27 +328,46 @@ class Upload
     /**
      * Get file
      *
-     * @return string
+     * @return UploadedFile
      */
     public function getFile()
     {
         return $this->file;
     }
-    
+
     /**
-     * @Assert\Callback
+     * Set format
+     *
+     * @param array $format
+     * @return Upload
      */
-    public function isValidate(ExecutionContextInterface $context)
+    public function setFormat($format)
     {
-        if ($this->file != NULL) {
-            $info = explode("/", $this->file->getMimeType());
-            if ( ($this->format != null and $this->format != $info[1]) or
-                 ($this->type != null and $this->type != $info[0]) ) {
-                $context
-                    ->buildViolation('tools.upload.badFormat')
-                    ->atPath('file')
-                    ->addViolation();
-            }
-        }
+        $this->format = $format;
+
+        return $this;
+    }
+
+    /**
+     * Set downloadName
+     *
+     * @param string $downloadName
+     * @return Upload
+     */
+    public function setDownloadName($downloadName)
+    {
+        $this->downloadName = $downloadName;
+
+        return $this;
+    }
+
+    /**
+     * Get downloadName
+     *
+     * @return string 
+     */
+    public function getDownloadName()
+    {
+        return $this->downloadName;
     }
 }

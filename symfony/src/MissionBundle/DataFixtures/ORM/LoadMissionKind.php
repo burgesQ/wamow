@@ -13,21 +13,24 @@ class LoadMissionKind extends AbstractFixture implements OrderedFixtureInterface
   public function load(ObjectManager $manager)
   {
     $names = array(
-        'typemissions.title',
         'typemissions.strategic',
-        'typemissions.execution',
-        'typemissions.organisationtransformation',
-        'typemissions.businessreingeniering',
+
         'typemissions.csp',
         'typemissions.moa',
         'typemissions.moe',
         'typemissions.tma',
+
         'typemissions.infrastructure',
         'typemissions.migration',
         'typemissions.implementation',
+
+        'typemissions.execution',
+        'typemissions.organisationtransformation',
+        'typemissions.change',
+        'typemissions.businessreingeniering',
+
         'typemissions.interimmanagement',
         'typemissions.recruitment',
-        'typemissions.change',
         'typemissions.coaching',
         'typemissions.learning',
         'typemissions.audit',
@@ -53,6 +56,6 @@ class LoadMissionKind extends AbstractFixture implements OrderedFixtureInterface
     {
         // the order in which fixtures will be loaded
         // the lower the number, the sooner that this fixture is loaded
-        return 4;
+        return 6;
     }
 }

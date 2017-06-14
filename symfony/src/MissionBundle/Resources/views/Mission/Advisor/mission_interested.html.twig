@@ -1,0 +1,143 @@
+{% extends '::base.html.twig' %}
+{% trans_default_domain "tools" %}
+
+{# set up var #}
+{% set user = user_mission.user %}
+{% set mission = user_mission.mission %}
+{% set thread = user_mission.thread %}
+{% set steps = mission.steps %}
+{% set step = '' %}
+{% for oneStep in steps and step == '' %}
+    {% if oneStep.status == 1 %}
+        {% set step = oneStep %}
+    {% endif %}
+{% endfor %}
+
+{% block body %}
+
+    <div class="wmw-mission col-xs-10 col-xs-offset-1">
+
+        <a href="{{ path('dashboard') }}" class="wmw-mission-close"><i class="icon icon--cross"></i>{{ 'mission.view.advisor.btn_back_to_board' | trans }}</a>
+
+        <div class="wmw-mission-header row">
+            <div class="wmw-mission-summarybtn col-xs-12">
+                <a href="#" class="wmw-button wmw-button--small">
+                    <i></i>
+                    <span class='off'>{{ 'mission.view.more_info' | trans }}</span>
+                    <span class='on'>{{ 'mission.view.less_info' | trans }}</span>
+                    <i></i>
+                </a>
+            </div>
+            <div class="wmw-mission-summary wmw-mission-summary--left col-xs-12 col-md-10 row">
+                <span class="summary-el summary-el--interested">
+                    <span>
+                        <i class="icon icon--rocket"></i><br />
+                        {{ 'mission.view.advisor.interested' | trans }}
+                    </span>
+                </span>
+                <span class="summary-el summary-el--salary">
+                    <span>
+                        {{ 'mission.view.advisor.finance' | trans({ '%price': mission.price * 1000, '%professionalExpertise': mission.professionalExpertise.name | trans }, 'tools') | raw }}
+                    </span>
+                </span>
+                <span class="summary-el">
+                    <span>
+                        <i class="icon icon--calendar"></i><br />
+                        {{ mission.applicationEnding | time_diff }}
+                    </span>
+                </span>
+
+                <span class="summary-el">
+                    <span>
+                        <i class="icon icon--pointer"></i><br />
+                        {% if mission.address %}
+                            {% if mission.address.city %}
+                                {{ mission.address.city }}<br>
+                            {% endif %}
+                            {{ mission.address.country | countryName }}
+                        {% endif %}
+                    </span>
+                </span>
+                <span class="summary-el">
+                    <span>
+                        <i class="icon icon--language"></i><br />
+                        {% for lang in mission.languages %}
+                            {{ lang.name | trans }}
+                            {% if not loop.last %}
+                                ,
+                            {% endif %}
+                        {% endfor %}
+                    </span>
+                </span>
+                <span class="summary-el">
+                    <span>
+                        <i class="icon icon--world"></i><br />
+                        {%  if mission.telecommuting %}
+                            {{ 'mission.view.advisor.on_site' | trans }}
+                        {% else %}
+                            {{ 'mission.view.advisor.not_on_site' | trans }}
+                        {% endif %}
+                    </span>
+                </span>
+
+            </div>
+        </div>
+
+        <div class="wmw-mission-body wmw-mission-body--mail">
+            <div class="wmw-mission-content row">
+                <div class="wmw-mission-mail">
+                    <div class="mail-content mail-content--nopadding row">
+
+                        <div class="mail-content-sidebar mail-content-sidebar--large">
+                            <div class="sidebar-date">
+                                {{ 'mission.view.pitched_at' | trans({ date :  mission.updateDate | date('d/m/Y') }) }}
+                            </div>
+                            <div class="sidebar-title">
+                                {{ mission.title }}
+                                <small><i class="icon icon--certification"></i>
+                                    {{ 'mission.view.certifications' | trans | humanize }} :
+                                    {% for certif in mission.certifications %}
+                                    {{ certif.name }}
+                                    {% if not loop.last %}
+                                        ,
+                                    {% endif %}
+                                    {% endfor %}
+                                </small>
+                            </div>
+                            <div class="sidebar-content">
+                                {% if not user.payment %}
+                                    {{ mission.resume | truncate(100, false, '[...]' | nl2br) }}
+                                {% else %}
+                                    {{ mission.resume | nl2br }}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="mail-content-pitch">
+                            {{ form_start(form) }}
+                            {{ form_errors(form.text) }}
+                            {% if user.payment %}
+                                <div class="mail-content-pitch-writer">
+                                    {{ form_widget(form.text) }}
+                                    {{ form_row(form.submit) }}
+                                    <div class="writer-bottom">
+                                        <i class="icon icon--tick"></i>
+                                    </div>
+                                {% else %}
+                                    <a href="{{ path('user_profile_edit') }}">Subscribe There Please</a>
+                                    {% endif %}
+                                </div>
+                            {{ form_end(form) }}
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}

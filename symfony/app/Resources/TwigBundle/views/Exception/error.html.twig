@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ status_code }} - {{ status_text }}</h1>
+    <h2>{{ exception.message }}</h2>
+    <p>
+        <h3>
+            The requested page couldn't be located. Checkout for any URL
+            misspelling or
+
+            {% if app.user %}
+                <a href="{{ url('dashboard') }}">return to the dashboard.</a>.
+            {% else %}
+                <a href="{{ url('home_page_expert') }}">return to the homepage.</a>.
+            {% endif %}
+        </h3>
+{% endblock %}

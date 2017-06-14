@@ -2,10 +2,10 @@
 
 namespace InboxBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\Collection;
 use FOS\MessageBundle\Entity\Thread as BaseThread;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="InboxBundle\Repository\ThreadRepository")
@@ -78,7 +78,7 @@ class Thread extends BaseThread
     {
         parent::__construct();
         $this->proposals = new ArrayCollection();
-        $this->reply = null;
+        $this->reply     = null;
     }
 
     /**
@@ -107,12 +107,13 @@ class Thread extends BaseThread
     /**
      * Set Mission
      *
-     * @param $mission
+     * @param \MissionBundle\Entity\Mission $mission
      *
      * @return Thread
      */
     public function setMission($mission)
     {
+        $mission->addThread($this);
         $this->mission = $mission;
 
         return $this;
@@ -131,7 +132,7 @@ class Thread extends BaseThread
     /**
      * Set UserMission
      *
-     * @param $userMission
+     * @param \MissionBundle\Entity\UserMission $userMission
      *
      * @return Thread
      */
@@ -177,11 +178,10 @@ class Thread extends BaseThread
         return $this->reply;
     }
 
-
     /**
      * Add proposal
      *
-     * @param \ToolsBundle\Entity\Upload $proposal
+     * @param \ToolsBundle\Entity\Proposal $proposal
      * @return Thread
      */
     public function addProposal($proposal)

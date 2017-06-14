@@ -1,11 +1,11 @@
-# InboxBundle/Resources/config/routing.yml
-
-show_all:
-    path:   /
+send_message_to_contractor:
+    path:            /send_message_ctr
     defaults:
-        _controller: InboxBundle:Inbox:showAllThread
+        _controller: InboxBundle:Action:sendMessageAdvisor
+    methods: [POST]
 
-show_thread:
-    path:   /{id}
+send_message_to_advisor:
+    path:            /send_message_adv
     defaults:
-        _controller: InboxBundle:Inbox:showThread
+        _controller: InboxBundle:Action:sendMessageContractor
+    methods:     [POST]

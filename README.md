@@ -18,6 +18,30 @@
     $ docker-compose up -d
     ```
 
+2.1 (Optionnal) Dans le cas d'un dev local
+
+Get the ip from the nginx container then edit the file /etc/hosts to add the new dns. Her is a exemple :
+
+```bash
+sudo echo "NGINX_IP MY_DNS" >> /etc/hosts
+# equal to
+sudo echo "172.17.100.1 symfony.dev" >> /etc/hosts
+```
+
+Comment the app_dev.php file to acced the dev mod
+```bash
+$ emacs -nw symfony/web/app_dev.php
+# comment so:
+//if (isset($_SERVER['HTTP_CLIENT_IP'])
+//    || isset($_SERVER['HTTP_X_FORWARDED_FOR'])
+//    || !(in_array(@$_SERVER['REMOTE_ADDR'], array('127.0.0.1', 'fe80::1', '::1')) || php_sapi_name() === 'cli-server')
+//) {
+//    header('HTTP/1.0 403 Forbidden');
+//    exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
+//}
+
+```
+
 3. Composer install & create database
 
     ```bash
@@ -26,6 +50,14 @@
     $ sf doctrine:database:create
     $ sf doctrine:schema:update --force
     $ sf doctrine:fixtures:load --no-interaction
+    ```
+3Bis. Alternatively you can run the genDb script
+
+    ```bash
+    $ cp script/genData.sh symfony
+    $ docker-compose exec php zsh
+    $ composer update -vvv
+    $ ./genData.sh
     ```
 
 ## Usage

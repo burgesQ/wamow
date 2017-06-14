@@ -89,7 +89,7 @@ class Article
     /**
      * @ORM\OneToMany(
      *   targetEntity="BlogBundle\Entity\Comment",
-     *   mappedBy="articles"
+     *   mappedBy="article"
      * )
      * @var Comment[]|Collection
      */

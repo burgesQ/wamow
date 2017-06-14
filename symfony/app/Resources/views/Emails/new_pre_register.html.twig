@@ -1,0 +1,25 @@
+{% trans_default_domain 'tools' %}
+
+<h3>New Pre Register !</h3>
+
+<li>
+    Email: {{ preRegister.email }}
+</li>
+<li>
+    FirstName: {{ preRegister.firstname }}
+</li>
+<li>
+    LastName: {{ preRegister.lastname }}
+</li>
+<li>
+    Company: {{ preRegister.company }}
+</li>
+<li>
+    Country: {{ preRegister.country | countryName}}
+</li>
+<li>
+    Phone: {{ preRegister.phone.prefix.prefix }} {{ preRegister.phone.number }}
+</li>
+<li>
+    Comment: {{ preRegister.comment }}
+</li>

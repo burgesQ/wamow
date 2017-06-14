@@ -1,0 +1,62 @@
+{% trans_default_domain 'tools' %}
+
+{% set company = user.company %}
+
+<div class="content">
+    <div class="user_show_head">
+        {% if user.images is not empty %}
+            {% set image = user.images|last %}
+            {% if image.name is not null %}
+                <img src="{{ asset(image.webPath()) }}"/>
+            {% endif %}
+        {% endif %}
+        <h2>{{ user.lastName }}</h2>
+        <h2>{{ user.firstName|upper }}</h2>
+        <h2>{{ company.name|upper }}</h2>
+        {% if company.logo != null %}
+            <img src="{{ company.logo }}"/>
+        {% endif %}
+
+        <a href="{{ path('user_profile_edit') }}">{{ 'user.profile_show.advisor.link_edit_profile'|trans|upper }}</a>
+        <a href="{{ path('dashboard') }}">{{ 'user.profile_show.advisor.link_back_to_board'|trans|upper }}</a>
+        <a href="{{ path('user_profile_show') }}">{{ 'user.profile_show.advisor.link_general'|trans|upper }}</a>
+        <a href="{{ path('user_profile_show') }}">{{ 'user.profile_show.advisor.link_billing'|trans|upper }}</a>
+    </div>
+
+    <div class="user_show_content">
+        <h4>
+            @Icon {{ user.email }}
+        </h4>
+        <h4>
+            @*Icon {{ user.emergencyEmail }}
+        </h4>
+        <h4>
+            PhoneIcon
+            {% if user.phone %}
+                ({{ user.phone.prefix.prefix }}){{ user.phone.number }}
+            {% endif %}
+        </h4>
+        <h4>
+            MapsIcon
+            {% if user.addresses is not empty %}
+                {% set address = user.addresses|last %}
+                {{ address.street }}{{ address.street2 }} - {{ address.zipcode }} {{ address.city }}
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                EarthIcon
+                {{ address.country }}
+            {% endif %}
+        </h4>
+        <h4>
+            MapsCompanyIcon
+            {% if company.address is not null %}
+                {{ company.address.street }}{{ company.address.street2 }} - {{ company.address.zipcode }} {{ company.address.city }}
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                EarthIcon
+                {{ company.address.country }}
+            {% endif %}
+        </h4>
+        <h4>
+            BuildingIcon {{ company.name }}
+        </h4>
+    </div>
+</div>

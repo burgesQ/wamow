@@ -2,26 +2,31 @@
 
 namespace MissionBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * UserMission
+ *
  * @ORM\Table(name="user_mission")
  * @ORM\Entity(repositoryClass="MissionBundle\Repository\UserMissionRepository")
  * @ORM\HasLifecycleCallbacks()
  */
 class UserMission
 {
-    const DELETED    = -5;
-    const DISMISS    = -4;
-    const GIVEUP     = -3;
-    const REFUSED    = -2;
-    const NEW        = -1;
-    const INTERESTED = 0;
-    const ONGOING    = 1;
-    const SHORTLIST  = 2;
-    const FINALIST   = 3;
+    // USER_MISSION STATUS
 
+    const DELETED    = -70;
+    const ENDDATE    = -60;
+    const DISMISS    = -50;
+    const GIVEUP     = -40;
+    const FULL       = -30;
+    const ACTIVATED  = -20;
+    const MATCHED    = -10;
+    const INTERESTED = 0;
+    const ONGOING    = 10;
+    const SHORTLIST  = 20;
+    const FINALIST   = 30;
 
     /**
      * @var int
@@ -39,13 +44,13 @@ class UserMission
 
     /**
      * @var \DateTime
-     * @ORM\Column(name="creationDate", type="datetime", nullable=false)
+     * @ORM\Column(name="creation_date", type="datetime", nullable=false)
      */
     private $creationDate;
 
     /**
      * @var \DateTime
-     * @ORM\Column(name="updateDate", type="datetime", nullable=false)
+     * @ORM\Column(name="update_date", type="datetime", nullable=false)
      */
     private $updateDate;
 
@@ -76,20 +81,53 @@ class UserMission
      */
     private $thread;
 
+    /**
+     * @var int
+     * @ORM\Column(name="score", type="integer", nullable=true)
+     */
+    private $score;
 
     /**
-     * UserMission constructor.
+     * @var \DateTime
+     * @ORM\Column(name="interested_at", type="datetime", nullable=true)
+     */
+    private $interestedAt;
+
+    /**
+     * @var string
+     * @ORM\Column(name="note", type="text", nullable=false)
+     */
+    private $note;
+
+    /**
+     * @var int
+     * @ORM\Column(name="id_for_contractor", type="integer", nullable=true)
+     */
+    private $idForContractor;
+
+    /**
+     * @ORM\OneToMany(targetEntity="ToolsBundle\Entity\UploadResume",
+     *     mappedBy="userMission", cascade={"remove"})
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
+     */
+    private $proposals;
+
+    /**
      *
      * @param $user
      * @param $mission
      */
     public function __construct($user, $mission)
     {
-        $this->status       = self::NEW;
+        $this->status       = self::ACTIVATED;
         $this->creationDate = new \DateTime();
         $this->updateDate   = new \DateTime();
         $this->user         = $user;
         $this->mission      = $mission;
+        $this->note         = "";
+        $this->proposals    = new ArrayCollection();
+        $mission->addUserMission($this);
+        $user->addUserMission($this);
     }
 
     /**
@@ -226,7 +264,7 @@ class UserMission
 
     /**
      * Get thread
-     * @return \ToolsBundle\Entity\Thread
+     * @return \InboxBundle\Entity\Thread
      */
     public function getThread()
     {
@@ -236,7 +274,7 @@ class UserMission
     /**
      * Set thread
      *
-     * @param \ToolsBundle\Entity\Thread $thread
+     * @param \InboxBundle\Entity\Thread $thread
      *
      * @return UserMission
      */
@@ -247,4 +285,153 @@ class UserMission
         return $this;
     }
 
+
+    /**
+     * Set score
+     *
+     * @param integer $score
+     * @return UserMission
+     */
+    public function setScore($score)
+    {
+        $this->score = $score;
+
+        return $this;
+    }
+
+    /**
+     * Get score
+     *
+     * @return integer
+     */
+    public function getScore()
+    {
+        return $this->score;
+    }
+
+     /**
+     * Set interestedAt
+     *
+     * @param \DateTime $interestedAt
+     * @return UserMission
+     */
+    public function setInterestedAt($interestedAt)
+    {
+        $this->interestedAt = $interestedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get interestedAt
+     *
+     * @return \DateTime
+     */
+    public function getInterestedAt()
+    {
+        return $this->interestedAt;
+    }
+
+    /**
+     * Set note
+     *
+     * @param string $note
+     * @return UserMission
+     */
+    public function setNote($note)
+    {
+        $this->note = $note;
+
+        return $this;
+    }
+
+    /**
+     * Get note
+     *
+     * @return string
+     */
+    public function getNote()
+    {
+        return $this->note;
+    }
+
+    /**
+     * Set idForContractor
+     *
+     * @param integer $idForContractor
+     * @return UserMission
+     */
+    public function setIdForContractor($idForContractor)
+    {
+        $this->idForContractor = $idForContractor;
+
+        return $this;
+    }
+
+    /**
+     * Get idForContractor
+     *
+     * @return integer
+     */
+    public function getIdForContractor()
+    {
+        return $this->idForContractor;
+    }
+
+    /**
+     * Add proposal
+     *
+     * @param \ToolsBundle\Entity\UploadResume $proposal
+     * @return UserMission
+     */
+    public function addProposale($proposal)
+    {
+        $proposal->setUserMission($this);
+        $this->proposals[] = $proposal;
+
+        return $this;
+    }
+
+    /**
+     * Remove proposal
+     *
+     * @param \ToolsBundle\Entity\UploadResume $proposal
+     */
+    public function removeProposale($proposal)
+    {
+        $this->proposals->removeElement($proposal);
+    }
+
+    /**
+     * Get proposals
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProposals()
+    {
+        return $this->proposals;
+    }
+
+    /**
+     * Add proposals
+     *
+     * @param \ToolsBundle\Entity\UploadResume $proposals
+     * @return UserMission
+     */
+    public function addProposal(\ToolsBundle\Entity\UploadResume $proposals)
+    {
+        $this->proposals[] = $proposals;
+
+        return $this;
+    }
+
+    /**
+     * Remove proposals
+     *
+     * @param \ToolsBundle\Entity\UploadResume $proposals
+     */
+    public function removeProposal(\ToolsBundle\Entity\UploadResume $proposals)
+    {
+        $this->proposals->removeElement($proposals);
+    }
 }

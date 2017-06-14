@@ -13,8 +13,35 @@ use MissionBundle\Entity\UserMission;
  */
 class UserMissionRepository extends EntityRepository
 {
+    public function findOrderedByMission($mission, $max)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('t')
+            ->from('MissionBundle:UserMission', 't')
+            ->join('t.mission', 'm')
+            ->join('m.steps', 's')
+            ->where('t.mission = :mission')
+                ->setParameter('mission', $mission)
+            ->andWhere('t.status = '.UserMission::ACTIVATED)
+            ->andWhere('s.status = 1 and s.position = 1')
+            ->orderBy("t.score", "desc");
+        if ($max) {
+            $qb->setMaxResults($max);
+        }
+        return $qb->getQuery()->getResult();
+    }
+
     // Query get users availables for a specific step
     //$full is a boolean : false => getAvailablesUsers; true => get All availables users in Array form.
+    /**
+     * Query get users availables for a specific step
+     * $full is a boolean : false => getAvailablesUsers; true => get All availables users in Array form.
+     *
+     * @param $missionId
+     * @param \MissionBundle\Entity\Step $step
+     * @param $arrayForm
+     * @return array|\Doctrine\ORM\QueryBuilder
+     */
     public function getAvailablesUsers($missionId, $step, $arrayForm)
     {
         $qb = $this->_em->createQueryBuilder();
@@ -42,10 +69,8 @@ class UserMissionRepository extends EntityRepository
             ->leftjoin('t.mission', 'm')
             ->where('u.id = :userId')
                 ->setParameter('userId', $userId)
-            ->andWhere('t.status != :status1')
-                ->setParameter('status1', UserMission::NEW)
-            ->andWhere('t.status != :status2')
-                ->setParameter('status2', UserMission::REFUSED)
+            ->andWhere('t.status > :status1')
+                ->setParameter('status1', UserMission::MATCHED)
             ->orderBy('m.applicationEnding', 'ASC');
         return $qb->getQuery()->getResult();
     }
@@ -60,8 +85,29 @@ class UserMissionRepository extends EntityRepository
             ->where('u.id = :userId')
                 ->setParameter('userId', $userId)
             ->andWhere('t.status < :status')
-                ->setParameter('status', UserMission::NEW)
+                ->setParameter('status', UserMission::ACTIVATED)
             ->orderBy('m.applicationEnding', 'ASC');
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @param \MissionBundle\Entity\Mission $mission
+     * @param $status
+     * @return array
+     */
+    public function findAllAtLeastThan($mission, $status)
+    {
+        $qb = $this->_em->createQueryBuilder();
+
+        $qb->select('um')
+            ->from('MissionBundle:UserMission', 'um')
+            ->leftjoin('um.mission', 'm')
+            ->where('m.id = :mId')
+            ->setParameter('mId', $mission->getId())
+            ->andWhere('um.status >= :status')
+            ->setParameter('status', $status)
+        ;
+
         return $qb->getQuery()->getResult();
     }
 }

@@ -1,0 +1,141 @@
+{% extends '::base.html.twig' %}
+{% trans_default_domain "tools" %}
+
+{# set up var #}
+{% set user = user_mission.user %}
+{% set mission = user_mission.mission %}
+{% set thread = user_mission.thread %}
+{% set anonymous = step.getAnonymousMode %}
+
+{% block body %}
+
+    {# set up header #}
+    <div class="header">
+        <div class="status">
+            PencileIcon<br>
+            {{ 'mission.view.to_answer' | trans }} <br>
+        </div>
+        <div class="finance">
+            {{ 'mission.view.advisor.finance' | trans({ '%price': mission.price * 1000, '%professionalExpertise': mission.professionalExpertise.name | trans }, 'tools') | nl2br }}
+        </div>
+        <div class="day_left">
+            ClockIcon<br>
+            {{ mission.applicationEnding | time_diff }}
+        </div>
+        <div class="calendar">
+            CalendarIcon<br>
+            {{ mission.missionBeginning | date("M d") }}<br>
+            {{ mission.missionEnding | date("M d") }}
+        </div>
+        <div class="address">
+            PinPointIcon<br>
+            {% if mission.address %}
+                {% if mission.address.city %}
+                    {{ mission.address.city }}<br>
+                {% endif %}
+                {{ mission.address.country | countryName }}
+            {% endif %}
+        </div>
+        <div class="lang">
+            BubleIcon<br>
+            {% for lang in mission.languages %}
+                {{ lang.name | trans }}
+                {% if not loop.last %}
+                    ,
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="on_site">
+            EarthIcon<br>
+            {% if mission.telecommuting %}
+                {{ 'mission.view.advisor.on_site' | trans }}
+            {% else %}
+                {{ 'mission.view.advisor.not_on_site' | trans }}
+            {% endif %}
+        </div>
+        <div class="mission_status">
+            {% if step.position == 2 %}
+                FlagIcon<br>
+                {{ 'mission.view.shortlisted' | trans | nl2br }}
+            {% elseif step.position == 3 %}
+                HandShackIcon<br>
+                {{ 'mission.view.selected' | trans | nl2br }}
+            {% endif %}
+        </div>
+        <p>
+        <div class="btn_back">
+            CrossIcon<br>
+            <a href="{{ path('dashboard') }}">{{ 'mission.view.advisor.btn_back_to_board' | trans | upper }}</a>
+        </div>
+    </div>
+
+    {# set up left and right content #}
+    <div class="content">
+
+        {# set up left content #}
+        <div class="meta_data">
+            Pitched at {{ mission.updateDate | date('d/m/Y') }} <br>
+            <h4>{{ mission.title }}</h4> <br>
+            CertificationIcon Certification:
+            {% for certif in mission.certifications %}
+            {{ certif.name }}
+            {% if not loop.last %}
+                ,
+            {% endif %}
+            {% endfor %}<br>
+            TypeMissionIcon
+            {% for kind in mission.missionKinds %}
+            {{ kind.name | trans }}
+            {% if not loop.last %}
+                ,
+            {% endif %}
+            {% endfor %}<br>
+        </div>
+        <div class="resume">
+            {{ mission.resume | nl2br }}
+        </div>
+
+        {# set up right content #}
+        <div class="chat_box"><p>
+            <div class="message" id="thread_message">
+                {% include '@Mission/Mission/Advisor/view_thread_advisor.html.twig' %}
+            </div>
+            <div class="answer">
+                <form>
+                    <textarea id="inbox_input_message" name="inbox[inout_message]"></textarea>
+                    <input type="button" id="submit_text" value="{{ 'form.btn.send' | trans | upper }}" onClick="sendMessage()"/>
+                </form>
+            </div>
+            <div class="upload_proposal">
+                {% if form is defined %}
+                    {{ form_start(form) }}
+                    {{ form_errors(form) }}
+                    {{ form_errors(form.file) }}
+                    {{ form_widget(form.file) }}
+                    {{ form_widget(form.submit) }}
+                    {{ form_end(form) }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        function sendMessage() {
+            if ($('textarea#inbox_input_message').val()) {
+                $.ajax({
+                    url: "{{ path('send_message_to_contractor') }}",
+                    method: "post",
+                    data: {
+                        id: {{ user_mission.id }},
+                        message: $('textarea#inbox_input_message').val()
+                    }
+                }).done(function (msg) {
+                    $('textarea#inbox_input_message').val('');
+                    $('#thread_message').html(msg);
+                });
+            }
+        }
+    </script>
+{% endblock %}

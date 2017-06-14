@@ -1,0 +1,52 @@
+tools:
+    phone:
+        digits: 'The phone number can only have between 4 and 10 digits.'
+        prefix: 'You must enter a prefix with the phone number.'
+    prefix:
+        phone: 'You must enter a phone number with the prefix.'
+    address:
+        required: 'The address must only contain letters numbers, point, comma or dash.'
+        city: 'The city must  only contain letters or dash.'
+        state: 'The state must contain only letters or dash.'
+    upload:
+        badFormat: "This fils doesn't match the good format"
+    number:
+        reauired: "Please enter a valid number"
+
+user:
+    companysize:
+        min: "Please select at least one Company size"
+    continent:
+        min: "Please select at least one Area"
+    fname:
+        blank: 'Please enter your first name.'
+        short: 'The first name is too short.'
+        long: 'The first name is too long.'
+        illegale: 'This first name contains illegal characters'
+    lname:
+        blank: 'Please enter your last name.'
+        short: 'The last name is too short.'
+        long: 'The last name is too long.'
+        illegale: 'This last name contains illegal characters'
+
+company:
+    name:
+        blank: 'Please enter your company.'
+        short: 'Company name is too short'
+        long: 'Company name is too long.'
+        illegale: 'This company name contains illegal characters'
+
+error:
+    mission_kind:
+        one: Select at least one missionKind
+    language:
+        one: Select at least one language
+    resume:
+        max_words: Your resume cannot contain more than 500 words
+    date:
+        past_date: You can't pick a past date
+        after_end_date: The mission cannot start after the end date
+        before_start_date: The application end date cannot be before the start date of the mission
+    wolrd:
+        continent: Please select at least one continent
+        country: Please select at least one country
