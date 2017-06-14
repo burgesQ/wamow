@@ -289,7 +289,7 @@ user:
 ## Mission
 mission:
     view:
-        more_info: MORE DETIALS
+        more_info: MORE DETAILS
         less_info: LESS DETAILS
         pitched_at: Pitched at date
         certifications: Certification(s)
@@ -297,6 +297,8 @@ mission:
         currency_k: K $
         receive_the_pitch: <span> %nb </span> will receive the pitch
         contractor:
+            pitched_at: Pitched at date
+            next_mission: Next Mission >
             status_advisor: all advisor
             status_shortlist: shortlist
             status_finalit: finalist
@@ -306,8 +308,8 @@ mission:
             btn_add_to_shortlist: add to shortlist
             btn_remove_from_shortlist: remove from shortlist
             finance: |
-                $ %price
-                %professionalExpertise
+                %professionalExpertise<br>
+                <strong>$ %price</strong><br>
         advisor:
             btn_back_to_board: back to board
             btn_back_to_global_view: back to global view
@@ -326,8 +328,8 @@ mission:
             Shortlisted
             MISSION STATUS
         selected: |
-            Selected
-            MISSION STATUS
+            Selected<br>
+            <small>mission status</small>
     action:
         add_to_shortlist: User added to shortlist !
         add_to_contract: User added to contract !

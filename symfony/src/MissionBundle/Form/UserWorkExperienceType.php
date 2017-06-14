@@ -37,7 +37,7 @@ class UserWorkExperienceType extends AbstractType
                 'translation_domain'        => 'tools',
                 'choice_translation_domain' => 'tools'
             ])
-            ->add('companySize', EntityType::class, [
+            ->add('companySizes', EntityType::class, [
                 'class'                     => 'MissionBundle:CompanySize',
                 'property'                  => 'name',
                 'multiple'                  => true,
