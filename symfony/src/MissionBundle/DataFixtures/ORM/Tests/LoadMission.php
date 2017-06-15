@@ -228,7 +228,6 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface, Co
         $i = 0;
         /** @var \MissionBundle\Entity\UserMission $oneUserMission */
         foreach ($mission10->getUserMission() as $oneUserMission) {
-            var_dump('+1');
             if ($i % 2) {
                 $oneUserMission->getUser()->setPayment(1);
                 $oneUserMission->setStatus(UserMission::ONGOING);

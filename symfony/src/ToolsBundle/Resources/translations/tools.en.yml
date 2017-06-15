@@ -73,6 +73,8 @@ legends:
 
 ## Common error
 error:
+    page:
+        common: The requested page couldn't be located. Checkout for any URL misspelling or
     forbidden: You have no access to this page
     logged: You're not logged
     user:

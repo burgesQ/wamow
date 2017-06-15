@@ -1,4 +1,0 @@
-setlocale:
-    path:      /setlocale/{language}
-    defaults:
-        _controller: ToolsBundle:Tools:setlocale

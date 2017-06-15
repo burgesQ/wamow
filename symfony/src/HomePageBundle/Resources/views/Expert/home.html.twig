@@ -6,8 +6,6 @@
 
 {% block body %}
 <a href="{{ path('home_page_seeker') }}">{{ 'home.advisor.contractorlink' | trans | upper }}</a><br>
-<a href="{{ path('setlocale', {'language': 'en'}) }}">{{ 'header.lang.en' | trans | upper }}</a><br>
-<a href="{{ path('setlocale', {'language': 'fr'}) }}">{{ 'header.lang.fr' | trans | upper }}</a><br>
 <a href="">{{ 'header.news' | trans | upper }}</a><br>
 <a href="{{ path('fos_user_security_login') }}">{{ 'home.advisor.login' | trans }}</a><br>
 <a href="{{ path('fos_user_registration_register_expert') }}">{{ 'home.advisor.signup' | trans }}</a><br>

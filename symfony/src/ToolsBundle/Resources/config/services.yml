@@ -1,6 +1,0 @@
-services:
-    toolsbundle.locale_listener:
-        class: ToolsBundle\EventListener\LocaleListener
-        arguments: ['%kernel.default_locale%']
-        tags:
-            - { name: kernel.event_subscriber }

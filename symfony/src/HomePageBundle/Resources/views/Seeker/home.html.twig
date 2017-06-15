@@ -6,8 +6,6 @@
 
 {% block body %}
 <br>
-<a href="{{ path('setlocale', {'language': 'en'}) }}">{{ 'header.lang.en' | trans | upper }}</a><br>
-<a href="{{ path('setlocale', {'language': 'fr'}) }}">{{ 'header.lang.fr' | trans | upper }}</a><br>
 <a href="">{{ 'home.contractor.signup' | trans | upper }}</a><br>
 <a href="{{ path('fos_user_security_login') }}">{{ 'home.contractor.login' | trans | upper }}</a><br>
 {{ 'home.contractor.title' | trans }}<br>
