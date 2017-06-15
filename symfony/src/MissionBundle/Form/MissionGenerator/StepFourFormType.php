@@ -28,11 +28,6 @@ class StepFourFormType extends AbstractType
                 'validation_groups'  => false,
                 'label'              => 'form.btn.edit'
             ])
-            ->add('print', SubmitType::class, [
-                'translation_domain' => 'tools',
-                'validation_groups'  => false,
-                'label'              => 'form.btn.print'
-            ])
             ->add('forLater', SubmitType::class, [
                 'translation_domain' => 'tools',
                 'validation_groups'  => false,
