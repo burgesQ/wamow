@@ -5,122 +5,172 @@
 {% set user = user_mission.user %}
 {% set mission = user_mission.mission %}
 {% set thread = user_mission.thread %}
+{% set lastMsg = thread.messages | last %}
 {% set anonymous = step.getAnonymousMode %}
 
 {% block body %}
 
-    {# set up header #}
-    <div class="header">
-        <div class="status">
-            PencileIcon<br>
-            {{ 'mission.view.to_answer' | trans }} <br>
-        </div>
-        <div class="finance">
-            {{ 'mission.view.advisor.finance' | trans({ '%price': mission.price * 1000, '%professionalExpertise': mission.professionalExpertise.name | trans }, 'tools') | nl2br }}
-        </div>
-        <div class="day_left">
-            ClockIcon<br>
-            {{ mission.applicationEnding | time_diff }}
-        </div>
-        <div class="calendar">
-            CalendarIcon<br>
-            {{ mission.missionBeginning | date("M d") }}<br>
-            {{ mission.missionEnding | date("M d") }}
-        </div>
-        <div class="address">
-            PinPointIcon<br>
-            {% if mission.address %}
-                {% if mission.address.city %}
-                    {{ mission.address.city }}<br>
-                {% endif %}
-                {{ mission.address.country | countryName }}
-            {% endif %}
-        </div>
-        <div class="lang">
-            BubleIcon<br>
-            {% for lang in mission.languages %}
-                {{ lang.name | trans }}
-                {% if not loop.last %}
-                    ,
-                {% endif %}
-            {% endfor %}
-        </div>
-        <div class="on_site">
-            EarthIcon<br>
-            {% if mission.telecommuting %}
-                {{ 'mission.view.advisor.on_site' | trans }}
-            {% else %}
-                {{ 'mission.view.advisor.not_on_site' | trans }}
-            {% endif %}
-        </div>
-        <div class="mission_status">
-            {% if step.position == 2 %}
-                FlagIcon<br>
-                {{ 'mission.view.shortlisted' | trans | nl2br }}
-            {% elseif step.position == 3 %}
-                HandShackIcon<br>
-                {{ 'mission.view.selected' | trans | nl2br }}
-            {% endif %}
-        </div>
-        <p>
-        <div class="btn_back">
-            CrossIcon<br>
-            <a href="{{ path('dashboard') }}">{{ 'mission.view.advisor.btn_back_to_board' | trans | upper }}</a>
-        </div>
-    </div>
+    <div class="wmw-mission col-xs-10 col-xs-offset-1">
 
-    {# set up left and right content #}
-    <div class="content">
+        <a href="{{ path('dashboard') }}" class="wmw-mission-close"><i class="icon icon--cross"></i>{{ 'mission.view.advisor.btn_back_to_board' | trans }}</a>
 
-        {# set up left content #}
-        <div class="meta_data">
-            Pitched at {{ mission.updateDate | date('d/m/Y') }} <br>
-            <h4>{{ mission.title }}</h4> <br>
-            CertificationIcon Certification:
-            {% for certif in mission.certifications %}
-            {{ certif.name }}
-            {% if not loop.last %}
-                ,
-            {% endif %}
-            {% endfor %}<br>
-            TypeMissionIcon
-            {% for kind in mission.missionKinds %}
-            {{ kind.name | trans }}
-            {% if not loop.last %}
-                ,
-            {% endif %}
-            {% endfor %}<br>
-        </div>
-        <div class="resume">
-            {{ mission.resume | nl2br }}
-        </div>
-
-        {# set up right content #}
-        <div class="chat_box"><p>
-            <div class="message" id="thread_message">
-                {% include '@Mission/Mission/Advisor/view_thread_advisor.html.twig' %}
+        <div class="wmw-mission-header row">
+            <div class="wmw-mission-summarybtn col-xs-12">
+                <a href="#" class="wmw-button wmw-button--red wmw-button--small">
+                    <i></i>
+                    <span class='off'>{{ 'mission.view.more_info' | trans }}</span>
+                    <span class='on'>{{ 'mission.view.less_info' | trans }}</span>
+                    <i></i>
+                </a>
             </div>
-            <div class="answer">
-                <form>
-                    <textarea id="inbox_input_message" name="inbox[inout_message]"></textarea>
-                    <input type="button" id="submit_text" value="{{ 'form.btn.send' | trans | upper }}" onClick="sendMessage()"/>
-                </form>
-            </div>
-            <div class="upload_proposal">
-                {% if form is defined %}
-                    {{ form_start(form) }}
-                    {{ form_errors(form) }}
-                    {{ form_errors(form.file) }}
-                    {{ form_widget(form.file) }}
-                    {{ form_widget(form.submit) }}
-                    {{ form_end(form) }}
+            <div class="wmw-mission-summary wmw-mission-summary--left col-xs-12 col-md-10 row">
+                {% if lastMsg.sender != user %}
+                    <span class="summary-el summary-el--answer">
+                        <span>
+                            <i class="icon icon--pen"></i><br/>
+                            {{ 'mission.view.to_answer' | trans }}
+                        </span>
+                    </span>
+                {% endif %}
+                <span class="summary-el summary-el--salary">
+                    <span>
+                        {{ 'mission.view.advisor.finance' | trans({ '%price': mission.price * 1000, '%professionalExpertise': mission.professionalExpertise.name | trans }) | raw }}
+                    </span>
+                </span>
+                <span class="summary-el">
+                    <span>
+                        <i class="icon icon--calendar"></i><br/>
+                        {{ mission.applicationEnding | time_diff }}
+                    </span>
+                </span>
+                <span class="summary-el">
+                    <span>
+                        <i class="icon icon--pointer"></i><br/>
+                        {% if mission.address %}
+                            {% if mission.address.city %}
+                                {{ mission.address.city }}<br>
+                            {% endif %}
+                            {{ mission.address.country | countryName }}
+                        {% endif %}
+                    </span>
+                </span>
+                <span class="summary-el">
+                    <span>
+                        <i class="icon icon--language"></i><br/>
+                        {% for lang in mission.languages %}
+                            {{ lang.name | trans }}
+                            {% if not loop.last %}
+                                ,
+                            {% endif %}
+                        {% endfor %}
+                    </span>
+                </span>
+                <span class="summary-el">
+                    <span>
+                        <i class="icon icon--world"></i><br/>
+                        {% if mission.telecommuting %}
+                            {{ 'mission.view.advisor.on_site' | trans }}
+                        {% else %}
+                            {{ 'mission.view.advisor.not_on_site' | trans }}
+                        {% endif %}
+                    </span>
+                </span>
+                {% if step.position == 1 %}
+                    <span class="summary-el summary-el--purple">
+                        <span>
+                            <i class="icon icon--rocket"></i><br/>
+                            {{ 'mission.view.contractor.status_interested' | trans }}
+                        </span>
+                    </span>
+                {% elseif step.position == 2 %}
+                    <span class="summary-el summary-el--purple">
+                        <span>
+                            <i class="icon icon--flag"></i><br/>
+                            {{ 'mission.view.contractor.status_shortlist' | trans }}
+                        </span>
+                    </span>
+                {% elseif step.position == 3 %}
+                    <span class="summary-el summary-el--purple">
+                        <span>
+                            <i class="icon icon--star"></i><br/>
+                            {{ 'mission.view.contractor.status_finalit' | trans }}
+                        </span>
+                    </span>
                 {% endif %}
             </div>
         </div>
+
+        <div class="wmw-mission-body wmw-mission-body--mail">
+            <div class="wmw-mission-content row">
+                <div class="wmw-mission-mail">
+                    <div class="mail-content mail-content--toanswer">
+
+                        <div class="mail-content-sidebar">
+                            <div class="sidebar-date">
+                                {{ 'mission.view.pitched_at' | trans({ date :  mission.updateDate | date('d/m/Y') }) }}
+                            </div>
+                            <div class="sidebar-title">
+                                {{ mission.title }}
+                                <small><i class="icon icon--certification"></i>
+                                    {{ 'mission.view.certifications' | trans | humanize }} :
+                                    {% for certif in mission.certifications %}
+                                        {{ certif.name }}
+                                        {% if not loop.last %}
+                                            ,
+                                        {% endif %}
+                                    {% endfor %}
+                                </small>
+                            </div>
+                            <div class="sidebar-content">
+                                {% if not user.payment %}
+                                    {{ mission.resume | truncate(100, false, '[...]' | nl2br) }}
+                                {% else %}
+                                    {{ mission.resume | nl2br }}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="mail-content-chat mail-content-chat--red">
+                            <div class="message" id="thread_message">
+                                {% include '@Mission/Mission/Advisor/view_thread_advisor.html.twig' %}
+                            </div>
+                        </div>
+
+                        <div class="mail-content-answer mail-content-answer--red">
+
+                            <textarea id="inbox_input_message" name="inbox[inout_message]"></textarea>
+                            <button id="submit_text" value="{{ 'form.btn.send' | trans | upper }}"
+                                    onClick="sendMessage()">{{ 'form.btn.send' | trans }}</button>
+
+                            <!-- Case 2 -->
+                            {# TODO REVIEW ON INTEGRATION STEP 2 / 3 #}
+                            <div class="mail-content-answer-bottom">
+                                {% if form is defined and step.position >= 2 %}
+                                    {{ form_start(form) }}
+                                    {{ form_errors(form) }}
+                                    {{ form_errors(form.file) }}
+
+                                    {{ form_row(form.submit) }}
+                                    {{ form_widget(form.file, { 'attr' : { class : 'bottom-proposal'}}) }}
+                                    {{ form_end(form) }}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
 {% endblock %}
 
 {% block javascripts %}
+    {{ parent() }}
+
     <script type="text/javascript">
         function sendMessage() {
             if ($('textarea#inbox_input_message').val()) {

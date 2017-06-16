@@ -301,6 +301,7 @@ mission:
             status_advisor: all advisor
             status_shortlist: shortlist
             status_finalit: finalist
+            status_interested: interested
             btn_refuse: REFUSE
             btn_proced_to_shortlist: Proceed to shortlist
             btn_contract: contract
