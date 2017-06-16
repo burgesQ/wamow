@@ -290,7 +290,6 @@ user:
 mission:
     view:
         pitched_at: Pitched at date
-        certifications: Certification(s)
         price_day: $ </div> / day
         more_info: more details
         less_info: less details

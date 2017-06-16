@@ -55,8 +55,7 @@ class MissionController extends Controller
                     return $this->render('@Mission/Mission/Contractor/mission_all_advisor.html.twig', [
                         'mission'      => $mission,
                         'interested'   => count($userMissions),
-                        'shortlisted'  => count($userMissionRepo->findAllAtLeastThan($mission,
-                            UserMission::SHORTLIST)),
+                        'shortlisted'  => count($userMissionRepo->findAllAtLeastThan($mission, UserMission::SHORTLIST)),
                         'userMissions' => $userMissions,
                         'nextMission'  => $nextMissionId,
                         'user'         => $this->getUser(),
