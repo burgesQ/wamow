@@ -1,4 +1,4 @@
-<!doctype html>
+<doctype html>
 <html lang="fr">
 <head>
 
@@ -29,11 +29,10 @@
     <div class="wmw-wrapper">
         {% block header %}
         <header class="wmw-header wmw-header--ob row">
-        	<a href="#" class="wmw-header-logo"><img src="{{asset('images/header-logo.png')}}" alt="WMW" /></a>
+            {% include '@User/Profile/profile_header.html.twig' %}
         </header>
         {% endblock %}
         <main class="wmw-main row">
-            {% include '@User/Profile/profile_header.html.twig' %}
             {% for type, messages in app.session.flashBag.all %}
                 {% for message in messages %}
                     <div class="{{ type }}">

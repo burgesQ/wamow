@@ -3402,7 +3402,7 @@ var Master = {
     init_mission_overlay: function(){
 
         $('#wmw-overlay-ob-4 .wmw-overlay-close').on('click', function(){
-			// window.location.reload()
+            // window.location.reload()
             var num = $(this).parent().parent().attr('data-num');
             var val =  $('.wmw-onboard-switches-el[data-num='+num+'] input[type=hidden]').val();
 
@@ -3429,11 +3429,11 @@ var Master = {
             var $el = $(this).parent().parent().parent().parent();
             var val = $el.find('input[type=hidden]').val();
             var $overlay = $('#wmw-overlay-ob-4');
-			var checkbox = $(this).parent().find('input[type=checkbox]');
-			checkbox.prop('checked', true);
-			if (checkbox.val())
-			Master.addExpShapForm(checkbox.val());
-			// NOTE : Not a form anymore ?!
+            var checkbox = $(this).parent().find('input[type=checkbox]');
+            checkbox.prop('checked', true);
+            if (checkbox.val())
+                Master.addExpShapForm(checkbox.val());
+            // NOTE : Not a form anymore ?!
             // $overlay.deserialize( val );
 
             Master.open_mission_overlay( $el );
@@ -3453,29 +3453,39 @@ var Master = {
             return false;
         });
     },
-	addExpShapForm: function( i ){
-		$('#wmw-overlay-ob-4').html("");
-        var $checkbox = $('input#app_user_profile_workExperience_' + i);
+    // HER WE TRANSFORM THE USERWORKEXP SKELETON FROM INTO A ACTUAL ONE
+    addExpShapForm: function( i ){
+        $('#wmw-overlay-ob-4').html("");
         var $label = $('#label_app_user_profile_workExperience_' + i );
-		var $container = $('#wmw-overlay-ob-4');
-		var $prototype = $($container.attr('data-prototype')
-			.replace(/__name__label__/g, $label.text())
-			.replace(/__name__/g, i));
+        var $container = $('#wmw-overlay-ob-4');
+        var $prototype = $($container.attr('data-prototype')
+            .replace(/__name__label__/g, $label.text())
+            .replace(/__name__/g, i));
 
-		$container.append($prototype);
+        $container.append($prototype);
 
-		$("#app_user_profile_userWorkExperiences_" + i + "_workExperience option:selected").removeAttr("selected");
-		$("#app_user_profile_userWorkExperiences_" + i + "_workExperience option[value='" + i + "']").attr('selected', 'selected');
-		Master.init_mission_overlay();
+        $("#app_user_profile_userWorkExperiences_" + i + "_workExperience option:selected").removeAttr("selected");
+        $("#app_user_profile_userWorkExperiences_" + i + "_workExperience option[value='" + i + "']").attr('selected', 'selected');
 
-		// var $btn = '<input type="button" id="add_edit_' + i + '" value="AddEdit">';
-		// $checkbox.after($btn);
-	},
+        // THEN WE ADD THE CLOSE METHODE (PREVIOUSLY, CALL TO init_mission_overlay)
+        //Master.init_mission_overlay();
+        $('#wmw-overlay-ob-4 .wmw-overlay-close').on('click', function(){
+            // window.location.reload()
+            var num = $(this).parent().parent().attr('data-num');
+            var val =  $('.wmw-onboard-switches-el[data-num='+num+'] input[type=hidden]').val();
+
+            if(val == '')
+                $('.wmw-onboard-switches-el[data-num='+num+'] input[type=checkbox]').trigger('click').removeClass('invalid');
+
+            Master.close_mission_overlay();
+        });
+    },
+
     open_mission_overlay: function( $el ){
 
-        var title = $el.find('label:first-child').text();
-        var num = $el.attr('data-num');
-        var $overlay = $('#wmw-overlay-ob-4');
+        // var title = $el.find('label:first-child').text();
+        // var num = $el.attr('data-num');
+        // var $overlay = $('#wmw-overlay-ob-4');
 
         // $overlay.find('.wmw-overlay-title').text( title );
         // $overlay.attr('data-num', num);
@@ -3489,7 +3499,7 @@ var Master = {
         var $overlay = $('#wmw-overlay-ob-4');
 
         $overlay.attr('data-num', '');
-        // $overlay[0].reset();
+//       $overlay[0].reset();
         Master.close_overlay( $overlay );
     },
 
