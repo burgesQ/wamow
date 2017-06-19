@@ -16,45 +16,39 @@ class PaymentController extends Controller
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function payAction(Request $request)
+    public function stripeAction(Request $request)
     {
-        $stripe = array(
-          "secret_key"      => "sk_test_BQokikJOvBiI2HlWgH4olfQ2",
-          "publishable_key" => "pk_test_6pRNASCoBOKtIshFeQd4XMUh"
-        );
-        Stripe::setApiKey($stripe['secret_key']);
-
-        if (!$request->isXmlHttpRequest()) {
-            throw new HttpException('Not a xml request');
-        }
+        Stripe::setApiKey($this->container->getParameter("stripe_secret_key"));
 
         // get user
         if (!($user = $this->getUser())) {
             throw new NotFoundHttpException();
         }
 
-        $user->setNotification(!$user->getNotification());
-        // switch user notification
+        $token  = $_POST['stripeToken'];
+
+        $customer = \Stripe\Customer::create(array(
+            'email' => $user->getEmail(),
+            'source'  => $token
+        ));
+
+        $charge = \Stripe\Charge::create(array(
+            'customer' => $customer->id,
+            'amount'   => $this->container->getParameter("stripe_subscription_price") * 100,
+            'currency' => $this->container->getParameter('stripe_subscription_currency')
+        ));
+
+        $user->setPlanPaymentProvider("stripe");
+        $user->setPlanPaymentAmount($this->container->getParameter("stripe_subscription_price"));
+        $user->setPlanType("ADVISOR_PLAN_V1");
+        $user->setPlanSubscripbedAt(new \DateTime());
+        $user->setPlanExpiresAt(new \DateTime("+1 months"));
+
         $this->getDoctrine()->getManager()->flush();
 
-        return new Response('Oukey');
-   }
+        $trans = $this->get('translator');
+        $request->getSession()->getFlashBag()->add('notice', $trans->trans('payment.ok', [], 'tools'));
 
-   public function toPayAction(Request $request)
-   {
-      $stripe = array(
-       "secret_key"      => "sk_test_BQokikJOvBiI2HlWgH4olfQ2",
-       "publishable_key" => "pk_test_6pRNASCoBOKtIshFeQd4XMUh"
-      );
-      Stripe::setApiKey($stripe['secret_key']);
-
-      die('<form action="'.$this->generateUrl('user_pay').'" method="post">
-          <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-            data-key="'.$stripe['publishable_key'].'"
-            data-description="Access for a year"
-            data-amount="5000"
-            data-locale="auto"></script>
-          </form>')
-      ;
+        return $this->redirect($request->headers->get('referer'));
    }
 }

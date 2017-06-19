@@ -480,3 +480,6 @@ mails:
          L'équipe.
     subject:
         new_message: Vous avez un nouveau message !
+payment:
+    ok: "Inscription activée avec succés !"
+    ko: "Inscription annulée."

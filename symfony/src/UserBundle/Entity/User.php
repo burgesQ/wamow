@@ -308,13 +308,6 @@ class User extends BaseUser implements ParticipantInterface
     private $addresses;
 
     /**
-     * @var boolean
-     *
-     * @orm\Column(nullable=false, name="payment", type="boolean")
-     */
-    private $payment;
-
-    /**
      * @var bool
      * @ORM\Column(name="notification", type="boolean", nullable=false)
      */
@@ -1281,26 +1274,13 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Set payement
-     *
-     * @param boolean $payment
-     * @return User
-     */
-    public function setPayment($payment)
-    {
-        $this->payment = $payment;
-
-        return $this;
-    }
-
-    /**
      * Get payment
      *
      * @return boolean
      */
     public function getPayment()
     {
-        return $this->payment;
+        return $this->planExpiresAt > new \DateTime() ? true : false;
     }
 
     /**
