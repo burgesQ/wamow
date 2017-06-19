@@ -200,7 +200,10 @@ mission:
         see: "Voir votre mission"
         edit: "Editer votre mission"
         another: "Créer une nouvelle mission"
+
     error:
+        page:
+            common: La page demandé est introuvable. Verrifiez láddress url ou
         authorized: "Vous n'êtes pas autorisé à créer une mission."
         logged: "Vous n'êtes pas connecté."
         contractor: "Seul un expert peut éditer une mission."

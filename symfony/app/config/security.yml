@@ -26,15 +26,18 @@ security:
             form_login:
                 provider:             fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
-                login_path:           /dashboard
-                check_path:           /login_check
-                failure_path:         /login
+                login_path:           dashboard
+                check_path:           fos_user_security_check
+                check_path:           fos_user_security_login
+            logout:
+                path:                  fos_user_security_logout
+                target:                home_page
 
             oauth:
                 resource_owners:
-                    linkedin:          /service/login/check-linkedin
-                login_path:            /service/login
-                failure_path:          /service/login
+                    linkedin:          linkedin_login
+                login_path:            hwi_oauth_redirect
+                failure_path:          hwi_oauth_connect
 
                 oauth_user_provider:
                     service:           my_user_provider

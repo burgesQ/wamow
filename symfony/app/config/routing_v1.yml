@@ -1,0 +1,33 @@
+## Must Be First Import !!
+user:
+    resource: "@UserBundle/Resources/config/routing.yml"
+    prefix: /
+
+company:
+    resource: "@CompanyBundle/Resources/config/routing.yml"
+    prefix: /
+
+home_page:
+    resource: "@HomePageBundle/Resources/config/routing.yml"
+    prefix: /
+
+mission:
+    resource: "@MissionBundle/Resources/config/routing.yml"
+    prefix: /
+
+dashboard:
+    resource: "@DashboardBundle/Resources/config/routing.yml"
+    prefix:   /
+
+notification:
+    resource: "@NotificationBundle/Resources/config/routing.yml"
+    prefix:   /
+
+inbox:
+    resource: "@InboxBundle/Resources/config/routing.yml"
+    prefix:   /inbox
+
+## Must Be Last Import !!!!
+blog:
+    resource: "@BlogBundle/Resources/config/routing.yml"
+    prefix:   /
