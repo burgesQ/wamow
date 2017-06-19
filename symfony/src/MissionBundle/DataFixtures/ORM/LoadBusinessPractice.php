@@ -2,31 +2,33 @@
 
 namespace MissionBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
-use MissionBundle\Entity\BusinessPractice;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\Persistence\ObjectManager;
+use MissionBundle\Entity\BusinessPractice;
 
 class LoadBusinessPractice extends AbstractFixture implements OrderedFixtureInterface
 {
+    /**
+     * @param \Doctrine\Common\Persistence\ObjectManager $manager
+     */
     public function load(ObjectManager $manager)
     {
-        $names = array(
-            'businesspractice.industry',
-            'businesspractice.finance',
-            'businesspractice.retail',
-            'businesspractice.media',
-            'businesspractice.tourism',
+        $names = [
             'businesspractice.construction',
-            'businesspractice.realestate',
-            'businesspractice.hotel',
-            'businesspractice.services',
             'businesspractice.energy',
+            'businesspractice.finance',
+            'businesspractice.hotel',
+            'businesspractice.industry',
             'businesspractice.it',
-            'businesspractice.public',
+            'businesspractice.media',
             'businesspractice.ngo',
-        );
+            'businesspractice.public',
+            'businesspractice.realestate',
+            'businesspractice.retail',
+            'businesspractice.services',
+            'businesspractice.tourism'
+        ];
 
         foreach ($names as $name) {
             $kind = new BusinessPractice();
@@ -36,10 +38,11 @@ class LoadBusinessPractice extends AbstractFixture implements OrderedFixtureInte
         $manager->flush();
     }
 
+    /**
+     * @return int
+     */
     public function getOrder()
     {
-        // the order in which fixtures will be loaded
-        // the lower the number, the sooner that this fixture is loaded
         return 5;
     }
 }
