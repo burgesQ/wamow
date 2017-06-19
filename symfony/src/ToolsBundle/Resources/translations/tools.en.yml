@@ -71,7 +71,6 @@ legends:
         background check.
     currency: $
 
-
 ## Common error
 error:
     forbidden: You have no access to this page
@@ -290,25 +289,27 @@ user:
 ## Mission
 mission:
     view:
-        more_info: MORE DETIALS
-        less_info: LESS DETAILS
         pitched_at: Pitched at date
-        certifications: Certification(s)
         price_day: $ </div> / day
+        more_info: more details
+        less_info: less details
         currency_k: K $
         receive_the_pitch: <span> %nb </span> will receive the pitch
         contractor:
+            pitched_at: Pitched at date
+            next_mission: Next Mission >
             status_advisor: all advisor
             status_shortlist: shortlist
             status_finalit: finalist
+            status_interested: interested
             btn_refuse: REFUSE
             btn_proced_to_shortlist: Proceed to shortlist
             btn_contract: contract
             btn_add_to_shortlist: add to shortlist
             btn_remove_from_shortlist: remove from shortlist
             finance: |
-                $ %price
-                %professionalExpertise
+                %professionalExpertise<br>
+                <strong>$ %price</strong><br>
         advisor:
             btn_back_to_board: back to board
             btn_back_to_global_view: back to global view
@@ -327,8 +328,8 @@ mission:
             Shortlisted
             MISSION STATUS
         selected: |
-            Selected
-            MISSION STATUS
+            Selected<br>
+            <small>mission status</small>
     action:
         add_to_shortlist: User added to shortlist !
         add_to_contract: User added to contract !

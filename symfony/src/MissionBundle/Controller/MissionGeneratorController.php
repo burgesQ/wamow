@@ -305,8 +305,6 @@ class MissionGeneratorController extends Controller
                     $em->flush();
 
                     return $this->redirectToRoute('dashboard');
-                case $formStepFour->get('print')->isClicked() :
-                    return new Response("okok let's print");
 
                 case $formStepFour->get('edit')->isClicked() :
                     return $this->redirectToRoute('mission_new_step_one', [

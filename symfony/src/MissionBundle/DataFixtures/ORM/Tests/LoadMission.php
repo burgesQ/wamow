@@ -2,6 +2,7 @@
 
 namespace MissionBundle\DataFixtures\ORM\Tests;
 
+use MissionBundle\Entity\UserMission;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -221,6 +222,22 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface, Co
 
         // save all that shit
         $manager->flush();
+
+        $mission10 = $manager->getRepository('MissionBundle:Mission')->findOneBy(['title' => 'Service à GoGo']);
+
+        $i = 0;
+        /** @var \MissionBundle\Entity\UserMission $oneUserMission */
+        foreach ($mission10->getUserMission() as $oneUserMission) {
+            var_dump('+1');
+            if ($i % 2) {
+                $oneUserMission->getUser()->setPayment(1);
+                $oneUserMission->setStatus(UserMission::ONGOING);
+                $oneUserMission->setIdForContractor($i);
+                $this->container->get('inbox.services')->createThreadPitch($oneUserMission, "Test " . $i);
+            }
+            $i++;
+        }
+
         return 0;
     }
 
