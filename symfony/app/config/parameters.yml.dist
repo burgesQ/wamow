@@ -39,5 +39,5 @@ parameters:
     # Stripe
     stripe_publishable_key: pk_test_6pRNASCoBOKtIshFeQd4XMUh
     stripe_secret_key: sk_test_BQokikJOvBiI2HlWgH4olfQ2
-    stripe_subscription_price: 5.00
+    advisor_plan_v1_price: 5.00
     stripe_subscription_currency: usd

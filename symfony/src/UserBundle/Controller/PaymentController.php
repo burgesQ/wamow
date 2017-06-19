@@ -34,15 +34,15 @@ class PaymentController extends Controller
 
         $charge = \Stripe\Charge::create(array(
             'customer' => $customer->id,
-            'amount'   => $this->container->getParameter("stripe_subscription_price") * 100,
+            'amount'   => $this->container->getParameter("advisor_plan_v1_price") * 100,
             'currency' => $this->container->getParameter('stripe_subscription_currency')
         ));
 
         $user->setPlanPaymentProvider("stripe");
-        $user->setPlanPaymentAmount($this->container->getParameter("stripe_subscription_price"));
+        $user->setPlanPaymentAmount($this->container->getParameter("advisor_plan_v1_price"));
         $user->setPlanType("ADVISOR_PLAN_V1");
         $user->setPlanSubscripbedAt(new \DateTime());
-        $user->setPlanExpiresAt(new \DateTime("+1 months"));
+        $user->setPlanExpiresAt(new \DateTime("+12 months"));
 
         $this->getDoctrine()->getManager()->flush();
 
