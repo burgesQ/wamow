@@ -3,80 +3,161 @@
 
 {% block body %}
 
-    <br><br>
-    <div>
-        <h3>{{ 'mission.new.step_four.title' | trans }}</h3>
-        <h4>{{ 'mission.new.step_four.subtitle' | trans }}</h4>
-        {{ 'mission.new.step_four.hint' | trans | striptags('<br>') | raw }}
-    </div><br>
-    <div>
-        {{ form_start(form) }}
-        {{ form_errors(form) }}
-        <div>
-            <br><h2>{{ 'mission.new.label.step_four.finance' | trans }}</h2><br>
-            <div>
-                {{ 'mission.new.label.step_four.professional_expertise' | trans }}<br>
-                {{ mission.professionalExpertise.name|trans }}<br>
-            </div>
-            <div>
-                {{ 'mission.new.label.step_four.end_pitch' | trans }}<br>
-                {{ mission.applicationEnding|date("m/d/Y") }}<br>
-            </div>
-            <div>
-                {{ 'mission.new.label.step_four.start_mission' | trans }}<br>
-                {{ 'mission.new.label.step_four.date_range'|trans({'%startDate': mission.missionBeginning|date("m/d/Y"), '%endDate': mission.missionEnding|date("m/d/Y")}, 'MissionBundle') }}
-            </div>
-            <div>
-                {{ 'mission.new.label.step_four.budget' | trans }}<br>
-                {{ mission.budget * 1000 }}
-            </div>
-            {{ form_row(form.telecommuting) }}
-            {{ form_row(form.confidentiality) }}
-            {{  form_row(form.edit_1) }}
-        </div><br>
-        <div>
-            <div>
-                {{ 'mission.new.label.step_four.mission_kind' | trans }}<br>
-                {% for missionKind in mission.missionKinds %}
-                    <li>{{ missionKind.name | trans }}</li>
-                {% endfor %}
-            </div>
-            <div>
-                {{ 'mission.new.label.step_four.languages' | trans }}<br>
-                {% for languages in mission.languages %}
-                    <li>{{ languages.name | trans({}, 'tools') }}</li>
-                {% endfor %}
-                {{ 'mission.new.label.step_four.certif' | trans }}<br>
-                {% for certification in mission.certifications %}
-                    <li>{{ certification.name }}</li>
-                {% endfor %}
+    {{ form_start(form, { 'attr' : { 'class' : 'wmw-onboard wmw-onboard--pitch col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3' }} ) }}
+
+        <div class="wmw-onboard-body">
+
+            <h1>
+                {{ 'mission.new.step_four.title' | trans }}
+                <small>{{ 'mission.new.step_four.subtitle' | trans }}</small>
+            </h1>
+
+            {{ form_errors(form) }}
+
+            <div class="wmw-onboard-resume row">
+                <div class="wmw-onboard-resume-sidebar col-xs-12 col-md-4">
+
+                    <div class="sidebar-block">
+                        <div class="sidebar-block-business">
+                            <i class="icon icon--business-finance"></i>{{ 'mission.new.label.step_four.finance' | trans }}
+                        </div>
+                        <div class="sidebar-block-el">
+                            <div class="title">
+                                <i class="icon icon--calendar"></i>{{ 'mission.new.label.step_four.professional_expertise' | trans }}
+                            </div>
+                            <div class="value">{{ mission.professionalExpertise.name | trans }}</div>
+                        </div>
+                        <div class="sidebar-block-el">
+                            <div class="title">
+                                <i class="icon icon--calendar"></i> {{ 'mission.new.label.step_four.end_pitch' | trans }}
+                            </div>
+                            <div class="value">{{ mission.applicationEnding|date("m/d/Y") }}</div>
+                        </div>
+                        <div class="sidebar-block-el">
+                            <div class="title">
+                                <i class="icon icon--calendar"></i> {{ 'mission.new.label.step_four.start_mission' | trans }}
+                            </div>
+                            <div class="value">
+                                {{ 'mission.new.label.step_four.date_range' | trans({'%startDate' : mission.missionBeginning | date("m/d/Y"),'%endDate'   : mission.missionEnding | date("m/d/Y") }) }}
+                            </div>
+                        </div>
+                        <div class="sidebar-block-el">
+                            <div class="title">
+                                <i class="icon icon--budget"></i> {{ 'mission.new.label.step_four.budget' | trans }}
+                            </div>
+                            <div class="value"> {{ mission.budget * 1000 }} {{ 'legends.currency' | trans }}</div>
+                        </div>
+                        <div class="sidebar-block-el">
+                            <div class="title">
+                                <i class="icon icon--world"></i>
+                                {% if mission.telecommuting %}
+                                    {{ 'mission.new.label.step_four.on_site' | trans }}
+                                {% else %}
+                                    {{ 'mission.new.label.step_four.not_on_site' | trans }}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="sidebar-block-el">
+                            <div class="title">
+                                <i class="icon icon--locker"></i>
+                                {% if mission.confidentiality %}
+                                    {{ 'mission.new.label.step_four.confidential' | trans }}
+                                {% else %}
+                                    {{ 'mission.new.label.step_four.not_confidential' | trans }}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    {{ form_widget(form.edit_1, { 'attr' : {'class' : 'wmw-button wmw-button--border wmw-button--green wmw-button--small'}}) }}
+
+                    <div class="sidebar-block">
+                        <div class="sidebar-block-el">
+                            <div class="title">
+                                <i class="icon icon--typology"></i> {{ 'mission.new.label.step_four.mission_kind' | trans }}
+                            </div>
+                            <div class="value">
+                                <ul>
+                                    {% for missionKind in mission.missionKinds %}
+                                        <li>{{ missionKind.name | trans }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sidebar-block">
+                        <div class="sidebar-block-el">
+                            <div class="title">
+                                <i class="icon icon--language"></i> {{ 'mission.new.label.step_four.languages' | trans }}
+                            </div>
+                            <div class="value">
+                                {% for languages in mission.languages %}
+                                    <li>{{ languages.name | trans({}, 'tools') }}</li>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="sidebar-block-el">
+                            <div class="title">
+                                <i class="icon icon--certification"></i> {{ 'mission.new.label.step_four.certif' | trans | raw }}
+                            </div>
+                            <div class="value">
+                                {% for certification in mission.certifications %}
+                                    <li>{{ certification.name }}</li>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sidebar-block">
+                        <div class="sidebar-block-el">
+                            <div class="title">
+                                <i class="icon icon--price"></i> {{ 'mission.new.label.step_four.price' | trans }}
+                            </div>
+                            <div class="value">{{ mission.price }}{{ 'mission.new.label.step_four.price_day' | trans }}</div>
+                        </div>
+                        <div class="sidebar-block-el">
+                            <div class="title">
+                                <i class="icon icon--certification"></i> {{ 'mission.new.label.step_four.concerned' | trans }}
+                            </div>
+                            <div class="value">{{ nbAdvisors }}</div>
+                        </div>
+                    </div>
+
+                    {{ form_widget(form.edit_2, { 'attr' : {'class' : 'wmw-button wmw-button--border wmw-button--green wmw-button--small'}}) }}
+
+                </div>
+
+                <div class="wmw-onboard-resume-content col-xs-12 col-md-8">
+                    {{  form_row(form.edit, { 'attr' : { 'class' : 'wmw-button wmw-button--border wmw-button--green wmw-button--small' }}) }}
+                    <h2>{{ mission.title }}</h2>
+                    {{ mission.resume | raw }}
+                </div>
 
             </div>
-            <div>
-                {{ 'mission.new.label.step_four.price' | trans }}<br>
-                {{ mission.price }} $/j
-            </div>
-            <div>
-                {{ 'mission.new.label.step_four.concerned' | trans }}<br>
-                <b>{{ nbAdvisors }}</b>
-            </div>
-            {{  form_row(form.edit_2) }}
-        </div><br>
-        <div>
-            <div>
-                {{ mission.title }}<br>
-            </div>
-            <div>
-                {{ mission.resume|nl2br }}<br>
-            </div>
-            {{  form_row(form.edit) }}
-        </div><br>
-        {{ form_widget(form.forLater, {attr: {formnovalidate: 'formnovalidate'}}) }}
-        {{ form_widget(form.print, {attr: {formnovalidate: 'formnovalidate'}}) }}
-        {{ form_widget(form.back, {attr: {formnovalidate: 'formnovalidate'}}) }}
-        {{ form_widget(form.next) }}
-        {{ form_end(form) }}
 
+            <div class="wmw-progressbar">
+                <span class="active"></span>
+                <span class="active"></span>
+                <span class="active"></span>
+                <span class="active"></span>
+                <span></span>
+            </div>
+
+        </div>
+
+        <div class="wmw-onboard-bottom">
+
+    {{ form_widget(form.forLater, {attr: { formnovalidate: 'formnovalidate',
+        class : 'wmw-button wmw-button--black wmw-button--border'}}) }}
+    <button onclick="window.print()" type="button" class="wmw-button wmw-button--black wmw-button--border wmw-onboard-bottom-left"><i></i><span>{{ 'form.btn.print' | trans }}</span><i></i></button><br />
+    {{ form_widget(form.back, {attr: { formnovalidate: 'formnovalidate',
+        class: 'wmw-button wmw-button--border'}}) }}
+    {{ form_widget(form.next, { 'attr' : { class: 'wmw-button wmw-button--green'}}) }}
+        </div>
+
+    {{ form_end(form) }}
+
+    <div class="wmw-onboard-text col-md-2">
+        {{ 'mission.new.step_four.hint' | trans | raw }}
     </div>
 
 {% endblock %}

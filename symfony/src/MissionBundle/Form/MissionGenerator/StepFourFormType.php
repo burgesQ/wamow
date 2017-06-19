@@ -13,16 +13,6 @@ class StepFourFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('confidentiality', CheckboxType::class, [
-                'translation_domain' => 'tools',
-                'label'              => 'mission.view.step_four.confidentiality',
-                'required'           => false
-            ])
-            ->add('telecommuting', CheckboxType::class, [
-                'translation_domain' => 'tools',
-                'required'           => false,
-                'label'              => 'mission.view.step_four.telecommuting'
-            ])
             ->add('edit', SubmitType::class, [
                 'translation_domain' => 'tools',
                 'validation_groups'  => false,
@@ -37,11 +27,6 @@ class StepFourFormType extends AbstractType
                 'translation_domain' => 'tools',
                 'validation_groups'  => false,
                 'label'              => 'form.btn.edit'
-            ])
-            ->add('print', SubmitType::class, [
-                'translation_domain' => 'tools',
-                'validation_groups'  => false,
-                'label'              => 'form.btn.print'
             ])
             ->add('forLater', SubmitType::class, [
                 'translation_domain' => 'tools',

@@ -44,6 +44,10 @@ class MissionController extends Controller
             if ($user->getCompany() !== $mission->getCompany()) {
                 throw $this->createNotFoundException($trans->trans('error.mission.wrong_company', [], 'tools'));
             }
+
+            $nextMissionId = $this->getDoctrine()->getRepository('MissionBundle:Mission')
+                ->findNextMission($missionId, $mission->getCompany())[0];
+
             switch ($step->getPosition()) {
                 // if mission is step 1
                 case (1) :
@@ -52,7 +56,10 @@ class MissionController extends Controller
                         'mission'      => $mission,
                         'interested'   => count($userMissions),
                         'shortlisted'  => count($userMissionRepo->findAllAtLeastThan($mission, UserMission::SHORTLIST)),
-                        'userMissions' => $userMissions
+                        'userMissions' => $userMissions,
+                        'nextMission'  => $nextMissionId,
+                        'user'         => $this->getUser(),
+
                     ]);
                 // if mission id step 2
                 case (2) :
@@ -68,7 +75,9 @@ class MissionController extends Controller
                         'mission'      => $mission,
                         'shortlisted'  => count($userMissions),
                         'userMissions' => $userMissions,
-                        'nbProposale'  => $nbProposale
+                        'nbProposale'  => $nbProposale,
+                        'nextMission'  => $nextMissionId,
+                        'user'         => $this->getUser()
                     ]);
                 // if mission is step 3
                 case (3) :
@@ -111,7 +120,6 @@ class MissionController extends Controller
             switch ($userMissionStatus) {
                 // user haven't send any message
                 case ($userMissionStatus === UserMission::MATCHED && !$user->getPayment()) :
-                case ($userMissionStatus === UserMission::ACTIVATED && !$user->getPayment()) :
                 case (UserMission::INTERESTED) :
                     $form = $this->createForm(MessageMissionFormType::class);
                     if ($form->handleRequest($request)->isSubmitted() && $form->isValid()) {
@@ -126,12 +134,13 @@ class MissionController extends Controller
                     'form'         => $form->createView()
                 ]);
                 // user have subscribe, he can send a message
-                case (($userMissionStatus === UserMission::ACTIVATED || $userMissionStatus === UserMission::MATCHED)
-                    && $user->getPayment()) :
+                case ($userMissionStatus === UserMission::MATCHED && $user->getPayment()) :
                     return $this->interestedAction($missionId);
                 // user already have sent a message; the mission isn't shortlisted
                 case (UserMission::ONGOING) :
                     $messageService->markAsRead($userMission->getThread()->getLastMessage());
+                    $em->flush();
+
                     return $this->render('@Mission/Mission/Advisor/mission_to_answer.html.twig', [
                         'user_mission' => $userMission,
                         'userId'       => $userMission->getUser()->getId(),
@@ -150,6 +159,7 @@ class MissionController extends Controller
 
                         return $this->redirectToRoute('mission_view', ['missionId' => $missionId]);
                     }
+                    $em->flush();
 
                     return $this->render('@Mission/Mission/Advisor/mission_to_answer.html.twig', [
                         'user_mission' => $userMission,
@@ -199,21 +209,11 @@ class MissionController extends Controller
 
         $messageService = $this->get('fos_message.message_reader');
         switch ($step->getPosition()) {
-            // if mission is in step 1
             case (1) :
+            case (2) :
+            case (3) :
                 $messageService->markAsRead($userMission->getThread()->getLastMessage());
-                return $this->render('@Mission/Mission/Contractor/mission_answer_to_advisor.html.twig', [
-                    'userMission' => $userMission,
-                    'anonymous'   => $step->getAnonymousMode(),
-                    'userId'      => $user->getId(),
-                    'mission'     => $mission,
-                    'interested'  => count($this->getDoctrine()->getRepository('MissionBundle:UserMission')->findAllAtLeastThan($mission, UserMission::ONGOING)),
-                    'shortlisted' => count($this->getDoctrine()->getRepository('MissionBundle:UserMission')->findAllAtLeastThan($mission, UserMission::SHORTLIST)),
-                    'nbAdvisor'   => $userMission->getIdForContractor()
-                ]);
-            // if mission is in step 2
-            case (2):
-                $messageService->markAsRead($userMission->getThread()->getLastMessage());
+                $this->getDoctrine()->getManager()->flush();
                 $userMissions = $this->getDoctrine()->getRepository('MissionBundle:UserMission')->findAllAtLeastThan($mission, UserMission::SHORTLIST);
                 $nbProposale = 0;
                 /** @var UserMission $userMission */
@@ -223,19 +223,15 @@ class MissionController extends Controller
                     }
                 }
 
-                return $this->render('@Mission/Mission/Contractor/mission_answer_to_advisor_shortlist.html.twig', [
+                return $this->render('@Mission/Mission/Contractor/mission_answer_to_advisor.html.twig', [
                     'userMission' => $userMission,
                     'anonymous'   => $step->getAnonymousMode(),
                     'userId'      => $user->getId(),
                     'mission'     => $mission,
-                    'nbProposale' => $nbProposale
-                ]);
-            // if mission is in step 3
-            case (3) :
-
-                return $this->render('@Mission/Mission/Contractor/mission_answer_to_advisor_finalist.html.twig', [
-                    'userMission' => $userMission,
-                    'anonymous'   => $step->getAnonymousMode()
+                    'nbProposale' => $nbProposale,
+                    'interested'  => count($this->getDoctrine()->getRepository('MissionBundle:UserMission')->findAllAtLeastThan($mission, UserMission::ONGOING)),
+                    'shortlisted' => count($this->getDoctrine()->getRepository('MissionBundle:UserMission')->findAllAtLeastThan($mission, UserMission::SHORTLIST)),
+                    'user'        => $user
                 ]);
 
             default:
@@ -280,8 +276,7 @@ class MissionController extends Controller
             throw $this->createNotFoundException($trans->trans('error.mission.limit_reach', [], 'tools'));
         }
         switch (($userMissionStatus = $userMission->getStatus())) {
-            case (UserMission::ACTIVATED) :
-            case (UserMission::ONGOING) :
+            case (UserMission::MATCHED) :
                 if ($user->getPayment()) {
                     // mark user as interested for the mission
                     $userMission->setStatus(UserMission::INTERESTED)->setInterestedAt(new \DateTime());

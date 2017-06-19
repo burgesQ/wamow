@@ -3,134 +3,337 @@
 
 {% block body %}
 
-    {# set up top #}
-    <div class="top">
+    {% set mission = userMission.mission %}
+    {% set user    = userMission.user %}
+    {% set step = null %}
+    {% for oneStep in mission.steps %}
+        {% if oneStep.status == 1 %}
+            {% set step = oneStep %}
+        {% endif %}
+    {% endfor %}
 
-        {# set up content_top #}
-        <div class="content_top">
-            <div class="info">
-                {{ mission.title }}<br>
-                CertificationIcon {{ 'typemissions.certification' | trans }}:
-                {% for certif in mission.certifications %}
-                    {{ certif.name }}
-                    {% if not loop.last %}
-                        ,
-                    {% endif %}
-                {% endfor %}<br>
-            </div>
-            <div class="intereted">
-                InterestedIcon<br>
-                {{ interested }} {{ 'dashboard.contractor.mission.interested' | trans }}
-            </div>
-            <div class="selected">
-                {{ shortlisted }}/3 {{ 'dashboard.contractor.mission.selected' | trans }}
-            </div>
-            <div class="finance">
-                {% for kind in mission.missionKinds %}
-                    {{ kind.name | trans }}
-                    {% if not loop.last %}
-                        ,
-                    {% endif %}
-                {% endfor %}<br>
-                {{ 'mission.view.contractor.finance' | trans({ '%price': mission.price * 1000, '%professionalExpertise': mission.professionalExpertise.name | trans }, 'tools') | nl2br }}
-            </div>
-            <div class="day_left">
-                ClockIcon<br>
-                {{ mission.applicationEnding | time_diff }}
-            </div>
-            <div class="calendar">
-                CalendarIcon<br>
-                {{ mission.missionBeginning | date("M d") }}<br>
-                {{ mission.missionEnding | date("M d") }}
-            </div>
-            <div class="address">
-                PinPointIcon<br>
-                {% if mission.address %}
-                    {% if mission.address.city %}
-                        {{ mission.address.city }}<br>
-                    {% endif %}
-                    {{ mission.address.country | countryName }}
+    <div class="wmw-mission col-xs-10 col-xs-offset-1">
+        <a href="{{ path('dashboard') }}" class="wmw-mission-close"><i
+                    class="icon icon--cross"></i>{{ 'mission.view.advisor.btn_back_to_board' | trans }}</a>
+
+        <div class="wmw-mission-breadcrumbs">
+            <span class="breadcrumbs-el active">
+                1. {{ 'mission.view.contractor.status_advisor' | trans | upper }}</span>
+            <span class="breadcrumbs-el{% if step.position > 1 %} active{% endif %}">
+                2. {{ 'mission.view.contractor.status_shortlist' | trans | upper }}
+                {% if step.position == 1 %}
+                    <a href="{{ path('mission_shortlist', { 'missionId' : mission.id }) }}">
+                        <button class="wmw-button wmw-button--black wmw-button--border wmw-button--small">
+                            <i></i><span>
+                                {{ 'mission.view.contractor.btn_proced_to_shortlist' | trans | upper }}
+                            </span><i></i>
+                        </button>
+                    </a>
                 {% endif %}
+            </span>
+            <span class="breadcrumbs-el{% if step.position > 2 %} active{% endif %}">
+                3. {{ 'mission.view.contractor.status_finalit' | trans | upper }}</span>
+        </div>
+
+        <div class="wmw-mission-header row">
+            <h1 class="col-xs-12 col-lg-5">
+                {{ mission.title }}
+                <small><i class="icon icon--certification"></i>
+                    {{ 'mission.view.certifications' | trans | humanize }} :
+                    {% for certif in mission.certifications %}
+                        {{ certif.name }}
+                        {% if not loop.last %}
+                            ,
+                        {% endif %}
+                    {% endfor %}
+                </small>
+            </h1>
+
+            <div class="wmw-mission-summarybtn col-xs-12">
+                <a href="#" class="wmw-button wmw-button--small">
+                    <i></i>
+                    <span class='off'>
+                        {{ 'mission.view.more_info' | trans }}
+                    </span>
+                    <span class='on'>
+                        {{ 'mission.view.less_info' | trans }}
+                    </span>
+                    <i></i>
+                </a>
             </div>
-            <div class="lang">
-                BubleIcon<br>
-                {% for lang in mission.languages %}
-                    {{ lang.name | trans }}
-                    {% if not loop.last %}
-                        ,
-                    {% endif %}
-                {% endfor %}
-            </div>
-            <div class="on_site">
-                EarthIcon<br>
-                {% if mission.telecommuting %}
-                    {{ 'mission.view.advisor.on_site' | trans }}
-                {% else %}
-                    {{ 'mission.view.advisor.not_on_site' | trans }}
+
+            <div class="wmw-mission-summary col-xs-12 col-lg-7 row">
+
+                {% if step.position == 1 %}
+                    <span class="summary-el">
+                        <span>
+                            <i class="icon icon--avatar"></i><br/>
+                            {{ interested }} {{ 'dashboard.contractor.mission.interested' | trans }}
+                        </span>
+                    </span>
+                    <span class="summary-el summary-el--shortlist">
+                        <span>
+                            <i class="icon icon--star"></i><br/>
+                            <span class="number">{{ shortlisted }}</span>/3 {{ 'dashboard.contractor.mission.selected' | trans }}
+                        </span>
+                    </span>
+                {% elseif step.position == 2 %}
+                    <span class="summary-el">
+                        <span>
+                            <i class="icon icon--avatar"></i><br/>
+                            {{ shortlisted }} {{ 'dashboard.contractor.mission.shortlist' | trans }}
+                        </span>
+                    </span>
+                    <span class="summary-el">
+                        <span>
+                            <i class="icon icon--document"></i><br/>
+                            {{ nbProposale }}/3 {{ 'dashboard.contractor.mission.proposal' | trans }}
+                        </span>
+                    </span>
                 {% endif %}
+
+                <span class="summary-el summary-el--salary">
+                    <span>
+                        {{ 'mission.view.contractor.finance' | trans({ '%price': (mission.price * 1000), '%professionalExpertise': mission.professionalExpertise.name | trans }, 'tools') | raw }}
+                        {% for kind in mission.missionKinds %}
+                            {{ kind.name | trans }}
+                            {% if not loop.last %}
+                                ,
+                            {% endif %}
+                        {% endfor %}
+                    </span>
+                </span>
+                <span class="summary-el">
+                    <span>
+                        <i class="icon icon--calendar"></i><br/>
+                        {{ mission.applicationEnding | time_diff }}
+                    </span>
+                </span>
+                <span class="summary-el">
+                    <span>
+                        <i class="icon icon--pointer"></i><br/>
+                        {% if mission.address %}
+                            {% if mission.address.city %}
+                                {{ mission.address.city }}<br>
+                            {% endif %}
+                            {{ mission.address.country | countryName }}
+                        {% endif %}
+                    </span>
+                </span>
+                <span class="summary-el">
+                    <span>
+                        <i class="icon icon--language"></i><br/>
+                        {% for lang in mission.languages %}
+                            {{ lang.name | trans }}
+                            {% if not loop.last %}
+                                ,
+                            {% endif %}
+                        {% endfor %}
+                    </span>
+                </span>
+
+                {% if step.position == 3 %}
+                    <span class="summary-el">
+                        <span>
+                            <i class="icon icon--world"></i><br/>
+                            {% if mission.telecommuting %}
+                                {{ 'mission.view.advisor.on_site' | trans }}
+                            {% else %}
+                                {{ 'mission.view.advisor.not_on_site' | trans }}
+                            {% endif %}
+                        </span>
+                    </span>
+                    <span class="summary-el">
+                        <span>
+                            <i class="icon icon--clock"></i><br/>
+                            from {{ mission.missionBeginning | date('m/d/Y') }}
+                            to {{ mission.missionEnding | date('m/d/Y') }}
+                        </span>
+                    </span>
+                {% endif %}
+
+                <span class="summary-el summary-el--selected">
+                    <span>
+                        {% if step.position == 3 %}
+                            <i class="icon icon--handshake"></i><br/>
+                            {{ 'dashboard.contractor.mission.selected' | trans | raw }}
+                        {% elseif step.position == 2 %}
+                            <i class="icon icon--selected"></i><br/>
+                            {{ 'dashboard.contractor.mission.shortlist' | trans }}
+                        {% else %}
+                            <i class="icon icon--consultant"></i><br/>
+                            {{ 'dashboard.contractor.mission.interested' | trans }}
+                        {% endif %}
+                    </span>
+                </span>
+
             </div>
-            PencilIcon<br>
-            {{ 'mission.view.to_answer' | trans }}
+        </div>
+
+        <div class="wmw-mission-body wmw-mission-body--mail">
+            <div class="wmw-mission-content row">
+                <div class="wmw-mission-mail">
+
+                    <div class="mail-toolbar">
+                        {% if step.position == 1 %}
+                            <div class="mail-toolbar-buttons">
+                                {# TODO : HIDE BTN DEPENDING ON THE USERMISSION STATUS #}
+                                <button id="refuse_{{ userMission.id }}" type="button"
+                                        class="wmw-button wmw-button--red wmw-button--border wmw-button--small">
+                                    <i></i><span>
+                                        <i class="icon icon--cross"></i>
+                                        {{ 'mission.view.contractor.btn_refuse' | trans }}
+                                    </span><i></i>
+                                </button>
+                                <div class="wmw-checkbutton">
+                                    <button type="button" id="shortlist_{{ userMission.id }}"
+                                            class="wmw-button wmw-button--green wmw-button--border wmw-button--small"
+                                            {% if userMission.status == constant('SHORTLIST', userMission) %}visibility="hidden"{% endif %}>
+                                        <i></i><span>
+                                            <i class="icon icon--star"></i>
+                                            {{ 'mission.view.contractor.btn_add_to_shortlist' | trans | upper }}
+                                        </span><i></i>
+                                    </button>
+                                    <button id="remove_from_shortlist_{{ userMission.id }}" hidden type="button"
+                                            class="wmw-button wmw-button--red wmw-button--border wmw-button--small"
+                                            {% if userMission.status < constant('SHORTLIST', userMission) %}display=none{% endif %}>
+                                        <i></i><span>
+                                            <i class="icon icon--star"></i>
+                                            {{ 'mission.view.contractor.btn_remove_from_shortlist' | trans | upper }}
+                                        </span><i></i>
+                                    </button>
+                                    <input type="checkbox" name="wmw-shortlist[]"/>
+                                </div>
+                            </div>
+                        {% elseif step.position == 2 %}
+                            <div class="mail-toolbar-buttons">
+                                <button id="refuse_{{ userMission.id }}" type="button" class="wmw-button wmw-button--red wmw-button--border wmw-button--small">
+                                    <i></i><span>
+                                        <i class="icon icon--cross"></i>
+                                        {{ 'mission.view.contractor.btn_refuse' | trans }}
+                                    </span><i></i>
+                                </button>
+                                <button id="contract_{{ userMission.id }}" type="button" class="wmw-button wmw-button--green wmw-button--border wmw-button--small">
+                                    <i></i><span>
+                                        <i class="icon icon--handshake"></i>
+                                        {{ 'mission.view.contractor.btn_contract' | trans | upper }}
+                                    </span><i></i>
+                                </button>
+                            </div>
+                        {% endif %}
+
+                        <div class="mail-toolbar-title">
+                            Consultant {{ userMission.idForContractor }}
+                        </div>
+                    </div>
+
+                    <div class="mail-content">
+
+                        {% if step.position == 3 %}
+                            <div class="mail-content-profile">
+
+                                {% set image = null %}
+                                {% if user.images is not empty %}
+                                    {% set image = user.images | last %}
+                                    {% if image.name is not null %}
+                                        <div class="mail-content-profile-picture" style="background-image:url({{ image.webPath() }});"></div>
+                                    {% endif %}
+                                {% else %}
+                                    {% set image = 'images/' ~ random(['placeholder-pp-0.png', 'placeholder-pp-1.png', 'placeholder-pp-2.png', 'placeholder-pp-3.png']) %}
+                                    <div class="mail-content-profile-picture" style="background-image:url({{ image }});"></div>
+
+                                {% endif %}
+
+                                <div class="mail-content-profile-name">{{ user.firstname }} {{ user.lastname }}</div>
+                                <div class="mail-content-profile-coords">
+                                    <a href="mailto:franckdellage@gmail.com">{{ user.email }}</a><br />
+                                    {% if user.phone is not null %}
+                                        {{ user.phone.prefix.prefix }}{{ user.phone.number }}
+                                    {% endif %}
+                                </div>
+                                <div class="mail-content-profile-buttons row">
+
+                                    {# TODO : BETTER WAY OF DOWN #}
+
+                                    {% if user.resumes is not empty %}
+                                        {% set resume = user.resumes | last %}
+                                        {% set path = "http://symfony.dev/" ~ resume.getUploadRootDir %}
+                                        <a href="{{ path }}" download="{{ resume.downloadName }}" class="wmw-simple-button">
+                                            <i class="icon icon--download"></i>{{ 'form.btn.download_resume' | trans }}</a>
+                                    {% endif %}
+
+                                    {% if userMission.thread.proposals is not empty %}
+                                        {% set proposal = userMission.thread.proposals | last %}
+                                        {% set path = "http://symfony.dev/" ~ proposal.getUploadRootDir %}
+                                        <a href="{{ path }}" download="{{ proposal.downloadName }}" class="wmw-simple-button wmw-simple-button--green">
+                                            <i class="icon icon--download"></i>{{ 'form.btn.download_proposal' | trans }}</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        <div class="mail-content-notes{% if step.position == 3 %} mail-content-notes--semi{% endif %}">
+                            <label for="wmw-mission-notes">Notes</label>
+                            <div class="edit" id="{{ userMission.id }}">
+                                {{ userMission.note | nl2br }}
+                            </div>
+                            <div id="wmw-mission-notes-status">{{ 'form.btn.save' | trans }}</div>
+                        </div>
+
+
+
+                        <div class="mail-content-chat">
+                            {% include '@Mission/Mission/Contractor/view_thread_contractor.html.twig' %}
+                        </div>
+
+                        <form action="" method="post" class="mail-content-answer">
+                            <textarea class="required"></textarea>
+                            <button type="submit">{{ 'form.btn.send' | trans }}</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wmw-mission-sidebar">
+                <div class="sidebar-wrapper">
+                    <div class="sidebar-date">
+                        {{ 'mission.view.contractor.pitched_at' | trans({ date : mission.updateDate | date('d/m/Y') }) }}
+                    </div>
+                    <p>
+                        {{ mission.resume | raw }}
+                    </p>
+                </div>
+                <a href="#" class="sidebar-button"></a>
+            </div>
         </div>
     </div>
 
-    {# set up left and right content #}
-    <div class="content">
-
-        {# set up left content #}
-        <div class="meta_data">
-            {#TODO TRANS#}
-            Pitched at {{ mission.updateDate | date('d/m/Y') }} <br>
-                <h4>{{ mission.title }}</h4> <br>
-        </div>
-        <div class="resume">
-            {{ mission.resume | nl2br }}
-        </div>
-
-        {# set up right content #}
-        <div class="top_chat_box">
-            <div class="button_action">
-                <button id="refuse_{{ userMission.id }}">{{ 'mission.view.contractor.btn_refuse' | trans }}</button>
-                <button id="shortlist_{{ userMission.id }}" {% if userMission.status == constant('SHORTLIST', userMission) %}hidden{% endif %}>{{ 'mission.view.contractor.btn_add_to_shortlist' | trans | upper }}</button>
-                <button id="remove_from_shortlist_{{ userMission.id }}" {% if userMission.status < constant('SHORTLIST', userMission) %}hidden{% endif %}>{{ 'mission.view.contractor.btn_remove_from_shortlist' | trans | upper }}</button>
-            </div>
-
-            {{ 'footer.advisor' | trans }}{{ nbAdvisor }}
-
-            CrossIcon
-            <a href="{{ path('dashboard') }}">{{ 'mission.view.advisor.btn_back_to_global_view' | trans | upper }}</a>
-        </div>
-        <div class="chat_box"><p>
-            <div class="message" id="thread_message">
-                {% include '@Mission/Mission/Contractor/view_thread_contractor.html.twig' %}
-            </div>
-            <div class="answer">
-                <form>
-                    <textarea id="inbox_input_message" name="inbox[inout_message]" required="required"></textarea>
-                    <input type="button" id="submit_text" value="{{ 'form.btn.send' | trans | upper }}"
-                           onClick="sendMessage()"/>
-                </form>
-            </div>
-            <div class="edit" id="{{ userMission.id }}">
-                {{ userMission.note }}
-            </div>
-        </div>
-    </div>
 {% endblock %}
 
 {% block javascripts %}
+
+    {{ parent() }}
+
     <script src="http://www.appelsiini.net/download/jquery.jeditable.js"></script>
     <script src="http://www.appelsiini.net/download/jquery.jeditable.mini.js"></script>
     <script type="text/javascript">
 
+//        AJAX JEDITABLE (NOTES)
         $('.edit').editable('{{ path('user_mission_notes') }}', {
             type: 'textarea',
             submit: '{{ 'form.btn.save' | trans }}',
             indicator: '{{ 'form.note.indicator' | trans }}',
             tooltip: '{{ 'form.note.tooltip' | trans }}',
-            id: $(this).attr('id')
+            id: $(this).attr('id'),
+            data: function (value, settings) {
+                return value.replace(/<br\s*\/?>\n?/gi, '\n');
+            },
+            callback: function (value, settings) {
+                $(this).html(value.replace(/\n/g, "<br />"));
+            }
         });
 
+//        AJAX SHORTLIST ACTION (STEP 1)
         $('[id^="shortlist_"]').each(function () {
             $(this).click(function () {
                 var id = $(this).attr('id').split('_')[1];
@@ -148,6 +351,7 @@
             });
         });
 
+//        AJAX REMOVE FROM SHORTLIST ACTION (STEP 1)
         $('[id^="remove_from_shortlist_"]').each(function () {
             $(this).click(function () {
                 var id = $(this).attr('id').split('_')[3];
@@ -165,6 +369,23 @@
             });
         });
 
+//        AJAX CONTRACT ACTION (STEP 2)
+        $('[id^="contract_"]').each(function () {
+            $(this).click(function () {
+                var id = $(this).attr('id').split('_')[1];
+                $.ajax({
+                    url: "{{ path('user_mission_add_to_contract') }}",
+                    method: "put",
+                    data: {id: id}
+                }).done(function (msg) {
+                    alert("{{ 'mission.action.add_to_contract' | trans }}");
+                }).fail(function () {
+                    alert("{{ 'error.action.failed' | trans }}");
+                });
+            });
+        });
+
+//        AJAX REFUSE ACTION (STEP 1|2)
         $('[id^="refuse_"]').each(function () {
             $(this).click(function () {
                 var id = $(this).attr('id').split('_')[1];
@@ -179,7 +400,8 @@
                 });
             });
         });
-        
+
+//        AJAX SEND / UPDATE MESSAGE
         function sendMessage() {
             if ($('textarea#inbox_input_message').val()) {
                 $.ajax({
@@ -195,5 +417,6 @@
                 });
             }
         }
+
     </script>
 {% endblock %}

@@ -38,6 +38,7 @@ class RegistrationAdvisorController extends Controller
         $session     = new Session(new PhpBridgeSessionStorage());
         $userManager = $this->get('fos_user.user_manager');
         $em          = $this->getDoctrine()->getManager();
+        $trans       = $this->get('translator');
 
         $session->start();
         $session->set('role', 'ADVISOR');
@@ -79,9 +80,9 @@ class RegistrationAdvisorController extends Controller
         // if form submitted
         if ($form->handleRequest($request)->isSubmitted() && $form->isValid()) {
             if (!$user->getLinkedinId() && !$form->get('resume')->getData()->getFile()) {
-                $form->get('resume')->addError(
-                    new FormError('Please Upload a resume or link your account with Linkedin')
-                );
+                $form->get('resume')->addError(new FormError($trans->trans('error.upload_resume_or_linkedin', [], 'tools')));
+            } elseif($userManager->findUserBy(['email' => $form->get('user')->get('email')->getData()]) !== null) {
+                $form->get('user')->addError(new FormError($trans->trans('error.user.email_in_use', [], 'tools')));
             } else {
                 $event = new FormEvent($form, $request);
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
