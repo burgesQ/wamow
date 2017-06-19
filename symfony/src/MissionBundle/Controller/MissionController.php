@@ -126,6 +126,7 @@ class MissionController extends Controller
                         $userMission->setIdForContractor(count($userMissionRepo->findAllAtLeastThan($mission, UserMission::ONGOING)) + 1);
                         $inboxService->createThreadPitch($userMission, $form->getData()['text']);
                         $userMission->setStatus(UserMission::ONGOING);
+                        $user->setScoringBonus($user->setScoringBonus() - $this->containter->getParameter("scoring_weight.user_subscribe"));
                         $em->flush();
                         return $this->redirectToRoute('mission_view', ['missionId' => $missionId]);
                     }
@@ -336,8 +337,8 @@ class MissionController extends Controller
         }
 
         /** @var UserMission $oneUserMission */
-        foreach ($userMissionRepo->findAllAtLeastThan($mission, UserMission::ACTIVATED) as $oneUserMission) {
-            if ($oneUserMission->getStatus() >= UserMission::ACTIVATED
+        foreach ($userMissionRepo->findAllAtLeastThan($mission, UserMission::SCORED) as $oneUserMission) {
+            if ($oneUserMission->getStatus() >= UserMission::SCORED
                 && $oneUserMission->getStatus() < UserMission::SHORTLIST) {
                 $oneUserMission->setStatus(UserMission::DISMISS);
             }
@@ -372,7 +373,7 @@ class MissionController extends Controller
                 case UserMission::ENDDATE:
                 case UserMission::DISMISS:
                     throw $this->createNotFoundException($trans->trans('error.user_mission.cant_giveup', [], 'tools'));
-                case UserMission::ACTIVATED:
+                case UserMission::SCORED:
                 case UserMission::MATCHED:
                 case UserMission::INTERESTED:
                     $userMission->setStatus(UserMission::GIVEUP);

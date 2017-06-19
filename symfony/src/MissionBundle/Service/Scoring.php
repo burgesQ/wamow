@@ -9,8 +9,9 @@ use MissionBundle\Entity\UserMission;
     protected $em;
     protected $scoringRules;
     protected $weightBusinessPractice, $weightProfessionalExpertise, $weightCompanySize, $weightMissionKind, $weightLocation, $weightCertification, $weightWorkExperience;
+    protected $scoringMin;
 
-    public function __construct(\Doctrine\ORM\EntityManager $em, $scoringRules, $weightBusinessPractice, $weightProfessionalExpertise, $weightCompanySize, $weightMissionKind, $weightLocation, $weightCertification, $weightWorkExperience)
+    public function __construct(\Doctrine\ORM\EntityManager $em, $scoringRules, $weightBusinessPractice, $weightProfessionalExpertise, $weightCompanySize, $weightMissionKind, $weightLocation, $weightCertification, $weightWorkExperience, $scoringMin)
     {
         $this->em = $em;
         $this->scoringRules = $scoringRules;
@@ -21,6 +22,7 @@ use MissionBundle\Entity\UserMission;
         $this->weightLocation = $weightLocation;
         $this->weightCertification = $weightCertification;
         $this->weightWorkExperience = $weightWorkExperience;
+        $this->scoringMin = $scoringMin;
     }
 
     private function getScoringStep($mission)
@@ -68,12 +70,12 @@ use MissionBundle\Entity\UserMission;
             // zone géographique
             foreach ($experience->getContinents() as $userContinent) {
                 if ($mission->getContinents()->contains($userContinent)) {
-                    $score += $this->weightContinent;
+                    $score += $this->weightLocation;
                 }
             }
             // archétype mission
             if ($mission->getWorkExperience() && $mission->getWorkExperience() == $experience->getWorkExperience()) {
-
+                $score += $this->weightWorkExperience;
             }
         }
 
@@ -126,7 +128,7 @@ use MissionBundle\Entity\UserMission;
         $scoringStep = $this->getScoringStep($mission);
         $scoringRules = $this->scoringRules;
         // $matchedUserMissions = $this->em->getRepository("MissionBundle:UserMission")->findBy("mission" => $mission, "status" => UserMission::MATCHED);
-        $userMissions = $this->em->getRepository("MissionBundle:UserMission")->findOrderedByMission($mission, $scoringRules[$scoringStep][1]);
+        $userMissions = $this->em->getRepository("MissionBundle:UserMission")->findOrderedByMission($mission, $scoringRules[$scoringStep][1], $this->scoringMin);
         // for JSON
         $scoringHistory[$scoringStep] = array();
         $scorings = array();

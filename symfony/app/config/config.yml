@@ -164,5 +164,6 @@ parameters:
     scoring_rules:
         0: [0, 5]
         1: [2, 10]
-        2: [4, 20]
-        3: [6, null]
+        2: [2, 20]
+        3: [2, null]
+    scoring_match_min: 10

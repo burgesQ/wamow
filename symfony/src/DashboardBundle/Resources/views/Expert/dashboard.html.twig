@@ -52,7 +52,7 @@
                 {{ days }} days
             {% endif %}
             {{ wip.mission.address.city }} - {{ wip.mission.address.country | upper }}</br>
-            {% if wip.status == constant('ACTIVATED', wip) or wip.status == constant('MATCHED', wip) or wip.status == constant('INTERESTED', wip) %}
+            {% if wip.status == constant('SCORED', wip) or wip.status == constant('MATCHED', wip) or wip.status == constant('INTERESTED', wip) %}
                 {{ 'dashboard.advisor.wip.interested' | trans }}</br>
             {% elseif wip.status == constant('ONGOING', wip) %}
                 {{ 'dashboard.advisor.wip.ongoing' | trans }}</br>

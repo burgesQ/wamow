@@ -47,6 +47,7 @@ services:
             - '%scoring_weight.location%'
             - '%scoring_weight.certification%'
             - '%scoring_weight.work_experience%'
+            - '%scoring_match_min%'
 
     app.user_mission_listener:
         class: MissionBundle\Listener\UserMissionListener
