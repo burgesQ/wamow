@@ -1,23 +1,55 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-{% if error %}
-    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-{% endif %}
 
-<form action="{{ path("fos_user_security_check") }}" method="post">
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+<form action="{{ path("fos_user_security_check") }}"
+      method="post"
+      class="wmw-onboard col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 col-xl-4 col-xl-offset-4">
 
-    <label for="username">{{ 'security.login.email'|trans }}</label>
-    <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+    {% if error %}
+        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
 
-    <label for="password">{{ 'security.login.password'|trans }}</label>
-    <input type="password" id="password" name="_password" required="required" />
+    <div class="wmw-onboard-body">
 
-    <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+        <h1>{{ 'layout.login' | trans }}</h1>
 
-    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-    <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
 
-    <a href="{{ path('fos_user_resetting_request') }}">{{ 'security.login.reset'|trans}}</a>
-    <a href="{{ path('hwi_oauth_service_redirect', {'service': 'linkedin' }) }}">{{ 'security.login.linkedin'|trans }}</a>
+        <div class="wmw-fieldrow row">
+            <label class="wmw-label wmw-label--right col-xs-5"
+                   for="username">{{ 'security.login.email'|trans }}</label>
+            <input type="email" id="username" name="_username" class="required col-xs-7" value="{{ last_username }}"/>
+        </div>
+
+        <div class="wmw-fieldrow row">
+            <label class="wmw-label wmw-label--right col-xs-5"
+                   for="password">{{ 'security.login.password'|trans }}</label>
+            <input type="password" id="password" name="_password" class="required col-xs-7"/>
+        </div>
+
+        <div class="wmw-fieldrow row">
+
+            <div class="wmw-switchfield">
+                <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
+                <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+            </div>
+
+            <button type="submit" id="_submit" name="_submit"
+                    class="wmw-button wmw-button--green wmw-button--border">
+                <i></i><span>{{ 'layout.login' | trans }}</span><i></i></button>
+
+            <a href="{{ path('fos_user_resetting_request') }}">
+                <button type="button" class="wmw-button">
+                    <i></i><span>{{ 'security.login.reset' | trans }}</span><i></i>
+                </button>
+            </a>
+
+            <a href="{{ path('hwi_oauth_service_redirect', {'service': 'linkedin' }) }}">
+                <button type="button" class="wmw-button wmw-button--border">
+                    <i></i><span>{{ 'security.login.linkedin' | trans }}</span><i></i>
+                </button>
+            </a>
+        </div>
+
+    </div>
 </form>
