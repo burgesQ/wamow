@@ -1,16 +1,23 @@
 {% extends "UserBundle::layout.html.twig" %}
 {% block javascripts %}
-   {{parent()}}
-   <script src="{{asset('js/select2/js/select2.min.js')}}"></script>
+    {{parent()}}
+
+    {% javascripts '@TetranzSelect2EntityBundle/Resources/public/js/select2entity.js' %}
+   <link href="{{ asset('js/select2/css/select2.css') }}" rel="stylesheet"/>
+   <script src="{{ asset('js/select2/js/select2.js') }}"></script>
+   <script src="{{ asset('bundles/tetranzselect2entity/js/select2entity.js') }}"></script>
+    {% endjavascripts %}
+
+   {#<script src="{{asset('js/select2/js/select2.min.js')}}"></script>#}
    <script type="text/javascript">
-   //   $('#merged_form_registration_user_languages').select2();
-   // NOTE : Select2 non compatible avec le CSS actuel
+       //   $('#merged_form_registration_user_languages').select2();
+       // NOTE : Select2 non compatible avec le CSS actuel
    </script>
 {% endblock %}
 {% block stylesheets %}
-   {{parent()}}
+    {{parent()}}
    <link rel="stylesheet" href="{{asset('js/select2/css/select2.min.css')}}" />
 {% endblock %}
 {% block fos_user_content %}
-{% include "UserBundle:Registration:register_content_expert.html.twig" %}
+    {% include "UserBundle:Registration:register_content_expert.html.twig" %}
 {% endblock fos_user_content %}

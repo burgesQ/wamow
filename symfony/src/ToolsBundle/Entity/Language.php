@@ -31,6 +31,11 @@ class Language
     private $name;
 
 
+    function __toString()
+    {
+        return $this->name;
+    }
+
     /**
      * Get id
      *

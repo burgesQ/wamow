@@ -1,0 +1,5 @@
+languages_autocomplete:
+    path:            /language/autocomplete
+    defaults:
+        _controller: ToolsBundle:Action:languagesAutocomplete
+    methods:     [GET]
