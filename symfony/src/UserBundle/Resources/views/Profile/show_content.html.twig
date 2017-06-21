@@ -1,99 +1,211 @@
-{% trans_default_domain 'FOSUserBundle' %}
+{% trans_default_domain 'tools' %}
 
-<div class="user_user_show">
+<div class="wmw-dashboard-main col-xs-12 col-lg-10">
+    <div class="wmw-profile">
+        <div class="wmw-profile-header">
 
-  <p>
-    {% trans with {'%nb%': fos_message_nb_unread()} from 'FOSUserBundle' %}
-      profile.show.unread
-    {% endtrans %}
-  </p>
-  <p>
-    {% trans with {'%nb%': user.nbLoad } from 'FOSUserBundle' %}
-      profile.show.nbLoad
-    {% endtrans %}
-  </p>
-  <p>
-    {% if user.readReport == true %}
-      {{ 'profile.show.readReportActivate'|trans }}
-    {% else %}
-      {{ 'profile.show.readReportDesactivate'|trans }}
-    {% endif %}
-  </p>
-  <p>
-    {{ 'profile.show.image'|trans }}:
-    {% if image != null and image.name != null %}
-      {{ image.name }} is a {{ image.type }} upload the {{ image.uploadDate|date("m/d/Y") }}
-      <img src="{{ asset(image.webPath()) }}"/>
-    {% endif %}
-  </p>
+            {# profile picture #}
+            <div class="wmw-profile-header-picture">
+                {% if user.images is not empty %}
+                    {% set image = user.images|last %}
+                    {% if image.name is not null %}
+                        <img src="{{ asset(image.webPath()) }}"/>
+                    {% endif %}
+                {% else %}
+                    <img src="{{ asset('images/' ~ random(['placeholder-pp-0.png', 'placeholder-pp-1.png', 'placeholder-pp-2.png', 'placeholder-pp-3.png'])) }}"/>
+                {% endif %}
 
-  <p> {{ 'profile.show.first_name'|trans }}: {{ user.firstName }} </p>
-  <p> {{ 'profile.show.last_name'|trans }}: {{ user.lastName }} </p>
-  <p> {{ 'profile.show.gender'|trans }}: {{ user.gender }} </p>
-  <p> {{ 'profile.show.birthdate'|trans}}:
-    {% if user.birthdate != null %}
-      {{ user.birthdate|date("m/d/Y") }}
-    {% endif %} </p>
+            </div>
 
-  <p> {{ 'profile.show.daily_fees_min'|trans }}: {{ user.dailyFeesMin }} </p>
-  <p> {{ 'profile.show.daily_fees_max'|trans }}: {{ user.dailyFeesMax }} </p>
+            {# head profile#}
+            <div class="wmw-profile-header-name">{{ user.lastName }}<br/>{{ user.firstName | upper }}</div>
 
-  <p> {{ 'profile.show.email'|trans }}: {{ user.email }} </p>
-  <p> {{ 'profile.show.emergencyEmail'|trans }}: {{ user.emergencyEmail }} </p>
+            {# TODO REMOVE ACTION; PUT href #}
+            <div class="wmw-profile-header-button">
+                <a href="{{ path('user_profile_edit') }}">
+                    <button class="wmw-button wmw-button--small wmw-button--border">
+                        <i></i><span><i class="icon icon--pen"></i>
+                            {{ 'user.profile_show.advisor.link_edit_profile' | trans | upper }}
+                        </span><i></i>
+                    </button>
+                </a>
+            </div>
 
-  <p> {{ 'profile.show.phone'|trans }}:
-      {% if user.phone != null %}
-        {{ user.phone.prefix.prefix }} {{ user.phone.number }} ({{ user.phone.prefix.country|countryName }})
-      {% endif %} </p>
+            <a href="{{ path('dashboard') }}" class="wmw-profile-close"><i class="icon icon--cross"></i>
+                {{ 'user.profile_show.advisor.link_back_to_board' | trans }}
+            </a>
+        </div>
 
-  <p> {{ 'profile.show.country'|trans }}:
-    {% if user.country != null %}
-      {{ user.country|countryName }}
-    {% endif %} </p>
-  <p> {{ 'profile.show.company'|trans }}:
-    {% if user.company != null %}
-      {{ user.company.name}}
-    {% endif %} </p>
+        {# links #}
+        <div class="wmw-profile-tabs row">
+            <a href="{{ path('user_profile_show') }}" class="active">
+                {{ 'user.profile_show.advisor.link_general' | trans }}
+            </a>
+            <a href="#">
+                {{ 'user.profile_show.advisor.link_billing' | trans }}
+            </a>
+        </div>
 
-    <p> {{ 'profile.show.userResume'|trans }}:
-      {% if user.resumes != null %}
-      {% for resume in user.resumes %}
-        {{ resume.content }}
-      {% endfor %}
-      {% endif %} </p>
+        {# content #}
+        <div class="wmw-profile-content wmw-bgfields--readonly">
+            <div class="row">
 
-  <p> {{ 'profile.show.userResume'|trans }}:
-    {% if user.userResume != null %}
-      {{ user.userResume }}
-    {% endif %} </p>
+                <div class="col-xs-12 col-sm-5 row">
+                    {# email #}
+                    <div class="wmw-bgfield col-xs-10">
+                        <label for="profile-email">{{ 'home.contractor.preregister.email' | trans }}</label>
+                        <input type="email" id="profile-email" name="profile-email" value="{{ user.email }}"
+                               class="required" disabled="true"/>
+                        <div class="wmw-bgfield-bg"><i class="icon icon--email"></i></div>
+                    </div>
 
-  <p> {{ 'profile.show.professionalExpertise'|trans }}:
-    {% if user.professionalExpertise != null %}
-      <ul> {% for professionalExpertise in user.professionalExpertise %}
-        <li> {{ professionalExpertise.name|trans({}, 'MissionBundle') }} </li>
-      {% endfor %} </ul>
-    {% endif %} </p>
+                    {# emergency mail #}
+                    <div class="wmw-bgfield col-xs-10">
+                        <label for="profile-backup-email">Backup email</label>
+                        <input type="email" id="profile-backup-email" name="profile-backup-email"
+                               value="{{ user.emergencyEmail }}" class="required" disabled="true"/>
+                        <div class="wmw-bgfield-bg"><i class="icon icon--email"></i></div>
+                    </div>
+                </div>
 
-  <p> {{ 'profile.show.businessPractice'|trans }}:
-    {% if user.businessPractice != null %}
-      <ul> {% for businessPractice in user.businessPractice %}
-        <li> {{ businessPractice.name|trans({}, 'MissionBundle') }} </li>
-      {% endfor %} </ul>
-    {% endif %} </p>
+                {# TODO CERTIFICATION / BORDER BTN #}
+                <div class="col-xs-12 col-sm-5 col-sm-offset-2">
+                    {% if roleAdvisor %}
+                        {# certification #}
+                        <div class="wmw-bgfield">
+                            {{ form_start(form) }}
+                            {{ form_widget(form.certifications) }}
+                            <div class="wmw-bgfield-bg"><i></i></div>
+                        </div>
+                        <div class="wmw-bgfield wmw-bgfield--persistent">
+                            {{ form_row(form.save, {'attr': {'class': 'wmw-button wmw-button--small wmw-button--green'}}) }}
+                            {{ form_end(form) }}
+                            <div class="wmw-bgfield-bg"><i></i></div>
+                        </div>
 
-  <p> {{ 'profile.show.missionKind'|trans }}:
-    {% if user.missionKind != null %}
-      <ul> {% for missionKind in user.missionKind %}
-        <li> {{ missionKind.name|trans({}, 'MissionBundle') }} </li>
-      {% endfor %} </ul>
-    {% endif %} </p>
+                    {% else %}
+                        {# company #}
+                        <div class="wmw-bgfield col-xs-10">
+                            <label for="profile-company">Company</label>
+                            <input type="text" id="profile-company" name="profile-company" value="{{ company.name | upper }}" class="required" disabled="true" />
+                            <div class="wmw-bgfield-bg"><i class="icon icon--company"></i></div>
+                        </div>
+                        <div class="wmw-bgfield wmw-bgfield--persistent">
+                            <button class="wmw-button wmw-button--green wmw-button--small"
+                                    type="submit"
+                                    id="edit_certification_form_save"
+                                    name="edit_certification_form[save]">
+                                <i></i><span>{{ 'form.btn.save_certif' | trans }}</span><i></i>
+                            </button>
+                        </div>
+                    {% endif %}
+                </div>
 
-  <p> {{ 'profile.show.languages'|trans }}:
-    {% if user.languages is not null %}
-      <ul> {% for language in user.languages %}
-        <li> {{ language.name }} </li>
-      {% endfor %} </ul>
-    {% endif %} </p>
+                {# phone number #}
+                <div class="col-xs-12 col-sm-5 row">
+                    <div class="wmw-bgfield col-xs-10">
+                        <label for="profile-phone">Phone number</label>
+                        <input type="text" id="profile-phone" name="profile-phone"
+                                {% if user.phone %}
+                                    value="({{ user.phone.prefix.prefix }}){{ user.phone.number }}"
+                                {% endif %}
+                               class="required" disabled="true"/>
+                        <div class="wmw-bgfield-bg"><i class="icon icon--phone"></i></div>
+                    </div>
+                </div>
 
-  <p> {{ user.newsletter ? 'profile.show.newslettertrue'|trans : 'profile.show.newsletterfalse'|trans }} </p>
+                {# languages #}
+                <div class="col-xs-12 col-sm-5 col-sm-offset-2">
+                    <div class="wmw-bgfield">
+                        {% set languages = '' %}
+                        {% for language in user.languages %}
+                            {% if loop.last %}
+                                {% set languages = languages ~ language.name | trans | upper %}
+                            {% else %}
+                                {% set languages = languages ~ language.name | trans | upper ~ ', ' %}
+                            {% endif %}
+                        {% endfor %}
+                        <label for="profile-languages">Languages</label>
+                        <input type="text" id="profile-languages" name="profile-languages" value="{{ languages }}"
+                               class="required" disabled="true"/>
+                        <div class="wmw-bgfield-bg"><i class="icon icon--language"></i></div>
+                    </div>
+                </div>
+
+                {# address #}
+                {% set renderAddress = '' %}
+                {% set renderCountry = '' %}
+                {% if user.addresses is not empty %}
+                    {% set address = user.addresses | last %}
+                    {% set renderAddress = address.number ~ ' ' ~ address.street ~ address.street2 ~ ' - ' ~ address.zipcode ~ ' ' ~ address.city %}
+                    {% set renderCountry = address.country %}
+                {% endif %}
+                <div class="col-xs-12 col-sm-6">
+                    <div class="wmw-bgfield">
+                        <label for="profile-address">Address</label>
+                        <input type="text" id="profile-address" name="profile-address"
+                               value="{{ renderAddress }}" class="required"
+                               disabled="true"/>
+                        <div class="wmw-bgfield-bg"><i class="icon icon--address"></i></div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-5 col-sm-offset-1">
+                    <div class="wmw-bgfield">
+                        <label for="profile-country">Country</label>
+                        <select id="profile-country" name="profile-country" class="required" disabled="true">
+                            <option value="{{ renderCountry }}">{{ renderCountry }}</option>
+                        </select>
+                        <div class="wmw-bgfield-bg"><i class="icon icon--world"></i></div>
+                    </div>
+                </div>
+
+                {% if not roleAdvisor %}
+                    {# address company #}
+                    {% set renderAddress = '' %}
+                    {% set renderCountry = '' %}
+                    {% if company.addresse is defined %}
+                        {% set address = company.addresse %}
+                        {% set renderAddress = address.number ~ ' ' ~ address.street ~ address.street2 ~ ' - ' ~ address.zipcode ~ ' ' ~ address.city %}
+                        {% set renderCountry = address.country %}
+                    {% endif %}
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="wmw-bgfield">
+                            <label for="profile-address">Address</label>
+                            <input type="text" id="profile-address" name="profile-address"
+                                   value="{{ renderAddress }}" class="required"
+                                   disabled="true"/>
+                            <div class="wmw-bgfield-bg"><i class="icon icon--address"></i></div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-5 col-sm-offset-1">
+                        <div class="wmw-bgfield">
+                            <label for="profile-country">Country</label>
+                            <select id="profile-country" name="profile-country" class="required" disabled="true">
+                                <option value="{{ renderCountry }}">{{ renderCountry }}</option>
+                            </select>
+                            <div class="wmw-bgfield-bg"><i class="icon icon--world"></i></div>
+                        </div>
+                    </div>
+                {% endif %}
+
+                <div class="col-xs-12 row">
+                    <div class="col-xs-12 col-md-5 col-md-offset-1">
+                        <div class="wmw-profile-subtitle"><span>Subscription</span></div>
+                        <div class="wmw-profile-subscription">
+                            <div class="wmw-profile-subscription-plan">
+                                <span class="plan-icon"><i class="icon icon--star"></i></span>
+                                <span class="plan-label">Advisor plan</span>
+                            </div>
+                            <div class="wmw-profile-subscription-info">
+                                <i class="icon icon--clock"></i> 1 an<br/>
+                                <i class="icon icon--calendar"></i> Ends 09 15, 2017
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

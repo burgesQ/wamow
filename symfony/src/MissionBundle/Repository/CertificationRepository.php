@@ -15,6 +15,12 @@ use Doctrine\ORM\EntityRepository;
  */
 class CertificationRepository extends EntityRepository
 {
+    /**
+     * @param $q
+     * @param $page
+     * @param $pageLimit
+     * @return \Doctrine\ORM\Tools\Pagination\Paginator
+     */
     public function findAutocompleteCertification($q, $page, $pageLimit)
     {
         $qb = $this->_em->createQueryBuilder();
