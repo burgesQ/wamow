@@ -88,6 +88,11 @@ class UserMission
     private $score;
 
     /**
+     * @ORM\Column(name="score_details", type="json_array", nullable=true)
+     */
+    private $scoreDetails;
+
+    /**
      * @var \DateTime
      * @ORM\Column(name="interested_at", type="datetime", nullable=true)
      */
@@ -433,5 +438,28 @@ class UserMission
     public function removeProposal(\ToolsBundle\Entity\UploadResume $proposals)
     {
         $this->proposals->removeElement($proposals);
+    }
+
+    /**
+     * Set scoreDetails
+     *
+     * @param array $scoreDetails
+     * @return UserMission
+     */
+    public function setScoreDetails($scoreDetails)
+    {
+        $this->scoreDetails = $scoreDetails;
+
+        return $this;
+    }
+
+    /**
+     * Get scoreDetails
+     *
+     * @return array
+     */
+    public function getScoreDetails()
+    {
+        return $this->scoreDetails;
     }
 }

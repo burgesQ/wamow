@@ -49,28 +49,45 @@ use MissionBundle\Entity\UserMission;
 
     public function getScoring($mission, $userMission)
     {
+        $scoringDetails = array();
         $score = 0;
         $user = $userMission->getUser();
         // secteur activité
+        $nb = 0;
         if ($user->getBusinessPractice()->contains($mission->getBusinessPractice())) {
             $score += $this->weightBusinessPractice;
+            $nb++;
+        }
+        if ($nb) {
+            $scoringDetails["BusinessPractice"] = array("weight" => $this->weightBusinessPractice, "nb" => $nb);
+            $nb = 0;
         }
         // experience technique
         if ($user->getProfessionalExpertise()->contains($mission->getProfessionalExpertise())) {
             $score += $this->weightProfessionalExpertise;
+            $nb++;
+        }
+        if ($nb) {
+            $scoringDetails["ProfessionalExpertise"] = array("weight" => $this->weightProfessionalExpertise, "nb" => $nb);
+            $nb = 0;
         }
 
         $experiences = $user->getUserWorkExperiences();
         $companySize = $mission->getCompanySize();
+        $nbSize = 0;
+        $nbContinent = 0;
+        $nbWorkExperience = 0;
         foreach ($experiences as $experience) {
             // taille entreprise
             if ($experience->getCompanySizes()->contains($companySize)) {
                 $score += $this->weightCompanySize;
+                $nbSize++;
             }
             // zone géographique
             foreach ($experience->getContinents() as $userContinent) {
                 if ($mission->getContinents()->contains($userContinent)) {
                     $score += $this->weightLocation;
+                    $nbContinent++;
                 }
             }
             // archétype mission
@@ -78,23 +95,47 @@ use MissionBundle\Entity\UserMission;
                 $score += $this->weightWorkExperience;
             }
         }
+        if ($nbSize) {
+            $scoringDetails["CompanySize"] = array("weight" => $this->weightCompanySize, "nb" => $nbSize);
+        }
+        if ($nbContinent) {
+            $scoringDetails["Continent"] = array("weight" => $this->weightLocation, "nb" => $nbContinent);
+        }
+        if ($nbWorkExperience) {
+            $scoringDetails["tWorkExperience"] = array("weight" => $this->weightWorkExperience, "nb" => $nbWorkExperience);
+        }
 
         // Certifications
         foreach ($user->getCertifications() as $certification) {
             if ($mission->getCertifications()->contains($certification)) {
                 $score += $this->weightCertification;
+                $nb++;
             }
+        }
+        if ($nb) {
+            $scoringDetails["Certification"] = array("weight" => $this->weightCertification, "nb" => $nb);
+            $nb = 0;
         }
 
         foreach ($user->getMissionKind() as $missionKind) {
             // type mission
             if ($mission->getMissionKinds()->contains($missionKind)) {
                 $score += $this->weightMissionKind;
+                $nb++;
             }
+        }
+        if ($nb) {
+            $scoringDetails["MissionKind"] = array("weight" => $this->weightMissionKind, "nb" => $nb);
+            $nb = 0;
         }
 
         // rotation
-        $score += $user->getScoringBonus();
+        if ($user->getScoringBonus()) {
+            $score += $user->getScoringBonus();
+            $scoringDetails["ScoringBonus"] = array("weight" => $user->getScoringBonus());
+        }
+        
+        $userMission->setScoreDetails($scoringDetails);
 
         return $score;
     }
