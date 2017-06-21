@@ -12,6 +12,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use MissionBundle\Entity\UserWorkExperience;
 use Symfony\Component\Form\AbstractType;
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Form\Extension\Core\Type\RangeType;
 
 class UserWorkExperienceType extends AbstractType
 {
@@ -46,6 +47,10 @@ class UserWorkExperienceType extends AbstractType
                 'label'                     => false,
                 'translation_domain'        => 'tools',
                 'choice_translation_domain' => 'tools',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->orderBy('u.id', 'ASC');
+                },
                 'constraints'               => new Count([
                     'min'        => 1,
                     'minMessage' => 'user.companysize.min',
@@ -65,7 +70,7 @@ class UserWorkExperienceType extends AbstractType
                     'minMessage' => 'user.continent.min',
                 ])
             ])
-            ->add('cumuledMonth', IntegerType::class, [
+            ->add('cumuledMonth', RangeType::class, [
                 'translation_domain' => 'tools',
                 'label'              => 'registration.advisor.four.cumuledmonth',
                 'required'           => true,
@@ -73,7 +78,7 @@ class UserWorkExperienceType extends AbstractType
                     'min' => 1
                 ]
             ])
-            ->add('dailyFees', IntegerType::class, [
+            ->add('dailyFees', RangeType::class, [
                 'translation_domain' => 'tools',
                 'label'              => 'registration.advisor.four.dailyfees',
                 'required'           => true,

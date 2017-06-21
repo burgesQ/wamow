@@ -2,62 +2,49 @@
 {% trans_default_domain "tools" %}
 
 {% block body %}
-
-    {{ 'registration.advisor.four.title' | trans }}
-    <br>
-    {{ 'registration.advisor.four.subtitle' | trans | upper }}
-    <br>
-    {{ 'registration.advisor.four.howtotitle' | trans | upper }}
-    <br>
-    {{ 'registration.advisor.four.howtotext' | trans }}
-
-    <div id="well">
-        {{ form_start(form, {'attr': {'id': 'form_work_experience'}}) }}
+    {{ form_start(form, {'attr': {'id': "wmw-form-ob-4", 'class': 'wmw-onboard col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 col-xl-4 col-xl-offset-4'}}) }}
+        {{ form_errors(form.workExperience) }}
         {{ form_errors(form.userWorkExperiences) }}
-        {{ form_widget(form.workExperience) }}
-        {{ form_widget(form.userWorkExperiences) }}
-        {{ form_widget(form.back) }}
-        {{ form_widget(form.submit) }}
-        {{ form_end(form) }}
+
+        <div class="wmw-onboard-body">
+            <h1>
+                {{ 'registration.advisor.four.title' | trans }}
+                <small>{{ 'registration.advisor.four.subtitle' | trans | upper }}</small>
+            </h1>
+            <div class="wmw-onboard-switches">
+                {% for key, workExperience in form.workExperience %}
+                    <div class="wmw-onboard-switches-el">
+                        {{ form_label(workExperience, null, {"label_attr": {"id": ("label_" ~ workExperience.vars.id), "class": "wmw-onboard-switches-el-label"}}) }}
+                        <div class="wmw-switchfield">
+                            {{ form_widget(workExperience, {'attr' : {'class': 'requiredgroup:wmw-ob-missions vv-ggparent workexperience-link'}}) }}
+                            <label for="{{ workExperience.vars.id }}"><span>No</span><span>Yes</span></label>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="wmw-progressbar">
+                <span class="active"></span>
+                <span class="active"></span>
+                <span class="active"></span>
+                <span class="active"></span>
+                <span class="active"></span>
+            </div>
+        </div>
+        <div class="wmw-onboard-bottom">
+            {{ form_widget(form.back, {'attr' : {'class': 'wmw-button wmw-button--border'}}) }}
+            {#{{ form_widget(form.submit, {'attr' : {'class': 'wmw-button wmw-button--green'}, 'label': '<i></i><span>Next</span><i></i>'}) }}#}
+            {# TODO -> VALIDATE COUNT AT LEAST ONE #}
+            {{ form_widget(form.submit) }}
+        </div>
+
+        <div class="wmw-overlay" id="wmw-overlay-ob-4"
+             data-prototype="{% filter escape %}{% include 'UserBundle:Registration:_userWorkExperiences_prototype.html.twig' with { 'form': form.userWorkExperiences.vars.prototype } %}{% endfilter %}"></div>
+    {{ form_end(form) }}
+
+    <div class="wmw-onboard-text col-md-3 col-xl-2">
+        <p>{{ 'registration.advisor.four.howtotitle' | trans | upper }}</p>
+        <p>{{ 'registration.advisor.four.howtotext' | trans }}
+        </p>
     </div>
-
 {% endblock %}
-{% block javascripts %}
-    <script type="text/javascript">
-        jQuery(document).ready(function () {
-            $('[id^="app_user_profile_workExperience_"]').change(function () {
-                if ($(this).is(":checked")) {
-                    addExpShapForm($(this).val());
-                } else {
-                    removeExpShapForm($(this).val());
-                }
-            });
 
-            // add the AddEdit btn and the expShap form to the page
-            function addExpShapForm(i) {
-                var $checkbox = $('input#app_user_profile_workExperience_' + i);
-                var $container = $('div#app_user_profile_userWorkExperiences');
-                var $prototype = $($container.attr('data-prototype')
-                    .replace(/__name__label__/g, '')
-                    .replace(/__name__/g, i));
-                console.log(i);
-
-                $container.append($prototype);
-
-                jQuery("#app_user_profile_userWorkExperiences_" + i + "_workExperience option:selected").removeAttr("selected");
-                jQuery("#app_user_profile_userWorkExperiences_" + i + "_workExperience option[value='" + i + "']").attr('selected', 'selected');
-
-                var $btn = '<input type="button" id="add_edit_' + i + '" value="AddEdit">';
-                $checkbox.after($btn);
-            }
-
-            // add the AddEdit btn and the expShap form to the page
-            function removeExpShapForm(i) {
-                var $container = $('div#app_user_profile_userWorkExperiences_' + i);
-                var $btn = $('input#add_edit_' + i);
-                $container.remove();
-                $btn.remove();
-            }
-        });
-    </script>
-{% endblock %}
