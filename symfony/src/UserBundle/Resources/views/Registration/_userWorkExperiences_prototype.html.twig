@@ -3,11 +3,13 @@
     <div class="wmw-overlay-title">__name__label__</div>
     <div class="wmw-overlay-content">
         <div class="row">
+
             {% for companySize in userWorkExperience.companySizes %}
                 <div class="col-xs-4">
                     <label for="{{ companySize.vars.id }}">
-                        <!-- TODO : CSS -->
-                        <i class="icon icon--company-small"></i><br/>
+                        {% set help = companySize.vars.label | split('.') %}
+                        <i class="icon icon--company-{{ help[1] }}">
+                        </i><br/>
                         {{ form_label(companySize) }}
                         <a href="#" class="wmw-tip wmw-tip--left">?<span
                                     class="wmw-tip-box">Lorem ipsum dolor sit amet</span></a>
