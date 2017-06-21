@@ -2747,8 +2747,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
             $newUser
                 ->setFirstName($oneData[0])
                 ->setLastName($oneData[1])
-                ->setEmail($oneData[2])
-                ->setEmergencyEmail($oneData[3])
+                ->setEmail('fake-' . $oneData[2])
+                ->setEmergencyEmail('fake-' . $oneData[3])
             ;
 
             // set languages
