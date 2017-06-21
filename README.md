@@ -48,7 +48,7 @@ $ emacs -nw symfony/web/app_dev.php
     $ docker-compose exec php bash
     $ composer install
     $ sf doctrine:database:create
-    $ sf doctrine:schema:update --force
+    $ sf doctrine:migrations:migrate
     $ sf doctrine:fixtures:load --no-interaction
     ```
 3Bis. Alternatively you can run the genDb script
