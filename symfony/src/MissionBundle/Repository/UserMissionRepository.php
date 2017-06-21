@@ -69,8 +69,7 @@ class UserMissionRepository extends EntityRepository
             ->leftjoin('t.mission', 'm')
             ->where('u.id = :userId')
                 ->setParameter('userId', $userId)
-            ->andWhere('t.status = :status1')
-                ->setParameter('status1', UserMission::MATCHED)
+            ->andWhere('t.status >= :' . UserMission::MATCHED)
             ->orderBy('m.applicationEnding', 'ASC');
         return $qb->getQuery()->getResult();
     }
@@ -106,6 +105,27 @@ class UserMissionRepository extends EntityRepository
             ->setParameter('mId', $mission->getId())
             ->andWhere('um.status >= :status')
             ->setParameter('status', $status)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @param $user
+     * @return array
+     */
+    public function findAllNewMission($user)
+    {
+        $qb = $this->_em->createQueryBuilder();
+
+        $qb
+            ->select('um')
+            ->from('MissionBundle:UserMission', 'um')
+            ->leftjoin('um.mission', 'm')
+            ->where('um.user = :user')
+            ->setParameter('user', $user)
+            ->andWhere('um.status = ' . UserMission::MATCHED)
+            ->andWhere('m.nbOngoing < 10')
         ;
 
         return $qb->getQuery()->getResult();

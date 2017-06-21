@@ -223,20 +223,20 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface, Co
         // save all that shit
         $manager->flush();
 
-        $mission10 = $manager->getRepository('MissionBundle:Mission')->findOneBy(['title' => 'Service à GoGo']);
-
-        $i = 0;
-        /** @var \MissionBundle\Entity\UserMission $oneUserMission */
-        foreach ($mission10->getUserMission() as $oneUserMission) {
-            if ($i % 2) {
-                $oneUserMission->getUser()->setPayment(1);
-                $oneUserMission->setStatus(UserMission::ONGOING);
-                $oneUserMission->setIdForContractor($i);
-                $this->container->get('inbox.services')->createThreadPitch($oneUserMission, "Test " . $i);
+        foreach ($manager->getRepository('MissionBundle:Mission')->findAll() as $oneMission) {
+            $i = 0;
+            /** @var \MissionBundle\Entity\UserMission $oneUserMission */
+            foreach ($oneMission->getUserMission() as $oneUserMission) {
+                if ($i % 2) {
+                    $oneUserMission->getUser()->setPayment(1);
+                    $oneUserMission->setStatus(UserMission::ONGOING);
+                    $oneUserMission->setIdForContractor($i);
+                    $oneMission->setNbOngoing($oneMission->getNbOngoing() + 1);
+                    $this->container->get('inbox.services')->createThreadPitch($oneUserMission, "Test " . $i);
+                }
+                $i++;
             }
-            $i++;
         }
-
         return 0;
     }
 
