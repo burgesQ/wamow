@@ -131,7 +131,8 @@ class MissionController extends Controller
                     }
                 return $this->render('@Mission/Mission/Advisor/mission_interested.html.twig', [
                     'user_mission' => $userMission,
-                    'form'         => $form->createView()
+                    'form'         => $form->createView(),
+                    'stripePublishableKey' => $this->container->getParameter("stripe_publishable_key")
                 ]);
                 // user have subscribe, he can send a message
                 case ($userMissionStatus === UserMission::MATCHED && $user->getPayment()) :
