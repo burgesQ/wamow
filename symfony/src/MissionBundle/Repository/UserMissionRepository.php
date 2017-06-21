@@ -70,7 +70,7 @@ class UserMissionRepository extends EntityRepository
             ->leftjoin('t.mission', 'm')
             ->where('u.id = :userId')
                 ->setParameter('userId', $userId)
-            ->andWhere('t.status >= :' . UserMission::MATCHED)
+            ->andWhere('t.status >= ' . UserMission::MATCHED)
             ->orderBy('m.applicationEnding', 'ASC');
         return $qb->getQuery()->getResult();
     }

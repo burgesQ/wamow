@@ -130,6 +130,18 @@
                      .replace(/__name__/g, index));
                  container.append(prototype);
              }
+
+             $("#step_three_form_price").change(function() {
+                 $.ajax({
+                        url: "{{path("mission_count_match", {'missionId': mission.id})}}",
+                        type: 'post',
+                        dataType: 'json',
+                        data: $("form[name='step_three_form']").serialize(),
+                        success: function(data) {
+                            $("#count-match").text(data['matches']);
+                        },
+                });
+             });
          });
      </script>
 {% endblock %}

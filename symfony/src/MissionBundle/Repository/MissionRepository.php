@@ -166,7 +166,7 @@ class MissionRepository extends EntityRepository
             "languageIds" => $mission->getLanguages()->toArray(),
             "professionalExpertise" => $mission->getProfessionalExpertise(),
             "businessPractice" => $mission->getBusinessPractice(),
-            "missionBudget" => $mission->getBudget(),
+            "missionBudget" => $mission->getPrice(),
             "userStatus" => User::REGISTER_NO_STEP
         );
         $qb->setParameters($parameters);

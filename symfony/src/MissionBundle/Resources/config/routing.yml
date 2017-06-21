@@ -97,3 +97,8 @@ user_mission_notes:
     defaults:
         _controller: MissionBundle:Action:saveNote
     methods:     [POST]
+
+mission_count_match:
+    path:            /mission/{missionId}/countMatch
+    defaults:
+        _controller: MissionBundle:Action:getNbMatch
