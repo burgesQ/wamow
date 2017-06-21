@@ -40,15 +40,19 @@ class EditProfileFormType extends AbstractType
 
         if (!strcmp($options['role'], 'ROLE_ADVISOR')) {
             $builder
-                ->add('languages', EntityType::class, [
-                    'choice_translation_domain' => 'tools',
-                    'property'                  => 'name',
-                    'multiple'                  => true,
-                    'expanded'                  => true,
-                    'required'                  => true,
-                    'class'                     => 'ToolsBundle:Language',
-                    'label'                     => false,
+                ->add('languages', Select2EntityType::class, [
+                    'translation_domain' => 'tools',
+                    'text_property' => 'name',
+                    'remote_route'  => 'languages_autocomplete',
+                    'primary_key'   => 'id',
+                    'allow_add'     => [
+                        'enabled'        => false
+                    ],
+                    'multiple'      => true,
+                    'class'         => 'ToolsBundle\Entity\Language',
+                    'label'         => 'mission.new.label.language'
                 ])
+
                 ->add('certifications', Select2EntityType::class, [
                     'translation_domain' => 'tools',
                     'text_property' => 'name',

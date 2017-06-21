@@ -5,6 +5,7 @@ parameters:
 
     # Language
     locale:            fr
+    app_locales:       fr|en
 
     database_host:     db
     database_port:     ~

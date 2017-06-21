@@ -142,6 +142,7 @@ class ActionController extends Controller
             }
 
             $userMission->setStatus(UserMission::FINALIST);
+            $mission->setNbOngoing(1);
             $nStep->setStatus(1);
             $step->setStatus(0);
             $em->flush();

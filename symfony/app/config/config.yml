@@ -16,6 +16,7 @@ imports:
 
 framework:
     #esi:             ~
+    default_locale:  "%locale%"
     translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:
@@ -27,7 +28,6 @@ framework:
     #serializer:      { enable_annotations: true }
     templating:
         engines: ['twig']
-    default_locale:  "%locale%"
     trusted_hosts:   ~
     trusted_proxies: ~
     session:

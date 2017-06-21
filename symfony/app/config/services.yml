@@ -25,12 +25,6 @@ services:
         tags:
              - { name: 'twig.extension' }
 
-    tools.locale_listener:
-        class: ToolsBundle\EventListener\LocaleListener
-        arguments: ["%kernel.default_locale%"]
-        tags:
-            - { name: kernel.event_subscriber }
-
     signed_up:
         class: UserBundle\Services\SignedUp
         arguments: ['@doctrine.orm.entity_manager']

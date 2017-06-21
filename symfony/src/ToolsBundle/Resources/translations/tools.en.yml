@@ -1,6 +1,7 @@
 # tools.en.yml
 form:
     address:
+        address: address
         street: "Address"
         street_2: "Address bis"
         city: "City"
@@ -25,6 +26,7 @@ form:
         later: FINISH LATER
         edit: EDIT
         print: PRINT
+        send: send
 
     note:
         indicator: Saving ...
@@ -37,18 +39,19 @@ form:
     file:
         file: "File"
 
-    btn:
-        send: send
 
 ## Base
 header:
-    lang:
-        en: "Eng"
-        fr: "Fr"
     news: "News"
     profile: Profile
     billing: Billing
     logout: Logout
+
+side_bar:
+    email_notification: |
+        email
+        notifications
+    profile: "profile\n"
 
 footer:
     mission: "Mission"
@@ -73,6 +76,8 @@ legends:
 
 ## Common error
 error:
+    page:
+        common: The requested page couldn't be located. Checkout for any URL misspelling or
     forbidden: You have no access to this page
     logged: You're not logged
     user:
@@ -123,6 +128,7 @@ home:
             text: "Get the contractors detailed feedback. Improve your impact, matchup your rating to succeed again! Be recommended by the contractor."
         preregister:
             email: "Email"
+            emergency_email: Emergency email
             firstname: "First name"
             lastname: "Last name"
             company: "Company"
@@ -153,22 +159,26 @@ home:
 
 ## Dashboard
 dashboard:
+    unread: unread message(s)
     advisor:
         fyi:
             title: "Your dashboard:"
-            text: ''
+            text: 'Blablabla'
         new:
             title: "You may be interested..."
             date: "Pitched at "
             interestedbutton: "I am interested"
         wip:
             title: "My missions"
-            date: "Pitched at "
+            date: Pitched at date
             showmore: "Show more"
             giveupbutton: "Delete"
             interested: "Interested"
             ongoing: "On going"
             shortlist: "Shortlist"
+            waiting: waiting
+            selected: selected
+            to_answer: To answer
             finalist: "Finalist"
             giveup: "Giveup"
             dismiss: "Dismiss"
@@ -177,10 +187,24 @@ dashboard:
             full: "Mission Full"
             unread: "{0}No new message|{1}You have %unread% new message|]1,Inf]You have %unread% new messages"
         close:
-            showmore: "Show more"
+            show_more: "Show more"
             title: "Deleted Mission"
             mission: Mission Closed
-
+            delete: Delete
+            close: Closed
+        other:
+            none: No other pitch yes
+            none_leg: Other pitch will be available soone
+            advice: Advice
+            in_fact: You are more likely to be selected...
+            get_in_touch: Getting touch
+            contact: Contact
+            see_the_pitch: See the pitch
+            waiting: Waiting
+            answer: Answer
+            mission_status: Mission status
+            show_all_pitch: Show all pitch
+            echange: echange
     contractor:
         new:
             button: "Write pitch"
@@ -189,7 +213,7 @@ dashboard:
             text: ''
         mission:
             title: "Pitchs published"
-            date: "Pitched at "
+            date: "Pitched on "
             showmore: "Show more"
             seethepitchbutton: "See the pitch"
             answerbutton: "Answer"
@@ -209,7 +233,7 @@ dashboard:
             proposal: Proposal
         draft:
             title: "Drafts"
-            date: "Started at "
+            date: Started on date
             continuebutton: "Continue"
             deletebutton: "Delete"
     error:
@@ -239,8 +263,17 @@ registration:
         one:
             title: "Business practice?"
             subtitle: "Select industry you've already worked on"
-            howtotitle: "First step:"
-            howtotext: "We need to know where you acquired your experience and / or did your missions. What does www.consultants.wantmore.work mean by Business Practices? We have identified 13 different business sectors. You can make several choices."
+            how_to_label: |
+                85% OF PITCHES ARE FINDING EXPERTS
+                WITHIN 15 DAYS.
+            how_to_text: |
+                Having a good matching profile will invrease
+                your succès !So fill in your profile details
+                with attention.
+                Be aware that the User Agreement of www.
+                consultants.wantmore.work require a ID
+                background check.
+
             backbutton: "BACK"
             nextbutton: "NEXT"
         two:
@@ -276,12 +309,13 @@ user:
         resume_stuff: Resume stuff's
         advisor:
             link_back_to_board: back to board
+            link_show_profile: show profile
             link_edit_profile: edit profile
             link_general: GENERALE
             link_billing: BILLING
             title_algorithm_improvment: algorythm improvment
             title_subscription: subscription
-            email_notification: email notification
+            email_notification: email<br>notification
     profile_edit:
         advisor:
             btn_save_change: SAVE CHANGE
@@ -321,15 +355,20 @@ mission:
             on_site: On site
             not_on_site: Not on site
         to_answer: To Answer
+
+        waitting: |
+          <small>MISSION STATUS</small><br />
+          <span class="status">Waitting</span>
         interested: |
-            Interested
-            MISSION STATUS
+          <small>MISSION STATUS</small><br />
+          <span class="status">Interested</span>
         shortlisted: |
-            Shortlisted
-            MISSION STATUS
+            <small>MISSION STATUS</small><br />
+            <span class="status">Shortlisted</span>
         selected: |
-            Selected<br>
-            <small>mission status</small>
+            <small>MISSION STATUS</small><br />
+            <span class="status">Selected</span>
+
     action:
         add_to_shortlist: User added to shortlist !
         add_to_contract: User added to contract !

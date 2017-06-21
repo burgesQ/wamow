@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Tetranz\Select2EntityBundle\Form\Type\Select2EntityType;
 use ToolsBundle\Form\AddressCountryFormType;
 use Symfony\Component\Form\AbstractType;
 
@@ -46,16 +47,18 @@ class RegistrationType extends AbstractType
                 'required'                  => false,
                 'label'                     => 'registration.advisor.zero.remote',
             ])
-            ->add('languages', EntityType::class, [
-                'choice_translation_domain' => 'tools',
-                'translation_domain'        => 'tools',
-                'choice_label'              => 'name',
-                'multiple'                  => true,
-                'expanded'                  => false,
-                'required'                  => true,
 
-                'class'                     => 'ToolsBundle:Language',
-                'label'                     => 'registration.advisor.zero.languages',
+            ->add('languages', Select2EntityType::class, [
+                'translation_domain' => 'tools',
+                'text_property' => 'name',
+                'remote_route'  => 'languages_autocomplete',
+                'primary_key'   => 'id',
+                'allow_add'     => [
+                    'enabled'        => false
+                ],
+                'multiple'      => true,
+                'class'         => 'ToolsBundle\Entity\Language',
+                'label'         => 'mission.new.label.language'
             ])
         ;
     }

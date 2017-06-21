@@ -1,0 +1,153 @@
+{% trans_default_domain 'tools' %}
+
+<div class="wmw-dashboard-main col-xs-12 col-lg-10">
+    <div class="wmw-profile">
+        <div class="wmw-profile-header">
+
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+
+            {# profile picture #}
+            <div class="wmw-profile-header-picture">
+                {% if user.images is not empty %}
+                    {% set image = user.images|last %}
+                    {% if image.name is not null %}
+                        <img src="{{ asset(image.webPath()) }}"/>
+                    {% endif %}
+                {% else %}
+                    <img src="{{ asset('images/' ~ random(['placeholder-pp-0.png', 'placeholder-pp-1.png', 'placeholder-pp-2.png', 'placeholder-pp-3.png'])) }}"/>
+                {% endif %}
+            </div>
+            {{ form_widget(form.image.file) }}
+
+            {# head profile#}
+            <div class="wmw-profile-header-name">{{ user.lastName }}<br/>{{ user.firstName | upper }}</div>
+
+            <div class="wmw-profile-header-button">
+                <a href="{{ path('user_profile_show') }}">
+                    <button type="button" class="wmw-button wmw-button--small wmw-button--border">
+                        <i></i><span><i class="icon icon--pen"></i>
+                            {{ 'user.profile_show.advisor.link_show_profile' | trans | upper }}
+                            </span><i></i>
+                    </button>
+                </a>
+            </div>
+
+            <a href="{{ path('dashboard') }}" class="wmw-profile-close"><i class="icon icon--cross"></i>
+                {{ 'user.profile_show.advisor.link_back_to_board' | trans }}
+            </a>
+        </div>
+
+        {# links #}
+        <div class="wmw-profile-tabs row">
+            <a href="{{ path('user_profile_show') }}" class="active">
+                {{ 'user.profile_show.advisor.link_general' | trans }}
+            </a>
+            <a href="#">
+                {{ 'user.profile_show.advisor.link_billing' | trans }}
+            </a>
+        </div>
+
+        <div class="wmw-profile-content">
+            <div class="row">
+
+                <div class="col-xs-12 col-sm-5 row">
+                    <div class="wmw-bgfield col-xs-10">
+                        <label for="profile-email">{{ 'home.contractor.preregister.email' | trans }}</label>
+                        {{ form_row(form.user.email) }}
+                        <div class="wmw-bgfield-bg"><i class="icon icon--email"></i></div>
+                    </div>
+
+                    <div class="wmw-bgfield col-xs-10">
+                        <label for="profile-backup-email">{{ 'home.contractor.preregister.emergency_email' | trans | capitalize }}</label>
+                        {{ form_widget(form.user.emergencyEmail) }}
+                        <div class="wmw-bgfield-bg"><i class="icon icon--email"></i></div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-5 col-sm-offset-2">
+                    {{ form_start(formPassword) }}
+                    {{ form_errors(formPassword) }}
+                    <div class="wmw-bgfield wmw-bgfield--persistent">
+                        {{ form_row(formPassword.current_password) }}
+                        <div class="wmw-bgfield-bg"><i class="icon icon--locker"></i></div>
+                    </div>
+                    <div class="wmw-bgfield wmw-bgfield--persistent">
+                        {{ form_row(formPassword.plainPassword.first, { 'attr' : { class : 'corresponding:profile-password' }}) }}
+                        <div class="wmw-bgfield-bg"><i class="icon icon--locker"></i></div>
+                    </div>
+                    <div class="wmw-bgfield wmw-bgfield--persistent">
+                        {{ form_row(formPassword.plainPassword.second, { 'attr' : { class : 'corresponding:profile-password' }}) }}
+                        <div class="wmw-bgfield-bg"><i class="icon icon--locker"></i></div>
+                    </div>
+                    {{ form_row(formPassword.submit, { 'attr' : { class : "wmw-button" }}) }}
+                </div>
+
+                <div class="col-xs-12 col-sm-5 row">
+                    <div class="wmw-bgfield col-xs-10">
+                        <label for="profile-phone">{{ 'form.phone.number' | trans }}</label>
+                        {{ form_widget(form.user.phone.prefix) }}{{ form_widget(form.user.phone.number) }}
+                        <div class="wmw-bgfield-bg"><i class="icon icon--phone"></i></div>
+                    </div>
+                </div>
+
+                {% if roleAdvisor %}
+                    <div class="col-xs-12 col-sm-5 col-sm-offset-2">
+                        <div class="wmw-bgfield">
+                            <label for="profile-languages">{{ 'mission.new.label.language' | trans }}</label>
+                            {{ form_widget(form.user.languages) }}
+                            <div class="wmw-bgfield-bg"><i class="icon icon--language"></i></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-5 col-sm-offset-2">
+                        <div class="wmw-bgfield">
+                            <label for="profile-languages">{{ 'mission.new.label.certification' | trans }}</label>
+                            {{ form_widget(form.user.certifications) }}
+                            <div class="wmw-bgfield-bg"><i class="icon icon--language"></i></div>
+                        </div>
+                    </div>
+                {% endif %}
+                {% set address = form.user.addresses | last %}
+
+                <div class="col-xs-12 col-sm-6">
+                    <div class="wmw-bgfield">
+                        <label for="profile-address">{{ 'form.address.address' | trans }}</label>
+                        {{ form_widget(address.number) }}
+                        {{ form_widget(address.street) }}
+                        {{ form_widget(address.street2) }}
+                        {{ form_widget(address.zipcode) }}
+                        {{ form_widget(address.city) }}
+                        {{ form_widget(address.state) }}
+                        <div class="wmw-bgfield-bg"><i class="icon icon--address"></i></div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-5 col-sm-offset-1">
+                    <div class="wmw-bgfield">
+                        <label for="profile-country">{{ 'form.address.country'  | trans }}</label>
+                        {{ form_widget(address.country) }}
+                        <div class="wmw-bgfield-bg"><i class="icon icon--world"></i></div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 row">
+                    <div class="col-xs-12 col-md-5 col-md-offset-1">
+                        <div class="wmw-profile-subtitle"><span>Subscription</span></div>
+                        <div class="wmw-profile-subscription">
+                            <div class="wmw-profile-subscription-plan">
+                                <span class="plan-icon"><i class="icon icon--star"></i></span>
+                                <span class="plan-label">Advisor plan</span>
+                            </div>
+                            <div class="wmw-profile-subscription-info">
+                                <i class="icon icon--clock"></i> 1 an<br/>
+                                <i class="icon icon--calendar"></i> Ends 09 15, 2017
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{ form_widget(form.submit, { attr : { class : "wmw-button"}}) }}
+                {{ form_end(form) }}
+                {{ form_end(formPassword) }}
+            </div>
+        </div>
+    </div>

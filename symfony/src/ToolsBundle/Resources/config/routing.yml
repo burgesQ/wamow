@@ -1,4 +1,5 @@
-setlocale:
-    path:      /setlocale/{language}
+languages_autocomplete:
+    path:            /language/autocomplete
     defaults:
-        _controller: ToolsBundle:Tools:setlocale
+        _controller: ToolsBundle:Action:languagesAutocomplete
+    methods:     [GET]

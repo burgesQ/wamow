@@ -52,24 +52,18 @@ class StepThreeFormType extends AbstractType
                 'class'              => 'MissionBundle\Entity\Certification',
                 'label'              => 'mission.new.label.certification'
             ])
-            ->add('languages', CollectionType::class, [
-                'allow_add'          => true,
-                'allow_delete'       => true,
-                'entry_type'         => EntityType::class,
+
+            ->add('languages', Select2EntityType::class, [
                 'translation_domain' => 'tools',
-                'required'           => true,
-                'label'              => false,
-                'entry_options'      => [
-                    'choice_translation_domain' => 'tools',
-                    'translation_domain'        => 'tools',
-                    'choice_label'              => 'name',
-                    'required'                  => true,
-                    'class'                     => 'ToolsBundle:Language',
-                    'label'                     => '',
+                'text_property' => 'name',
+                'remote_route'  => 'languages_autocomplete',
+                'primary_key'   => 'id',
+                'allow_add'     => [
+                    'enabled'        => false
                 ],
-                'attr' => [
-                    'class' => 'col-xs-10 col-md-6 required'
-                ]
+                'multiple'      => true,
+                'class'         => 'ToolsBundle\Entity\Language',
+                'label'         => 'mission.new.label.language'
             ])
             ->add('workExperience', EntityType::class, [
                 'choice_translation_domain' => 'tools',

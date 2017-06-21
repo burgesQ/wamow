@@ -35,10 +35,8 @@ class EditCertificationFormType extends AbstractType
                 'class'              => 'MissionBundle\Entity\Certification',
                 'label'              => 'mission.new.form.certification'
             ])
-            ->add('save', SubmitType::class, [
-                'translation_domain' => 'tools',
-                'label'              => 'form.btn.save_certif'
-            ]);
+            ->add('save', SubmitType::class)
+        ;
     }
 
     /**
