@@ -37,7 +37,9 @@
             <p class="wmw-onboard-paragraph">
                 {{ form_label(form.lastName)}}
                 {{ form_widget(form.lastName)}}
+                {{ form_errors(form.firstName) }}
                 {{ form_widget(form.firstName)}}
+                {{ form_errors(form.lastName) }}
                 {{ 'mission.view.step_five.company' | trans({'%company': user.company}) | raw}}
             </p>
 
@@ -67,7 +69,7 @@
                     {{ form_widget(form.inspectors, { 'attr' : { 'class' : 'wmw-autocomplete col-xs-10 col-md-5 required'}}) }}
                 </div>
             </div>
-
+            {{ form_errors(form.inspectors) }}
             <p class="wmw-onboard-mentions">
                 {{ 'mission.view.step_five.ending' | trans | raw }}
             </p>
@@ -83,7 +85,7 @@
         </div>
 
         <div class="wmw-onboard-bottom">
-            {% set shar = '<i></i><span>' ~ form.sharePitch.vars.label ~ '</span><i></i>' %}
+            {% set share = '<i></i><span>' ~ form.sharePitch.vars.label ~ '</span><i></i>' %}
             {% set back = '<i></i><span>' ~ form.back.vars.label ~ '</span><i></i>' %}
 
             {{ form_widget(form.back, {attr: {formnovalidate: 'formnovalidate', class : 'wmw-button wmw-button--border'}, label: back}) }}
