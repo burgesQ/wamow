@@ -147,7 +147,7 @@ Simply add this: (then go to [symfony.dev:8080](http://symfony.dev:8080))
         * Test Fixtures order  :
             sf doctrine:database:drop --force
             sf doctrine:database:create
-            sf doctrine:schema:update --force
+            sf doctrine:migrations:migrate
             sf doctrine:fixtures:load --no-interaction
 
         * Assets Installation order for JS/CSS  :
