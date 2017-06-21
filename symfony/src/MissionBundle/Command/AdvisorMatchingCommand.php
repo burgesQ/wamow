@@ -68,15 +68,16 @@ class AdvisorMatchingCommand extends ContainerAwareCommand
         $io->newLine(2);
         $io->section('Update Activated');
         $progress = new ProgressBar($output, count($missions));
+        $nbMatched = 0;
         foreach ($missions as $mission) {
             $progress->advance();
-            $this->getContainer()->get("scoring")->updateActivated($mission);
+            $nbMatched += $this->getContainer()->get("scoring")->updateActivated($mission);
         }
         $progress->finish();
         $em->flush();
 
         $io->newLine(2);
-        $io->success(count($missions).' Missions mises à jour avec '.$nbNewUserMissions.' UserMissions créés.');
+        $io->success(count($missions).' Missions mises à jour, avec '.$nbMatched.' nouveaux matchs et '.$nbNewUserMissions.' UserMissions créés');
 
     }
 

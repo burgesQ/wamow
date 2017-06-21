@@ -48,7 +48,7 @@ class UserMissionListener
     public function preUpdate(PreUpdateEventArgs $event)
     {
         if ($event->hasChangedField("status")) {
-            if ($event->getOldValue("status") == UserMission::ACTIVATED
+            if ($event->getOldValue("status") == UserMission::SCORED
                 && $event->getNewValue("status") == UserMission::MATCHED) {
                 /** @var UserMission $userMission */
                 $userMission = $event->getEntity();

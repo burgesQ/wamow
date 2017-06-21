@@ -21,7 +21,7 @@ class UserMission
     const DISMISS    = -50;
     const GIVEUP     = -40;
     const FULL       = -30;
-    const ACTIVATED  = -20;
+    const SCORED  = -20;
     const MATCHED    = -10;
     const INTERESTED = 0;
     const ONGOING    = 10;
@@ -88,6 +88,11 @@ class UserMission
     private $score;
 
     /**
+     * @ORM\Column(name="score_details", type="json_array", nullable=true)
+     */
+    private $scoreDetails;
+
+    /**
      * @var \DateTime
      * @ORM\Column(name="interested_at", type="datetime", nullable=true)
      */
@@ -119,7 +124,7 @@ class UserMission
      */
     public function __construct($user, $mission)
     {
-        $this->status       = self::ACTIVATED;
+        $this->status       = self::SCORED;
         $this->creationDate = new \DateTime();
         $this->updateDate   = new \DateTime();
         $this->user         = $user;
@@ -433,5 +438,28 @@ class UserMission
     public function removeProposal(\ToolsBundle\Entity\UploadResume $proposals)
     {
         $this->proposals->removeElement($proposals);
+    }
+
+    /**
+     * Set scoreDetails
+     *
+     * @param array $scoreDetails
+     * @return UserMission
+     */
+    public function setScoreDetails($scoreDetails)
+    {
+        $this->scoreDetails = $scoreDetails;
+
+        return $this;
+    }
+
+    /**
+     * Get scoreDetails
+     *
+     * @return array
+     */
+    public function getScoreDetails()
+    {
+        return $this->scoreDetails;
     }
 }

@@ -228,6 +228,13 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface, Co
             /** @var \MissionBundle\Entity\UserMission $oneUserMission */
             foreach ($oneMission->getUserMission() as $oneUserMission) {
                 if ($i % 2) {
+                    $user = $oneUserMission->getUser();
+                    $user->setPlanPaymentProvider("stripe");
+                    $user->setPlanPaymentAmount($this->container->getParameter("advisor_plan_v1_price"));
+                    $user->setPlanType("ADVISOR_PLAN_V1");
+                    $user->setPlanSubscripbedAt(new \DateTime());
+                    $user->setPlanExpiresAt(new \DateTime("+12 months"));
+                    
                     $oneUserMission->setStatus(UserMission::ONGOING);
                     $oneUserMission->setIdForContractor($i);
                     $oneMission->setNbOngoing($oneMission->getNbOngoing() + 1);
