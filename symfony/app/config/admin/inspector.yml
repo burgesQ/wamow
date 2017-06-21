@@ -1,0 +1,13 @@
+easy_admin:
+    entities:
+        Inspector:
+            class: CompanyBundle\Entity\Inspector
+            label: 'Inspector'
+            list:
+                title: "Inspectors"
+                fields: 
+                    - 'id'
+                    - 'name'
+            form:
+                fields:
+                    - { property: 'name', type: 'text' }

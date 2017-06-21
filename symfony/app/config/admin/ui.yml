@@ -1,0 +1,14 @@
+easy_admin:
+    site_name: 'Want More Work'
+    formats:
+        date: 'd/m/Y'
+        datetime: 'd/m/Y H:i'
+    design:
+        color_scheme: 'dark'
+        menu:
+            - { entity: 'Certification', label: 'Certifications', icon: square }
+            - { entity: 'Preregister', label: 'Preregisters', icon: square }
+            - { entity: 'Company', label: 'Companys', icon: square }
+            - { entity: 'Inspector', label: 'Inspectors', icon: square }
+            - { entity: 'Mission', label: 'Missions', icon: square }
+            - { entity: 'User', label: 'Users', icon: square }

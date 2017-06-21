@@ -1,0 +1,19 @@
+easy_admin:
+    entities:
+        Mission:
+            class: MissionBundle\Entity\Mission
+            label: 'Mission'
+            list:
+                title: "Missions"
+                fields: 
+                    - 'id'
+                    - 'title'
+                    - 'resume'
+                    - { property: 'creationDate', type: 'date' }
+                    - { property: 'status', type: 'boolean' }
+                    - 'nbOngoing'
+            form:
+                fields:
+                    - { property: 'title', type: 'text' }
+                    - { property: 'resume', type: 'textarea' }
+                    - { property: 'nbOngoing', type: 'number' }
