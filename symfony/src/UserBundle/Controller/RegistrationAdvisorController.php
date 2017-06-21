@@ -283,24 +283,18 @@ class RegistrationAdvisorController extends Controller
                 return $this->redirectToRoute('expert_registration_step_three');
             }
 
-            dump($form);
-
             if ($form->isValid()) {
-
                 /** @var \MissionBundle\Entity\UserWorkExperience $oneWorkExp */
                 foreach ($user->getUserWorkExperiences() as $oneWorkExp) {
                     $oneWorkExp->setUser($user);
-                    dump($oneWorkExp);
                     $em->persist($oneWorkExp);
                 }
-
                 $user->setStatus(User::REGISTER_NO_STEP);
                 $this->get('fos_user.user_manager')->updateUser($user);
                 $em->flush();
 
                 return $this->redirectToRoute('dashboard');
             }
-            die;
         }
 
         return $this->render('UserBundle:Registration:register_expert_step_four.html.twig', [
