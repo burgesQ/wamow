@@ -50,6 +50,8 @@ $ emacs -nw symfony/web/app_dev.php
     $ sf doctrine:database:create
     $ sf doctrine:migrations:migrate
     $ sf doctrine:fixtures:load --no-interaction
+    $ sf assetic:install --symlink
+    $ sf assetic:dump web/
     ```
 3Bis. Alternatively you can run the genDb script
 
