@@ -1,4 +1,20 @@
 {% extends '::base.html.twig' %}
+
+{% form_theme form _self %}
+{%- block button_widget -%}
+    {%- if label is empty -%}
+        {%- if label_format is not empty -%}
+            {% set label = label_format|replace({
+            '%name%': name,
+            '%id%': id,
+            }) %}
+        {%- else -%}
+            {% set label = name|humanize %}
+        {%- endif -%}
+    {%- endif -%}
+    <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ translation_domain is same as(false) ? label|raw : label|trans({}, translation_domain)|raw }}</button>
+{%- endblock button_widget -%}
+
 {% trans_default_domain "tools" %}
 
 {% block body %}
@@ -31,10 +47,11 @@
             </div>
         </div>
         <div class="wmw-onboard-bottom">
-            {{ form_widget(form.back, {'attr' : {'class': 'wmw-button wmw-button--border'}}) }}
-            {#{{ form_widget(form.submit, {'attr' : {'class': 'wmw-button wmw-button--green'}, 'label': '<i></i><span>Next</span><i></i>'}) }}#}
-            {# TODO -> VALIDATE COUNT AT LEAST ONE #}
-            {{ form_widget(form.submit) }}
+            {% set next = '<i></i><span>' ~ form.submit.vars.label | trans ~ '</span><i></i>' %}
+            {% set back = '<i></i><span>' ~ form.back.vars.label | trans ~ '</span><i></i>' %}
+
+            {{ form_widget(form.back, {'attr': {'class': 'wmw-button wmw-button--border'}, 'label': back }) }}
+            {{ form_widget(form.submit, {'attr': {'class': 'wmw-button wmw-button--green'}, 'label': next }) }}
         </div>
 
         <div class="wmw-overlay" id="wmw-overlay-ob-4"
