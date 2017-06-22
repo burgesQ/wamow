@@ -316,7 +316,7 @@ class Mission
      * @var integer
      *
      * @ORM\Column(name="nb_ongoing", type="integer", nullable=false)
-     * @Assert\Range(min = 1)
+     * @Assert\Range(min = 0)
      */
     private $nbOngoing;
 
