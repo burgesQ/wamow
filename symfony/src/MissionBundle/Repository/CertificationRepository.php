@@ -19,7 +19,7 @@ class CertificationRepository extends EntityRepository
      * @param $q
      * @param $page
      * @param $pageLimit
-     * @return \Doctrine\ORM\Tools\Pagination\Paginator
+     * @return Paginator
      */
     public function findAutocompleteCertification($q, $page, $pageLimit)
     {
