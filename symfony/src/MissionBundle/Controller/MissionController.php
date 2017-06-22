@@ -46,7 +46,7 @@ class MissionController extends Controller
             }
 
             $nextMissionId = $this->getDoctrine()->getRepository('MissionBundle:Mission')
-                ->findNextMission($missionId, $mission->getCompany())[0];
+                ->findNextMission($missionId, $mission->getCompany());
 
             switch ($step->getPosition()) {
                 // if mission is step 1
