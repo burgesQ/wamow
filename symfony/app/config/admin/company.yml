@@ -1,0 +1,17 @@
+easy_admin:
+    entities:
+        Company:
+            class: CompanyBundle\Entity\Company
+            label: 'Company'
+            list:
+                title: "Companys"
+                fields: 
+                    - 'id'
+                    - 'name'
+                    - { property: 'creationDate', type: 'date' }
+                    - { property: 'status', type: 'boolean' }
+            form:
+                fields:
+                    - { property: 'name', type: 'text' }
+                    - { property: 'businessPractice', type: 'entity', type_options: {'class': 'MissionBundle\Entity\BusinessPractice', multiple: false, expanded: false, required: true} }
+                    - { property: 'status', type: 'text' }

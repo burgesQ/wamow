@@ -55,6 +55,11 @@ class PhoneNumber
      */
     private $updateDate;
 
+    public function __toString()
+    {
+        return $this->number;
+    }
+
     public function __construct()
     {
         $this->creationDate = new \Datetime();

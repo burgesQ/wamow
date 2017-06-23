@@ -1,3 +1,8 @@
+easy_admin_bundle:
+    resource: "@EasyAdminBundle/Controller/"
+    type:     annotation
+    prefix:   /admin
+    
 ## Local import
 bundles:
     resource: "./routing_v1.yml"
