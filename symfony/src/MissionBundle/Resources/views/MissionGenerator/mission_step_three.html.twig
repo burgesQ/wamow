@@ -29,12 +29,6 @@
 
             <div class="wmw-pitch-finder">
 
-                {{ form_errors(form.missionKinds) }}
-                {{ form_errors(form.workExperience) }}
-                {{ form_errors(form.certifications) }}
-                {{ form_errors(form.languages) }}
-                {{ form_errors(form.price) }}
-
                 <div class="wmw-onboard-domains row">
                     <div class="wmw-onboard-domains-col col-xs-12 col-sm-6">
                         {% for key, val in form.missionKinds %}
@@ -59,6 +53,7 @@
                             {% endif %}
                         {% endfor %}
                 </div>
+                {{ form_errors(form.missionKinds) }}
 
                 {# TODO CSS CERTIFICATIONS #}
                 <div class="wmw-copyfields">
@@ -67,6 +62,7 @@
                         {{ form_widget(form.certifications, { 'attr' : { 'class' : 'col-xs-10 col-md-6' }}) }}
                     </div>
                 </div><br />
+                {{ form_errors(form.certifications) }}
 
                 {# TODO CSS CERTIFICATIONS #}
                 <div class="wmw-copyfields">
@@ -75,11 +71,13 @@
                         {{ form_widget(form.languages, { 'attr' : { 'class' : 'col-xs-10 col-md-6' }}) }}
                     </div>
                 </div><br />
+                {{ form_errors(form.languages) }}
 
                 <div class="wmw-fieldrow row">
                     <label for="{{ form.workExperience.vars.id }}" class="wmw-label wmw-label--topmobile col-xs-10 col-sm-5">{{ 'workexperience.title' | trans }}</label>
                     {{ form_row(form.workExperience, { 'attr' : { 'class' : 'col-xs-10 col-md-6 required'}}) }}
                 </div>
+                {{ form_errors(form.workExperience) }}
 
             </div>
 
@@ -97,6 +95,7 @@
                     </div>
                 </div>
             </div>
+                {{ form_errors(form.price) }}
 
             <div class="wmw-progressbar">
                 <span class="active"></span>
@@ -110,7 +109,7 @@
 
     <div class="wmw-onboard-bottom">
         {% set late = '<i></i><span>' ~ form.forLater.vars.label ~ '</span><i></i>' %}
-        {% set next = '<i></i><span>' ~ form.submit.vars.label ~ '</span><i></i>' %}
+        {% set next = '<i></i><span>' ~ form.next.vars.label ~ '</span><i></i>' %}
         {% set back = '<i></i><span>' ~ form.back.vars.label ~ '</span><i></i>' %}
 
         {{ form_row(form.forLater, { 'attr' : { formnovalidate: 'formnovalidate','class' : 'wmw-button wmw-button--black wmw-button--border wmw-onboard-bottom-left'}, label: late}) }}

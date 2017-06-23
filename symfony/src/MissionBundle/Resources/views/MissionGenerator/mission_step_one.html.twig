@@ -21,28 +21,28 @@
 
     {# form #}
     {{ form_start(form, {'attr': {'class': 'wmw-onboard wmw-onboard--pitch col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3'}}) }}
-    {{ form_errors(form) }}
-    {{ form_errors(form.title) }}
-    {{ form_errors(form.resume) }}
-    <div class="wmw-onboard-body">
-        <h1>
-            {{ 'mission.new.step_one.title' | trans }}
-            <small>{{ 'mission.new.step_one.subtitle' | trans }}</small>
-        </h1>
+        {{ form_errors(form) }}
+        <div class="wmw-onboard-body">
+            <h1>
+                {{ 'mission.new.step_one.title' | trans }}
+                <small>{{ 'mission.new.step_one.subtitle' | trans }}</small>
+            </h1>
 
-        <div class="wmw-fieldrow row">
-            <label for="wmw-pitch-title" class="wmw-label col-xs-6 col-xl-5">
-                {{ 'mission.new.label.title' | trans }}
-            </label>
-            {{ form_widget(form.title, {'attr': {'class': 'required col-xs-6 col-xl-7'}}) }}
-        </div>
+            <div class="wmw-fieldrow row">
+                <label for="wmw-pitch-title" class="wmw-label col-xs-6 col-xl-5">
+                    {{ 'mission.new.label.title' | trans }}
+                </label>
+                {{ form_widget(form.title, {'attr': {'class': 'required col-xs-6 col-xl-7'}}) }}
+            </div>
+            {{ form_errors(form.title) }}
 
-        <div class="wmw-fieldrow row">
-            <label for="wmw-pitch-desc" class="wmw-label wmw-label--top col-xs-12 col-md-6 col-xl-5">
-                {{ 'mission.new.label.resume' | trans }}
-            </label>
-            {{ form_widget(form.resume) }}
-        </div>
+            <div class="wmw-fieldrow row">
+                <label for="wmw-pitch-desc" class="wmw-label wmw-label--top col-xs-12 col-md-6 col-xl-5">
+                    {{ 'mission.new.label.resume' | trans }}
+                </label>
+                {{ form_widget(form.resume) }}
+            </div>
+            {{ form_errors(form.resume) }}
 
         <div class="wmw-progressbar">
             <span class="active"></span>
