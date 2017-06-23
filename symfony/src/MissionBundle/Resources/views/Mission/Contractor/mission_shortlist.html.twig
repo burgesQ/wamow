@@ -103,6 +103,13 @@
         </div> <!--END TRAIL---->
 
         <div class="wmw-mission-body">
+
+            {% if nextMission is not null %}
+                <div class="wmw-mission-pagination">
+                    <a href="{{ path('mission_view', { 'missionId' : nextMission.id }) }}">{{ 'mission.view.contractor.next_mission' | trans }}</a>
+                </div>
+            {% endif %}
+
             {% for userMission in userMissions %}
                 {% set lastMsg = userMission.thread.messages | last %}
                 {% set read = lastMsg.metadata[1].isRead %}

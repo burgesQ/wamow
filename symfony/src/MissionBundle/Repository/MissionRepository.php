@@ -270,20 +270,25 @@ class MissionRepository extends EntityRepository
      * (next btn)
      *
      * @param integer $missionId
-     * @return array
+     * @param         $company
+     * @return integer | null
      */
     public function findNextMission($missionId, $company)
     {
         $qb = $this->_em->createQueryBuilder();
 
-        $qb->select('m')
+        $qb->select('m.id')
             ->from('MissionBundle:Mission', 'm')
             ->where('m.id > '.$missionId)
             ->andWhere('m.company = :company')
             ->setParameter("company", $company)
+            ->andWhere('m.status = :published')
+            ->setParameter("published", Mission::PUBLISHED)
             ->orderBy('m.id', 'ASC')
+            ->setMaxResults(1)
         ;
 
-        return $qb->getQuery()->getResult();
+        return $qb->getQuery()->getOneOrNullResult();
+
     }
 }
