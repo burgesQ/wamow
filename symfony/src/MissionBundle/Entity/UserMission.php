@@ -21,7 +21,7 @@ class UserMission
     const DISMISS    = -50;
     const GIVEUP     = -40;
     const FULL       = -30;
-    const SCORED  = -20;
+    const SCORED     = -20;
     const MATCHED    = -10;
     const INTERESTED = 0;
     const ONGOING    = 10;

@@ -1,4 +1,20 @@
 {% extends '::base.html.twig' %}
+
+{% form_theme form _self %}
+{%- block button_widget -%}
+    {%- if label is empty -%}
+        {%- if label_format is not empty -%}
+            {% set label = label_format|replace({
+            '%name%': name,
+            '%id%': id,
+            }) %}
+        {%- else -%}
+            {% set label = name|humanize %}
+        {%- endif -%}
+    {%- endif -%}
+    <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ translation_domain is same as(false) ? label|raw : label|trans({}, translation_domain)|raw }}</button>
+{%- endblock button_widget -%}
+
 {% trans_default_domain "tools" %}
 
 {% block body %}
@@ -39,8 +55,13 @@
 
     {# buttons #}
     <div class="wmw-onboard-bottom">
-        {{ form_widget(form.forLater, {attr: {formnovalidate: 'formnovalidate', class: 'wmw-button wmw-button--black wmw-button--border wmw-onboard-bottom-left'}}) }}
-        {{ form_widget(form.next, {attr: {class: 'wmw-button wmw-button--green'}}) }}
+        {% set back = '<i></i><span>' ~ form.back.vars.label | trans ~ '</span><i></i>' %}
+        {% set next = '<i></i><span>' ~ form.next.vars.label | trans ~ '</span><i></i>' %}
+        {% set forLater = '<i></i><span>' ~ form.forLater.vars.label | trans ~ '</span><i></i>' %}
+
+        {{ form_widget(form.forLater, {attr: {formnovalidate: 'formnovalidate', class: 'wmw-button wmw-button--black wmw-button--border wmw-onboard-bottom-left'}, label: forLater }) }}
+        {{ form_widget(form.back, {attr: {class: 'wmw-button'}, label : back}) }}
+        {{ form_widget(form.next, {attr: {class: 'wmw-button wmw-button--green'}, label : next}) }}
     </div>
     {{ form_end(form) }}
 
