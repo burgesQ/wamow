@@ -19,7 +19,7 @@ class LanguageRepository extends EntityRepository
      * @param $q
      * @param $page
      * @param $pageLimit
-     * @return \ToolsBundle\Repository\Paginator
+     * @return Paginator
      */
     public function findAutocompleteCertification($q, $page, $pageLimit)
     {
@@ -28,7 +28,7 @@ class LanguageRepository extends EntityRepository
         $qb->select('l')
             ->from('ToolsBundle:Language', 'l')
             ->where('l.name LIKE :q')
-            ->setParameter('q', $q . '%')
+            ->setParameter('q', 'language.' . $q . '%')
         ;
 
         if (!is_numeric($page)) {
