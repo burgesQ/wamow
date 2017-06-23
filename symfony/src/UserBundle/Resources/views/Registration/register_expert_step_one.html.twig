@@ -19,52 +19,50 @@
 
 {% block body %}
 
-    {{ form_start(form) }}
-        <div class="wmw-onboard col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 col-xl-4 col-xl-offset-4">
-            <div class="wmw-onboard-body">
-                <h1>
-                    {{ 'registration.advisor.one.title' | trans }}
-                    <small>
-                        {{ 'registration.advisor.one.subtitle' | trans | upper }}
-                    </small>
-                </h1>
+    {{ form_start(form, { 'attr' : { class : "wmw-onboard col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 col-xl-4 col-xl-offset-4" }}) }}
 
-                <div class="wmw-onboard-businesses row">
-                    {{ form_errors(form) }}
-                    {{ form_errors(form.businessPractice) }}
+    <div class="wmw-onboard-body">
 
-                    {% for key, val in form.businessPractice %}
-                        <div class="wmw-iconfield col-xs-6 col-sm-4">
-                            <input type="checkbox" name="businesses[]" id="business-{{ key }}"
-                                   class="requiredgroup:businesses vv-gparent"/>
-                            <label for="business-{{ key }}">
-                                <span>
-                                    <i class="icon icon--business-{{ arrayImg[val.vars.label] }}"></i><br/>
-                                    {{ val.vars.label | trans }}
-                                </span>
-                            </label>
-                        </div>
-                    {% endfor %}
+        <h1>
+            {{ 'registration.advisor.one.title' | trans }}
+            <small>{{ 'registration.advisor.one.subtitle' | trans | upper }}</small>
+        </h1>
 
+
+        {{ form_errors(form) }}
+        {{ form_errors(form.businessPractice) }}
+        <div class="wmw-onboard-businesses row">
+            {% for key, val in form.businessPractice %}
+                <div class="wmw-iconfield col-xs-6 col-sm-4">
+                    <input type="checkbox" name="businesses[]" id="business-{{ key }}"
+                           class="requiredgroup:businesses vv-gparent"/>
+                    <label for="business-{{ key }}">
+                                        <span>
+                                            <i class="icon icon--business-{{ arrayImg[val.vars.label] }}"></i><br/>
+                                            {{ val.vars.label | trans }}
+                                        </span>
+                    </label>
                 </div>
+            {% endfor %}
+        </div>
 
-                <div class="wmw-progressbar">
-                    <span class="active"></span>
-                    <span class="active"></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
+        <div class="wmw-progressbar">
+            <span class="active"></span>
+            <span class="active"></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
 
-            </div>
+    <div class="wmw-onboard-bottom">
+        {% set next = '<i></i><span>' ~ form.submit.vars.label | trans ~ '</span><i></i>' %}
+        {% set back = '<i></i><span>' ~ form.back.vars.label | trans ~ '</span><i></i>' %}
 
-            <div class="wmw-onboard-bottom">
-                {% set next = '<i></i><span>' ~ form.submit.vars.label | trans ~ '</span><i></i>' %}
-                {% set back = '<i></i><span>' ~ form.back.vars.label | trans ~ '</span><i></i>' %}
+        {{ form_widget(form.back, {'attr': {'class': 'wmw-button wmw-button--border'}, 'label': back }) }}
+        {{ form_widget(form.submit, {'attr': {'class': 'wmw-button wmw-button--green'}, 'label': next }) }}
+    </div>
 
-                {{ form_widget(form.back, {'attr': {'class': 'wmw-button wmw-button--border'}, 'label': back }) }}
-                {{ form_widget(form.submit, {'attr': {'class': 'wmw-button wmw-button--green'}, 'label': next }) }}
-            </div>
     {{ form_end(form) }}
 
     <div class="wmw-onboard-text col-md-3 col-xl-2">
@@ -75,4 +73,6 @@
             {{ 'registration.advisor.one.how_to_text' | trans | nl2br }}
         </p>
     </div>
+
+
 {% endblock %}
