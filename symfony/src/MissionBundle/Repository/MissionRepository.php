@@ -63,7 +63,7 @@ class MissionRepository extends EntityRepository
                 LEFT JOIN m.missionKinds k
                 LEFT JOIN m.userMission um
                 WHERE     um.user = :user
-                AND       um.status >= " . UserMission::ACTIVATED ."
+                AND       um.status >= " . UserMission::SCORED ."
                 AND       m.status = " . Mission::PUBLISHED;
 
         // add each user language in the query
@@ -234,7 +234,7 @@ class MissionRepository extends EntityRepository
         if ($ignored)
             $base = $base . '
                 AND       um.mission = :mission
-                AND       um.status >= ' . UserMIssion::ACTIVATED;
+                AND       um.status >= ' . UserMIssion::SCORED;
         // order user by id
         $base = $base . '
                 GROUP BY u.id ORDER BY  u.id ASC';

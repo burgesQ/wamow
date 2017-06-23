@@ -5,8 +5,8 @@
     {%- if label is empty -%}
         {%- if label_format is not empty -%}
             {% set label = label_format|replace({
-                '%name%': name,
-                '%id%': id,
+            '%name%': name,
+            '%id%': id,
             }) %}
         {%- else -%}
             {% set label = name|humanize %}
@@ -39,13 +39,16 @@
         <span class="active"></span>
         <span class="active"></span>
         <span class="active"></span>
-        <span></span>
+        <span class="active"></span>
         <span></span>
     </div>
 </div>
 <div class="wmw-onboard-bottom">
-    {{ form_widget(form.back, {'attr' : {'class': 'wmw-button wmw-button--border'}}) }}
-    {{ form_widget(form.submit, {'attr' : {'class': '"wmw-button wmw-button--green'}, 'label': '<i></i><span>Next</span><i></i>'}) }}
+    {% set next = '<i></i><span>' ~ form.submit.vars.label | trans ~ '</span><i></i>' %}
+    {% set back = '<i></i><span>' ~ form.back.vars.label | trans ~ '</span><i></i>' %}
+
+    {{ form_widget(form.back, {'attr': {'class': 'wmw-button wmw-button--border'}, 'label': back }) }}
+    {{ form_widget(form.submit, {'attr': {'class': 'wmw-button wmw-button--green'}, 'label': next }) }}
 </div>
 {{ form_end(form) }}
 <div class="wmw-onboard-text col-md-3 col-xl-2">

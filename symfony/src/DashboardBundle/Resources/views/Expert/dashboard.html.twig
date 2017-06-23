@@ -178,7 +178,7 @@
                                     <span class="infos-el infos-el--status col-xs-6">
                                         <span>
 
-                                            {% if wip.status == constant('ACTIVATED', wip) or wip.status == constant('MATCHED', wip) or wip.status == constant('INTERESTED', wip) %}
+                                            {% if wip.status == constant('SCORED', wip) or wip.status == constant('MATCHED', wip) or wip.status == constant('INTERESTED', wip) %}
                                                 <i class="icon icon--chair"></i><br/>
                                                 <small>{{ 'dashboard.advisor.other.mission_status' | trans }}</small><br/>
                                                 <span class="status">{{ 'dashboard.advisor.wip.interested' | trans }}</span>

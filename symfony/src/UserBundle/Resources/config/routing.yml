@@ -1,15 +1,3 @@
-## HWI OAuthBundle routes, Must Be First Import
-hwi_oauth_connect:
-    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
-    prefix:   /service/login
-
-hwi_oauth_redirect:
-    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
-    prefix:   /service/login
-
-linkedin_login:
-    path: /service/login/check-linkedin
-
 ## FOS UserBundle Routes
 fos_user_security:
     resource: "@UserBundle/Resources/config/routing/security.yml"

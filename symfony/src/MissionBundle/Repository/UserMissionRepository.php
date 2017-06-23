@@ -13,7 +13,7 @@ use MissionBundle\Entity\UserMission;
  */
 class UserMissionRepository extends EntityRepository
 {
-    public function findOrderedByMission($mission, $max)
+    public function findOrderedByMission($mission, $maxResult, $minScore)
     {
         $qb = $this->_em->createQueryBuilder();
         $qb->select('t')
@@ -22,11 +22,12 @@ class UserMissionRepository extends EntityRepository
             ->join('m.steps', 's')
             ->where('t.mission = :mission')
                 ->setParameter('mission', $mission)
-            ->andWhere('t.status = '.UserMission::ACTIVATED)
+            ->andWhere('t.status = '.UserMission::SCORED)
             ->andWhere('s.status = 1 and s.position = 1')
+            ->andWhere("t.score >= ".$minScore)
             ->orderBy("t.score", "desc");
-        if ($max) {
-            $qb->setMaxResults($max);
+        if ($maxResult) {
+            $qb->setMaxResults($maxResult);
         }
         return $qb->getQuery()->getResult();
     }
@@ -69,7 +70,7 @@ class UserMissionRepository extends EntityRepository
             ->leftjoin('t.mission', 'm')
             ->where('u.id = :userId')
                 ->setParameter('userId', $userId)
-            ->andWhere('t.status >= :' . UserMission::MATCHED)
+            ->andWhere('t.status >= ' . UserMission::MATCHED)
             ->orderBy('m.applicationEnding', 'ASC');
         return $qb->getQuery()->getResult();
     }
@@ -84,7 +85,7 @@ class UserMissionRepository extends EntityRepository
             ->where('u.id = :userId')
                 ->setParameter('userId', $userId)
             ->andWhere('t.status < :status')
-                ->setParameter('status', UserMission::ACTIVATED)
+                ->setParameter('status', UserMission::SCORED)
             ->orderBy('m.applicationEnding', 'ASC');
         return $qb->getQuery()->getResult();
     }
