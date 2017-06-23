@@ -13,18 +13,26 @@
 
         <h1>{{ 'layout.login' | trans }}</h1>
 
+        <a href="{{ path('hwi_oauth_service_redirect', {'service': 'linkedin' }) }}">
+            <button type="button" class="wmw-button wmw-button--green wmw-button--full">
+                <i></i><span>{{ 'security.login.linkedin' | trans }}</span><i></i>
+            </button>
+        </a>
+
+        <div class="wmw-onboard-or">{{ 'registration.advisor.zero.or' | trans({}, 'tools') | upper }}</div>
+
         <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
 
         <div class="wmw-fieldrow row">
+            <input type="email" id="username" name="_username" class="required col-xs-7" value="{{ last_username }}"/>
             <label class="wmw-label wmw-label--right col-xs-5"
                    for="username">{{ 'security.login.email'|trans }}</label>
-            <input type="email" id="username" name="_username" class="required col-xs-7" value="{{ last_username }}"/>
         </div>
 
         <div class="wmw-fieldrow row">
+            <input type="password" id="password" name="_password" class="required col-xs-7"/>
             <label class="wmw-label wmw-label--right col-xs-5"
                    for="password">{{ 'security.login.password'|trans }}</label>
-            <input type="password" id="password" name="_password" class="required col-xs-7"/>
         </div>
 
         <div class="wmw-fieldrow row">
@@ -33,7 +41,9 @@
                 <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
                 <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
             </div>
+        </div>
 
+        <div class="wmw-onboard-bottom">
             <button type="submit" id="_submit" name="_submit"
                     class="wmw-button wmw-button--green wmw-button--border">
                 <i></i><span>{{ 'layout.login' | trans }}</span><i></i></button>
@@ -44,11 +54,6 @@
                 </button>
             </a>
 
-            <a href="{{ path('hwi_oauth_service_redirect', {'service': 'linkedin' }) }}">
-                <button type="button" class="wmw-button wmw-button--border">
-                    <i></i><span>{{ 'security.login.linkedin' | trans }}</span><i></i>
-                </button>
-            </a>
         </div>
 
     </div>
