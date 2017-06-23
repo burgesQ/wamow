@@ -35,7 +35,7 @@ security:
 
             oauth:
                 resource_owners:
-                    linkedin:          linkedin_login
+                    linkedin:          /service/login/check-linkedin
                 login_path:            hwi_oauth_redirect
                 failure_path:          hwi_oauth_connect
 
