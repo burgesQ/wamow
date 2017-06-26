@@ -116,6 +116,7 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface, Co
 
             // set budget
             $mission->setBudget($oneMission->budget);
+            $mission->setPrice($oneMission->budget * 100);
 
             // set address
             $mission->setAddress($this->createAddress($manager, $oneMission->address));
@@ -196,6 +197,7 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface, Co
 
             // set budget
             $mission->setBudget($anotherMission['budget']);
+            $mission->setPrice($anotherMission['budget'] * 100);
 
             // set address
             $mission->setAddress($this->createAddress($manager, $oneMission['address'], true));
