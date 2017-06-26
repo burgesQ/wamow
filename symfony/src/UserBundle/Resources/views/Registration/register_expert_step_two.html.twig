@@ -44,7 +44,7 @@
             </div>
         </div>
         <div class="wmw-onboard-bottom">
-            {% set next = '<i></i><span>' ~ form.submit.vars.label | trans ~ '</span><i></i>' %}
+            {% set next = '<i></i><span>' ~ 'form.btn.next' | trans ~ '</span><i></i>' %}
             {% set back = '<i></i><span>' ~ form.back.vars.label | trans ~ '</span><i></i>' %}
 
             {{ form_widget(form.back, {'attr': {'class': 'wmw-button wmw-button--border'}, 'label': back }) }}
