@@ -24,6 +24,11 @@ mission_answer_to_advisor:
     defaults:
         _controller: MissionBundle:Mission:answerToAdvisor
 
+user_mission_refuse:
+    path:            /refuse/{userMissionId}
+    defaults:
+        _controller: MissionBundle:Mission:refuseUserMission
+
 # Mission Generator
 mission_new_step_one:
     path:      /mission/new/1/{missionId}
@@ -84,12 +89,6 @@ user_mission_remove_from_shortlist:
     path:            /shortlist/remove
     defaults:
         _controller: MissionBundle:Action:removeFromShortlist
-    methods:     [PUT]
-
-user_mission_refuse:
-    path:            /refuse
-    defaults:
-        _controller: MissionBundle:Action:refuseUserMission
     methods:     [PUT]
 
 user_mission_notes:

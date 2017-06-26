@@ -208,43 +208,6 @@ class ActionController extends Controller
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
-     * @throws \HttpHeaderException
-     */
-    public function refuseUserMissionAction(Request $request)
-    {
-        if (!$request->isXmlHttpRequest()) {
-            throw new HttpException('Not a xml request');
-        }
-
-        $trans = $this->get('translator');
-        $em    = $this->getDoctrine()->getManager();
-
-        // Get Check User
-        /** @var \UserBundle\Entity\User $user */
-        if (($user = $this->getUser()) === null) {
-            throw new NotFoundHttpException($trans->trans('error.logged', [], 'tools'));
-        } elseif (!$this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR')) {
-            throw new NotFoundHttpException($trans->trans('error.forbidden', [], 'tools'));
-        } elseif (!$request->request->has('id')) {
-            throw new \HttpHeaderException('Missing id parameters');
-        }
-
-        // Get Check UserMission
-        $id              = $request->request->get('id');
-        $userMissionRepo = $em->getRepository('MissionBundle:UserMission');
-        if (!($userMission = $userMissionRepo->findOneBy(['id' => $id]))) {
-            throw new NotFoundHttpException($trans->trans('error.user_mission.not_found', [], 'tools'));
-        }
-
-        $userMission->setStatus(UserMission::DISMISS);
-        $em->flush();
-
-        return new JsonResponse(['data' => json_encode('Ok')]);
-    }
-
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \HttpHeaderException
      */
