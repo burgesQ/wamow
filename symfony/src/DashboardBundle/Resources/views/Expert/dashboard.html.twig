@@ -167,7 +167,7 @@
                                             {{ wip.mission.applicationEnding | time_diff }}
                                         </span>
                                     </span>
-                                    <span class="infos-el infos-el--status col-xs-6">
+                                    <span class="infos-el infos-el--status{% if unread > 0 %} infos-el--unread{% endif %} col-xs-6">
                                         <span>
 
                                             {% if wip.status == constant('SCORED', wip) or wip.status == constant('MATCHED', wip) or wip.status == constant('INTERESTED', wip) %}
