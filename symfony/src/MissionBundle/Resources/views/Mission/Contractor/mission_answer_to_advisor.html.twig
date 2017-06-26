@@ -282,10 +282,8 @@
 
                         <div class="mail-content-notes{% if step.position == 3 %} mail-content-notes--semi{% endif %}">
                             <label for="wmw-mission-notes">Notes</label>
-                            <div class="edit" id="{{ userMission.id }}">
-                                {{ userMission.note | nl2br }}
-                            </div>
-                            <div id="wmw-mission-notes-status">{{ 'form.btn.save' | trans }}</div>
+                            <textarea id="wmw-mission-notes" class="element-notes-textarea" data-id="{{ userMission.id }}" data-path="{{ path('user_mission_notes') }}">{{ userMission.note }}</textarea>
+                            <div id="wmw-mission-notes-status" class="element-notes-status">Enregistré</div>
                         </div>
 
                         <div class="mail-content-chat">
@@ -326,24 +324,7 @@
 {% block javascripts %}
     {{ parent() }}
 
-    <script src="http://www.appelsiini.net/download/jquery.jeditable.js"></script>
-    <script src="http://www.appelsiini.net/download/jquery.jeditable.mini.js"></script>
     <script type="text/javascript">
-
-//        AJAX JEDITABLE (NOTES)
-        $('.edit').editable('{{ path('user_mission_notes') }}', {
-            type: 'textarea',
-            submit: '{{ 'form.btn.save' | trans }}',
-            indicator: '{{ 'form.note.indicator' | trans }}',
-            tooltip: '{{ 'form.note.tooltip' | trans }}',
-            id: $(this).attr('id'),
-            data: function (value, settings) {
-                return value.replace(/<br\s*\/?>\n?/gi, '\n');
-            },
-            callback: function (value, settings) {
-                $(this).html(value.replace(/\n/g, "<br />"));
-            }
-        });
 
 //        AJAX SHORTLIST ACTION (STEP 1)
         $('[id^="shortlist_"]').each(function () {

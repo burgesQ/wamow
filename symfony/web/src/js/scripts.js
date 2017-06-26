@@ -160,7 +160,7 @@ var Master = {
         }
 
         $('.wmw-mission-element .element-content').perfectScrollbar({ suppressScrollX:true }); 
-        $('.wmw-mission-element .element-notes').perfectScrollbar({ suppressScrollX:true }); 
+        //$('.wmw-mission-element .element-notes').perfectScrollbar({ suppressScrollX:true }); 
         $('.wmw-mission-sidebar .sidebar-wrapper').perfectScrollbar({ suppressScrollX:true }); 
         $('.wmw-mission-content').perfectScrollbar({ suppressScrollY:true }); 
         $('.main-slider-element-wrapper').perfectScrollbar({ suppressScrollX:true });
@@ -283,25 +283,25 @@ var Master = {
 
     init_mission_notes : function(){
 
-        function record_notes( notes, id ){
+        function record_notes( $el ){
 
-            var data = { "notes" : notes, "id" : id };
+            var val = $el.val();
+            var id = $el.attr('data-id');
+            var path = $el.attr('data-path');
+            var data = { "value" : val, "id" : id };
 
-            $.ajax( '../ajax/set-notes.php', {
+            $.ajax( path, {
                 method : 'post',
-                data : data,
-                dataType : 'json'
+                data : data
             }).done( function( response ){
 
-                var $status = $('#wmw-mission-notes-status');
-                $status.text(response.status).stop(true, true).fadeIn(500).delay(5000).fadeOut(500); 
+                $el.val(response);
+                $el.parent().find(".element-notes-status").stop(true, true).fadeIn(500).delay(5000).fadeOut(500); 
             });
         }
 
-        $('#wmw-mission-notes').on('blur', function(){
-            var val = $(this).val();
-            var id = $("#wmw-mission-id").val();
-            record_notes(val, id);
+        $('.element-notes-textarea').on('blur', function(){
+            record_notes( $(this) );
         });
     },
 
