@@ -54,25 +54,20 @@
             </div>
         </div>
 
-        <div class="wmw-copyfields">
-
-            <div class="wmw-copyfield row">
-                {#<div class="wmw-fieldrow wmw-copyfield row">#}
-                <br>
-                <label for="wmw-ob-language-1"
-                       class="wmw-label wmw-label--topmobile col-xs-10 col-sm-5">{{ form_label(form.user.languages) }}</label><br>
+        <div class="wmw-fieldrow row">
+            <label for="wmw-ob-language-1"
+                   class="wmw-label wmw-label--topmobile col-xs-10 col-sm-5">{{ form_label(form.user.languages) }}</label>
+            <div class="col-xs-12 col-sm-7">
                 {{ form_widget(form.user.languages) }}
-                {{ form_errors(form.user.languages) }}
             </div>
-
         </div>
-
         <div class="wmw-uploadfield">
             {{ form_widget(form.resume.file) }}
             <button type="button" class="wmw-button wmw-button--green"><i></i><span>Upload your cv</span><i></i></button>
             <div class="wmw-uploadfield-val"></div>
         </div>
         {{ form_errors(form.resume.file) }}
+
 
     </div>
 
