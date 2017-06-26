@@ -4,13 +4,13 @@ namespace UserBundle\Controller;
 
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use UserBundle\Form\EditCertificationFormType;
 use UserBundle\Form\EditProfileMergedFormType;
 use Symfony\Component\HttpFoundation\Request;
 use UserBundle\Form\EditPasswordFormType;
 use FOS\UserBundle\Model\UserInterface;
 use ToolsBundle\Entity\ProfilePicture;
+use Symfony\Component\Form\FormError;
 use ToolsBundle\Entity\Address;
 use UserBundle\Entity\User;
 
@@ -82,29 +82,36 @@ class ProfileController extends Controller
             $arrayData, $arrayOption)->setData($arrayData)
         ;
         $formPassword        = $this->createForm(new EditPasswordFormType(User::class))->setData($user);
+        /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
+        $userManager = $this->get('fos_user.user_manager');
 
-        if (($formPassword->handleRequest($request)->isSubmitted() && $formPassword->isValid())
-            || ($form->handleRequest($request)->isSubmitted() && $form->isValid())) {
-            /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
-            $userManager = $this->get('fos_user.user_manager');
 
-            $user->setFirstName(ucwords($user->getFirstName()));
-            $user->setLastName(ucwords($user->getLastName()));
+        if ($formPassword->handleRequest($request)->isSubmitted()) {
+            if ($formPassword->isValid()) {
+                $userManager->updateUser($user);
 
-            if ($image->getFile()) {
-                $user->addImage($image);
+                return $this->redirectToRoute('user_profile_show');
             }
+        } elseif ($form->handleRequest($request)->isSubmitted() && $form->isValid()) {
+            if ($form->get('user')->get('phone')->get('prefix')->isEmpty()
+                || $form->get('user')->get('phone')->get('number')->isEmpty()) {
+                $form->get('user')->get('phone')->addError(new FormError($this->get('translator')
+                    ->trans('error.phone.please_fill', [],
+                        'tools')));
+            } else {
+                $user->setFirstName(ucwords($user->getFirstName()));
+                $user->setLastName(ucwords($user->getLastName()));
 
-            if ($newAddress !== null) {
-                $em->persist($newAddress);
+                if ($image->getFile()) {
+                    $user->addImage($image);
+                }
+                if ($newAddress !== null) {
+                    $em->persist($newAddress);
+                }
+                $userManager->updateUser($user);
+
+                return $this->redirectToRoute('user_profile_show');
             }
-
-            $userManager->updateUser($user);
-            $em->flush();
-            $url      = $this->generateUrl('user_profile_show');
-            $response = new RedirectResponse($url);
-
-            return $response;
         }
 
         return $this->render('UserBundle:Profile:edit.html.twig', [
