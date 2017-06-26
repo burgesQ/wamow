@@ -329,6 +329,8 @@ mission:
         less_info: less details
         currency_k: K $
         receive_the_pitch: <span id='count-match'> %nb </span> will receive the pitch
+        certifications: Certification(s)
+        no_certification: No certification required
         contractor:
             pitched_at: Pitched at date
             next_mission: Next Mission >

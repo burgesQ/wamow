@@ -17,12 +17,16 @@
                 {{ mission.title }}
                 <small><i class="icon icon--certification"></i>
                     {{ 'mission.view.certifications' | trans | humanize }} :
-                    {% for certif in mission.certifications %}
-                        {{ certif.name }}
-                        {% if not loop.last %}
-                            ,
-                        {% endif %}
-                    {% endfor %}
+                    {% if mission.certifications.count() > 0 %}
+                        {% for certif in mission.certifications %}
+                            {{ certif.name }}
+                            {% if not loop.last %}
+                                ,
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        {{ 'mission.view.no_certification' | trans }}
+                    {% endif %}
                 </small>
             </h1>
 
