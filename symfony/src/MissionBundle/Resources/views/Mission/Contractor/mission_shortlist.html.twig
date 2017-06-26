@@ -166,12 +166,14 @@
                                 </span><i></i>
                             </button>
                         </a>
-                        <button id="contract_{{ userMission.id }}" type="button" class="wmw-button wmw-button--green wmw-button--border wmw-button--small">
-                            <i></i><span>
-                                <i class="icon icon--handshake"></i>
-                                {{ 'mission.view.contractor.btn_contract' | trans | upper }}
-                            </span><i></i>
-                        </button>
+                        <a href="{{ path('user_mission_add_to_contract', { 'userMissionId' : userMission.id }) }}">
+                            <button id="contract_{{ userMission.id }}" type="button" class="wmw-button wmw-button--green wmw-button--border wmw-button--small">
+                                <i></i><span>
+                                    <i class="icon icon--handshake"></i>
+                                    {{ 'mission.view.contractor.btn_contract' | trans | upper }}
+                                </span><i></i>
+                            </button>
+                        </a>
                     </div>
 
                 </div>

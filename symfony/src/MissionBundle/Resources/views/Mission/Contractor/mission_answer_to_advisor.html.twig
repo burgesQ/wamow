@@ -221,12 +221,14 @@
                                         </span><i></i>
                                     </button>
                                 </a>
-                                <button id="contract_{{ userMission.id }}" type="button" class="wmw-button wmw-button--green wmw-button--border wmw-button--small">
-                                    <i></i><span>
-                                        <i class="icon icon--handshake"></i>
-                                        {{ 'mission.view.contractor.btn_contract' | trans | upper }}
-                                    </span><i></i>
-                                </button>
+                                <a href="{{ path('user_mission_add_to_contract', { 'userMissionId' : userMission.id }) }}">
+                                    <button id="contract_{{ userMission.id }}" type="button" class="wmw-button wmw-button--green wmw-button--border wmw-button--small">
+                                        <i></i><span>
+                                            <i class="icon icon--handshake"></i>
+                                            {{ 'mission.view.contractor.btn_contract' | trans | upper }}
+                                        </span><i></i>
+                                    </button>
+                                </a>
                             </div>
                         {% endif %}
 
@@ -356,22 +358,6 @@
                     alert("{{ 'mission.action.remove_from_shortlist' | trans }}");
                     $('#remove_from_shortlist_' + id).hide();
                     $('#shortlist_' + id).show();
-                }).fail(function () {
-                    alert("{{ 'error.action.failed' | trans }}");
-                });
-            });
-        });
-
-//        AJAX CONTRACT ACTION (STEP 2)
-        $('[id^="contract_"]').each(function () {
-            $(this).click(function () {
-                var id = $(this).attr('id').split('_')[1];
-                $.ajax({
-                    url: "{{ path('user_mission_add_to_contract') }}",
-                    method: "put",
-                    data: {id: id}
-                }).done(function (msg) {
-                    alert("{{ 'mission.action.add_to_contract' | trans }}");
                 }).fail(function () {
                     alert("{{ 'error.action.failed' | trans }}");
                 });
