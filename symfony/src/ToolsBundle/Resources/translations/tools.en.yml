@@ -193,7 +193,7 @@ dashboard:
             delete: Delete
             close: Closed
         other:
-            none: No other pitch yes
+            none: No other pitch
             none_leg: Other pitch will be available soone
             advice: Advice
             in_fact: You are more likely to be selected...
