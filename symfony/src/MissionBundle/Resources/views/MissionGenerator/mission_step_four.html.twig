@@ -166,7 +166,7 @@
             {% set next = '<i></i><span>' ~ form.next.vars.label | trans ~ '</span><i></i>' %}
             {% set forLater = '<i></i><span>' ~ form.forLater.vars.label | trans ~ '</span><i></i>' %}
 
-            {{ form_widget(form.forLater, {attr: { formnovalidate: 'formnovalidate',class : 'wmw-button wmw-button--black wmw-button--border'}, label: forLater}) }}
+            {{ form_widget(form.forLater, {attr: { formnovalidate: 'formnovalidate',class : 'wmw-button wmw-button--black wmw-button--border wmw-button-later'}, label: forLater}) }}
             <button onclick="window.print()" type="button"
                     class="wmw-button wmw-button--black wmw-button--border wmw-onboard-bottom-left">
                 <i></i><span>{{ 'form.btn.print' | trans }}</span><i></i></button>

@@ -58,8 +58,11 @@ var Master = {
             e.stopPropagation();
         });
 
-    	$('form').validVal({
-    	});
+    	$('form').validVal();
+
+        $('.wmw-button-later').on('click', function(){
+            $('form').trigger("destroy.vv");
+        });
 
     	$('.wmw-uploadfield button').on('click', function(){
     		$(this).parent().find('input[type=file]').trigger( 'click' );
