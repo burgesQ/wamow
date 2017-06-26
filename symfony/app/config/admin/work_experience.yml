@@ -1,0 +1,55 @@
+easy_admin:
+    entities:
+        WorkExp:
+            class: MissionBundle\Entity\WorkExperience
+            label: 'Work Experience'
+            list:
+                title: "Work Experience"
+                fields:
+                    - 'id'
+                    - 'name'
+                    - 'contractorBusinessPractices'
+                    - 'contractorProfessionalExpertises'
+                    - 'contractorMissionKinds'
+                    - 'advisorBusinessPractices'
+                    - 'advisorProfessionalExpertises'
+                    - 'advisorMissionKinds'
+            form:
+                fields:
+                    - { property: 'name', type: 'text' }
+                    - { property: 'contractorBusinessPractices', type: 'easyadmin_autocomplete', type_options: { by_reference: false } }
+                    - { property: 'contractorProfessionalExpertises', type: 'easyadmin_autocomplete', type_options: { by_reference: false } }
+                    - { property: 'contractorMissionKinds', type: 'easyadmin_autocomplete', type_options: { by_reference: false } }
+                    - { property: 'advisorBusinessPractices', type: 'easyadmin_autocomplete', type_options: { by_reference: false } }
+                    - { property: 'advisorProfessionalExpertises', type: 'easyadmin_autocomplete', type_options: { by_reference: false } }
+                    - { property: 'advisorMissionKinds', type: 'easyadmin_autocomplete', type_options: { by_reference: false } }
+        BusinessPra:
+            class: MissionBundle\Entity\BusinessPractice
+            label: 'Business Practice'
+            list:
+                title: "Business Practice"
+                fields:
+                    - 'id'
+                    - 'name'
+                    - 'contractorWorkExperiences'
+                    - 'contractorWorkExperiences'
+        ProExp:
+            class: MissionBundle\Entity\ProfessionalExpertise
+            label: 'Professional Expertise'
+            list:
+                title: "Professional Expertise"
+                fields:
+                    - 'id'
+                    - 'name'
+                    - 'contractorWorkExperiences'
+                    - 'contractorWorkExperiences'
+        MissionKind:
+            class: MissionBundle\Entity\MissionKind
+            label: 'Mission Kind'
+            list:
+                title: "Mission Kind"
+                fields:
+                    - 'id'
+                    - 'name'
+                    - 'contractorWorkExperiences'
+                    - 'contractorWorkExperiences'
