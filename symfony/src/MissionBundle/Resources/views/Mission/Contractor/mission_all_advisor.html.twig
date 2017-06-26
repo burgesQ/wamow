@@ -157,7 +157,10 @@
                             </div>
                         </div>
 
-                        <div class="element-notes">
+                        <div class="element-notes{% if userMission.note == '' %} element-notes--empty{% endif %}">
+                            <div class="element-notes-empty">
+                                <span>Notes<br /><i class="icon icon--notes"></i></span>
+                            </div>
                             <textarea class="element-notes-textarea" data-id="{{ userMission.id }}" data-path="{{ path('user_mission_notes') }}">{{ userMission.note }}</textarea>
                             <div class="element-notes-status">Enregistré</div>
                         </div>

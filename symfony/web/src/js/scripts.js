@@ -302,6 +302,12 @@ var Master = {
 
         $('.element-notes-textarea').on('blur', function(){
             record_notes( $(this) );
+        }).on('keyup keypress keydown', function(){
+
+            if($(this).val() == '')
+                $(this).parent().addClass('element-notes--empty');
+            else
+                $(this).parent().removeClass('element-notes--empty');
         });
     },
 
