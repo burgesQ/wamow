@@ -105,17 +105,6 @@
 
                     {% for wip in wips %}
 
-                        {% set unread = 0 %}
-                        {% set break = false %}
-                        {% if wip.thread != null %}
-                            {% for message in wip.thread.messages | reverse if not break %}
-                                {% if message.metadata[0].isRead == false %}
-                                    {% set unread = unread + 1 %}
-                                {% else %}
-                                    {% set break = true %}
-                                {% endif %}
-                            {% endfor %}
-                        {% endif %}
 
                         {% if wip.status == constant('INTERESTED', wip) or wip.status == constant('MATCHED', wip) %}
                             <div class="main-missions-el main-missions-el--waiting row">
@@ -127,6 +116,13 @@
                             <div class="main-missions-el main-missions-el--selected row">
                         {% endif %}
 
+                                {% set unread = 0 %}
+                                {% if wip.thread != null %}
+                                    {% set message = wip.thread.messages.last %}
+                                    {% if message.metadata[1].isRead == false and message.sender != user %}
+                                        {% set unread = unread + 1 %}
+                                    {% endif %}
+                                {% endif %}
 
                                 <div class="main-missions-el-content col-xs-12 col-md-6">
                                     <div class="content-date">{{ 'dashboard.advisor.wip.date' | trans }} {{ wip.mission.creationDate | date("m/d/Y") }}</div>

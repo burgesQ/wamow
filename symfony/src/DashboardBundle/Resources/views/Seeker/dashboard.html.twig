@@ -72,8 +72,18 @@
                     {% elseif stepPosition == 2 %}
                         <div class="main-missions-el row">
                     {% elseif stepPosition == 3 %}
-                    <div class="main-missions-el main-missions-el--selected row">
+                        <div class="main-missions-el main-missions-el--selected row">
                     {% endif %}
+
+                            {% set unread = 0 %}
+                            {% for thread in mission.threads %}
+                                {% if thread.userMission.status == (stepPosition * 10) %}
+                                    {% set message = thread.messages.last %}
+                                        {% if message.metadata[1].isRead == false and message.sender != user %}
+                                            {% set unread = unread + 1 %}
+                                        {% endif %}
+                                {% endif %}
+                            {% endfor %}
 
                         <div class="main-missions-el-content col-xs-12 col-md-6">
                             <div class="content-date">
@@ -117,20 +127,6 @@
                         </div>
 
                         <div class="main-missions-el-infos col-xs-12 col-md-3 row">
-
-                            {% set unread = 0 %}
-                            {% for thread in mission.threads %}
-                                {% if thread.userMission.status == (stepPosition * 10) %}
-                                    {% set break = false %}
-                                    {% for message in thread.messages | reverse if not break %}
-                                        {% if message.metadata[1].isRead == false %}
-                                            {% set unread = unread + 1 %}
-                                        {% else %}
-                                            {% set break = true %}
-                                        {% endif %}
-                                    {% endfor %}
-                                {% endif %}
-                            {% endfor %}
 
                             {% if stepPosition == 1 %}
                                 <span class="infos-el col-xs-6">
