@@ -1,4 +1,4 @@
-<doctype html>
+<!doctype html>
 <html lang="fr">
     <head>
 
@@ -28,7 +28,7 @@
     <body>
         <div class="wmw-wrapper">
             {% block header %}
-                <header class="wmw-header wmw-header--ob row">
+                <header class="wmw-header row{% if user is not defined %} wmw-header--ob{% endif %}">
                     {% include '@User/Profile/profile_header.html.twig' %}
                 </header>
             {% endblock %}
