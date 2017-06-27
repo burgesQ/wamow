@@ -3008,7 +3008,7 @@ $.fn.deserialize = function (serializedString)
             var name = decodeURIComponent(nameValue[0]);
             var value = decodeURIComponent(nameValue[1]);
             // Find one or more fields
-            var $field = $form.find('[name=' + name + ']');    
+            var $field = $form.find('[name="' + name + '"]');    
             
             if ($field[0].type == "radio" 
                 || $field[0].type == "checkbox") 

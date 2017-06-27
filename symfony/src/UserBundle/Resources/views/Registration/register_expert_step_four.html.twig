@@ -29,11 +29,12 @@
             </h1>
             <div class="wmw-onboard-switches">
                 {% for key, workExperience in form.workExperience %}
-                    <div class="wmw-onboard-switches-el">
+                    <div class="wmw-onboard-switches-el" data-num="{{ key }}">
                         {{ form_label(workExperience, null, {"label_attr": {"id": ("label_" ~ workExperience.vars.id), "class": "wmw-onboard-switches-el-label"}}) }}
                         <div class="wmw-switchfield">
+                            <input type="hidden" id="wmw-ob-mission-{{ key }}-val" value="" />
                             {{ form_widget(workExperience, {'attr' : {'class': 'requiredgroup:wmw-ob-missions vv-ggparent workexperience-link'}}) }}
-                            <label for="{{ workExperience.vars.id }}"><span>No</span><span>Yes</span></label>
+                            <label for="{{ workExperience.vars.id }}"><span>add</span><span><a href="#">edit</a></span></label>
                         </div>
                     </div>
                 {% endfor %}
@@ -54,8 +55,12 @@
             {{ form_widget(form.submit, {'attr': {'class': 'wmw-button wmw-button--green'}, 'label': next }) }}
         </div>
 
-        <div class="wmw-overlay" id="wmw-overlay-ob-4"
-             data-prototype="{% filter escape %}{% include 'UserBundle:Registration:_userWorkExperiences_prototype.html.twig' with { 'form': form.userWorkExperiences.vars.prototype } %}{% endfilter %}"></div>
+    </form>
+
+    <form class="wmw-overlay" id="wmw-overlay-ob-4">
+        {% include 'UserBundle:Registration:_userWorkExperiences_prototype.html.twig' with { 'form': form.userWorkExperiences.vars.prototype } %}
+    </form>
+
     {{ form_end(form) }}
 
     <div class="wmw-onboard-text col-md-3 col-xl-2">
