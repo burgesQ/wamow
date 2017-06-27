@@ -3136,6 +3136,7 @@ var Master = {
         Master.init_mission_shortlist_buttons();
         Master.init_dashboard_mission_slider();
         Master.init_copyfields();
+        Master.resize_mail_content_chat();
 
         $('.wmw-overlay-inner').perfectScrollbar({ suppressScrollX:true });  
         
@@ -3161,10 +3162,31 @@ var Master = {
 
     onresize : function(){
 
+        Master.resize_mail_content_chat();
     },
 
     onscroll : function(){
 
+    },
+
+    resize_mail_content_chat : function(){
+
+        var $chat = $('.mail-content-chat');
+        if($chat.get().length>0){
+
+            var $header = $('.wmw-header'),
+                $mission_header = $('.wmw-mission-header'),
+                $answer = $('.mail-content-answer'),
+                $footer = $('.wmw-footer'),
+                new_height =    parseInt($(window).height()) - 
+                                parseInt($header.outerHeight()) - 
+                                parseInt($mission_header.outerHeight()) - 
+                                parseInt($answer.outerHeight()) - 
+                                parseInt($footer.outerHeight()) -
+                                200;
+
+            $chat.height( new_height );
+        }
     },
 
     init_autocomplete : function( field, lookup ){
