@@ -166,39 +166,40 @@
                         </div>
 
                         <div class="element-buttons">
-
-                            {# TODO : HIDE BTN DEPENDING ON THE USERMISSION STATUS #}
-                            <a href="{{ path('user_mission_refuse', { 'userMissionId' : userMission.id }) }}">
-                                <button id="refuse_{{ userMission.id }}" type="button" class="wmw-button wmw-button--red wmw-button--border wmw-button--small">
-                                    <i></i><span>
-                                        <i class="icon icon--cross"></i>
-                                        {{ 'mission.view.contractor.btn_refuse' | trans }}
-                                    </span><i></i>
-                                </button>
-                            </a>
-
-                            <div class="wmw-checkbutton">
-                                <button type="button" id="shortlist_{{ userMission.id }}" class="wmw-button wmw-button--green wmw-button--border wmw-button--small" {% if userMission.status == constant('SHORTLIST', userMission) %}visibility="hidden"{% endif %}>
-                                    <i></i><span>
-                                        <i class="icon icon--star"></i>
-                                        {{ 'mission.view.contractor.btn_add_to_shortlist' | trans | upper }}
-                                    </span><i></i>
-                                </button>
-
-                                <button id="remove_from_shortlist_{{ userMission.id }}" hidden type="button" class="wmw-button wmw-button--red wmw-button--border wmw-button--small" {% if userMission.status < constant('SHORTLIST', userMission) %}display=none{% endif %}>
-                                    <i></i><span>
-                                        <i class="icon icon--star"></i>
-                                        {{ 'mission.view.contractor.btn_remove_from_shortlist' | trans | upper }}
-                                    </span><i></i>
-                                </button>
-                                <input type="checkbox" name="wmw-shortlist[]" />
-                            </div>
-
+                            {% if userMission.status != constant('SHORTLIST', userMission) %}
+                                <a href="{{ path('user_mission_refuse', { 'userMissionId' : userMission.id }) }}">
+                                    <button id="refuse_{{ userMission.id }}" type="button" class="wmw-button wmw-button--red wmw-button--border wmw-button--small">
+                                        <i></i><span>
+                                            <i class="icon icon--cross"></i>
+                                            {{ 'mission.view.contractor.btn_refuse' | trans }}
+                                        </span><i></i>
+                                    </button>
+                                </a>
+                            {% else %}
+                                <br>
+                            {% endif %}
+                                {% if userMission.status != constant('SHORTLIST', userMission) %}
+                                    <a href="{{ path('user_mission_add_to_shortlist', { 'userMissionId' : userMission.id }) }}">
+                                        <button type="button" class="wmw-button wmw-button--green wmw-button--border wmw-button--small">
+                                            <i></i><span>
+                                                <i class="icon icon--star"></i>
+                                                {{ 'mission.view.contractor.btn_add_to_shortlist' | trans | upper }}
+                                            </span><i></i>
+                                        </button>
+                                    </a>
+                                {% else %}
+                                    <a href="{{ path('user_mission_remove_from_shortlist', { 'userMissionId' : userMission.id }) }}">
+                                        <button type="button" class="wmw-button wmw-button--red wmw-button--border wmw-button--small">
+                                            <i></i><span>
+                                                <i class="icon icon--star"></i>
+                                                {{ 'mission.view.contractor.btn_remove_from_shortlist' | trans | upper }}
+                                            </span><i></i>
+                                        </button>
+                                    </a>
+                                {% endif %}
                         </div>
                     </div>
                 {% endfor %}
-
-
             </div>
 
             <div class="wmw-mission-sidebar">
@@ -220,46 +221,4 @@
 {% endblock %}
 
 {% block javascripts %}
-
-    {{ parent() }}
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-            $('[id^="shortlist_"]').each(function () {
-                $(this).click(function () {
-                    var id = $(this).attr('id').split('_')[1];
-                    $.ajax({
-                        url: "{{ path('user_mission_add_to_shortlist') }}",
-                        method: "put",
-                        data: {id: id}
-                    }).done(function (msg) {
-                        alert("{{ 'mission.action.add_to_shortlist' | trans }}");
-                        $('#shortlist_' + id).hide();
-                        $('#remove_from_shortlist_' + id).show();
-
-                    }).fail(function () {
-                        alert("{{ 'error.action.shortlist.to_much' | trans }}");
-                    });
-                });
-            });
-
-            $('[id^="remove_from_shortlist_"]').each(function () {
-                $(this).click(function () {
-                    var id = $(this).attr('id').split('_')[3];
-                    $.ajax({
-                        url: "{{ path('user_mission_remove_from_shortlist') }}",
-                        method: "put",
-                        data: {id: id}
-                    }).done(function (msg) {
-                        alert("{{ 'mission.action.remove_from_shortlist' | trans }}");
-                        $('#remove_from_shortlist_' + id).hide();
-                        $('#shortlist_' + id).show();
-                    }).fail(function () {
-                        alert("{{ 'error.action.failed' | trans }}");
-                    });
-                });
-            });
-
-        });
-    </script>
 {% endblock %}

@@ -288,7 +288,7 @@ class MissionController extends Controller
                         ->getRepository('MissionBundle:UserMission')
                         ->findAllAtLeastThan($mission, UserMission::SHORTLIST);
                 $nbProposale  = 0;
-                /** @var UserMission $userMission */
+                /** @var UserMission $oneUserMission */
                 foreach ($userMissions as $oneUserMission) {
                     if (!$oneUserMission->getThread()->getProposals()->isEmpty()) {
                         $nbProposale++;
@@ -525,5 +525,98 @@ class MissionController extends Controller
             return $this->redirectToRoute('mission_view', ['missionId' => $mission->getId()]);
         }
         throw new NotFoundHttpException($trans->trans('error.mission.already', [], 'tools'));
+    }
+
+    /**
+     * Mark a UserMission as SHORTLISTED
+     *
+     * @param $userMissionId
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function addToShortlistAction($userMissionId)
+    {
+        $trans = $this->get('translator');
+        $em    = $this->getDoctrine()->getManager();
+
+        // Get Check User
+        /** @var \UserBundle\Entity\User $user */
+        if (($user = $this->getUser()) === null) {
+            throw new NotFoundHttpException($trans->trans('error.logged', [], 'tools'));
+        } elseif (!$this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR')) {
+            throw new NotFoundHttpException($trans->trans('error.forbidden', [], 'tools'));
+        }
+
+        // Get Check UserMission
+        /** @var \MissionBundle\Repository\UserMissionRepository $userMissionRepo */
+        $userMissionRepo = $em->getRepository('MissionBundle:UserMission');
+        if (!($userMission = $userMissionRepo->findOneBy(['id' => $userMissionId]))
+            || $userMission->getStatus() !== UserMission::ONGOING) {
+            throw new NotFoundHttpException($trans->trans('error.user_mission.not_found', [], 'tools'));
+        }
+
+        // Get Check Mission And Step
+        /** @var \MissionBundle\Entity\Mission $mission */
+        if (($mission = $userMission->getMission()) === null
+            || $mission->getStatus() !== Mission::PUBLISHED
+            || $user->getCompany() !== $mission->getCompany()) {
+            throw new NotFoundHttpException($trans->trans('error.mission.not_found', [], 'tools'));
+        }
+
+        // Count UserMission By the Step
+        if (($step = $em->getRepository('MissionBundle:Step')->findOneby([
+                'mission' => $mission, 'status'  => 1]))
+            && ($nStep = $em->getRepository('MissionBundle:Step')->findOneby([
+                'mission'  => $mission, 'position' => $step->getPosition() + 1]))
+            && count($userMissionRepo->findAllAtLeastThan($mission, UserMission::SHORTLIST)) < $nStep->getNbMaxUser()) {
+            $userMission->setStatus(UserMission::SHORTLIST);
+            $em->flush();
+
+            return $this->redirectToRoute('mission_view', ['missionId' => $mission->getId()]);
+        }
+        throw new NotFoundHttpException($trans->trans('error.user_mission.not_enough', [], 'tools'));
+    }
+
+    /**
+     * @param $userMissionId
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function removeFromShortlistAction($userMissionId)
+    {
+        $trans = $this->get('translator');
+        $em    = $this->getDoctrine()->getManager();
+
+        // Get Check User
+        /** @var \UserBundle\Entity\User $user */
+        if (($user = $this->getUser()) === null) {
+            throw new NotFoundHttpException($trans->trans('error.logged', [], 'tools'));
+        } elseif (!$this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR')) {
+            throw new NotFoundHttpException($trans->trans('error.forbidden', [], 'tools'));
+        }
+        // Get Check UserMission
+        /** @var \MissionBundle\Repository\UserMissionRepository $userMissionRepo */
+        $userMissionRepo = $em->getRepository('MissionBundle:UserMission');
+        if (!($userMission = $userMissionRepo->findOneBy(['id' => $userMissionId]))
+            || $userMission->getStatus() !== UserMission::SHORTLIST) {
+            throw new NotFoundHttpException($trans->trans('error.user_mission.not_found', ['%id' => $userMissionId], 'tools'));
+        }
+
+        // Get Check Mission And Step
+        /** @var \MissionBundle\Entity\Mission $mission */
+        if (($mission = $userMission->getMission()) === null
+            || $mission->getStatus() !== Mission::PUBLISHED
+            || $user->getCompany() !== $mission->getCompany()) {
+            throw new NotFoundHttpException($trans->trans('error.mission.not_found', [], 'tools'));
+        }
+
+        // Count UserMission By the Step
+        if (($step = $em->getRepository('MissionBundle:Step')->findOneby([
+                'mission' => $mission, 'status'  => 1])) && $step->getPosition() !== 1) {
+            throw new NotFoundHttpException($trans->trans('error.action.failed', [], 'tools'));
+        }
+
+        $userMission->setStatus(UserMission::ONGOING);
+        $em->flush();
+
+        return $this->redirectToRoute('mission_view', ['missionId' => $mission->getId()]);
     }
 }
