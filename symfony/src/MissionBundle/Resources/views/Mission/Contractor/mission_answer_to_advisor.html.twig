@@ -247,7 +247,7 @@
                                         <div class="mail-content-profile-picture" style="background-image:url({{ image.webPath() }});"></div>
                                     {% endif %}
                                 {% else %}
-                                    {% set image = 'images/' ~ random(['placeholder-pp-0.png', 'placeholder-pp-1.png', 'placeholder-pp-2.png', 'placeholder-pp-3.png']) %}
+                                    {% set image = asset('images/' ~ random(['placeholder-pp-0.png', 'placeholder-pp-1.png', 'placeholder-pp-2.png', 'placeholder-pp-3.png'])) %}
                                     <div class="mail-content-profile-picture" style="background-image:url({{ image }});"></div>
 
                                 {% endif %}
@@ -288,16 +288,22 @@
                             <div id="wmw-mission-notes-status">{{ 'form.btn.save' | trans }}</div>
                         </div>
 
-
-
                         <div class="mail-content-chat">
-                            {% include '@Mission/Mission/Contractor/view_thread_contractor.html.twig' %}
+                            <div class="message" id="thread_message">
+                                {% include '@Mission/Mission/Contractor/view_thread_contractor.html.twig' %}
+                            </div>
                         </div>
 
-                        <form action="" method="post" class="mail-content-answer">
-                            <textarea class="required"></textarea>
-                            <button type="submit">{{ 'form.btn.send' | trans }}</button>
-                        </form>
+                        <div class="mail-content-answer">
+                            <textarea id="inbox_input_message" name="inbox[inout_message]"></textarea>
+                            <button id="submit_text" value="{{ 'form.btn.send' | trans | upper }}"
+                                    onClick="sendMessage()">{{ 'form.btn.send' | trans }}</button>
+                        </div>
+
+                        {#<form action="" method="post" class="mail-content-answer">#}
+                            {#<textarea class="required" id="inbox_input_message"></textarea>#}
+                            {#<button type="submit">{{ 'form.btn.send' | trans }}</button>#}
+                        {#</form>#}
                     </div>
                 </div>
             </div>
@@ -315,11 +321,9 @@
             </div>
         </div>
     </div>
-
 {% endblock %}
 
 {% block javascripts %}
-
     {{ parent() }}
 
     <script src="http://www.appelsiini.net/download/jquery.jeditable.js"></script>
