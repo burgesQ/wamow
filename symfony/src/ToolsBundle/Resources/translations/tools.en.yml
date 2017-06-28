@@ -793,3 +793,9 @@ mails:
 payment:
     ok: "Subscription success !"
     ko: "Subscription failed."
+    subscription: "Subscription"
+    plan:
+        advisor: "Advisor plan"
+        free: "Basic plan (free)"
+    one_year: "1 year"
+    ends: "Ends"
