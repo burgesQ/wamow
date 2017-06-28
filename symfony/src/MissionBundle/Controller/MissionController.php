@@ -188,7 +188,7 @@ class MissionController extends Controller
     {
         $trans = $this->get('translator');
 
-        // check kuser auth
+        // check user auth
         if (!($user = $this->getUser())) {
             throw new NotFoundHttpException($trans->trans('error.logged', [], 'tools'));
         } elseif ($user->getRoles()[0] !== 'ROLE_CONTRACTOR') {
@@ -220,8 +220,8 @@ class MissionController extends Controller
                 $userMissions = $this->getDoctrine()->getRepository('MissionBundle:UserMission')->findAllAtLeastThan($mission, UserMission::SHORTLIST);
                 $nbProposale = 0;
                 /** @var UserMission $userMission */
-                foreach ($userMissions as $userMission) {
-                    if (!$userMission->getThread()->getProposals()->isEmpty()) {
+                foreach ($userMissions as $oneUserMission) {
+                    if (!$oneUserMission->getThread()->getProposals()->isEmpty()) {
                         $nbProposale++;
                     }
                 }
