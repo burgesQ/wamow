@@ -149,10 +149,12 @@
                         </div>
 
                     </div>
-                    <div class="element-notes">
-                        <div class="edit" id="{{ userMission.id }}">
-                            {{ userMission.note | nl2br }}
+                    <div class="element-notes{% if userMission.note == '' %} element-notes--empty{% endif %}">
+                        <div class="element-notes-empty">
+                            <span>Notes<br /><i class="icon icon--notes"></i></span>
                         </div>
+                        <textarea class="element-notes-textarea" data-id="{{ userMission.id }}" data-path="{{ path('user_mission_notes') }}">{{ userMission.note }}</textarea>
+                        <div class="element-notes-status">Enregistré</div>
                     </div>
 
                     <div class="element-buttons">
@@ -196,23 +198,8 @@
 {% block javascripts %}
     {{ parent() }}
 
-    <script src="http://www.appelsiini.net/download/jquery.jeditable.js"></script>
-    <script src="http://www.appelsiini.net/download/jquery.jeditable.mini.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $('.edit').editable('{{ path('user_mission_notes') }}', {
-                type: 'textarea',
-                submit: 'Save',
-                indicator: 'Saving...',
-                tooltip: 'Click to edit note',
-                id: $(this).attr('id'),
-                data: function(value, settings) {
-                    return value.replace(/<br\s*\/?>\n?/gi, '\n');
-                },
-                callback: function(value, settings) {
-                    $(this).html(value.replace(/\n/g, "<br />"));
-                }
-            });
 
             $('[id^="contract_"]').each(function () {
                 $(this).click(function () {

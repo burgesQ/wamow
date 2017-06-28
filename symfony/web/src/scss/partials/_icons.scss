@@ -1,0 +1,83 @@
+// Custom template
+
+@font-face {
+    font-family:"icons";
+    src: url("../fonts/icons.eot?805ba4bd3f547293431814e3b33dad41");
+    src: url("../fonts/icons.eot?#iefix") format("embedded-opentype"),
+		url("../fonts/icons.woff?805ba4bd3f547293431814e3b33dad41") format("woff"),
+		url("../fonts/icons.ttf?805ba4bd3f547293431814e3b33dad41") format("truetype"),
+		url("../fonts/icons.svg?805ba4bd3f547293431814e3b33dad41#icons") format("svg");
+    font-weight:normal;
+    font-style:normal;
+    }
+
+.icon {
+    font-family:"icons";
+    display:inline-block;
+    font-style:normal;
+    speak:none;
+    -webkit-font-smoothing:antialiased;
+    font-size:1em;
+    line-height:1em;
+    vertical-align:middle;
+    }
+
+// Icons
+.icon--address:before { content:"\f101"; }
+.icon--arrow:before { content:"\f102"; }
+.icon--avatar:before { content:"\f103"; }
+.icon--bell:before { content:"\f104"; }
+.icon--budget:before { content:"\f105"; }
+.icon--business-construction:before { content:"\f106"; }
+.icon--business-energy:before { content:"\f107"; }
+.icon--business-finance:before { content:"\f108"; }
+.icon--business-food-beverage:before { content:"\f109"; }
+.icon--business-hotel:before { content:"\f10a"; }
+.icon--business-industry:before { content:"\f10b"; }
+.icon--business-it:before { content:"\f10c"; }
+.icon--business-leisure:before { content:"\f10d"; }
+.icon--business-manufacturing:before { content:"\f10e"; }
+.icon--business-media-telco-entertainment:before { content:"\f10f"; }
+.icon--business-ngo:before { content:"\f110"; }
+.icon--business-public:before { content:"\f111"; }
+.icon--business-real-estate:before { content:"\f112"; }
+.icon--business-retail:before { content:"\f113"; }
+.icon--business-service:before { content:"\f114"; }
+.icon--business-sport:before { content:"\f115"; }
+.icon--business-tourisme:before { content:"\f116"; }
+.icon--calendar:before { content:"\f117"; }
+.icon--cb:before { content:"\f118"; }
+.icon--certification:before { content:"\f119"; }
+.icon--chair:before { content:"\f11a"; }
+.icon--clock:before { content:"\f11b"; }
+.icon--company-large:before { content:"\f11c"; }
+.icon--company-medium:before { content:"\f11d"; }
+.icon--company-small:before { content:"\f11e"; }
+.icon--company:before { content:"\f11f"; }
+.icon--consultant:before { content:"\f120"; }
+.icon--cross:before { content:"\f121"; }
+.icon--document-more:before { content:"\f122"; }
+.icon--document:before { content:"\f123"; }
+.icon--download:before { content:"\f124"; }
+.icon--email:before { content:"\f125"; }
+.icon--eye:before { content:"\f126"; }
+.icon--facebook:before { content:"\f127"; }
+.icon--flag:before { content:"\f128"; }
+.icon--handshake:before { content:"\f129"; }
+.icon--language:before { content:"\f12a"; }
+.icon--linkedin-thin:before { content:"\f12b"; }
+.icon--linkedin:before { content:"\f12c"; }
+.icon--locker:before { content:"\f12d"; }
+.icon--mail:before { content:"\f12e"; }
+.icon--notes:before { content:"\f12f"; }
+.icon--pen:before { content:"\f130"; }
+.icon--phone:before { content:"\f131"; }
+.icon--pointer:before { content:"\f132"; }
+.icon--rocket:before { content:"\f133"; }
+.icon--selected:before { content:"\f134"; }
+.icon--star:before { content:"\f135"; }
+.icon--tick:before { content:"\f136"; }
+.icon--trashbin:before { content:"\f137"; }
+.icon--twitter:before { content:"\f138"; }
+.icon--typology:before { content:"\f139"; }
+.icon--world:before { content:"\f13a"; }

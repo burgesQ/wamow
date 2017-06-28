@@ -55,22 +55,20 @@
                 </div>
                 {{ form_errors(form.missionKinds) }}
 
-                {# TODO CSS CERTIFICATIONS #}
-                <div class="wmw-copyfields">
-                    <div class="wmw-copyfield row">
-                        <label for="{{ form.certifications.vars.name }}" class="wmw-label wmw-label--topmobile col-xs-10 col-sm-5">{{ 'mission.new.label.step_three.certif' | trans | raw }}</label>
+                <div class="wmw-fieldrow row">
+                    <label for="{{ form.certifications.vars.name }}" class="wmw-label wmw-label--topmobile col-xs-10 col-sm-5">{{ 'mission.new.label.step_three.certif' | trans | raw }}</label>
+                    <div class="col-xs-12 col-sm-7">
                         {{ form_widget(form.certifications, { 'attr' : { 'class' : 'col-xs-10 col-md-6' }}) }}
                     </div>
-                </div><br />
+                </div>
                 {{ form_errors(form.certifications) }}
 
-                {# TODO CSS CERTIFICATIONS #}
-                <div class="wmw-copyfields">
-                    <div class="wmw-copyfield row">
-                        <label for="{{ form.languages.vars.name }}" class="wmw-label wmw-label--topmobile col-xs-10 col-sm-5">{{ 'mission.new.label.step_three.lang' | trans }}</label>
+                <div class="wmw-fieldrow row">
+                    <label for="{{ form.languages.vars.name }}" class="wmw-label wmw-label--topmobile col-xs-10 col-sm-5">{{ 'mission.new.label.step_three.lang' | trans }}</label>
+                    <div class="col-xs-12 col-sm-7">
                         {{ form_widget(form.languages, { 'attr' : { 'class' : 'col-xs-10 col-md-6' }}) }}
                     </div>
-                </div><br />
+                </div>
                 {{ form_errors(form.languages) }}
 
                 <div class="wmw-fieldrow row">
@@ -112,7 +110,7 @@
         {% set next = '<i></i><span>' ~ form.next.vars.label ~ '</span><i></i>' %}
         {% set back = '<i></i><span>' ~ form.back.vars.label ~ '</span><i></i>' %}
 
-        {{ form_row(form.forLater, { 'attr' : { formnovalidate: 'formnovalidate','class' : 'wmw-button wmw-button--black wmw-button--border wmw-onboard-bottom-left'}, label: late}) }}
+        {{ form_row(form.forLater, { 'attr' : { formnovalidate: 'formnovalidate','class' : 'wmw-button wmw-button--black wmw-button--border wmw-onboard-bottom-left wmw-button-later'}, label: late}) }}
         {{ form_widget(form.back, { 'attr' : { 'class' : 'wmw-button wmw-button--border' }, label: back}) }}
         {{ form_widget(form.next, { 'attr' : { 'class' : 'wmw-button wmw-button--green' }, label: next}) }}
     </div>

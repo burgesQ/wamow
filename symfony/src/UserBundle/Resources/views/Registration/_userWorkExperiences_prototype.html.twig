@@ -4,14 +4,14 @@
     <div class="wmw-overlay-content">
         <div class="row">
 
-            {% for companySize in userWorkExperience.companySizes %}
+            {% for key, companySize in userWorkExperience.companySizes %}
                 <div class="col-xs-4">
                     <label for="{{ companySize.vars.id }}">
                         {% set help = companySize.vars.label | split('.') %}
                         <i class="icon icon--company-{{ help[1] }}">
                         </i><br/>
                         {{ form_label(companySize) }}
-                        <a href="#" class="wmw-tip wmw-tip--left">?<span
+                        <a href="#" class="wmw-tip wmw-tip--{% if key == 1 %}left{% elseif key == 2 %}center{% else %}right{% endif %}">?<span
                                     class="wmw-tip-box">Lorem ipsum dolor sit amet</span></a>
                     </label>
                     <div class="wmw-switchfield">
@@ -37,7 +37,7 @@
         <div>
             <label for="{{ userWorkExperience.cumuledMonth.vars.id }}">
                 {{ form_label(userWorkExperience.cumuledMonth) }}
-            </label><br/>
+            </label>
             <div class="wmw-rangefield">
                 {{ form_widget(userWorkExperience.cumuledMonth) }}
                 <div class="wmw-rangefield-value"><span>12</span> months</div>
@@ -46,7 +46,7 @@
         <div>
             <label for="{{ userWorkExperience.dailyFees.vars.id }}">
                 {{ form_label(userWorkExperience.dailyFees) }}
-            </label><br/>
+            </label>
             <div class="wmw-rangefield">
                 {{ form_widget(userWorkExperience.dailyFees) }}
                 <div class="wmw-rangefield-value"><span>1000</span> $</div>
@@ -61,12 +61,9 @@
                 <label for="{{ userWorkExperience.peremption.vars.id }}"><span>No</span><span>Yes</span></label>
             </div>
         </div>
-    </div><br />
-    <div class="wmw-overlay-buttons">
-        <!-- TODO VALIDATE ACTUAL CARD -->
-        <button type="button" class="wmw-overlay-close wmw-button wmw-button--border">
-            <i></i><span>Cancel</span><i></i></button>
-        <button type="button" class="wmw-overlay-close wmw-button wmw-button--green">
-            <i></i><span>Confirm</span><i></i></button>
-    </div><br />
+    </div>
 </div><br />
+<div class="wmw-overlay-buttons">
+    <button type="button" class="wmw-overlay-close wmw-button wmw-button--border"><i></i><span>Cancel</span><i></i></button>
+    <button type="submit" class="wmw-button wmw-button--green"><i></i><span>Confirm</span><i></i></button>
+</div>

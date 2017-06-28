@@ -142,7 +142,7 @@
                                         </span>
                                     </span>
                                 {% else %}
-                                    <span class="infos-el infos-el--status col-xs-6">
+                                    <span class="infos-el infos-el--status{% if unread > 0 %} infos-el--unread{% endif %} col-xs-6">
                                         <span>
                                             <i class="icon icon--rocket"></i><br />
                                             {{ 'mission.view.interested' | trans | raw }}
@@ -165,7 +165,7 @@
                                         {{ proposal }}/ 3 {{ 'dashboard.contractor.mission.proposal' | trans }}
                                     </span>
                                 </span>
-                                <span class="infos-el infos-el--status col-xs-6">
+                                <span class="infos-el infos-el--status{% if unread > 0 %} infos-el--unread{% endif %} col-xs-6">
                                     <span>
                                         <i class="icon icon--selected"></i><br />
                                         {{ 'mission.view.shortlisted' | trans | raw }}
@@ -188,7 +188,7 @@
                                         {{ proposal }}/ 3 {{ 'dashboard.contractor.mission.proposal' | trans }}
                                     </span>
                                 </span>
-                                <span class="infos-el infos-el--status col-xs-6">
+                                <span class="infos-el infos-el--status{% if unread > 0 %} infos-el--unread{% endif %} col-xs-6">
                                     <span>
                                         <i class="icon icon--handshake"></i><br />
                                         {{ 'mission.view.shortlisted' | trans | raw }}
