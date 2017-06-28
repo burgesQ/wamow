@@ -106,6 +106,8 @@ error:
             no_advisor: No advisor selected for the Finalist step.
     action:
         failed: Action failed.
+        shortlist:
+            to_much: You allready have selected 3 advisor.
     upload_resume_or_linkedin: Please Upload a resume or link your account with Linkedin
 
 ## Home
