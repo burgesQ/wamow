@@ -29,6 +29,11 @@ user_mission_refuse:
     defaults:
         _controller: MissionBundle:Mission:refuseUserMission
 
+user_mission_add_to_contract:
+    path:            /contract/add/{userMissionId}
+    defaults:
+        _controller: MissionBundle:Mission:addToContract
+
 # Mission Generator
 mission_new_step_one:
     path:      /mission/new/1/{missionId}
@@ -72,12 +77,6 @@ certifications_autocomplete:
     defaults:
         _controller: MissionBundle:Action:certificationsAutocomplete
     methods:     [GET]
-
-user_mission_add_to_contract:
-    path:            /contract/add
-    defaults:
-        _controller: MissionBundle:Action:addToContract
-        methode:     PUT
 
 user_mission_add_to_shortlist:
     path:            /shortlist/add
