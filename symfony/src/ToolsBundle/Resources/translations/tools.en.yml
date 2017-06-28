@@ -536,9 +536,9 @@ businesspractice:
     hotel: "Good & Beverage / Hotel / Sport / Leisure"
     services: "Services (included transport)"
     energy: "Energy"
-    it: "IT"
+    it: "Information Technology"
     public: "Public"
-    ngo: "NGO"
+    ngo: "Non Governmental Organisation"
 
 professionalexpertises:
     title: "Professional Expertises"
