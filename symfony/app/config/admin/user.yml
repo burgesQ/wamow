@@ -5,7 +5,7 @@ easy_admin:
             label: 'User'
             list:
                 title: "Users"
-                fields: 
+                fields:
                     - 'id'
                     - 'firstname'
                     - 'lastname'
