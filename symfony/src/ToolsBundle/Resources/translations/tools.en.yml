@@ -110,6 +110,8 @@ error:
         shortlist:
             to_much: You allready have selected 3 advisor.
     upload_resume_or_linkedin: Please Upload a resume or link your account with Linkedin
+    phone:
+        please_fill: Please fill out the phone number fileds.
 
 ## Home
 home:
