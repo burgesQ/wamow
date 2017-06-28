@@ -54,3 +54,7 @@ services:
         arguments: ['@scoring']
         tags:
             - { name: doctrine.event_listener, event: postPersist }
+
+    fos_user.listener.flash:
+        class: UserBundle\EventListener\FlashListener
+        arguments: ['@session', '@translator']
