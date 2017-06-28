@@ -182,13 +182,15 @@
                         {% if step.position == 1 %}
                             <div class="mail-toolbar-buttons">
                                 {# TODO : HIDE BTN DEPENDING ON THE USERMISSION STATUS #}
-                                <button id="refuse_{{ userMission.id }}" type="button"
-                                        class="wmw-button wmw-button--red wmw-button--border wmw-button--small">
-                                    <i></i><span>
-                                        <i class="icon icon--cross"></i>
-                                        {{ 'mission.view.contractor.btn_refuse' | trans }}
-                                    </span><i></i>
-                                </button>
+                                <a href="{{ path('user_mission_refuse', { 'userMissionId' : userMission.id }) }}">
+                                    <button id="refuse_{{ userMission.id }}" type="button"
+                                            class="wmw-button wmw-button--red wmw-button--border wmw-button--small">
+                                        <i></i><span>
+                                            <i class="icon icon--cross"></i>
+                                            {{ 'mission.view.contractor.btn_refuse' | trans }}
+                                        </span><i></i>
+                                    </button>
+                                </a>
                                 <div class="wmw-checkbutton">
                                     <button type="button" id="shortlist_{{ userMission.id }}"
                                             class="wmw-button wmw-button--green wmw-button--border wmw-button--small"
@@ -211,12 +213,14 @@
                             </div>
                         {% elseif step.position == 2 %}
                             <div class="mail-toolbar-buttons">
-                                <button id="refuse_{{ userMission.id }}" type="button" class="wmw-button wmw-button--red wmw-button--border wmw-button--small">
-                                    <i></i><span>
-                                        <i class="icon icon--cross"></i>
-                                        {{ 'mission.view.contractor.btn_refuse' | trans }}
-                                    </span><i></i>
-                                </button>
+                                <a href="{{ path('user_mission_refuse', { 'userMissionId' : userMission.id }) }}">
+                                    <button id="refuse_{{ userMission.id }}" type="button" class="wmw-button wmw-button--red wmw-button--border wmw-button--small">
+                                        <i></i><span>
+                                            <i class="icon icon--cross"></i>
+                                            {{ 'mission.view.contractor.btn_refuse' | trans }}
+                                        </span><i></i>
+                                    </button>
+                                </a>
                                 <button id="contract_{{ userMission.id }}" type="button" class="wmw-button wmw-button--green wmw-button--border wmw-button--small">
                                     <i></i><span>
                                         <i class="icon icon--handshake"></i>
@@ -383,22 +387,6 @@
                     data: {id: id}
                 }).done(function (msg) {
                     alert("{{ 'mission.action.add_to_contract' | trans }}");
-                }).fail(function () {
-                    alert("{{ 'error.action.failed' | trans }}");
-                });
-            });
-        });
-
-//        AJAX REFUSE ACTION (STEP 1|2)
-        $('[id^="refuse_"]').each(function () {
-            $(this).click(function () {
-                var id = $(this).attr('id').split('_')[1];
-                $.ajax({
-                    url: "{{ path('user_mission_refuse') }}",
-                    method: "put",
-                    data: {id: id}
-                }).done(function (msg) {
-                    alert("{{ 'mission.action.refuse_user' | trans }}");
                 }).fail(function () {
                     alert("{{ 'error.action.failed' | trans }}");
                 });

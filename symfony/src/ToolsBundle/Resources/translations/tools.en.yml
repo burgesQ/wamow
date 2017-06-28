@@ -87,6 +87,7 @@ error:
         not_found: No such userMission entity (%id)
         cant_giveup: Uou can't give up this mission.
         already_giveup: You alredy give_up this mission.
+        not_enough: You cannot remove the last advisor from the mission.
     mission:
         pitch:
             contractor: A contractor cannot pitch.

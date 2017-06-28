@@ -338,20 +338,17 @@ class MissionController extends Controller
             throw new NotFoundHttpException($trans->trans('error.mission.shortlist.to_much', [], 'tools'));
         }
 
-        $nbOngoing = $mission->getNbOngoing();
-
         /** @var UserMission $oneUserMission */
         foreach ($userMissionRepo->findAllAtLeastThan($mission, UserMission::SCORED) as $oneUserMission) {
             if ($oneUserMission->getStatus() >= UserMission::SCORED
                 && $oneUserMission->getStatus() < UserMission::SHORTLIST) {
                 $oneUserMission->setStatus(UserMission::DISMISS);
-                $nbOngoing -= 1;
             }
         }
 
         $step->setStatus(0);
         $nextStep->setStatus(1);
-        $mission->setNbOngoing($nbOngoing);
+        $mission->setNbOngoing(count($userMissionRepo->findAllAtLeastThan($mission, UserMission::SHORTLIST)));
         $em->flush();
 
         return $this->redirectToRoute('mission_view', ['missionId' => $missionId]);
@@ -408,4 +405,43 @@ class MissionController extends Controller
         }
         throw $this->createNotFoundException($trans->trans('mission.error.forbiddenAccess', [], 'MissionBundle'));
     }
+
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param integer                                   $userMissionId
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \HttpHeaderException
+     */
+    public function refuseUserMissionAction(Request $request, $userMissionId)
+    {
+        $trans = $this->get('translator');
+        $em    = $this->getDoctrine()->getManager();
+
+        // Get Check User
+        /** @var \UserBundle\Entity\User $user */
+        if (($user = $this->getUser()) === null) {
+            throw new NotFoundHttpException($trans->trans('error.logged', [], 'tools'));
+        } elseif (!$this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR')) {
+            throw new NotFoundHttpException($trans->trans('error.forbidden', [], 'tools'));
+        }
+        // Get Check UserMission
+
+        $userMissionRepo = $em->getRepository('MissionBundle:UserMission');
+        if (!($userMission = $userMissionRepo->findOneBy(['id' => $userMissionId])) ||
+            $userMission->getMission()->getCompany() !== $user->getCompany()) {
+            throw new NotFoundHttpException($trans->trans('error.user_mission.not_found', [], 'tools'));
+        } elseif ($userMission->getMission()->getNbOngoing() == 1) {
+            throw new NotFoundHttpException($trans->trans('error.user_mission.not_enough', [], 'tools'));
+        }
+
+        $userMission->setStatus(UserMission::DISMISS);
+        $em->flush();
+
+        return $this->redirectToRoute('mission_view', [
+           'missionId' => $userMission->getMission()->getId()
+        ]);
+    }
+
 }
