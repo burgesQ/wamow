@@ -162,41 +162,35 @@
                                 <span>Notes<br /><i class="icon icon--notes"></i></span>
                             </div>
                             <textarea class="element-notes-textarea" data-id="{{ userMission.id }}" data-path="{{ path('user_mission_notes') }}">{{ userMission.note }}</textarea>
-                            <div class="element-notes-status">Enregistré</div>
+                            <div class="element-notes-status">{{ 'form.note.saved' | trans }}</div>
                         </div>
 
                         <div class="element-buttons">
                             {% if userMission.status != constant('SHORTLIST', userMission) %}
-                                <a href="{{ path('user_mission_refuse', { 'userMissionId' : userMission.id }) }}">
-                                    <button id="refuse_{{ userMission.id }}" type="button" class="wmw-button wmw-button--red wmw-button--border wmw-button--small">
-                                        <i></i><span>
-                                            <i class="icon icon--cross"></i>
-                                            {{ 'mission.view.contractor.btn_refuse' | trans }}
-                                        </span><i></i>
-                                    </button>
+                                <a href="{{ path('user_mission_refuse', { 'userMissionId' : userMission.id }) }}" class="wmw-button wmw-button--red wmw-button--border wmw-button--small">
+                                    <i></i><span>
+                                        <i class="icon icon--cross"></i>
+                                        {{ 'mission.view.contractor.btn_refuse' | trans }}
+                                    </span><i></i>
                                 </a>
                             {% else %}
                                 <br>
                             {% endif %}
-                                {% if userMission.status != constant('SHORTLIST', userMission) %}
-                                    <a href="{{ path('user_mission_add_to_shortlist', { 'userMissionId' : userMission.id }) }}">
-                                        <button type="button" class="wmw-button wmw-button--green wmw-button--border wmw-button--small">
-                                            <i></i><span>
-                                                <i class="icon icon--star"></i>
-                                                {{ 'mission.view.contractor.btn_add_to_shortlist' | trans | upper }}
-                                            </span><i></i>
-                                        </button>
-                                    </a>
-                                {% else %}
-                                    <a href="{{ path('user_mission_remove_from_shortlist', { 'userMissionId' : userMission.id }) }}">
-                                        <button type="button" class="wmw-button wmw-button--red wmw-button--border wmw-button--small">
-                                            <i></i><span>
-                                                <i class="icon icon--star"></i>
-                                                {{ 'mission.view.contractor.btn_remove_from_shortlist' | trans | upper }}
-                                            </span><i></i>
-                                        </button>
-                                    </a>
-                                {% endif %}
+                            {% if userMission.status != constant('SHORTLIST', userMission) %}
+                                <a href="{{ path('user_mission_add_to_shortlist', { 'userMissionId' : userMission.id }) }}" class="wmw-button wmw-button--green wmw-button--border wmw-button--small">
+                                    <i></i><span>
+                                        <i class="icon icon--star"></i>
+                                        {{ 'mission.view.contractor.btn_add_to_shortlist' | trans | upper }}
+                                    </span><i></i>
+                                </a>
+                            {% else %}
+                                <a href="{{ path('user_mission_remove_from_shortlist', { 'userMissionId' : userMission.id }) }}" class="wmw-button wmw-button--red wmw-button--border wmw-button--small">
+                                    <i></i><span>
+                                        <i class="icon icon--star"></i>
+                                        {{ 'mission.view.contractor.btn_remove_from_shortlist' | trans | upper }}
+                                    </span><i></i>
+                                </a>
+                            {% endif %}
                         </div>
                     </div>
                 {% endfor %}
