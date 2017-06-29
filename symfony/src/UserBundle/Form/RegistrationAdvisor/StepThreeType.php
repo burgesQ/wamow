@@ -18,18 +18,18 @@ class StepThreeType extends AbstractType
             ->remove('current_password')
             ->remove('email')
 
-            ->add('missionKind', EntityType::class, [
-                    'class'                     => 'MissionBundle:MissionKind',
-                    'property'                  => 'name',
-                    'multiple'                  => true,
-                    'expanded'                  => true,
-                    'label'                     => false,
-                    'translation_domain'        => 'tools',
-                    'choice_translation_domain' => 'tools',
-                    'constraints'               => new Count([
-                        'min' => 1,
-                        'minMessage' => 'user.kindfomission.min',
-                    ])
+            ->add('professionalExpertise', EntityType::class, [
+                'class'                     => 'MissionBundle:ProfessionalExpertise',
+                'property'                  => 'name',
+                'multiple'                  => true,
+                'expanded'                  => true,
+                'label'                     => false,
+                'translation_domain'        => 'tools',
+                'choice_translation_domain' => 'tools',
+                'constraints'               => new Count([
+                    'min' => 1,
+                    'minMessage' => 'user.professionalexpertises.min',
+                ])
             ])
             ->add('submit', SubmitType::class, [
                     'translation_domain' => 'tools',
