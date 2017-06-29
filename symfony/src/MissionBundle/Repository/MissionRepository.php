@@ -287,6 +287,22 @@ class MissionRepository extends EntityRepository
         ;
 
         return $qb->getQuery()->getOneOrNullResult();
+    }
 
+    /**
+     * @return array
+     */
+    public function findMissionToUpdate()
+    {
+        $qb = $this->_em->createQueryBuilder();
+
+        $qb->select('m')
+            ->from('MissionBundle:Mission', 'm')
+            ->where('m.status = '.Mission::PUBLISHED)
+            ->andWhere('m.applicationEnding > :today')
+            ->setParameter("today", new \DateTime())
+        ;
+
+        return $qb->getQuery()->getResult();
     }
 }
