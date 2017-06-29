@@ -5,6 +5,7 @@ namespace MissionBundle\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use MissionBundle\Form\MessageMissionFormType;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use ToolsBundle\Form\ProposalFromType;
 use MissionBundle\Entity\UserMission;
@@ -101,6 +102,11 @@ class MissionController extends Controller
             if (($url = $this->get('signed_up')->checkIfSignedUp($user->getStatus()))) {
                 return $this->redirectToRoute($url);
             }
+            /** @var \UserBundle\Entity\User $user */
+            $user = $this->getUser();
+            if ($user->getPlanExpiresAt() < new \DateTime()) {
+                return new Response("Your subscription expired on " . $user->getPlanExpiresAt()->format('Y-m-d H:i:s'));
+            }
 
             // get associated userMission
             /** @var UserMission $userMission */
@@ -130,8 +136,8 @@ class MissionController extends Controller
                             1);
                         $inboxService->createThreadPitch($userMission, $form->getData()['text']);
                         $userMission->setStatus(UserMission::ONGOING);
-                        $user->setScoringBonus($user->setScoringBonus() -
-                            $this->containter->getParameter("scoring_weight.user_subscribe"));
+                        $user->setScoringBonus($user->getScoringBonus() -
+                            $this->container->getParameter("scoring_weight.user_subscribe"));
                         $em->flush();
 
                         return $this->redirectToRoute('mission_view', ['missionId' => $missionId]);
