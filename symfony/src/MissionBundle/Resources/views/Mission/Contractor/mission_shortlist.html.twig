@@ -199,24 +199,4 @@
 
 {% block javascripts %}
     {{ parent() }}
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-            $('[id^="contract_"]').each(function () {
-                $(this).click(function () {
-                    var id = $(this).attr('id').split('_')[1];
-                    $.ajax({
-                        url: "{{ path('user_mission_add_to_contract') }}",
-                        method: "put",
-                        data: {id: id}
-                    }).done(function (msg) {
-                        alert("{{ 'mission.action.add_to_contract' | trans }}");
-                    }).fail(function () {
-                        alert("{{ 'error.action.failed' | trans }}");
-                    });
-                });
-            });
-        });
-    </script>
 {% endblock %}
