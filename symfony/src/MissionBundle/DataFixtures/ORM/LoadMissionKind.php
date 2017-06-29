@@ -10,47 +10,47 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 
 class LoadMissionKind extends AbstractFixture implements OrderedFixtureInterface
 {
-  public function load(ObjectManager $manager)
-  {
-    $names = array(
-        'typemissions.strategic',
+    public function load(ObjectManager $manager)
+    {
+        $names = [
+            'typemissions.strategic',
 
-        'typemissions.csp',
-        'typemissions.moa',
-        'typemissions.moe',
-        'typemissions.tma',
+            'typemissions.csp',
+            'typemissions.moa',
+            'typemissions.moe',
+            'typemissions.tma',
 
-        'typemissions.infrastructure',
-        'typemissions.migration',
-        'typemissions.implementation',
+            'typemissions.infrastructure',
+            'typemissions.migration',
+            'typemissions.implementation',
 
-        'typemissions.execution',
-        'typemissions.organisationtransformation',
-        'typemissions.change',
-        'typemissions.businessreingeniering',
+            'typemissions.execution',
+            'typemissions.organisationtransformation',
+            'typemissions.change',
+            'typemissions.businessreingeniering',
 
-        'typemissions.interimmanagement',
-        'typemissions.recruitment',
-        'typemissions.coaching',
-        'typemissions.learning',
-        'typemissions.audit',
-        'typemissions.costkilling',
-        'typemissions.outplacement',
-        'typemissions.certification',
-        'typemissions.outsourcing',
-        'typemissions.mediation',
-        'typemissions.communication',
-        'typemissions.knowledgemanagement',
-        'typemissions.crm',
-    );
+            'typemissions.interimmanagement',
+            'typemissions.recruitment',
+            'typemissions.coaching',
+            'typemissions.learning',
+            'typemissions.audit',
+            'typemissions.costkilling',
+            'typemissions.outplacement',
+            'typemissions.certification',
+            'typemissions.outsourcing',
+            'typemissions.mediation',
+            'typemissions.communication',
+            'typemissions.knowledgemanagement',
+            'typemissions.crm',
+        ];
 
-    foreach ($names as $name) {
-      $kind = new MissionKind();
-      $kind->setName($name);
-      $manager->persist($kind);
+        foreach ($names as $name) {
+            $kind = new MissionKind();
+            $kind->setName($name);
+            $manager->persist($kind);
+        }
+        $manager->flush();
     }
-    $manager->flush();
-  }
 
     public function getOrder()
     {

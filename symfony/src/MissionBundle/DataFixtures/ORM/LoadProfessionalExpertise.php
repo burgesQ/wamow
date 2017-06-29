@@ -12,7 +12,7 @@ class LoadProfessionalExpertise extends AbstractFixture implements OrderedFixtur
 {
     public function load(ObjectManager $manager)
     {
-        $names = array(
+        $names = [
             'professionalexpertises.businessunitmanager',
             'professionalexpertises.humanresources',
             'professionalexpertises.purchasing',
@@ -35,10 +35,9 @@ class LoadProfessionalExpertise extends AbstractFixture implements OrderedFixtur
             'professionalexpertises.digital',
             'professionalexpertises.law',
             'professionalexpertises.csr',
-        );
+        ];
 
-        foreach ($names as $name)
-        {
+        foreach ($names as $name) {
             $expertise = new ProfessionalExpertise();
             $expertise->setName($name);
             $manager->persist($expertise);
@@ -50,6 +49,6 @@ class LoadProfessionalExpertise extends AbstractFixture implements OrderedFixtur
     {
         // the order in which fixtures will be loaded
         // the lower the number, the sooner that this fixture is loaded
-        return 7;
+        return 4;
     }
 }
