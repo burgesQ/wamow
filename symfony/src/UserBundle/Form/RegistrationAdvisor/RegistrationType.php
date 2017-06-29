@@ -58,9 +58,15 @@ class RegistrationType extends AbstractType
                 ],
                 'multiple'      => true,
                 'class'         => 'ToolsBundle\Entity\Language',
-                'label'         => 'mission.new.label.language'
+                'label'         => 'mission.new.label.language',
             ])
-        ;
+            ->add('linkedinId', TextType::class, [
+                'attr'     => [
+                    'style' => "display:none"
+                ],
+                'label'    => false,
+                'required' => false
+            ]);
     }
 
     public function getParent()
