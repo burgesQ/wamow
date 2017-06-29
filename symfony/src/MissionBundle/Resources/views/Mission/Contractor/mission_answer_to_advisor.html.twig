@@ -13,9 +13,13 @@
     {% endfor %}
 
     <div class="wmw-mission col-xs-10 col-xs-offset-1">
-        <a href="{{ path('dashboard') }}" class="wmw-mission-close"><i
-                    class="icon icon--cross"></i>{{ 'mission.view.advisor.btn_back_to_board' | trans }}</a>
-
+        {% if step.position == 3 %}
+            <a href="{{ path('dashboard') }}" class="wmw-mission-close"><i
+                        class="icon icon--cross"></i>{{ 'mission.view.advisor.btn_back_to_board' | trans }}</a>
+        {% else %}
+            <a href="{{ path('mission_view', { 'missionId' : mission.id }) }}" class="wmw-mission-close"><i
+                        class="icon icon--cross"></i>{{ 'mission.view.advisor.btn_back_to_mission' | trans }}</a>
+        {% endif %}
         <div class="wmw-mission-breadcrumbs">
             <span class="breadcrumbs-el active">
                 1. {{ 'mission.view.contractor.status_advisor' | trans | upper }}</span>
