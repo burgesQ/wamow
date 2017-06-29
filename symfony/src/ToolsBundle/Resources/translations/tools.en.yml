@@ -265,6 +265,7 @@ registration:
             mismatchpassword: "Mismatch password"
             resume: "Upload your CV"
             nextbutton: "NEXT"
+            confirm: Please confirm the informations bellow
         one:
             title: "Business practice?"
             subtitle: "Select industry you've already worked on"

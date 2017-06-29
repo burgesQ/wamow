@@ -9,17 +9,16 @@
             {{ 'registration.advisor.zero.title' | trans }}
         </h1>
 
-        {{ form_errors(form) }}
-        {{ form_errors(form.user) }}
-        {{ form_errors(form.resume) }}
-
-        <a href="{{ path('hwi_oauth_service_redirect', {'service': 'linkedin' }) }}">
-            <button type="button" class="wmw-button">
-                <i></i><span>{{ 'registration.advisor.zero.linkedinbutton' | trans }}</span><i></i>
-            </button>
-        </a>
-
-        <div class="wmw-onboard-or">{{ 'registration.advisor.zero.or' | trans | upper }}</div>
+        {% if form.user.linkedinId.vars.value is null %}
+            <a href="{{ path('hwi_oauth_service_redirect', {'service': 'linkedin' }) }}">
+                <button type="button" class="wmw-button">
+                    <i></i><span>{{ 'registration.advisor.zero.linkedinbutton' | trans }}</span><i></i>
+                </button>
+            </a>
+            <div class="wmw-onboard-or">{{ 'registration.advisor.zero.or' | trans | upper }}</div>
+        {% else %}
+            <div class="wmw-onboard-or">{{ 'registration.advisor.zero.confirm' | trans | upper }}</div>
+        {% endif %}
 
         <div class="wmw-fieldrow row">
             {{ form_widget(form.user.firstName, {'attr' : {'class': 'required col-xs-7'}}) }}
@@ -53,7 +52,6 @@
                 {{ form_label(form.user.remoteWork) }}
             </div>
         </div>
-
         <div class="wmw-fieldrow row">
             <label for="wmw-ob-language-1"
                    class="wmw-label wmw-label--topmobile col-xs-10 col-sm-5">{{ form_label(form.user.languages) }}</label>
