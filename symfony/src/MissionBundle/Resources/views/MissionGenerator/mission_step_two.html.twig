@@ -142,12 +142,13 @@
         </div>
 
         <div class="wmw-onboard-bottom">
-            {% set late = '<i></i><span>' ~ form.forLater.vars.label ~ '</span><i></i>' %}
-            {% set next = '<i></i><span>' ~ form.next.vars.label ~ '</span><i></i>' %}
-            {% set back = '<i></i><span>' ~ form.back.vars.label ~ '</span><i></i>' %}
+            {% set late = '<i></i><span>' ~ form.forLater.vars.label | trans  ~ '</span><i></i>' %}
+            {% set next = '<i></i><span>' ~ form.next.vars.label | trans ~ '</span><i></i>' %}
+            {% set back = '<i></i><span>' ~ form.back.vars.label | trans ~ '</span><i></i>' %}
 
-            {{ form_row(form.forLater, { 'attr' : { formnovalidate: 'formnovalidate','class' : 'wmw-button wmw-button--black wmw-button--border wmw-onboard-bottom-left wmw-button-later'}, label: late}) }}
-            {{ form_widget(form.back, { 'attr' : { 'class' : 'wmw-button wmw-button--border' }, label: back}) }}
+            {{ form_row(form.forLater, { 'attr' : { formnovalidate: 'formnovalidate',
+                class : 'wmw-button wmw-button--black wmw-button--border wmw-onboard-bottom-left wmw-button-later'}, label: late}) }}
+            {{ form_widget(form.back, { 'attr' : { 'class' : 'wmw-button' }, label: back}) }}
             {{ form_widget(form.next, { 'attr' : { 'class' : 'wmw-button wmw-button--green' }, label: next}) }}
         </div>
 
