@@ -45,73 +45,37 @@ class WorkExperience
      *
      * @ORM\ManyToMany(
      *     targetEntity="MissionBundle\Entity\BusinessPractice",
-     *     inversedBy="contractorWorkExperiences")
-     * @JoinTable(name="work_experience_contractor_business_practices")
+     *     inversedBy="workExperiences")
      */
-    private $contractorBusinessPractices;
+    private $businessPractices;
 
     /**
      * @var ArrayCollection
      *
      * @ORM\ManyToMany(
      *     targetEntity="MissionBundle\Entity\ProfessionalExpertise",
-     *     inversedBy="contractorWorkExperiences")
-     * @JoinTable(name="work_experience_contractor_professional_expertises")
+     *     inversedBy="workExperiences")
      */
-    private $contractorProfessionalExpertises;
+    private $professionalExpertises;
 
     /**
      * @var ArrayCollection
      *
      * @ORM\ManyToMany(
      *     targetEntity="MissionBundle\Entity\MissionKind",
-     *     inversedBy="contractorWorkExperiences")
-     * @JoinTable(name="work_experience_contractor_mission_kinds")
+     *     inversedBy="workExperiences")
      */
-    private $contractorMissionKinds;
-
-    /**
-     * @var ArrayCollection
-     *
-     * @ORM\ManyToMany(
-     *     targetEntity="MissionBundle\Entity\BusinessPractice",
-     *     inversedBy="advisorWorkExperiences")
-     * @JoinTable(name="work_experience_advisor_business_practices")
-     */
-    private $advisorBusinessPractices;
-
-    /**
-     * @var ArrayCollection
-     *
-     * @ORM\ManyToMany(
-     *     targetEntity="MissionBundle\Entity\ProfessionalExpertise",
-     *     inversedBy="advisorWorkExperiences")
-     * @JoinTable(name="work_experience_advisor_professional_expertises")
-     */
-    private $advisorProfessionalExpertises;
-
-    /**
-     * @var ArrayCollection
-     *
-     * @ORM\ManyToMany(
-     *     targetEntity="MissionBundle\Entity\MissionKind",
-     *     inversedBy="advisorWorkExperiences")
-     * @JoinTable(name="work_experience_advisor_mission_kinds")
-     */
-    private $advisorMissionKinds;
+    private $missionKinds;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->users                            = new ArrayCollection();
-        $this->contracotrBusinessPractices      = new ArrayCollection();
-        $this->contractorProfessionalExpertises = new ArrayCollection();
-        $this->contractorMissionKinds           = new ArrayCollection();
-        $this->advisorBusinessPractices         = new ArrayCollection();
-        $this->advisorProfessionalExpertises    = new ArrayCollection();
-        $this->advisorMissionKinds              = new ArrayCollection();
+        $this->users                  = new ArrayCollection();
+        $this->businessPractices      = new ArrayCollection();
+        $this->professionalExpertises = new ArrayCollection();
+        $this->missionKinds           = new ArrayCollection();
     }
 
     /**
@@ -222,212 +186,107 @@ class WorkExperience
     }
 
     /**
-     * Add contractorBusinessPractices
+     * Add businessPractices
      *
-     * @param \MissionBundle\Entity\BusinessPractice $contractorBusinessPractices
+     * @param \MissionBundle\Entity\BusinessPractice $businessPractices
      * @return WorkExperience
      */
-    public function addContractorBusinessPractice($contractorBusinessPractices)
+    public function addBusinessPractice($businessPractices)
     {
-        $contractorBusinessPractices->addContractorWorkExperience($this);
-        $this->contractorBusinessPractices[] = $contractorBusinessPractices;
+        $businessPractices->addWorkExperience($this);
+        $this->businessPractices[] = $businessPractices;
 
         return $this;
     }
 
     /**
-     * Remove contractorBusinessPractices
+     * Remove businessPractices
      *
-     * @param \MissionBundle\Entity\BusinessPractice $contractorBusinessPractices
+     * @param \MissionBundle\Entity\BusinessPractice $businessPractices
      */
-    public function removeContractorBusinessPractice($contractorBusinessPractices)
+    public function removeBusinessPractice($businessPractices)
     {
-        $contractorBusinessPractices->removeContractorWorkExperience($this);
-        $this->contractorBusinessPractices->removeElement($contractorBusinessPractices);
+        $businessPractices->removeWorkExperience($this);
+        $this->businessPractices->removeElement($businessPractices);
     }
 
     /**
-     * Get contractorBusinessPractices
+     * Get businessPractices
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getContractorBusinessPractices()
+    public function getBusinessPractices()
     {
-        return $this->contractorBusinessPractices;
+        return $this->businessPractices;
     }
 
     /**
-     * Add contractorProfessionalExpertises
+     * Add professionalExpertises
      *
-     * @param \MissionBundle\Entity\ProfessionalExpertise $contractorProfessionalExpertises
+     * @param \MissionBundle\Entity\ProfessionalExpertise $professionalExpertises
      * @return WorkExperience
      */
-    public function addContractorProfessionalExpertise($contractorProfessionalExpertises)
+    public function addProfessionalExpertise($professionalExpertises)
     {
-        $contractorProfessionalExpertises->addContractorWorkExperience($this);
-        $this->contractorProfessionalExpertises[] = $contractorProfessionalExpertises;
+        $professionalExpertises->addWorkExperience($this);
+        $this->professionalExpertises[] = $professionalExpertises;
 
         return $this;
     }
 
     /**
-     * Remove contractorProfessionalExpertises
+     * Remove professionalExpertises
      *
-     * @param \MissionBundle\Entity\ProfessionalExpertise $contractorProfessionalExpertises
+     * @param \MissionBundle\Entity\ProfessionalExpertise $professionalExpertises
      */
-    public function removeContractorProfessionalExpertise($contractorProfessionalExpertises)
+    public function removeProfessionalExpertise($professionalExpertises)
     {
-        $contractorProfessionalExpertises->removeContractorWorkExperience($this);
-        $this->contractorProfessionalExpertises->removeElement($contractorProfessionalExpertises);
+        $professionalExpertises->removeWorkExperience($this);
+        $this->professionalExpertises->removeElement($professionalExpertises);
     }
 
     /**
-     * Get contractorProfessionalExpertises
+     * Get professionalExpertises
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getContractorProfessionalExpertises()
+    public function getProfessionalExpertises()
     {
-        return $this->contractorProfessionalExpertises;
+        return $this->professionalExpertises;
     }
 
     /**
-     * Add contractorMissionKinds
+     * Add missionKinds
      *
-     * @param \MissionBundle\Entity\MissionKind $contractorMissionKinds
+     * @param \MissionBundle\Entity\MissionKind $missionKinds
      * @return WorkExperience
      */
-    public function addContractorMissionKind($contractorMissionKinds)
+    public function addMissionKind($missionKinds)
     {
-        $contractorMissionKinds->addContractorWorkExperience($this);
-        $this->contractorMissionKinds[] = $contractorMissionKinds;
+        $missionKinds->addWorkExperience($this);
+        $this->missionKinds[] = $missionKinds;
 
         return $this;
     }
 
     /**
-     * Remove contractorMissionKinds
+     * Remove missionKinds
      *
-     * @param \MissionBundle\Entity\MissionKind $contractorMissionKinds
+     * @param \MissionBundle\Entity\MissionKind $missionKinds
      */
-    public function removeContractorMissionKind($contractorMissionKinds)
+    public function removeMissionKind($missionKinds)
     {
-        $contractorMissionKinds->removeContractorWorkExperience($this);
-        $this->contractorMissionKinds->removeElement($contractorMissionKinds);
+        $missionKinds->removeWorkExperience($this);
+        $this->missionKinds->removeElement($missionKinds);
     }
 
     /**
-     * Get contractorMissionKinds
+     * Get missionKinds
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getContractorMissionKinds()
+    public function getMissionKinds()
     {
-        return $this->contractorMissionKinds;
-    }
-
-    /**
-     * Add advisorBusinessPractices
-     *
-     * @param \MissionBundle\Entity\BusinessPractice $advisorBusinessPractices
-     * @return WorkExperience
-     */
-    public function addAdvisorBusinessPractice($advisorBusinessPractices)
-    {
-        $advisorBusinessPractices->addAdvisorWorkExperience($this);
-        $this->advisorBusinessPractices[] = $advisorBusinessPractices;
-
-        return $this;
-    }
-
-    /**
-     * Remove advisorBusinessPractices
-     *
-     * @param \MissionBundle\Entity\BusinessPractice $advisorBusinessPractices
-     */
-    public function removeAdvisorBusinessPractice($advisorBusinessPractices)
-    {
-        $advisorBusinessPractices->removeAdvisorWorkExperience($this);
-        $this->advisorBusinessPractices->removeElement($advisorBusinessPractices);
-    }
-
-    /**
-     * Get advisorBusinessPractices
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getAdvisorBusinessPractices()
-    {
-        return $this->advisorBusinessPractices;
-    }
-
-    /**
-     * Add advisorProfessionalExpertises
-     *
-     * @param \MissionBundle\Entity\ProfessionalExpertise $advisorProfessionalExpertises
-     * @return WorkExperience
-     */
-    public function addAdvisorProfessionalExpertise($advisorProfessionalExpertises)
-    {
-        $advisorProfessionalExpertises->addAdvisorWorkExperience($this);
-        $this->advisorProfessionalExpertises[] = $advisorProfessionalExpertises;
-
-        return $this;
-    }
-
-    /**
-     * Remove advisorProfessionalExpertises
-     *
-     * @param \MissionBundle\Entity\ProfessionalExpertise $advisorProfessionalExpertises
-     */
-    public function removeAdvisorProfessionalExpertise($advisorProfessionalExpertises)
-    {
-        $advisorProfessionalExpertises->removeAdvisorWorkExperience($this);
-        $this->advisorProfessionalExpertises->removeElement($advisorProfessionalExpertises);
-    }
-
-    /**
-     * Get advisorProfessionalExpertises
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getAdvisorProfessionalExpertises()
-    {
-        return $this->advisorProfessionalExpertises;
-    }
-
-    /**
-     * Add advisorMissionKinds
-     *
-     * @param \MissionBundle\Entity\MissionKind $advisorMissionKinds
-     * @return WorkExperience
-     */
-    public function addAdvisorMissionKind($advisorMissionKinds)
-    {
-        $advisorMissionKinds->addAdvisorWorkExperience($this);
-        $this->advisorMissionKinds[] = $advisorMissionKinds;
-
-        return $this;
-    }
-
-    /**
-     * Remove advisorMissionKinds
-     *
-     * @param \MissionBundle\Entity\MissionKind $advisorMissionKinds
-     */
-    public function removeAdvisorMissionKind($advisorMissionKinds)
-    {
-        $advisorMissionKinds->removeAdvisorWorkExperience($this);
-        $this->advisorMissionKinds->removeElement($advisorMissionKinds);
-    }
-
-    /**
-     * Get advisorMissionKinds
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getAdvisorMissionKinds()
-    {
-        return $this->advisorMissionKinds;
+        return $this->missionKinds;
     }
 }

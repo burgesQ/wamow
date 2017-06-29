@@ -34,26 +34,16 @@ class BusinessPractice
      *
      * @ORM\ManyToMany(
      *     targetEntity="MissionBundle\Entity\WorkExperience",
-     *     mappedBy="contractorBusinessPractices")
+     *     mappedBy="businessPractices")
      */
-    private $contractorWorkExperiences;
-
-    /**
-     * @var \Doctrine\Common\Collections\ArrayCollection
-     *
-     * @ORM\ManyToMany(
-     *     targetEntity="MissionBundle\Entity\WorkExperience",
-     *     mappedBy="advisorBusinessPractices")
-     */
-    private $advisorWorkExperiences;
+    private $workExperiences;
 
     /**
      * BusinessPractice constructor.
      */
     public function __construct()
     {
-        $this->contractorWorkExperiences = new ArrayCollection();
-        $this->advisorWorkExperiences    = new ArrayCollection();
+        $this->workExperiences = new ArrayCollection();
     }
 
     /**
@@ -98,68 +88,35 @@ class BusinessPractice
     }
 
     /**
-     * Add contractorWorkExperiences
+     * Add workExperiences
      *
-     * @param \MissionBundle\Entity\WorkExperience $contractorWorkExperiences
+     * @param \MissionBundle\Entity\WorkExperience $workExperiences
      * @return BusinessPractice
      */
-    public function addContractorWorkExperience($contractorWorkExperiences)
+    public function addWorkExperience($workExperiences)
     {
-        $this->contractorWorkExperiences[] = $contractorWorkExperiences;
+        $this->workExperiences[] = $workExperiences;
 
         return $this;
     }
 
     /**
-     * Remove contractorWorkExperiences
+     * Remove workExperiences
      *
-     * @param \MissionBundle\Entity\WorkExperience $contractorWorkExperiences
+     * @param \MissionBundle\Entity\WorkExperience $workExperiences
      */
-    public function removeContractorWorkExperience($contractorWorkExperiences)
+    public function removeWorkExperience($workExperiences)
     {
-        $this->contractorWorkExperiences->removeElement($contractorWorkExperiences);
+        $this->workExperiences->removeElement($workExperiences);
     }
 
     /**
-     * Get contractorWorkExperiences
+     * Get workExperiences
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getContractorWorkExperiences()
+    public function getWorkExperiences()
     {
-        return $this->contractorWorkExperiences;
-    }
-
-    /**
-     * Add advisorWorkExperiences
-     *
-     * @param \MissionBundle\Entity\WorkExperience $advisorWorkExperiences
-     * @return BusinessPractice
-     */
-    public function addAdvisorWorkExperience($advisorWorkExperiences)
-    {
-        $this->advisorWorkExperiences[] = $advisorWorkExperiences;
-
-        return $this;
-    }
-
-    /**
-     * Remove advisorWorkExperiences
-     *
-     * @param \MissionBundle\Entity\WorkExperience $advisorWorkExperiences
-     */
-    public function removeAdvisorWorkExperience($advisorWorkExperiences)
-    {
-        $this->advisorWorkExperiences->removeElement($advisorWorkExperiences);
-    }
-
-    /**
-     * Get advisorWorkExperiences
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getAdvisorWorkExperiences()
-    {
-        return $this->advisorWorkExperiences;
+        return $this->workExperiences;
     }
 }

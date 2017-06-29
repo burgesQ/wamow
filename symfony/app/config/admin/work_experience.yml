@@ -2,27 +2,21 @@ easy_admin:
     entities:
         WorkExp:
             class: MissionBundle\Entity\WorkExperience
-            label: 'Work Experience'
+            label: 'Work Experiences'
             list:
-                title: "Work Experience"
+                title: "Work Experiences"
                 fields:
                     - 'id'
                     - 'name'
-                    - 'contractorBusinessPractices'
-                    - 'contractorProfessionalExpertises'
-                    - 'contractorMissionKinds'
-                    - 'advisorBusinessPractices'
-                    - 'advisorProfessionalExpertises'
-                    - 'advisorMissionKinds'
+                    - 'businessPractices'
+                    - 'professionalExpertises'
+                    - 'missionKinds'
             form:
                 fields:
                     - { property: 'name', type: 'text' }
-                    - { property: 'contractorBusinessPractices', type: 'easyadmin_autocomplete', type_options: { by_reference: false } }
-                    - { property: 'contractorProfessionalExpertises', type: 'easyadmin_autocomplete', type_options: { by_reference: false } }
-                    - { property: 'contractorMissionKinds', type: 'easyadmin_autocomplete', type_options: { by_reference: false } }
-                    - { property: 'advisorBusinessPractices', type: 'easyadmin_autocomplete', type_options: { by_reference: false } }
-                    - { property: 'advisorProfessionalExpertises', type: 'easyadmin_autocomplete', type_options: { by_reference: false } }
-                    - { property: 'advisorMissionKinds', type: 'easyadmin_autocomplete', type_options: { by_reference: false } }
+                    - { property: 'businessPractices', type: 'easyadmin_autocomplete', type_options: { by_reference: false } }
+                    - { property: 'professionalExpertises', type: 'easyadmin_autocomplete', type_options: { by_reference: false } }
+                    - { property: 'missionKinds', type: 'easyadmin_autocomplete', type_options: { by_reference: false } }
         BusinessPra:
             class: MissionBundle\Entity\BusinessPractice
             label: 'Business Practice'
@@ -31,8 +25,7 @@ easy_admin:
                 fields:
                     - 'id'
                     - 'name'
-                    - 'contractorWorkExperiences'
-                    - 'contractorWorkExperiences'
+                    - 'workExperiences'
         ProExp:
             class: MissionBundle\Entity\ProfessionalExpertise
             label: 'Professional Expertise'
@@ -41,8 +34,7 @@ easy_admin:
                 fields:
                     - 'id'
                     - 'name'
-                    - 'contractorWorkExperiences'
-                    - 'contractorWorkExperiences'
+                    - 'workExperiences'
         MissionKind:
             class: MissionBundle\Entity\MissionKind
             label: 'Mission Kind'
@@ -51,5 +43,4 @@ easy_admin:
                 fields:
                     - 'id'
                     - 'name'
-                    - 'contractorWorkExperiences'
-                    - 'contractorWorkExperiences'
+                    - 'workExperiences'
