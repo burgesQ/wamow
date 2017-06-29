@@ -29,6 +29,7 @@ form:
         send: send
 
     note:
+        saved: Saved
         indicator: Saving ...
         tooltip: Click to edit note
 

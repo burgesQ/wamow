@@ -18,6 +18,9 @@ form:
     file:
         file: "Fichier"
 
+    note:
+        saved: Enregistré
+
 language:
     title: "Langues"
     english: "Anglais"
