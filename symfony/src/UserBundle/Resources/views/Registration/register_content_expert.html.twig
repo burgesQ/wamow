@@ -9,7 +9,8 @@
             {{ 'registration.advisor.zero.title' | trans }}
         </h1>
 
-        {% if form.user.linkedinId.vars.value is null %}
+        {{ form_widget(form.user.linkedinId) }}
+        {% if form.user.linkedinId.vars.value == '' %}
             <a href="{{ path('hwi_oauth_service_redirect', {'service': 'linkedin' }) }}">
                 <button type="button" class="wmw-button">
                     <i></i><span>{{ 'registration.advisor.zero.linkedinbutton' | trans }}</span><i></i>
@@ -19,6 +20,9 @@
         {% else %}
             <div class="wmw-onboard-or">{{ 'registration.advisor.zero.confirm' | trans | upper }}</div>
         {% endif %}
+
+        {{ form_errors(form.user) }}
+        {{ form_errors(form) }}
 
         <div class="wmw-fieldrow row">
             {{ form_widget(form.user.firstName, {'attr' : {'class': 'required col-xs-7'}}) }}
@@ -59,6 +63,8 @@
                 {{ form_widget(form.user.languages) }}
             </div>
         </div>
+        {{ form_errors(form.user.languages) }}
+
         <div class="wmw-uploadfield">
             {{ form_widget(form.resume.file) }}
             <button type="button" class="wmw-button wmw-button--green"><i></i><span>Upload your cv</span><i></i></button>
