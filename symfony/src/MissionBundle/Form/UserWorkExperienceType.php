@@ -22,7 +22,7 @@ class UserWorkExperienceType extends AbstractType
             ->add('workExperience', EntityType::class, [
                 'class'         => 'MissionBundle:WorkExperience',
                 'attr'          => [
-                    'type' => ChoiceType::class,
+                    'type'   => ChoiceType::class,
                     'hidden' => true
                 ],
                 'query_builder' => function (EntityRepository $er) {
@@ -47,7 +47,7 @@ class UserWorkExperienceType extends AbstractType
                 'label'                     => false,
                 'translation_domain'        => 'tools',
                 'choice_translation_domain' => 'tools',
-                'query_builder' => function (EntityRepository $er) {
+                'query_builder'             => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')
                         ->orderBy('u.id', 'ASC');
                 },
@@ -83,7 +83,8 @@ class UserWorkExperienceType extends AbstractType
                 'label'              => 'registration.advisor.four.dailyfees',
                 'required'           => true,
                 'attr'               => [
-                    'min' => 1
+                    'min' => 1,
+                    'max' => 10000,
                 ]
             ])
             ->add('peremption', CheckboxType::class, [
