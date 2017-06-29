@@ -35,11 +35,6 @@ class StepThreeType extends AbstractType
                     'translation_domain' => 'tools',
                     'label'              => 'registration.advisor.three.nextbutton',
             ])
-            ->add('back', SubmitType::class, [
-                    'translation_domain' => 'tools',
-                    'label'              => 'registration.advisor.three.backbutton',
-                    'validation_groups'  => false,
-            ])
         ;
     }
 

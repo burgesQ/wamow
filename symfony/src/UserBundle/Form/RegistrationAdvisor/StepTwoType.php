@@ -32,11 +32,6 @@ class StepTwoType extends AbstractType
             ])
             ->add('submit', SubmitType::class, [
             ])
-            ->add('back', SubmitType::class, [
-                'translation_domain' => 'tools',
-                'label'              => 'registration.advisor.two.backbutton',
-                'validation_groups'  => false,
-            ])
         ;
     }
 

@@ -52,11 +52,7 @@ class StepFourType extends AbstractType
                 'translation_domain' => 'tools',
                 'label'              => 'registration.advisor.four.nextbutton'
             ])
-            ->add('back', SubmitType::class, [
-                'translation_domain' => 'tools',
-                'label'              => 'registration.advisor.four.backbutton',
-                'validation_groups'  => false,
-            ]);
+        ;
     }
 
     public function getParent()

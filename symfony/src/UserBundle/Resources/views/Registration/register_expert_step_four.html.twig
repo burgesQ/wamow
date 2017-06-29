@@ -48,10 +48,12 @@
             </div>
         </div>
         <div class="wmw-onboard-bottom">
+            <a href="{{ path('expert_registration_step_three') }}" class="wmw-button wmw-button--border">
+                <i></i><span>
+                    {{ 'form.btn.back' | trans }}
+                </span><i></i>
+            </a>
             {% set next = '<i></i><span>' ~ form.submit.vars.label | trans ~ '</span><i></i>' %}
-            {% set back = '<i></i><span>' ~ form.back.vars.label | trans ~ '</span><i></i>' %}
-
-            {{ form_widget(form.back, {'attr': {'class': 'wmw-button wmw-button--border'}, 'label': back }) }}
             {{ form_widget(form.submit, {'attr': {'class': 'wmw-button wmw-button--green'}, 'label': next }) }}
         </div>
 
