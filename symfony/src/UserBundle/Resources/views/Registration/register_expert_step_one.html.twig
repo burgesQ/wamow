@@ -32,15 +32,20 @@
         {{ form_errors(form) }}
         {{ form_errors(form.businessPractice) }}
         <div class="wmw-onboard-businesses row">
-            {% for key, val in form.businessPractice %}
+            {% for key, businessPractice in form.businessPractice %}
                 <div class="wmw-iconfield col-xs-6 col-sm-4">
-                    <input type="checkbox" name="businesses[]" id="business-{{ key }}"
-                           class="requiredgroup:businesses vv-gparent"/>
-                    <label for="business-{{ key }}">
-                                        <span>
-                                            <i class="icon icon--business-{{ arrayImg[val.vars.label] }}"></i><br/>
-                                            {{ val.vars.label | trans }}
-                                        </span>
+
+                    {{ form_widget(businessPractice, {'attr' : {
+                        class : 'requiredgroup:businesses vv-gparent',
+                        name  : "businesses[]",
+                        id    : "business-" ~ businessPractice.vars.id
+                    }}) }}
+
+                    <label for="{{ businessPractice.vars.id }}">
+                        <span>
+                            <i class="icon icon--business-{{ arrayImg[businessPractice.vars.label] }}"></i><br/>
+                            {{ businessPractice.vars.label | trans }}
+                        </span>
                     </label>
                 </div>
             {% endfor %}

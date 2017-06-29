@@ -167,7 +167,7 @@ class RegistrationAdvisorController extends Controller
 
         $arrayImg = [
             "businesspractice.industry" => "manufacturing",
-            "businesspractice.finance" => "",
+            "businesspractice.finance" => "finance",
             "businesspractice.retail" => "retail",
             "businesspractice.media" => "media-telco-entertainment",
             "businesspractice.tourism" => "tourisme",
@@ -175,10 +175,10 @@ class RegistrationAdvisorController extends Controller
             "businesspractice.realestate" => "finance",
             "businesspractice.hotel" => "hotel",
             "businesspractice.services" => "food-beverage",
-            "businesspractice.energy" => "manufacturing",
-            "businesspractice.it" => "",
-            "businesspractice.public" => "",
-            "businesspractice.ngo" => ""
+            "businesspractice.energy" => "energy",
+            "businesspractice.it" => "it",
+            "businesspractice.public" => "public",
+            "businesspractice.ngo" => "ngo"
         ];
 
         return $this->render('UserBundle:Registration:register_expert_step_one.html.twig', [

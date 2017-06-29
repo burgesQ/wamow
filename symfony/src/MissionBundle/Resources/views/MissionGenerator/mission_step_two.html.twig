@@ -33,7 +33,23 @@
             </div>
 
             <div class="wmw-onboard-businesses row">
-                {{ form_widget(form.businessPractice) }}
+                {% for key, businessPractice in form.businessPractice %}
+                    <div class="wmw-iconfield col-xs-6 col-sm-4">
+
+                        {{ form_widget(businessPractice, {'attr' : {
+                            class : 'requiredgroup:businesses vv-gparent',
+                            name  : "businesses[]",
+                            id    : "business-" ~ businessPractice.vars.id
+                        }}) }}
+
+                        <label for="{{ businessPractice.vars.id }}">
+                        <span>
+                            <i class="icon icon--business-{{ arrayImg[businessPractice.vars.label] }}"></i><br/>
+                            {{ businessPractice.vars.label | trans }}
+                        </span>
+                        </label>
+                    </div>
+                {% endfor %}
             </div>
             {{ form_errors(form.businessPractice) }}
 

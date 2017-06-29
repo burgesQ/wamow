@@ -187,10 +187,26 @@ class MissionGeneratorController extends Controller
                 'missionId' => $newMission->getId()
             ]);
         }
+        $arrayImg = [
+            "businesspractice.industry" => "manufacturing",
+            "businesspractice.finance" => "finance",
+            "businesspractice.retail" => "retail",
+            "businesspractice.media" => "media-telco-entertainment",
+            "businesspractice.tourism" => "tourisme",
+            "businesspractice.construction" => "construction",
+            "businesspractice.realestate" => "finance",
+            "businesspractice.hotel" => "hotel",
+            "businesspractice.services" => "food-beverage",
+            "businesspractice.energy" => "energy",
+            "businesspractice.it" => "it",
+            "businesspractice.public" => "public",
+            "businesspractice.ngo" => "ngo"
+        ];
 
         return $this->render('MissionBundle:MissionGenerator:mission_step_two.html.twig', [
-            'form' => $formStepTwo->createView(),
-            'user' => $user
+            'form'     => $formStepTwo->createView(),
+            'user'     => $user,
+            'arrayImg' => $arrayImg
         ]);
     }
 
