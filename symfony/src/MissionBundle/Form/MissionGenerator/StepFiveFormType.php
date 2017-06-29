@@ -50,11 +50,6 @@ class StepFiveFormType extends AbstractType
                 'class'              => 'CompanyBundle\Entity\Inspector',
                 'label'              => 'mission.new.form.cac',
             ])
-            ->add('back', SubmitType::class, [
-                'translation_domain' => 'tools',
-                'validation_groups'  => false,
-                'label'              => 'mission.new.form.back'
-            ])
             ->add('sharePitch', SubmitType::class, [
                 'translation_domain' => 'tools',
                 'label'              => 'mission.new.form.share_pitch'

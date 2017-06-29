@@ -36,10 +36,7 @@ class StepOneFormType extends AbstractType
                 'translation_domain' => 'tools',
                 'label'              => $options['labelNext']
             ])
-            ->add('back', SubmitType::class, [
-                'translation_domain' => 'tools',
-                'label'              => $options['labelBack']
-            ]);
+        ;
     }
 
     /**

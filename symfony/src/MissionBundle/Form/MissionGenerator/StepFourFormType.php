@@ -33,11 +33,6 @@ class StepFourFormType extends AbstractType
                 'validation_groups'  => false,
                 'label'              => 'form.btn.later'
             ])
-            ->add('back', SubmitType::class, [
-                'translation_domain' => 'tools',
-                'validation_groups'  => false,
-                'label'              => 'form.btn.back'
-            ])
             ->add('next', SubmitType::class, [
                 'translation_domain' => 'tools',
                 'label'              => 'form.btn.next'
