@@ -2995,7 +2995,7 @@ var Auditors = [
 
 (function($) {
 
-$.fn.deserialize = function (serializedString) 
+$.fn.deserialize = function (serializedString)
 {
     var $form = $(this);
     $form[0].reset();
@@ -3008,18 +3008,18 @@ $.fn.deserialize = function (serializedString)
             var name = decodeURIComponent(nameValue[0]);
             var value = decodeURIComponent(nameValue[1]);
             // Find one or more fields
-            var $field = $form.find('[name="' + name + '"]');    
-            
-            if ($field[0].type == "radio" 
-                || $field[0].type == "checkbox") 
+            var $field = $form.find('[name="' + name + '"]');
+
+            if ($field[0].type == "radio"
+                || $field[0].type == "checkbox")
             {
-                var $fieldWithValue = $field.filter('[value="' + value + '"]');            
+                var $fieldWithValue = $field.filter('[value="' + value + '"]');
                 var isFound = ($fieldWithValue.length > 0);
                 if (!isFound && value == "on") {
                     $field.first().prop("checked", true);
                 } else {
                     $fieldWithValue.prop("checked", isFound);
-                } 
+                }
             } else {
                 $field.val(value);
             }
@@ -3138,18 +3138,18 @@ var Master = {
         Master.init_copyfields();
         Master.resize_mail_content_chat();
 
-        $('.wmw-overlay-inner').perfectScrollbar({ suppressScrollX:true });  
-        
+        $('.wmw-overlay-inner').perfectScrollbar({ suppressScrollX:true });
+
         var $chat    = $('.mail-content-chat');
         if($chat.get().length>0){
             $chat.perfectScrollbar({ suppressScrollX:true });
             $chat.scrollTop( $chat[0].scrollHeight );
         }
 
-        $('.wmw-mission-element .element-content').perfectScrollbar({ suppressScrollX:true }); 
-        //$('.wmw-mission-element .element-notes').perfectScrollbar({ suppressScrollX:true }); 
-        $('.wmw-mission-sidebar .sidebar-wrapper').perfectScrollbar({ suppressScrollX:true }); 
-        $('.wmw-mission-content').perfectScrollbar({ suppressScrollY:true }); 
+        $('.wmw-mission-element .element-content').perfectScrollbar({ suppressScrollX:true });
+        //$('.wmw-mission-element .element-notes').perfectScrollbar({ suppressScrollX:true });
+        $('.wmw-mission-sidebar .sidebar-wrapper').perfectScrollbar({ suppressScrollX:true });
+        $('.wmw-mission-content').perfectScrollbar({ suppressScrollY:true });
         $('.main-slider-element-wrapper').perfectScrollbar({ suppressScrollX:true });
         $('.mail-content-sidebar').not( $('.mail-content-sidebar--noscroll') ).perfectScrollbar({ suppressScrollX:true });
 
@@ -3178,10 +3178,10 @@ var Master = {
                 $mission_header = $('.wmw-mission-header'),
                 $answer = $('.mail-content-answer'),
                 $footer = $('.wmw-footer'),
-                new_height =    parseInt($(window).height()) - 
-                                parseInt($header.outerHeight()) - 
-                                parseInt($mission_header.outerHeight()) - 
-                                parseInt($answer.outerHeight()) - 
+                new_height =    parseInt($(window).height()) -
+                                parseInt($header.outerHeight()) -
+                                parseInt($mission_header.outerHeight()) -
+                                parseInt($answer.outerHeight()) -
                                 parseInt($footer.outerHeight()) -
                                 200;
 
@@ -3304,7 +3304,7 @@ var Master = {
             }).done( function( response ){
 
                 $el.val(response);
-                $el.parent().find(".element-notes-status").stop(true, true).fadeIn(500).delay(5000).fadeOut(500); 
+                $el.parent().find(".element-notes-status").stop(true, true).fadeIn(500).delay(5000).fadeOut(500);
             });
         }
 
@@ -3440,14 +3440,19 @@ var Master = {
             }
         });
 
-        $('#wmw-form-ob-4 label a').on('click', function(e){
+        $('.wmw-onboard-switches-el-label').on('click', function(){
             e.preventDefault();
 
             var $el = $(this).parent().parent().parent().parent();
             var val = $el.find('input[type=hidden]').val();
             var $overlay = $('#wmw-overlay-ob-4');
 
-            $overlay.deserialize( val );
+            var checkbox = $(this).parent().find('input[type=checkbox]');
+ 			checkbox.prop('checked', true);
+ 			if (checkbox.val())
+            Master.addExpShapForm(checkbox.val());
+ 			// NOTE : Not a form anymore ?!
+            // $overlay.deserialize( val );
 
             Master.open_mission_overlay( $el );
         });
@@ -3466,16 +3471,33 @@ var Master = {
             return false;
         });
     },
+	addExpShapForm: function( i ){
+		$('#wmw-overlay-ob-4').html("");
+        var $checkbox = $('input#app_user_profile_workExperience_' + i);
+        var $label = $('#label_app_user_profile_workExperience_' + i );
+		var $container = $('#wmw-overlay-ob-4');
+		var $prototype = $($container.attr('data-prototype')
+			.replace(/__name__label__/g, $label.text())
+			.replace(/__name__/g, i));
 
+		$container.append($prototype);
+
+		$("#app_user_profile_userWorkExperiences_" + i + "_workExperience option:selected").removeAttr("selected");
+		$("#app_user_profile_userWorkExperiences_" + i + "_workExperience option[value='" + i + "']").attr('selected', 'selected');
+		Master.init_mission_overlay();
+
+		// var $btn = '<input type="button" id="add_edit_' + i + '" value="AddEdit">';
+		// $checkbox.after($btn);
+	},
     open_mission_overlay: function( $el ){
 
         var title = $el.find('label:first-child').text();
         var num = $el.attr('data-num');
         var $overlay = $('#wmw-overlay-ob-4');
 
-        $overlay.find('.wmw-overlay-title').text( title );
-        $overlay.attr('data-num', num);
-        $overlay.find('input[type=range]').trigger('change');
+        // $overlay.find('.wmw-overlay-title').text( title );
+        // $overlay.attr('data-num', num);
+        // $overlay.find('input[type=range]').trigger('change');
 
         Master.open_overlay('#wmw-overlay-ob-4');
     },
@@ -3485,7 +3507,7 @@ var Master = {
         var $overlay = $('#wmw-overlay-ob-4');
 
         $overlay.attr('data-num', '');
-        $overlay[0].reset();
+        // $overlay[0].reset();
         Master.close_overlay( $overlay );
     },
 
@@ -3587,7 +3609,7 @@ var Master = {
                   $btn = $(paginationItem+':first-child');
                 }
 
-                $btn.trigger('click'); 
+                $btn.trigger('click');
               }
             });
             $(slider).on('swiperight',function(){
@@ -3595,7 +3617,7 @@ var Master = {
                 $(prev).trigger('click');
 
               else{
-                
+
                 var $btn = false;
                 $btn = $(paginationItem+'.active').next('a:visible');
 
@@ -3603,9 +3625,9 @@ var Master = {
                   $btn = $last;
                 }
 
-                $btn.trigger('click'); 
+                $btn.trigger('click');
               }
-            }); 
+            });
 
         }else{
 
@@ -3618,7 +3640,7 @@ var Master = {
             if(typeof(touchPrev) === 'function'){
                 $(slider).on('swiperight',function(){
                     touchPrev();
-                }); 
+                });
             }
         }
 
