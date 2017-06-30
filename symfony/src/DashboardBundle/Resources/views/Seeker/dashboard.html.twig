@@ -148,7 +148,7 @@
                                             {{ 'mission.view.interested' | trans | raw }}
                                         </span>
                                         {% if unread > 0 %}
-                                            <a href="#">{{ 'dashboard.unread' | trans({'unread': unread}) }}</a>
+                                            <a href="{{ path('mission_view', { 'missionId' : mission.id }) }}">{{ 'dashboard.unread' | trans({'unread': unread}) }}</a>
                                         {% endif %}
                                     </span>
                                 {% endif %}
@@ -171,7 +171,7 @@
                                         {{ 'mission.view.shortlisted' | trans | raw }}
                                     </span>
                                     {% if unread > 0 %}
-                                        <a href="#">{{ 'dashboard.unread' | trans({'unread': unread}) }}</a>
+                                        <a href="{{ path('mission_view', { 'missionId' : mission.id }) }}">{{ 'dashboard.unread' | trans({'unread': unread}) }}</a>
                                     {% endif %}
                                 </span>
                                 <span class="infos-el col-xs-6">
@@ -194,7 +194,7 @@
                                         {{ 'mission.view.shortlisted' | trans | raw }}
                                     </span>
                                     {% if unread > 0 %}
-                                        <a href="#">{{ 'dashboard.unread' | trans({'unread': unread}) }}</a>
+                                        <a href="{{ path('mission_view', { 'missionId' : mission.id }) }}">{{ 'dashboard.unread' | trans({'unread': unread}) }}</a>
                                     {% endif %}
                                 </span>
                                 <span class="infos-el col-xs-6">

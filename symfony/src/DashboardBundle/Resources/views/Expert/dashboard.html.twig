@@ -189,7 +189,7 @@
                                                 <span class="status">{{ 'dashboard.advisor.wip.selected' | trans | upper }}</span>
                                             {% endif %}
                                             {% if unread > 0 %}
-                                                <a href="#">{{ 'dashboard.unread' | trans({'unread': unread}) }}</a>
+                                                <a href="{{ path('mission_view', { 'missionId' : wip.mission.id }) }}">{{ 'dashboard.unread' | trans({'unread': unread}) }}</a>
                                             {% endif %}
                                         </span>
                                     </span>
