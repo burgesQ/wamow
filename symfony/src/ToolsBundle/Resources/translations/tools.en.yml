@@ -316,6 +316,7 @@ user:
         resume_stuff: Resume stuff's
         advisor:
             link_back_to_board: back to board
+            link_back_to_mission: back to mission
             link_show_profile: show profile
             link_edit_profile: edit profile
             link_general: GENERALE

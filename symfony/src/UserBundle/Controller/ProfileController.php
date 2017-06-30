@@ -2,6 +2,8 @@
 
 namespace UserBundle\Controller;
 
+use MissionBundle\Entity\UserMission;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use UserBundle\Form\EditCertificationFormType;
@@ -60,13 +62,13 @@ class ProfileController extends Controller
         if (!is_object($user = $this->getUser()) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         } elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')
-                 && ($url = $this->get('signed_up')->checkIfSignedUp($user->getStatus()))) {
+            && ($url = $this->get('signed_up')->checkIfSignedUp($user->getStatus()))) {
             return $this->redirectToRoute($url);
         }
 
-        $em                  = $this->getDoctrine()->getManager();
-        $image               = new ProfilePicture();
-        $arrayData           = [
+        $em        = $this->getDoctrine()->getManager();
+        $image     = new ProfilePicture();
+        $arrayData = [
             'user'  => $user,
             'image' => $image
         ];
@@ -79,8 +81,7 @@ class ProfileController extends Controller
 
         $arrayOption['role'] = $user->getRoles()[0];
         $form                = $this->createForm(EditProfileMergedFormType::class,
-            $arrayData, $arrayOption)->setData($arrayData)
-        ;
+            $arrayData, $arrayOption)->setData($arrayData);
         $formPassword        = $this->createForm(new EditPasswordFormType(User::class))->setData($user);
         /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
         $userManager = $this->get('fos_user.user_manager');
@@ -119,5 +120,31 @@ class ProfileController extends Controller
             'formPassword' => $formPassword->createView(),
             'user'         => $user
         ]);
+    }
+
+    /**
+     * Display data about the user userId
+     *
+     * @param                                           $missionId
+     * @param integer                                   $userId
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function viewAction($missionId, $userId)
+    {
+        /** @var \UserBundle\Entity\User $user */
+        if (!is_object(($user = $this->getUser())) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        } elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR') &&
+            ($adv = $this->getDoctrine()->getRepository('UserBundle:User')->findOneBy(['id' => $userId])) &&
+            ($userMission = $this->getDoctrine()->getRepository('MissionBundle:UserMission')
+                ->findUserMissionByCompanyAndUser($missionId, $userId)) &&
+            ($userMission->getStatus() >= UserMission::SHORTLIST)
+        ) {
+            return $this->render('UserBundle:Profile:view.html.twig', [
+                'user'      => $adv,
+                'missionId' => $missionId
+            ]);
+        }
+        throw new NotFoundHttpException('You cannot see this profile');
     }
 }
