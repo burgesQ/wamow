@@ -144,16 +144,22 @@
                 {% for userMission in userMissions %}
                     {% set lastMsg = userMission.thread.messages | last %}
 
-                    <div class="wmw-mission-element">
+                    <div class="wmw-mission-element wmw-mission-element--shortlist">
                         <div class="element-title">
                             Advisor {{ userMission.idForContractor }}
+
+                            <div class="element-title-links">
+                                <a href="{{ path('mission_answer_to_advisor', { 'userMissionId' : userMission.id }) }}" class="wmw-simple-button wmw-simple-button--green">
+                                    <i class="icon icon--eye"></i> {{ 'inbox.show' | trans }}</a>
+                                </a>
+                            </div>
+
                         </div>
                         <div class="element-content{% if lastMsg.sender.id == userMission.user.id and lastMsg.metadata[1].isRead == false %} element-content--newmessage{% endif %}">
                             <div class="element-content-title">Advisor {{ userMission.idForContractor }}</div>
                             {{ lastMsg.body }}
                             <div class="element-content-bottom">
                                 {{ lastMsg.createdAt | date('D d M h\\hm') }}
-                                <a href="{{ path('mission_answer_to_advisor', { 'userMissionId' : userMission.id }) }}"><i class="icon icon--eye"></i> {{ 'inbox.show' | trans }}</a>
                             </div>
                         </div>
 
