@@ -354,6 +354,7 @@ mission:
                 %professionalExpertise<br>
                 <strong>$ %price</strong><br>
         advisor:
+            btn_back_to_mission: back to advisor list
             btn_back_to_board: back to board
             btn_back_to_global_view: back to global view
             interested: Interested
