@@ -408,6 +408,11 @@ class Mission
         }
     }
 
+    public function __toString()
+    {
+     return $this->id . ' : ' . $this->title;
+    }
+
     /**
      * @ORM\PreUpdate
      */

@@ -13,3 +13,4 @@ easy_admin:
             - { entity: 'Mission', label: 'Missions', icon: square }
             - { entity: 'User', label: 'Users', icon: square }
             - { entity: 'WorkExp', label: 'Work Experience', icon: square }
+            - { entity: 'UserMission', label: 'User Mission', icon: square }

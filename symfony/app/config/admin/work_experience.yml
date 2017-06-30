@@ -7,7 +7,7 @@ easy_admin:
                 title: "Work Experiences"
                 fields:
                     - 'id'
-                    - 'name'
+                    - { property : 'name', trans : true, domaine : 'tools' }
                     - 'businessPractices'
                     - 'professionalExpertises'
                     - 'missionKinds'
