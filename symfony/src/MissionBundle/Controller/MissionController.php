@@ -5,6 +5,7 @@ namespace MissionBundle\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use MissionBundle\Form\MessageMissionFormType;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use ToolsBundle\Form\ProposalFromType;
 use MissionBundle\Entity\UserMission;
@@ -100,6 +101,11 @@ class MissionController extends Controller
             // check if user fully registred
             if (($url = $this->get('signed_up')->checkIfSignedUp($user->getStatus()))) {
                 return $this->redirectToRoute($url);
+            }
+            /** @var \UserBundle\Entity\User $user */
+            $user = $this->getUser();
+            if ($user->getPlanExpiresAt() < new \DateTime()) {
+                return new Response("Your subscription expired on " . $user->getPlanExpiresAt()->format('Y-m-d H:i:s'));
             }
 
             // get associated userMission
