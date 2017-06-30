@@ -93,6 +93,7 @@ use MissionBundle\Entity\UserMission;
             // archétype mission
             if ($mission->getWorkExperience() && $mission->getWorkExperience() == $experience->getWorkExperience()) {
                 $score += $this->weightWorkExperience;
+                $nbWorkExperience++;
             }
         }
         if ($nbSize) {
@@ -134,7 +135,7 @@ use MissionBundle\Entity\UserMission;
             $score += $user->getScoringBonus();
             $scoringDetails["ScoringBonus"] = array("weight" => $user->getScoringBonus());
         }
-        
+
         $userMission->setScoreDetails($scoringDetails);
 
         return $score;
