@@ -462,6 +462,8 @@ class MissionController extends Controller
             throw new NotFoundHttpException($trans->trans('error.user_mission.not_enough', [], 'tools'));
         }
 
+        $this->get('inbox.services')->sendMessage($user,
+            $trans->trans('mission.message.removed', [], 'tools'), $userMission->getThread());
         $userMission->setStatus(UserMission::DISMISS);
         $em->flush();
 
@@ -522,6 +524,8 @@ class MissionController extends Controller
                 }
             }
 
+            $this->get('inbox.services')->sendMessage($user,
+                $trans->trans('mission.message.selected', [], 'tools'), $userMission->getThread());
             $userMission->setStatus(UserMission::FINALIST);
             $mission->setNbOngoing(1);
             $nStep->setStatus(1);
@@ -574,6 +578,9 @@ class MissionController extends Controller
             && ($nStep = $em->getRepository('MissionBundle:Step')->findOneby([
                 'mission'  => $mission, 'position' => $step->getPosition() + 1]))
             && count($userMissionRepo->findAllAtLeastThan($mission, UserMission::SHORTLIST)) < $nStep->getNbMaxUser()) {
+
+            $this->get('inbox.services')->sendMessage($user,
+                $trans->trans('mission.message.shortlist_added', [], 'tools'), $userMission->getThread());
             $userMission->setStatus(UserMission::SHORTLIST);
             $em->flush();
 
@@ -620,6 +627,8 @@ class MissionController extends Controller
             throw new NotFoundHttpException($trans->trans('error.action.failed', [], 'tools'));
         }
 
+        $this->get('inbox.services')->sendMessage($user,
+            $trans->trans('mission.message.removed', [], 'tools'), $userMission->getThread());
         $userMission->setStatus(UserMission::ONGOING);
         $em->flush();
 
