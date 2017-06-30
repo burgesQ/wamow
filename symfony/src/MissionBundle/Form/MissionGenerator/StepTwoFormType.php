@@ -108,11 +108,6 @@ class StepTwoFormType extends AbstractType
                     'style' => $options['stepFour']
                 ]
             ])
-            ->add('back', SubmitType::class, [
-                'translation_domain' => 'tools',
-                'validation_groups'  => false,
-                'label'              => $options['labelBack']
-            ])
             ->add('next', SubmitType::class, [
                 'translation_domain' => 'tools',
                 'label'              => $options['labelNext']
