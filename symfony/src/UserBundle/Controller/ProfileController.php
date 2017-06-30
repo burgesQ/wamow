@@ -62,7 +62,8 @@ class ProfileController extends Controller
         if (!is_object($user = $this->getUser()) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         } elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')
-            && ($url = $this->get('signed_up')->checkIfSignedUp($user->getStatus()))) {
+            && ($url = $this->get('signed_up')->checkIfSignedUp($user->getStatus()))
+        ) {
             return $this->redirectToRoute($url);
         }
 
@@ -82,20 +83,14 @@ class ProfileController extends Controller
         $arrayOption['role'] = $user->getRoles()[0];
         $form                = $this->createForm(EditProfileMergedFormType::class,
             $arrayData, $arrayOption)->setData($arrayData);
-        $formPassword        = $this->createForm(new EditPasswordFormType(User::class))->setData($user);
         /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
         $userManager = $this->get('fos_user.user_manager');
 
 
-        if ($formPassword->handleRequest($request)->isSubmitted()) {
-            if ($formPassword->isValid()) {
-                $userManager->updateUser($user);
-
-                return $this->redirectToRoute('user_profile_show');
-            }
-        } elseif ($form->handleRequest($request)->isSubmitted() && $form->isValid()) {
+        if ($form->handleRequest($request)->isSubmitted() && $form->isValid()) {
             if ($form->get('user')->get('phone')->get('prefix')->isEmpty()
-                || $form->get('user')->get('phone')->get('number')->isEmpty()) {
+                || $form->get('user')->get('phone')->get('number')->isEmpty()
+            ) {
                 $form->get('user')->get('phone')->addError(new FormError($this->get('translator')
                     ->trans('error.phone.please_fill', [],
                         'tools')));
@@ -116,9 +111,8 @@ class ProfileController extends Controller
         }
 
         return $this->render('UserBundle:Profile:edit.html.twig', [
-            'form'         => $form->createView(),
-            'formPassword' => $formPassword->createView(),
-            'user'         => $user
+            'form' => $form->createView(),
+            'user' => $user
         ]);
     }
 
@@ -147,4 +141,29 @@ class ProfileController extends Controller
         }
         throw new NotFoundHttpException('You cannot see this profile');
     }
-}
+
+    /**
+     * Handle the change password option
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function changePasswordAction(Request $request)
+    {
+        if (!is_object(($user = $this->getUser())) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+
+        $formPassword = $this->createForm(new EditPasswordFormType(User::class))->setData($user);
+        if ($formPassword->handleRequest($request)->isSubmitted() && $formPassword->isValid()) {
+            $this->get('fos_user.user_manager')->updateUser($user);
+
+            return $this->redirectToRoute('user_profile_show');
+        }
+
+        return $this->render('@User/Security/edit_password.html.twig', [
+            'formPassword' => $formPassword->createView(),
+            'user'         => $user
+        ]);
+
+    }
