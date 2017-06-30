@@ -130,8 +130,8 @@ class MissionController extends Controller
                             1);
                         $inboxService->createThreadPitch($userMission, $form->getData()['text']);
                         $userMission->setStatus(UserMission::ONGOING);
-                        $user->setScoringBonus($user->setScoringBonus() -
-                            $this->containter->getParameter("scoring_weight.user_subscribe"));
+                        $user->setScoringBonus($user->getScoringBonus() -
+                            $this->container->getParameter("scoring_weight.user_subscribe"));
                         $em->flush();
 
                         return $this->redirectToRoute('mission_view', ['missionId' => $missionId]);
