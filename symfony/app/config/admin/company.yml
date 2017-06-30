@@ -10,8 +10,13 @@ easy_admin:
                     - 'name'
                     - { property: 'creationDate', type: 'date' }
                     - { property: 'status', type: 'boolean' }
+                    - 'address'
+                    - 'resume'
+                    - 'businessPractice'
             form:
                 fields:
                     - { property: 'name', type: 'text' }
                     - { property: 'businessPractice', type: 'entity', type_options: {'class': 'MissionBundle\Entity\BusinessPractice', multiple: false, expanded: false, required: true} }
                     - { property: 'status', type: 'text' }
+                    - { property : 'address', type : 'ToolsBundle\Form\AddressType'}
+                    - { property : 'resume' }
