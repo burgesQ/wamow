@@ -191,7 +191,7 @@
                                 <span class="infos-el infos-el--status{% if unread > 0 %} infos-el--unread{% endif %} col-xs-6">
                                     <span>
                                         <i class="icon icon--handshake"></i><br />
-                                        {{ 'mission.view.shortlisted' | trans | raw }}
+                                        {{ 'mission.view.selected' | trans | raw }}
                                     </span>
                                     {% if unread > 0 %}
                                         <a href="#">{{ 'dashboard.unread' | trans({'unread': unread}) }}</a>

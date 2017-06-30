@@ -329,6 +329,11 @@ user:
 
 ## Mission
 mission:
+    message:
+        shortlist_added: "You have been added to the shortlist of the mission."
+        shortlist_removed: "You have been refused from the mission."
+        selected: "You have been selected for the mission."
+        removed: "You have been removed from the shortlist of the mission."
     view:
         pitched_at: Pitched at date
         price_day: $ </div> / day
