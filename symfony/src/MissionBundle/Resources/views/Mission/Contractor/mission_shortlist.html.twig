@@ -120,17 +120,20 @@
                 <div class="wmw-mission-element wmw-mission-element--shortlist">
                     <div class="element-title">
                         {{ userMission.user.firstName }} {{ userMission.user.lastName }}
-                        {% if userMission.thread.proposals is not empty %}
-                            <div class="element-title-links">
 
+                        <div class="element-title-links">
+                            <a href="{{ path('mission_answer_to_advisor', { 'userMissionId' : userMission.id }) }}" class="wmw-simple-button wmw-simple-button--green">
+                                <i class="icon icon--eye"></i> {{ 'inbox.show' | trans }}
+                            </a>
+                            {% if userMission.thread.proposals is not empty %}
                                 {% set proposal = userMission.thread.proposals | last %}
                                 {# TODO find a better methode #}
                                 {%  set path = "http://symfony.dev/" ~ proposal.getUploadRootDir %}
                                 <a href="{{ path }}" download="{{ proposale.downloadName }}" class="wmw-simple-button wmw-simple-button--green">
                                     <i class="icon icon--download"></i> {{ 'form.btn.download_proposal' | trans }}
                                 </a>
-                            </div>
-                        {% endif %}
+                            {% endif %}
+                        </div>
                     </div>
                     <div class="element-content{% if lastMsg.sender.id == userMission.user.id and lastMsg.metadata[1].isRead == false %} element-content--newmessage{% endif %}">
                         <div class="element-content-title">Advisor {{ userMission.idForContractor }}</div>
@@ -145,7 +148,6 @@
                         {{ lastMsg.body }}
                         <div class="element-content-bottom">
                             {{ lastMsg.createdAt | date('D d M h\\hm') }}
-                            <a href="{{ path('mission_answer_to_advisor', { 'userMissionId' : userMission.id }) }}"><i class="icon icon--eye"></i> {{ 'inbox.show' | trans }}</a>
                         </div>
 
                     </div>
