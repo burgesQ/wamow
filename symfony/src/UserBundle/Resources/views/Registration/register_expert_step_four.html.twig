@@ -54,6 +54,7 @@
                 </span><i></i>
             </a>
             {% set next = '<i></i><span>' ~ form.submit.vars.label | trans ~ '</span><i></i>' %}
+            {{ form_widget(form._token) }}
             {{ form_widget(form.submit, {'attr': {'class': 'wmw-button wmw-button--green'}, 'label': next }) }}
         </div>
 
