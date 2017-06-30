@@ -34,7 +34,7 @@ class DashboardController extends Controller
             ]);
         } elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_CONTRACTOR')) {
             $missionRepo = $em->getRepository('MissionBundle:Mission');
-            $missions    = $missionRepo->getContractorMissions($user->getId(), $user->getCompany()->getId(), Mission::DRAFT);
+            $missions    = $missionRepo->getContractorMissions($user->getCompany()->getId(), Mission::DRAFT);
             $drafts      = $missionRepo->findBy([
                     'contact' => $user,
                     'company' => $user->getCompany(),

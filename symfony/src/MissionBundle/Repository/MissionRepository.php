@@ -29,14 +29,12 @@ class MissionRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getContractorMissions($userId, $companyId, $status)
+    public function getContractorMissions($companyId, $status)
     {
         $qb = $this->_em->createQueryBuilder();
         $qb->select('m')
         ->from('MissionBundle:Mission', 'm')
-        ->where('m.contact = :userId')
-            ->setParameter('userId', $userId)
-        ->andWhere('m.company = :companyId')
+        ->where('m.company = :companyId')
             ->setParameter('companyId', $companyId)
         ->andWhere('m.status > :status')
             ->setParameter('status', $status);
