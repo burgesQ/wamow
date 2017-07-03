@@ -16,16 +16,27 @@ class StepFourType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
+
+        /** @var \UserBundle\Entity\User $user */
+        $user = $builder->getData();
+
         $builder
             ->remove('username')
             ->remove('current_password')
             ->remove('email')
             ->add('workExperience', EntityType::class, [
                 'class'                     => 'MissionBundle:WorkExperience',
-                'query_builder'             => function (EntityRepository $er) {
+                'query_builder'             => function (EntityRepository $er) use ($user) {
                     return $er->createQueryBuilder('u')
+                        ->join('u.missionKinds', 'm')
+                        ->join('u.professionalExpertises', 'p')
+                        ->join('u.businessPractices', 'b')
                         ->where('u.name != :create')
-                        ->setParameter('create', 'workexperience.create')
+                            ->setParameter('create', 'workexperience.create')
+                        ->andWhere('b.id IN (:businessPra) OR p.id IN (:proExp) OR m.id IN (:missionKinds)')
+                            ->setParameter('proExp', $user->getProfessionalExpertise()->toArray())
+                            ->setParameter('missionKinds', $user->getMissionKind()->toArray())
+                            ->setParameter('businessPra', $user->getBusinessPractice()->toArray())
                         ->orderBy('u.id', 'ASC');
                 },
                 'property'                  => 'name',
@@ -52,11 +63,7 @@ class StepFourType extends AbstractType
                 'translation_domain' => 'tools',
                 'label'              => 'registration.advisor.four.nextbutton'
             ])
-            ->add('back', SubmitType::class, [
-                'translation_domain' => 'tools',
-                'label'              => 'registration.advisor.four.backbutton',
-                'validation_groups'  => false,
-            ]);
+        ;
     }
 
     public function getParent()

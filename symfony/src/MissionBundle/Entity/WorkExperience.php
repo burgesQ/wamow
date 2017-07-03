@@ -4,6 +4,7 @@ namespace MissionBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinTable;
 
 /**
  * WorkExperience
@@ -40,21 +41,59 @@ class WorkExperience
     private $userWorkExperiences;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(
+     *     targetEntity="MissionBundle\Entity\BusinessPractice",
+     *     inversedBy="workExperiences")
+     */
+    private $businessPractices;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(
+     *     targetEntity="MissionBundle\Entity\ProfessionalExpertise",
+     *     inversedBy="workExperiences")
+     */
+    private $professionalExpertises;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(
+     *     targetEntity="MissionBundle\Entity\MissionKind",
+     *     inversedBy="workExperiences")
+     */
+    private $missionKinds;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
-        $this->users = new ArrayCollection();
+        $this->users                  = new ArrayCollection();
+        $this->businessPractices      = new ArrayCollection();
+        $this->professionalExpertises = new ArrayCollection();
+        $this->missionKinds           = new ArrayCollection();
     }
 
     /**
-     * Get id
-     *
-     * @return integer
+     * @return string
      */
-    public function getId()
+    public function __toString()
     {
-        return $this->id;
+        return $this->getName();
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**
@@ -71,13 +110,13 @@ class WorkExperience
     }
 
     /**
-     * Get name
+     * Get id
      *
-     * @return string
+     * @return integer
      */
-    public function getName()
+    public function getId()
     {
-        return $this->name;
+        return $this->id;
     }
 
     /**
@@ -139,10 +178,115 @@ class WorkExperience
     /**
      * Get userWorkExperiences
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getUserWorkExperiences()
     {
         return $this->userWorkExperiences;
+    }
+
+    /**
+     * Add businessPractices
+     *
+     * @param \MissionBundle\Entity\BusinessPractice $businessPractices
+     * @return WorkExperience
+     */
+    public function addBusinessPractice($businessPractices)
+    {
+        $businessPractices->addWorkExperience($this);
+        $this->businessPractices[] = $businessPractices;
+
+        return $this;
+    }
+
+    /**
+     * Remove businessPractices
+     *
+     * @param \MissionBundle\Entity\BusinessPractice $businessPractices
+     */
+    public function removeBusinessPractice($businessPractices)
+    {
+        $businessPractices->removeWorkExperience($this);
+        $this->businessPractices->removeElement($businessPractices);
+    }
+
+    /**
+     * Get businessPractices
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBusinessPractices()
+    {
+        return $this->businessPractices;
+    }
+
+    /**
+     * Add professionalExpertises
+     *
+     * @param \MissionBundle\Entity\ProfessionalExpertise $professionalExpertises
+     * @return WorkExperience
+     */
+    public function addProfessionalExpertise($professionalExpertises)
+    {
+        $professionalExpertises->addWorkExperience($this);
+        $this->professionalExpertises[] = $professionalExpertises;
+
+        return $this;
+    }
+
+    /**
+     * Remove professionalExpertises
+     *
+     * @param \MissionBundle\Entity\ProfessionalExpertise $professionalExpertises
+     */
+    public function removeProfessionalExpertise($professionalExpertises)
+    {
+        $professionalExpertises->removeWorkExperience($this);
+        $this->professionalExpertises->removeElement($professionalExpertises);
+    }
+
+    /**
+     * Get professionalExpertises
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProfessionalExpertises()
+    {
+        return $this->professionalExpertises;
+    }
+
+    /**
+     * Add missionKinds
+     *
+     * @param \MissionBundle\Entity\MissionKind $missionKinds
+     * @return WorkExperience
+     */
+    public function addMissionKind($missionKinds)
+    {
+        $missionKinds->addWorkExperience($this);
+        $this->missionKinds[] = $missionKinds;
+
+        return $this;
+    }
+
+    /**
+     * Remove missionKinds
+     *
+     * @param \MissionBundle\Entity\MissionKind $missionKinds
+     */
+    public function removeMissionKind($missionKinds)
+    {
+        $missionKinds->removeWorkExperience($this);
+        $this->missionKinds->removeElement($missionKinds);
+    }
+
+    /**
+     * Get missionKinds
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMissionKinds()
+    {
+        return $this->missionKinds;
     }
 }

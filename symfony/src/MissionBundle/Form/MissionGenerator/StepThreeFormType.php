@@ -2,6 +2,7 @@
 
 namespace MissionBundle\Form\MissionGenerator;
 
+use MissionBundle\Entity\Mission;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Tetranz\Select2EntityBundle\Form\Type\Select2EntityType;
@@ -21,6 +22,9 @@ class StepThreeFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        /** @var Mission $mission */
+        $mission = $builder->getData();
+
         $builder
             ->add('missionKinds', EntityType::class, [
                 'choice_translation_domain' => 'tools',
@@ -52,7 +56,6 @@ class StepThreeFormType extends AbstractType
                 'class'              => 'MissionBundle\Entity\Certification',
                 'label'              => 'mission.new.label.certification'
             ])
-
             ->add('languages', Select2EntityType::class, [
                 'translation_domain' => 'tools',
                 'text_property' => 'name',
@@ -75,6 +78,19 @@ class StepThreeFormType extends AbstractType
                 'required'                  => true,
                 'class'                     => 'MissionBundle:WorkExperience',
                 'label'                     => false,
+                'query_builder'             => function (EntityRepository $er) use ($mission) {
+                    return $er->createQueryBuilder('u')
+                        ->join('u.missionKinds', 'm')
+                        ->join('u.professionalExpertises', 'p')
+                        ->join('u.businessPractices', 'b')
+                        ->where('u.name != :create')
+                            ->setParameter('create', 'workexperience.create')
+                        ->andWhere('b  = :businessPra OR p = :proExp OR m.id IN (:missionKinds)')
+                            ->setParameter('proExp', $mission->getProfessionalExpertise())
+                            ->setParameter('missionKinds', $mission->getMissionKinds()->toArray())
+                            ->setParameter('businessPra', $mission->getBusinessPractice())
+                        ->orderBy('u.id', 'ASC');
+                },
             ])
             ->add('price', RangeType::class, [
                 'translation_domain' => 'tools',
@@ -87,11 +103,6 @@ class StepThreeFormType extends AbstractType
                 'attr'               => [
                     'style' => $options['stepFour']
                 ]
-            ])
-            ->add('back', SubmitType::class, [
-                'translation_domain' => 'tools',
-                'validation_groups'  => false,
-                'label'              => $options['labelBack']
             ])
             ->add('next', SubmitType::class, [
                 'translation_domain' => 'tools',

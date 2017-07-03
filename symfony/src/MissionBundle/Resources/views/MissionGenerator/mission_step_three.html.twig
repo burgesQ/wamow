@@ -15,6 +15,12 @@
     <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ translation_domain is same as(false) ? label|raw : label|trans({}, translation_domain)|raw }}</button>
 {%- endblock button_widget -%}
 
+{% block tetranz_select2entity_widget_select_option %}
+    <option value="{{ id }}" selected="selected">
+        {{ label | trans({}, 'tools') }}
+    </option>
+{% endblock %}
+
 {% trans_default_domain "tools" %}
 
 {% block body %}
@@ -28,12 +34,6 @@
             </h1>
 
             <div class="wmw-pitch-finder">
-
-                {{ form_errors(form.missionKinds) }}
-                {{ form_errors(form.workExperience) }}
-                {{ form_errors(form.certifications) }}
-                {{ form_errors(form.languages) }}
-                {{ form_errors(form.price) }}
 
                 <div class="wmw-onboard-domains row">
                     <div class="wmw-onboard-domains-col col-xs-12 col-sm-6">
@@ -59,27 +59,29 @@
                             {% endif %}
                         {% endfor %}
                 </div>
+                {{ form_errors(form.missionKinds) }}
 
-                {# TODO CSS CERTIFICATIONS #}
-                <div class="wmw-copyfields">
-                    <div class="wmw-copyfield row">
-                        <label for="{{ form.certifications.vars.name }}" class="wmw-label wmw-label--topmobile col-xs-10 col-sm-5">{{ 'mission.new.label.step_three.certif' | trans | raw }}</label>
+                <div class="wmw-fieldrow row">
+                    <label for="{{ form.certifications.vars.name }}" class="wmw-label wmw-label--topmobile col-xs-10 col-sm-5">{{ 'mission.new.label.step_three.certif' | trans | raw }}</label>
+                    <div class="col-xs-12 col-sm-7">
                         {{ form_widget(form.certifications, { 'attr' : { 'class' : 'col-xs-10 col-md-6' }}) }}
                     </div>
-                </div><br />
+                </div>
+                {{ form_errors(form.certifications) }}
 
-                {# TODO CSS CERTIFICATIONS #}
-                <div class="wmw-copyfields">
-                    <div class="wmw-copyfield row">
-                        <label for="{{ form.languages.vars.name }}" class="wmw-label wmw-label--topmobile col-xs-10 col-sm-5">{{ 'mission.new.label.step_three.lang' | trans }}</label>
+                <div class="wmw-fieldrow row">
+                    <label for="{{ form.languages.vars.name }}" class="wmw-label wmw-label--topmobile col-xs-10 col-sm-5">{{ 'mission.new.label.step_three.lang' | trans }}</label>
+                    <div class="col-xs-12 col-sm-7">
                         {{ form_widget(form.languages, { 'attr' : { 'class' : 'col-xs-10 col-md-6' }}) }}
                     </div>
-                </div><br />
+                </div>
+                {{ form_errors(form.languages) }}
 
                 <div class="wmw-fieldrow row">
                     <label for="{{ form.workExperience.vars.id }}" class="wmw-label wmw-label--topmobile col-xs-10 col-sm-5">{{ 'workexperience.title' | trans }}</label>
                     {{ form_row(form.workExperience, { 'attr' : { 'class' : 'col-xs-10 col-md-6 required'}}) }}
                 </div>
+                {{ form_errors(form.workExperience) }}
 
             </div>
 
@@ -97,6 +99,7 @@
                     </div>
                 </div>
             </div>
+                {{ form_errors(form.price) }}
 
             <div class="wmw-progressbar">
                 <span class="active"></span>
@@ -108,15 +111,20 @@
 
         </div>
 
-    <div class="wmw-onboard-bottom">
-        {% set late = '<i></i><span>' ~ form.forLater.vars.label ~ '</span><i></i>' %}
-        {% set next = '<i></i><span>' ~ form.submit.vars.label ~ '</span><i></i>' %}
-        {% set back = '<i></i><span>' ~ form.back.vars.label ~ '</span><i></i>' %}
+        <div class="wmw-onboard-bottom">
+            {% set late = '<i></i><span>' ~ form.forLater.vars.label | trans  ~ '</span><i></i>' %}
+            {{ form_widget(form.forLater, {attr: {formnovalidate: 'formnovalidate',
+                class: 'wmw-button wmw-button--black wmw-button--border wmw-onboard-bottom-left wmw-button-later'}, label: late }) }}
 
-        {{ form_row(form.forLater, { 'attr' : { formnovalidate: 'formnovalidate','class' : 'wmw-button wmw-button--black wmw-button--border wmw-onboard-bottom-left'}, label: late}) }}
-        {{ form_widget(form.back, { 'attr' : { 'class' : 'wmw-button wmw-button--border' }, label: back}) }}
-        {{ form_widget(form.next, { 'attr' : { 'class' : 'wmw-button wmw-button--green' }, label: next}) }}
-    </div>
+            <a href="{{ path('mission_new_step_two', { 'missionId' : missionId }) }}" class="wmw-button wmw-button--border">
+                <i></i><span>
+                    {{ 'form.btn.back' | trans }}
+                </span><i></i>
+            </a>
+
+            {% set next = '<i></i><span>' ~ form.next.vars.label | trans ~ '</span><i></i>' %}
+            {{ form_widget(form.next, { 'attr' : { 'class' : 'wmw-button wmw-button--green' }, label: next}) }}
+        </div>
 
     {{ form_end(form) }}
 
@@ -150,6 +158,18 @@
                      .replace(/__name__/g, index));
                  container.append(prototype);
              }
+
+             $("#step_three_form_price").change(function() {
+                 $.ajax({
+                        url: "{{path("mission_count_match", {'missionId': mission.id})}}",
+                        type: 'post',
+                        dataType: 'json',
+                        data: $("form[name='step_three_form']").serialize(),
+                        success: function(data) {
+                            $("#count-match").text(data['matches']);
+                        },
+                });
+             });
          });
      </script>
 {% endblock %}

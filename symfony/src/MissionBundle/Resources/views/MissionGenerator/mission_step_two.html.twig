@@ -28,37 +28,44 @@
                 <small>{{ 'mission.new.step_two.subtitle' | trans }}</small>
             </h1>
 
-            {{ form_errors(form) }}
-            {{ form_errors(form.businessPractice) }}
-            {{ form_errors(form.professionalExpertise) }}
-            {{ form_errors(form.budget) }}
-            {{ form_errors(form.continents) }}
-            {{ form_errors(form.applicationEnding) }}
-            {{ form_errors(form.missionBeginning) }}
-            {{ form_errors(form.missionEnding) }}
-            {{ form_errors(form.confidentiality) }}
-            {{ form_errors(form.telecommuting) }}
-            {{ form_errors(form.address) }}
-
             <div class="wmw-sectionfield">
                 <label class="wmw-label">{{ 'businesspractice.title' | trans }}</label>
             </div>
 
             <div class="wmw-onboard-businesses row">
-                {{ form_widget(form.businessPractice) }}
+                {% for key, businessPractice in form.businessPractice %}
+                    <div class="wmw-iconfield col-xs-6 col-sm-4">
+
+                        {{ form_widget(businessPractice, {'attr' : {
+                            class : 'requiredgroup:businesses vv-gparent',
+                            name  : "businesses[]",
+                            id    : "business-" ~ businessPractice.vars.id
+                        }}) }}
+
+                        <label for="{{ businessPractice.vars.id }}">
+                        <span>
+                            <i class="icon icon--business-{{ arrayImg[businessPractice.vars.label] }}"></i><br/>
+                            {{ businessPractice.vars.label | trans }}
+                        </span>
+                        </label>
+                    </div>
+                {% endfor %}
             </div>
+            {{ form_errors(form.businessPractice) }}
 
             <div class="wmw-fieldrow row">
                 <label class="wmw-label wmw-label--topmobile col-xs-12 col-sm-5"
                        for="wmw-pitch-domain">{{ 'professionalexpertises.title' | trans }}</label>
                 {{ form_widget(form.professionalExpertise, { 'attr': { 'class': 'required col-xs-12 col-md-6' }}) }}
             </div>
+            {{ form_errors(form.professionalExpertise) }}
 
             <div class="wmw-fieldrow row">
                 <label class="wmw-label wmw-label--topmobile col-xs-12 col-sm-5"
                        for="wmw-pitch-budget">{{ 'mission.new.label.budget' | trans }}</label>
                 {{ form_widget(form.budget, {'attr': { 'class': 'required col-xs-12 col-md-6'}}) }}
             </div>
+            {{ form_errors(form.budget) }}
 
             <div class="wmw-onboard-blocks row">
                 {% for key, val in form.continents %}
@@ -71,6 +78,7 @@
                     </div>
                 {% endfor %}
             </div>
+            {{ form_errors(form.continents) }}
 
             <div class="wmw-fieldrow wmw-selectrow row">
                 <label class="wmw-label wmw-label--topmobile col-xs-12 col-sm-5">{{ 'mission.new.label.applicationEnding' | trans }}</label>
@@ -80,6 +88,7 @@
                     {% endfor %}
                 </div>
             </div>
+            {{ form_errors(form.applicationEnding) }}
 
             <div class="wmw-fieldrow wmw-selectrow row">
                 <label class="wmw-label wmw-label--topmobile col-xs-12 col-sm-5">{{ 'mission.new.label.missionBeginning' | trans }}</label>
@@ -89,6 +98,7 @@
                     {% endfor %}
                 </div>
             </div>
+            {{ form_errors(form.missionBeginning) }}
 
             <div class="wmw-fieldrow wmw-selectrow row">
                 <label class="wmw-label wmw-label--topmobile col-xs-12 col-sm-5">{{ 'mission.new.label.missionEnding' | trans }}</label>
@@ -98,6 +108,7 @@
                     {% endfor %}
                 </div>
             </div>
+            {{ form_errors(form.missionEnding) }}
 
             <div class="wmw-onboard-blocks row">
                 <div class="wmw-onboard-blocks-el col-xs-12 col-md-6">
@@ -116,6 +127,9 @@
                     {{ form_widget(form.address.country) }}
                 </div>
             </div>
+            {{ form_errors(form.confidentiality) }}
+            {{ form_errors(form.telecommuting) }}
+            {{ form_errors(form.address) }}
 
             <div class="wmw-progressbar">
                 <span class="active"></span>
@@ -124,18 +138,22 @@
                 <span></span>
                 <span></span>
             </div>
-
         </div>
 
-        <div class="wmw-onboard-bottom">
-            {% set late = '<i></i><span>' ~ form.forLater.vars.label ~ '</span><i></i>' %}
-            {% set next = '<i></i><span>' ~ form.submit.vars.label ~ '</span><i></i>' %}
-            {% set back = '<i></i><span>' ~ form.back.vars.label ~ '</span><i></i>' %}
+    <div class="wmw-onboard-bottom">
+        {% set late = '<i></i><span>' ~ form.forLater.vars.label | trans  ~ '</span><i></i>' %}
+        {{ form_widget(form.forLater, {attr: {formnovalidate: 'formnovalidate',
+            class: 'wmw-button wmw-button--black wmw-button--border wmw-onboard-bottom-left wmw-button-later'}, label: late }) }}
+        
+        <a href="{{ path('mission_new_step_one', { 'missionId' : missionId }) }}" class="wmw-button wmw-button--border">
+            <i></i><span>
+                    {{ 'form.btn.back' | trans }}
+                </span><i></i>
+        </a>
 
-            {{ form_row(form.forLater, { 'attr' : { formnovalidate: 'formnovalidate','class' : 'wmw-button wmw-button--black wmw-button--border wmw-onboard-bottom-left'}, label: late}) }}
-            {{ form_widget(form.back, { 'attr' : { 'class' : 'wmw-button wmw-button--border' }, label: back}) }}
-            {{ form_widget(form.next, { 'attr' : { 'class' : 'wmw-button wmw-button--green' }, label: next}) }}
-        </div>
+        {% set next = '<i></i><span>' ~ form.next.vars.label | trans ~ '</span><i></i>' %}
+        {{ form_widget(form.next, { 'attr' : { 'class' : 'wmw-button wmw-button--green' }, label: next}) }}
+    </div>
 
     {{ form_end(form) }}
 

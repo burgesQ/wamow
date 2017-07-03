@@ -13,9 +13,13 @@
     {% endfor %}
 
     <div class="wmw-mission col-xs-10 col-xs-offset-1">
-        <a href="{{ path('dashboard') }}" class="wmw-mission-close"><i
-                    class="icon icon--cross"></i>{{ 'mission.view.advisor.btn_back_to_board' | trans }}</a>
-
+        {% if step.position == 3 %}
+            <a href="{{ path('dashboard') }}" class="wmw-mission-close"><i
+                        class="icon icon--cross"></i>{{ 'mission.view.advisor.btn_back_to_board' | trans }}</a>
+        {% else %}
+            <a href="{{ path('mission_view', { 'missionId' : mission.id }) }}" class="wmw-mission-close"><i
+                        class="icon icon--cross"></i>{{ 'mission.view.advisor.btn_back_to_mission' | trans }}</a>
+        {% endif %}
         <div class="wmw-mission-breadcrumbs">
             <span class="breadcrumbs-el active">
                 1. {{ 'mission.view.contractor.status_advisor' | trans | upper }}</span>
@@ -24,9 +28,9 @@
                 {% if step.position == 1 and shortlisted > 0 %}
                     <a href="{{ path('mission_shortlist', { 'missionId' : mission.id }) }}">
                         <button class="wmw-button wmw-button--black wmw-button--border wmw-button--small">
-                            <i></i><span>
-                                {{ 'mission.view.contractor.btn_proced_to_shortlist' | trans | upper }}
-                            </span><i></i>
+                        <i></i><span>
+                            {{ 'mission.view.contractor.btn_proced_to_shortlist' | trans | upper }}
+                        </span><i></i>
                         </button>
                     </a>
                 {% endif %}
@@ -40,12 +44,16 @@
                 {{ mission.title }}
                 <small><i class="icon icon--certification"></i>
                     {{ 'mission.view.certifications' | trans | humanize }} :
-                    {% for certif in mission.certifications %}
-                        {{ certif.name }}
-                        {% if not loop.last %}
-                            ,
-                        {% endif %}
-                    {% endfor %}
+                    {% if mission.certifications.count() > 0 %}
+                        {% for certif in mission.certifications %}
+                            {{ certif.name }}
+                            {% if not loop.last %}
+                                ,
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        {{ 'mission.view.no_certification' | trans }}
+                    {% endif %}
                 </small>
             </h1>
 
@@ -177,48 +185,49 @@
                     <div class="mail-toolbar">
                         {% if step.position == 1 %}
                             <div class="mail-toolbar-buttons">
-                                {# TODO : HIDE BTN DEPENDING ON THE USERMISSION STATUS #}
-                                <button id="refuse_{{ userMission.id }}" type="button"
-                                        class="wmw-button wmw-button--red wmw-button--border wmw-button--small">
-                                    <i></i><span>
-                                        <i class="icon icon--cross"></i>
-                                        {{ 'mission.view.contractor.btn_refuse' | trans }}
-                                    </span><i></i>
-                                </button>
-                                <div class="wmw-checkbutton">
-                                    <button type="button" id="shortlist_{{ userMission.id }}"
-                                            class="wmw-button wmw-button--green wmw-button--border wmw-button--small"
-                                            {% if userMission.status == constant('SHORTLIST', userMission) %}visibility="hidden"{% endif %}>
+
+                                {% if userMission.status != constant('SHORTLIST', userMission) %}
+
+                                    <a href="{{ path('user_mission_refuse', { 'userMissionId' : userMission.id }) }}" class="wmw-button wmw-button--red wmw-button--border wmw-button--small">
+                                        <i></i><span>
+                                            <i class="icon icon--cross"></i>
+                                            {{ 'mission.view.contractor.btn_refuse' | trans }}
+                                        </span><i></i>
+                                    </a>
+
+                                    <a href="{{ path('user_mission_add_to_shortlist', { 'userMissionId' : userMission.id }) }}" class="wmw-button wmw-button--green wmw-button--border wmw-button--small">
                                         <i></i><span>
                                             <i class="icon icon--star"></i>
                                             {{ 'mission.view.contractor.btn_add_to_shortlist' | trans | upper }}
                                         </span><i></i>
-                                    </button>
-                                    <button id="remove_from_shortlist_{{ userMission.id }}" hidden type="button"
-                                            class="wmw-button wmw-button--red wmw-button--border wmw-button--small"
-                                            {% if userMission.status < constant('SHORTLIST', userMission) %}display=none{% endif %}>
+                                    </a>
+
+                                {% else %}
+
+                                    <a href="{{ path('user_mission_remove_from_shortlist', { 'userMissionId' : userMission.id }) }}" class="wmw-button wmw-button--red wmw-button--border wmw-button--small">
                                         <i></i><span>
                                             <i class="icon icon--star"></i>
                                             {{ 'mission.view.contractor.btn_remove_from_shortlist' | trans | upper }}
                                         </span><i></i>
-                                    </button>
-                                    <input type="checkbox" name="wmw-shortlist[]"/>
-                                </div>
-                            </div>
+                                    </a>
+
+                                {% endif %}
+
+                    </div>
                         {% elseif step.position == 2 %}
                             <div class="mail-toolbar-buttons">
-                                <button id="refuse_{{ userMission.id }}" type="button" class="wmw-button wmw-button--red wmw-button--border wmw-button--small">
+                                <a href="{{ path('user_mission_refuse', { 'userMissionId' : userMission.id }) }}" class="wmw-button wmw-button--red wmw-button--border wmw-button--small">
                                     <i></i><span>
                                         <i class="icon icon--cross"></i>
                                         {{ 'mission.view.contractor.btn_refuse' | trans }}
                                     </span><i></i>
-                                </button>
-                                <button id="contract_{{ userMission.id }}" type="button" class="wmw-button wmw-button--green wmw-button--border wmw-button--small">
+                                </a>
+                                <a href="{{ path('user_mission_add_to_contract', { 'userMissionId' : userMission.id }) }}" class="wmw-button wmw-button--green wmw-button--border wmw-button--small">
                                     <i></i><span>
                                         <i class="icon icon--handshake"></i>
                                         {{ 'mission.view.contractor.btn_contract' | trans | upper }}
                                     </span><i></i>
-                                </button>
+                                </a>
                             </div>
                         {% endif %}
 
@@ -239,7 +248,7 @@
                                         <div class="mail-content-profile-picture" style="background-image:url({{ image.webPath() }});"></div>
                                     {% endif %}
                                 {% else %}
-                                    {% set image = 'images/' ~ random(['placeholder-pp-0.png', 'placeholder-pp-1.png', 'placeholder-pp-2.png', 'placeholder-pp-3.png']) %}
+                                    {% set image = asset('images/' ~ random(['placeholder-pp-0.png', 'placeholder-pp-1.png', 'placeholder-pp-2.png', 'placeholder-pp-3.png'])) %}
                                     <div class="mail-content-profile-picture" style="background-image:url({{ image }});"></div>
 
                                 {% endif %}
@@ -274,22 +283,26 @@
 
                         <div class="mail-content-notes{% if step.position == 3 %} mail-content-notes--semi{% endif %}">
                             <label for="wmw-mission-notes">Notes</label>
-                            <div class="edit" id="{{ userMission.id }}">
-                                {{ userMission.note | nl2br }}
-                            </div>
-                            <div id="wmw-mission-notes-status">{{ 'form.btn.save' | trans }}</div>
+                            <textarea id="wmw-mission-notes" class="element-notes-textarea" data-id="{{ userMission.id }}" data-path="{{ path('user_mission_notes') }}">{{ userMission.note }}</textarea>
+                            <div id="wmw-mission-notes-status" class="element-notes-status">{{ 'form.note.saved' | trans }}</div>
                         </div>
-
-
 
                         <div class="mail-content-chat">
-                            {% include '@Mission/Mission/Contractor/view_thread_contractor.html.twig' %}
+                            <div class="message" id="thread_message">
+                                {% include '@Mission/Mission/Contractor/view_thread_contractor.html.twig' %}
+                            </div>
                         </div>
 
-                        <form action="" method="post" class="mail-content-answer">
-                            <textarea class="required"></textarea>
-                            <button type="submit">{{ 'form.btn.send' | trans }}</button>
-                        </form>
+                        <div class="mail-content-answer">
+                            <textarea id="inbox_input_message" name="inbox[inout_message]"></textarea>
+                            <button id="submit_text" value="{{ 'form.btn.send' | trans | upper }}"
+                                    onClick="sendMessage()">{{ 'form.btn.send' | trans }}</button>
+                        </div>
+
+                        {#<form action="" method="post" class="mail-content-answer">#}
+                            {#<textarea class="required" id="inbox_input_message"></textarea>#}
+                            {#<button type="submit">{{ 'form.btn.send' | trans }}</button>#}
+                        {#</form>#}
                     </div>
                 </div>
             </div>
@@ -307,99 +320,12 @@
             </div>
         </div>
     </div>
-
 {% endblock %}
 
 {% block javascripts %}
-
     {{ parent() }}
 
-    <script src="http://www.appelsiini.net/download/jquery.jeditable.js"></script>
-    <script src="http://www.appelsiini.net/download/jquery.jeditable.mini.js"></script>
     <script type="text/javascript">
-
-//        AJAX JEDITABLE (NOTES)
-        $('.edit').editable('{{ path('user_mission_notes') }}', {
-            type: 'textarea',
-            submit: '{{ 'form.btn.save' | trans }}',
-            indicator: '{{ 'form.note.indicator' | trans }}',
-            tooltip: '{{ 'form.note.tooltip' | trans }}',
-            id: $(this).attr('id'),
-            data: function (value, settings) {
-                return value.replace(/<br\s*\/?>\n?/gi, '\n');
-            },
-            callback: function (value, settings) {
-                $(this).html(value.replace(/\n/g, "<br />"));
-            }
-        });
-
-//        AJAX SHORTLIST ACTION (STEP 1)
-        $('[id^="shortlist_"]').each(function () {
-            $(this).click(function () {
-                var id = $(this).attr('id').split('_')[1];
-                $.ajax({
-                    url: "{{ path('user_mission_add_to_shortlist') }}",
-                    method: "put",
-                    data: {id: id}
-                }).done(function (msg) {
-                    alert("{{ 'mission.action.add_to_shortlist' | trans }}");
-                    $('#shortlist_' + id).hide();
-                    $('#remove_from_shortlist_' + id).show();
-                }).fail(function () {
-                    alert("{{ 'error.action.failed' | trans }}");
-                });
-            });
-        });
-
-//        AJAX REMOVE FROM SHORTLIST ACTION (STEP 1)
-        $('[id^="remove_from_shortlist_"]').each(function () {
-            $(this).click(function () {
-                var id = $(this).attr('id').split('_')[3];
-                $.ajax({
-                    url: "{{ path('user_mission_remove_from_shortlist') }}",
-                    method: "put",
-                    data: {id: id}
-                }).done(function (msg) {
-                    alert("{{ 'mission.action.remove_from_shortlist' | trans }}");
-                    $('#remove_from_shortlist_' + id).hide();
-                    $('#shortlist_' + id).show();
-                }).fail(function () {
-                    alert("{{ 'error.action.failed' | trans }}");
-                });
-            });
-        });
-
-//        AJAX CONTRACT ACTION (STEP 2)
-        $('[id^="contract_"]').each(function () {
-            $(this).click(function () {
-                var id = $(this).attr('id').split('_')[1];
-                $.ajax({
-                    url: "{{ path('user_mission_add_to_contract') }}",
-                    method: "put",
-                    data: {id: id}
-                }).done(function (msg) {
-                    alert("{{ 'mission.action.add_to_contract' | trans }}");
-                }).fail(function () {
-                    alert("{{ 'error.action.failed' | trans }}");
-                });
-            });
-        });
-
-//        AJAX REFUSE ACTION (STEP 1|2)
-        $('[id^="refuse_"]').each(function () {
-            $(this).click(function () {
-                var id = $(this).attr('id').split('_')[1];
-                $.ajax({
-                    url: "{{ path('user_mission_refuse') }}",
-                    method: "put",
-                    data: {id: id}
-                }).done(function (msg) {
-                    alert("{{ 'mission.action.refuse_user' | trans }}");
-                }).fail(function () {
-                    alert("{{ 'error.action.failed' | trans }}");
-                });
-            });
-        });
 
 //        AJAX SEND / UPDATE MESSAGE
         function sendMessage() {

@@ -38,11 +38,9 @@
 
         {# links #}
         <div class="wmw-profile-tabs row">
+            <a href="#"></a>
             <a href="{{ path('user_profile_show') }}" class="active">
                 {{ 'user.profile_show.advisor.link_general' | trans }}
-            </a>
-            <a href="#">
-                {{ 'user.profile_show.advisor.link_billing' | trans }}
             </a>
         </div>
 
@@ -190,21 +188,30 @@
                     </div>
                 {% endif %}
 
-                <div class="col-xs-12 row">
-                    <div class="col-xs-12 col-md-5 col-md-offset-1">
-                        <div class="wmw-profile-subtitle"><span>Subscription</span></div>
-                        <div class="wmw-profile-subscription">
-                            <div class="wmw-profile-subscription-plan">
-                                <span class="plan-icon"><i class="icon icon--star"></i></span>
-                                <span class="plan-label">Advisor plan</span>
-                            </div>
-                            <div class="wmw-profile-subscription-info">
-                                <i class="icon icon--clock"></i> 1 an<br/>
-                                <i class="icon icon--calendar"></i> Ends 09 15, 2017
+                {% if roleAdvisor %}
+                    <div class="col-xs-12 row">
+                        <div class="col-xs-12 col-md-5 col-md-offset-1">
+                            <div class="wmw-profile-subtitle"><span>{{ 'payment.subscription' | trans }}</span></div>
+                            <div class="wmw-profile-subscription">
+                                {% if user.planExpiresAt and user.planExpiresAt > date() %}
+                                    <div class="wmw-profile-subscription-plan">
+                                        <span class="plan-icon"><i class="icon icon--star"></i></span>
+                                        <span class="plan-label">{{ 'payment.plan.advisor' | trans }}</span>
+                                    </div>
+                                    <div class="wmw-profile-subscription-info">
+                                        <i class="icon icon--clock"></i> {{'payment.one_year' | trans }}<br/>
+                                        <i class="icon icon--calendar"></i> {{'payment.ends' | trans }} {{user.planExpiresAt|date("Y-m-d")}}
+                                    </div>
+                                {% else %}
+                                    <div class="wmw-profile-subscription-plan">
+                                        <span class="plan-icon"><i class="icon icon--star"></i></span>
+                                        <span class="plan-label">{{ 'payment.plan.free' | trans }}</span>
+                                    </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
-                </div>
+                {% endif %}
             </div>
         </div>
     </div>

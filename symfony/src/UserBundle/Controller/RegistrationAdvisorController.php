@@ -20,7 +20,6 @@ use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\FOSUserEvents;
 use ToolsBundle\Entity\Address;
 use UserBundle\Entity\User;
-use MissionBundle\Entity\UserWorkExperience;
 use Swift_Message;
 
 class RegistrationAdvisorController extends Controller
@@ -49,7 +48,7 @@ class RegistrationAdvisorController extends Controller
             $user = $userManager->createUser();
             $user->setEnabled(true);
             $user->setRoles(["ROLE_ADVISOR"]);
-        } else if (($url = $this->get('signed_up')->checkIfSignedUp($user->getStatus()))) {
+        } elseif (($url = $this->get('signed_up')->checkIfSignedUp($user->getStatus()))) {
             $this->redirectToRoute($url);
         }
 
@@ -82,8 +81,11 @@ class RegistrationAdvisorController extends Controller
         if ($form->handleRequest($request)->isSubmitted() && $form->isValid()) {
             if (!$user->getLinkedinId() && !$form->get('resume')->getData()->getFile()) {
                 $form->get('resume')->addError(new FormError($trans->trans('error.upload_resume_or_linkedin', [], 'tools')));
-            } elseif($userManager->findUserBy(['email' => $form->get('user')->get('email')->getData()]) !== null && !$user->getLinkedinId()) {
-                $form->get('user')->addError(new FormError($trans->trans('error.user.email_in_use', [], 'tools')));
+            } elseif($userManager->findUserBy(['email' => $form->get('user')->get('email')->getData()]) !== null &&
+                (!$this->getUser() || $this->getUser()->getEmail() == $form->get('user')->get('email')->getData())) {
+
+                $form->get('user')->get('email')->addError(new FormError($trans->trans('error.user.email_in_use', [],
+                    'tools')));
             } else {
                 $event = new FormEvent($form, $request);
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
@@ -144,7 +146,7 @@ class RegistrationAdvisorController extends Controller
 
         if (!($user = $this->getUser())) {
             return $this->redirectToRoute('fos_user_registration_register_expert');
-        } elseif ($user->getStatus() !== User::REGISTER_STEP_ONE) {
+        } elseif ($user->getStatus() < User::REGISTER_STEP_ONE) {
             return $this->redirectToRoute($this->get('signed_up')->checkIfSignedUp($user->getStatus()));
         }
 
@@ -152,13 +154,6 @@ class RegistrationAdvisorController extends Controller
         $form = $this->createForm(new StepOneType(), $user)->setData($user);
         // if form submitted
         if ($form->handleRequest($request)->isSubmitted() && $form->isValid()) {
-            // if back button submit, reset user data to previous step
-            if ($form->get('back')->isClicked()) {
-                $user->setStatus(User::REGISTER_STEP_ZERO);
-                $this->get('fos_user.user_manager')->updateUser($user);
-
-                return new RedirectResponse($this->redirectToRoute('expert_registration_step_one'));
-            }
             $user->setStatus(User::REGISTER_STEP_TWO);
             $this->get('fos_user.user_manager')->updateUser($user);
 
@@ -167,7 +162,7 @@ class RegistrationAdvisorController extends Controller
 
         $arrayImg = [
             "businesspractice.industry" => "manufacturing",
-            "businesspractice.finance" => "",
+            "businesspractice.finance" => "finance",
             "businesspractice.retail" => "retail",
             "businesspractice.media" => "media-telco-entertainment",
             "businesspractice.tourism" => "tourisme",
@@ -175,10 +170,10 @@ class RegistrationAdvisorController extends Controller
             "businesspractice.realestate" => "finance",
             "businesspractice.hotel" => "hotel",
             "businesspractice.services" => "food-beverage",
-            "businesspractice.energy" => "manufacturing",
-            "businesspractice.it" => "",
-            "businesspractice.public" => "",
-            "businesspractice.ngo" => ""
+            "businesspractice.energy" => "energy",
+            "businesspractice.it" => "it",
+            "businesspractice.public" => "public",
+            "businesspractice.ngo" => "ngo"
         ];
 
         return $this->render('UserBundle:Registration:register_expert_step_one.html.twig', [
@@ -198,19 +193,13 @@ class RegistrationAdvisorController extends Controller
     {
         if (!($user = $this->getUser())) {
             return $this->redirectToRoute('fos_user_registration_register_expert');
-        } elseif ($user->getStatus() !== User::REGISTER_STEP_TWO) {
+        } elseif ($user->getStatus() < User::REGISTER_STEP_TWO) {
             return $this->redirectToRoute($this->get('signed_up')->checkIfSignedUp($user->getStatus()));
         }
 
         /** @var \Symfony\Component\Form\Form $form */
         $form = $this->createForm(new StepTwoType(), $user)->setData($user);
         if ($form->handleRequest($request)->isSubmitted() && $form->isValid()) {
-            if ($form->get('back')->isClicked()) {
-                $user->setStatus(User::REGISTER_STEP_ONE);
-                $this->get('fos_user.user_manager')->updateUser($user);
-
-                return $this->redirectToRoute('expert_registration_step_one');
-            }
             $user->setStatus(User::REGISTER_STEP_THREE);
             $this->get('fos_user.user_manager')->updateUser($user);
 
@@ -233,19 +222,13 @@ class RegistrationAdvisorController extends Controller
     {
         if (!($user = $this->getUser())) {
             return $this->redirectToRoute('fos_user_registration_register_expert');
-        } elseif ($user->getStatus() !== User::REGISTER_STEP_THREE) {
+        } elseif ($user->getStatus() < User::REGISTER_STEP_THREE) {
             return $this->redirectToRoute($this->get('signed_up')->checkIfSignedUp($user->getStatus()));
         }
 
         /** @var \Symfony\Component\Form\Form $form */
         $form = $this->createForm(new StepThreeType(), $user)->setData($user);
         if ($form->handleRequest($request)->isSubmitted() && $form->isValid()) {
-            if ($form->get('back')->isClicked()) {
-                $user->setStatus(User::REGISTER_STEP_TWO);
-                $this->get('fos_user.user_manager')->updateUser($user);
-
-                return $this->redirectToRoute('expert_registration_step_two');
-            }
             $user->setStatus(User::REGISTER_STEP_FOUR);
             $this->get('fos_user.user_manager')->updateUser($user);
 
@@ -268,33 +251,24 @@ class RegistrationAdvisorController extends Controller
     {
         if (!($user = $this->getUser())) {
             return $this->redirectToRoute('fos_user_registration_register_expert');
-        } elseif ($user->getStatus() !== User::REGISTER_STEP_FOUR) {
+        } elseif ($user->getStatus() < User::REGISTER_STEP_FOUR) {
             return $this->redirectToRoute($this->get('signed_up')->checkIfSignedUp($user->getStatus()));
         }
 
         $em = $this->getDoctrine()->getManager();
         /** @var \Symfony\Component\Form\Form $form */
         $form = $this->createForm(new StepFourType(), $user)->setData($user);
-        if ($form->handleRequest($request)->isSubmitted()) {
-            if ($form->get('back')->isClicked()) {
-                $user->setStatus(User::REGISTER_STEP_THREE);
-                $this->get('fos_user.user_manager')->updateUser($user);
-
-                return $this->redirectToRoute('expert_registration_step_three');
+        if ($form->handleRequest($request)->isSubmitted() && $form->isValid()) {
+            /** @var \MissionBundle\Entity\UserWorkExperience $oneWorkExp */
+            foreach ($user->getUserWorkExperiences() as $oneWorkExp) {
+                $oneWorkExp->setUser($user);
+                $em->persist($oneWorkExp);
             }
+            $user->setStatus(User::REGISTER_NO_STEP);
+            $this->get('fos_user.user_manager')->updateUser($user);
+            $em->flush();
 
-            if ($form->isValid()) {
-                /** @var \MissionBundle\Entity\UserWorkExperience $oneWorkExp */
-                foreach ($user->getUserWorkExperiences() as $oneWorkExp) {
-                    $oneWorkExp->setUser($user);
-                    $em->persist($oneWorkExp);
-                }
-                $user->setStatus(User::REGISTER_NO_STEP);
-                $this->get('fos_user.user_manager')->updateUser($user);
-                $em->flush();
-
-                return $this->redirectToRoute('dashboard');
-            }
+            return $this->redirectToRoute('dashboard');
         }
 
         return $this->render('UserBundle:Registration:register_expert_step_four.html.twig', [

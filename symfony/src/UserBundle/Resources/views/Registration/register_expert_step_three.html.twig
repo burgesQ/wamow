@@ -17,43 +17,50 @@
 
 {% trans_default_domain "tools" %}
 {% block body %}
-{{ form_start(form, {'attr': {'class': 'wmw-onboard col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 col-xl-4 col-xl-offset-4'}}) }}
-{{ form_errors(form.missionKind) }}
-<div class="wmw-onboard-body">
-    <h1>
-        {{ 'registration.advisor.three.title' | trans }}
-        <small>{{ 'registration.advisor.three.subtitle' | trans | upper }}</small>
-    </h1>
-    <div class="wmw-onboard-switches">
-        {% for key, missionKind in form.missionKind %}
-            <div class="wmw-onboard-switches-el">
-                <label for="{{missionKind.vars.id}}">{{ form_label(missionKind) }}</label>
-                <div class="wmw-switchfield">
-                    {{ form_widget(missionKind, {'attr' : {'class': 'requiredgroup:wmw-ob-missions vv-ggparent'}}) }}
-                    <label for="{{ missionKind.vars.id }}"><span>No</span><span>Yes</span></label>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-    <div class="wmw-progressbar">
-        <span class="active"></span>
-        <span class="active"></span>
-        <span class="active"></span>
-        <span class="active"></span>
-        <span></span>
-    </div>
-</div>
-<div class="wmw-onboard-bottom">
-    {% set next = '<i></i><span>' ~ form.submit.vars.label | trans ~ '</span><i></i>' %}
-    {% set back = '<i></i><span>' ~ form.back.vars.label | trans ~ '</span><i></i>' %}
 
-    {{ form_widget(form.back, {'attr': {'class': 'wmw-button wmw-button--border'}, 'label': back }) }}
-    {{ form_widget(form.submit, {'attr': {'class': 'wmw-button wmw-button--green'}, 'label': next }) }}
-</div>
-{{ form_end(form) }}
-<div class="wmw-onboard-text col-md-3 col-xl-2">
-    <p>{{ 'registration.advisor.three.howtotitle' | trans | upper }}</p>
-    <p>{{ 'registration.advisor.three.howtotext' | trans }}
-</p>
-</div>
+    {{ form_start(form, {'attr': {'class': 'wmw-onboard col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 col-xl-4 col-xl-offset-4'}}) }}
+
+    <div class="wmw-onboard-body">
+
+        <h1>
+            {{ 'registration.advisor.three.title' | trans }}
+            <small>{{ 'registration.advisor.three.subtitle' | trans | upper }}</small>
+        </h1>
+
+        {{ form_errors(form.professionalExpertise) }}
+        <div class="wmw-onboard-switches">
+            {% for key, professionalExpertise in form.professionalExpertise %}
+                <div class="wmw-onboard-switches-el">
+                    <label for="{{ professionalExpertise.vars.id }}">{{ form_label(professionalExpertise) }}</label>
+                    <div class="wmw-switchfield">
+                        {{ form_widget(professionalExpertise, {'attr' : {'class': 'requiredgroup:wmw-ob-missions vv-ggparent'}}) }}
+                        <label for="{{ professionalExpertise.vars.id }}"><span>No</span><span>Yes</span></label>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="wmw-progressbar">
+            <span class="active"></span>
+            <span class="active"></span>
+            <span class="active"></span>
+            <span class="active"></span>
+            <span></span>
+        </div>
+    </div>
+    <div class="wmw-onboard-bottom">
+        <a href="{{ path('expert_registration_step_two') }}" class="wmw-button wmw-button--border">
+            <i></i><span>
+                {{ 'form.btn.back' | trans }}
+            </span><i></i>
+        </a>
+        {% set next = '<i></i><span>' ~ form.submit.vars.label | trans ~ '</span><i></i>' %}
+        {{ form_widget(form.submit, {'attr': {'class': 'wmw-button wmw-button--green'}, 'label': next }) }}
+    </div>
+    {{ form_end(form) }}
+    <div class="wmw-onboard-text col-md-3 col-xl-2">
+        <p>{{ 'registration.advisor.three.howtotitle' | trans | upper }}</p>
+        <p>{{ 'registration.advisor.three.howtotext' | trans }}
+        </p>
+    </div>
 {% endblock %}

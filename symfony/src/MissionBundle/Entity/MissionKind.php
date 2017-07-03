@@ -2,6 +2,7 @@
 
 namespace MissionBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -29,13 +30,48 @@ class MissionKind
     private $name;
 
     /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     *
+     * @ORM\ManyToMany(
+     *     targetEntity="MissionBundle\Entity\WorkExperience",
+     *     mappedBy="missionKinds")
+     */
+    private $workExperiences;
+
+    /**
+     * MissionKind constructor.
+     */
+    public function __construct()
+    {
+        $this->workExperiences = new ArrayCollection();
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->name;
+    }
+
+    /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**
@@ -52,12 +88,35 @@ class MissionKind
     }
 
     /**
-     * Get name
+     * Add workExperiences
      *
-     * @return string 
+     * @param \MissionBundle\Entity\WorkExperience $workExperiences
+     * @return MissionKind
      */
-    public function getName()
+    public function addWorkExperience($workExperiences)
     {
-        return $this->name;
+        $this->workExperiences[] = $workExperiences;
+
+        return $this;
+    }
+
+    /**
+     * Remove workExperiences
+     *
+     * @param \MissionBundle\Entity\WorkExperience $workExperiences
+     */
+    public function removeWorkExperience($workExperiences)
+    {
+        $this->workExperiences->removeElement($workExperiences);
+    }
+
+    /**
+     * Get workExperiences
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getWorkExperiences()
+    {
+        return $this->workExperiences;
     }
 }

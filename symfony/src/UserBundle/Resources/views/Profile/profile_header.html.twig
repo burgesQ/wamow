@@ -1,6 +1,5 @@
 {% trans_default_domain 'tools' %}
 
-<header class="wmw-header row">
     <a href="{{ path('home_page_expert') }}" class="wmw-header-logo">
         <img src="{{ asset('images/header-logo.png') }}" alt="WMW"/>
     </a>
@@ -22,20 +21,18 @@
             <div class="wmw-header-profile-button">
                 <button type="button" class="wmw-button wmw-button--border" id="hide_logout">
                     <i></i><span>
-                {% if (user.firstName ~ user.LastName) | length < 20 %}
-                    {{ user.firstName }} {{ user.lastName }}
-                {% else %}
-                    {{ (user.firstName) | truncate(1, false, '.') }} {{ user.lastName | truncate(18, false, '') }}
-                {% endif %}
+                    {% if (user.firstName ~ user.LastName) | length < 20 %}
+                        <span class="name">{{ user.firstName }} {{ user.lastName }}</span>
+                    {% else %}
+                        <span class="name">{{ (user.firstName) | truncate(1, false, '.') }} {{ user.lastName | truncate(18, false, '') }}</span>
+                    {% endif %}
                         <i class="icon icon--arrow"></i>
-            </span><i></i>
+                    </span><i></i>
                 </button>
                 <div class="wmw-header-profile-menu">
                     <a href="{{ path('user_profile_show') }}">{{ 'header.profile' | trans }}</a>
-                    <a href="#">{{ 'header.billing' | trans }}</a>
                     <a href="{{ path('fos_user_security_logout') }}">{{ 'header.logout' | trans }}</a>
                 </div>
             </div>
         {% endif %}
     </div>
-</header>

@@ -29,6 +29,7 @@ form:
         send: send
 
     note:
+        saved: Saved
         indicator: Saving ...
         tooltip: Click to edit note
 
@@ -87,6 +88,7 @@ error:
         not_found: No such userMission entity (%id)
         cant_giveup: Uou can't give up this mission.
         already_giveup: You alredy give_up this mission.
+        not_enough: You cannot remove the last advisor from the mission.
     mission:
         pitch:
             contractor: A contractor cannot pitch.
@@ -106,7 +108,11 @@ error:
             no_advisor: No advisor selected for the Finalist step.
     action:
         failed: Action failed.
+        shortlist:
+            to_much: You allready have selected 3 advisor.
     upload_resume_or_linkedin: Please Upload a resume or link your account with Linkedin
+    phone:
+        please_fill: Please fill out the phone number fileds.
 
 ## Home
 home:
@@ -193,7 +199,7 @@ dashboard:
             delete: Delete
             close: Closed
         other:
-            none: No other pitch yes
+            none: No other pitch
             none_leg: Other pitch will be available soone
             advice: Advice
             in_fact: You are more likely to be selected...
@@ -260,6 +266,7 @@ registration:
             mismatchpassword: "Mismatch password"
             resume: "Upload your CV"
             nextbutton: "NEXT"
+            confirm: Please confirm the informations bellow
         one:
             title: "Business practice?"
             subtitle: "Select industry you've already worked on"
@@ -322,13 +329,20 @@ user:
 
 ## Mission
 mission:
+    message:
+        shortlist_added: "You have been added to the shortlist of the mission."
+        shortlist_removed: "You have been refused from the mission."
+        selected: "You have been selected for the mission."
+        removed: "You have been removed from the shortlist of the mission."
     view:
         pitched_at: Pitched at date
         price_day: $ </div> / day
         more_info: more details
         less_info: less details
         currency_k: K $
-        receive_the_pitch: <span> %nb </span> will receive the pitch
+        receive_the_pitch: <span id='count-match'> %nb </span> will receive the pitch
+        certifications: Certification(s)
+        no_certification: No certification required
         contractor:
             pitched_at: Pitched at date
             next_mission: Next Mission >
@@ -345,6 +359,7 @@ mission:
                 %professionalExpertise<br>
                 <strong>$ %price</strong><br>
         advisor:
+            btn_back_to_mission: back to advisor list
             btn_back_to_board: back to board
             btn_back_to_global_view: back to global view
             interested: Interested
@@ -529,9 +544,9 @@ businesspractice:
     hotel: "Good & Beverage / Hotel / Sport / Leisure"
     services: "Services (included transport)"
     energy: "Energy"
-    it: "IT"
+    it: "Information Technology"
     public: "Public"
-    ngo: "NGO"
+    ngo: "Non Governmental Organisation"
 
 professionalexpertises:
     title: "Professional Expertises"
@@ -786,3 +801,9 @@ mails:
 payment:
     ok: "Subscription success !"
     ko: "Subscription failed."
+    subscription: "Subscription"
+    plan:
+        advisor: "Advisor plan"
+        free: "Basic plan (free)"
+    one_year: "1 year"
+    ends: "Ends"

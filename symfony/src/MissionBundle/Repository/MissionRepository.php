@@ -29,14 +29,12 @@ class MissionRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getContractorMissions($userId, $companyId, $status)
+    public function getContractorMissions($companyId, $status)
     {
         $qb = $this->_em->createQueryBuilder();
         $qb->select('m')
         ->from('MissionBundle:Mission', 'm')
-        ->where('m.contact = :userId')
-            ->setParameter('userId', $userId)
-        ->andWhere('m.company = :companyId')
+        ->where('m.company = :companyId')
             ->setParameter('companyId', $companyId)
         ->andWhere('m.status > :status')
             ->setParameter('status', $status);
@@ -166,7 +164,7 @@ class MissionRepository extends EntityRepository
             "languageIds" => $mission->getLanguages()->toArray(),
             "professionalExpertise" => $mission->getProfessionalExpertise(),
             "businessPractice" => $mission->getBusinessPractice(),
-            "missionBudget" => $mission->getBudget(),
+            "missionBudget" => $mission->getPrice(),
             "userStatus" => User::REGISTER_NO_STEP
         );
         $qb->setParameters($parameters);
@@ -270,20 +268,25 @@ class MissionRepository extends EntityRepository
      * (next btn)
      *
      * @param integer $missionId
-     * @return array
+     * @param         $company
+     * @return integer | null
      */
     public function findNextMission($missionId, $company)
     {
         $qb = $this->_em->createQueryBuilder();
 
-        $qb->select('m')
+        $qb->select('m.id')
             ->from('MissionBundle:Mission', 'm')
             ->where('m.id > '.$missionId)
             ->andWhere('m.company = :company')
             ->setParameter("company", $company)
+            ->andWhere('m.status = :published')
+            ->setParameter("published", Mission::PUBLISHED)
             ->orderBy('m.id', 'ASC')
+            ->setMaxResults(1)
         ;
 
-        return $qb->getQuery()->getResult();
+        return $qb->getQuery()->getOneOrNullResult();
+
     }
 }

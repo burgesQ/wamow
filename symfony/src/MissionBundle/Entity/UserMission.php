@@ -462,4 +462,14 @@ class UserMission
     {
         return $this->scoreDetails;
     }
+
+    /**
+     * Get scoreDetails
+     *
+     * @return string
+     */
+    public function getScoreDetailsAsString()
+    {
+        return json_encode($this->scoreDetails);
+    }
 }

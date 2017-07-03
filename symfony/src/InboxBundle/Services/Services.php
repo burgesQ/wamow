@@ -46,14 +46,15 @@ class Services
      * Create a thread between the user that pitch and the user that created the mission
      *
      * @param UserMission $userMission
-     * @param string        $content
+     * @param string      $content
      *
      * @return \InboxBundle\Entity\Thread|object
      */
     public function createThreadPitch($userMission, $content = null)
     {
         if (($thread = $this->em->getRepository('InboxBundle:Thread')
-            ->findOneBy(['userMission' => $userMission]))){
+            ->findOneBy(['userMission' => $userMission]))
+        ) {
             return $thread;
         }
 
@@ -110,8 +111,7 @@ class Services
             ->create($thread);
 
         // handle request
-        if ($replyForm->handleRequest($request)->isSubmitted()
-            && $replyForm->isValid()) {
+        if ($replyForm->handleRequest($request)->isSubmitted() && $replyForm->isValid()) {
             // use FOSMessageBundle methode
             $composer = $this->container->get('fos_message.composer');
             $sender   = $this->container->get('fos_message.sender');
@@ -239,14 +239,15 @@ class Services
     public function updateReadReport($thread, $user)
     {
         // if no thread
-        if ($thread == null)
+        if ($thread == null) {
             return false;
+        }
 
         // get last message
         $lastMessages = $thread->getMessages()[count($thread->getMessages()) - 1];
 
         // if user is not the sender; set the message to read
-        if ($user != $lastMessages->getSender()) {
+        if ($user !== $lastMessages->getSender()) {
             $lastMessages->setIsReadByParticipant($user, true);
             $this->em->flush();
 
@@ -261,5 +262,22 @@ class Services
         }
 
         return false;
+    }
+
+    /**
+     * @param User   $user
+     * @param string $content
+     * @param Thread $thread
+     */
+    public function sendMessage($user, $content, $thread)
+    {
+        $composer = $this->container->get('fos_message.composer');
+        $sender   = $this->container->get('fos_message.sender');
+
+        /** @var \FOS\MessageBundle\Entity\Message $message */
+        $message = $composer->reply($thread)->setSender($user)->setBody($content)->getMessage();
+        $sender->send($message);
+        $message->setIsReadByParticipant($user, true);
+        $this->em->flush();
     }
 }

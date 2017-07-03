@@ -24,6 +24,27 @@ mission_answer_to_advisor:
     defaults:
         _controller: MissionBundle:Mission:answerToAdvisor
 
+# Action from Contractor on Advisor
+user_mission_refuse:
+    path:            /refuse/{userMissionId}
+    defaults:
+        _controller: MissionBundle:Mission:refuseUserMission
+
+user_mission_add_to_contract:
+    path:            /contract/add/{userMissionId}
+    defaults:
+        _controller: MissionBundle:Mission:addToContract
+
+user_mission_add_to_shortlist:
+    path:            /shortlist/add/{userMissionId}
+    defaults:
+        _controller: MissionBundle:Mission:addToShortlist
+
+user_mission_remove_from_shortlist:
+    path:            /shortlist/remove/{userMissionId}
+    defaults:
+        _controller: MissionBundle:Mission:removeFromShortlist
+
 # Mission Generator
 mission_new_step_one:
     path:      /mission/new/1/{missionId}
@@ -68,32 +89,13 @@ certifications_autocomplete:
         _controller: MissionBundle:Action:certificationsAutocomplete
     methods:     [GET]
 
-user_mission_add_to_contract:
-    path:            /contract/add
-    defaults:
-        _controller: MissionBundle:Action:addToContract
-        methode:     PUT
-
-user_mission_add_to_shortlist:
-    path:            /shortlist/add
-    defaults:
-        _controller: MissionBundle:Action:addToShortlist
-    methods:     [PUT]
-
-user_mission_remove_from_shortlist:
-    path:            /shortlist/remove
-    defaults:
-        _controller: MissionBundle:Action:removeFromShortlist
-    methods:     [PUT]
-
-user_mission_refuse:
-    path:            /refuse
-    defaults:
-        _controller: MissionBundle:Action:refuseUserMission
-    methods:     [PUT]
-
 user_mission_notes:
     path:            /save_notes
     defaults:
         _controller: MissionBundle:Action:saveNote
     methods:     [POST]
+
+mission_count_match:
+    path:            /mission/{missionId}/countMatch
+    defaults:
+        _controller: MissionBundle:Action:getNbMatch

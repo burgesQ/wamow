@@ -2,11 +2,8 @@
 
 namespace MissionBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\DataFixtures\FixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
-use MissionBundle\Entity\ProfessionalExpertise;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * ProfessionalExpertise
@@ -33,6 +30,31 @@ class ProfessionalExpertise
     private $name;
 
     /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     *
+     * @ORM\ManyToMany(
+     *     targetEntity="MissionBundle\Entity\WorkExperience",
+     *     mappedBy="professionalExpertises")
+     */
+    private $workExperiences;
+
+    /**
+     * ProfessionalExpertise constructor.
+     */
+    public function __construct()
+    {
+        $this->workExperiences = new ArrayCollection();
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->name;
+    }
+
+    /**
      * Get id
      *
      * @return integer
@@ -40,6 +62,16 @@ class ProfessionalExpertise
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**
@@ -56,12 +88,35 @@ class ProfessionalExpertise
     }
 
     /**
-     * Get name
+     * Add workExperiences
      *
-     * @return string
+     * @param \MissionBundle\Entity\WorkExperience $workExperiences
+     * @return ProfessionalExpertise
      */
-    public function getName()
+    public function addWorkExperience($workExperiences)
     {
-        return $this->name;
+        $this->workExperiences[] = $workExperiences;
+
+        return $this;
+    }
+
+    /**
+     * Remove workExperiences
+     *
+     * @param \MissionBundle\Entity\WorkExperience $workExperiences
+     */
+    public function removeWorkExperience($workExperiences)
+    {
+        $this->workExperiences->removeElement($workExperiences);
+    }
+
+    /**
+     * Get workExperiences
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getWorkExperiences()
+    {
+        return $this->workExperiences;
     }
 }

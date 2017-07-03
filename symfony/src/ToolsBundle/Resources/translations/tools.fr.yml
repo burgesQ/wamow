@@ -18,6 +18,9 @@ form:
     file:
         file: "Fichier"
 
+    note:
+        saved: Enregistré
+
 language:
     title: "Langues"
     english: "Anglais"
@@ -486,3 +489,9 @@ mails:
 payment:
     ok: "Inscription activée avec succés !"
     ko: "Inscription annulée."
+    subscription: "Inscription"
+    plan:
+        advisor: "Accès advisor"
+        free: "Accès basique (gratuit)"
+    one_year: "1 an"
+    ends: "Termine le"

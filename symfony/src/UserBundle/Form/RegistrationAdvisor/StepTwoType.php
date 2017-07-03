@@ -17,8 +17,9 @@ class StepTwoType extends AbstractType
             ->remove('username')
             ->remove('current_password')
             ->remove('email')
-            ->add('professionalExpertise', EntityType::class, [
-                'class'                     => 'MissionBundle:ProfessionalExpertise',
+
+            ->add('missionKind', EntityType::class, [
+                'class'                     => 'MissionBundle:MissionKind',
                 'property'                  => 'name',
                 'multiple'                  => true,
                 'expanded'                  => true,
@@ -27,15 +28,10 @@ class StepTwoType extends AbstractType
                 'choice_translation_domain' => 'tools',
                 'constraints'               => new Count([
                     'min' => 1,
-                    'minMessage' => 'user.professionalexpertises.min',
+                    'minMessage' => 'user.kindfomission.min',
                 ])
             ])
             ->add('submit', SubmitType::class, [
-            ])
-            ->add('back', SubmitType::class, [
-                'translation_domain' => 'tools',
-                'label'              => 'registration.advisor.two.backbutton',
-                'validation_groups'  => false,
             ])
         ;
     }

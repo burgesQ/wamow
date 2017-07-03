@@ -78,7 +78,7 @@ class UserWorkExperience
      * @ORM\Column(name="daily_fees", type="integer")
      * @Assert\Length(
      *     min=0,
-     *     max=5000,
+     *     max=10000,
      *     minMessage="The value enter is too small",
      *     maxMessage="The value enter is too big",
      * )

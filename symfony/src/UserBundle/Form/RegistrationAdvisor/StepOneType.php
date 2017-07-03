@@ -34,11 +34,6 @@ class StepOneType extends AbstractType
                 'translation_domain' => 'tools',
                 'label'              => 'registration.advisor.one.nextbutton'
             ])
-            ->add('back', SubmitType::class, [
-                'translation_domain' => 'tools',
-                'label'              => 'registration.advisor.one.backbutton',
-                'validation_groups'  => false,
-            ])
         ;
     }
 

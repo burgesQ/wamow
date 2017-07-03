@@ -5,17 +5,30 @@ easy_admin:
             label: 'User'
             list:
                 title: "Users"
-                fields: 
+                fields:
                     - 'id'
                     - 'firstname'
                     - 'lastname'
-                    - 'username'
                     - 'email'
                     - 'roles'
+                    - 'company'
+                    - 'enabled'
             form:
                 fields:
                     - { property: 'firstname', type: 'text' }
                     - { property: 'lastname', type: 'text' }
-                    - { property: 'username', type: 'text' }
                     - { property: 'email', type: 'email' }
                     - { property: 'roles', type: 'choice', type_options: { required: true, multiple: true, expanded: true, choices: { 'ROLE_ADVISOR': 'ROLE_ADVISOR', 'ROLE_CONTRACTOR': 'ROLE_CONTRACTOR' } } }
+                    - { property: 'company', type: 'easyadmin_autocomplete', type_options: { by_reference: false } }
+                    - { property: 'plainPassword', type: 'password' }
+                    - { property: 'status', type: 'choice', type_options: { required: true, multiple: false, expanded: false, choices: { 0 : 'STEP_ZERO', 1 : 'STEP_ONE',  2 : 'STEP_TWO', 3 : 'STEP_THREE', 4 : 'STEP_FOUR', 5 : 'NO_STEP' } } }
+                    - { property: 'languages', type: 'easyadmin_autocomplete', type_options: { by_reference: false } }
+
+        Language:
+            class: ToolsBundle\Entity\Language
+            label: 'Language'
+            list:
+                title: "Languages"
+                fields:
+                    - 'id'
+                    - 'name'

@@ -79,10 +79,6 @@ class MissionGeneratorController extends Controller
 
         $stepMission = $newMission->getStatusGenerator();
 
-        if ($stepMission !== Mission::STEP_ZERO && $stepMission !== Mission::STEP_THREE) {
-            return $this->redirectToRoute('mission_edit', ['missionId' => $newMission->getId()]);
-        }
-
         $newMission->setOnDraft(false);
         $arrayForm = [];
         if ($stepMission === Mission::STEP_THREE) {
@@ -121,7 +117,8 @@ class MissionGeneratorController extends Controller
 
         return $this->render('MissionBundle:MissionGenerator:mission_step_one.html.twig', [
             'form' => $formStepOne->createView(),
-            'user' => $user
+            'user' => $user,
+            'missionId' => $missionId
         ]);
     }
 
@@ -142,7 +139,7 @@ class MissionGeneratorController extends Controller
             return new Response($this->get('translator')->trans('mission.error.authorized', [], 'MissionBundle'));
         }
         $stepMission = $newMission->getStatusGenerator();
-        if ($stepMission !== Mission::STEP_ONE && $stepMission !== Mission::STEP_THREE) {
+        if ($newMission->getTitle() == null) {
             return $this->redirectToRoute('mission_edit', ['missionId' => $newMission->getId()]);
         }
 
@@ -162,16 +159,8 @@ class MissionGeneratorController extends Controller
 
         if ($formStepTwo->handleRequest($request)->isSubmitted() && $formStepTwo->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            if ($formStepTwo->get('back')->isClicked()) {
-                if ($stepMission !== Mission::STEP_THREE) {
-                    $newMission->setStatusGenerator(Mission::STEP_ZERO);
-                    $em->flush();
-                }
 
-                return $this->redirectToRoute('mission_edit', [
-                    'missionId' => $newMission->getId()
-                ]);
-            } elseif ($formStepTwo->get('forLater')->isClicked()) {
+            if ($formStepTwo->get('forLater')->isClicked()) {
                 $newMission->setOnDraft(true);
                 $em->flush();
 
@@ -188,9 +177,27 @@ class MissionGeneratorController extends Controller
             ]);
         }
 
+        $arrayImg = [
+            "businesspractice.industry" => "manufacturing",
+            "businesspractice.finance" => "finance",
+            "businesspractice.retail" => "retail",
+            "businesspractice.media" => "media-telco-entertainment",
+            "businesspractice.tourism" => "tourisme",
+            "businesspractice.construction" => "construction",
+            "businesspractice.realestate" => "finance",
+            "businesspractice.hotel" => "hotel",
+            "businesspractice.services" => "food-beverage",
+            "businesspractice.energy" => "energy",
+            "businesspractice.it" => "it",
+            "businesspractice.public" => "public",
+            "businesspractice.ngo" => "ngo"
+        ];
+
         return $this->render('MissionBundle:MissionGenerator:mission_step_two.html.twig', [
-            'form' => $formStepTwo->createView(),
-            'user' => $user
+            'form'     => $formStepTwo->createView(),
+            'user'     => $user,
+            'arrayImg' => $arrayImg,
+            'missionId' => $missionId
         ]);
     }
 
@@ -212,7 +219,7 @@ class MissionGeneratorController extends Controller
         }
 
         $stepMission = $newMission->getStatusGenerator();
-        if ($stepMission !== Mission::STEP_TWO && $stepMission !== Mission::STEP_THREE) {
+        if ($newMission->getBusinessPractice() == null) {
             return $this->redirectToRoute('mission_edit', ['missionId' => $newMission->getId()]);
         }
 
@@ -230,22 +237,6 @@ class MissionGeneratorController extends Controller
 
         if ($formStepThree->handleRequest($request)->isSubmitted() && $formStepThree->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            if ($formStepThree->get('back')->isClicked()) {
-                if ($stepMission !== Mission::STEP_THREE) {
-                    $newMission->setStatusGenerator(Mission::STEP_ONE);
-                    $em->flush();
-                }
-
-                return $this->redirectToRoute('mission_edit', [
-                    'missionId' => $newMission->getId()
-                ]);
-            } elseif ($formStepThree->get('forLater')->isClicked()) {
-                $newMission->setOnDraft(true);
-                $em->flush();
-
-                return $this->redirectToRoute('dashboard');
-            }
-
             $newMission->setStatusGenerator(Mission::STEP_THREE);
             $em->flush();
 
@@ -258,6 +249,7 @@ class MissionGeneratorController extends Controller
             'form'      => $formStepThree->createView(),
             'mission'   => $newMission,
             'user'      => $user,
+            'missionId' => $missionId
         ]);
     }
 
@@ -276,7 +268,7 @@ class MissionGeneratorController extends Controller
         /** @var \MissionBundle\Entity\Mission $newMission */
         if (!($newMission = $missionRepository->findOneBy(['id' => $missionId, 'contact' => $user]))) {
             return new Response($this->get('translator')->trans('mission.error.authorized', [], 'MissionBundle'));
-        } elseif ($newMission->getStatusGenerator() !== Mission::STEP_THREE) {
+        } elseif ($newMission->getStatusGenerator() < Mission::STEP_THREE) {
             return $this->redirectToRoute('mission_edit', ['missionId' => $newMission->getId()]);
         }
         $newMission->setOnDraft(false);
@@ -288,10 +280,6 @@ class MissionGeneratorController extends Controller
             $em = $this->getDoctrine()->getManager();
 
             switch ($formStepFour) {
-                case $formStepFour->get('back')->isClicked() :
-                    return $this->redirectToRoute('mission_new_step_three', [
-                        'missionId' => $newMission->getId()
-                    ]);
                 case $formStepFour->get('forLater')->isClicked() :
                     $newMission->setOnDraft(true);
                     $em->flush();
@@ -326,7 +314,8 @@ class MissionGeneratorController extends Controller
             'form'       => $formStepFour->createView(),
             'mission'    => $newMission,
             'nbAdvisors' => count($missionRepository->getUsersByMission($newMission, false, false)),
-            'user'       => $user
+            'user'       => $user,
+            'missionId' => $missionId
         ]);
 
     }
@@ -347,7 +336,8 @@ class MissionGeneratorController extends Controller
         /** @var \MissionBundle\Entity\Mission $newMission */
         if (!($newMission = $missionRepository->findOneBy(['id' => $missionId, 'contact' => $user]))) {
             return new Response($this->get('translator')->trans('mission.error.authorized', [], 'MissionBundle'));
-        } elseif ($newMission->getStatusGenerator() !== Mission::STEP_FOUR) {
+        } elseif ($newMission->getStatusGenerator() < Mission::STEP_FOUR) {
+
             return $this->redirectToRoute('mission_edit', ['missionId' => $newMission->getId()]);
         }
         $newMission->setOnDraft(false);
@@ -360,14 +350,6 @@ class MissionGeneratorController extends Controller
 
         if ($formStepFive->handleRequest($request)->isSubmitted() && $formStepFive->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            if ($formStepFive->get('back')->isClicked()) {
-                $newMission->setStatusGenerator(Mission::STEP_THREE);
-                $em->flush();
-
-                return $this->redirectToRoute('mission_edit', [
-                    'missionId' => $newMission->getId()
-                ]);
-            }
             $newMission->setStatus(Mission::PUBLISHED)->setStatusGenerator(Mission::DONE);
 
             $jsonConfig = json_decode($em->getRepository('ToolsBundle:Config')->findOneConfig()->getValue());
@@ -397,7 +379,8 @@ class MissionGeneratorController extends Controller
 
         return $this->render('MissionBundle:MissionGenerator:mission_step_five.html.twig', [
             'form' => $formStepFive->createView(),
-            'user' => $user
+            'user' => $user,
+            'missionId' => $missionId
         ]);
     }
 

@@ -1,0 +1,46 @@
+easy_admin:
+    entities:
+        WorkExp:
+            class: MissionBundle\Entity\WorkExperience
+            label: 'Work Experiences'
+            list:
+                title: "Work Experiences"
+                fields:
+                    - 'id'
+                    - { property : 'name', trans : true, domaine : 'tools' }
+                    - 'businessPractices'
+                    - 'professionalExpertises'
+                    - 'missionKinds'
+            form:
+                fields:
+                    - { property: 'name', type: 'text' }
+                    - { property: 'businessPractices', type: 'easyadmin_autocomplete', type_options: { by_reference: false } }
+                    - { property: 'professionalExpertises', type: 'easyadmin_autocomplete', type_options: { by_reference: false } }
+                    - { property: 'missionKinds', type: 'easyadmin_autocomplete', type_options: { by_reference: false } }
+        BusinessPra:
+            class: MissionBundle\Entity\BusinessPractice
+            label: 'Business Practice'
+            list:
+                title: "Business Practice"
+                fields:
+                    - 'id'
+                    - 'name'
+                    - 'workExperiences'
+        ProExp:
+            class: MissionBundle\Entity\ProfessionalExpertise
+            label: 'Professional Expertise'
+            list:
+                title: "Professional Expertise"
+                fields:
+                    - 'id'
+                    - 'name'
+                    - 'workExperiences'
+        MissionKind:
+            class: MissionBundle\Entity\MissionKind
+            label: 'Mission Kind'
+            list:
+                title: "Mission Kind"
+                fields:
+                    - 'id'
+                    - 'name'
+                    - 'workExperiences'

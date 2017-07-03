@@ -28,12 +28,16 @@
                 {{ mission.title }}
                 <small><i class="icon icon--certification"></i>
                     {{ 'mission.view.certifications' | trans | humanize }} :
-                    {% for certif in mission.certifications %}
-                        {{ certif.name }}
-                        {% if not loop.last %}
-                            ,
-                        {% endif %}
-                    {% endfor %}
+                    {% if mission.certifications.count() > 0 %}
+                        {% for certif in mission.certifications %}
+                            {{ certif.name }}
+                            {% if not loop.last %}
+                                ,
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        {{ 'mission.view.no_certification' | trans }}
+                    {% endif %}
                 </small>
             </h1>
 
@@ -140,56 +144,62 @@
                 {% for userMission in userMissions %}
                     {% set lastMsg = userMission.thread.messages | last %}
 
-                    <div class="wmw-mission-element">
+                    <div class="wmw-mission-element wmw-mission-element--shortlist">
                         <div class="element-title">
                             Advisor {{ userMission.idForContractor }}
+
+                            <div class="element-title-links">
+                                <a href="{{ path('mission_answer_to_advisor', { 'userMissionId' : userMission.id }) }}" class="wmw-simple-button wmw-simple-button--green">
+                                    <i class="icon icon--eye"></i> {{ 'inbox.show' | trans }}</a>
+                                </a>
+                            </div>
+
                         </div>
                         <div class="element-content{% if lastMsg.sender.id == userMission.user.id and lastMsg.metadata[1].isRead == false %} element-content--newmessage{% endif %}">
                             <div class="element-content-title">Advisor {{ userMission.idForContractor }}</div>
                             {{ lastMsg.body }}
                             <div class="element-content-bottom">
                                 {{ lastMsg.createdAt | date('D d M h\\hm') }}
-                                <a href="{{ path('mission_answer_to_advisor', { 'userMissionId' : userMission.id }) }}"><i class="icon icon--eye"></i> {{ 'inbox.show' | trans }}</a>
                             </div>
                         </div>
 
-                        <div class="element-notes">
-                            <div class="edit" id="{{ userMission.id }}">
-                                {{ userMission.note | nl2br }}
+                        <div class="element-notes{% if userMission.note == '' %} element-notes--empty{% endif %}">
+                            <div class="element-notes-empty">
+                                <span>Notes<br /><i class="icon icon--notes"></i></span>
                             </div>
+                            <textarea class="element-notes-textarea" data-id="{{ userMission.id }}" data-path="{{ path('user_mission_notes') }}">{{ userMission.note }}</textarea>
+                            <div class="element-notes-status">{{ 'form.note.saved' | trans }}</div>
                         </div>
 
                         <div class="element-buttons">
-
-                            {# TODO : HIDE BTN DEPENDING ON THE USERMISSION STATUS #}
-                            <button id="refuse_{{ userMission.id }}" type="button" class="wmw-button wmw-button--red wmw-button--border wmw-button--small">
-                                <i></i><span>
-                                    <i class="icon icon--cross"></i>
-                                    {{ 'mission.view.contractor.btn_refuse' | trans }}
-                                </span><i></i>
-                            </button>
-                            <div class="wmw-checkbutton">
-                                <button type="button" id="shortlist_{{ userMission.id }}" class="wmw-button wmw-button--green wmw-button--border wmw-button--small" {% if userMission.status == constant('SHORTLIST', userMission) %}visibility="hidden"{% endif %}>
+                            {% if userMission.status != constant('SHORTLIST', userMission) %}
+                                <a href="{{ path('user_mission_refuse', { 'userMissionId' : userMission.id }) }}" class="wmw-button wmw-button--red wmw-button--border wmw-button--small">
+                                    <i></i><span>
+                                        <i class="icon icon--cross"></i>
+                                        {{ 'mission.view.contractor.btn_refuse' | trans }}
+                                    </span><i></i>
+                                </a>
+                            {% else %}
+                                <br>
+                            {% endif %}
+                            {% if userMission.status != constant('SHORTLIST', userMission) %}
+                                <a href="{{ path('user_mission_add_to_shortlist', { 'userMissionId' : userMission.id }) }}" class="wmw-button wmw-button--green wmw-button--border wmw-button--small">
                                     <i></i><span>
                                         <i class="icon icon--star"></i>
                                         {{ 'mission.view.contractor.btn_add_to_shortlist' | trans | upper }}
                                     </span><i></i>
-                                </button>
-
-                                <button id="remove_from_shortlist_{{ userMission.id }}" hidden type="button" class="wmw-button wmw-button--red wmw-button--border wmw-button--small" {% if userMission.status < constant('SHORTLIST', userMission) %}display=none{% endif %}>
+                                </a>
+                            {% else %}
+                                <a href="{{ path('user_mission_remove_from_shortlist', { 'userMissionId' : userMission.id }) }}" class="wmw-button wmw-button--red wmw-button--border wmw-button--small">
                                     <i></i><span>
                                         <i class="icon icon--star"></i>
                                         {{ 'mission.view.contractor.btn_remove_from_shortlist' | trans | upper }}
                                     </span><i></i>
-                                </button>
-                                <input type="checkbox" name="wmw-shortlist[]" />
-                            </div>
-
+                                </a>
+                            {% endif %}
                         </div>
                     </div>
                 {% endfor %}
-
-
             </div>
 
             <div class="wmw-mission-sidebar">
@@ -211,77 +221,4 @@
 {% endblock %}
 
 {% block javascripts %}
-
-    {{ parent() }}
-    <script src="http://www.appelsiini.net/download/jquery.jeditable.js"></script>
-    <script src="http://www.appelsiini.net/download/jquery.jeditable.mini.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-            $('.edit').editable('{{ path('user_mission_notes') }}', {
-                type: 'textarea',
-                submit: 'Save',
-                indicator: 'Saving...',
-                tooltip: 'Click to edit note',
-                id: $(this).attr('id'),
-                data: function(value, settings) {
-                    return value.replace(/<br\s*\/?>\n?/gi, '\n');
-                },
-                callback: function(value, settings) {
-                    $(this).html(value.replace(/\n/g, "<br />"));
-                }
-            });
-
-            $('[id^="shortlist_"]').each(function () {
-                $(this).click(function () {
-                    var id = $(this).attr('id').split('_')[1];
-                    $.ajax({
-                        url: "{{ path('user_mission_add_to_shortlist') }}",
-                        method: "put",
-                        data: {id: id}
-                    }).done(function (msg) {
-                        alert("{{ 'mission.action.add_to_shortlist' | trans }}");
-                        $('#shortlist_' + id).hide();
-                        $('#remove_from_shortlist_' + id).show();
-
-                    }).fail(function () {
-                        alert("{{ 'error.action.failed' | trans }}");
-                    });
-                });
-            });
-
-            $('[id^="remove_from_shortlist_"]').each(function () {
-                $(this).click(function () {
-                    var id = $(this).attr('id').split('_')[3];
-                    $.ajax({
-                        url: "{{ path('user_mission_remove_from_shortlist') }}",
-                        method: "put",
-                        data: {id: id}
-                    }).done(function (msg) {
-                        alert("{{ 'mission.action.remove_from_shortlist' | trans }}");
-                        $('#remove_from_shortlist_' + id).hide();
-                        $('#shortlist_' + id).show();
-                    }).fail(function () {
-                        alert("{{ 'error.action.failed' | trans }}");
-                    });
-                });
-            });
-
-            $('[id^="refuse_"]').each(function () {
-                $(this).click(function () {
-                    var id = $(this).attr('id').split('_')[1];
-                    $.ajax({
-                        url: "{{ path('user_mission_refuse') }}",
-                        method: "put",
-                        data: {id: id}
-                    }).done(function (msg) {
-                        alert("{{ 'mission.action.refuse_user' | trans }}");
-                    }).fail(function () {
-                        alert("{{ 'error.action.failed' | trans }}");
-                    });
-                });
-            });
-        });
-
-    </script>
 {% endblock %}

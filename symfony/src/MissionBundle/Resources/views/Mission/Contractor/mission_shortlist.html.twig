@@ -17,12 +17,16 @@
                 {{ mission.title }}
                 <small><i class="icon icon--certification"></i>
                     {{ 'mission.view.certifications' | trans | humanize }} :
-                    {% for certif in mission.certifications %}
-                        {{ certif.name }}
-                        {% if not loop.last %}
-                            ,
-                        {% endif %}
-                    {% endfor %}
+                    {% if mission.certifications.count() > 0 %}
+                        {% for certif in mission.certifications %}
+                            {{ certif.name }}
+                            {% if not loop.last %}
+                                ,
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        {{ 'mission.view.no_certification' | trans }}
+                    {% endif %}
                 </small>
             </h1>
 
@@ -103,23 +107,33 @@
         </div> <!--END TRAIL---->
 
         <div class="wmw-mission-body">
+
+            {% if nextMission is not null %}
+                <div class="wmw-mission-pagination">
+                    <a href="{{ path('mission_view', { 'missionId' : nextMission.id }) }}">{{ 'mission.view.contractor.next_mission' | trans }}</a>
+                </div>
+            {% endif %}
+
             {% for userMission in userMissions %}
                 {% set lastMsg = userMission.thread.messages | last %}
                 {% set read = lastMsg.metadata[1].isRead %}
                 <div class="wmw-mission-element wmw-mission-element--shortlist">
                     <div class="element-title">
                         {{ userMission.user.firstName }} {{ userMission.user.lastName }}
-                        {% if userMission.thread.proposals is not empty %}
-                            <div class="element-title-links">
 
+                        <div class="element-title-links">
+                            <a href="{{ path('mission_answer_to_advisor', { 'userMissionId' : userMission.id }) }}" class="wmw-simple-button wmw-simple-button--green">
+                                <i class="icon icon--eye"></i> {{ 'inbox.show' | trans }}
+                            </a>
+                            {% if userMission.thread.proposals is not empty %}
                                 {% set proposal = userMission.thread.proposals | last %}
                                 {# TODO find a better methode #}
                                 {%  set path = "http://symfony.dev/" ~ proposal.getUploadRootDir %}
                                 <a href="{{ path }}" download="{{ proposale.downloadName }}" class="wmw-simple-button wmw-simple-button--green">
                                     <i class="icon icon--download"></i> {{ 'form.btn.download_proposal' | trans }}
                                 </a>
-                            </div>
-                        {% endif %}
+                            {% endif %}
+                        </div>
                     </div>
                     <div class="element-content{% if lastMsg.sender.id == userMission.user.id and lastMsg.metadata[1].isRead == false %} element-content--newmessage{% endif %}">
                         <div class="element-content-title">Advisor {{ userMission.idForContractor }}</div>
@@ -134,29 +148,30 @@
                         {{ lastMsg.body }}
                         <div class="element-content-bottom">
                             {{ lastMsg.createdAt | date('D d M h\\hm') }}
-                            <a href="{{ path('mission_answer_to_advisor', { 'userMissionId' : userMission.id }) }}"><i class="icon icon--eye"></i> {{ 'inbox.show' | trans }}</a>
                         </div>
 
                     </div>
-                    <div class="element-notes">
-                        <div class="edit" id="{{ userMission.id }}">
-                            {{ userMission.note | nl2br }}
+                    <div class="element-notes{% if userMission.note == '' %} element-notes--empty{% endif %}">
+                        <div class="element-notes-empty">
+                            <span>Notes<br /><i class="icon icon--notes"></i></span>
                         </div>
+                        <textarea class="element-notes-textarea" data-id="{{ userMission.id }}" data-path="{{ path('user_mission_notes') }}">{{ userMission.note }}</textarea>
+                        <div class="element-notes-status">{{ 'form.note.saved' | trans }}</div>
                     </div>
 
                     <div class="element-buttons">
-                        <button id="refuse_{{ userMission.id }}" type="button" class="wmw-button wmw-button--red wmw-button--border wmw-button--small">
+                        <a href="{{ path('user_mission_refuse', { 'userMissionId' : userMission.id }) }}" class="wmw-button wmw-button--red wmw-button--border wmw-button--small">
                             <i></i><span>
                                 <i class="icon icon--cross"></i>
                                 {{ 'mission.view.contractor.btn_refuse' | trans }}
                             </span><i></i>
-                        </button>
-                        <button id="contract_{{ userMission.id }}" type="button" class="wmw-button wmw-button--green wmw-button--border wmw-button--small">
+                        </a>
+                        <a href="{{ path('user_mission_add_to_contract', { 'userMissionId' : userMission.id }) }}" class="wmw-button wmw-button--green wmw-button--border wmw-button--small">
                             <i></i><span>
                                 <i class="icon icon--handshake"></i>
                                 {{ 'mission.view.contractor.btn_contract' | trans | upper }}
                             </span><i></i>
-                        </button>
+                        </a>
                     </div>
 
                 </div>
@@ -182,54 +197,4 @@
 
 {% block javascripts %}
     {{ parent() }}
-
-    <script src="http://www.appelsiini.net/download/jquery.jeditable.js"></script>
-    <script src="http://www.appelsiini.net/download/jquery.jeditable.mini.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('.edit').editable('{{ path('user_mission_notes') }}', {
-                type: 'textarea',
-                submit: 'Save',
-                indicator: 'Saving...',
-                tooltip: 'Click to edit note',
-                id: $(this).attr('id'),
-                data: function(value, settings) {
-                    return value.replace(/<br\s*\/?>\n?/gi, '\n');
-                },
-                callback: function(value, settings) {
-                    $(this).html(value.replace(/\n/g, "<br />"));
-                }
-            });
-
-            $('[id^="contract_"]').each(function () {
-                $(this).click(function () {
-                    var id = $(this).attr('id').split('_')[1];
-                    $.ajax({
-                        url: "{{ path('user_mission_add_to_contract') }}",
-                        method: "put",
-                        data: {id: id}
-                    }).done(function (msg) {
-                        alert("{{ 'mission.action.add_to_contract' | trans }}");
-                    }).fail(function () {
-                        alert("{{ 'error.action.failed' | trans }}");
-                    });
-                });
-            });
-
-            $('[id^="refuse_"]').each(function () {
-                $(this).click(function () {
-                    var id = $(this).attr('id').split('_')[1];
-                    $.ajax({
-                        url: "{{ path('user_mission_refuse') }}",
-                        method: "put",
-                        data: {id: id}
-                    }).done(function (msg) {
-                        alert("{{ 'mission.action.refuse_user' | trans }}");
-                    }).fail(function () {
-                        alert("{{ 'error.action.failed' | trans }}");
-                    });
-                });
-            });
-        });
-    </script>
 {% endblock %}
