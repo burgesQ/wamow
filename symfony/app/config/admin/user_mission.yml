@@ -1,0 +1,28 @@
+easy_admin:
+    disabled_actions: ['delete', 'new', 'edit']
+    entities:
+        UserMission:
+            class: MissionBundle\Entity\UserMission
+            label: 'UserMission'
+            list:
+                actions:
+                    - { name: 'show', icon: 'search' }
+                title: "UserMissions"
+                fields:
+                    - 'id'
+                    - 'user'
+                    - 'mission'
+                    - 'status'
+                    - 'score'
+                    - 'updateDate'
+            show:
+                fields:
+                    - { property : 'user' }
+                    - { property : 'mission' }
+                    - { property : 'status' }
+                    - { property : 'score' }
+                    - { property : 'creationDate' }
+                    - { property : 'updateDate' }
+                    - { property : 'interestedAt' }
+                    - { property : 'getScoreDetailsAsString' }
+
