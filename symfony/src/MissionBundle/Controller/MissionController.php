@@ -104,7 +104,7 @@ class MissionController extends Controller
             }
             /** @var \UserBundle\Entity\User $user */
             $user = $this->getUser();
-            if ($user->getPlanExpiresAt() < new \DateTime()) {
+            if ($user->getPlanExpiresAt() && $user->getPlanExpiresAt() < new \DateTime()) {
                 return new Response("Your subscription expired on " . $user->getPlanExpiresAt()->format('Y-m-d H:i:s'));
             }
 
