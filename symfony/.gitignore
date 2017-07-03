@@ -15,5 +15,6 @@
 /web/assetic
 /web/uploads
 /web/fonts
+/web/node_modules
 /.idea
 /components
