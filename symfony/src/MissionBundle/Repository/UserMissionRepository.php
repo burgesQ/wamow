@@ -61,20 +61,6 @@ class UserMissionRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getMyMissions($userId)
-    {
-        $qb = $this->_em->createQueryBuilder();
-        $qb->select('t')
-            ->from('MissionBundle:UserMission', 't')
-            ->leftjoin('t.user', 'u')
-            ->leftjoin('t.mission', 'm')
-            ->where('u.id = :userId')
-                ->setParameter('userId', $userId)
-            ->andWhere('t.status >= ' . UserMission::MATCHED)
-            ->orderBy('m.applicationEnding', 'ASC');
-        return $qb->getQuery()->getResult();
-    }
-
     public function getMyOldMissions($userId)
     {
         $qb = $this->_em->createQueryBuilder();
@@ -129,6 +115,20 @@ class UserMissionRepository extends EntityRepository
             ->andWhere('m.nbOngoing < 10')
         ;
 
+        return $qb->getQuery()->getResult();
+    }
+
+    public function getMyMissions($userId)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('t')
+            ->from('MissionBundle:UserMission', 't')
+            ->leftjoin('t.user', 'u')
+            ->leftjoin('t.mission', 'm')
+            ->where('u.id = :userId')
+            ->setParameter('userId', $userId)
+            ->andWhere('t.status >= ' . UserMission::INTERESTED)
+            ->orderBy('m.applicationEnding', 'ASC');
         return $qb->getQuery()->getResult();
     }
 }

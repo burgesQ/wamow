@@ -1,5 +1,4 @@
 easy_admin:
-    disabled_actions: ['delete', 'new', 'edit']
     entities:
         UserMission:
             class: MissionBundle\Entity\UserMission
@@ -25,4 +24,5 @@ easy_admin:
                     - { property : 'updateDate' }
                     - { property : 'interestedAt' }
                     - { property : 'getScoreDetailsAsString' }
+            disabled_actions: ['delete', 'new', 'edit']
 

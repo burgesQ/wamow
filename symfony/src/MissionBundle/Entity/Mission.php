@@ -1397,7 +1397,7 @@ class Mission
      * Set companySize
      *
      * @param \MissionBundle\Entity\CompanySize $companySize
-     * @return Company
+     * @return Mission
      */
     public function setCompanySize(\MissionBundle\Entity\CompanySize $companySize = null)
     {

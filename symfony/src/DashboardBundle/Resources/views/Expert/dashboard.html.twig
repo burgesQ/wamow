@@ -69,7 +69,6 @@
                                     <span><i class="icon icon--pointer"></i>{{ new.mission.address.city }} - {{ new.mission.address.country | upper }}</span>
                                 </div>
                             </div>
-                            {#ACTION K-C#}
                             <a href="{{ path('mission_interested', {'missionId': new.mission.id}) }}">
                                 <button type="button" data-mission-id="{{ new.mission.id }}" class="main-slider-interested wmw-button wmw-button--green">
                                     <i></i><span>{{ 'dashboard.advisor.new.interestedbutton' | trans }}</span><i></i>
