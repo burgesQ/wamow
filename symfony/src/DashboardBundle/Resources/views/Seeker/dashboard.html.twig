@@ -221,12 +221,18 @@
                     </div>
 
                 {% endfor %}
-
-
+                {% if missions is empty %}
+                  {#<div class="wmw-slider-element wmw-slider-element--special col-xs-12 col-sm-6 col-md-4">#}
+                    {#<div class="main-missions-el main-missions-el--waiting">#}
+                        <image src="/images/picto_Working.jpg" style="width:25%;height:30%;" align="middel"/><br />
+                        {{ 'mission.message.no_mission' | trans({ url : path('mission_new_step_one')}, 'tools') | raw | nl2br }}
+                    {#</div>#}
+                {% endif %}
             </div>
 
+            {% if drafts is not empty %}
             <h2 class="main-title"><i class="icon icon--pen"></i>{{ 'dashboard.contractor.draft.title' | trans }}</h2>
-
+            {% endif %}
             {# drafts #}
             <div class="main-slider main-slider--drafts wmw-slider">
                 <div class="wmw-slider-inner row">

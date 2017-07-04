@@ -200,6 +200,13 @@
                         </div>
                     </div>
                 {% endfor %}
+                {% if userMissions is empty %}
+                    <div class="wmw-mission-element wmw-mission-element--shortlist"></div>
+                    <div class="wmw-mission-element wmw-mission-element--shortlist">
+                        <image src="/images/picto_Working.jpg" /><br />
+                        {{ 'mission.message.no_advisor' | trans }}
+                    </div>
+                {% endif %}
             </div>
 
             <div class="wmw-mission-sidebar">
