@@ -1,0 +1,138 @@
+{% trans_default_domain 'tools' %}
+
+<div class="wmw-dashboard-main col-xs-12 col-lg-10">
+    <div class="wmw-profile">
+        <div class="wmw-profile-header">
+
+            {# profile picture #}
+            <div class="wmw-profile-header-picture">
+                {% if user.images is not empty %}
+                    {% set image = user.images|last %}
+                    {% if image.name is not null %}
+                        <img src="{{ asset(image.webPath()) }}"/>
+                    {% endif %}
+                {% else %}
+                    <img src="{{ asset('images/' ~ random(['placeholder-pp-0.png', 'placeholder-pp-1.png', 'placeholder-pp-2.png', 'placeholder-pp-3.png'])) }}"/>
+                {% endif %}
+
+            </div>
+
+            {# head profile#}
+            <div class="wmw-profile-header-name">{{ user.lastName }}<br/>{{ user.firstName | upper }}</div>
+
+            <a href="{{ path('mission_view', { 'missionId' : missionId }) }}" class="wmw-profile-close"><i class="icon icon--cross"></i>
+                {{ 'user.profile_show.advisor.link_back_to_mission' | trans }}
+            </a>
+        </div>
+
+        {# links #}
+        <div class="wmw-profile-tabs row">
+            <a>
+
+            </a>
+            <a href="{{ path('user_profile_show') }}" class="active">
+                {{ 'user.profile_show.advisor.link_general' | trans }}
+            </a>
+        </div>
+
+        {# content #}
+        <div class="wmw-profile-content wmw-bgfields--readonly">
+            <div class="row">
+
+                <div class="col-xs-12 col-sm-5 row">
+
+                    {# email #}
+                    <div class="wmw-bgfield col-xs-10">
+                        <label for="profile-email">{{ 'home.contractor.preregister.email' | trans }}</label>
+                        <input type="email" id="profile-email" name="profile-email" value="{{ user.email }}"
+                               class="required" disabled="true"/>
+                        <div class="wmw-bgfield-bg"><i class="icon icon--email"></i></div>
+                    </div>
+
+                    {# emergency mail #}
+                    <div class="wmw-bgfield col-xs-10">
+                        <label for="profile-backup-email">Backup email</label>
+                        <input type="email" id="profile-backup-email" name="profile-backup-email"
+                               value="{{ user.emergencyEmail }}" class="required" disabled="true"/>
+                        <div class="wmw-bgfield-bg"><i class="icon icon--email"></i></div>
+                    </div>
+
+                    {# phone number #}
+                    <div class="wmw-bgfield col-xs-10">
+                        <label for="profile-phone">Phone number</label>
+                        <input type="text" id="profile-phone" name="profile-phone"
+                                {% if user.phone %}
+                                    value="({{ user.phone.prefix.prefix }}){{ user.phone.number }}"
+                                {% endif %}
+                               class="required" disabled="true"/>
+                        <div class="wmw-bgfield-bg"><i class="icon icon--phone"></i></div>
+                    </div>
+
+                    {# address #}
+                    {% set renderAddress = '' %}
+                    {% set renderCountry = '' %}
+                    {% if user.addresses is not empty %}
+                        {% set address = user.addresses | last %}
+                        {% set renderAddress = address.number ~ ' ' ~ address.street ~ address.street2 ~ ' - ' ~ address.zipcode ~ ' ' ~ address.city %}
+                        {% set renderCountry = address.country %}
+                    {% endif %}
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="wmw-bgfield">
+                            <label for="profile-address">Address</label>
+                            <input type="text" id="profile-address" name="profile-address"
+                                   value="{{ renderAddress }}" class="required"
+                                   disabled="true"/>
+                            <div class="wmw-bgfield-bg"><i class="icon icon--address"></i></div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-5 col-sm-offset-1">
+                        <div class="wmw-bgfield">
+                            <label for="profile-country">Country</label>
+                            <select id="profile-country" name="profile-country" class="required" disabled="true">
+                                <option value="{{ renderCountry }}">{{ renderCountry }}</option>
+                            </select>
+                            <div class="wmw-bgfield-bg"><i class="icon icon--world"></i></div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-xs-14 col-sm-6 row">
+
+                    {# certification #}
+                    <div class="wmw-bgfield col-xs-12">
+                        {% set input = "" %}
+                        {% for certif in user.certifications %}
+                            {% set input = input ~ certif.name %}
+                            {% if not loop.last %}
+                                {% set input = intput ~ ", " %}
+                            {% endif %}
+                        {% endfor %}
+                        <div class="wmw-bgfield-bg"><i class="icon icon--certification"></i></div>
+                        <input type="text" id="profile-languages" name="profile-languages" value="{{ input }}"
+                               class="required" disabled="true"/>
+
+                    </div>
+
+                    {# languages #}
+                    <div class="wmw-bgfield col-xs-12">
+                        {% set languages = '' %}
+                        {% for language in user.languages %}
+                            {% if loop.last %}
+                                {% set languages = languages ~ language.name | trans | upper %}
+                            {% else %}
+                                {% set languages = languages ~ language.name | trans | upper ~ ', ' %}
+                            {% endif %}
+                        {% endfor %}
+                        <label for="profile-languages">Languages</label>
+                        <input type="text" id="profile-languages" name="profile-languages" value="{{ languages }}"
+                               class="required" disabled="true"/>
+                        <div class="wmw-bgfield-bg"><i class="icon icon--language"></i></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -104,7 +104,8 @@
                     </span>
                 </span>
             </div>
-        </div> <!--END TRAIL---->
+        </div>
+        <!--END TRAIL---->
 
         <div class="wmw-mission-body">
 
@@ -119,8 +120,9 @@
                 {% set read = lastMsg.metadata[1].isRead %}
                 <div class="wmw-mission-element wmw-mission-element--shortlist">
                     <div class="element-title">
-                        {{ userMission.user.firstName }} {{ userMission.user.lastName }}
-
+                        <a href="{{ path('user_profile_view', { 'missionId' : mission.id, 'userId' : userMission.user.id }) }}">
+                            {{ userMission.user.firstName }} {{ userMission.user.lastName }}
+                        </a>
                         <div class="element-title-links">
                             <a href="{{ path('mission_answer_to_advisor', { 'userMissionId' : userMission.id }) }}" class="wmw-simple-button wmw-simple-button--green">
                                 <i class="icon icon--eye"></i> {{ 'inbox.show' | trans }}
