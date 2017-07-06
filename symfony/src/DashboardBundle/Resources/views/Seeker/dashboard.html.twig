@@ -224,7 +224,7 @@
                 {% if missions is empty %}
                   {#<div class="wmw-slider-element wmw-slider-element--special col-xs-12 col-sm-6 col-md-4">#}
                     {#<div class="main-missions-el main-missions-el--waiting">#}
-                        <image src="/images/picto_Working.jpg" style="width:25%;height:30%;" align="middel"/><br />
+                        <image src="/images/picto_Working.jpg" style="height:30%;" align="middel"/><br />
                         {{ 'mission.message.no_mission' | trans({ url : path('mission_new_step_one')}, 'tools') | raw | nl2br }}
                     {#</div>#}
                 {% endif %}
