@@ -346,6 +346,7 @@ class RegistrationAdvisorController extends Controller
                         }
                     }
                     $em->persist($userWorkExperience);
+                    $em->flush();
                 }
             }
             $user->setStatus(User::REGISTER_NO_STEP);
