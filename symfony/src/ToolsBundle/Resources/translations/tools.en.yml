@@ -27,6 +27,7 @@ form:
         edit: EDIT
         print: PRINT
         send: send
+        update_password: Update password
 
     note:
         saved: Saved
@@ -320,7 +321,7 @@ user:
             link_show_profile: show profile
             link_edit_profile: edit profile
             link_general: GENERALE
-            link_billing: BILLING
+            link_password: PASSWORD
             title_algorithm_improvment: algorythm improvment
             title_subscription: subscription
             email_notification: email<br>notification
