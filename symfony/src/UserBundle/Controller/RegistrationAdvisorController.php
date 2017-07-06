@@ -334,6 +334,12 @@ class RegistrationAdvisorController extends Controller
                                 foreach ($lastTmp as $lastLoop) {
                                     if ($i) {
                                         $userWorkExperience->setDailyFees($lastLoop);
+                                        if ($user->getDailyFeesMin() > $lastLoop) {
+                                            $user->setDailyfeesMin($lastLoop);
+                                        }
+                                        if ($user->getDailyFeesMax() < $lastLoop) {
+                                            $user->setDailyfeesMax($lastLoop);
+                                        }
                                     }
                                     $i++;
                                 }
