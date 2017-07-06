@@ -42,7 +42,7 @@
         {# new missions #}
         <div class="wmw-dashboard-main col-xs-12 col-lg-10">
 
-            <h2 class="main-title"><i class="icon icon--star"></i>{{ 'dashboard.advisor.new.title' | trans }}</h2>
+            {% if news is not empty %}<h2 class="main-title"><i class="icon icon--star"></i>{{ 'dashboard.advisor.new.title' | trans }}{% endif %}</h2>
 
             <div class="main-slider wmw-slider">
                 <div class="wmw-slider-inner row">
@@ -78,13 +78,12 @@
                     </div>
                     {% endfor %}
 
-                    <div class="wmw-slider-element wmw-slider-element--special col-xs-12 col-sm-6 col-md-4">
-                        <div class="main-slider-element">
-                            <div class="main-slider-nopitch">
-                                {{ 'dashboard.advisor.other.none' | trans }}
-                            </div>
+                    {% if news is empty %}
+                        <div class="wmw-slider-element wmw-slider-element--special col-xs-12 col-sm-6 col-md-4">
+                            <image src="/images/picto_Working.jpg" style="width:75%;height:80%;"/><br />
+                            {{ 'mission.message.no_proposition' | trans }}
                         </div>
-                    </div>
+                    {% endif %}
                 </div>
 
                 <div class="wmw-slider-navigation">

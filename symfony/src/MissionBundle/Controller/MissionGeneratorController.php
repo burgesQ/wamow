@@ -279,6 +279,8 @@ class MissionGeneratorController extends Controller
         if ($formStepFour->handleRequest($request)->isSubmitted() && $formStepFour->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
+
+
             switch ($formStepFour) {
                 case $formStepFour->get('forLater')->isClicked() :
                     $newMission->setOnDraft(true);
@@ -300,12 +302,14 @@ class MissionGeneratorController extends Controller
                     return $this->redirectToRoute('mission_new_step_three', [
                         'missionId' => $newMission->getId()
                     ]);
+                default :
+                    break;
             }
 
             $newMission->setStatusGenerator(Mission::STEP_FOUR);
             $em->flush();
 
-            return $this->redirectToRoute('mission_new_step_four', [
+            return $this->redirectToRoute('mission_new_step_five', [
                 'missionId' => $newMission->getId()
             ]);
         }
@@ -332,7 +336,6 @@ class MissionGeneratorController extends Controller
         $missionRepository = $this->getDoctrine()->getRepository('MissionBundle:Mission');
         /** @var \UserBundle\Entity\User $user */
         $user = $this->getUser();
-
         /** @var \MissionBundle\Entity\Mission $newMission */
         if (!($newMission = $missionRepository->findOneBy(['id' => $missionId, 'contact' => $user]))) {
             return new Response($this->get('translator')->trans('mission.error.authorized', [], 'MissionBundle'));
