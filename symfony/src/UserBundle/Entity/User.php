@@ -387,6 +387,8 @@ class User extends BaseUser implements ParticipantInterface
         $this->secretMail            = [];
         $this->linkedinData          = [];
         $this->scoringBonus          = 5;
+        $this->dailyFeesMax = 0;
+        $this->dailyFeesMin = 0;
     }
 
     /**
@@ -403,26 +405,8 @@ class User extends BaseUser implements ParticipantInterface
      */
     public function isValidate($context)
     {
-        $feesMin = $this->getDailyFeesMin();
-        $feesMax = $this->getDailyFeesMax();
-
         if ($this->getPhone() != NULL) {
             $this->getPhone()->isValidate($context);
-        } elseif ($feesMin == NULL && $feesMax != NULL) {
-            $context
-                ->buildViolation('user.minfees.unset')
-                ->atPath('dailyFeesMin')
-                ->addViolation();
-        } elseif ($feesMax == NULL && $feesMin != NULL) {
-            $context
-                ->buildViolation('user.maxfees.unset')
-                ->atPath('dailyFeesMax')
-                ->addViolation();
-        } elseif ($feesMin != NULL && $feesMax != NULL && $feesMin >= $feesMax) {
-            $context
-                ->buildViolation('user.minfees.over')
-                ->atPath('dailyFeesMin')
-                ->addViolation();
         }
     }
 

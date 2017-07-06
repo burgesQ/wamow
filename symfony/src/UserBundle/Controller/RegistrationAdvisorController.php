@@ -292,22 +292,33 @@ class RegistrationAdvisorController extends Controller
                                 switch ($whichOne) {
                                     case ($whichOne == "]=1") :
                                         $userWorkExperience->addCompanySize($smallComp);
+                                        break;
                                     case ($whichOne == "]=2") :
                                         $userWorkExperience->addCompanySize($mediumComp);
+                                        break;
                                     case ($whichOne == "]=3") :
                                         $userWorkExperience->addCompanySize($largeComp);
+                                        break;
+                                    default :
+                                        break;
                                 }
                             case ($label == "continent]") :
                                 $whichOne = $arrayTmp[4];
                                 switch ($whichOne) {
                                     case ($whichOne == "]=1") :
                                         $userWorkExperience->addContinent($asia);
+                                        break;
                                     case ($whichOne == "]=2") :
                                         $userWorkExperience->addContinent($emea);
+                                        break;
                                     case ($whichOne == "]=3") :
                                         $userWorkExperience->addContinent($northAmerica);
+                                        break;
                                     case ($whichOne == "]=4") :
                                         $userWorkExperience->addContinent($southAmerica);
+                                        break;
+                                    default :
+                                        break;
                                 }
 
                             case (substr($label, 0, 12) == "cumuledMonth") :
