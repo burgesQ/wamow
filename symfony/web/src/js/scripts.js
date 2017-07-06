@@ -2,6 +2,7 @@
 /*include /libs/jquery.validval.js*/
 /*include /libs/jquery.scrollbars.js*/
 /*include /libs/jquery.autocomplete.js*/
+/*include /libs/sweetalert2.js*/
 /*include /auditors.js*/
 
 // --------------------- MASTER PART -------------------------- //
@@ -58,7 +59,20 @@ var Master = {
             e.stopPropagation();
         });
 
-    	$('form').validVal();
+    	$('form').validVal({
+            form : {
+                onInvalid : function(){
+
+                    swal({
+                      title: '',
+                      text: "Il semble que certains champs n'ont pas été remplis correctement.",
+                      type: 'error',
+                      confirmButtonText: 'OK',
+                      confirmButtonColor: "#362a7e"
+                    });
+                }
+            }
+        });
 
         $('.wmw-button-later').on('click', function(){
             $('form').trigger("destroy.vv");
