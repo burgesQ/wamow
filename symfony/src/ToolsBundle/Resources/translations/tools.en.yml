@@ -316,6 +316,7 @@ user:
         resume_stuff: Resume stuff's
         advisor:
             link_back_to_board: back to board
+            link_back_to_mission: back to mission
             link_show_profile: show profile
             link_edit_profile: edit profile
             link_general: GENERALE
@@ -334,6 +335,9 @@ mission:
         shortlist_removed: "You have been refused from the mission."
         selected: "You have been selected for the mission."
         removed: "You have been removed from the shortlist of the mission."
+        no_advisor: No advisor accepted your mission yet. We are a matching best profile for you and you'll receive an email as soon as we found him/her !
+        no_proposition: We didn't find any mission for you but we are still looking for it !
+        no_mission: You don't have any mission. <a href="url">Add one</a> and we will find its best advisors !
     view:
         pitched_at: Pitched at date
         price_day: $ </div> / day

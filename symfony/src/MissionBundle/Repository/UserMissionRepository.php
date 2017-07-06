@@ -131,4 +131,19 @@ class UserMissionRepository extends EntityRepository
             ->orderBy('m.applicationEnding', 'ASC');
         return $qb->getQuery()->getResult();
     }
+
+    public function findUserMissionByCompanyAndUser($missionId, $userId)
+    {
+        $qb = $this->_em->createQueryBuilder();
+
+        $qb
+            ->select('um')
+            ->from('MissionBundle:UserMission', 'um')
+            ->leftjoin('um.mission', 'm')
+            ->where('um.user = ' . $userId)
+            ->andWhere('m.id = ' . $missionId)
+        ;
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
 }
