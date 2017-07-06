@@ -478,7 +478,7 @@ var Master = {
                 var val = $(this).serialize();
                 var num = $(this).attr('data-num');
 
-                $('#wmw-ob-mission-'+num+'-val').val( val );
+                $('#app_user_profile_userWorkExpSerialized_'+num).val( val );
                 Master.close_mission_overlay();
             }
 
@@ -509,9 +509,9 @@ var Master = {
         var num = $el.attr('data-num');
         var $overlay = $('#wmw-overlay-ob-4');
 
-        // $overlay.find('.wmw-overlay-title').text( title );
-        // $overlay.attr('data-num', num);
-        // $overlay.find('input[type=range]').trigger('change');
+        //$overlay.find('.wmw-overlay-title').text( title );
+        $overlay.attr('data-num', num);
+        //$overlay.find('input[type=range]').trigger('change');
 
         Master.open_overlay('#wmw-overlay-ob-4');
     },

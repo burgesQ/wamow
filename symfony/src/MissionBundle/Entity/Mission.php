@@ -1376,7 +1376,7 @@ class Mission
      * @param \MissionBundle\Entity\WorkExperience $workExperience
      * @return Mission
      */
-    public function setWorkExperience(\MissionBundle\Entity\WorkExperience $workExperience = null)
+    public function setWorkExperience(WorkExperience $workExperience = null)
     {
         $this->workExperience = $workExperience;
 
@@ -1399,7 +1399,7 @@ class Mission
      * @param \MissionBundle\Entity\CompanySize $companySize
      * @return Mission
      */
-    public function setCompanySize(\MissionBundle\Entity\CompanySize $companySize = null)
+    public function setCompanySize(CompanySize $companySize = null)
     {
         $this->companySize = $companySize;
 
