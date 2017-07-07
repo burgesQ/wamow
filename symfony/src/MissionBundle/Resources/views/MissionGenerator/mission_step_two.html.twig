@@ -55,7 +55,7 @@
 
             <div class="wmw-fieldrow row">
                 <label class="wmw-label wmw-label--topmobile col-xs-12 col-sm-5"
-                       for="wmw-pitch-domain">{{ 'professionalexpertises.title' | trans }}</label>
+                       for="wmw-pitch&-domain">{{ 'professionalexpertises.title' | trans }}</label>
                 {{ form_widget(form.professionalExpertise, { 'attr': { 'class': 'required col-xs-12 col-md-6' }}) }}
             </div>
             {{ form_errors(form.professionalExpertise) }}
@@ -104,7 +104,11 @@
                 <label class="wmw-label wmw-label--topmobile col-xs-12 col-sm-5">{{ 'mission.new.label.missionEnding' | trans }}</label>
                 <div class="col-xs-12 col-md-6 row">
                     {% for key, val in form.missionEnding | reverse %}
+<<<<<<< HEAD
                         {{ form_widget(val, { 'attr' : { 'class' : 'col-xs-4 required' , 'no-validate' : 'true' }}) }}
+=======
+                        {{ form_widget(val, { 'attr' : { 'class' : 'col-xs-4 required'}}) }}
+>>>>>>> 081ce47... [440-revert]
                     {% endfor %}
                 </div>
             </div>
@@ -142,14 +146,15 @@
 
     <div class="wmw-onboard-bottom">
         {% set late = '<i></i><span>' ~ form.forLater.vars.label | trans  ~ '</span><i></i>' %}
-        {{ form_widget(form.forLater, {attr: {formnovalidate: 'formnovalidate',
+        {{ form_widget(form.forLater, {attr: { formnovalidate: 'formnovalidate',
             class: 'wmw-button wmw-button--black wmw-button--border wmw-onboard-bottom-left wmw-button-later'}, label: late }) }}
 
         {% set back = '<i></i><span>' ~ form.back.vars.label | trans ~ '</span><i></i>' %}
-        {{ form_widget(form.back, {attr: {formnovalidate: 'formnovalidate', class : 'wmw-button wmw-button--border'}, label: back}) }}
+        {{ form_widget(form.back, {attr: { formnovalidate: 'formnovalidate',
+            class: 'wmw-button wmw-button--border wmw-button-later'}, label: back }) }}
 
         {% set next = '<i></i><span>' ~ form.next.vars.label | trans ~ '</span><i></i>' %}
-        {{ form_widget(form.next, { 'attr' : { 'class' : 'wmw-button wmw-button--green' }, label: next}) }}
+        {{ form_widget(form.next, { 'attr' : { 'class' : 'wmw-button wmw-button--green  wmw-button-later' , formnovalidate: 'formnovalidate',}, label: next}) }}
     </div>
 
     {{ form_end(form) }}
