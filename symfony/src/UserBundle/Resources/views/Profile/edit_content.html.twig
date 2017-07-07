@@ -1,6 +1,7 @@
 {% trans_default_domain 'tools' %}
 
-{% set next = '<i></i><span>' ~ 'form.btn.save' | trans ~ '</span><i></i>' %}
+{% set save = '<i></i><span>' ~ 'form.btn.save' | trans ~ '</span><i></i>' %}
+{% set savePass = '<i></i><span>' ~ 'form.btn.update_password' | trans ~ '</span><i></i>' %}
 
 <div class="wmw-dashboard-main col-xs-12 col-lg-10">
     <div class="wmw-profile">
@@ -48,8 +49,8 @@
             <a href="{{ path('user_profile_show') }}" class="active">
                 {{ 'user.profile_show.advisor.link_general' | trans }}
             </a>
-            <a href="#">
-                {{ 'user.profile_show.advisor.link_billing' | trans }}
+            <a href="{{ path('user_profile_password') }}">
+                {{ 'user.profile_show.advisor.link_password' | trans }}
             </a>
         </div>
 
@@ -130,36 +131,10 @@
                         {{ form_errors(form.user.certifications) }}
                     {% endif %}
 
-
-                    {{ form_row(form.submit, { attr : { class : "wmw-button" }, label : next }) }}
+                    {{ form_row(form.submit, { attr : { class : "wmw-button" }, label : save }) }}
                     {{ form_end(form) }}
 
                 </div>
-
-                <div class="col-xs-14 col-sm-6 row">
-                    {{ form_start(formPassword) }}
-                    {{ form_errors(formPassword) }}
-                    <div class="wmw-bgfield wmw-bgfield--persistent">
-                        {{ form_row(formPassword.current_password) }}
-                        <div class="wmw-bgfield-bg"><i class="icon icon--locker"></i></div>
-                    </div>
-                    <div class="wmw-bgfield wmw-bgfield--persistent">
-                        {{ form_row(formPassword.plainPassword.first, { 'attr' : { class : 'corresponding:profile-password' }}) }}
-                        <div class="wmw-bgfield-bg"><i class="icon icon--locker"></i></div>
-                    </div>
-                    <div class="wmw-bgfield wmw-bgfield--persistent">
-                        {{ form_row(formPassword.plainPassword.second, { 'attr' : { class : 'corresponding:profile-password' }}) }}
-                        <div class="wmw-bgfield-bg"><i class="icon icon--locker"></i></div>
-                    </div>
-
-
-                </div>
-
-                {{ form_row(formPassword.submit, { attr : { class : "wmw-button" }, label : next }) }}
-                {{ form_end(formPassword) }}
-
-
-
 
                 <div class="col-xs-12 row">
                     <div class="col-xs-12 col-md-5 col-md-offset-1">

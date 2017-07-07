@@ -3368,36 +3368,36 @@ var Master = {
 
         function get_price(){
 
-            var data = $("#wmw-pitchprice-form").serialize();
-
-            $.ajax( '../ajax/get-price.php', {
-                method : 'post',
-                data : data,
-                dataType : 'json'
-            }).done( function( response ){
-
-                var $range = $(".wmw-onboard-price-inner input[type=range]");
-                var $input = $(".wmw-onboard-price-inner input[type=text]");
-                $range.attr('min', response.price_min);
-                $range.attr('max', response.price_max);
-                $range.val( response.price_max );
-                $input.val( response.price_max );
-            });
+            // var data = $("#wmw-pitchprice-form").serialize();
+            //
+            // $.ajax( '../ajax/get-price.php', {
+            //     method : 'post',
+            //     data : data,
+            //     dataType : 'json'
+            // }).done( function( response ){
+            //
+            //     var $range = $(".wmw-onboard-price-inner input[type=range]");
+            //     var $input = $(".wmw-onboard-price-inner input[type=text]");
+            //     $range.attr('min', response.price_min);
+            //     $range.attr('max', response.price_max);
+            //     $range.val( response.price_max );
+            //     $input.val( response.price_max );
+            // });
         }
 
         function get_people(){
 
-            var data = { "price" : $("#wmw-pitchprice-form input[type=range]").val() };
-
-            $.ajax( '../ajax/get-people.php', {
-                method : 'post',
-                data : data,
-                dataType : 'json'
-            }).done( function( response ){
-
-                var $people = $(".wmw-onboard-price-number span");
-                $people.text( response.nb_people );
-            });
+            // var data = { "price" : $("#wmw-pitchprice-form input[type=range]").val() };
+            //
+            // $.ajax( '../ajax/get-people.php', {
+            //     method : 'post',
+            //     data : data,
+            //     dataType : 'json'
+            // }).done( function( response ){
+            //
+            //     var $people = $(".wmw-onboard-price-number span");
+            //     $people.text( response.nb_people );
+            // });
         }
 
         $('.wmw-pitch-finder').on('change', 'input, select', function(){
@@ -3464,7 +3464,7 @@ var Master = {
                 var val = $(this).serialize();
                 var num = $(this).attr('data-num');
 
-                $('#wmw-ob-mission-'+num+'-val').val( val );
+                $('#app_user_profile_userWorkExpSerialized_'+num).val( val );
                 Master.close_mission_overlay();
             }
 
@@ -3495,9 +3495,9 @@ var Master = {
         var num = $el.attr('data-num');
         var $overlay = $('#wmw-overlay-ob-4');
 
-        // $overlay.find('.wmw-overlay-title').text( title );
-        // $overlay.attr('data-num', num);
-        // $overlay.find('input[type=range]').trigger('change');
+        //$overlay.find('.wmw-overlay-title').text( title );
+        $overlay.attr('data-num', num);
+        //$overlay.find('input[type=range]').trigger('change');
 
         Master.open_overlay('#wmw-overlay-ob-4');
     },

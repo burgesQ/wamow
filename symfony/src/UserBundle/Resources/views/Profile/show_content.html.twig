@@ -42,6 +42,9 @@
             <a href="{{ path('user_profile_show') }}" class="active">
                 {{ 'user.profile_show.advisor.link_general' | trans }}
             </a>
+            <a href="{{ path('user_profile_password') }}">
+                {{ 'user.profile_show.advisor.link_password' | trans }}
+            </a>
         </div>
 
         {# content #}
@@ -123,7 +126,6 @@
                                 {% set languages = languages ~ language.name | trans | upper ~ ', ' %}
                             {% endif %}
                         {% endfor %}
-                        <label for="profile-languages">Languages</label>
                         <input type="text" id="profile-languages" name="profile-languages" value="{{ languages }}"
                                class="required" disabled="true"/>
                         <div class="wmw-bgfield-bg"><i class="icon icon--language"></i></div>

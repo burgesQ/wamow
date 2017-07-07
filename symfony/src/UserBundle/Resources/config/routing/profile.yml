@@ -15,3 +15,9 @@ user_profile_edit:
     methods:         GET|POST
     defaults:
         _controller: UserBundle:Profile:edit
+
+user_profile_password:
+    path:            /password
+    methods:         GET|POST
+    defaults:
+        _controller: UserBundle:Profile:changePassword

@@ -145,20 +145,6 @@
      <script type="text/javascript">
          $(document).ready(function () {
 
-             var container = $('div#step_three_form_languages');
-             var index     = container.find(':input').length;
-
-             if (index === 0) {
-                 addLanguage(container, index);
-             }
-
-             function addLanguage(container, index) {
-                 var prototype = $(container.attr('data-prototype')
-                     .replace(/__name__label__/g, '')
-                     .replace(/__name__/g, index));
-                 container.append(prototype);
-             }
-
              $("#step_three_form_price").change(function() {
                  $.ajax({
                         url: "{{path("mission_count_match", {'missionId': mission.id})}}",

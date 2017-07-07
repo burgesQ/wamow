@@ -271,7 +271,9 @@ class Mission
     private $certifications;
 
     /**
-     * @ORM\OneToOne(targetEntity="MissionBundle\Entity\WorkExperience", cascade={"persist"})
+     * @ORM\ManyToOne(
+     *     targetEntity="MissionBundle\Entity\WorkExperience",
+     *     inversedBy="missions")
      * @ORM\JoinColumn(nullable=true)
      */
     private $workExperience;
@@ -1376,8 +1378,11 @@ class Mission
      * @param \MissionBundle\Entity\WorkExperience $workExperience
      * @return Mission
      */
-    public function setWorkExperience(\MissionBundle\Entity\WorkExperience $workExperience = null)
+    public function setWorkExperience(WorkExperience $workExperience = null)
     {
+        if ($workExperience) {
+            $workExperience->addMission($this);
+        }
         $this->workExperience = $workExperience;
 
         return $this;
@@ -1399,7 +1404,7 @@ class Mission
      * @param \MissionBundle\Entity\CompanySize $companySize
      * @return Mission
      */
-    public function setCompanySize(\MissionBundle\Entity\CompanySize $companySize = null)
+    public function setCompanySize(CompanySize $companySize = null)
     {
         $this->companySize = $companySize;
 

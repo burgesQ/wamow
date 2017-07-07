@@ -68,6 +68,16 @@ class WorkExperience
     private $missionKinds;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(
+     *     targetEntity="MissionBundle\Entity\Mission",
+     *     mappedBy="workExperience"
+     * )
+     */
+    private $missions;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -76,6 +86,7 @@ class WorkExperience
         $this->businessPractices      = new ArrayCollection();
         $this->professionalExpertises = new ArrayCollection();
         $this->missionKinds           = new ArrayCollection();
+        $this->missions               = new ArrayCollection();
     }
 
     /**
@@ -288,5 +299,38 @@ class WorkExperience
     public function getMissionKinds()
     {
         return $this->missionKinds;
+    }
+
+    /**
+     * Add missions
+     *
+     * @param \MissionBundle\Entity\Mission $missions
+     * @return WorkExperience
+     */
+    public function addMission($missions)
+    {
+        $this->missions[] = $missions;
+
+        return $this;
+    }
+
+    /**
+     * Remove missions
+     *
+     * @param \MissionBundle\Entity\Mission $missions
+     */
+    public function removeMission($missions)
+    {
+        $this->missions->removeElement($missions);
+    }
+
+    /**
+     * Get missions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMissions()
+    {
+        return $this->missions;
     }
 }

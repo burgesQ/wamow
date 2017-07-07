@@ -95,8 +95,9 @@
             </div>
 
             {# wip missions #}
-            <h2 class="main-title"><i class="icon icon--document"></i>{{ 'dashboard.advisor.wip.title' | trans }}</h2>
-
+            {% if wips is not empty %}
+                <h2 class="main-title"><i class="icon icon--document"></i>{{ 'dashboard.advisor.wip.title' | trans }}</h2>
+            {% endif %}
                 <div class="main-missions">
 
                     {% for wip in wips %}
