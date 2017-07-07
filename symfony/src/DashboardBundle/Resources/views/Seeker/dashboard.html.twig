@@ -32,7 +32,8 @@
 
         {# wip missions #}
         <div class="wmw-dashboard-main col-xs-12 col-lg-10">
-            <h2 class="main-title"><i class="icon icon--document"></i>{{ 'dashboard.contractor.mission.title' | trans }}</h2>
+            <h2 class="main-title">
+            {% if missions is not empty %}<i class="icon icon--document"></i>{{ 'dashboard.contractor.mission.title' | trans }}{% endif %}</h2>
             <div class="main-missions">
                 {% for mission in missions %}
 
@@ -221,11 +222,8 @@
 
                 {% endfor %}
                 {% if missions is empty %}
-                  {#<div class="wmw-slider-element wmw-slider-element--special col-xs-12 col-sm-6 col-md-4">#}
-                    {#<div class="main-missions-el main-missions-el--waiting">#}
                         <image src="/images/picto_Working.jpg" style="height:30%;" align="middel"/><br />
                         {{ 'mission.message.no_mission' | trans({ url : path('mission_new_step_one')}, 'tools') | raw | nl2br }}
-                    {#</div>#}
                 {% endif %}
             </div>
 
@@ -255,10 +253,12 @@
                     {% endfor %}
 
                 </div>
+                {% if missions is not empty %}
                 <div class="wmw-slider-navigation">
                     <a href="#" class="wmw-slider-navigation--prev"><i class="icon icon--arrow"></i></a>
                     <a href="#" class="wmw-slider-navigation--next"><i class="icon icon--arrow"></i></a>
                 </div>
+                {% endif %}
             </div>
          </div>
     </div>
