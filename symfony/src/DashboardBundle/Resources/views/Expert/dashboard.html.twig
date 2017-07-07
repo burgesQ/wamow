@@ -44,7 +44,7 @@
 
             {% if news is not empty %}<h2 class="main-title"><i class="icon icon--star"></i>{{ 'dashboard.advisor.new.title' | trans }}{% endif %}</h2>
 
-            <div class="main-slider wmw-slider">
+            <div class="main-slider wmw-slider{% if news|length <= 1 %} wmw-slider--noarrow{% endif %}{% if news|length <= 3 %} wmw-slider--noarrowdesktop{% endif %}">
                 <div class="wmw-slider-inner row">
 
                     {% for new in news %}
