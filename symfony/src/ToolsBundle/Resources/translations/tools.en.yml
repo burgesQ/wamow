@@ -416,6 +416,9 @@ mission:
             title: Final Step
             subtitle: Last Step And we're good !
             hint: "FINAL STEP : "
+        form:
+            back_resume: Back to resume
+            save_mod: Save modifications
 
         label:
             title: TITLE OF THE PITCH
