@@ -93,7 +93,8 @@
         <div class="wmw-onboard-bottom">
 
             {% set back = '<i></i><span>' ~ form.back.vars.label | trans ~ '</span><i></i>' %}
-            {{ form_widget(form.back, {attr: {formnovalidate: 'formnovalidate', class : 'wmw-button wmw-button--border'}, label: back}) }}
+            {{ form_widget(form.back, {attr: { formnovalidate: 'formnovalidate',
+                class: 'wmw-button wmw-button--border wmw-button-later'}, label: back }) }}
 
             {% set share = '<i></i><span>' ~ form.sharePitch.vars.label | trans ~ '</span><i></i>' %}
             {{ form_widget(form.sharePitch, { 'attr' : { class : 'wmw-button wmw-button--green'}, label: share}) }}
