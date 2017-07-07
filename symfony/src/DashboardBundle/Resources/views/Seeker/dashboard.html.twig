@@ -233,7 +233,7 @@
             <h2 class="main-title"><i class="icon icon--pen"></i>{{ 'dashboard.contractor.draft.title' | trans }}</h2>
             {% endif %}
             {# drafts #}
-            <div class="main-slider main-slider--drafts wmw-slider">
+            <div class="main-slider main-slider--drafts wmw-slider{% if drafts|length <= 1 %} wmw-slider--noarrow{% endif %}{% if drafts|length <= 3 %} wmw-slider--noarrowdesktop{% endif %}">
                 <div class="wmw-slider-inner row">
 
                     {% for draft in drafts %}
