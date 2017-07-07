@@ -3011,6 +3011,8 @@ $.fn.deserialize = function (serializedString)
             // Find one or more fields
             var $field = $form.find('[name="' + name + '"]');
 
+            console.log($field, name);
+
             if ($field[0].type == "radio"
                 || $field[0].type == "checkbox")
             {
@@ -3461,19 +3463,14 @@ var Master = {
             }
         });
 
-        $('.wmw-onboard-switches-el-label').on('click', function(){
+        $('#wmw-form-ob-4 label a').on('click', function(e){
             e.preventDefault();
 
-            var $el = $(this).parent().parent().parent().parent();
+            var $el = $(this).parent().parent().parent();
             var val = $el.find('input[type=hidden]').val();
             var $overlay = $('#wmw-overlay-ob-4');
 
-            var checkbox = $(this).parent().find('input[type=checkbox]');
- 			checkbox.prop('checked', true);
- 			if (checkbox.val())
-            Master.addExpShapForm(checkbox.val());
- 			// NOTE : Not a form anymore ?!
-            // $overlay.deserialize( val );
+            $overlay.deserialize( val );
 
             Master.open_mission_overlay( $el );
         });
@@ -3492,33 +3489,16 @@ var Master = {
             return false;
         });
     },
-	addExpShapForm: function( i ){
-		$('#wmw-overlay-ob-4').html("");
-        var $checkbox = $('input#app_user_profile_workExperience_' + i);
-        var $label = $('#label_app_user_profile_workExperience_' + i );
-		var $container = $('#wmw-overlay-ob-4');
-		var $prototype = $($container.attr('data-prototype')
-			.replace(/__name__label__/g, $label.text())
-			.replace(/__name__/g, i));
 
-		$container.append($prototype);
-
-		$("#app_user_profile_userWorkExperiences_" + i + "_workExperience option:selected").removeAttr("selected");
-		$("#app_user_profile_userWorkExperiences_" + i + "_workExperience option[value='" + i + "']").attr('selected', 'selected');
-		Master.init_mission_overlay();
-
-		// var $btn = '<input type="button" id="add_edit_' + i + '" value="AddEdit">';
-		// $checkbox.after($btn);
-	},
     open_mission_overlay: function( $el ){
 
         var title = $el.find('label:first-child').text();
         var num = $el.attr('data-num');
         var $overlay = $('#wmw-overlay-ob-4');
 
-        //$overlay.find('.wmw-overlay-title').text( title );
+        $overlay.find('.wmw-overlay-title').text( title );
         $overlay.attr('data-num', num);
-        //$overlay.find('input[type=range]').trigger('change');
+        $overlay.find('input[type=range]').trigger('change');
 
         Master.open_overlay('#wmw-overlay-ob-4');
     },
@@ -3528,7 +3508,7 @@ var Master = {
         var $overlay = $('#wmw-overlay-ob-4');
 
         $overlay.attr('data-num', '');
-        // $overlay[0].reset();
+        $overlay[0].reset();
         Master.close_overlay( $overlay );
     },
 
