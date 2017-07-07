@@ -194,14 +194,14 @@
                                             {{ 'mission.view.contractor.btn_refuse' | trans }}
                                         </span><i></i>
                                     </a>
-
-                                    <a href="{{ path('user_mission_add_to_shortlist', { 'userMissionId' : userMission.id }) }}" class="wmw-button wmw-button--green wmw-button--border wmw-button--small">
-                                        <i></i><span>
-                                            <i class="icon icon--star"></i>
-                                            {{ 'mission.view.contractor.btn_add_to_shortlist' | trans | upper }}
-                                        </span><i></i>
-                                    </a>
-
+                                    {% if shortlisted < 3 %}
+                                        <a href="{{ path('user_mission_add_to_shortlist', { 'userMissionId' : userMission.id }) }}" class="wmw-button wmw-button--green wmw-button--border wmw-button--small">
+                                            <i></i><span>
+                                                <i class="icon icon--star"></i>
+                                                {{ 'mission.view.contractor.btn_add_to_shortlist' | trans | upper }}
+                                            </span><i></i>
+                                        </a>
+                                    {% endif %}
                                 {% else %}
 
                                     <a href="{{ path('user_mission_remove_from_shortlist', { 'userMissionId' : userMission.id }) }}" class="wmw-button wmw-button--red wmw-button--border wmw-button--small">
@@ -232,7 +232,13 @@
                         {% endif %}
 
                         <div class="mail-toolbar-title">
-                            Consultant {{ userMission.idForContractor }}
+                            {% if step.position == 1 %}
+                                Consultant {{ userMission.idForContractor }}
+                            {% else %}
+                                <a href="{{ path('user_profile_view', { 'missionId' : mission.id, 'userId' : userMission.user.id }) }}">
+                                    {{ userMission.user.firstName }} {{ userMission.user.lastName }}
+                                </a>
+                            {% endif %}
                         </div>
                     </div>
 

@@ -42,13 +42,13 @@
         {# new missions #}
         <div class="wmw-dashboard-main col-xs-12 col-lg-10">
 
-            <h2 class="main-title"><i class="icon icon--star"></i>{{ 'dashboard.advisor.new.title' | trans }}</h2>
+            {% if news is not empty %}<h2 class="main-title"><i class="icon icon--star"></i>{{ 'dashboard.advisor.new.title' | trans }}{% endif %}</h2>
 
-            <div class="main-slider wmw-slider">
+            <div class="main-slider wmw-slider{% if news|length <= 1 %} wmw-slider--noarrow{% endif %}{% if news|length <= 3 %} wmw-slider--noarrowdesktop{% endif %}">
                 <div class="wmw-slider-inner row">
 
                     {% for new in news %}
-                        {% if loop.index0 == 0 %}
+                        {% if loop.index == 0 %}
                             <div class="wmw-slider-element wmw-slider-element--active col-xs-12 col-sm-6 col-md-4">
                         {% else %}
                             <div class="wmw-slider-element col-xs-12 col-sm-6 col-md-4">
@@ -78,13 +78,14 @@
                     </div>
                     {% endfor %}
 
-                    <div class="wmw-slider-element wmw-slider-element--special col-xs-12 col-sm-6 col-md-4">
-                        <div class="main-slider-element">
-                            <div class="main-slider-nopitch">
-                                {{ 'dashboard.advisor.other.none' | trans }}
-                            </div>
+                    {% if news is empty %}
+                        <div class="wmw-slider-element wmw-slider-element--empty">
+                            <span>
+                                <img src="{{ asset('images/picto_Working.jpg') }}" /><br />
+                                {{ 'mission.message.no_proposition' | trans }}
+                            </span>
                         </div>
-                    </div>
+                    {% endif %}
                 </div>
 
                 <div class="wmw-slider-navigation">
@@ -94,8 +95,9 @@
             </div>
 
             {# wip missions #}
-            <h2 class="main-title"><i class="icon icon--document"></i>{{ 'dashboard.advisor.wip.title' | trans }}</h2>
-
+            {% if wips is not empty %}
+                <h2 class="main-title"><i class="icon icon--document"></i>{{ 'dashboard.advisor.wip.title' | trans }}</h2>
+            {% endif %}
                 <div class="main-missions">
 
                     {% for wip in wips %}

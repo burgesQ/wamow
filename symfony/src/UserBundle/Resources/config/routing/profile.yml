@@ -4,8 +4,20 @@ user_profile_show:
     defaults:
         _controller: UserBundle:Profile:show
 
+user_profile_view:
+    path:            /{missionId}/{userId}
+    methods:         GET|POST
+    defaults:
+        _controller: UserBundle:Profile:view
+
 user_profile_edit:
     path:            /edit
     methods:         GET|POST
     defaults:
         _controller: UserBundle:Profile:edit
+
+user_profile_password:
+    path:            /password
+    methods:         GET|POST
+    defaults:
+        _controller: UserBundle:Profile:changePassword

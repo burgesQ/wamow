@@ -2,6 +2,7 @@
 
 namespace UserBundle\Controller;
 
+use MissionBundle\Entity\UserWorkExperience;
 use Symfony\Component\HttpFoundation\Session\Storage\PhpBridgeSessionStorage;
 use UserBundle\Form\RegistrationAdvisor\MergedFormRegistrationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -82,7 +83,7 @@ class RegistrationAdvisorController extends Controller
             if (!$user->getLinkedinId() && !$form->get('resume')->getData()->getFile()) {
                 $form->get('resume')->addError(new FormError($trans->trans('error.upload_resume_or_linkedin', [], 'tools')));
             } elseif($userManager->findUserBy(['email' => $form->get('user')->get('email')->getData()]) !== null &&
-                (!$this->getUser() || $this->getUser()->getEmail() == $form->get('user')->get('email')->getData())) {
+                (!$this->getUser() || $this->getUser()->getEmail() !== $form->get('user')->get('email')->getData())) {
 
                 $form->get('user')->get('email')->addError(new FormError($trans->trans('error.user.email_in_use', [],
                     'tools')));
@@ -102,7 +103,6 @@ class RegistrationAdvisorController extends Controller
                 $user->setPlainPassword($password);
                 $userManager->updateUser($user);
 
-                $user->setPublicId(md5(uniqid() . $user->getUserResume() . $user->getId()));
                 $resume->setUser($user);
                 $em->persist($resume);
                 $em->flush();
@@ -259,10 +259,105 @@ class RegistrationAdvisorController extends Controller
         /** @var \Symfony\Component\Form\Form $form */
         $form = $this->createForm(new StepFourType(), $user)->setData($user);
         if ($form->handleRequest($request)->isSubmitted() && $form->isValid()) {
-            /** @var \MissionBundle\Entity\UserWorkExperience $oneWorkExp */
-            foreach ($user->getUserWorkExperiences() as $oneWorkExp) {
-                $oneWorkExp->setUser($user);
-                $em->persist($oneWorkExp);
+
+            $workExpRepo     = $em->getRepository('MissionBundle:WorkExperience');
+            $companySizeRepo = $em->getRepository('MissionBundle:CompanySize');
+            $continentRepo   = $em->getRepository('MissionBundle:Continent');
+
+            $smallComp    = $companySizeRepo->findOneBy(['name' => 'company_size.small']);
+            $mediumComp   = $companySizeRepo->findOneBy(['name' => 'company_size.medium']);
+            $largeComp    = $companySizeRepo->findOneBy(['name' => 'company_size.large']);
+            $southAmerica = $continentRepo->findOneBy(['name' => 'continent.south_america']);
+            $northAmerica = $continentRepo->findOneBy(['name' => 'continent.north_america']);
+            $asia         = $continentRepo->findOneBy(['name' => 'continent.asia']);
+            $emea         = $continentRepo->findOneBy(['name' => 'continent.emea']);
+
+            foreach ($form->get('userWorkExpSerialized')->getData() as $key => $val) {
+                if ($val) {
+                    $array = explode('&', str_replace('__name__', $key, urldecode($val)));
+
+                    /** @var UserWorkExperience $userWorkExperience */
+                    $userWorkExperience = new UserWorkExperience();
+                    $user->addUserWorkExperience($userWorkExperience);
+                    $userWorkExperience->setUser($user);
+                    $userWorkExperience->setWorkExperience($workExpRepo->findOneBy(['id' => $key]));
+
+                    foreach ($array as $value) {
+                        $arrayTmp = explode('[', $value);
+                        $label    = $arrayTmp[3];
+                        switch ($label) {
+                            case ($label == "companySizes]") :
+                                $whichOne = $arrayTmp[4];
+                                switch ($whichOne) {
+                                    case ($whichOne == "]=1") :
+                                        $userWorkExperience->addCompanySize($smallComp);
+                                        break;
+                                    case ($whichOne == "]=2") :
+                                        $userWorkExperience->addCompanySize($mediumComp);
+                                        break;
+                                    case ($whichOne == "]=3") :
+                                        $userWorkExperience->addCompanySize($largeComp);
+                                        break;
+                                    default :
+                                        break;
+                                }
+                            case ($label == "continent]") :
+                                $whichOne = $arrayTmp[4];
+                                switch ($whichOne) {
+                                    case ($whichOne == "]=1") :
+                                        $userWorkExperience->addContinent($asia);
+                                        break;
+                                    case ($whichOne == "]=2") :
+                                        $userWorkExperience->addContinent($emea);
+                                        break;
+                                    case ($whichOne == "]=3") :
+                                        $userWorkExperience->addContinent($northAmerica);
+                                        break;
+                                    case ($whichOne == "]=4") :
+                                        $userWorkExperience->addContinent($southAmerica);
+                                        break;
+                                    default :
+                                        break;
+                                }
+
+                            case (substr($label, 0, 12) == "cumuledMonth") :
+                                $lastTmp = explode('=', $label);
+                                $i       = 0;
+                                foreach ($lastTmp as $lastLoop) {
+                                    if ($i) {
+                                        $userWorkExperience->setCumuledMonth($lastLoop);
+                                    }
+                                    $i++;
+                                }
+                            case (substr($label, 0, 10) == "peremption") :
+                                $lastTmp = explode('=', $label);
+                                $i       = 0;
+                                foreach ($lastTmp as $lastLoop) {
+                                    if ($i) {
+                                        $userWorkExperience->setPeremption(true);
+                                    }
+                                    $i++;
+                                }
+                            case (substr($label, 0, 9) == "dailyFees") :
+                                $lastTmp = explode('=', $label);
+                                $i       = 0;
+                                foreach ($lastTmp as $lastLoop) {
+                                    if ($i) {
+                                        $userWorkExperience->setDailyFees($lastLoop);
+                                        if ($user->getDailyFeesMin() > $lastLoop) {
+                                            $user->setDailyfeesMin($lastLoop);
+                                        }
+                                        if ($user->getDailyFeesMax() < $lastLoop) {
+                                            $user->setDailyfeesMax($lastLoop);
+                                        }
+                                    }
+                                    $i++;
+                                }
+                        }
+                    }
+                    $em->persist($userWorkExperience);
+                    $em->flush();
+                }
             }
             $user->setStatus(User::REGISTER_NO_STEP);
             $this->get('fos_user.user_manager')->updateUser($user);

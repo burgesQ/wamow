@@ -3,6 +3,7 @@
 namespace CompanyBundle\Entity;
 
 use MissionBundle\Entity\BusinessPractice;
+use ToolsBundle\Entity\Address;
 use UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\EntityRepository;
@@ -88,7 +89,7 @@ class Company
 
     public function __toString()
     {
-        return $this->getName();
+        return $this->name;
     }
 
     /**

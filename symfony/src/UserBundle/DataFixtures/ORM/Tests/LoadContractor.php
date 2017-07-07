@@ -92,9 +92,6 @@ class LoadContractor extends AbstractFixture implements OrderedFixtureInterface,
 
             // save user in db
             $userManager->updateUser($newUser, true);
-
-            $newUser->setPublicId(md5(uniqid() . $newUser->getUsername() . $newUser->getId()));
-            $userManager->updateUser($newUser, true);
         }
     }
 

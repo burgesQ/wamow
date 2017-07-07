@@ -38,9 +38,11 @@
 
         {# links #}
         <div class="wmw-profile-tabs row">
-            <a href="#"></a>
             <a href="{{ path('user_profile_show') }}" class="active">
                 {{ 'user.profile_show.advisor.link_general' | trans }}
+            </a>
+            <a href="{{ path('user_profile_password') }}">
+                {{ 'user.profile_show.advisor.link_password' | trans }}
             </a>
         </div>
 
@@ -59,26 +61,28 @@
 
                     {# emergency mail #}
                     <div class="wmw-bgfield col-xs-10">
-                        <label for="profile-backup-email">Backup email</label>
-                        <input type="email" id="profile-backup-email" name="profile-backup-email"
-                               value="{{ user.emergencyEmail }}" class="required" disabled="true"/>
-                        <div class="wmw-bgfield-bg"><i class="icon icon--email"></i></div>
+                            <label for="profile-backup-email">Backup email</label>
+                            <input type="email" id="profile-backup-email" name="profile-backup-email"
+                                   value="{{ user.emergencyEmail }}" class="required" disabled="true"/>
+                        {% if user.emergencyEmail %}
+                            <div class="wmw-bgfield-bg"><i class="icon icon--email"></i></div>
+                        {% endif %}
                     </div>
                 </div>
 
-                {# TODO CERTIFICATION / BORDER BTN #}
                 <div class="col-xs-12 col-sm-5 col-sm-offset-2">
                     {% if roleAdvisor %}
                         {# certification #}
                         <div class="wmw-bgfield">
+                            {% form_theme form "form_themes.html.twig" %}
                             {{ form_start(form) }}
                             {{ form_widget(form.certifications) }}
-                            <div class="wmw-bgfield-bg"><i></i></div>
+                            <div class="wmw-bgfield-bg"><i class="icon icon--certification"></i></div>
                         </div>
-                        <div class="wmw-bgfield wmw-bgfield--persistent">
-                            {{ form_row(form.save, {'attr': {'class': 'wmw-button wmw-button--small wmw-button--green'}}) }}
+                        <div class="wmw-bgfield">
+                            {% set save = '<i></i><span>' ~ 'form.btn.save_certif' | trans ~ '</span><i></i>' %}
+                            {{ form_row(form.save, {'attr': {'class': 'wmw-button wmw-button--small wmw-button--green'}, label: save}) }}
                             {{ form_end(form) }}
-                            <div class="wmw-bgfield-bg"><i></i></div>
                         </div>
 
                     {% else %}
@@ -88,33 +92,25 @@
                             <input type="text" id="profile-company" name="profile-company" value="{{ company.name | upper }}" class="required" disabled="true" />
                             <div class="wmw-bgfield-bg"><i class="icon icon--company"></i></div>
                         </div>
-                        <div class="wmw-bgfield wmw-bgfield--persistent">
-                            <button class="wmw-button wmw-button--green wmw-button--small"
-                                    type="submit"
-                                    id="edit_certification_form_save"
-                                    name="edit_certification_form[save]">
-                                <i></i><span>{{ 'form.btn.save_certif' | trans }}</span><i></i>
-                            </button>
-                        </div>
                     {% endif %}
                 </div>
 
                 {# phone number #}
-                <div class="col-xs-12 col-sm-5 row">
-                    <div class="wmw-bgfield col-xs-10">
+                <div class="row">
+                    <div class="wmw-bgfield col-xs-12 col-xs-10">
                         <label for="profile-phone">Phone number</label>
                         <input type="text" id="profile-phone" name="profile-phone"
                                 {% if user.phone %}
                                     value="({{ user.phone.prefix.prefix }}){{ user.phone.number }}"
                                 {% endif %}
                                class="required" disabled="true"/>
-                        <div class="wmw-bgfield-bg"><i class="icon icon--phone"></i></div>
+                        {% if user.phone %}
+                            <div class="wmw-bgfield-bg"><i class="icon icon--phone"></i></div>
+                        {% endif %}
                     </div>
-                </div>
-
-                {# languages #}
-                <div class="col-xs-12 col-sm-5 col-sm-offset-2">
-                    <div class="wmw-bgfield">
+                    {# languages #}
+                    {#<div class="col-xs-12 col-sm-5 col-sm-offset-2">#}
+                    <div class="wmw-bgfield col-xs-12 col-xs-10">
                         {% set languages = '' %}
                         {% for language in user.languages %}
                             {% if loop.last %}
@@ -123,10 +119,11 @@
                                 {% set languages = languages ~ language.name | trans | upper ~ ', ' %}
                             {% endif %}
                         {% endfor %}
-                        <label for="profile-languages">Languages</label>
                         <input type="text" id="profile-languages" name="profile-languages" value="{{ languages }}"
                                class="required" disabled="true"/>
-                        <div class="wmw-bgfield-bg"><i class="icon icon--language"></i></div>
+                        {% if user.languages is not empty %}
+                            <div class="wmw-bgfield-bg"><i class="icon icon--language"></i></div>
+                        {% endif %}
                     </div>
                 </div>
 
@@ -144,7 +141,9 @@
                         <input type="text" id="profile-address" name="profile-address"
                                value="{{ renderAddress }}" class="required"
                                disabled="true"/>
-                        <div class="wmw-bgfield-bg"><i class="icon icon--address"></i></div>
+                        {% if renderAddress != '' %}
+                            <div class="wmw-bgfield-bg"><i class="icon icon--address"></i></div>
+                        {% endif %}
                     </div>
                 </div>
 
@@ -154,7 +153,9 @@
                         <select id="profile-country" name="profile-country" class="required" disabled="true">
                             <option value="{{ renderCountry }}">{{ renderCountry }}</option>
                         </select>
-                        <div class="wmw-bgfield-bg"><i class="icon icon--world"></i></div>
+                        {% if renderCountry != '' %}
+                            <div class="wmw-bgfield-bg"><i class="icon icon--world"></i></div>
+                        {% endif %}
                     </div>
                 </div>
 
@@ -173,7 +174,9 @@
                             <input type="text" id="profile-address" name="profile-address"
                                    value="{{ renderAddress }}" class="required"
                                    disabled="true"/>
-                            <div class="wmw-bgfield-bg"><i class="icon icon--address"></i></div>
+                            {% if renderAddress != '' %}
+                                <div class="wmw-bgfield-bg"><i class="icon icon--address"></i></div>
+                            {% endif %}
                         </div>
                     </div>
 
@@ -183,7 +186,9 @@
                             <select id="profile-country" name="profile-country" class="required" disabled="true">
                                 <option value="{{ renderCountry }}">{{ renderCountry }}</option>
                             </select>
-                            <div class="wmw-bgfield-bg"><i class="icon icon--world"></i></div>
+                            {% if renderAddress != '' %}
+                                <div class="wmw-bgfield-bg"><i class="icon icon--world"></i></div>
+                            {% endif %}
                         </div>
                     </div>
                 {% endif %}

@@ -20,3 +20,4 @@ easy_admin:
                     - { property: 'status', type: 'text' }
                     - { property : 'address', type : 'ToolsBundle\Form\AddressType'}
                     - { property : 'resume' }
+                    - { property : 'logo' }

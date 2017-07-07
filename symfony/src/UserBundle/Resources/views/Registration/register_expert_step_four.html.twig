@@ -22,6 +22,8 @@
         {{ form_errors(form.workExperience) }}
         {{ form_errors(form.userWorkExperiences) }}
 
+    {{ form_widget(form.userWorkExpSerialized) }}
+
         <div class="wmw-onboard-body">
             <h1>
                 {{ 'registration.advisor.four.title' | trans }}
@@ -32,7 +34,10 @@
                     <div class="wmw-onboard-switches-el" data-num="{{ key }}">
                         {{ form_label(workExperience, null, {"label_attr": {"id": ("label_" ~ workExperience.vars.id), "class": "wmw-onboard-switches-el-label"}}) }}
                         <div class="wmw-switchfield">
-                            <input type="hidden" id="wmw-ob-mission-{{ key }}-val" value="" />
+
+                            <input type="hidden" id="app_user_profile_userWorkExpSerialized_{{ key }}" name="app_user_profile[userWorkExpSerialized][{{ key }}]" required="required"  value=""/>
+                            {#<input type="hidden" id="wmw-ob-mission-{{ key }}-val" value="" />#}
+
                             {{ form_widget(workExperience, {'attr' : {'class': 'requiredgroup:wmw-ob-missions vv-ggparent workexperience-link'}}) }}
                             <label for="{{ workExperience.vars.id }}"><span>add</span><span><a href="#">edit</a></span></label>
                         </div>
@@ -48,14 +53,18 @@
             </div>
         </div>
         <div class="wmw-onboard-bottom">
+            {% set next = '<i></i><span>' ~ form.submit.vars.label | trans ~ '</span><i></i>' %}
+            {#{% set back = '<i></i><span>' ~ form.back.vars.label | trans ~ '</span><i></i>' %}#}
+
             <a href="{{ path('expert_registration_step_three') }}" class="wmw-button wmw-button--border">
                 <i></i><span>
-                    {{ 'form.btn.back' | trans }}
-                </span><i></i>
+                {{ 'form.btn.back' | trans }}
+            </span><i></i>
             </a>
-            {% set next = '<i></i><span>' ~ form.submit.vars.label | trans ~ '</span><i></i>' %}
-            {{ form_widget(form._token) }}
+
+            {#{{ form_widget(form.back, {'attr': {'class': 'wmw-button wmw-button--border'}, 'label': back }) }}#}
             {{ form_widget(form.submit, {'attr': {'class': 'wmw-button wmw-button--green'}, 'label': next }) }}
+            {{ form_widget(form._token) }}
         </div>
 
     </form>

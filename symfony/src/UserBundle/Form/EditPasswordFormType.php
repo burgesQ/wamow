@@ -14,7 +14,9 @@ class EditPasswordFormType extends BaseType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('submit', SubmitType::class)
+            ->add('submit', SubmitType::class, [
+                'label' => ''
+            ])
         ;
     }
 }

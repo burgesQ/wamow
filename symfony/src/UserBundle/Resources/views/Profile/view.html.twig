@@ -1,0 +1,49 @@
+{% extends "::base.html.twig" %}
+
+{% trans_default_domain 'tools' %}
+
+{% block body %}
+    <div class="wmw-dashboard col-xs-10 col-xs-offset-1 row">
+
+        <div class="wmw-dashboard-sidebar col-xs-12 col-lg-2">
+            <div class="sidebar-progress">
+                <a href="{{ path('mission_new_step_one') }}" class="sidebar-progress-button">
+                    <i class="icon icon--document-more"></i><br />
+                    {{ 'dashboard.contractor.new.button' | trans | upper }}
+                </a>
+            </div>
+
+            <div class="sidebar-notifications">
+                <label for="wmw-profile-notifications">
+                    <i class="icon icon--bell"></i>
+                    {{ 'side_bar.email_notification' | trans | upper | nl2br }}
+                </label>
+                <div class="wmw-switchfield wmw-switchfield--small">
+                    <input type="checkbox" id="wmw-profile-notifications" {% if user.notification %}checked{% endif %}
+                           onclick="switchNotification()"/>
+                    <label for="wmw-profile-notifications"></label>
+                </div>
+            </div>
+
+            <div class="sidebar-text">
+                <strong>{{ 'dashboard.advisor.fyi.title' | trans | upper }}</strong>
+                {{ 'dashboard.advisor.fyi.text' | trans | upper }}
+            </div>
+        </div>
+
+        {% include "UserBundle:Profile:view_content.html.twig" %}
+    </div>
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        function switchNotification() {
+            $.ajax({
+                url: "{{ path('user_switch_notification') }}",
+                method: "put"
+            });
+        }
+    </script>
+{% endblock %}

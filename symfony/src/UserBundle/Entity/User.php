@@ -376,17 +376,18 @@ class User extends BaseUser implements ParticipantInterface
         $this->userMission           = new ArrayCollection();
         $this->certifications        = new ArrayCollection();
         $this->confidentiality       = false;
-        $this->payment               = false;
         $this->remoteWork            = false;
         $this->newsletter            = true;
         $this->notification          = true;
         $this->userResume            = null;
         $this->company               = null;
-        $this->publicId              = "";
         $this->giveUpCount           = 0;
         $this->secretMail            = [];
         $this->linkedinData          = [];
         $this->scoringBonus          = 5;
+        $this->dailyFeesMax          = 0;
+        $this->dailyFeesMin          = 0;
+        $this->publicId              = md5(uniqid() . time());
     }
 
     /**
@@ -403,26 +404,8 @@ class User extends BaseUser implements ParticipantInterface
      */
     public function isValidate($context)
     {
-        $feesMin = $this->getDailyFeesMin();
-        $feesMax = $this->getDailyFeesMax();
-
         if ($this->getPhone() != NULL) {
             $this->getPhone()->isValidate($context);
-        } elseif ($feesMin == NULL && $feesMax != NULL) {
-            $context
-                ->buildViolation('user.minfees.unset')
-                ->atPath('dailyFeesMin')
-                ->addViolation();
-        } elseif ($feesMax == NULL && $feesMin != NULL) {
-            $context
-                ->buildViolation('user.maxfees.unset')
-                ->atPath('dailyFeesMax')
-                ->addViolation();
-        } elseif ($feesMin != NULL && $feesMax != NULL && $feesMin >= $feesMax) {
-            $context
-                ->buildViolation('user.minfees.over')
-                ->atPath('dailyFeesMin')
-                ->addViolation();
         }
     }
 

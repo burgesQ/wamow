@@ -2825,7 +2825,6 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                 $this->linkAddress($oneData[12], $newUser, $manager);
             }
 
-            $newUser->setPublicId(md5(uniqid() . $newUser->getUsername() . $i));
             // save user in db
             $userManager->updateUser($newUser, true);
             $i++;
