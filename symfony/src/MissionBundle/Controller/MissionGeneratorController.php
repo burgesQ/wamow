@@ -312,10 +312,6 @@ class MissionGeneratorController extends Controller
 
 
             switch ($formStepFour) {
-                case $formStepFour->get('back')->isClicked() :
-                    return $this->redirectToRoute('mission_new_step_three', [
-                        'missionId' => $newMission->getId()
-                    ]);
                 case $formStepFour->get('forLater')->isClicked() :
                     $newMission->setOnDraft(true);
                     $em->flush();
