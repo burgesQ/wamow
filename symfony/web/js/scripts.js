@@ -3176,6 +3176,8 @@ var Master = {
         $('.mail-content-sidebar').not( $('.mail-content-sidebar--noscroll') ).perfectScrollbar({ suppressScrollX:true });
 
         Master.init_slider('.main-slider', '.wmw-slider-inner', '.wmw-slider-navigation', false, '.wmw-slider-element', false, false);
+
+        Master.init_candidates_scrolling();
     },
 
     onload : function(){
@@ -3309,6 +3311,57 @@ var Master = {
             var mission_id = $(this).attr('data-mission-id');
             i_am_interested( mission_id );
         });
+    },
+
+    init_candidates_scrolling : function(){
+
+        /*var timer = false;
+
+        function start_scrolling( direction ){
+
+            if(!timer)
+                timer = setInterval( function(){
+
+                    var sleft = parseInt($('.wmw-mission-body').scrollLeft());
+                    sleft = (sleft > 0) ? sleft-1:0; 
+                    if( direction == 'right')
+                        sleft = (sleft > ) ? sleft+1:$('.wmw-mission-body').width(); 
+                
+                    console.log(sleft);
+
+                    $('.wmw-mission-body').scrollLeft(sleft);
+                }, 50);
+        }
+
+        function stop_scrolling(){
+
+            clearInterval( timer );
+            timer = false;
+        }
+
+        if($('.wmw-mission-body').get().length>0){
+
+            var $obj = $('.wmw-mission-body');
+            var left = {};
+            var offset = $obj.offset();
+            var width = $obj.width();
+
+            $('.wmw-mission-body').mousemove(function(e){
+
+                left = {
+                    px: (e.pageX - offset.left),
+                    percent: (e.pageX - offset.left) / width
+                };
+
+                if( left.percent < 0.25){
+                    start_scrolling('left');
+                }else if( left.percent > 0.75){
+                    start_scrolling('right');
+                }else{
+                    stop_scrolling();
+                }
+            });
+        }*/
     },
 
     init_mission_notes : function(){
