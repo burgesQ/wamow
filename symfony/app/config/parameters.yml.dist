@@ -4,8 +4,9 @@
 parameters:
 
     # Language
-    locale:            fr
-    app_locales:       fr|en
+    locale:            en
+    app_locales:       en|fr
+    app_locales_array: [ en , fr ]
 
     database_host:     db
     database_port:     ~
