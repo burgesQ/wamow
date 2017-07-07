@@ -27,6 +27,7 @@
                         <span class="name">{{ (user.firstName) | truncate(1, false, '.') }} {{ user.lastName | truncate(18, false, '') }}</span>
                     {% endif %}
                         <i class="icon icon--arrow"></i>
+                        <i class="icon icon--avatar"></i>
                     </span><i></i>
                 </button>
                 <div class="wmw-header-profile-menu">
@@ -35,4 +36,5 @@
                 </div>
             </div>
         {% endif %}
+        {% include 'local.html.twig' %}
     </div>
