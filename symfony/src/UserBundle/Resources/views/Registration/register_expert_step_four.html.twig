@@ -64,6 +64,7 @@
 
             {#{{ form_widget(form.back, {'attr': {'class': 'wmw-button wmw-button--border'}, 'label': back }) }}#}
             {{ form_widget(form.submit, {'attr': {'class': 'wmw-button wmw-button--green'}, 'label': next }) }}
+            {{ form_widget(form._token) }}
         </div>
 
     </form>
