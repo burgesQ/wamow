@@ -222,8 +222,10 @@
 
                 {% endfor %}
                 {% if missions is empty %}
-                        <image src="/images/picto_Working.jpg" style="height:30%;" align="middel"/><br />
+                    <div class="main-missions-el main-missions-el--empty">
+                        <img src="{{ asset('images/picto_Working.jpg') }}" /><br />
                         {{ 'mission.message.no_mission' | trans({ url : path('mission_new_step_one')}, 'tools') | raw | nl2br }}
+                    </div>
                 {% endif %}
             </div>
 
@@ -235,7 +237,12 @@
                 <div class="wmw-slider-inner row">
 
                     {% for draft in drafts %}
-                        <div class="wmw-slider-element wmw-slider-element--active col-xs-12 col-md-4">
+                        {% if loop.index == 0 %}
+                            <div class="wmw-slider-element wmw-slider-element--active col-xs-12 col-md-4">
+                        {% else %}
+                            <div class="wmw-slider-element col-xs-12 col-md-4">
+                        {% endif %}
+
                             <div class="main-slider-element">
                                 <div class="main-slider-element-wrapper">
                                     <div class="main-slider-date">{{ 'dashboard.contractor.draft.date' | trans({ date : draft.creationDate | date }) }}</div>
