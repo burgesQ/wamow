@@ -3364,51 +3364,6 @@ var Master = {
         });
     },
 
-    init_pitch_finder : function(){
-
-        function get_price(){
-
-            // var data = $("#wmw-pitchprice-form").serialize();
-            //
-            // $.ajax( '../ajax/get-price.php', {
-            //     method : 'post',
-            //     data : data,
-            //     dataType : 'json'
-            // }).done( function( response ){
-            //
-            //     var $range = $(".wmw-onboard-price-inner input[type=range]");
-            //     var $input = $(".wmw-onboard-price-inner input[type=text]");
-            //     $range.attr('min', response.price_min);
-            //     $range.attr('max', response.price_max);
-            //     $range.val( response.price_max );
-            //     $input.val( response.price_max );
-            // });
-        }
-
-        function get_people(){
-
-            // var data = { "price" : $("#wmw-pitchprice-form input[type=range]").val() };
-            //
-            // $.ajax( '../ajax/get-people.php', {
-            //     method : 'post',
-            //     data : data,
-            //     dataType : 'json'
-            // }).done( function( response ){
-            //
-            //     var $people = $(".wmw-onboard-price-number span");
-            //     $people.text( response.nb_people );
-            // });
-        }
-
-        $('.wmw-pitch-finder').on('change', 'input, select', function(){
-            get_price();
-        });
-
-        $('.wmw-onboard-price input[type=range]').on('change', function(){
-            get_people();
-        });
-    },
-
     open_overlay: function( id ){
         $( id ).addClass('wmw-overlay--active');
     },
