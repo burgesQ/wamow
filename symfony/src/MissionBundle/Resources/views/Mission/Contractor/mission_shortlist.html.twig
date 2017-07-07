@@ -115,6 +115,8 @@
                 </div>
             {% endif %}
 
+            <div class="wmw-mission-content row">
+
             {% for userMission in userMissions %}
                 {% set lastMsg = userMission.thread.messages | last %}
                 {% set read = lastMsg.metadata[1].isRead %}
@@ -178,6 +180,8 @@
 
                 </div>
             {% endfor %}
+
+        </div>
 
             <div class="wmw-mission-sidebar">
                 <div class="sidebar-wrapper" >
