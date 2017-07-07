@@ -103,7 +103,6 @@ class RegistrationAdvisorController extends Controller
                 $user->setPlainPassword($password);
                 $userManager->updateUser($user);
 
-                $user->setPublicId(md5(uniqid() . $user->getUserResume() . $user->getId()));
                 $resume->setUser($user);
                 $em->persist($resume);
                 $em->flush();
