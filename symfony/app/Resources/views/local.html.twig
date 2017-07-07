@@ -5,10 +5,10 @@
 <div class="wmw-header-languages-button">
 	{% for locale in locales if locale == app.request.locale %}
     <button type="button" class="wmw-button wmw-button--border wmw-button--green" id="hide_logout">
-        <i></i><span>
+        <span>
             <span class="name">{{ locale }}</span>
             <i class="icon icon--arrow"></i>
-        </span><i></i>
+        </span>
     </button>
     {% endfor %}
     <div class="wmw-header-languages-menu">
