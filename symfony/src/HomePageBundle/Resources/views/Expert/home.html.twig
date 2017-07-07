@@ -5,30 +5,31 @@
 {% endblock %}
 
 {% block body %}
-<a href="{{ path('home_page_seeker') }}">{{ 'home.advisor.contractorlink' | trans | upper }}</a><br>
-<a href="">{{ 'header.news' | trans | upper }}</a><br>
-<a href="{{ path('fos_user_security_login') }}">{{ 'home.advisor.login' | trans }}</a><br>
-<a href="{{ path('fos_user_registration_register_expert') }}">{{ 'home.advisor.signup' | trans }}</a><br>
+    <a href="{{ path('home_page_seeker') }}">{{ 'home.advisor.contractorlink' | trans | upper }}</a><br>
+    <a href="">{{ 'header.news' | trans | upper }}</a><br>
+    <a href="{{ path('fos_user_security_login') }}">{{ 'home.advisor.login' | trans }}</a><br>
+    <a href="{{ path('fos_user_registration_register_expert') }}">{{ 'home.advisor.signup' | trans }}</a><br>
 
-{{ 'home.advisor.title' | trans }}<br>
-{{ 'home.advisor.valueproposition.first' | trans | upper }}<br>
-{{ 'home.advisor.valueproposition.second' | trans | upper }}<br>
-{{ 'home.advisor.howdoesitwork' | trans }}<br>
-{{ 'home.advisor.start.text' | trans }}<br>
-{{ 'home.advisor.play.text' | trans }}<br>
-{{ 'home.advisor.improve.text' | trans }}<br>
-{{ 'home.advisor.pay.text' | trans }}<br>
+    {{ 'home.advisor.title' | trans }}<br>
+    {{ 'home.advisor.valueproposition.first' | trans | upper }}<br>
+    {{ 'home.advisor.valueproposition.second' | trans | upper }}<br>
+    {{ 'home.advisor.howdoesitwork' | trans }}<br>
+    {{ 'home.advisor.start.text' | trans }}<br>
+    {{ 'home.advisor.play.text' | trans }}<br>
+    {{ 'home.advisor.improve.text' | trans }}<br>
+    {{ 'home.advisor.pay.text' | trans }}<br>
 
-<a href="{{ path('fos_user_registration_register_expert') }}">{{ 'home.advisor.open' | trans | upper }}</a><br>
+    <a href="{{ path('fos_user_registration_register_expert') }}">{{ 'home.advisor.open' | trans | upper }}</a><br>
 
-<a href="">{{ 'footer.mission' | trans | upper }}/</a><br>
-<a href="">{{ 'footer.about' | trans | upper }}/</a><br>
-<a href="{{ path('home_page_seeker') }}">{{ 'footer.contractor' | trans | upper }}/</a><br>
-<a href="">{{ 'footer.agreement' | trans | upper }}/</a><br>
-<a href="">{{ 'footer.legal' | trans | upper }}/</a><br>
-<a href="{{ facebook_link }}">logo facebook</a><br>
-<a href="{{ twitter_link }}">logo twitter</a><br>
-<a href="{{ linkedin_link }}">logo linkedin</a><br>
+    <a href="">{{ 'footer.mission' | trans | upper }}/</a><br>
+    <a href="">{{ 'footer.about' | trans | upper }}/</a><br>
+    <a href="{{ path('home_page_seeker') }}">{{ 'footer.contractor' | trans | upper }}/</a><br>
+    <a href="">{{ 'footer.agreement' | trans | upper }}/</a><br>
+    <a href="">{{ 'footer.legal' | trans | upper }}/</a><br>
+    <a href="{{ facebook_link }}">logo facebook</a><br>
+    <a href="{{ twitter_link }}">logo twitter</a><br>
+    <a href="{{ linkedin_link }}">logo linkedin</a><br>
+
 {% endblock %}
 
 {% block javascripts %}
