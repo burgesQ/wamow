@@ -3037,11 +3037,17 @@ var Master = {
             $(this).parent().toggleClass('wmw-header-profile-button--active');
         });
 
-        $('body').on('click', function(){
-             $('.wmw-header-profile-button').removeClass('wmw-header-profile-button--active');
+        $('.wmw-header-languages-button .wmw-button').on('click', function(e){
+            e.preventDefault();
+            $(this).parent().toggleClass('wmw-header-languages-button--active');
         });
 
-        $('.wmw-header-profile-button a, .wmw-header-profile-button .wmw-button').on('click', function(e){
+        $('body').on('click', function(){
+             $('.wmw-header-profile-button').removeClass('wmw-header-profile-button--active');
+            $('.wmw-header-languages-button').removeClass('wmw-header-languages-button--active');
+        });
+
+        $('.wmw-header-profile-button a, .wmw-header-profile-button .wmw-button, .wmw-header-languages-button a, .wmw-header-languages-button .wmw-button').on('click', function(e){
             e.stopPropagation();
         });
 
