@@ -59,7 +59,7 @@
                 <script type="text/javascript">
                     $(window).on('load', function(){
                         swal({
-                            type:"{{ type }}",
+                            type:"{{ type == "notice" ? "success" : type }}",
                             title: "",
                             text: "{{ message|trans({}, 'FOSUserBundle') }}",
                             confirmButtonText: "OK",
