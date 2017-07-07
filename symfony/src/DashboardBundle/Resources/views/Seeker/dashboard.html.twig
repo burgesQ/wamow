@@ -4,7 +4,6 @@
 {% block body %}
 
     <div class="wmw-dashboard col-xs-10 col-xs-offset-1 row">
-
         {# sideBar #}
         <div class="wmw-dashboard-sidebar col-xs-12 col-lg-2">
             <div class="sidebar-progress">
@@ -33,7 +32,8 @@
 
         {# wip missions #}
         <div class="wmw-dashboard-main col-xs-12 col-lg-10">
-            <h2 class="main-title"><i class="icon icon--document"></i>{{ 'dashboard.contractor.mission.title' | trans }}</h2>
+            <h2 class="main-title">
+            {% if missions is not empty %}<i class="icon icon--document"></i>{{ 'dashboard.contractor.mission.title' | trans }}{% endif %}</h2>
             <div class="main-missions">
                 {% for mission in missions %}
 
@@ -260,10 +260,12 @@
                     {% endfor %}
 
                 </div>
+                {% if missions is not empty %}
                 <div class="wmw-slider-navigation">
                     <a href="#" class="wmw-slider-navigation--prev"><i class="icon icon--arrow"></i></a>
                     <a href="#" class="wmw-slider-navigation--next"><i class="icon icon--arrow"></i></a>
                 </div>
+                {% endif %}
             </div>
          </div>
     </div>

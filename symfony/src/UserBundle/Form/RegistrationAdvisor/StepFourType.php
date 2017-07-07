@@ -3,6 +3,7 @@
 namespace UserBundle\Form\RegistrationAdvisor;
 
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Validator\Constraints\Count;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -24,6 +25,14 @@ class StepFourType extends AbstractType
             ->remove('username')
             ->remove('current_password')
             ->remove('email')
+            ->add('userWorkExpSerialized', CollectionType::class, [
+                'type'               => HiddenType::class,
+                'mapped'             => false,
+                'label'              => false,
+                'allow_add'          => true,
+                'allow_delete'       => false,
+                'allow_extra_fields' => false
+            ])
             ->add('workExperience', EntityType::class, [
                 'class'                     => 'MissionBundle:WorkExperience',
                 'query_builder'             => function (EntityRepository $er) use ($user) {
@@ -32,11 +41,11 @@ class StepFourType extends AbstractType
                         ->join('u.professionalExpertises', 'p')
                         ->join('u.businessPractices', 'b')
                         ->where('u.name != :create')
-                            ->setParameter('create', 'workexperience.create')
+                        ->setParameter('create', 'workexperience.create')
                         ->andWhere('b.id IN (:businessPra) OR p.id IN (:proExp) OR m.id IN (:missionKinds)')
-                            ->setParameter('proExp', $user->getProfessionalExpertise()->toArray())
-                            ->setParameter('missionKinds', $user->getMissionKind()->toArray())
-                            ->setParameter('businessPra', $user->getBusinessPractice()->toArray())
+                        ->setParameter('proExp', $user->getProfessionalExpertise()->toArray())
+                        ->setParameter('missionKinds', $user->getMissionKind()->toArray())
+                        ->setParameter('businessPra', $user->getBusinessPractice()->toArray())
                         ->orderBy('u.id', 'ASC');
                 },
                 'property'                  => 'name',
@@ -55,6 +64,7 @@ class StepFourType extends AbstractType
             ])
             ->add('userWorkExperiences', CollectionType::class, [
                 'type'               => new UserWorkExperienceType(),
+                'label'              => false,
                 'allow_add'          => true,
                 'allow_delete'       => true,
                 'allow_extra_fields' => true
@@ -62,8 +72,7 @@ class StepFourType extends AbstractType
             ->add('submit', SubmitType::class, [
                 'translation_domain' => 'tools',
                 'label'              => 'registration.advisor.four.nextbutton'
-            ])
-        ;
+            ]);
     }
 
     public function getParent()
