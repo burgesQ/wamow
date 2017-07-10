@@ -319,7 +319,7 @@
                         {{ 'mission.view.contractor.pitched_at' | trans({ date : mission.updateDate | date('d/m/Y') }) }}
                     </div>
                     <p>
-                        {{ mission.resume | raw }}
+                        {{ mission.resume |  nl2br }}
                     </p>
                 </div>
                 <a href="#" class="sidebar-button"></a>
