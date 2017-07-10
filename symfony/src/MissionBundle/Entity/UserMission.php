@@ -145,6 +145,7 @@ class UserMission
 
     /**
      * Get id
+     *
      * @return integer
      */
     public function getId()
@@ -154,6 +155,7 @@ class UserMission
 
     /**
      * Get creationDate
+     *
      * @return \DateTime
      */
     public function getCreationDate()
@@ -177,6 +179,7 @@ class UserMission
 
     /**
      * Get status
+     *
      * @return integer
      */
     public function getStatus()
@@ -200,6 +203,7 @@ class UserMission
 
     /**
      * Get updateDate
+     *
      * @return \DateTime
      */
     public function getUpdateDate()
@@ -223,6 +227,7 @@ class UserMission
 
     /**
      * Get user
+     *
      * @return \UserBundle\Entity\User
      */
     public function getUser()
@@ -246,6 +251,7 @@ class UserMission
 
     /**
      * Get mission
+     *
      * @return \MissionBundle\Entity\Mission
      */
     public function getMission()
@@ -269,6 +275,7 @@ class UserMission
 
     /**
      * Get thread
+     *
      * @return \InboxBundle\Entity\Thread
      */
     public function getThread()
@@ -441,6 +448,16 @@ class UserMission
     }
 
     /**
+     * Get scoreDetails
+     *
+     * @return array
+     */
+    public function getScoreDetails()
+    {
+        return $this->scoreDetails;
+    }
+
+    /**
      * Set scoreDetails
      *
      * @param array $scoreDetails
@@ -456,20 +473,36 @@ class UserMission
     /**
      * Get scoreDetails
      *
-     * @return array
-     */
-    public function getScoreDetails()
-    {
-        return $this->scoreDetails;
-    }
-
-    /**
-     * Get scoreDetails
-     *
      * @return string
      */
     public function getScoreDetailsAsString()
     {
-        return json_encode($this->scoreDetails);
+        return $this->score . ' = ' . json_encode($this->scoreDetails);
+    }
+
+    /**
+     * Get statusTrans
+     *
+     * @return string
+     */
+    public function getStatusTrans()
+    {
+        $array = ["DELETED"    => -70,
+                  "ENDDATE"    => -60,
+                  "DISMISS"    => -50,
+                  "GIVEUP"     => -40,
+                  "FULL"       => -30,
+                  "SCORED"     => -20,
+                  "MATCHED"    => -10,
+                  "INTERESTED" => 0,
+                  "ONGOING"    => 10,
+                  "SHORTLIST"  => 20,
+                  "FINALIST"   => 30
+        ];
+        foreach ($array as $key => $val) {
+            if ($val == $this->status) {
+                return '(' . $val . ') ' . $key;
+            }
+        }
     }
 }
