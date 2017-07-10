@@ -10,7 +10,7 @@ easy_admin:
                     - 'title'
                     - 'resume'
                     - { property: 'creationDate', type: 'date' }
-                    - { property: 'status', type: 'boolean' }
+                    - 'statusTrans'
                     - 'nbOngoing'
                     - { property : 'getScoreDetailsAsString' }
             form:
