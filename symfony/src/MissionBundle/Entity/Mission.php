@@ -389,10 +389,6 @@ class Mission
                         ->buildViolation('error.date.before_start_date')
                         ->atPath('applicationEnding')->addViolation()
                     ;
-                } elseif ($this->getMissionEnding()) {
-                    $this->setPrice(($this->getBudget() * 1000) / $this->getMissionEnding()
-                            ->diff($this->getMissionBeginning())
-                            ->format('%a'));
                 }
             } elseif ($this->getStatusGenerator() == self::STEP_TWO) {
                 if (!count($this->getMissionKinds())) {
