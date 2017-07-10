@@ -19,11 +19,14 @@ easy_admin:
                     - { property: 'lastname', type: 'text' }
                     - { property: 'email', type: 'email' }
                     - { property: 'roles', type: 'choice', type_options: { required: true, multiple: true, expanded: true, choices: { 'ROLE_ADVISOR': 'ROLE_ADVISOR', 'ROLE_CONTRACTOR': 'ROLE_CONTRACTOR' } } }
-                    - { property: 'company', type: 'easyadmin_autocomplete', type_options: { by_reference: false } }
-                    - { property: 'plainPassword', type: 'password' }
+                    - { property: 'company', type: 'easyadmin_autocomplete', type_options: { by_reference: false, class: 'CompanyBundle\Entity\Company' } }
                     - { property: 'status', type: 'choice', type_options: { required: true, multiple: false, expanded: false, choices: { 0 : 'STEP_ZERO', 1 : 'STEP_ONE',  2 : 'STEP_TWO', 3 : 'STEP_THREE', 4 : 'STEP_FOUR', 5 : 'NO_STEP' } } }
                     - { property: 'languages', type: 'easyadmin_autocomplete', type_options: { by_reference: false } }
-
+            new:
+                fileds:
+                    - { property: 'plainPassword', type: 'password' }
+            disabled_actions:
+                - 'delete'
         Language:
             class: ToolsBundle\Entity\Language
             label: 'Language'
