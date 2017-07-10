@@ -25,8 +25,10 @@ easy_admin:
             new:
                 fileds:
                     - { property: 'plainPassword', type: 'password' }
+                    - { property: 'roles', type: 'choice', type_options: { required: true, multiple: true, expanded: true, choices: { 'ROLE_ADVISOR': 'ROLE_ADVISOR', 'ROLE_CONTRACTOR': 'ROLE_CONTRACTOR' } } }
             disabled_actions:
                 - 'delete'
+
         Language:
             class: ToolsBundle\Entity\Language
             label: 'Language'
