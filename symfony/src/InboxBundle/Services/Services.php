@@ -3,6 +3,7 @@
 namespace InboxBundle\Services;
 
 use FOS\MessageBundle\MessageBuilder\NewThreadMessageBuilder;
+use Swift_Message;
 use Symfony\Component\DependencyInjection\Container;
 use FOS\MessageBundle\FormType\ReplyMessageFormType;
 use InboxBundle\Repository\MessageRepository;
@@ -16,6 +17,7 @@ use Symfony\Component\Form\Form;
 use Doctrine\ORM\EntityManager;
 use InboxBundle\Entity\Message;
 use InboxBundle\Entity\Thread;
+use ToolsBundle\Entity\Proposal;
 use UserBundle\Entity\User;
 
 class Services
@@ -94,141 +96,6 @@ class Services
     }
 
     /**
-     * Create the reply form for the thread of a mission
-     * Manage new message on the thread
-     *
-     * @param $thread
-     * @param $user
-     * @param $request
-     *
-     * @return ReplyMessageFormType|null
-     */
-    public function getReplyForm($thread, $user, $request)
-    {
-        // create form
-        /** @var Form $replyForm */
-        $replyForm = $this->container->get('fos_message.reply_form.factory')
-            ->create($thread);
-
-        // handle request
-        if ($replyForm->handleRequest($request)->isSubmitted() && $replyForm->isValid()) {
-            // use FOSMessageBundle methode
-            $composer = $this->container->get('fos_message.composer');
-            $sender   = $this->container->get('fos_message.sender');
-
-            $message = $composer->reply($thread)->setSender($user)
-                ->setBody($replyForm->getData()->getBody())->getMessage();
-            $sender->send($message);
-            $message->setIsReadByParticipant($user, true);
-            $this->em->flush();
-
-            // return null to inform the controller
-            // to reload the page
-            return null;
-        }
-
-        // return form
-        return $replyForm->createView();
-    }
-
-    /**
-     * Set a array of array with all data of the view for
-     * MissionBundle:show_thread_seeker
-     *
-     * @param User    $user
-     * @param Mission $mission
-     * @param         $request
-     *
-     * @return array|null
-     */
-    public function setViewContractor($user, $mission, $request)
-    {
-        // get utilitys
-        /** @var MessageRepository $messageRepo */
-        $messageRepo = $this->em->getRepository('InboxBundle:Message');
-        /** @var ThreadRepository $threadRepo */
-        $threadRepo = $this->em->getRepository('InboxBundle:Thread');
-
-        // set empty arrays
-        $bigArrayThreads = $threadRepo->findBy(['mission' => $mission]);
-        $bigArrayMessage = [];
-        $bigArrayUserId  = [];
-        $bigArrayRead    = [];
-
-        /** @var FormInterface $form */
-        $form = $this->container->get('form.factory')
-            ->create(new ThreadMissionType(), $mission);
-
-        // if their is a response
-        if ($form->handleRequest($request)->isSubmitted()) {
-            /** @var Thread $oneThread */
-            foreach ($bigArrayThreads as $oneThread) {
-                if ($oneThread->getReply() != null) {
-                    // get last meta for copy
-                    /** @var MessageMetadata $templateMeta */
-                    $templateMeta = $oneThread->getMessages()[0]->getMetadata()[0];
-
-                    // get the sender service
-                    $sender = $this->container->get('fos_message.sender');
-
-                    // create the new message
-                    $message = new Message();
-                    $message->setThread($oneThread);
-                    $message->setSender($user);
-                    $message->setBody($oneThread->getReply());
-                    $this->em->persist($message);
-                    $this->em->flush();
-
-                    // create the new messageMetadata
-                    $meta = new MessageMetadata();
-                    $meta->setMessage($message);
-                    $meta->setParticipant($templateMeta->getParticipant());
-                    $meta->setIsRead(false);
-                    $this->em->persist($meta);
-                    $this->em->flush();
-
-                    // link the meta to the message
-                    $message->addMetadata($meta);
-                    $this->em->flush();
-
-                    // send the message
-                    $sender->send($message);
-                    $message->setIsReadByParticipant($user, true);
-
-                    // reset the request and the reply data
-                    $oneThread->setReply(null);
-                    $this->em->flush();
-
-                    // return null to inform the controller to reload the page
-                    return null;
-                }
-            }
-        }
-
-        // manage data from the threads
-        /** @var Thread $oneThread */
-        foreach ($bigArrayThreads as $oneThread) {
-            $bigArrayUserId[]  = $oneThread->getUserMission()->getUser()->getId();
-            $bigArrayMessage[] = $messageRepo->getMessageForThread($oneThread, $user->getNbLoad());
-            $bigArrayRead[]    = $this->updateReadReport($oneThread, $user);
-        }
-
-        // return array data with
-        // - array of thread for the mission
-        // - array of array of message by thread
-        // - array of UserId for AnonymousMod
-        // - array of bool for the readReport of the last message
-        // - form (ThreadMissionForm) to reply to message
-        return [
-            $bigArrayThreads,
-            $bigArrayMessage,
-            $bigArrayUserId,
-            $bigArrayRead,
-            $form->createView()
-        ];
-    }
-
-    /**
      * Update the readReport status and return it
      *
      * @param Thread $thread
@@ -279,5 +146,42 @@ class Services
         $sender->send($message);
         $message->setIsReadByParticipant($user, true);
         $this->em->flush();
+    }
+
+    /**
+     * @param \ToolsBundle\Entity\Proposal      $proposal
+     * @param \MissionBundle\Entity\UserMission $userMission
+     */
+    public function sendProposaleMessage(Proposal $proposal, UserMission $userMission)
+    {
+        $composer = $this->container->get('fos_message.composer');
+        $sender   = $this->container->get('fos_message.sender');
+
+        /** @var \InboxBundle\Entity\Message$message */
+        $message = $composer->reply($userMission->getThread())->setSender(
+            $userMission->getUser())->setBody('')->getMessage();
+        $message->setUserMissionProposalId($userMission->getId());
+        $sender->send($message);
+        $message->setIsReadByParticipant($userMission->getUser(), true);
+        $this->em->flush();
+
+        $contractor = $userMission->getMission()->getContact();
+
+        if ($contractor->getNotification()) {
+            $trans = $this->container->get('translator');
+            $message = Swift_Message::newInstance()
+                ->setSubject($trans->trans('mails.subject.new_message', [], 'tools'))
+                ->setFrom($this->container->getParameter('email_sender'))
+                ->setTo($contractor->getEmail())/* put a valid email address there to test */
+                ->setBody($this->container->get('templating')->render('Emails/new_message.html.twig', [
+                    'f_name'        => $contractor->getFirstName(),
+                    'l_name'        => $contractor->getLastName(),
+                    'title'         => $userMission->getMission()->getTitle(),
+                    'roles'         => 'ROLE_CONTRACTOR',
+                    'missionId'     => $userMission->getMission()->getId(),
+                    'userMissionId' => $userMission->getId()
+                ]), 'text/html');
+            $this->container->get('mailer')->send($message);
+        }
     }
 }

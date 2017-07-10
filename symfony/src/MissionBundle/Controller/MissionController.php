@@ -173,6 +173,8 @@ class MissionController extends Controller
                         $em->persist($proposal);
                         $em->flush();
 
+                        $this->get('inbox.services')->sendProposaleMessage($proposal, $userMission);
+
                         return $this->redirectToRoute('mission_view', ['missionId' => $missionId]);
                     }
                     $em->flush();

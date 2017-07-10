@@ -3,3 +3,13 @@ languages_autocomplete:
     defaults:
         _controller: ToolsBundle:Action:languagesAutocomplete
     methods:     [GET]
+
+download_proposal:
+    path: /proposal/download/{id}
+    defaults:
+        _controller: ToolsBundle:Action:downloadProposal
+
+download_resume:
+    path: /resume/download/{id}
+    defaults:
+        _controller: ToolsBundle:Action:downloadResume

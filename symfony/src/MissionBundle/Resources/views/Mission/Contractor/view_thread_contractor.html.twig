@@ -10,7 +10,7 @@
         {% endif %}
 
         <div class="chatbox-name">
-            {% if anonymous  %}
+            {% if anonymous %}
                 {{ message.sender | e }}
             {% else %}
                 {% if message.sender.id == userId %}
@@ -22,11 +22,17 @@
         </div>
 
         <div class="chatbox-time">
-                {{ message.createdAt | date }}
+            {{ message.createdAt | date }}
         </div>
-         <div class="messenger_thread_message_body chatbox-content" id="message_{{ message.id }}">
+        <div class="messenger_thread_message_body chatbox-content" id="message_{{ message.id }}">
+           {% if message.userMissionProposalId %}
+               {{ 'mails.new.proposal' |
+               trans({ '%link_start%' : '<a href="'~path('download_proposal', { id : message.userMissionProposalId })~'">',
+                   '%link_end%' : '</a>'}) | raw }}
+            {% else %}
                 {{ message.body }}
-            </div>
+            {% endif %}
+        </div>
         </div>
     {% endfor %}
 {% endif %}

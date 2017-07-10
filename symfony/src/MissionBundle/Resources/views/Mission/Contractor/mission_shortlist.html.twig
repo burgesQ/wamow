@@ -131,9 +131,7 @@
                             </a>
                             {% if userMission.thread.proposals is not empty %}
                                 {% set proposal = userMission.thread.proposals | last %}
-                                {# TODO find a better methode #}
-                                {%  set path = "http://symfony.dev/" ~ proposal.getUploadRootDir %}
-                                <a href="{{ path }}" download="{{ proposale.downloadName }}" class="wmw-simple-button wmw-simple-button--green">
+                                <a href="{{ path('download_proposal', { id : userMission.id }) }}" class="wmw-simple-button wmw-simple-button--green">
                                     <i class="icon icon--download"></i> {{ 'form.btn.download_proposal' | trans }}
                                 </a>
                             {% endif %}

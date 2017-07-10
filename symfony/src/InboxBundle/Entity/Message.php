@@ -44,12 +44,40 @@ class Message extends BaseMessage
     protected $metadata;
 
     /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    protected $userMissionProposalId;
+
+    /**
      * Get metadata
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection|\InboxBundle\Entity\MessageMetadata[]
      */
     public function getMetadata()
     {
         return $this->metadata;
+    }
+
+    /**
+     * Set userMissionProposalId
+     *
+     * @param integer $userMissionProposalId
+     * @return Message
+     */
+    public function setUserMissionProposalId($userMissionProposalId)
+    {
+        $this->userMissionProposalId = $userMissionProposalId;
+
+        return $this;
+    }
+
+    /**
+     * Get userMissionProposalId
+     *
+     * @return integer
+     */
+    public function getUserMissionProposalId()
+    {
+        return $this->userMissionProposalId;
     }
 }

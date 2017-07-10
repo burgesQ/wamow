@@ -268,19 +268,14 @@
                                 </div>
                                 <div class="mail-content-profile-buttons row">
 
-                                    {# TODO : BETTER WAY OF DOWN #}
-
                                     {% if user.resumes is not empty %}
-                                        {% set resume = user.resumes | last %}
-                                        {% set path = "http://symfony.dev/" ~ resume.getUploadRootDir %}
-                                        <a href="{{ path }}" download="{{ resume.downloadName }}" class="wmw-simple-button">
+                                        <a href="{{ path('download_resume', { id : userMission.id }) }}" class="wmw-simple-button">
                                             <i class="icon icon--download"></i>{{ 'form.btn.download_resume' | trans }}</a>
                                     {% endif %}
 
                                     {% if userMission.thread.proposals is not empty %}
                                         {% set proposal = userMission.thread.proposals | last %}
-                                        {% set path = "http://symfony.dev/" ~ proposal.getUploadRootDir %}
-                                        <a href="{{ path }}" download="{{ proposal.downloadName }}" class="wmw-simple-button wmw-simple-button--green">
+                                        <a href="{{ path('download_proposal', { id : userMission.id }) }}" class="wmw-simple-button wmw-simple-button--green">
                                             <i class="icon icon--download"></i>{{ 'form.btn.download_proposal' | trans }}</a>
                                     {% endif %}
                                 </div>
