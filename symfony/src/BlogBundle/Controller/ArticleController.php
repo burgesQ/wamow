@@ -29,7 +29,7 @@ class ArticleController extends Controller
 
         // if no article match the url throw error
         if ($article === null || $article->getPublishedDate() > new \DateTime())
-            throw new NotFoundHttpException($this->get('translator')->trans('view.error.notFound'));
+            throw new NotFoundHttpException($this->get('translator')->trans('newsletter.view.error.not_found', [], 'tools'));
 
         // create form and handle request
         /** @var Form $form */

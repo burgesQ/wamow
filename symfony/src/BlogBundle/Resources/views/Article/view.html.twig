@@ -8,14 +8,14 @@
 
     {% if comments|length > 0 %}
         {{ comments|length }}
-        {% trans with { '%article_title': article.title }from "BlogBundle" %}
-            view.comment.intro
+        {% trans with { '%article_title': article.title }from "tools" %}
+            newsletter.view.comment.intro
         {% endtrans %}<br><br>
     {% endif %}
     {% for oneComment in comments %}
         <div>
-            {% trans with {'%author_f_name' : oneComment.firstNameAuthor, '%author_l_name' : oneComment.lastNameAuthor, '%author' : oneComment.emailAuthor, '%postDate' : oneComment.postDate|date('m/d/Y H:i:s')} from "BlogBundle" %}
-            view.comment.meta
+            {% trans with {'%author_f_name' : oneComment.firstNameAuthor, '%author_l_name' : oneComment.lastNameAuthor, '%author' : oneComment.emailAuthor, '%postDate' : oneComment.postDate|date('m/d/Y H:i:s')} from "tools" %}
+            newsletter.view.comment.meta
             {% endtrans %}
         </div><div>
             {{ oneComment.content|striptags('<br>')|raw }}<br>
@@ -23,8 +23,8 @@
     {% endfor %}
 
     <br>
-    {% trans from "BlogBundle" %}
-        view.comment.reply
+    {% trans from "tools" %}
+        newsletter.view.comment.reply
     {% endtrans %}<br>
     <br>
     <form action="{{ path('article_view', {'url': article.url}) }}" method="post">

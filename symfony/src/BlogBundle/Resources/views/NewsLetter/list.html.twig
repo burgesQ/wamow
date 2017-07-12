@@ -2,7 +2,7 @@
 
 {% block body %}
 
-    <h4> {{ 'view.newsletter.what'|trans({}, "BlogBundle") }} </h4>
+    <h4> {{ 'newsletter.view.newsletter.what'|trans({}, "tools") }} </h4>
 
     {% for oneNewsletter in newsletters  %}
         <a href="{{ path('newsletter_show', {'id': oneNewsletter.number}) }}">

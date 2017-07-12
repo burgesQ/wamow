@@ -486,6 +486,8 @@ mails:
          L'équipe.
     subject:
         new_message: Vous avez un nouveau message !
+
+# Pqyement template
 payment:
     ok: "Inscription activée avec succés !"
     ko: "Inscription annulée."
@@ -495,3 +497,30 @@ payment:
         free: "Accès basique (gratuit)"
     one_year: "1 an"
     ends: "Termine le"
+
+# Notification template
+notification:
+    seeker:
+        mission:
+            create: "Vous avez créé une mission (%date%)"
+            edit: "Vous avez edité une mission (%date%)"
+            delete: "Vous avez supprimé une mission (%date%)"
+            empty: "Un advisor s'est désinscrit du processus de pitch (%date%)"
+            pitchedbynewuser: "Un advisor s'est inscrit au processus de pitch (%date%)"
+            takeback: "Vous avez repêché un advisor (%date%)"
+            selection: "Vous avez selectionné un advisor pour la prochaine étape (%date%)"
+            dismiss: "Vous avez éliminé un advisor (%date%)"
+        company:
+            join: "Vous avez rejoint une entité (%date%)"
+            leave: "Vous avez quitté une entité (%date%)"
+
+    expert:
+        mission:
+            pitch: "Vous candidatez pour une mission (%date%)"
+            giveup: "Vous avez abandonnez une candidature (%date%)"
+            delete: "Une mission a été annulée (%date%)"
+            takeback: "Vous avez été repêché (%date%)"
+            selection: "Vous avez été sélectionné pour la prochaine étape (%date%)"
+            dismiss: "Vous avez été éliminé (%date%)"
+            notselected: "Vous n'avez pas été sélectionné pour la prochaine étape (%date%)"
+            beginselection: "Vous faites parti du processus de pitch"
