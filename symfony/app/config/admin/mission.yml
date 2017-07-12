@@ -12,8 +12,11 @@ easy_admin:
                     - { property: 'creationDate', type: 'date' }
                     - { property: 'status', type: 'boolean' }
                     - 'nbOngoing'
+                    - { property : 'getScoreDetailsAsString' }
             form:
                 fields:
                     - { property: 'title', type: 'text' }
                     - { property: 'resume', type: 'textarea' }
                     - { property: 'nbOngoing', type: 'number' }
+                    - { property: 'nextUpdateScoring'}
+                    - { property: 'scoreDetailsAsString' }
