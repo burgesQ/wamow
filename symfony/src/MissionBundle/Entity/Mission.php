@@ -1443,4 +1443,29 @@ class Mission
     {
         return $this->nbOngoing;
     }
+
+    /**
+     * Get scoreDetails
+     *
+     * @return string
+     */
+    public function getScoreDetailsAsString()
+    {
+        return json_encode($this->scoringHistory);
+    }
+
+    /**
+     * Set scoreDetails
+     *
+     * @param string $scoring
+     * @return $this
+     */
+    public function setScoreDetailsAsString(string $scoring)
+    {
+        $tmp = json_decode($scoring);
+        if ($tmp) {
+            $this->setScoringHistory($tmp);
+        }
+        return $this;
+    }
 }
