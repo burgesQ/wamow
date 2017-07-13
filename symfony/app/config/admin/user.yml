@@ -22,7 +22,7 @@ easy_admin:
                     - { property: 'languages', type: 'easyadmin_autocomplete', type_options: { by_reference: false } }
             new:
                fields:
-                    - { property: 'roles', type: 'choice', type_options: { required: true, multiple: true, expanded: true, choices: { 'ROLE_ADVISOR': 'ROLE_ADVISOR', 'ROLE_CONTRACTOR': 'ROLE_CONTRACTOR' } } }
+                    - { property: 'roles', type: 'choice', type_options: { required: true, multiple: true, expanded: true, choices: { 'ROLE_ADVISOR': 'ROLE_ADVISOR', 'ROLE_CONTRACTOR': 'ROLE_CONTRACTOR' }, disabled : true, data : { 'ROLE_CONTRACTOR': 'ROLE_CONTRACTOR' } } }
                     - { property: 'plainPassword', type: 'password' }
                     - { property: 'company', type: 'easyadmin_autocomplete', type_options: { by_reference: false } }
 
