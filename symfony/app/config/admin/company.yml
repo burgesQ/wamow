@@ -2,7 +2,7 @@ easy_admin:
     entities:
         Company:
             class: CompanyBundle\Entity\Company
-            label: 'Company'
+            label: 'Companies'
             list:
                 title: "Companies"
                 fields: 
