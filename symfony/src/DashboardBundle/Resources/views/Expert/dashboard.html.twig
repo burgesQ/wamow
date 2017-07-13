@@ -7,7 +7,6 @@
 
         <div class="wmw-dashboard-sidebar col-xs-12 col-lg-2">
 
-
             {% set ringLevel = 50 %}
             {% if user.images is not empty %}
                 {% set ringLevel = ringLevel + 25 %}
@@ -60,7 +59,7 @@
                                 <div class="main-slider-desc">{{ new.mission.resume | truncate(100, false, '[...]') }}</div>
                                 <div class="main-slider-price">
                                     <strong>{{ new.mission.professionalExpertise.name | trans }}</strong>
-                                    {{ 'legends.currency' | trans }}{{ new.mission.budget | trans }}
+                                    {{ 'legends.currency' | trans }}{{ new.mission.price }}
                                     <small>{{ new.mission.businessPractice.name | trans }}</small>
                                 </div>
                                 <div class="main-slider-infos">
@@ -156,7 +155,7 @@
                                 <div class="main-missions-el-price col-xs-12 col-md-3">
                                     <span>
                                         <strong>{{ wip.mission.professionalExpertise.name | trans }}</strong>
-                                        {{ 'legends.currency' | trans }}{{ wip.mission.budget }}
+                                        {{ 'legends.currency' | trans }}{{ wip.mission.price }}
                                         <small>{{ wip.mission.businessPractice.name | trans }}</small>
                                     </span>
                                 </div>

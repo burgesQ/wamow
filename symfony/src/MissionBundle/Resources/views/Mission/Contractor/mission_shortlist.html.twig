@@ -59,7 +59,7 @@
 
             <span class="summary-el summary-el--salary">
                 <span>
-                    {{ 'mission.view.contractor.finance' | trans({ '%price': (mission.price * 1000), '%professionalExpertise': mission.professionalExpertise.name | trans }, 'tools') | raw }}
+                    {{ 'mission.view.contractor.finance' | trans({ '%price': (mission.budget), '%professionalExpertise': mission.professionalExpertise.name | trans }, 'tools') | raw }}
                     {% for kind in mission.missionKinds %}
                         {{ kind.name | trans }}
                         {% if not loop.last %}
