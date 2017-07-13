@@ -30,6 +30,7 @@ form:
         add: add
         yes: yes
         no: no
+        update_password: Update password
 
     note:
         saved: Saved
@@ -252,6 +253,7 @@ dashboard:
 registration:
     advisor:
         zero:
+            confirm: "Please confirm information bellow"
             title: "First, let's connect."
             subtitle: "Find a match in just 5 minutes."
             howtotitle: "85% of pitches find a matching expert within 15 days."
@@ -322,6 +324,7 @@ user:
             link_edit_profile: edit profile
             link_general: My profile
             link_billing: BILLING
+            link_password: PASSWORD
             title_algorithm_improvment: algorithm improvement
             title_subscription: subscription
             email_notification: email<br>notification
@@ -387,6 +390,9 @@ mission:
         refuse_user: User declined.
 
     new:
+        form:
+            back: back
+            share_pitch: share the pitch
         step_one:
             title: The pitch
             subtitle: Let's start with the beginning

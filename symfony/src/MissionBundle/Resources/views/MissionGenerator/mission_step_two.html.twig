@@ -1,19 +1,6 @@
 {% extends '::base.html.twig' %}
 
-{% form_theme form _self %}
-{%- block button_widget -%}
-    {%- if label is empty -%}
-        {%- if label_format is not empty -%}
-            {% set label = label_format|replace({
-            '%name%': name,
-            '%id%': id,
-            }) %}
-        {%- else -%}
-            {% set label = name|humanize %}
-        {%- endif -%}
-    {%- endif -%}
-    <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ translation_domain is same as(false) ? label|raw : label|trans({}, translation_domain)|raw }}</button>
-{%- endblock button_widget -%}
+{% form_theme form "form_themes.html.twig" %}
 
 {% trans_default_domain "tools" %}
 
@@ -37,7 +24,7 @@
                     <div class="wmw-iconfield col-xs-6 col-sm-4">
 
                         {{ form_widget(businessPractice, {'attr' : {
-                            class : 'requiredgroup:businesses vv-gparent',
+                            class : 'requiredgroup:businesses vv-ggparent',
                             name  : "businesses[]",
                             id    : "business-" ~ businessPractice.vars.id
                         }}) }}
@@ -50,22 +37,22 @@
                         </label>
                     </div>
                 {% endfor %}
+                {{ form_errors(form.businessPractice) }}
             </div>
-            {{ form_errors(form.businessPractice) }}
 
             <div class="wmw-fieldrow row">
                 <label class="wmw-label wmw-label--topmobile col-xs-12 col-sm-5"
                        for="wmw-pitch&-domain">{{ 'professionalexpertises.title' | trans }}</label>
                 {{ form_widget(form.professionalExpertise, { 'attr': { 'class': 'required col-xs-12 col-md-6' }}) }}
+                {{ form_errors(form.professionalExpertise) }}
             </div>
-            {{ form_errors(form.professionalExpertise) }}
 
             <div class="wmw-fieldrow row">
                 <label class="wmw-label wmw-label--topmobile col-xs-12 col-sm-5"
                        for="wmw-pitch-budget">{{ 'mission.new.label.budget' | trans }}</label>
                 {{ form_widget(form.budget, {'attr': { 'class': 'required col-xs-12 col-md-6'}}) }}
+                {{ form_errors(form.budget) }}
             </div>
-            {{ form_errors(form.budget) }}
 
             <div class="wmw-onboard-blocks row">
                 {% for key, val in form.continents %}
@@ -77,8 +64,8 @@
                         </div>
                     </div>
                 {% endfor %}
+                {{ form_errors(form.continents) }}
             </div>
-            {{ form_errors(form.continents) }}
 
             <div class="wmw-fieldrow wmw-selectrow row">
                 <label class="wmw-label wmw-label--topmobile col-xs-12 col-sm-5">{{ 'mission.new.label.applicationEnding' | trans }}</label>
@@ -87,8 +74,8 @@
                         {{ form_widget(val, { 'attr' : { 'class' : 'col-xs-4 required' }}) }}
                     {% endfor %}
                 </div>
+                {{ form_errors(form.applicationEnding) }}
             </div>
-            {{ form_errors(form.applicationEnding) }}
 
             <div class="wmw-fieldrow wmw-selectrow row">
                 <label class="wmw-label wmw-label--topmobile col-xs-12 col-sm-5">{{ 'mission.new.label.missionBeginning' | trans }}</label>
@@ -97,22 +84,18 @@
                         {{ form_widget(val, { 'attr' : { 'class' : 'col-xs-4 required' }}) }}
                     {% endfor %}
                 </div>
+                {{ form_errors(form.missionBeginning) }}
             </div>
-            {{ form_errors(form.missionBeginning) }}
 
             <div class="wmw-fieldrow wmw-selectrow row">
                 <label class="wmw-label wmw-label--topmobile col-xs-12 col-sm-5">{{ 'mission.new.label.missionEnding' | trans }}</label>
                 <div class="col-xs-12 col-md-6 row">
                     {% for key, val in form.missionEnding | reverse %}
-<<<<<<< HEAD
-                        {{ form_widget(val, { 'attr' : { 'class' : 'col-xs-4 required' , 'no-validate' : 'true' }}) }}
-=======
                         {{ form_widget(val, { 'attr' : { 'class' : 'col-xs-4 required'}}) }}
->>>>>>> 081ce47... [440-revert]
                     {% endfor %}
                 </div>
+                {{ form_errors(form.missionEnding) }}
             </div>
-            {{ form_errors(form.missionEnding) }}
 
             <div class="wmw-onboard-blocks row">
                 <div class="wmw-onboard-blocks-el col-xs-12 col-md-6">
@@ -134,6 +117,7 @@
             {{ form_errors(form.confidentiality) }}
             {{ form_errors(form.telecommuting) }}
             {{ form_errors(form.address) }}
+            {{ form_errors(form) }}
 
             <div class="wmw-progressbar">
                 <span class="active"></span>
@@ -154,7 +138,7 @@
             class: 'wmw-button wmw-button--border wmw-button-later'}, label: back }) }}
 
         {% set next = '<i></i><span>' ~ form.next.vars.label | trans ~ '</span><i></i>' %}
-        {{ form_widget(form.next, { 'attr' : { 'class' : 'wmw-button wmw-button--green  wmw-button-later' , formnovalidate: 'formnovalidate',}, label: next}) }}
+        {{ form_widget(form.next, { 'attr' : { 'class' : 'wmw-button wmw-button--green  wmw-button-later'}, label: next}) }}
     </div>
 
     {{ form_end(form) }}

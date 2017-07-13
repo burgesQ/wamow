@@ -1,19 +1,6 @@
 {% extends '::base.html.twig' %}
 
-{% form_theme form _self %}
-{%- block button_widget -%}
-    {%- if label is empty -%}
-        {%- if label_format is not empty -%}
-            {% set label = label_format|replace({
-            '%name%': name,
-            '%id%': id,
-            }) %}
-        {%- else -%}
-            {% set label = name|humanize %}
-        {%- endif -%}
-    {%- endif -%}
-    <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ translation_domain is same as(false) ? label|raw : label|trans({}, translation_domain)|raw }}</button>
-{%- endblock button_widget -%}
+{% form_theme form "form_themes.html.twig" %}
 
 {% trans_default_domain "tools" %}
 
@@ -27,7 +14,6 @@
             {{ 'registration.advisor.one.title' | trans }}
             <small>{{ 'registration.advisor.one.subtitle' | trans | upper }}</small>
         </h1>
-
 
         {{ form_errors(form) }}
         {{ form_errors(form.businessPractice) }}
@@ -80,6 +66,5 @@
             {{ 'registration.advisor.one.how_to_text' | trans | nl2br }}
         </p>
     </div>
-
 
 {% endblock %}

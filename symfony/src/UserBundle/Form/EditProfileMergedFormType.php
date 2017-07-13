@@ -14,7 +14,7 @@ class EditProfileMergedFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('user', new EditProfileFormType(User::class), [
+            ->add('user', EditProfileFormType::class, [
                 'role' => $options['role']
             ])
             ->add('image', ProfilePictureType::class)

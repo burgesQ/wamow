@@ -1,25 +1,6 @@
 {% extends '::base.html.twig' %}
 
-{% form_theme form _self %}
-{%- block button_widget -%}
-    {%- if label is empty -%}
-        {%- if label_format is not empty -%}
-            {% set label = label_format|replace({
-            '%name%': name,
-            '%id%': id,
-            }) %}
-        {%- else -%}
-            {% set label = name|humanize %}
-        {%- endif -%}
-    {%- endif -%}
-    <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ translation_domain is same as(false) ? label|raw : label|trans({}, translation_domain)|raw }}</button>
-{%- endblock button_widget -%}
-
-{% block tetranz_select2entity_widget_select_option %}
-    <option value="{{ id }}" selected="selected">
-        {{ label | trans({}, 'tools') }}
-    </option>
-{% endblock %}
+{% form_theme form "form_themes.html.twig" %}
 
 {% trans_default_domain "tools" %}
 
