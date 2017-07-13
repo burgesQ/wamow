@@ -114,6 +114,7 @@ error:
     upload_resume_or_linkedin: Please Upload a resume or link your account with Linkedin
     phone:
         please_fill: Please fill out the phone number fileds.
+    not_found: Not found
 
 ## Home
 home:
@@ -375,7 +376,6 @@ mission:
             on_site: On site
             not_on_site: Not on site
         to_answer: To Answer
-        waitting_label: Waitting
 
         waitting: |
           <small>MISSION STATUS</small><br />
@@ -786,6 +786,9 @@ company_size:
 
 ## Mails template
 mails:
+    new:
+        proposal: |
+            Find the proposal I just upload %link_start%her%link_end%
     hello: Hello %f_name %l_name !
     registration:
         new_password: "Her your new password : %password"
@@ -816,3 +819,4 @@ payment:
         free: "Basic plan (free)"
     one_year: "1 year"
     ends: "Ends"
+>>>>>>> 0bf142d... [505-download-action]

@@ -143,8 +143,8 @@
                         <div class="mail-content-answer mail-content-answer--red">
 
                             <textarea id="inbox_input_message" name="inbox[inout_message]"></textarea>
-                            <button id="submit_text" value="{{ 'form.btn.send' | trans | upper }}"
-                                    onClick="sendMessage()">{{ 'form.btn.send' | trans }}</button>
+                            <button id="submit_text" value="{{ 'form.btn.send' | trans | upper }}">
+                                {{ 'form.btn.send' | trans }}</button>
 
                             <!-- Case 2 -->
                             {# TODO REVIEW ON INTEGRATION STEP 2 / 3 #}
@@ -171,20 +171,22 @@
     {{ parent() }}
 
     <script type="text/javascript">
-        function sendMessage() {
-            if ($('textarea#inbox_input_message').val()) {
-                $.ajax({
-                    url: "{{ path('send_message_to_contractor') }}",
-                    method: "post",
-                    data: {
-                        id: {{ user_mission.id }},
-                        message: $('textarea#inbox_input_message').val()
-                    }
-                }).done(function (msg) {
-                    $('textarea#inbox_input_message').val('');
-                    $('#thread_message').html(msg);
-                });
-            }
-        }
+        $(document).ready(function() {
+            $('#submit_text').click(function(e) {
+                if ($('textarea#inbox_input_message').val()) {
+                    $.ajax({
+                        url: "{{ path('send_message_to_contractor') }}",
+                        method: "post",
+                        data: {
+                            id: {{ user_mission.id }},
+                            message: $('textarea#inbox_input_message').val()
+                        }
+                    }).done(function (msg) {
+                        $('textarea#inbox_input_message').val('');
+                        $('#thread_message').html(msg);
+                    });
+                }
+            });
+        });
     </script>
 {% endblock %}

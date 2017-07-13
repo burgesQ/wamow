@@ -1,21 +1,21 @@
 {% trans_default_domain "tools" %}
 
 {% if thread != null %}
-    {% for message in thread.messages %}
-        {% if message.sender.id == userId %}
-            <div class="chatbox chatbox--a">
-        {% else %}
-            <div class="chatbox chatbox--b">
+{% for message in thread.messages %}
+{% if message.sender.id == userId %}
+<div class="chatbox chatbox--a">
+                {% else %}
+                <div class="chatbox chatbox--b">
         {% endif %}
-        <div class="chatbox-name">
-            {% if anonymous == 1 %}
-                {% if message.sender.id  == userId %}
-                    You
+                <div class="chatbox-name">
+            {% if anonymous %}
+                {{ message.sender | e }}
+            {% else %}
+                {% if message.sender.id == userId %}
+                    {{ 'inbox.you' | trans }}
                 {% else %}
                     Contractor
                 {% endif %}
-            {% else %}
-                {{ message.sender | e }}
             {% endif %}
         </div>
         <div class="chatbox-time">
@@ -23,7 +23,13 @@
         </div>
 
         <div class="messenger_thread_message_body chatbox-content" id="message_{{ message.id }}">
-            {{ message.body }}
+            {% if message.userMissionProposalId %}
+                {{ 'mails.new.proposal' |
+                trans({ '%link_start%' : '<a href="'~path('download_proposal', { id : message.userMissionProposalId })~'">',
+                    '%link_end%' : '</a>'}) | raw }}
+            {% else %}
+                {{ message.body }}
+            {% endif %}
         </div>
         </div>
     {% endfor %}
