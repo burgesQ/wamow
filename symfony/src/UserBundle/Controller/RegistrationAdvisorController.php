@@ -301,7 +301,7 @@ class RegistrationAdvisorController extends Controller
                                         break;
                                 }
                                 break;
-                            case ($label == "continent]") :
+                            case ($label == "continents]") :
                                 $whichOne = $arrayTmp[4];
                                 switch ($whichOne) {
                                     case ($whichOne == "]=1") :
