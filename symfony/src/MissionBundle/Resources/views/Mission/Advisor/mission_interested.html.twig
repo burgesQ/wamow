@@ -175,7 +175,7 @@
                             </div>
                             <div class="sidebar-content">
                                 {% if not user.payment %}
-                                    {{ mission.resume | truncate(100, false, '[...]' | nl2br) }}
+                                    {{ mission.resume | truncate(500, false, '[...]' | nl2br) }}
                                 {% else %}
                                     {{ mission.resume | nl2br }}
                                 {% endif %}
