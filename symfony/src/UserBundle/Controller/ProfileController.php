@@ -86,14 +86,13 @@ class ProfileController extends Controller
         /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
         $userManager = $this->get('fos_user.user_manager');
 
-
         if ($form->handleRequest($request)->isSubmitted() && $form->isValid()) {
+
             if ($form->get('user')->get('phone')->get('prefix')->isEmpty()
                 || $form->get('user')->get('phone')->get('number')->isEmpty()
             ) {
-                $form->get('user')->get('phone')->addError(new FormError($this->get('translator')
-                    ->trans('error.phone.please_fill', [],
-                        'tools')));
+                $form->get('user')->addError(new FormError($this->get('translator')
+                    ->trans('error.phone.please_fill', [], 'tools')));
             } else {
                 $user->setFirstName(ucwords($user->getFirstName()));
                 $user->setLastName(ucwords($user->getLastName()));

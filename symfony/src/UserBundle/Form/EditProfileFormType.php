@@ -49,6 +49,7 @@ class EditProfileFormType extends AbstractType
                         'enabled'        => false
                     ],
                     'multiple'      => true,
+                    'required'      => true,
                     'class'         => 'ToolsBundle\Entity\Language',
                     'label'         => 'mission.new.label.language'
                 ])

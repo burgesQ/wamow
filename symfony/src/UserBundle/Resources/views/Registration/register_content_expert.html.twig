@@ -1,79 +1,83 @@
 {% trans_default_domain 'tools' %}
 
+{% form_theme form "form_themes.html.twig" %}
+
+{% set address = form.user.addresses | last %}
+
 {{ form_start(form, {'attr': {'class': 'wmw-onboard col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 col-xl-4 col-xl-offset-4'}}) }}
 
-    <div class="wmw-onboard-body">
+<div class="wmw-onboard-body">
 
-        <h1>
-            <small>{{ 'registration.advisor.zero.subtitle' | trans }}</small>
-            {{ 'registration.advisor.zero.title' | trans }}
-        </h1>
+    <h1>
+        <small>{{ 'registration.advisor.zero.subtitle' | trans }}</small>
+        {{ 'registration.advisor.zero.title' | trans }}
+    </h1>
 
-        {{ form_widget(form.user.linkedinId) }}
-        {% if form.user.linkedinId.vars.value == '' %}
-            <a href="{{ path('hwi_oauth_service_redirect', {'service': 'linkedin' }) }}">
-                <button type="button" class="wmw-button">
-                    <i></i><span>{{ 'registration.advisor.zero.linkedinbutton' | trans }}</span><i></i>
-                </button>
-            </a>
-            <div class="wmw-onboard-or">{{ 'registration.advisor.zero.or' | trans | upper }}</div>
-        {% else %}
-            <div class="wmw-onboard-or">{{ 'registration.advisor.zero.confirm' | trans | upper }}</div>
-        {% endif %}
+    {{ form_widget(form.user.linkedinId) }}
+    {% if form.user.linkedinId.vars.value == '' %}
+        <a href="{{ path('hwi_oauth_service_redirect', {'service': 'linkedin' }) }}">
+            <button type="button" class="wmw-button">
+                <i></i><span>{{ 'registration.advisor.zero.linkedinbutton' | trans }}</span><i></i>
+            </button>
+        </a>
+        <div class="wmw-onboard-or">{{ 'registration.advisor.zero.or' | trans | upper }}</div>
+    {% else %}
+        <div class="wmw-onboard-or">{{ 'registration.advisor.zero.confirm' | trans | upper }}</div>
+    {% endif %}
 
-        {{ form_errors(form.user) }}
-        {{ form_errors(form) }}
+    {{ form_errors(form.user) }}
+    {{ form_errors(form) }}
 
-        <div class="wmw-fieldrow row">
-            {{ form_widget(form.user.firstName, {'attr' : {'class': 'required col-xs-7'}}) }}
-            <label class="wmw-label wmw-label--right col-xs-5"
-                   for="wmw-ob-firstname">{{ form_label(form.user.firstName) }}</label>
-        </div>
+    <div class="wmw-fieldrow row">
+        {{ form_widget(form.user.firstName, {'attr' : {'class': 'required col-xs-7'}}) }}
+        <label class="wmw-label wmw-label--right col-xs-5"
+               for="wmw-ob-firstname">{{ form_label(form.user.firstName) }}</label>
         {{ form_errors(form.user.firstName) }}
+    </div>
 
-        <div class="wmw-fieldrow row">
-            {{ form_widget(form.user.lastName, {'attr' : {'class': 'required col-xs-7'}}) }}
-            <label class="wmw-label wmw-label--right col-xs-5"
-                   for="wmw-ob-lastname">{{ form_label(form.user.lastName) }}</label>
-        </div>
+    <div class="wmw-fieldrow row">
+        {{ form_widget(form.user.lastName, {'attr' : {'class': 'required col-xs-7'}}) }}
+        <label class="wmw-label wmw-label--right col-xs-5"
+               for="wmw-ob-lastname">{{ form_label(form.user.lastName) }}</label>
         {{ form_errors(form.user.lastName) }}
+    </div>
 
-        <div class="wmw-fieldrow row">
-            {{ form_widget(form.user.email, {'attr' : {'class': 'required email col-xs-7'}}) }}
-            <label class="wmw-label wmw-label--right col-xs-5" for="wmw-ob-email">{{ form_label(form.user.email) }}</label>
-        </div>
+    <div class="wmw-fieldrow row">
+        {{ form_widget(form.user.email, {'attr' : {'class': 'required email col-xs-7'}}) }}
+        <label class="wmw-label wmw-label--right col-xs-5" for="wmw-ob-email">{{ form_label(form.user.email) }}</label>
         {{ form_errors(form.user.email) }}
+    </div>
 
-        <div class="wmw-fieldrow row">
-            {{ form_widget(address.country, {'attr' : {'class': 'col-xs-12 col-sm-6 col-md-5 required'}}) }}
-        </div>
+    <div class="wmw-fieldrow row">
+        {{ form_widget(address.country, {'attr' : {'class': 'col-xs-12 col-sm-6 col-md-5 required'}}) }}
         {{ form_errors(address) }}
         {{ form_errors(address.country) }}
+    </div>
 
-        <div class="wmw-fieldrow">
-            <div class="wmw-switchfield">
-                {{ form_widget(form.user.remoteWork) }}
-                {{ form_label(form.user.remoteWork) }}
-            </div>
+    <div class="wmw-fieldrow">
+        <div class="wmw-switchfield">
+            {{ form_widget(form.user.remoteWork) }}
+            {{ form_label(form.user.remoteWork) }}
         </div>
-        <div class="wmw-fieldrow row">
-            <label for="wmw-ob-language-1"
-                   class="wmw-label wmw-label--topmobile col-xs-10 col-sm-5">{{ form_label(form.user.languages) }}</label>
-            <div class="col-xs-12 col-sm-7">
-                {{ form_widget(form.user.languages) }}
-            </div>
+    </div>
+    <div class="wmw-fieldrow row">
+        <label for="wmw-ob-language-1"
+               class="wmw-label wmw-label--topmobile col-xs-10 col-sm-5">{{ form_label(form.user.languages) }}</label>
+        <div class="col-xs-12 col-sm-7">
+            {{ form_widget(form.user.languages) }}
         </div>
         {{ form_errors(form.user.languages) }}
-
-        <div class="wmw-uploadfield">
-            {{ form_widget(form.resume.file) }}
-            <button type="button" class="wmw-button wmw-button--green"><i></i><span>Upload your cv</span><i></i></button>
-            <div class="wmw-uploadfield-val"></div>
-        </div>
-        {{ form_errors(form.resume.file) }}
-
-
     </div>
+
+    <div class="wmw-uploadfield">
+        {{ form_widget(form.resume.file) }}
+        <button type="button" class="wmw-button wmw-button--green"><i></i><span>Upload your cv</span><i></i></button>
+        <div class="wmw-uploadfield-val"></div>
+    </div>
+    {{ form_errors(form.resume.file) }}
+
+
+</div>
 
 {% set save = '<i></i><span>' ~ form.save.vars.label | trans ~ '</span><i></i>' %}
 {{ form_row(form.save, { 'attr' : { 'class': 'wmw-button wmw-button--green wmw-button--border' }, 'label' : save}) }}

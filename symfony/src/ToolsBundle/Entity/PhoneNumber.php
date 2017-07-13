@@ -29,7 +29,6 @@ class PhoneNumber
      * @var string
      * @Assert\Regex(
      *  pattern="/^[0-9]{4,10}$/",
-     *  message="tools.phone.digits"
      * )
      * @ORM\Column(name="number", type="string", length=255)
      */

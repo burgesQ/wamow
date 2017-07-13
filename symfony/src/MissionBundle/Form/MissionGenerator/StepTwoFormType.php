@@ -26,16 +26,17 @@ class StepTwoFormType extends AbstractType
                 'multiple'                  => false,
                 'expanded'                  => true,
                 'class'                     => 'MissionBundle:BusinessPractice',
-                'label'                     => true
+                'label'                     => true,
+                'required'                  => true
             ])
             ->add('professionalExpertise', EntityType::class, [
                 'choice_translation_domain' => 'tools',
                 'translation_domain'        => 'tools',
                 'choice_label'              => 'name',
-                'placeholder'               => 'professionalexpertises.title',
                 'multiple'                  => false,
                 'class'                     => 'MissionBundle:ProfessionalExpertise',
-                'label'                     => 'professionalexpertises.title'
+                'label'                     => 'professionalexpertises.title',
+                'required'                  => true
             ])
             ->add('budget', IntegerType::class, [
                 'translation_domain' => 'tools',
@@ -116,8 +117,7 @@ class StepTwoFormType extends AbstractType
                 'translation_domain' => 'tools',
                 'validation_groups'  => false,
                 'label'              => $options['labelBack']
-            ])
-        ;
+            ]);
     }
 
     /**

@@ -1,25 +1,6 @@
 {% extends '::base.html.twig' %}
 
-{% form_theme form _self %}
-{%- block button_widget -%}
-    {%- if label is empty -%}
-        {%- if label_format is not empty -%}
-            {% set label = label_format|replace({
-            '%name%': name,
-            '%id%': id,
-            }) %}
-        {%- else -%}
-            {% set label = name|humanize %}
-        {%- endif -%}
-    {%- endif -%}
-    <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ translation_domain is same as(false) ? label|raw : label|trans({}, translation_domain)|raw }}</button>
-{%- endblock button_widget -%}
-
-{% block tetranz_select2entity_widget_select_option %}
-    <option value="{{ id }}" selected="selected">
-        {{ label | trans({}, 'tools') }}
-    </option>
-{% endblock %}
+{% form_theme form "form_themes.html.twig" %}
 
 {% trans_default_domain "tools" %}
 
@@ -58,30 +39,30 @@
                                 </div>
                             {% endif %}
                         {% endfor %}
+                    {{ form_errors(form.missionKinds) }}
                 </div>
-                {{ form_errors(form.missionKinds) }}
 
                 <div class="wmw-fieldrow row">
                     <label for="{{ form.certifications.vars.name }}" class="wmw-label wmw-label--topmobile col-xs-10 col-sm-5">{{ 'mission.new.label.step_three.certif' | trans | raw }}</label>
                     <div class="col-xs-12 col-sm-7">
                         {{ form_widget(form.certifications, { 'attr' : { 'class' : 'col-xs-10 col-md-6' }}) }}
                     </div>
+                    {{ form_errors(form.certifications) }}
                 </div>
-                {{ form_errors(form.certifications) }}
 
                 <div class="wmw-fieldrow row">
                     <label for="{{ form.languages.vars.name }}" class="wmw-label wmw-label--topmobile col-xs-10 col-sm-5">{{ 'mission.new.label.step_three.lang' | trans }}</label>
                     <div class="col-xs-12 col-sm-7">
                         {{ form_widget(form.languages, { 'attr' : { 'class' : 'col-xs-10 col-md-6' }}) }}
                     </div>
+                    {{ form_errors(form.languages) }}
                 </div>
-                {{ form_errors(form.languages) }}
 
                 <div class="wmw-fieldrow row">
                     <label for="{{ form.workExperience.vars.id }}" class="wmw-label wmw-label--topmobile col-xs-10 col-sm-5">{{ 'workexperience.title' | trans }}</label>
                     {{ form_row(form.workExperience, { 'attr' : { 'class' : 'col-xs-10 col-md-6 required'}}) }}
+                    {{ form_errors(form.workExperience) }}
                 </div>
-                {{ form_errors(form.workExperience) }}
 
             </div>
 

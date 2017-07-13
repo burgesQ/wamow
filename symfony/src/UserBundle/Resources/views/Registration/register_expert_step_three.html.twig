@@ -1,21 +1,9 @@
 {% extends "UserBundle::layout.html.twig" %}
 
-{% form_theme form _self %}
-{%- block button_widget -%}
-    {%- if label is empty -%}
-        {%- if label_format is not empty -%}
-            {% set label = label_format|replace({
-            '%name%': name,
-            '%id%': id,
-            }) %}
-        {%- else -%}
-            {% set label = name|humanize %}
-        {%- endif -%}
-    {%- endif -%}
-    <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ translation_domain is same as(false) ? label|raw : label|trans({}, translation_domain)|raw }}</button>
-{%- endblock button_widget -%}
+{% form_theme form "form_themes.html.twig" %}
 
 {% trans_default_domain "tools" %}
+
 {% block body %}
 
     {{ form_start(form, {'attr': {'class': 'wmw-onboard col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 col-xl-4 col-xl-offset-4'}}) }}
@@ -48,6 +36,7 @@
             <span></span>
         </div>
     </div>
+
     <div class="wmw-onboard-bottom">
         <a href="{{ path('expert_registration_step_two') }}" class="wmw-button wmw-button--border">
             <i></i><span>
@@ -57,10 +46,16 @@
         {% set next = '<i></i><span>' ~ form.submit.vars.label | trans ~ '</span><i></i>' %}
         {{ form_widget(form.submit, {'attr': {'class': 'wmw-button wmw-button--green'}, 'label': next }) }}
     </div>
+
     {{ form_end(form) }}
+
     <div class="wmw-onboard-text col-md-3 col-xl-2">
-        <p>{{ 'registration.advisor.three.howtotitle' | trans | upper }}</p>
-        <p>{{ 'registration.advisor.three.howtotext' | trans }}
+        <p>
+            {{ 'registration.advisor.three.howtotitle' | trans | upper }}
+        </p>
+        <p>
+            {{ 'registration.advisor.three.howtotext' | trans }}
         </p>
     </div>
+
 {% endblock %}

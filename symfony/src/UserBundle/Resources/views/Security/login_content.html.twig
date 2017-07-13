@@ -1,13 +1,8 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-
 <form action="{{ path("fos_user_security_check") }}"
       method="post"
       class="wmw-onboard col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 col-xl-4 col-xl-offset-4">
-
-    {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
 
     <div class="wmw-onboard-body">
 
@@ -33,10 +28,14 @@
             <input type="password" id="password" name="_password" class="required col-xs-7"/>
             <label class="wmw-label wmw-label--right col-xs-5"
                    for="password">{{ 'security.login.password'|trans }}</label>
+            {% if error %}
+                <ul class="form-error">
+                    <li>{{ error.messageKey|trans(error.messageData, 'security') }}</li>
+                </ul>
+            {% endif %}
         </div>
 
         <div class="wmw-fieldrow row">
-
             <div class="wmw-switchfield">
                 <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
                 <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
