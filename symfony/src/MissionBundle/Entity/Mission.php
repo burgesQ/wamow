@@ -383,8 +383,7 @@ class Mission
                         ->buildViolation('error.date.after_end_date')
                         ->atPath('missionBeginning')->addViolation()
                     ;
-                } elseif ($applicationEnding->format("yy/mm/dd")
-                          >= $missionBeginning->format("yy/mm/dd")) {
+                } elseif ($applicationEnding->format("yy/mm/dd") >= $missionBeginning->format("yy/mm/dd")) {
                     $context
                         ->buildViolation('error.date.before_start_date')
                         ->atPath('applicationEnding')->addViolation()
