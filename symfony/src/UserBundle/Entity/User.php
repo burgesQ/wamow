@@ -253,7 +253,6 @@ class User extends BaseUser implements ParticipantInterface
      * @Assert\Email(
      *     message = "The email '{{ value }}' is not a valid email."
      * )
-     * @Assert\NotBlank()
      */
     protected $emergencyEmail;
 
