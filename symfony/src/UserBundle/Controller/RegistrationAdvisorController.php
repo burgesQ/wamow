@@ -275,7 +275,6 @@ class RegistrationAdvisorController extends Controller
             foreach ($form->get('userWorkExpSerialized')->getData() as $key => $val) {
                 if ($val) {
                     $array = explode('&', str_replace('__name__', $key, urldecode($val)));
-
                     /** @var UserWorkExperience $userWorkExperience */
                     $userWorkExperience = new UserWorkExperience();
                     $user->addUserWorkExperience($userWorkExperience);
@@ -301,6 +300,7 @@ class RegistrationAdvisorController extends Controller
                                     default :
                                         break;
                                 }
+                                break;
                             case ($label == "continent]") :
                                 $whichOne = $arrayTmp[4];
                                 switch ($whichOne) {
@@ -319,32 +319,21 @@ class RegistrationAdvisorController extends Controller
                                     default :
                                         break;
                                 }
-
+                                break;
                             case (substr($label, 0, 12) == "cumuledMonth") :
                                 $lastTmp = explode('=', $label);
-                                $i       = 0;
-                                foreach ($lastTmp as $lastLoop) {
-                                    if ($i) {
-                                        $userWorkExperience->setCumuledMonth($lastLoop);
-                                    }
-                                    $i++;
-                                }
+                                $userWorkExperience->setCumuledMonth($lastTmp[1]);
+                                break;
                             case (substr($label, 0, 10) == "peremption") :
-                                $lastTmp = explode('=', $label);
-                                $i       = 0;
-                                foreach ($lastTmp as $lastLoop) {
-                                    if ($i) {
-                                        $userWorkExperience->setPeremption(true);
-                                    }
-                                    $i++;
-                                }
+                                $userWorkExperience->setPeremption(true);
+                                break;
                             case (substr($label, 0, 9) == "dailyFees") :
                                 $lastTmp = explode('=', $label);
                                 $i       = 0;
                                 foreach ($lastTmp as $lastLoop) {
                                     if ($i) {
                                         $userWorkExperience->setDailyFees($lastLoop);
-                                        if ($user->getDailyFeesMin() > $lastLoop) {
+                                        if (!$user->getDailyFeesMin() || $user->getDailyFeesMin() > $lastLoop) {
                                             $user->setDailyfeesMin($lastLoop);
                                         }
                                         if ($user->getDailyFeesMax() < $lastLoop) {
@@ -353,6 +342,8 @@ class RegistrationAdvisorController extends Controller
                                     }
                                     $i++;
                                 }
+                            default :
+                                break;
                         }
                     }
                     $em->persist($userWorkExperience);
