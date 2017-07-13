@@ -9,9 +9,9 @@ tools:
         city: 'The city must  only contain letters or dashes.'
         state: 'The state must contain only letters or dashes.'
     upload:
-        badFormat: "This format is not accepted"
+    	badFormat: "This format is not accepted"
     number:
-        required: "Please enter a valid number"
+        reauired: "Please enter a valid number"
 
 user:
     companysize:
@@ -28,9 +28,6 @@ user:
         short: 'The last name is too short.'
         long: 'The last name is too long.'
         illegale: 'This last name contains illegal characters'
-    languages:
-        min: 'Please select at least one Language'
-
 
 company:
     name:
@@ -53,7 +50,4 @@ error:
     wolrd:
         continent: Please select at least one continent
         country: Please select at least one country
-        minlanguage: "Please select at least one language"
-    mission:
-        title:
-            illegale: The title can only contain letters
+    minlanguage: "Please select at least one language"
