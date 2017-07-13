@@ -11,15 +11,14 @@ easy_admin:
                     - 'id'
                     - 'user'
                     - 'mission'
-                    - 'status'
+                    - 'statusTrans'
                     - 'score'
                     - 'updateDate'
             show:
                 fields:
                     - { property : 'user' }
                     - { property : 'mission' }
-                    - { property : 'status' }
-                    - { property : 'score' }
+                    - { property : 'statusTrans' }
                     - { property : 'creationDate' }
                     - { property : 'updateDate' }
                     - { property : 'interestedAt' }

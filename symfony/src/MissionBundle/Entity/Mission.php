@@ -408,7 +408,7 @@ class Mission
 
     public function __toString()
     {
-     return $this->id . ' : ' . $this->title;
+        return $this->id . ' : ' . $this->title;
     }
 
     /**
@@ -426,7 +426,7 @@ class Mission
      */
     public function getId()
     {
-      return $this->id;
+        return $this->id;
     }
 
     /**
@@ -1433,7 +1433,7 @@ class Mission
     /**
      * Get nbOngoing
      *
-     * @return integer 
+     * @return integer
      */
     public function getNbOngoing()
     {
@@ -1463,5 +1463,24 @@ class Mission
             $this->setScoringHistory($tmp);
         }
         return $this;
+    }
+
+    /**
+     * get statusTrans
+     *
+     * @return string
+     */
+    public function getStatusTrans()
+    {
+        $array = [
+            "DELETED"   => -1,
+            "DRAFT"     => 0,
+            "PUBLISHED" => 1
+        ];
+        foreach ($array as $key => $val) {
+            if ($val == $this->status) {
+                return '(' . $val . ') ' . $key;
+            }
+        }
     }
 }
