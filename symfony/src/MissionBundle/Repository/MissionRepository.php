@@ -154,10 +154,11 @@ class MissionRepository extends EntityRepository
             ->andWhere("u.roles = :userRoles")
             ->andWhere("l.id IN(:languageIds)")
             ->andWhere("pe = :professionalExpertise OR bp = :businessPractice")
-            ->andWhere("u.remoteWork = ".($mission->getTelecommuting() ? "1" : "0"))
-            // TODO : No result, normal ? Column medium price needed ?
             ->andWhere("((u.dailyFeesMin + u.dailyFeesMax)/2.0) <= :missionBudget")
         ;
+        if ($mission->getTelecommuting()) {
+            $qb->andWhere("u.remoteWork = 1");
+        }
 
         $parameters = array(
             "userRoles" => "a:1:{i:0;s:12:\"ROLE_ADVISOR\";}",
