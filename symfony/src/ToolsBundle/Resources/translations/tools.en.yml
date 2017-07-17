@@ -229,6 +229,7 @@ dashboard:
             contactbutton: "Contact"
             deletebutton: "Delete"
             interested: "Interested"
+            not_interested: "Add to my choice"
             selected: "My Choice"
             proposal: "Proposal"
             finisher: "Chosen"
@@ -330,6 +331,8 @@ user:
 ## Mission
 mission:
     view:
+        to_answer: You have message(s) to answer
+        waiting_label: Waiting adviors
         pitched_at: Pitched at date
         price_day: $ </div> / day
         more_info: more details
@@ -363,17 +366,16 @@ mission:
                 %professionalExpertise
             on_site: On site
             not_on_site: Not on site
-        to_answer: To Answer
 
         waitting: |
           <small>MISSION STATUS</small><br />
           <span class="status">Waitting</span>
         interested: |
-          <small>MISSION STATUS</small><br />
-          <span class="status">Interested</span>
+          <small>mission status</small><br />
+          <span class="status">Select intereseted advisors</span>
         shortlisted: |
             <small>MISSION STATUS</small><br />
-            <span class="status">Shortlisted</span>
+            <span class="status">Shortlist</span>
         selected: |
             <small>MISSION STATUS</small><br />
             <span class="status">Selected</span>
