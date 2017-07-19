@@ -196,7 +196,7 @@ dashboard:
             unread: "{0}No new message|{1}You have %unread% new message|]1,Inf]You have %unread% new messages"
         close:
             show_more: "Show more"
-            title: "Deleted Mission"
+            title: "Ended missions"
             mission: Mission Closed
             delete: Delete
             close: Closed

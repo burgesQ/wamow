@@ -212,6 +212,8 @@
                     {% endfor %}
 
                     {# ko mission #}
+
+                    {% if closes is not empty %}<h2 class="main-title" style="padding-top:1%"><i class="icon icon--flag"></i>{{ 'dashboard.advisor.close.title' | trans }}{% endif %}</h2>
                     {% for close in closes %}
                         <div class="main-missions-el main-missions-el--closed row">
                             <div class="main-missions-el-content col-xs-12 col-md-10">
