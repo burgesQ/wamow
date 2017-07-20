@@ -3,7 +3,7 @@ form:
     address:
         address: address
         street: "Address"
-        street_2: "Address bis"
+        street_2: "Address 2"
         city: "City"
         zipcode: "Zipcode"
         state: "State"
@@ -16,9 +16,9 @@ form:
     btn:
         send: send
         save: save
-        upload_proposal: Upload Porposal
-        download_proposal: Download Porposal
-        save_certif: Save cecrtification
+        upload_proposal: Upload Proposal
+        download_proposal: Download Proposal
+        save_certif: Save certification
         download_resume: Download User Resume
         cancel_mission: CANCEL MISSION
         back: BACK
@@ -27,7 +27,9 @@ form:
         edit: EDIT
         print: PRINT
         send: send
-        update_password: Update password
+        add: add
+        yes: yes
+        no: no
 
     note:
         saved: Saved
@@ -35,7 +37,7 @@ form:
         tooltip: Click to edit note
 
     phone:
-        prefix: "Prefix"
+        prefix: "Country Code"
         number: "Phone"
 
     file:
@@ -47,7 +49,7 @@ header:
     news: "News"
     profile: Profile
     billing: Billing
-    logout: Logout
+    logout: Log Out
 
 side_bar:
     email_notification: |
@@ -58,112 +60,110 @@ side_bar:
 footer:
     mission: "Mission"
     about: "About"
-    advisor: "Advisor"
+    advisor: "Expert"
     agreement: "User agreement"
     legal: "Legal notice"
-    contractor: "Contractor"
+    contractor: "Company"
 
 legends:
     title: |
-        85% OF PITCHES ARE FINDING EXPERTS
+        85% OF PITCHES FIND A MATCHING EXPERT
         WITHIN 15 DAYS.
     content: |
-        Having a good matching profile will invrease
-        your succès !So fill in your profile details
-        with attention.
-        Be aware that the User Agreement of www.
-        consultants.wantmore.work require a ID
+        A good profile will increase your success at matching, 
+        ensure your profile details are accurate and complete.
+        Be aware that the User Agreement of
+        consultants.wantmore.work requires an ID
         background check.
     currency: $
 
 ## Common error
 error:
     page:
-        common: The requested page couldn't be located. Checkout for any URL misspelling or
+        common: The requested page couldn't be located. Check for any URL misspelling or
     forbidden: You have no access to this page
-    logged: You're not logged
+    logged: You're not logged in
     user:
         subscribe: Please Subscribe
-        email_in_use: Email allready in use.
+        email_in_use: Email already in use.
     user_mission:
         not_found: No such userMission entity (%id)
-        cant_giveup: Uou can't give up this mission.
-        already_giveup: You alredy give_up this mission.
-        not_enough: You cannot remove the last advisor from the mission.
+        cant_giveup: You cannot give up this mission.
+        already_giveup: You already gave up this mission.
+        not_enough: You cannot remove the last expert from the mission.
     mission:
         pitch:
-            contractor: A contractor cannot pitch.
+            contractor: A company cannot bid.
         shortlist:
-            to_much: you havent selected any advisor.
-            not_enough: Not enough user selected to proceed to shortlist.
-        step_error: There was a error while managing the step.
-        not_found: The asked mission dosen't exist
+            to_much: you have not selected any expert.
+            not_enough: Not enough users selected to proceed to My Selection.
+        step_error: There was an error 
+        not_found: The requested mission does not exist
         available: This mission isn't available
-        user_mission: You cannot pitch that mission
-        interested_twice: You already mark youreself as inetrested
+        user_mission: You cannot pitch this mission
+        interested_twice: You have already marked yourself as interested
         available: The mission %id is not available.
-        limit_reach: The advisor answer limit was reached for this mission. The mission is closed
-        wrong_company: You don't belong tothe right company
-        already: You already execute this action.
+        limit_reach: The limit of expert answers was reached for this mission. The mission is closed
+        wrong_company: You don't belong to the right company
+        already: You have already executed this action.
         finalist:
-            no_advisor: No advisor selected for the Finalist step.
+            no_advisor: No expert selected for the final step.
     action:
         failed: Action failed.
         shortlist:
-            to_much: You allready have selected 3 advisor.
-    upload_resume_or_linkedin: Please Upload a resume or link your account with Linkedin
+            to_much: You have already selected 3 experts.
+    upload_resume_or_linkedin: Please Upload a resume or link your account to LinkedIn
     phone:
-        please_fill: Please fill out the phone number fileds.
-    not_found: Not found
+        please_fill: Please fill out the phone number fields.
 
 ## Home
 home:
     contractor:
         login: "Log In"
         signup: "Sign Up"
-        title: "Get matched."
+        title: "Find a match."
         valueproposition:
             first: "Value your time"
             second: "Build a world of opportunities"
         howdoesitwork: "How does it work?"
         start:
-            text: "Create your profile with very few information. Highlight your work experience. Select some of your most characteristic projects and work experiences."
+            text: "A little information is required to create your profile; highlight your work experience and select the projects and work experiences that interest you the most."
         play:
-            text: "Receive targeted pitches fitting your expertise and profile. Answer or ask for more information. Challenge the contractor! Give the best of yourself! Get selected!"
+            text: "Receive targeted pitches meeting your expertise and profile. Answer directly or ask for more information. Challenge the company! Do your best! Get selected!"
         improve:
-            text: "Receive your first pitch. Only when opt-in for your first one, subscribe an annual plan."
+            text: "Receive your first pitch. When you opt-in for the first one, you'll have to subscribe to an annual plan."
         pay:
-            text: "Get the contractors detailed feedback. Improve your impact, matchup your rating to succeed again! Be recommended by the contractor."
+            text: "Get the company's detailed feedback. Increase your influence, matchup your rating to succeed again! Get recommended by the company."
         preregister:
             email: "Email"
-            emergency_email: Emergency email
+            emergency_email: Secondary email
             firstname: "First name"
             lastname: "Last name"
             company: "Company"
             country: "Country"
             phone: "Direct line"
             comment: "Comment"
-            submit: "PLEASE CONTACT ME"
+            submit: "Let's start"
             registered: "You request was submitted"
     advisor:
-        contractorlink: "Contractor"
+        contractorlink: "Company"
         login: "Log In"
         signup: "Sign Up"
-        seeker: "Contractor"
+        seeker: "Company"
         open: "Open your account"
-        title: "Get matched."
+        title: "Find a match."
         valueproposition:
             first: "VALUE YOUR TIME"
             second: "BUILD A WORLD OF OPPORTUNITIES"
         howdoesitwork: "How does it work?"
         start:
-            text: "Create your profile with very few information. Highlight your work experience. Select some of your most characteristic projects and work experiences."
+            text: " A little information is required to create your profile; highlight your work experience and select the projects and work experiences that interest you the most."
         play:
-            text: "Receive targeted pitches fitting your expertise and profile. Answer or ask for more information. Challenge the contractor! Give the best of yourself! Get selected!"
+            text: " Receive targeted pitches meeting your expertise and profile. Answer directly or ask for more information. Challenge the company! Do your best! Get selected!"
         improve:
-            text: "Receive your first pitch. Only when opt-in for your first one, subscribe an annual plan."
+            text: " Receive your first pitch. When you opt-in for the first one, you'll have to subscribe to an annual plan "
         pay:
-            text: "Get the contractors detailed feedback. Improve your impact, matchup your rating to succeed again! Be recommended by the contractor."
+            text: " Get the company's detailed feedback. Increase your influence, matchup your rating to succeed again! Get recommended by the company "
 
 ## Dashboard
 dashboard:
@@ -182,13 +182,13 @@ dashboard:
             showmore: "Show more"
             giveupbutton: "Delete"
             interested: "Interested"
-            ongoing: "On going"
-            shortlist: "Shortlist"
+            ongoing: "Ongoing"
+            shortlist: "Selection"
             waiting: waiting
             selected: selected
             to_answer: To answer
-            finalist: "Finalist"
-            giveup: "Giveup"
+            finalist: "Chosen"
+            giveup: "Give up"
             dismiss: "Dismiss"
             delete: "Delete"
             ended: "Ended"
@@ -202,17 +202,17 @@ dashboard:
             close: Closed
         other:
             none: No other pitch
-            none_leg: Other pitch will be available soone
+            none_leg: Other pitches will be available soon
             advice: Advice
             in_fact: You are more likely to be selected...
-            get_in_touch: Getting touch
+            get_in_touch: Get in touch
             contact: Contact
             see_the_pitch: See the pitch
             waiting: Waiting
             answer: Answer
             mission_status: Mission status
-            show_all_pitch: Show all pitch
-            echange: echange
+            show_all_pitch: Show all pitches
+            echange: Interact
     contractor:
         new:
             button: "Write pitch"
@@ -220,23 +220,23 @@ dashboard:
             title: "Your dashboard:"
             text: ''
         mission:
-            title: "Pitchs published"
+            title: "Pitch published"
             date: "Pitched on "
             showmore: "Show more"
             seethepitchbutton: "See the pitch"
             answerbutton: "Answer"
-            selectfinalistbutton: "Select finalist"
+            selectfinalistbutton: "Choose the expert"
             contactbutton: "Contact"
             deletebutton: "Delete"
             interested: "Interested"
-            selected: "Selected"
+            selected: "My Choice"
             proposal: "Proposal"
-            finisher: "Finisher"
+            finisher: "Chosen"
             ongoing: "On going"
-            shortlist: "Shortlist"
+            shortlist: "My Selection"
             waiting: "Waiting"
             finish: "Finish"
-            mustbefinish: "Must be finish"
+            mustbefinish: "Should be finished"
             unread: "{0}No new message|{1}You have %unread% new message|]1,Inf]You have %unread% new messages"
             proposal: Proposal
         draft:
@@ -245,42 +245,40 @@ dashboard:
             continuebutton: "Continue"
             deletebutton: "Delete"
     error:
-        logged: "You are not logged"
+        logged: "You are not logged in"
 
 ## Registration
 registration:
     advisor:
         zero:
-            title: "Firts, let's connect."
-            subtitle: "Get matched in just 5 minutes."
-            howtotitle: "85% of pitches are finding experts within 15 days."
-            howtotext: "Having a good matching profile will increase your succes! So fill in your profile details with attention. Be aware that the User Agreement of www.consultants.wantmore.work require an ID background check."
-            linkedinbutton: "Sign Up with Linkedin"
+            title: "First, let's log in."
+            subtitle: "Find a match in just 5 minutes."
+            howtotitle: "85% of pitches find a matching expert within 15 days."
+            howtotext: "A good profile will increase your success at matching, ensure your profile details are accurate and complete. Be aware that the User Agreement of consultants.wantmore.work requires an ID background check."
+            linkedinbutton: "Sign Up with LinkedIn"
             or: "or"
             firstname: "First name"
             lastname: "Last name"
             email: "Email"
             country: "Country of residence"
-            remote: "I'm mobile"
+            remote: "Available to travel"
             languages: "Select your languages"
             password: "Password"
-            repeatpassord: "Repeat password"
-            mismatchpassword: "Mismatch password"
-            resume: "Upload your CV"
+            repeatpassord: "Confirm password"
+            mismatchpassword: "Password does not match"
+            resume: "Upload your Resume"
             nextbutton: "NEXT"
-            confirm: Please confirm the informations bellow
         one:
             title: "Business practice?"
-            subtitle: "Select industry you've already worked on"
+            subtitle: "Select industries you've already worked in"
             how_to_label: |
-                85% OF PITCHES ARE FINDING EXPERTS
+                85% OF PITCHES FIND A MATCHING EXPERT
                 WITHIN 15 DAYS.
             how_to_text: |
-                Having a good matching profile will invrease
-                your succès !So fill in your profile details
-                with attention.
-                Be aware that the User Agreement of www.
-                consultants.wantmore.work require a ID
+                A good profile will increase your success at matching, 
+                ensure your profile details are accurate and complete.
+                Be aware that the User Agreement of   
+                consultants.wantmore.work requires an ID
                 background check.
 
             backbutton: "BACK"
@@ -289,41 +287,40 @@ registration:
             title: "Kind of mission"
             subtitle: "Select your missions"
             howtotitle: "Second step:"
-            howtotext: "We need to understand which professional expertises you acquired or did in your missions. What does www.consultants.wantmore.work mean by Professional Expertises? We have identified 22 key functions in organizations. You can make several choices."
+            howtotext: "We need to understand what professional expertise you acquired during your previous missions. What does consultants.wantmore.work mean by Professional Expertise? We have identified 22 key functions in organizations. You can select multiple options."
             backbutton: "BACK"
             nextbutton: "NEXT"
         three:
-            title: "Professional Expertises"
-            subtitle: "Select wich type of missions"
+            title: "Professional Expertise"
+            subtitle: "Select which type of missions"
             howtotitle: "Third step:"
-            howtotext: "We need to understand what you did or experimented as advisor. What does www.consultants.wantmore.work mean by type of missions? We have identified 25 different consulting positions or levels. You can make several choices."
+            howtotext: "We need to understand what you did or experienced as an advisor. What does consultants.wantmore.work mean by type of missions? We have identified 25 different consulting positions or levels. You can select multiple options."
             backbutton: "BACK"
             nextbutton: "NEXT"
         four:
             title: "Valuable Work Experience"
             subtitle: "Select 1 to 10 items"
             howtotitle: "Fourth step:"
-            howtotext: "To identify your valuable work experience, you need to select between 1 to 10 items. It is important to choose relevant experiences and only proven ones to make your profile unique and bankable!"
+            howtotext: "To identify your valuable work experience, you need to select between 1 and 10 items. It is important to choose relevant experiences where you can provide proof of to make your profile unique and profitable!"
             backbutton: "BACK"
             nextbutton: "FINISH"
-            cumuledmonth: "How many cumulted years?"
-            dailyfees: "Average daily fees"
-            peremption: "Was the last mission of this kind within the last 2 years?"
+            cumuledmonth: "How many cumulated years?"
+            dailyfees: "Average daily rate"
+            peremption: "Was this performed within the last 2 years?"
 
 ## Users
 user:
     profile_show:
         wait_subscription_plan: "SUBSCRIPTION PLAN, WAIT FOR #98"
-        linkedin_stuff: LinkeDin stuff's
+        linkedin_stuff: LinkedIn stuff's
         resume_stuff: Resume stuff's
         advisor:
             link_back_to_board: back to board
-            link_back_to_mission: back to mission
             link_show_profile: show profile
             link_edit_profile: edit profile
-            link_general: GENERALE
-            link_password: PASSWORD
-            title_algorithm_improvment: algorythm improvment
+            link_general: My profile
+            link_billing: BILLING
+            title_algorithm_improvment: algorithm improvement
             title_subscription: subscription
             email_notification: email<br>notification
     profile_edit:
@@ -332,14 +329,6 @@ user:
 
 ## Mission
 mission:
-    message:
-        shortlist_added: "You have been added to the shortlist of the mission."
-        shortlist_removed: "You have been refused from the mission."
-        selected: "You have been selected for the mission."
-        removed: "You have been removed from the shortlist of the mission."
-        no_advisor: No advisor accepted your mission yet. We are a matching best profile for you and you'll receive an email as soon as we found him/her !
-        no_proposition: We didn't find any mission for you but we are still looking for it !
-        no_mission: You don't have any mission. <a href="url">Add one</a> and we will find its best advisors !
     view:
         pitched_at: Pitched at date
         price_day: $ </div> / day
@@ -352,20 +341,19 @@ mission:
         contractor:
             pitched_at: Pitched at date
             next_mission: Next Mission >
-            status_advisor: all advisor
-            status_shortlist: shortlist
-            status_finalit: finalist
+            status_advisor: all advisors
+            status_shortlist: My Selection
+            status_finalit: My Choice
             status_interested: interested
-            btn_refuse: REFUSE
-            btn_proced_to_shortlist: Proceed to shortlist
+            btn_refuse: DECLINE
+            btn_proced_to_shortlist: Proceed to My Selection
             btn_contract: contract
-            btn_add_to_shortlist: add to shortlist
-            btn_remove_from_shortlist: remove from shortlist
+            btn_add_to_shortlist: add to my selection
+            btn_remove_from_shortlist: remove from my selection
             finance: |
                 %professionalExpertise<br>
                 <strong>$ %price</strong><br>
         advisor:
-            btn_back_to_mission: back to advisor list
             btn_back_to_board: back to board
             btn_back_to_global_view: back to global view
             interested: Interested
@@ -391,48 +379,48 @@ mission:
             <span class="status">Selected</span>
 
     action:
-        add_to_shortlist: User added to shortlist !
+        add_to_shortlist: User added to my selection !
         add_to_contract: User added to contract !
-        remove_from_shortlist: User removed from shortlist !
-        refuse_user: User refused.
+        remove_from_shortlist: User removed from my selection !
+        refuse_user: User declined.
 
     new:
         step_one:
             title: The pitch
-            subtitle: Let's start with the begining
+            subtitle: Let's start with the beginning
             hint: "FIRST STEP : "
         step_two:
-            title: Mission Specification
+            title: Mission Details
             subtitle: Tell us more !
             hint: "SECOND STEP : "
         step_three:
             title: Mission Kind
-            subtitle: And what about your futur collaborator ?
-            hint: "THIRED STEP : "
+            subtitle: Do you know which type of expertise you are looking for ?
+            hint: "THIRD STEP : "
         step_four:
-            title: Resume
-            subtitle: Ok, let's make a point
+            title: Review
+            subtitle: Verify that all information is correct!
             hint: "FOURTH STEP : "
         step_five:
             title: Final Step
-            subtitle: Last Step And we're good !
+            subtitle: Let's wrap it up !
             hint: "FINAL STEP : "
         form:
-            back_resume: Back to resume
+            back_resume: Back to review
             save_mod: Save modifications
 
         label:
             title: TITLE OF THE PITCH
             resume: DESCRIPTION OF THE PROJECT (500 WORDS)
             later: FINISH LATER
-            budget: ESTIMED BUDGET
-            confidentiality: Anonymous corporate
-            telecommuting: On site presence required
+            budget: ESTIMATED BUDGET
+            confidentiality: Hidden Company Name
+            telecommuting: On site presence required (partially)
             country: COUNTRY
-            applicationEnding: END DATE FOR POSTULING TO THE PITCH
+            applicationEnding: APPLICATION DEADLINE
             missionBeginning: START DATE OF THE MISSION
-            missionEnding: ESIMATE END DATE OF THE MISSION
-            chooseDay: Days
+            missionEnding: ESIMATED END DATE OF THE MISSION
+            chooseDay: Day
             chooseMonth: Month
             chooseYear: Year
             certification: CERTIFICATION / SPECIAL SKILLS
@@ -442,24 +430,24 @@ mission:
                 certif: CERTIFICATION <small> (opptional) </small>
                 lang: work Language
             step_four:
-                professional_expertise: DOMAINE FONCTIONNEL
-                end_pitch: FIN DU PITCH
-                start_mission: DATE DE MISSION
-                mission_kind: TYPOLOGIE
-                telecommuting: SUR SITE
-                confidentiality: ANONYME
-                languages: LANGUES
-                certif: CERTIFICATION <small> (opptional) </small>
+                professional_expertise: PROFESSIONAL EXPERTISE
+                end_pitch: END OF PITCH
+                start_mission: START DATE OF THE MISSION
+                mission_kind: MISSION TYPE
+                telecommuting: ON SITE (PARTIALLY)
+                confidentiality: HIDDEN COMPANY NAME 
+                languages: LANGUAGES
+                certif: CERTIFICATIONS <small> (opptional) </small>
                 budget: BUDGET
-                price: PRIX
-                concerned: CONSULTANT CONCERNÉS
-                languages: LANGUES
+                price: PRICE
+                concerned: CONSULTANT CONCERNED
+                languages: LANGAUGES
                 finance: Finance
                 date_range: "from %startDate to %endDate"
                 on_site: on site
                 not_on_site: not on site
-                confidential: anonymous
-                not_confidential: not anonymous
+                confidential: hidden
+                not_confidential: not hidden
                 price_day: $ / day
 
 ## Inbox
@@ -472,6 +460,18 @@ inbox:
     show: show
     you: you
     new_message: New Message
+thread:
+    error:
+        logged: "Please login to access this page"
+        exist: "This conversation doesn't exist"
+        rights: "You cannot see this conversation"
+
+message:
+    readReport:
+        read: "ReadReport: read"
+        receive: "ReadReport: receive"
+
+
 
 ## Business vocabulary
 language:
@@ -537,8 +537,8 @@ company_size:
     large:  Large Companies
 
 experience_shaping:
-    cumuledmonth: How many cumuled month ?
-    daily_fees:   What was you're daily fees for the last mission of this kind ?
+    cumuledmonth: How many months in total ?
+    daily_fees:   What was your daily rate for the last mission of this kind ?
     peremption:   Was the last mission of this kind within the last 2 years ?
 
 businesspractice:
@@ -546,20 +546,20 @@ businesspractice:
     industry: "Industry"
     finance: "Finance"
     retail: "Retail"
-    media: "Media-Telecom / Entertainement Business"
+    media: "Media-Telecom / Entertainment Business"
     tourism: "Tourism"
     construction: "Construction"
     realestate: "Real Estate"
-    hotel: "Good & Beverage / Hotel / Sport / Leisure"
+    hotel: "Amenities/ Hospitality / Good & Beverage / Hotel / Sport / Leisure"
     services: "Services (included transport)"
     energy: "Energy"
     it: "Information Technology"
     public: "Public"
-    ngo: "Non Governmental Organisation"
+    ngo: "Non Governmental Organization"
 
 professionalexpertises:
-    title: "Professional Expertises"
-    businessunitmanager: "Business Unit Manager / Coporate Management"
+    title: "Professional Expertise"
+    businessunitmanager: "Business Unit Manager / Corporate Management"
     humanresources: "Human Resources / Organization"
     purchasing: "Purchasing"
     production: "Production"
@@ -586,15 +586,15 @@ typemissions:
     title: "Type of Missions"
     strategic: "Advisory Strategic"
     execution: "Advisory Execution"
-    organisationtransformation: "Advisory Organisation - Transformation"
+    organisationtransformation: "Advisory Organization - Transformation"
     businessreingeniering: "Advisory Business Reengineering"
-    csp: "Information Systems CSP"
-    moa: "Information Systems Project Manager MOA"
-    moe: "Information Systems Project Manager MOE"
-    tma: "Information Systems Third Party Maintenance"
-    infrastructure: "Infrastructure Information Systems"
-    migration: "Information Systems Migration"
-    implementation: "Information Systems Implementation"
+    csp: "IT CSP"
+    moa: "IT Project Manager - Development"
+    moe: "IT Project Manager - Operational"
+    tma: "IT Third Party Maintenance"
+    infrastructure: "Infrastructure IT"
+    migration: "IT Migration"
+    implementation: "IT Implementation"
     interimmanagement: "Interim Management"
     recruitment: "Recruitment"
     change: "Change Management"
@@ -612,7 +612,7 @@ typemissions:
 
 workexperience:
     title : "Valuable Work Experience"
-    create : "Create a Valuable Work Experience (it will take time before approbation to activate the experience)"
+    create : "Create a Valuable Work Experience (it will take time to approve the activation of the experience)"
     standardization : "Best Practices Standardization"
     transformation : "Organization Transformation"
     scope : "Mission's Scope"
@@ -621,17 +621,17 @@ workexperience:
     redesignfunction : "Redesign Functions(s)"
     developmentroadmap : "Subsidiary Development Roadmap"
     actionplan : "Action Plan"
-    growthdevelopment : "Identification of Growth Development threw New Opportunities (Acquisition, New Company...)"
+    growthdevelopment : "Identification of Growth Development through New Opportunities (Acquisition, New Company...)"
     diagnosisfunction : "Analysis and Diagnosis of Function"
     postmerger : "Post Merger Integration"
     potentialsynergies : "Potential Synergies Analysis in Mergers Process"
-    economicmodelisations : "Economic Modelisations and Drew-up of Impacts"
+    economicmodelisations : "Economic Modeling and Impact analysis"
     studies : "Studies"
     bestpracticesbenchmark : "Best Practices Benchmark"
     offshore : "Offshore IT Management"
     swap : "SWAP Analysis"
     outsourcing : "Outsourcing"
-    rationalisation : "Rationalisation"
+    rationalisation : "Rationalization"
     riskmanagement : "Risk Management"
     changemanagement : "Implementation of Change Management"
     restructuringplan : "Restructuring Plan"
@@ -644,7 +644,7 @@ workexperience:
     strategicduediligences : "Strategic Due Diligences"
     postacquisitionroadmap : "Post Acquisition Roadmap"
     jointventures : "Joint Ventures"
-    transfertoperationalmanagement : "Transfert Operational Management (exit)"
+    transfertoperationalmanagement : "Transfer Operational Management (exit)"
     portfoliovaluation : "Portfolio Valuation"
     cessionsstrategy : "Cessions Strategy"
     fundmanagementstrategy : "Fund Management Strategy (Sector, Diversification...)"
@@ -702,32 +702,32 @@ workexperience:
     currentitsystemlayout : "Current IT System Layout"
     businessrequirements : "Business Requirements"
     statementofwork : "Statement of Work (SOW)"
-    bidsollicitationmanagement : "Bid Sollicitation Management"
+    bidsollicitationmanagement : "Bid Solicitation Management"
     solutionselection : "Solution Selection"
     digitalstrategy : "Digital Strategy"
     e-commercestrategy : "E-Commerce Strategy"
     digitalperformancediagnosis : "Digital Performance Diagnosis"
     implementationofcollaborativeportalswebsites : "Implementation of Collaborative Portals/Websites"
-    retaildigitalisation : "Retail Digitalisation"
+    retaildigitalisation : "Retail Digitalization"
     processdesign : "Process Design"
     reengineeringprocess : "Reengineering Process"
     identificationofbestsupplychainpractices : "Identification of Best Supply Chain Practices"
     sharecenterservicesimplementation : "Share Center Services Implementation"
-    automatisation : "Automatisation"
-    stockoptimisation : "Stock Optimisation"
-    deliveryoptimisation : "Delivery Optimisation"
+    automatisation : "Automatization"
+    stockoptimisation : "Stock Optimization"
+    deliveryoptimisation : "Delivery Optimization"
     ergonomicstandardofwarehouse : "Ergonomic Standard of Warehouse"
     complexityreduction : "Complexity Reduction"
     internalcommunication : "Internal Communication"
-    humanressourcescommunication : "Human Ressources Communication"
+    humanressourcescommunication : "Human Resources Communication"
     institutionalcommunication : "Institutional Communication"
-    evenementialcommunication : "Evenemential Communication"
+    evenementialcommunication : "Event Communication"
     crisiscommunication : "Crisis Communication"
-    implementcommunicationplan : "Implement Communication P`lan"
+    implementcommunicationplan : "Implement Communication Plan"
     chainvalueoptimization : "Chain Value Optimization"
     packaging : "Packaging"
     redesigntoreducecost : "Redesign to Reduce Cost"
-    procurementmanagementoptimisation : "Procurement Management Optimisation (Post Merger)"
+    procurementmanagementoptimisation : "Procurement Management Optimization (Post Merger)"
     costreduction : "Cost Reduction"
     leanmanagement : "Lean Management"
     callcenterimplementation : "Call Center Implementation"
@@ -745,7 +745,7 @@ workexperience:
     strategyorganization : "HR Strategy and Organization"
     compensationbenefitsplanmanagement : "Compensation and Benefits Management"
     functionimprovement : "HR Function Improvement"
-    payrolloptimisation : "Payroll Optimisation"
+    payrolloptimisation : "Payroll Optimization"
     informationsystem : "HR Information System"
     payroll : "Payroll Administration"
     processimplementation : "HR Process Implementation"
@@ -759,7 +759,7 @@ workexperience:
     psychosocial : "Psychosocial Risks and Burn-Out"
     managementseminar : "Learning and Development Management Seminar"
     learningprogram : "Learning Program"
-    learningdigitalisation : "Learning Digitalisation (Coop, e-Learning…)"
+    learningdigitalisation : "Learning Digitalization (Coop, e-Learning…)"
     seriousgames : "Serious Games..."
     teambuilding : "Team Building Session"
     employerbranding : "Employer Branding"
@@ -786,18 +786,15 @@ company_size:
 
 ## Mails template
 mails:
-    new:
-        proposal: |
-            Find the proposal I just upload %link_start%her%link_end%
     hello: Hello %f_name %l_name !
     registration:
-        new_password: "Her your new password : %password"
+        new_password: "Your new password : %password"
     inbox:
         new_message_mission: You've got a new message on the mission %title.
         new_pitcher: You've got a new pitcher on the mission %missionName.
-        link: Click there to check it.
+        link: Click here to check it.
         the_team: The team.
-        link: "Go to check it :"
+        link: "Go check it :"
     subject:
          new_message: You've got a new message !
          new_password: Welcome !
@@ -806,16 +803,137 @@ mails:
         new_contractor: |
             Hello fName lName
 
-            The new mission missionTitle is a potential mission for your profile.
-            Go on the web site to check it.
+            We think the new mission missionTitle matches your profile and might interest you. 
+            Log In to our web site to check it.
 
-            Regards, The Teams.
+            Regards, The Team.
+        reset_password: |
+            Hello uName !
+
+            You may reset your password here
+
+            Greetings,
+            The WantMoreWork team
+
+# Payement template
 payment:
     ok: "Subscription success !"
     ko: "Subscription failed."
     subscription: "Subscription"
     plan:
-        advisor: "Advisor plan"
+        advisor: "Expert plan"
         free: "Basic plan (free)"
     one_year: "1 year"
     ends: "Ends"
+    card_number: Card Number
+    pls_there: Subscribe There Please
+
+# NewsLetter template
+newsletter:
+    body_title: THE NEWSLETTER FOR THOSE WHO WANT TO KNOW MORE ABOUT WORK
+    read_more: READ MORE
+
+# Notification template
+notification:
+    seeker:
+        mission:
+            create:
+            edit:
+            delete:
+            empty:
+            pitchedbynewuser:
+            takeback:
+            selection:
+            dismiss:
+        company:
+            join:
+            leave:
+
+    expert:
+        mission:
+            pitch:
+            giveup:
+            delete:
+            takeback:
+            selection:
+            dismiss:
+
+# Comapny translation
+company:
+    name: "Company"
+    new:
+        name: "Name"
+        size: "Size"
+        choosesize: "Choose the size"
+        small: "Small less than 10 employees"
+        medium: "Medium between 10 and 500 employees"
+        big: "More than 500 employees"
+        logo: "Logo"
+        description: "Description"
+        sector: "Sector"
+        choosesector: "Choose the sector"
+        submit: "OK"
+        registered: "Company name successfully registered"
+        error:
+            onecompany: "You cannot join more than one company"
+            authorized: "You are not authorized"
+            usedname: "The company %name% already exist."
+
+    join:
+        name: "Company"
+        new: "Create a new company"
+        submit: "Join"
+        info : "Your old Company will be replaced"
+        success: "Joined the company"
+        joined: "You joined name company"
+        error:
+            authorized: "You are not authorized"
+            onecompany: "You cannot join more than one company"
+
+    leave:
+        wannaleave: "Do you really want to leave %name% company?"
+        submit: "Yes"
+        leaved: "You left name company"
+        error:
+            authorized: "You are not authorized"
+            nocompany: "You do not belong to any company"
+
+# newsLetter translation
+newsletter:
+    view:
+        footer:
+            writer: Writed by %writer
+            poster: Posted by %poster the %postDate
+            updateDate: Last update the %updateDate
+        error:
+            not_found: Their is no such article :(
+        comment:
+            author_email: Email address
+            author_first_name: First Name
+            author_last_name: Last Name
+            content: Content of your comment
+            post: Post your comment
+            intro: 'thought on "%article_title"'
+            meta: Posted by %author_f_name %author_l_name (%author) the %postDate
+            reply: Reply
+        newsletter:
+            link: Click to see the full newsletter
+            what: Newsletters
+
+    edit:
+        save: Save changes
+        cancel: Cancel changes
+        content: Change content of the article
+        link: Edit the content of the article
+
+    new:
+        save: Create article
+        content: Content of the new article
+        title: Title of the new article
+        writedBy: Author of this article
+        url: Link for the new article
+        creationDate: Date of the article's (opptional)
+
+    user:
+        notLogged: You must be logged to edit the content of an article
+        noRights: You must be the writer or the publisher of an article to edit it
