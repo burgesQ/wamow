@@ -122,7 +122,7 @@
 
                         <div class="main-missions-el-price col-xs-12 col-md-3">
                             <strong>{{ mission.professionalExpertise.name | trans }}</strong>
-                            {{ 'legends.currency' | trans }}{{ mission.budget }}
+                            {{ 'legends.currency_day' | trans({ '%price' : mission.price }) }}
                             <small>{{ mission.businessPractice.name | trans }}</small>
                         </div>
 
