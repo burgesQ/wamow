@@ -366,15 +366,15 @@ mission:
             not_on_site: Not on site
         to_answer: To Answer
 
-        waitting: |
+        waiting: |
           <small>MISSION STATUS</small><br />
-          <span class="status">Waitting</span>
+          <span class="status">Waiting</span>
         interested: |
           <small>MISSION STATUS</small><br />
-          <span class="status">Interested</span>
+          <span class="status">Select interested advisors</span>
         shortlisted: |
             <small>MISSION STATUS</small><br />
-            <span class="status">Shortlisted</span>
+            <span class="status">Shortlist</span>
         selected: |
             <small>MISSION STATUS</small><br />
             <span class="status">Selected</span>

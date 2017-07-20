@@ -59,7 +59,7 @@
                                 <div class="main-slider-desc">{{ new.mission.resume | truncate(100, false, '[...]') }}</div>
                                 <div class="main-slider-price">
                                     <strong>{{ new.mission.professionalExpertise.name | trans }}</strong>
-                                    {{ 'legends.currency_day' | trans({ '%price' : 'new.mission.price'}, 'tools') }}
+                                    {{ 'legends.currency_day' | trans({ '%price' : new.mission.price }) }}
                                     <small>{{ new.mission.businessPractice.name | trans }}</small>
                                 </div>
                                 <div class="main-slider-infos">
