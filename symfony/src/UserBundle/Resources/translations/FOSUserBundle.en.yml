@@ -24,11 +24,11 @@ profile:
     show:
         username: Username
         email: Email
-        emergencyEmail: "Emergency Email"
+        emergencyEmail: "Secondary Email"
         first_name: 'First Name'
         last_name: 'Last Name'
         gender: Gender
-        birthdate: Birthdate
+        birthdate: Date of Birth
         daily_fees_min: 'Daily Fees Min'
         daily_fees_max: 'Daily Fees Max'
         label: Label
@@ -42,17 +42,17 @@ profile:
         status: Status
         phone: 'Phone Number'
         image: Picture
-        resume: 'Curriculum vitae'
+        resume: 'Resume'
         newslettertrue: 'You are registered for the newsletter'
         newsletterfalse: 'You are not registered for the newsletter'
         company: "Company"
-        userResume: "Resume of you by you"
+        userResume: "Your Resume"
         professionalExpertise: 'Your Professional Expertise'
         businessPractice: 'Your Business Practice'
         missionKind: 'Your Mission Kind'
         languages: 'Languages You speak'
         unread: 'You have %nb% unread message(s)'
-        nbLoad: 'You have setup your account to load up too %nb% messages by thread'
+        nbLoad: 'You have setup your account to load up to %nb% messages by thread'
         readReportActivate: "Your interlocutor will know that you've read their messages"
         readReportDesactivate: "Your interlocutor will not know that you've read their messages"
 
@@ -66,9 +66,9 @@ change_password:
 
 registration:
     linkedin: Sign up with Linkedin
-    check_email: 'An email has been sent to %email%. It contains an activation link you must click to activate your account.'
+    check_email: 'An email has been sent to %email%. It contains an activation link you must click on to activate your account.'
     confirmed: 'Congrats %username%, your account is now activated.'
-    back: 'Back to the originating page.'
+    back: 'Back to the initial page.'
     submit: Register
     flash:
         user_created: 'The user has been created successfully'
@@ -82,64 +82,64 @@ registration:
             Regards,
             WantMore.Work Team.
     step:
-        zero: 'GET MATCHED IN JUST 5 MINUTES'
+        zero: 'FIND A MATCH IN JUST 5 MINUTES'
         one: |
             FIRST STEP :
 
-            We need to know where you acquired your experience and / or did your missions.
+            We need to know in which field you acquired your experience and / or fulfilled your missions.
             What does www.consultants.wantmore.work mean by Business Practices ?
             We have identified 13 different business sectors.
-            You can make several choices.
+            You can select multiple options.
         two: |
             SECOND STEP :
 
-            We need to understand which professional expertises you acquired or did in your missions.
-            What does www.consultants.wantmore.work mean by Professional Expertises ?
+            We need to understand which professional expertise you acquired throughout your missions.
+            What does www.consultants.wantmore.work mean by Professional Expertise ?
             We have identified 22 key functions in organizations.
-            You can make several choices.
+            You can select multiple options.
         three: |
             THIRD STEP :
 
-            We need to understand what you did or experimented as advisor.
+            We need to understand what you've experienced as an expert.
             What does www.consultants.wantmore.work mean by type of missions ?
             We have identified 25 different consulting positions or levels.
-            You can make several choices.
+            You can select multiple options.
         four: |
             FOURTH STEP :
 
-            To identify your valuable work experience, you need to select between 5 to 10 items.
-            It is important to choose relevant experiences and only proven ones to make your profile unique and bankable!
+            To identify your valuable work experience, you need to select between 1 and 10 items.
+            It is important to choose relevant experiences and only those you can provide proof of to make your profile unique and profitable!
         five: |
             LAST STEP :
 
-            For each selected experiences, you have to specify carefully:
-            - in which kind of organization you acquired your experience: small, medium or large,
-            - the international exposition,
-            - the duration of your similar cumulated experience or missions,
+            For each selected experiences, you have to carefully specify:
+            - in what size organization you acquired your experience: small, medium or large,
+            - the international exposure,
+            - how many years in total,
             - and if you did it in the last two years."
     cat:
         zero: |
-            85% OF PITCHES ARE FINDING EXPERTS WITHIN 15 DAYS.
+            85% OF PITCHES FIND A MATCHING EXPERT WITHIN 15 DAYS.
 
-            Having a good matching profile will increase your success ! So fill in your profile details with attention.
-            Be aware that the User Agreement of www. consultants.wantmore.work require a ID background check.
+            Having a good matching profile will increase your success ! So fill in your profile details carefully.
+            Be aware that the User Agreement of www. consultants.wantmore.work requires an ID background check.
         one: 'Business Practice ?'
-        two: 'Professional Expertises'
+        two: 'Professional Expertise'
         three: 'Type of missions'
         four: 'Valuable Work Experience'
-        five: 'Experience Shaping'
+        five: 'Experience Details'
     consign:
-        zero: "First Let's Connect"
-        one: 'SELECT INDUSTRY YOU’VE ALREADY WORKED ON'
-        two: 'SELECT YOUR EXPERTISES'
+        zero: "First Let's Log In"
+        one: 'SELECT INDUSTRY YOU’VE WORKED IN'
+        two: 'SELECT YOUR EXPERTISE'
         three: 'SELECT WHICH TYPE OF MISSION'
-        four: 'Select 5 to 10 items'
-        five: 'SPECIFY SELECTED EXPERIENCES'
+        four: 'Select 1 to 10 items'
+        five: 'DETAIL SELECTED EXPERIENCES'
     or: 'OR'
 
 resetting:
     password_already_requested: 'The password for this user has already been requested within the last 24 hours.'
-    check_email: 'An email has been sent to %email%. It contains a link you must click to reset your password.'
+    check_email: 'An email has been sent to %email%. It contains a link you must click on to reset your password.'
     request:
         invalid_username: 'The username or email address "%username%" does not exist.'
         username: 'Username or email address'
@@ -147,9 +147,9 @@ resetting:
     reset:
         submit: 'Change password'
     flash:
-        success: 'The password has been reset successfully'
+        success: 'The password has been successfully reset'
     email:
-        subject: 'Reset Password WantMore.Work'
+        subject: 'Password Reset WantMore.Work'
         message: |
             Hello %username%!
 
@@ -172,7 +172,7 @@ form:
     firstname: "Firstname"
     lastname: "Lastname"
     email: "Email"
-    emergencyEmail: "Emergency Email*"
+    emergencyEmail: "Secondary Email*"
     current_password: "Current password"
     password: "Password"
     password_confirmation: "Repeat password"
@@ -189,14 +189,14 @@ form:
         month: "Month"
         day: "Day"
         year: "Year"
-        birthdate: "Birthdate"
+        birthdate: "Date of Birth"
     dailyfees:
-        min: "Daily fees minimum"
-        max: "Daily fees maximum"
+        min: "Daily rate minimum"
+        max: "Daily rate maximum"
     userResume: "Enter a few words to describe your expertise"
     submit: "Update"
-    languages: "Select the language that you spoke"
-    nbLoad: "Enter how many message should you to load by thread"
+    languages: "Select the languages that you speak"
+    nbLoad: "Enter how many messages should be loaded by thread"
     readReport: "Notify your interlocutor that you've read the message"
     back: Back
     next: Next
@@ -205,10 +205,10 @@ social:
     sign_in_google: "Sign in with Google"
     sign_in_linkedin: "Sign in with Linkedin"
     error:
-        access_denied: "You have refused access for this site."
+        access_denied: "You have been denied access to this site."
         authorization_expired: "Authorization expired."
         bad_verification_code: "Bad verification code."
-        consumer_key_rejected: "You have refused access for this site."
+        consumer_key_rejected: "You have been denied access to this site."
         incorrect_client_credentials: "Incorrect client credentials."
         invalid_assertion: "Invalid assertion."
         redirect_uri_mismatch: "Redirect URI mismatches configured one."
