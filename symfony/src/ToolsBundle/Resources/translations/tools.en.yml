@@ -70,12 +70,13 @@ legends:
         85% OF PITCHES FIND A MATCHING EXPERT
         WITHIN 15 DAYS.
     content: |
-        A good profile will increase your success at matching, 
+        A good profile will increase your success at matching,
         ensure your profile details are accurate and complete.
         Be aware that the User Agreement of
         consultants.wantmore.work requires an ID
         background check.
     currency: $
+    currency_day: $%price/d
 
 ## Common error
 error:
@@ -97,7 +98,7 @@ error:
         shortlist:
             to_much: you have not selected any expert.
             not_enough: Not enough users selected to proceed to My Selection.
-        step_error: There was an error 
+        step_error: There was an error
         not_found: The requested mission does not exist
         available: This mission isn't available
         user_mission: You cannot pitch this mission
@@ -196,7 +197,7 @@ dashboard:
             unread: "{0}No new message|{1}You have %unread% new message|]1,Inf]You have %unread% new messages"
         close:
             show_more: "Show more"
-            title: "Ended missions"
+            title: "Deleted Mission"
             mission: Mission Closed
             delete: Delete
             close: Closed
@@ -275,9 +276,9 @@ registration:
                 85% OF PITCHES FIND A MATCHING EXPERT
                 WITHIN 15 DAYS.
             how_to_text: |
-                A good profile will increase your success at matching, 
+                A good profile will increase your success at matching,
                 ensure your profile details are accurate and complete.
-                Be aware that the User Agreement of   
+                Be aware that the User Agreement of
                 consultants.wantmore.work requires an ID
                 background check.
 
@@ -435,7 +436,7 @@ mission:
                 start_mission: START DATE OF THE MISSION
                 mission_kind: MISSION TYPE
                 telecommuting: ON SITE (PARTIALLY)
-                confidentiality: HIDDEN COMPANY NAME 
+                confidentiality: HIDDEN COMPANY NAME
                 languages: LANGUAGES
                 certif: CERTIFICATIONS <small> (opptional) </small>
                 budget: BUDGET
@@ -803,7 +804,7 @@ mails:
         new_contractor: |
             Hello fName lName
 
-            We think the new mission missionTitle matches your profile and might interest you. 
+            We think the new mission missionTitle matches your profile and might interest you.
             Log In to our web site to check it.
 
             Regards, The Team.
