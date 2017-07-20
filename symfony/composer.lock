@@ -1172,16 +1172,16 @@
         },
         {
             "name": "hackzilla/password-generator",
-            "version": "1.3.0",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hackzilla/password-generator.git",
-                "reference": "a85b083e4116eb29f53c28b5bf3857283f9ead21"
+                "reference": "d3d6ae5df2960a7ac21e73ffd952958b3fbbaa68"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hackzilla/password-generator/zipball/a85b083e4116eb29f53c28b5bf3857283f9ead21",
-                "reference": "a85b083e4116eb29f53c28b5bf3857283f9ead21",
+                "url": "https://api.github.com/repos/hackzilla/password-generator/zipball/d3d6ae5df2960a7ac21e73ffd952958b3fbbaa68",
+                "reference": "d3d6ae5df2960a7ac21e73ffd952958b3fbbaa68",
                 "shasum": ""
             },
             "require": {
@@ -1209,7 +1209,7 @@
                 }
             ],
             "description": "Password Generator Library",
-            "time": "2016-07-24T15:43:52+00:00"
+            "time": "2017-07-15T09:55:13+00:00"
         },
         {
             "name": "hackzilla/password-generator-bundle",
@@ -2508,16 +2508,16 @@
         },
         {
             "name": "symfony/assetic-bundle",
-            "version": "v2.8.1",
+            "version": "v2.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/assetic-bundle.git",
-                "reference": "0241b135ff64c6031048c6425cd833a8300da46b"
+                "reference": "2e0a23a4874838e26de6f025e02fc63328921a4c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/assetic-bundle/zipball/0241b135ff64c6031048c6425cd833a8300da46b",
-                "reference": "0241b135ff64c6031048c6425cd833a8300da46b",
+                "url": "https://api.github.com/repos/symfony/assetic-bundle/zipball/2e0a23a4874838e26de6f025e02fc63328921a4c",
+                "reference": "2e0a23a4874838e26de6f025e02fc63328921a4c",
                 "shasum": ""
             },
             "require": {
@@ -2574,7 +2574,7 @@
                 "compression",
                 "minification"
             ],
-            "time": "2016-11-22T11:42:57+00:00"
+            "time": "2017-07-14T07:26:46+00:00"
         },
         {
             "name": "symfony/monolog-bundle",
@@ -3209,20 +3209,21 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.8.24",
+            "version": "v2.8.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "0ab3693b1154b1b166e98981ab3755636a5ae0e3"
+                "reference": "c2452af5659d0492a43268c389bb211295c5e4c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/0ab3693b1154b1b166e98981ab3755636a5ae0e3",
-                "reference": "0ab3693b1154b1b166e98981ab3755636a5ae0e3",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/c2452af5659d0492a43268c389bb211295c5e4c9",
+                "reference": "c2452af5659d0492a43268c389bb211295c5e4c9",
                 "shasum": ""
             },
             "require": {
                 "doctrine/common": "~2.4",
+                "ext-xml": "*",
                 "php": ">=5.3.9",
                 "psr/log": "~1.0",
                 "symfony/polyfill-apcu": "~1.1",
@@ -3342,7 +3343,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2017-07-05T08:53:15+00:00"
+            "time": "2017-07-17T18:00:19+00:00"
         },
         {
             "name": "tecnickcom/tcpdf",
@@ -3687,16 +3688,16 @@
     "packages-dev": [
         {
             "name": "sensio/generator-bundle",
-            "version": "v3.1.5",
+            "version": "v3.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioGeneratorBundle.git",
-                "reference": "535417a99ac1b387df3bfbc0c060122c24665b78"
+                "reference": "128bc5dabc91ca40b7445f094968dd70ccd58305"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/535417a99ac1b387df3bfbc0c060122c24665b78",
-                "reference": "535417a99ac1b387df3bfbc0c060122c24665b78",
+                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/128bc5dabc91ca40b7445f094968dd70ccd58305",
+                "reference": "128bc5dabc91ca40b7445f094968dd70ccd58305",
                 "shasum": ""
             },
             "require": {
@@ -3737,11 +3738,11 @@
                 }
             ],
             "description": "This bundle generates code for you",
-            "time": "2017-07-12T17:28:00+00:00"
+            "time": "2017-07-18T07:57:44+00:00"
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v2.8.24",
+            "version": "v2.8.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
