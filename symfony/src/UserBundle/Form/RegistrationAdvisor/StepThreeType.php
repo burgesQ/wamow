@@ -2,6 +2,7 @@
 
 namespace UserBundle\Form\RegistrationAdvisor;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Validator\Constraints\Count;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -29,7 +30,11 @@ class StepThreeType extends AbstractType
                 'constraints'               => new Count([
                     'min' => 1,
                     'minMessage' => 'user.professionalexpertises.min',
-                ])
+                ]),
+                'query_builder'             => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('e')
+                        ->orderBy('e.id', 'ASC');
+                },
             ])
             ->add('submit', SubmitType::class, [
                     'translation_domain' => 'tools',

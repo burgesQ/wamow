@@ -42,11 +42,6 @@ class Mission
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255, nullable=false)
-     * @Assert\Regex(
-     *     pattern="#^[a-zA-Zéèêëçîïíàáâñńœôö]+(?:[\s-][a-zA-Zéèêëçîïíàáâñńœôö]+)*$#",
-     *     match=true,
-     *     message="error.mission.title.illegale"
-     * )
      */
     private $title;
 
@@ -361,14 +356,7 @@ class Mission
     public function validate(ExecutionContextInterface $context)
     {
         if ($this->getOnDraft() === false) {
-            if ($this->getStatusGenerator() == self::STEP_ZERO) {
-                if (substr_count($this->getResume(), ' ') >= 500) {
-                    $context
-                        ->buildViolation('error.resume.max_words')
-                        ->atPath('resume')->addViolation()
-                    ;
-                }
-            } elseif ($this->getStatusGenerator() == self::STEP_ONE) {
+            if ($this->getStatusGenerator() == self::STEP_ONE) {
                 $missionBeginning = $this->getMissionBeginning();
                 $missionEnding = $this->getMissionEnding();
                 $applicationEnding = $this->getApplicationEnding();
