@@ -9,7 +9,13 @@ download_proposal:
     defaults:
         _controller: ToolsBundle:Action:downloadProposal
 
+download_proposal_advisor:
+    path: /proposal/download_adv/{id}
+    defaults:
+        _controller: ToolsBundle:Action:downloadProposalAdvisor
+
 download_resume:
     path: /resume/download/{id}
     defaults:
         _controller: ToolsBundle:Action:downloadResume
+

@@ -8,14 +8,6 @@
 
         <h1>{{ 'layout.login' | trans }}</h1>
 
-        <a href="{{ path('hwi_oauth_service_redirect', {'service': 'linkedin' }) }}">
-            <button type="button" class="wmw-button wmw-button--full">
-                <i></i><span>{{ 'security.login.linkedin' | trans }}</span><i></i>
-            </button>
-        </a>
-
-        <div class="wmw-onboard-or">{{ 'registration.advisor.zero.or' | trans({}, 'tools') | upper }}</div>
-
         <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
 
         <div class="wmw-fieldrow row">
@@ -44,11 +36,11 @@
 
         <div class="wmw-onboard-bottom">
             <button type="submit" id="_submit" name="_submit"
-                    class="wmw-button wmw-button--border">
+                    class="wmw-button wmw-button--green wmw-button--border">
                 <i></i><span>{{ 'layout.login' | trans }}</span><i></i></button>
 
             <a href="{{ path('fos_user_resetting_request') }}">
-                <button type="button" class="wmw-button">
+                <button type="button" class="wmw-button wmw-button--green">
                     <i></i><span>{{ 'security.login.reset' | trans }}</span><i></i>
                 </button>
             </a>

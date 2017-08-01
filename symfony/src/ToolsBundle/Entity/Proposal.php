@@ -24,9 +24,14 @@ class Proposal extends Upload
     /**
      * @ORM\ManyToOne(targetEntity="InboxBundle\Entity\Thread",
      *     inversedBy="proposals", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
      */
     private $thread;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="MissionBundle\Entity\Mission",
+     *     inversedBy="proposals", cascade={"persist"})
+     */
+    private $mission;
 
     /**
      * @var string
@@ -100,5 +105,28 @@ class Proposal extends Upload
     public function getContent()
     {
         return $this->content;
+    }
+
+    /**
+     * Set mission
+     *
+     * @param \MissionBundle\Entity\Mission $mission
+     * @return Proposal
+     */
+    public function setMission(\MissionBundle\Entity\Mission $mission)
+    {
+        $this->mission = $mission;
+
+        return $this;
+    }
+
+    /**
+     * Get mission
+     *
+     * @return \MissionBundle\Entity\Mission 
+     */
+    public function getMission()
+    {
+        return $this->mission;
     }
 }

@@ -317,6 +317,15 @@ class Mission
     private $nbOngoing;
 
     /**
+     * @ORM\OneToMany(
+     *      targetEntity="ToolsBundle\Entity\Proposal",
+     *      mappedBy="mission"
+     * )
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $proposals;
+
+    /**
      * Mission constructor.
      *
      * @param $nbStep
@@ -1469,5 +1478,38 @@ class Mission
                 return '(' . $val . ') ' . $key;
             }
         }
+    }
+
+    /**
+     * Add proposals
+     *
+     * @param \ToolsBundle\Entity\Proposal $proposals
+     * @return Mission
+     */
+    public function addProposal(\ToolsBundle\Entity\Proposal $proposals)
+    {
+        $this->proposals[] = $proposals;
+
+        return $this;
+    }
+
+    /**
+     * Remove proposals
+     *
+     * @param \ToolsBundle\Entity\Proposal $proposals
+     */
+    public function removeProposal(\ToolsBundle\Entity\Proposal $proposals)
+    {
+        $this->proposals->removeElement($proposals);
+    }
+
+    /**
+     * Get proposals
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProposals()
+    {
+        return $this->proposals;
     }
 }

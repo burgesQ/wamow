@@ -124,7 +124,13 @@
                                         {{ 'mission.view.no_certification' | trans }}
                                     {% endif %}
                                 </small>
+                            {% if mission.proposals is not empty %}
+                                {% set proposal = mission.proposals | last %}
+                                <a href="{{ path('download_proposal_advisor', { id : mission.id }) }}" class="wmw-simple-button wmw-simple-button--green">
+                                    <i class="icon icon--download"></i>{{ 'form.btn.download_proposal' | trans }}</a>
+                            {% endif %}
                             </div>
+
                             <div class="sidebar-content">
                                 {% if not user.payment %}
                                     {{ mission.resume | truncate(100, false, '[...]' | nl2br) }}

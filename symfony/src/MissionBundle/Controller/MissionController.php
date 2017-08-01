@@ -179,12 +179,12 @@ class MissionController extends Controller
                     }
                     $em->flush();
 
-                    return $this->render('@Mission/Mission/Advisor/mission_to_answer.html.twig', [
-                        'user_mission' => $userMission,
-                        'userId'       => $userMission->getUser()->getId(),
-                        'step'         => $step,
-                        'form'         => $form->createView()
-                    ]);
+                        return $this->render('@Mission/Mission/Advisor/mission_to_answer.html.twig', [
+                            'user_mission' => $userMission,
+                            'userId'       => $userMission->getUser()->getId(),
+                            'step'         => $step,
+                            'form'         => $form->createView()
+                        ]);
                 default :
                     throw $this->createNotFoundException('No view for this UserMission status defined (' .
                         $userMissionStatus . ')');
@@ -251,12 +251,13 @@ class MissionController extends Controller
     }
 
     /**
-     * @param $userMissionId
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param                                           $userMissionId
      *
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \HttpHeaderException
      */
-    public function answerToAdvisorAction($userMissionId)
+    public function answerToAdvisorAction(Request $request, $userMissionId)
     {
         $trans = $this->get('translator');
 
@@ -302,22 +303,36 @@ class MissionController extends Controller
                         $nbProposale++;
                     }
                 }
+                $em = $this->getDoctrine()->getManager();
+
+                $proposal = new Proposal();
+                $form     = $this->createForm(ProposalFromType::class, $proposal)->handleRequest($request);
+                if ($form->isSubmitted() && $form->isValid()) {
+                    $proposal->setMission($userMission->getMission());
+                    $em->persist($proposal);
+                    $em->flush();
+
+                    $this->get('inbox.services')->sendProposaleMessage($proposal, $userMission);
+
+                    return $this->redirectToRoute('mission_answer_to_advisor', ['userMissionId' => $userMissionId]);
+                }
+
 
                 return $this->render('@Mission/Mission/Contractor/mission_answer_to_advisor.html.twig', [
-                    'userMission' => $userMission,
-                    'anonymous'   => $step->getAnonymousMode(),
-                    'userId'      => $user->getId(),
-                    'mission'     => $mission,
-                    'nbProposale' => $nbProposale,
-                    'interested'  => count($this->getDoctrine()
-                        ->getRepository('MissionBundle:UserMission')
-                        ->findAllAtLeastThan($mission, UserMission::ONGOING)),
-                    'shortlisted' => count($this->getDoctrine()
-                        ->getRepository('MissionBundle:UserMission')
-                        ->findAllAtLeastThan($mission, UserMission::SHORTLIST)),
-                    'user'        => $user
-                ]);
-
+                        'userMission' => $userMission,
+                        'anonymous'   => $step->getAnonymousMode(),
+                        'userId'      => $user->getId(),
+                        'mission'     => $mission,
+                        'nbProposale' => $nbProposale,
+                        'interested'  => count($this->getDoctrine()
+                            ->getRepository('MissionBundle:UserMission')
+                            ->findAllAtLeastThan($mission, UserMission::ONGOING)),
+                        'shortlisted' => count($this->getDoctrine()
+                            ->getRepository('MissionBundle:UserMission')
+                            ->findAllAtLeastThan($mission, UserMission::SHORTLIST)),
+                        'user'        => $user,
+                        'form'        => $form->createView()
+                    ]);
             default:
                 throw new NotFoundHttpException('No such mission w/ step in position' . $step->getPosition());
         }

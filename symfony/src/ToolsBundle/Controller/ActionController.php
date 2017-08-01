@@ -65,6 +65,32 @@ class ActionController extends Controller
      * @param $id
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
      */
+    public function downloadProposalAdvisorAction($id)
+    {
+        if (!($user = $this->getUser())) {
+            throw $this->createNotFoundException('Not logged');
+        } elseif ((!($mission = $this->getDoctrine()->getRepository('MissionBundle:Mission')
+            ->findOneBy(['id' => $id]))) ||
+            !($userMission = $this->getDoctrine()->getRepository('MissionBundle:UserMission')->findOneBy([
+                'mission' => $mission,
+                'user'    => $user
+            ]))) {
+            throw $this->createNotFoundException('No such userMission');
+        } elseif ($userMission->getStatus() < UserMission::SHORTLIST) {
+            throw $this->createNotFoundException('No right');
+        }
+        /** @var \ToolsBundle\Entity\Proposal $proposal */
+        $proposal = $userMission->getMission()->getProposals()->last();
+
+        $response = new BinaryFileResponse($proposal->getWebPath());
+        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT,'proposale.pdf');
+        return $response;
+    }
+
+    /**
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
     public function downloadResumeAction($id)
     {
         if (!($user = $this->getUser()) || !$this->isGranted('ROLE_CONTRACTOR')) {

@@ -21,7 +21,7 @@
             {{ form_errors(form.image.file) }}
 
             {# head profile#}
-            <div class="wmw-profile-header-name">{{ user.lastName }}<br/>{{ user.firstName | upper }}</div>
+            <div class="wmw-profile-header-name">{{ user.lastName | upper }}<br/>{{ user.firstName }}</div>
 
             <div class="wmw-profile-header-button">
                 <a href="{{ path('user_profile_show') }}">

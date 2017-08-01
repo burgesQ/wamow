@@ -129,10 +129,10 @@
                             <a href="{{ path('mission_answer_to_advisor', { 'userMissionId' : userMission.id }) }}" class="wmw-simple-button wmw-simple-button--green">
                                 <i class="icon icon--eye"></i> {{ 'inbox.show' | trans }}
                             </a>
-                            {% if userMission.thread.proposals is not empty %}
-                                {% set proposal = userMission.thread.proposals | last %}
-                                <a href="{{ path('download_proposal', { id : userMission.id }) }}" class="wmw-simple-button wmw-simple-button--green">
-                                    <i class="icon icon--download"></i> {{ 'form.btn.download_proposal' | trans }}
+                            {% if userMission.user.resumes is not empty %}
+                                {% set resume = userMission.user.resumes | last %}
+                                <a href="{{ path('download_resume', { id : resume.id }) }}" class="wmw-simple-button wmw-simple-button--green">
+                                    <i class="icon icon--download"></i> {{ 'form.btn.download_resume' | trans }}
                                 </a>
                             {% endif %}
                         </div>

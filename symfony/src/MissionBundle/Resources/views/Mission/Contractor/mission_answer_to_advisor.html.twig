@@ -282,7 +282,28 @@
                             </div>
                         {% endif %}
 
-                        <div class="mail-content-notes{% if step.position == 3 %} mail-content-notes--semi{% endif %}">
+
+                        {% if step.position == 2 %}
+                            <div class="mail-content-profile">
+                                <div class="mail-content-profile-name">{{ user.firstname }} {{ user.lastname }}</div>
+
+                                <div class="mail-content-profile-buttons row">
+
+                                {% if user.resumes is not empty %}
+                                    <a href="{{ path('download_resume', { id : userMission.id }) }}" class="wmw-simple-button">
+                                        <i class="icon icon--download"></i>{{ 'form.btn.download_resume' | trans }}</a>
+                                {% endif %}
+
+                                {% if userMission.thread.proposals is not empty %}
+                                    {% set proposal = userMission.thread.proposals | last %}
+                                    <a href="{{ path('download_proposal', { id : userMission.id }) }}" class="wmw-simple-button wmw-simple-button--green">
+                                        <i class="icon icon--download"></i>{{ 'form.btn.download_proposal' | trans }}</a>
+                                {% endif %}
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        <div class="mail-content-notes{% if step.position >= 2 %} mail-content-notes--semi{% endif %}">
                             <label for="wmw-mission-notes">Notes</label>
                             <textarea id="wmw-mission-notes" class="element-notes-textarea" data-id="{{ userMission.id }}" data-path="{{ path('user_mission_notes') }}">{{ userMission.note }}</textarea>
                             <div id="wmw-mission-notes-status" class="element-notes-status">{{ 'form.note.saved' | trans }}</div>
@@ -298,6 +319,18 @@
                             <textarea id="inbox_input_message" name="inbox[inout_message]"></textarea>
                             <button id="submit_text" value="{{ 'form.btn.send' | trans | upper }}"
                                     onClick="sendMessage()">{{ 'form.btn.send' | trans }}</button>
+
+                            <div class="mail-content-answer-bottom">
+                                {% if form is defined and step.position == 2 %}
+                                    {{ form_start(form) }}
+                                    {{ form_errors(form) }}
+                                    {{ form_errors(form.file) }}
+
+                                    {{ form_row(form.submit) }}
+                                    {{ form_widget(form.file, { 'attr' : { class : 'bottom-proposal'}}) }}
+                                    {{ form_end(form) }}
+                                {% endif %}
+                            </div>
                         </div>
 
                         {#<form action="" method="post" class="mail-content-answer">#}
