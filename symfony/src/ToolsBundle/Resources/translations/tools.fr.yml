@@ -159,7 +159,7 @@ mission:
         country: Pays de la mission
         link: Creer un nouveau Pitch
         draft: Pitch en cours de creation
-        price_day: € </div> / jour
+        price_day: € / jour
         currency_k: 'k€'
         receive_the_pitch: <span> %nb </span> recevront le pitch
 

@@ -19,8 +19,8 @@ class StepTwoType extends AbstractType
             ->remove('current_password')
             ->remove('email')
 
-            ->add('missionKind', EntityType::class, [
-                'class'                     => 'MissionBundle:MissionKind',
+            ->add('professionalExpertise', EntityType::class, [
+                'class'                     => 'MissionBundle:ProfessionalExpertise',
                 'property'                  => 'name',
                 'multiple'                  => true,
                 'expanded'                  => true,
@@ -29,12 +29,8 @@ class StepTwoType extends AbstractType
                 'choice_translation_domain' => 'tools',
                 'constraints'               => new Count([
                     'min' => 1,
-                    'minMessage' => 'user.kindfomission.min',
-                ]),
-                'query_builder'             => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('e')
-                        ->orderBy('e.id', 'ASC');
-                },
+                    'minMessage' => 'user.professionalexpertises.min',
+                ])
             ])
             ->add('submit', SubmitType::class, [
             ])

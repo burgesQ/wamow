@@ -7,6 +7,7 @@ use FOS\MessageBundle\Model\ParticipantInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * User
@@ -405,12 +406,15 @@ class User extends BaseUser implements ParticipantInterface
 
     /**
      * @Assert\Callback
-     * @param \Symfony\Component\Validator\Context\ExecutionContextInterface $context
+     * @param ExecutionContextInterface $context
      */
-    public function isValidate($context)
+    public function isValidate(ExecutionContextInterface $context)
     {
         if ($this->getPhone() != NULL) {
             $this->getPhone()->isValidate($context);
+        }
+        if (!$this->getAddresses()->isEmpty() && $this->status == self::REGISTER_NO_STEP) {
+            $this->getAddresses()->last()->isValidate($context);
         }
     }
 

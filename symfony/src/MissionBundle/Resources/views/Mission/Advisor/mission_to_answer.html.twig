@@ -190,6 +190,7 @@
                     }).done(function (msg) {
                         $('textarea#inbox_input_message').val('');
                         $('#thread_message').html(msg);
+                        $(".mail-content-chat").stop().animate({ scrollTop: $(".mail-content-chat")[0].scrollHeight}, 1000);
                     });
                 }
             });

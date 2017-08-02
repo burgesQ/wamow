@@ -2,8 +2,10 @@
 
 namespace ToolsBundle\Entity;
 
+use Symfony\Component\Process\ExecutableFinder;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * Address
@@ -22,17 +24,6 @@ class Address
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="number", type="string", length=255, nullable=true)
-     * @Assert\Regex(
-     *     pattern="#^[0-9a-zA-Zéèêëçîïíàáâñńœôö]+(?:[\s-][a-zA-Zéèêëçîïíàáâñńœôö]+)*$#",
-     *     match=true,
-     *     message="tools.number.required")
-     */
-    private $number;
 
     /**
      * @var string
@@ -135,6 +126,20 @@ class Address
     {
         $this->creationDate = new \Datetime();
         $this->updateDate   = new \Datetime();
+    }
+
+    /**
+     * @Assert\Callback
+     * @param ExecutionContextInterface $context
+     */
+    public function isValidate(ExecutionContextInterface $context)
+    {
+        if ($this->street === null) {
+            $context
+                ->buildViolation('tools.address.street')
+                ->atPath('street')
+                ->addViolation();
+        }
     }
 
     /**
@@ -404,28 +409,5 @@ class Address
     public function getUser()
     {
         return $this->user;
-    }
-
-    /**
-     * Set number
-     *
-     * @param string $number
-     * @return Address
-     */
-    public function setNumber($number)
-    {
-        $this->number = $number;
-
-        return $this;
-    }
-
-    /**
-     * Get number
-     *
-     * @return string
-     */
-    public function getNumber()
-    {
-        return $this->number;
     }
 }

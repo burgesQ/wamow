@@ -5,13 +5,12 @@ form:
         street: "Address"
         street_2: "Address 2"
         city: "City"
-        zipcode: "Zipcode"
+        zipcode: "Zipcode / Postcode"
         state: "State"
         country: "Country"
         choosecountry: "Choose a country"
         name: "Add a name if required"
         label: "Add a label if required"
-        number: Street Number
 
     btn:
         send: send
@@ -30,6 +29,7 @@ form:
         add: add
         yes: yes
         no: no
+        update_password: Update password
 
     note:
         saved: Saved
@@ -43,6 +43,10 @@ form:
     file:
         file: "File"
 
+    password:
+        old: old password
+        new: new pasword
+        repeat: repeat new password
 
 ## Base
 header:
@@ -77,6 +81,7 @@ legends:
         background check.
     currency: $
     currency_day: $%price/d
+    confirmation: Are you shure ?
 
 ## Common error
 error:
@@ -285,17 +290,17 @@ registration:
             backbutton: "BACK"
             nextbutton: "NEXT"
         two:
-            title: "Kind of mission"
-            subtitle: "Select your missions"
+            title: "Professional Expertise"
+            subtitle: "Select which type of missions"
             howtotitle: "Second step:"
-            howtotext: "We need to understand what professional expertise you acquired during your previous missions. What does consultants.wantmore.work mean by Professional Expertise? We have identified 22 key functions in organizations. You can select multiple options."
+            howtotext: "We need to understand what you did or experienced as an advisor. What does consultants.wantmore.work mean by type of missions? We have identified 25 different consulting positions or levels. You can select multiple options."
             backbutton: "BACK"
             nextbutton: "NEXT"
         three:
-            title: "Professional Expertise"
-            subtitle: "Select which type of missions"
+            title: "Kind of mission"
+            subtitle: "Select your missions"
             howtotitle: "Third step:"
-            howtotext: "We need to understand what you did or experienced as an advisor. What does consultants.wantmore.work mean by type of missions? We have identified 25 different consulting positions or levels. You can select multiple options."
+            howtotext: "We need to understand what professional expertise you acquired during your previous missions. What does consultants.wantmore.work mean by Professional Expertise? We have identified 22 key functions in organizations. You can select multiple options."
             backbutton: "BACK"
             nextbutton: "NEXT"
         four:
@@ -324,6 +329,7 @@ user:
             title_algorithm_improvment: algorithm improvement
             title_subscription: subscription
             email_notification: email<br>notification
+            link_password: Change password
     profile_edit:
         advisor:
             btn_save_change: SAVE CHANGE
@@ -332,7 +338,7 @@ user:
 mission:
     view:
         pitched_at: Pitched at date
-        price_day: $ </div> / day
+        price_day: $ / day
         more_info: more details
         less_info: less details
         currency_k: K $
@@ -355,6 +361,7 @@ mission:
                 %professionalExpertise<br>
                 <strong>$ %price</strong><br>
         advisor:
+            btn_back_to_mission: back to mission
             btn_back_to_board: back to board
             btn_back_to_global_view: back to global view
             interested: Interested
@@ -412,7 +419,7 @@ mission:
 
         label:
             title: TITLE OF THE PITCH
-            resume: DESCRIPTION OF THE PROJECT (500 WORDS)
+            resume: DESCRIPTION OF THE PROJECT
             later: FINISH LATER
             budget: ESTIMATED BUDGET
             confidentiality: Hidden Company Name

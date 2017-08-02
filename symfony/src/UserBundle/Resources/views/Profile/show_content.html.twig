@@ -131,7 +131,7 @@
                 {% set renderCountry = '' %}
                 {% if user.addresses is not empty %}
                     {% set address = user.addresses | last %}
-                    {% set renderAddress = address.number ~ ' ' ~ address.street ~ address.street2 ~ ' - ' ~ address.zipcode ~ ' ' ~ address.city %}
+                    {% set renderAddress = address.street ~ address.street2 ~ ' - ' ~ address.zipcode ~ ' ' ~ address.city %}
                     {% set renderCountry = address.country %}
                 {% endif %}
                 <div class="col-xs-12 col-sm-6">

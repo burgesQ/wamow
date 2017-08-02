@@ -28,6 +28,23 @@ class MissionGeneratorController extends Controller
         'mission_new_step_five',
     ];
 
+    /** @var array  */
+    private $arrayImg = [
+        "businesspractice.industry" => "manufacturing",
+        "businesspractice.finance" => "finance",
+        "businesspractice.retail" => "retail",
+        "businesspractice.media" => "media-telco-entertainment",
+        "businesspractice.tourism" => "tourisme",
+        "businesspractice.construction" => "construction",
+        "businesspractice.realestate" => "finance",
+        "businesspractice.hotel" => "hotel",
+        "businesspractice.services" => "food-beverage",
+        "businesspractice.energy" => "energy",
+        "businesspractice.it" => "it",
+        "businesspractice.public" => "public",
+        "businesspractice.ngo" => "ngo"
+    ];
+
     /**
      * @param int $missionId
      *
@@ -190,26 +207,10 @@ class MissionGeneratorController extends Controller
             ]);
         }
 
-        $arrayImg = [
-            "businesspractice.industry" => "manufacturing",
-            "businesspractice.finance" => "finance",
-            "businesspractice.retail" => "retail",
-            "businesspractice.media" => "media-telco-entertainment",
-            "businesspractice.tourism" => "tourisme",
-            "businesspractice.construction" => "construction",
-            "businesspractice.realestate" => "finance",
-            "businesspractice.hotel" => "hotel",
-            "businesspractice.services" => "food-beverage",
-            "businesspractice.energy" => "energy",
-            "businesspractice.it" => "it",
-            "businesspractice.public" => "public",
-            "businesspractice.ngo" => "ngo"
-        ];
-
         return $this->render('MissionBundle:MissionGenerator:mission_step_two.html.twig', [
-            'form'     => $formStepTwo->createView(),
-            'user'     => $user,
-            'arrayImg' => $arrayImg,
+            'form'      => $formStepTwo->createView(),
+            'user'      => $user,
+            'arrayImg'  => $this->arrayImg,
             'missionId' => $missionId
         ]);
     }
@@ -346,9 +347,10 @@ class MissionGeneratorController extends Controller
         return $this->render('MissionBundle:MissionGenerator:mission_step_four.html.twig', [
             'form'       => $formStepFour->createView(),
             'mission'    => $newMission,
-            'nbAdvisors' => count($missionRepository->getUsersByMission($newMission, false, false)),
+            'nbAdvisors' => count($missionRepository->findUsersByMission($newMission)),
             'user'       => $user,
-            'missionId' => $missionId
+            'missionId'  => $missionId,
+            'arrayImg'   => $this->arrayImg
         ]);
 
     }

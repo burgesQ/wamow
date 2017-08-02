@@ -35,7 +35,8 @@
 
                     <div class="sidebar-block">
                         <div class="sidebar-block-business">
-                            <i class="icon icon--business-finance"></i>{{ 'mission.new.label.step_four.finance' | trans }}
+
+                            <i class="icon icon--business-{{ arrayImg[mission.businessPractice.name] }}"></i>{{ mission.businessPractice.name | trans }}
                         </div>
                         <div class="sidebar-block-el">
                             <div class="title">
@@ -61,7 +62,7 @@
                             <div class="title">
                                 <i class="icon icon--budget"></i> {{ 'mission.new.label.step_four.budget' | trans }}
                             </div>
-                            <div class="value"> {{ mission.budget * 1000 }} {{ 'legends.currency' | trans }}</div>
+                            <div class="value"> {{ mission.budget }} {{ 'legends.currency' | trans }}</div>
                         </div>
                         <div class="sidebar-block-el">
                             <div class="title">

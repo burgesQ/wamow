@@ -81,14 +81,12 @@
                     <div class="wmw-bgfiled col-xs-10">
                         <div class="wmw-bgfield">
                             <label for="profile-address">{{ 'form.address.address' | trans }}</label>
-                            {{ form_widget(address.number) }}
                             {{ form_widget(address.street) }}
                             {{ form_widget(address.street2) }}
                             {{ form_widget(address.zipcode) }}
                             {{ form_widget(address.city) }}
                             {{ form_widget(address.state) }}
                             <div class="wmw-bgfield-bg"><i class="icon icon--address"></i></div>
-                            {{ form_errors(address.number) }}
                             {{ form_errors(address.street) }}
                             {{ form_errors(address.street2) }}
                             {{ form_errors(address.zipcode) }}
@@ -125,11 +123,13 @@
                         </div>
                     {% endif %}
 
-                    {% set save = '<i></i><span>' ~ 'form.btn.save' | trans ~ '</span><i></i>' %}
-                    {{ form_row(form.submit, { attr : { class : "wmw-button" }, label : save }) }}
                     {{ form_errors(form) }}
                     {{ form_errors(form.user) }}
                     {{ form_errors(form.image) }}
+
+
+                    {% set save = '<i></i><span>' ~ 'form.btn.save' | trans ~ '</span><i></i>' %}
+                    {{ form_row(form.submit, { attr : { class : "wmw-button" }, label : save }) }}
 
                     {{ form_end(form) }}
 

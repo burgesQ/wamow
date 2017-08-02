@@ -387,12 +387,7 @@ class Mission
                     ;
                 }
             } elseif ($this->getStatusGenerator() == self::STEP_TWO) {
-                if (!count($this->getMissionKinds())) {
-                    $context
-                        ->buildViolation('error.mission_kind.one')
-                        ->atPath('missionKinds')->addViolation()
-                    ;
-                } elseif (!count($this->getLanguages())) {
+                if (!count($this->getLanguages())) {
                     $context
                         ->buildViolation('error.languages.one')
                         ->atPath('languages')->addViolation()

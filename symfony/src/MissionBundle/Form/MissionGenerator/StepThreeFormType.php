@@ -33,7 +33,6 @@ class StepThreeFormType extends AbstractType
                 'choice_label'              => 'name',
                 'multiple'                  => true,
                 'expanded'                  => true,
-                'required'                  => true,
                 'class'                     => 'MissionBundle:MissionKind',
                 'label'                     => false,
                 'query_builder'             => function (EntityRepository $er) {

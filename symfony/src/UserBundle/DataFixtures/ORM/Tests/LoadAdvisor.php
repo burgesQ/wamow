@@ -2842,8 +2842,7 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
         $address = new Address();
 
         $address
-            ->setNumber($oneData[2])
-            ->setStreet($oneData[3])
+            ->setStreet($oneData[2] . ' ' . $oneData[3])
             ->setStreet2($oneData[4])
             ->setZipcode($oneData[5])
             ->setCity($oneData[6])

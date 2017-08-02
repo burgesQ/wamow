@@ -65,6 +65,25 @@ class PhoneNumber
     }
 
     /**
+     * @Assert\Callback
+     * @param ExecutionContextInterface $context
+     */
+    public function isValidate(ExecutionContextInterface $context)
+    {
+        if  ($this->number === NULL && $this->prefix !== NULL) {
+            $context
+                ->buildViolation('tools.prefix.phone')
+                ->atPath('number')
+                ->addViolation();
+        } elseif  ($this->number !== NULL && $this->prefix === NULL) {
+            $context
+                ->buildViolation('tools.phone.prefix')
+                ->atPath('prefix')
+                ->addViolation();
+        }
+    }
+
+    /**
      * Get id
      *
      * @return integer
@@ -118,25 +137,6 @@ class PhoneNumber
     public function getPrefix()
     {
         return $this->prefix;
-    }
-
-    /**
-     * @Assert\Callback
-     * @param ExecutionContextInterface $context
-     */
-    public function isValidate(ExecutionContextInterface $context)
-    {
-        if  ($this->number === NULL && $this->prefix !== NULL) {
-            $context
-                ->buildViolation('tools.prefix.phone')
-                ->atPath('number')
-                ->addViolation();
-        } else if  ($this->number !== NULL && $this->prefix === NULL) {
-            $context
-                ->buildViolation('tools.phone.prefix')
-                ->atPath('prefix')
-                ->addViolation();
-        }
     }
 
     /**

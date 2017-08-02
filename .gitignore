@@ -6,3 +6,5 @@ app/cache/
 components/
 .bundle/
 /bin/
+/trans
+/trans.zip

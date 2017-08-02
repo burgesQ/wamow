@@ -25,13 +25,13 @@
                             {% elseif loop.index0 == 8 %}
                                     </div>
                                 <div class="wmw-onboard-domains-title">{{ 'mission.new.step_three.organisation_consult' | trans }}</div>
-                                    <div class="wmw-onboard-domains-subs">
+                                <div class="wmw-onboard-domains-subs">
                             {% elseif loop.index0 == 12 %}
                                     </div>
                             {% endif %}
 
                             <div class="wmw-switchfield wmw-switchfield--small">
-                                {{ form_widget(val, { 'attr' : { 'class' : 'requiredgroup:domains vv-ggparent' }}) }}
+                                {{ form_widget(val) }}
                                 <label for="{{ val.vars.id }}">{{ val.vars.label  |trans }}</label>
                             </div>
 
@@ -69,12 +69,13 @@
             <div class="wmw-onboard-price">
                 <label class="wmw-label wmw-label--top">{{ 'mission.new.label.range' | trans }}</label>
                 <div class="wmw-onboard-price-inner">
-                    <div class="wmw-onboard-price-input">
-                        <input type="text" id="wmw-pitch-price" value="{{ form.price.vars.value }}" readonly />
-                        {{ 'mission.view.price_day' | trans | raw }}
                     <div class="wmw-range-gradient">
                         {{ form_widget(form.price, { 'attr' : { 'min' : 100 , 'max' : 10000 , 'type' : 'range', 'value' : 10000}}) }}
                     </div>
+                    <div class="wmw-onboard-price-input" style="border:none">
+                        <input type="text" id="wmw-pitch-price" value="{{ form.price.vars.value }}" readonly /></div>
+                    {{ 'mission.view.price_day' | trans }}
+
                     <div class="wmw-onboard-price-number">
                         {{ 'mission.view.receive_the_pitch' | trans({ '%nb': 'X'}) | raw }}
                     </div>

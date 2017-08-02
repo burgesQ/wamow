@@ -115,7 +115,7 @@
                                 </a>
                             {% endif %}
 
-                            <a href="{{ path('mission_delete', { 'missionId' : mission.id }) }}" class="content-delete wmw-tinylink">
+                            <a href="{{ path('mission_delete', { 'missionId' : mission.id }) }}" class="content-delete wmw-tinylink" onclick="return confirm('{{ 'legends.confirmation' | trans }}')">
                                 <i class="icon icon--trashbin"></i> {{ 'dashboard.advisor.wip.delete' | trans }}
                             </a>
                         </div>
@@ -252,9 +252,9 @@
                                 <a href="{{ path('mission_edit', { 'missionId' : draft.id }) }}" class="wmw-button wmw-button--grey">
                                     <i></i><span>{{ 'dashboard.contractor.draft.continuebutton' | trans }}</span><i></i>
                                 </a>
-                                <a href="{{ path('mission_delete', {'missionId': draft.id}) }}" class="main-slider-delete wmw-tinylink">
+                                <btn href="{{ path('mission_delete', {'missionId': draft.id}) }}" class="main-slider-delete wmw-tinylink" onclick="return confirm('{{ 'legends.confirmation' | trans }}')">
                                     <i class="icon icon--trashbin"></i>{{ 'dashboard.advisor.wip.delete' | trans }}
-                                </a>
+                                </btn>
                             </div>
                         </div>
                     {% endfor %}
@@ -277,6 +277,7 @@
     {{ parent() }}
 
     <script type="text/javascript">
+
         $(document).ready(function () {
             $('#wmw-profile-notifications').change(function () {
                 $.ajax({
