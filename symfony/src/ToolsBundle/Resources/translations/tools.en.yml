@@ -82,6 +82,7 @@ legends:
     currency: $
     currency_day: $%price/d
     confirmation: Are you shure ?
+    other: other
 
 ## Common error
 error:
