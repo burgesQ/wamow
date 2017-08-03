@@ -109,11 +109,15 @@
 
         <div class="wmw-mission-body">
 
-            {% if nextMission is not null %}
-                <div class="wmw-mission-pagination">
+
+            <div class="wmw-mission-pagination">
+                {% if prevMission is not null %}
+                    <a href="{{ path('mission_view', { 'missionId' : prevMission.id }) }}">{{ 'mission.view.contractor.prev_mission' | trans }}</a>
+                {% endif %}
+                {% if nextMission is not null %}
                     <a href="{{ path('mission_view', { 'missionId' : nextMission.id }) }}">{{ 'mission.view.contractor.next_mission' | trans }}</a>
-                </div>
-            {% endif %}
+                {% endif %}
+            </div>
 
             <div class="wmw-mission-content row">
 

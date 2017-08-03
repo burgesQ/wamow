@@ -349,6 +349,7 @@ mission:
         contractor:
             pitched_at: Pitched at date
             next_mission: Next Mission >
+            prev_mission: < Prev Mission
             status_advisor: all advisors
             status_shortlist: My Selection
             status_finalit: My Choice

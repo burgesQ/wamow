@@ -46,8 +46,10 @@ class MissionController extends Controller
                 throw $this->createNotFoundException($trans->trans('error.mission.wrong_company', [], 'tools'));
             }
 
-            $nextMissionId = $this->getDoctrine()->getRepository('MissionBundle:Mission')
+            $nextMission = $this->getDoctrine()->getRepository('MissionBundle:Mission')
                 ->findNextMission($missionId, $mission->getCompany());
+            $prevMission = $this->getDoctrine()->getRepository('MissionBundle:Mission')
+                ->findPrevMission($missionId, $mission->getCompany());
 
             switch ($step->getPosition()) {
                 // if mission is step 1
@@ -59,7 +61,8 @@ class MissionController extends Controller
                         'interested'   => count($userMissions),
                         'shortlisted'  => count($userMissionRepo->findAllAtLeastThan($mission, UserMission::SHORTLIST)),
                         'userMissions' => $userMissions,
-                        'nextMission'  => $nextMissionId,
+                        'prevMission'  => $prevMission,
+                        'nextMission'  => $nextMission,
                         'user'         => $this->getUser(),
                         'selected'     => count($userMissionRepo->findAllAtLeastThan($mission, UserMission::SHORTLIST))
                     ]);
@@ -79,7 +82,8 @@ class MissionController extends Controller
                         'shortlisted'  => count($userMissions),
                         'userMissions' => $userMissions,
                         'nbProposale'  => $nbProposale,
-                        'nextMission'  => $nextMissionId,
+                        'prevMission'  => $prevMission,
+                        'nextMission'  => $nextMission,
                         'user'         => $this->getUser()
                     ]);
                 // if mission is step 3
