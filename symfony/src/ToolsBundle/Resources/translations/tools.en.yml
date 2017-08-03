@@ -30,6 +30,7 @@ form:
         yes: yes
         no: no
         update_password: Update password
+        subscribe: Subscribe
 
     note:
         saved: Saved
