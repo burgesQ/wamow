@@ -91,7 +91,17 @@ class UserWorkExperienceType extends AbstractType
                 'translation_domain' => 'tools',
                 'label'              => 'registration.advisor.four.peremption',
                 'required'           => false
-            ]);
+            ])
+            ->add('currency', EntityType::class, [
+                'choice_translation_domain' => 'tools',
+                'translation_domain'        => 'tools',
+                'choice_label'              => 'code',
+                'multiple'                  => false,
+                'class'                     => 'Lexik\Bundle\CurrencyBundle\Entity\Currency',
+                'label'                     => 'mission.new.label.currency',
+                'required'                  => true
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -72,9 +72,9 @@
                     <div class="wmw-range-gradient">
                         {{ form_widget(form.price, { 'attr' : { 'min' : 100 , 'max' : 10000 , 'type' : 'range', 'value' : 10000}}) }}
                     </div>
-                    <div class="wmw-onboard-price-input" style="border:noneste">
-                        <input type="text" id="wmw-pitch-price" value="{{ form.price.vars.value }}" readonly /></div>
-                    {{ 'mission.view.price_day' | trans }}
+                    <div class="wmw-onboard-price-input" style="border:none">
+                        <input type="text" id="wmw-pitch-price" value="10000" /></div>
+                    {% if mission.currency.code == 'USD' %}${% else %}€{% endif %}{{ 'mission.view.price_day' | trans }}
 
                     <div class="wmw-onboard-price-number">
                         {{ 'mission.view.receive_the_pitch' | trans({ '%nb': 'X'}) | raw }}

@@ -54,6 +54,13 @@
                 {{ form_errors(form.budget) }}
             </div>
 
+            <div class="wmw-fieldrow row">
+                <label class="wmw-label wmw-label--topmobile col-xs-12 col-sm-5"
+                       for="wmw-pitch-currency">{{ 'mission.new.label.currency' | trans }}</label>
+                {{ form_widget(form.currency, {'attr': { 'class': 'required col-xs-12 col-md-6'}}) }}
+                {{ form_errors(form.currency) }}
+            </div>
+
             <div class="wmw-onboard-blocks row">
                 {% for key, val in form.continents %}
                     <div class="wmw-onboard-blocks-el col-xs-6 col-md-3">

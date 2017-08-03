@@ -263,6 +263,7 @@ class RegistrationAdvisorController extends Controller
             $workExpRepo     = $em->getRepository('MissionBundle:WorkExperience');
             $companySizeRepo = $em->getRepository('MissionBundle:CompanySize');
             $continentRepo   = $em->getRepository('MissionBundle:Continent');
+            $currencyRepo    = $em->getRepository('LexikCurrencyBundle:Currency');
 
             $smallComp    = $companySizeRepo->findOneBy(['name' => 'company_size.small']);
             $mediumComp   = $companySizeRepo->findOneBy(['name' => 'company_size.medium']);
@@ -271,6 +272,8 @@ class RegistrationAdvisorController extends Controller
             $northAmerica = $continentRepo->findOneBy(['name' => 'continent.north_america']);
             $asia         = $continentRepo->findOneBy(['name' => 'continent.asia']);
             $emea         = $continentRepo->findOneBy(['name' => 'continent.emea']);
+            $usd          = $currencyRepo->findOneByCode('USD');
+            $eur          = $currencyRepo->findOneByCode('EUR');
 
             foreach ($form->get('userWorkExpSerialized')->getData() as $key => $val) {
                 if ($val) {
@@ -333,19 +336,42 @@ class RegistrationAdvisorController extends Controller
                                 foreach ($lastTmp as $lastLoop) {
                                     if ($i) {
                                         $userWorkExperience->setDailyFees($lastLoop);
-                                        if (!$user->getDailyFeesMin() || $user->getDailyFeesMin() > $lastLoop) {
-                                            $user->setDailyfeesMin($lastLoop);
-                                        }
-                                        if ($user->getDailyFeesMax() < $lastLoop) {
-                                            $user->setDailyfeesMax($lastLoop);
-                                        }
                                     }
                                     $i++;
                                 }
+                                break;
+                            case (substr($label, 0, 8) == "currency") :
+                                $whichOne = $arrayTmp[3];
+                                switch ($whichOne) {
+                                    case ($whichOne == "currency]=1") :
+                                        $userWorkExperience->setCurrency($usd);
+                                        break;
+                                    case ($whichOne == "currency]=2") :
+                                        $userWorkExperience->setCurrency($eur);
+                                        break;
+                                    default :
+                                        break;
+                                }
+                                break;
                             default :
                                 break;
                         }
                     }
+
+                    if ($userWorkExperience->getCurrency()->getCode() !== 'USD') {
+                        $dailyFees = $userWorkExperience->getDailyFees();
+                        $rate = $userWorkExperience->getCurrency()->getRate();
+                        $userWorkExperience->setDailyFees($dailyFees / $rate);
+                    }
+                    $daily = $userWorkExperience->getDailyFees();
+
+                    if (!$user->getDailyFeesMin() || $user->getDailyFeesMin() > $daily) {
+                        $user->setDailyfeesMin($daily);
+                    }
+                    if ($user->getDailyFeesMax() < $daily) {
+                        $user->setDailyfeesMax($daily);
+                    }
+
                     $em->persist($userWorkExperience);
                     $em->flush();
                 }

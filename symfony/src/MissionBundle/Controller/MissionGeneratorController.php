@@ -173,6 +173,7 @@ class MissionGeneratorController extends Controller
             $arrayForm['labelNext'] = 'mission.new.form.save_mod';
         }
 
+
         /** @var \Symfony\Component\Form\Form $formStepTwo */
         $formStepTwo = $this->get('form.factory')
             ->create(StepTwoFormType::class, $newMission, $arrayForm)->setData($newMission)
@@ -199,8 +200,15 @@ class MissionGeneratorController extends Controller
 
             if ($stepMission !== Mission::STEP_THREE) {
                 $newMission->setStatusGenerator(Mission::STEP_TWO);
-                $em->flush();
             }
+
+            if ($newMission->getCurrency()->getCode() !== 'USD') {
+                $budget = $newMission->getBudget();
+                $rate = $newMission->getCurrency()->getRate();
+                $newMission->setBudget($budget / $rate);
+            }
+
+            $em->flush();
 
             return $this->redirectToRoute('mission_new_step_three', [
                 'missionId' => $newMission->getId()
@@ -266,6 +274,12 @@ class MissionGeneratorController extends Controller
                 $em->flush();
 
                 return $this->redirectToRoute('dashboard');
+            }
+
+            if ($newMission->getCurrency()->getCode() !== 'USD') {
+                $price = $newMission->getPrice();
+                $rate = $newMission->getCurrency()->getRate();
+                $newMission->setPrice($price / $rate);
             }
 
             $newMission->setStatusGenerator(Mission::STEP_THREE);

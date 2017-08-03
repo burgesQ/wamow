@@ -169,3 +169,9 @@ parameters:
         2: [2, 20]
         3: [2, null]
     scoring_match_min: 10
+
+# Currency Bundle
+lexik_currency:
+    currencies:
+        default: USD              # [required] the default currency
+        managed: [USD, EUR]  # [required] all currencies used in your app

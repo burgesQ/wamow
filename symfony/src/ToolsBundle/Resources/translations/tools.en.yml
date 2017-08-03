@@ -342,7 +342,7 @@ user:
 mission:
     view:
         pitched_at: Pitched at date
-        price_day: $ / day
+        price_day: / day
         more_info: more details
         less_info: less details
         currency_k: K $
@@ -364,16 +364,15 @@ mission:
             btn_remove_from_shortlist: remove from my selection
             finance: |
                 %professionalExpertise<br>
-                <strong>$ %price</strong><br>
+                <strong>%price</strong><br>
         advisor:
             btn_back_to_mission: back to mission
             btn_back_to_board: back to board
             btn_back_to_global_view: back to global view
             interested: Interested
             finance: |
-                FINANCE <br>
-                <strong>$ %price</strong><br>
-                %professionalExpertise
+                %professionalExpertise<br>
+                <strong>%price</strong><br>
             on_site: On site
             not_on_site: Not on site
         to_answer: To Answer
@@ -423,6 +422,7 @@ mission:
             save_mod: Save modifications
 
         label:
+            currency: please select the curency
             title: TITLE OF THE PITCH
             resume: DESCRIPTION OF THE PROJECT
             later: FINISH LATER
@@ -461,7 +461,7 @@ mission:
                 not_on_site: not on site
                 confidential: hidden
                 not_confidential: not hidden
-                price_day: $ / day
+                price_day: / day
                 hint_company: This is a explination of the companies; you can select multiple of them
                 hint_continent: This is a explination of the companies; you can select multiple of them
     message:
@@ -818,15 +818,15 @@ mails:
            new_message: You've got a new message !
            new_password: Welcome !
            new_mission: You've got a new potential mission !
-      content:
-          new_contractor: |
+    content:
+           new_contractor: |
               Hello fName lName
 
               We think the new mission missionTitle matches your profile and might interest you.
               Log In to our web site to check it.
 
               Regards, The Team.
-          reset_password: |
+           reset_password: |
               Hello uName !
 
               You may reset your password here

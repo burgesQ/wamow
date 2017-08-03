@@ -1,4 +1,3 @@
-
 #! /bin/sh
 
 rm -rf app/cache &&
@@ -8,9 +7,9 @@ rm -rf app/cache &&
     php app/console doctrine:migrations:migrate --no-interaction -vvv &&
     php app/console doctrine:schema:validate -vvv &&
 ##* Load Fixture  :
-    php app/console doctrine:fixtures:load --no-interaction -vvv &&
+    php app/console lexik:currency:import ecb
+    php app/console doctrine:fixtures:load --append --no-interaction -vvv &&
 ##* Assets Installation order for JS/CSS :
-#    php app/console braincrafted:bootstrap:install &&
     php app/console assets:install --symlink &&
     php app/console assetic:dump web/ &&
 ##* Right Pb :

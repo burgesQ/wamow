@@ -42,7 +42,7 @@
                             <div class="title">
                                 <i class="icon icon--calendar"></i>{{ 'mission.new.label.step_four.professional_expertise' | trans }}
                             </div>
-                            <div class="value">{{ mission.professionalExpertise.name | trans }}</div>
+                            <div class="value">{% if mission.professionalExpertise %}{{ mission.professionalExpertise.name | trans }}{% endif %}</div>
                         </div>
                         <div class="sidebar-block-el">
                             <div class="title">
@@ -62,7 +62,7 @@
                             <div class="title">
                                 <i class="icon icon--budget"></i> {{ 'mission.new.label.step_four.budget' | trans }}
                             </div>
-                            <div class="value"> {{ mission.budget }} {{ 'legends.currency' | trans }}</div>
+                            <div class="value"> {{ mission.budget | currency_convert_format(mission.currency.code, false, true, 'USD') }} </div>
                         </div>
                         <div class="sidebar-block-el">
                             <div class="title">
@@ -129,7 +129,7 @@
                             <div class="title">
                                 <i class="icon icon--price"></i> {{ 'mission.new.label.step_four.price' | trans }}
                             </div>
-                            <div class="value">{{ mission.price }}{{ 'mission.new.label.step_four.price_day' | trans }}</div>
+                            <div class="value">{{ mission.price | currency_convert_format(mission.currency.code, false, true, 'USD') }}{{ 'mission.new.label.step_four.price_day' | trans }}</div>
                         </div>
                         <div class="sidebar-block-el">
                             <div class="title">

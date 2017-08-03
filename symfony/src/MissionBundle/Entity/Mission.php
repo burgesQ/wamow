@@ -326,6 +326,11 @@ class Mission
     private $proposals;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Lexik\Bundle\CurrencyBundle\Entity\Currency", cascade={"persist"})
+     */
+    private $currency;
+
+    /**
      * Mission constructor.
      *
      * @param $nbStep
@@ -1384,7 +1389,7 @@ class Mission
     {
         return $this->workExperience;
     }
-    
+
     /**
      * Set companySize
      *
@@ -1501,10 +1506,33 @@ class Mission
     /**
      * Get proposals
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getProposals()
     {
         return $this->proposals;
+    }
+
+    /**
+     * Set currency
+     *
+     * @param \Lexik\Bundle\CurrencyBundle\Entity\Currency $currency
+     * @return Mission
+     */
+    public function setCurrency(\Lexik\Bundle\CurrencyBundle\Entity\Currency $currency = null)
+    {
+        $this->currency = $currency;
+
+        return $this;
+    }
+
+    /**
+     * Get currency
+     *
+     * @return \Lexik\Bundle\CurrencyBundle\Entity\Currency
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
     }
 }
