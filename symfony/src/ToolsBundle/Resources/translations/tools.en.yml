@@ -31,6 +31,8 @@ form:
         no: no
         update_password: Update password
         subscribe: Subscribe
+        cancel: Cancel
+        confirm: Confirm
 
     note:
         saved: Saved
@@ -460,6 +462,12 @@ mission:
                 confidential: hidden
                 not_confidential: not hidden
                 price_day: $ / day
+                hint_company: This is a explination of the companies; you can select multiple of them
+                hint_continent: This is a explination of the companies; you can select multiple of them
+    message:
+        no_advisor: No advisor accepted your mission yet. We are a matching best profile for you and you'll receive an email as soon as we found him/her
+        no_proposition: We didn't find any mission for you but we are still looking for it !
+
 
 ## Inbox
 inbox:
@@ -807,24 +815,24 @@ mails:
         the_team: The team.
         link: "Go check it :"
     subject:
-         new_message: You've got a new message !
-         new_password: Welcome !
-         new_mission: You've got a new potential mission !
-    content:
-        new_contractor: |
-            Hello fName lName
+           new_message: You've got a new message !
+           new_password: Welcome !
+           new_mission: You've got a new potential mission !
+      content:
+          new_contractor: |
+              Hello fName lName
 
-            We think the new mission missionTitle matches your profile and might interest you.
-            Log In to our web site to check it.
+              We think the new mission missionTitle matches your profile and might interest you.
+              Log In to our web site to check it.
 
-            Regards, The Team.
-        reset_password: |
-            Hello uName !
+              Regards, The Team.
+          reset_password: |
+              Hello uName !
 
-            You may reset your password here
+              You may reset your password here
 
-            Greetings,
-            The WantMoreWork team
+              Greetings,
+              The WantMoreWork team
 
 # Payement template
 payment:

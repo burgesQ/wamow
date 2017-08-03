@@ -1,3 +1,4 @@
+{% trans_default_domain 'tools' %}
 {% set userWorkExperience = form %}
 <div class="wmw-overlay-inner col-xs-10 col-md-6 col-xl-4">
     <div class="wmw-overlay-title">__name__label__</div>
@@ -12,7 +13,7 @@
                         </i><br/>
                         {{ form_label(companySize) }}
                         <a href="#" class="wmw-tip wmw-tip--{% if key == 1 %}left{% elseif key == 2 %}center{% else %}right{% endif %}">?<span
-                                    class="wmw-tip-box">Lorem ipsum dolor sit amet</span></a>
+                                    class="wmw-tip-box">{{ 'mission.new.label.step_four.hint_company' | trans }}</span></a>
                     </label>
                     <div class="wmw-switchfield">
                         {{ form_widget(companySize, {'attr' : {'class' : "requiredgroup:company-size vv-ggparent"}}) }}
@@ -24,9 +25,17 @@
         <div class="row">
             {% for continent in userWorkExperience.continents %}
                 <div class="col-xs-3">
+
                     <label for="{{ continent.vars.id }}">
                         {{ form_label(continent) }}
+                        <a href="#" class="wmw-tip">
+                            ?
+                            <span class="wmw-tip-box">
+                                {{ 'mission.new.label.step_four.hint_continent' | trans }}
+                            </span>
+                        </a>
                     </label>
+
                     <div class="wmw-switchfield">
                         {{ form_widget(continent, {'attr' : {'class' : "requiredgroup:company-region vv-ggparent"}}) }}
                         <label for="{{ continent.vars.id }}"></label>
@@ -58,12 +67,12 @@
             </label>
             <div class="wmw-switchfield">
                 {{ form_widget(userWorkExperience.peremption) }}
-                <label for="{{ userWorkExperience.peremption.vars.id }}"><span>No</span><span>Yes</span></label>
+                <label for="{{ userWorkExperience.peremption.vars.id }}"><span>{{ 'no' | trans }}</span><span>{{ 'form.btn.yes' | trans }}</span></label>
             </div>
         </div>
     </div>
 </div><br />
 <div class="wmw-overlay-buttons">
-    <button type="button" class="wmw-overlay-close wmw-button wmw-button--border"><i></i><span>Cancel</span><i></i></button>
-    <button type="submit" class="wmw-button wmw-button--green"><i></i><span>Confirm</span><i></i></button>
+    <button type="button" class="wmw-overlay-close wmw-button wmw-button--border"><i></i><span>{{ 'form.btn.cancel' | trans }}</span><i></i></button>
+    <button type="submit" class="wmw-button wmw-button--green"><i></i><span>{{ 'form.btn.confirm' | trans }}</span><i></i></button>
 </div>
