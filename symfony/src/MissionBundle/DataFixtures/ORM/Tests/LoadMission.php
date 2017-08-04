@@ -65,6 +65,8 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface, Co
         $asia           = $continentRepo->findOneBy(['name' => 'continent.asia']);
         $emea           = $continentRepo->findOneBy(['name' => 'continent.emea']);
 
+        $usd = $manager->getRepository('LexikCurrencyBundle:Currency')->findOneBy(['code' => 'USD']);
+
         $jsonConfig      = json_decode($config->getValue());
 
         // get contractor one
@@ -116,6 +118,7 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface, Co
 
             // set budget
             $mission->setBudget($oneMission->budget);
+            $mission->setCurrency($usd);
             $mission->setPrice($oneMission->budget / 100);
 
             // set address
@@ -136,6 +139,7 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface, Co
 
             $mission->setPublicId(md5(uniqid().$i));
             $this->loadStep($manager, $mission, $jsonConfig);
+            $mission->setCurrency($usd);
             $manager->persist($mission);
             $i++;
         }
@@ -197,6 +201,7 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface, Co
 
             // set budget
             $mission->setBudget($anotherMission['budget']);
+            $mission->setCurrency($usd);
             $mission->setPrice($anotherMission['budget'] / 100);
 
             // set address
@@ -216,7 +221,6 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface, Co
 
             // persist mission
             $this->loadStep($manager, $mission, $jsonConfig);
-
             $manager->persist($mission);
 
             $done++;

@@ -34,8 +34,18 @@ class StepTwoFormType extends AbstractType
                 'translation_domain'        => 'tools',
                 'choice_label'              => 'name',
                 'multiple'                  => false,
+                'placeholder'               => 'professionalexpertises.title',
                 'class'                     => 'MissionBundle:ProfessionalExpertise',
                 'label'                     => 'professionalexpertises.title',
+                'required'                  => true
+            ])
+            ->add('currency', EntityType::class, [
+                'choice_translation_domain' => 'tools',
+                'translation_domain'        => 'tools',
+                'choice_label'              => 'code',
+                'multiple'                  => false,
+                'class'                     => 'Lexik\Bundle\CurrencyBundle\Entity\Currency',
+                'label'                     => 'legends.currency',
                 'required'                  => true
             ])
             ->add('budget', IntegerType::class, [

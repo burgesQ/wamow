@@ -42,11 +42,6 @@ class Mission
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255, nullable=false)
-     * @Assert\Regex(
-     *     pattern="#^[a-zA-Zéèêëçîïíàáâñńœôö]+(?:[\s-][a-zA-Zéèêëçîïíàáâñńœôö]+)*$#",
-     *     match=true,
-     *     message="error.mission.title.illegale"
-     * )
      */
     private $title;
 
@@ -322,6 +317,20 @@ class Mission
     private $nbOngoing;
 
     /**
+     * @ORM\OneToMany(
+     *      targetEntity="ToolsBundle\Entity\Proposal",
+     *      mappedBy="mission"
+     * )
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $proposals;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Lexik\Bundle\CurrencyBundle\Entity\Currency", cascade={"persist"})
+     */
+    private $currency;
+
+    /**
      * Mission constructor.
      *
      * @param $nbStep
@@ -361,14 +370,7 @@ class Mission
     public function validate(ExecutionContextInterface $context)
     {
         if ($this->getOnDraft() === false) {
-            if ($this->getStatusGenerator() == self::STEP_ZERO) {
-                if (substr_count($this->getResume(), ' ') >= 500) {
-                    $context
-                        ->buildViolation('error.resume.max_words')
-                        ->atPath('resume')->addViolation()
-                    ;
-                }
-            } elseif ($this->getStatusGenerator() == self::STEP_ONE) {
+            if ($this->getStatusGenerator() == self::STEP_ONE) {
                 $missionBeginning = $this->getMissionBeginning();
                 $missionEnding = $this->getMissionEnding();
                 $applicationEnding = $this->getApplicationEnding();
@@ -383,20 +385,14 @@ class Mission
                         ->buildViolation('error.date.after_end_date')
                         ->atPath('missionBeginning')->addViolation()
                     ;
-                } elseif ($applicationEnding->format("yy/mm/dd")
-                          >= $missionBeginning->format("yy/mm/dd")) {
+                } elseif ($applicationEnding->format("yy/mm/dd") >= $missionBeginning->format("yy/mm/dd")) {
                     $context
                         ->buildViolation('error.date.before_start_date')
                         ->atPath('applicationEnding')->addViolation()
                     ;
                 }
             } elseif ($this->getStatusGenerator() == self::STEP_TWO) {
-                if (!count($this->getMissionKinds())) {
-                    $context
-                        ->buildViolation('error.mission_kind.one')
-                        ->atPath('missionKinds')->addViolation()
-                    ;
-                } elseif (!count($this->getLanguages())) {
+                if (!count($this->getLanguages())) {
                     $context
                         ->buildViolation('error.languages.one')
                         ->atPath('languages')->addViolation()
@@ -1393,7 +1389,7 @@ class Mission
     {
         return $this->workExperience;
     }
-    
+
     /**
      * Set companySize
      *
@@ -1482,5 +1478,61 @@ class Mission
                 return '(' . $val . ') ' . $key;
             }
         }
+    }
+
+    /**
+     * Add proposals
+     *
+     * @param \ToolsBundle\Entity\Proposal $proposals
+     * @return Mission
+     */
+    public function addProposal(\ToolsBundle\Entity\Proposal $proposals)
+    {
+        $this->proposals[] = $proposals;
+
+        return $this;
+    }
+
+    /**
+     * Remove proposals
+     *
+     * @param \ToolsBundle\Entity\Proposal $proposals
+     */
+    public function removeProposal(\ToolsBundle\Entity\Proposal $proposals)
+    {
+        $this->proposals->removeElement($proposals);
+    }
+
+    /**
+     * Get proposals
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProposals()
+    {
+        return $this->proposals;
+    }
+
+    /**
+     * Set currency
+     *
+     * @param \Lexik\Bundle\CurrencyBundle\Entity\Currency $currency
+     * @return Mission
+     */
+    public function setCurrency(\Lexik\Bundle\CurrencyBundle\Entity\Currency $currency = null)
+    {
+        $this->currency = $currency;
+
+        return $this;
+    }
+
+    /**
+     * Get currency
+     *
+     * @return \Lexik\Bundle\CurrencyBundle\Entity\Currency
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
     }
 }

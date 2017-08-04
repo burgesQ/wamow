@@ -15,14 +15,14 @@
             <small>{{ 'registration.advisor.three.subtitle' | trans | upper }}</small>
         </h1>
 
-        {{ form_errors(form.professionalExpertise) }}
+        {{ form_errors(form.missionKind) }}
         <div class="wmw-onboard-switches">
-            {% for key, professionalExpertise in form.professionalExpertise %}
+            {% for key, missionKind in form.missionKind %}
                 <div class="wmw-onboard-switches-el">
-                    <label for="{{ professionalExpertise.vars.id }}">{{ form_label(professionalExpertise) }}</label>
+                    <label for="{{ missionKind.vars.id }}">{{ form_label(missionKind) }}</label>
                     <div class="wmw-switchfield">
-                        {{ form_widget(professionalExpertise, {'attr' : {'class': 'requiredgroup:wmw-ob-missions vv-ggparent'}}) }}
-                        <label for="{{ professionalExpertise.vars.id }}"><span>No</span><span>Yes</span></label>
+                        {{ form_widget(missionKind, {'attr' : {'class': 'requiredgroup:wmw-ob-missions vv-ggparent'}}) }}
+                        <label for="{{ missionKind.vars.id }}"><span>No</span><span>Yes</span></label>
                     </div>
                 </div>
             {% endfor %}

@@ -71,7 +71,7 @@
 
     <div class="wmw-uploadfield">
         {{ form_widget(form.resume.file) }}
-        <button type="button" class="wmw-button wmw-button--green"><i></i><span>Upload your cv</span><i></i></button>
+        <button type="button" class="wmw-button wmw-button--green"><i></i><span>{{ 'registration.advisor.zero.resume' | trans }}</span><i></i></button>
         <div class="wmw-uploadfield-val"></div>
     </div>
     {{ form_errors(form.resume.file) }}

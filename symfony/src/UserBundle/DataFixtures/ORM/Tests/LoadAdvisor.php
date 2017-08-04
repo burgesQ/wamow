@@ -2737,6 +2737,8 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
         $asia         = $continentRepo->findOneBy(['name' => 'continent.asia']);
         $emea         = $continentRepo->findOneBy(['name' => 'continent.emea']);
 
+        $usd = $manager->getRepository('LexikCurrencyBundle:Currency')->findOneBy(['code' => 'USD']);
+
         $i = 0;
 
         foreach ($this->arrayDatas as $oneData) {
@@ -2815,7 +2817,7 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
                     case $oneExpShap[6] == true:
                         $workExp->addContinent($emea);
                 }
-
+                $workExp->setCurrency($usd);
                 $manager->persist($workExp);
                 $j++;
             }
@@ -2842,8 +2844,7 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
         $address = new Address();
 
         $address
-            ->setNumber($oneData[2])
-            ->setStreet($oneData[3])
+            ->setStreet($oneData[2] . ' ' . $oneData[3])
             ->setStreet2($oneData[4])
             ->setZipcode($oneData[5])
             ->setCity($oneData[6])

@@ -16,14 +16,6 @@ class AddressType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('number', null, [
-                'translation_domain' => 'tools',
-                'required'           => true,
-                'label'              => 'form.address.number',
-                'attr'               => [
-                    'placeholder' => 'form.address.number'
-                ]
-            ])
             ->add('street', null, [
                 'translation_domain' => 'tools',
                 'required'           => true,

@@ -26,7 +26,8 @@
             <span class="breadcrumbs-el{% if step.position > 1 %} active{% endif %}">
                 2. {{ 'mission.view.contractor.status_shortlist' | trans | upper }}
                 {% if step.position == 1 and shortlisted > 0 %}
-                    <a href="{{ path('mission_shortlist', { 'missionId' : mission.id }) }}">
+                    <a href="{{ path('mission_shortlist', { 'missionId' : mission.id }) }}"
+                       onclick="return confirm('{{ 'legends.confirmation' | trans }}')">
                         <button class="wmw-button wmw-button--black wmw-button--border wmw-button--small">
                         <i></i><span>
                             {{ 'mission.view.contractor.btn_proced_to_shortlist' | trans | upper }}
@@ -102,7 +103,7 @@
 
                 <span class="summary-el summary-el--salary">
                     <span>
-                        {{ 'mission.view.contractor.finance' | trans({ '%price': (mission.budget), '%professionalExpertise': mission.professionalExpertise.name | trans }, 'tools') | raw }}
+                        {{ 'mission.view.contractor.finance' | trans({ '%price': (mission.budget |  currency_convert_format(mission.currency.code, false, true, 'USD') ), '%professionalExpertise': mission.professionalExpertise.name | trans }, 'tools') | raw }}
                         {% for kind in mission.missionKinds %}
                             {{ kind.name | trans }}
                             {% if not loop.last %}
@@ -188,14 +189,18 @@
 
                                 {% if userMission.status != constant('SHORTLIST', userMission) %}
 
-                                    <a href="{{ path('user_mission_refuse', { 'userMissionId' : userMission.id }) }}" class="wmw-button wmw-button--red wmw-button--border wmw-button--small">
+                                    <a href="{{ path('user_mission_refuse', { 'userMissionId' : userMission.id }) }}"
+                                       class="wmw-button wmw-button--red wmw-button--border wmw-button--small"
+                                       onclick="return confirm('{{ 'legends.confirmation' | trans }}')">
                                         <i></i><span>
                                             <i class="icon icon--cross"></i>
                                             {{ 'mission.view.contractor.btn_refuse' | trans }}
                                         </span><i></i>
                                     </a>
                                     {% if shortlisted < 3 %}
-                                        <a href="{{ path('user_mission_add_to_shortlist', { 'userMissionId' : userMission.id }) }}" class="wmw-button wmw-button--green wmw-button--border wmw-button--small">
+                                        <a href="{{ path('user_mission_add_to_shortlist', { 'userMissionId' : userMission.id }) }}"
+                                           class="wmw-button wmw-button--green wmw-button--border wmw-button--small"
+                                           onclick="return confirm('{{ 'legends.confirmation' | trans }}')">
                                             <i></i><span>
                                                 <i class="icon icon--star"></i>
                                                 {{ 'mission.view.contractor.btn_add_to_shortlist' | trans | upper }}
@@ -204,7 +209,9 @@
                                     {% endif %}
                                 {% else %}
 
-                                    <a href="{{ path('user_mission_remove_from_shortlist', { 'userMissionId' : userMission.id }) }}" class="wmw-button wmw-button--red wmw-button--border wmw-button--small">
+                                    <a href="{{ path('user_mission_remove_from_shortlist', { 'userMissionId' : userMission.id }) }}"
+                                       class="wmw-button wmw-button--red wmw-button--border wmw-button--small"
+                                       onclick="return confirm('{{ 'legends.confirmation' | trans }}')">
                                         <i></i><span>
                                             <i class="icon icon--star"></i>
                                             {{ 'mission.view.contractor.btn_remove_from_shortlist' | trans | upper }}
@@ -216,13 +223,17 @@
                     </div>
                         {% elseif step.position == 2 %}
                             <div class="mail-toolbar-buttons">
-                                <a href="{{ path('user_mission_refuse', { 'userMissionId' : userMission.id }) }}" class="wmw-button wmw-button--red wmw-button--border wmw-button--small">
+                                <a href="{{ path('user_mission_refuse', { 'userMissionId' : userMission.id }) }}"
+                                   class="wmw-button wmw-button--red wmw-button--border wmw-button--small"
+                                   onclick="return confirm('{{ 'legends.confirmation' | trans }}')">
                                     <i></i><span>
                                         <i class="icon icon--cross"></i>
                                         {{ 'mission.view.contractor.btn_refuse' | trans }}
                                     </span><i></i>
                                 </a>
-                                <a href="{{ path('user_mission_add_to_contract', { 'userMissionId' : userMission.id }) }}" class="wmw-button wmw-button--green wmw-button--border wmw-button--small">
+                                <a href="{{ path('user_mission_add_to_contract', { 'userMissionId' : userMission.id }) }}"
+                                   class="wmw-button wmw-button--green wmw-button--border wmw-button--small"
+                                   onclick="return confirm('{{ 'legends.confirmation' | trans }}')">
                                     <i></i><span>
                                         <i class="icon icon--handshake"></i>
                                         {{ 'mission.view.contractor.btn_contract' | trans | upper }}
@@ -265,15 +276,15 @@
                                     {% if user.phone is not null %}
                                         {{ user.phone.prefix.prefix }}{{ user.phone.number }}
                                     {% endif %}
-                                </div>
-                                <div class="mail-content-profile-buttons row">
-
+                                {#</div>#}
+                                {#<div class="mail-content-profile-buttons ">#}
                                     {% if user.resumes is not empty %}
                                         <a href="{{ path('download_resume', { id : userMission.id }) }}" class="wmw-simple-button">
                                             <i class="icon icon--download"></i>{{ 'form.btn.download_resume' | trans }}</a>
                                     {% endif %}
 
                                     {% if userMission.thread.proposals is not empty %}
+
                                         {% set proposal = userMission.thread.proposals | last %}
                                         <a href="{{ path('download_proposal', { id : userMission.id }) }}" class="wmw-simple-button wmw-simple-button--green">
                                             <i class="icon icon--download"></i>{{ 'form.btn.download_proposal' | trans }}</a>
@@ -282,7 +293,28 @@
                             </div>
                         {% endif %}
 
-                        <div class="mail-content-notes{% if step.position == 3 %} mail-content-notes--semi{% endif %}">
+
+                        {% if step.position == 2 %}
+                            <div class="mail-content-profile">
+                                <div class="mail-content-profile-name">{{ user.firstname }} {{ user.lastname }}</div>
+
+                                <div class="mail-content-profile-buttons row">
+
+                                {% if user.resumes is not empty %}
+                                    <a href="{{ path('download_resume', { id : userMission.id }) }}" class="wmw-simple-button">
+                                        <i class="icon icon--download"></i>{{ 'form.btn.download_resume' | trans }}</a>
+                                {% endif %}
+
+                                {% if userMission.thread.proposals is not empty %}
+                                    {% set proposal = userMission.thread.proposals | last %}
+                                    <a href="{{ path('download_proposal', { id : userMission.id }) }}" class="wmw-simple-button wmw-simple-button--green">
+                                        <i class="icon icon--download"></i>{{ 'form.btn.download_proposal' | trans }}</a>
+                                {% endif %}
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        <div class="mail-content-notes{% if step.position >= 2 %} mail-content-notes--semi{% endif %}">
                             <label for="wmw-mission-notes">Notes</label>
                             <textarea id="wmw-mission-notes" class="element-notes-textarea" data-id="{{ userMission.id }}" data-path="{{ path('user_mission_notes') }}">{{ userMission.note }}</textarea>
                             <div id="wmw-mission-notes-status" class="element-notes-status">{{ 'form.note.saved' | trans }}</div>
@@ -298,17 +330,25 @@
                             <textarea id="inbox_input_message" name="inbox[inout_message]"></textarea>
                             <button id="submit_text" value="{{ 'form.btn.send' | trans | upper }}"
                                     onClick="sendMessage()">{{ 'form.btn.send' | trans }}</button>
+
+                            <div class="mail-content-answer-bottom">
+                                {% if form is defined and step.position == 2 %}
+                                    {{ form_start(form) }}
+                                    {{ form_errors(form) }}
+                                    {{ form_errors(form.file) }}
+
+                                    {{ form_row(form.submit) }}
+                                    {{ form_widget(form.file, { 'attr' : { class : 'bottom-proposal'}}) }}
+                                    {{ form_end(form) }}
+                                {% endif %}
+                            </div>
                         </div>
 
-                        {#<form action="" method="post" class="mail-content-answer">#}
-                            {#<textarea class="required" id="inbox_input_message"></textarea>#}
-                            {#<button type="submit">{{ 'form.btn.send' | trans }}</button>#}
-                        {#</form>#}
                     </div>
                 </div>
             </div>
 
-            <div class="wmw-mission-sidebar">
+            <div class="wmw-mission-sidebar wmw-mission-sidebar--active">
                 <div class="sidebar-wrapper">
                     <div class="sidebar-date">
                         {{ 'mission.view.contractor.pitched_at' | trans({ date : mission.updateDate | date('d/m/Y') }) }}
@@ -341,6 +381,7 @@
                 }).done(function (msg) {
                     $('textarea#inbox_input_message').val('');
                     $('#thread_message').html(msg);
+                    $(".mail-content-chat").stop().animate({ scrollTop: $(".mail-content-chat")[0].scrollHeight}, 1000);
                 });
             }
         }

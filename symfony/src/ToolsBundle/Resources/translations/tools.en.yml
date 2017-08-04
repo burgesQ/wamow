@@ -5,13 +5,12 @@ form:
         street: "Address"
         street_2: "Address 2"
         city: "City"
-        zipcode: "Zipcode"
+        zipcode: "Zipcode / Postcode"
         state: "State"
         country: "Country"
         choosecountry: "Choose a country"
         name: "Add a name if required"
         label: "Add a label if required"
-        number: Street Number
 
     btn:
         send: send
@@ -30,6 +29,10 @@ form:
         add: add
         yes: yes
         no: no
+        update_password: Update password
+        subscribe: Subscribe
+        cancel: Cancel
+        confirm: Confirm
 
     note:
         saved: Saved
@@ -43,6 +46,10 @@ form:
     file:
         file: "File"
 
+    password:
+        old: old password
+        new: new pasword
+        repeat: repeat new password
 
 ## Base
 header:
@@ -77,6 +84,8 @@ legends:
         background check.
     currency: $
     currency_day: $%price/d
+    confirmation: Are you shure ?
+    other: other
 
 ## Common error
 error:
@@ -285,17 +294,17 @@ registration:
             backbutton: "BACK"
             nextbutton: "NEXT"
         two:
-            title: "Kind of mission"
-            subtitle: "Select your missions"
+            title: "Professional Expertise"
+            subtitle: "Select which type of missions"
             howtotitle: "Second step:"
-            howtotext: "We need to understand what professional expertise you acquired during your previous missions. What does consultants.wantmore.work mean by Professional Expertise? We have identified 22 key functions in organizations. You can select multiple options."
+            howtotext: "We need to understand what you did or experienced as an advisor. What does consultants.wantmore.work mean by type of missions? We have identified 25 different consulting positions or levels. You can select multiple options."
             backbutton: "BACK"
             nextbutton: "NEXT"
         three:
-            title: "Professional Expertise"
-            subtitle: "Select which type of missions"
+            title: "Kind of mission"
+            subtitle: "Select your missions"
             howtotitle: "Third step:"
-            howtotext: "We need to understand what you did or experienced as an advisor. What does consultants.wantmore.work mean by type of missions? We have identified 25 different consulting positions or levels. You can select multiple options."
+            howtotext: "We need to understand what professional expertise you acquired during your previous missions. What does consultants.wantmore.work mean by Professional Expertise? We have identified 22 key functions in organizations. You can select multiple options."
             backbutton: "BACK"
             nextbutton: "NEXT"
         four:
@@ -324,6 +333,7 @@ user:
             title_algorithm_improvment: algorithm improvement
             title_subscription: subscription
             email_notification: email<br>notification
+            link_password: Change password
     profile_edit:
         advisor:
             btn_save_change: SAVE CHANGE
@@ -332,7 +342,7 @@ user:
 mission:
     view:
         pitched_at: Pitched at date
-        price_day: $ </div> / day
+        price_day: / day
         more_info: more details
         less_info: less details
         currency_k: K $
@@ -342,6 +352,7 @@ mission:
         contractor:
             pitched_at: Pitched at date
             next_mission: Next Mission >
+            prev_mission: < Prev Mission
             status_advisor: all advisors
             status_shortlist: My Selection
             status_finalit: My Choice
@@ -353,15 +364,15 @@ mission:
             btn_remove_from_shortlist: remove from my selection
             finance: |
                 %professionalExpertise<br>
-                <strong>$ %price</strong><br>
+                <strong>%price</strong><br>
         advisor:
+            btn_back_to_mission: back to mission
             btn_back_to_board: back to board
             btn_back_to_global_view: back to global view
             interested: Interested
             finance: |
-                FINANCE <br>
-                <strong>$ %price</strong><br>
-                %professionalExpertise
+                %professionalExpertise<br>
+                <strong>%price</strong><br>
             on_site: On site
             not_on_site: Not on site
         to_answer: To Answer
@@ -411,8 +422,9 @@ mission:
             save_mod: Save modifications
 
         label:
+            currency: please select the curency
             title: TITLE OF THE PITCH
-            resume: DESCRIPTION OF THE PROJECT (500 WORDS)
+            resume: DESCRIPTION OF THE PROJECT
             later: FINISH LATER
             budget: ESTIMATED BUDGET
             confidentiality: Hidden Company Name
@@ -449,7 +461,13 @@ mission:
                 not_on_site: not on site
                 confidential: hidden
                 not_confidential: not hidden
-                price_day: $ / day
+                price_day: / day
+                hint_company: This is a explination of the companies; you can select multiple of them
+                hint_continent: This is a explination of the companies; you can select multiple of them
+    message:
+        no_advisor: No advisor accepted your mission yet. We are a matching best profile for you and you'll receive an email as soon as we found him/her
+        no_proposition: We didn't find any mission for you but we are still looking for it !
+
 
 ## Inbox
 inbox:
@@ -797,24 +815,24 @@ mails:
         the_team: The team.
         link: "Go check it :"
     subject:
-         new_message: You've got a new message !
-         new_password: Welcome !
-         new_mission: You've got a new potential mission !
+           new_message: You've got a new message !
+           new_password: Welcome !
+           new_mission: You've got a new potential mission !
     content:
-        new_contractor: |
-            Hello fName lName
+           new_contractor: |
+              Hello fName lName
 
-            We think the new mission missionTitle matches your profile and might interest you.
-            Log In to our web site to check it.
+              We think the new mission missionTitle matches your profile and might interest you.
+              Log In to our web site to check it.
 
-            Regards, The Team.
-        reset_password: |
-            Hello uName !
+              Regards, The Team.
+           reset_password: |
+              Hello uName !
 
-            You may reset your password here
+              You may reset your password here
 
-            Greetings,
-            The WantMoreWork team
+              Greetings,
+              The WantMoreWork team
 
 # Payement template
 payment:

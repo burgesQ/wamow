@@ -34,7 +34,7 @@
                 {% endif %}
                 <span class="summary-el summary-el--salary">
                     <span>
-                        {{ 'mission.view.advisor.finance' | trans({ '%price': mission.price, '%professionalExpertise': mission.professionalExpertise.name | trans }) | raw }}
+                        {{ 'mission.view.advisor.finance' | trans({ '%price': mission.price | currency_convert_format(mission.currency.code, false, true, 'USD'), '%professionalExpertise': mission.professionalExpertise.name | trans }) | raw }}
                     </span>
                 </span>
                 <span class="summary-el">
@@ -124,7 +124,13 @@
                                         {{ 'mission.view.no_certification' | trans }}
                                     {% endif %}
                                 </small>
+                            {% if mission.proposals is not empty %}
+                                {% set proposal = mission.proposals | last %}
+                                <a href="{{ path('download_proposal_advisor', { id : mission.id }) }}" class="wmw-simple-button wmw-simple-button--green">
+                                    <i class="icon icon--download"></i>{{ 'form.btn.download_proposal' | trans }}</a>
+                            {% endif %}
                             </div>
+
                             <div class="sidebar-content">
                                 {% if not user.payment %}
                                     {{ mission.resume | truncate(100, false, '[...]' | nl2br) }}
@@ -184,6 +190,7 @@
                     }).done(function (msg) {
                         $('textarea#inbox_input_message').val('');
                         $('#thread_message').html(msg);
+                        $(".mail-content-chat").stop().animate({ scrollTop: $(".mail-content-chat")[0].scrollHeight}, 1000);
                     });
                 }
             });

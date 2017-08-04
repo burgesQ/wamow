@@ -19,7 +19,8 @@
             <span class="breadcrumbs-el active">1. {{ 'mission.view.contractor.status_advisor' | trans | upper }}</span>
             <span class="breadcrumbs-el">2. {{ 'mission.view.contractor.status_shortlist' | trans | upper }}
                 {% if selected > 0 %}
-                    <a href="{{ path('mission_shortlist', { 'missionId' : mission.id }) }}">
+                    <a href="{{ path('mission_shortlist', { 'missionId' : mission.id }) }}"
+                       onclick="return confirm('{{ 'legends.confirmation' | trans }}')">
                         <button class="wmw-button wmw-button--black wmw-button--border wmw-button--small">
                             <i></i><span>
                                 {{ 'mission.view.contractor.btn_proced_to_shortlist' | trans | upper }}
@@ -77,7 +78,7 @@
                 </span>
                 <span class="summary-el summary-el--salary">
                     <span>
-                        {{ 'mission.view.contractor.finance' | trans({ '%price': (mission.budget), '%professionalExpertise': mission.professionalExpertise.name | trans }, 'tools') | raw }}
+                        {{ 'mission.view.contractor.finance' | trans({ '%price': (mission.budget | currency_convert_format(mission.currency.code, false, true, 'USD')), '%professionalExpertise': mission.professionalExpertise.name | trans }, 'tools') | raw }}
                         {% for kind in mission.missionKinds %}
                             {{ kind.name | trans }}
                             {% if not loop.last %}
@@ -146,11 +147,14 @@
 
         <div class="wmw-mission-body">
 
-            {% if nextMission is not null %}
-                <div class="wmw-mission-pagination">
+            <div class="wmw-mission-pagination">
+                {% if prevMission is not null %}
+                    <a href="{{ path('mission_view', { 'missionId' : prevMission.id }) }}">{{ 'mission.view.contractor.prev_mission' | trans }}</a>
+                {% endif %}
+                {% if nextMission is not null %}
                     <a href="{{ path('mission_view', { 'missionId' : nextMission.id }) }}">{{ 'mission.view.contractor.next_mission' | trans }}</a>
-                </div>
-            {% endif %}
+                {% endif %}
+            </div>
 
             <div class="wmw-mission-content row">
 
@@ -162,7 +166,8 @@
                             Advisor {{ userMission.idForContractor }}
 
                             <div class="element-title-links">
-                                <a href="{{ path('mission_answer_to_advisor', { 'userMissionId' : userMission.id }) }}" class="wmw-simple-button wmw-simple-button--green">
+                                <a href="{{ path('mission_answer_to_advisor', { 'userMissionId' : userMission.id }) }}"
+                                   class="wmw-simple-button wmw-simple-button--green">
                                     <i class="icon icon--eye"></i> {{ 'inbox.show' | trans }}</a>
                                 </a>
                             </div>
@@ -186,7 +191,9 @@
 
                         <div class="element-buttons">
                             {% if userMission.status != constant('SHORTLIST', userMission) %}
-                                <a href="{{ path('user_mission_refuse', { 'userMissionId' : userMission.id }) }}" class="wmw-button wmw-button--red wmw-button--border wmw-button--small">
+                                <a href="{{ path('user_mission_refuse', { 'userMissionId' : userMission.id }) }}"
+                                   class="wmw-button wmw-button--red wmw-button--border wmw-button--small"
+                                   onclick="return confirm('{{ 'legends.confirmation' | trans }}')">
                                     <i></i><span>
                                         <i class="icon icon--cross"></i>
                                         {{ 'mission.view.contractor.btn_refuse' | trans }}
@@ -196,14 +203,18 @@
                                 <br>
                             {% endif %}
                             {% if userMission.status != constant('SHORTLIST', userMission) and shortlisted < 3 %}
-                                <a href="{{ path('user_mission_add_to_shortlist', { 'userMissionId' : userMission.id }) }}" class="wmw-button wmw-button--green wmw-button--border wmw-button--small">
+                                <a href="{{ path('user_mission_add_to_shortlist', { 'userMissionId' : userMission.id }) }}"
+                                   class="wmw-button wmw-button--green wmw-button--border wmw-button--small"
+                                   onclick="return confirm('{{ 'legends.confirmation' | trans }}')">
                                     <i></i><span>
                                         <i class="icon icon--star"></i>
                                         {{ 'mission.view.contractor.btn_add_to_shortlist' | trans | upper }}
                                     </span><i></i>
                                 </a>
                             {% elseif userMission.status == constant('SHORTLIST', userMission) %}
-                                <a href="{{ path('user_mission_remove_from_shortlist', { 'userMissionId' : userMission.id }) }}" class="wmw-button wmw-button--red wmw-button--border wmw-button--small">
+                                <a href="{{ path('user_mission_remove_from_shortlist', { 'userMissionId' : userMission.id }) }}"
+                                   class="wmw-button wmw-button--red wmw-button--border wmw-button--small"
+                                   onclick="return confirm('{{ 'legends.confirmation' | trans }}')">
                                     <i></i><span>
                                         <i class="icon icon--star"></i>
                                         {{ 'mission.view.contractor.btn_remove_from_shortlist' | trans | upper }}

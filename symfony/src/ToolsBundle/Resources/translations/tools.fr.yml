@@ -159,7 +159,7 @@ mission:
         country: Pays de la mission
         link: Creer un nouveau Pitch
         draft: Pitch en cours de creation
-        price_day: € </div> / jour
+        price_day: € / jour
         currency_k: 'k€'
         receive_the_pitch: <span> %nb </span> recevront le pitch
 
@@ -479,13 +479,33 @@ workexperience:
 ## Mails template
 mails:
     hello: Bonjour %f_name %l_name !
+    registration:
+        new_password: "Votre nouveau mot de passe: %password"
     inbox:
-        new_message_mission: |
-         Vous avez un nouveau messge sur la mission %title.
-
-         L'équipe.
+        new_message_mission: Vous avez un nouveau messge sur la mission %title.
+        new_pitcher: Vous avez un nouveau message sur la mission %missionName.
+        link: Clickez ici pour le voir.
+        the_team: L'equipe.
+        link: "Cliquez ici :"
     subject:
-        new_message: Vous avez un nouveau message !
+         new_message: Vous avez un nouveau message !
+         new_password: Welcome !
+         new_mission: You've got a new potential mission !
+    content:
+        new_contractor: |
+            Hello fName lName
+
+            We think the new mission missionTitle matches your profile and might interest you.
+            Log In to our web site to check it.
+
+            Regards, The Team.
+        reset_password: |
+            Hello uName !
+
+            You may reset your password here
+
+            Greetings,
+            The WantMoreWork team
 
 # Pqyement template
 payment:

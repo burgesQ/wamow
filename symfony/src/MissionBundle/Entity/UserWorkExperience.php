@@ -93,6 +93,11 @@ class UserWorkExperience
     private $peremption;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Lexik\Bundle\CurrencyBundle\Entity\Currency", cascade={"persist"})
+     */
+    private $currency;
+
+    /**
      * UserWorkExperience constructor.
      */
     public function __construct()
@@ -298,5 +303,28 @@ class UserWorkExperience
     public function getContinents()
     {
         return $this->continents;
+    }
+
+    /**
+     * Set currency
+     *
+     * @param \Lexik\Bundle\CurrencyBundle\Entity\Currency $currency
+     * @return UserWorkExperience
+     */
+    public function setCurrency(\Lexik\Bundle\CurrencyBundle\Entity\Currency $currency = null)
+    {
+        $this->currency = $currency;
+
+        return $this;
+    }
+
+    /**
+     * Get currency
+     *
+     * @return \Lexik\Bundle\CurrencyBundle\Entity\Currency
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
     }
 }

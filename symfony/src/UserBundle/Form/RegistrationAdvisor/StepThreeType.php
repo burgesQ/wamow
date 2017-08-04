@@ -2,6 +2,7 @@
 
 namespace UserBundle\Form\RegistrationAdvisor;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Validator\Constraints\Count;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -18,8 +19,8 @@ class StepThreeType extends AbstractType
             ->remove('current_password')
             ->remove('email')
 
-            ->add('professionalExpertise', EntityType::class, [
-                'class'                     => 'MissionBundle:ProfessionalExpertise',
+            ->add('missionKind', EntityType::class, [
+                'class'                     => 'MissionBundle:MissionKind',
                 'property'                  => 'name',
                 'multiple'                  => true,
                 'expanded'                  => true,
@@ -28,7 +29,7 @@ class StepThreeType extends AbstractType
                 'choice_translation_domain' => 'tools',
                 'constraints'               => new Count([
                     'min' => 1,
-                    'minMessage' => 'user.professionalexpertises.min',
+                    'minMessage' => 'user.kindfomission.min',
                 ])
             ])
             ->add('submit', SubmitType::class, [

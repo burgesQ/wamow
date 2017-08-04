@@ -6,6 +6,7 @@ use MissionBundle\Entity\UserMission;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use ToolsBundle\Entity\PhoneNumber;
 use UserBundle\Form\EditCertificationFormType;
 use UserBundle\Form\EditProfileMergedFormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -88,12 +89,6 @@ class ProfileController extends Controller
 
         if ($form->handleRequest($request)->isSubmitted() && $form->isValid()) {
 
-            if ($form->get('user')->get('phone')->get('prefix')->isEmpty()
-                || $form->get('user')->get('phone')->get('number')->isEmpty()
-            ) {
-                $form->get('user')->addError(new FormError($this->get('translator')
-                    ->trans('error.phone.please_fill', [], 'tools')));
-            } else {
                 $user->setFirstName(ucwords($user->getFirstName()));
                 $user->setLastName(ucwords($user->getLastName()));
 
@@ -103,11 +98,11 @@ class ProfileController extends Controller
                 if ($newAddress !== null) {
                     $em->persist($newAddress);
                 }
+
                 $userManager->updateUser($user);
 
                 return $this->redirectToRoute('user_profile_show');
             }
-        }
 
         return $this->render('UserBundle:Profile:edit.html.twig', [
             'form' => $form->createView(),

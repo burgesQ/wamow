@@ -28,6 +28,23 @@ class MissionGeneratorController extends Controller
         'mission_new_step_five',
     ];
 
+    /** @var array  */
+    private $arrayImg = [
+        "businesspractice.industry" => "manufacturing",
+        "businesspractice.finance" => "finance",
+        "businesspractice.retail" => "retail",
+        "businesspractice.media" => "media-telco-entertainment",
+        "businesspractice.tourism" => "tourisme",
+        "businesspractice.construction" => "construction",
+        "businesspractice.realestate" => "finance",
+        "businesspractice.hotel" => "hotel",
+        "businesspractice.services" => "food-beverage",
+        "businesspractice.energy" => "energy",
+        "businesspractice.it" => "it",
+        "businesspractice.public" => "public",
+        "businesspractice.ngo" => "ngo"
+    ];
+
     /**
      * @param int $missionId
      *
@@ -156,6 +173,7 @@ class MissionGeneratorController extends Controller
             $arrayForm['labelNext'] = 'mission.new.form.save_mod';
         }
 
+
         /** @var \Symfony\Component\Form\Form $formStepTwo */
         $formStepTwo = $this->get('form.factory')
             ->create(StepTwoFormType::class, $newMission, $arrayForm)->setData($newMission)
@@ -182,34 +200,25 @@ class MissionGeneratorController extends Controller
 
             if ($stepMission !== Mission::STEP_THREE) {
                 $newMission->setStatusGenerator(Mission::STEP_TWO);
-                $em->flush();
             }
+
+            if ($newMission->getCurrency()->getCode() !== 'USD') {
+                $budget = $newMission->getBudget();
+                $rate = $newMission->getCurrency()->getRate();
+                $newMission->setBudget($budget / $rate);
+            }
+
+            $em->flush();
 
             return $this->redirectToRoute('mission_new_step_three', [
                 'missionId' => $newMission->getId()
             ]);
         }
 
-        $arrayImg = [
-            "businesspractice.industry" => "manufacturing",
-            "businesspractice.finance" => "finance",
-            "businesspractice.retail" => "retail",
-            "businesspractice.media" => "media-telco-entertainment",
-            "businesspractice.tourism" => "tourisme",
-            "businesspractice.construction" => "construction",
-            "businesspractice.realestate" => "finance",
-            "businesspractice.hotel" => "hotel",
-            "businesspractice.services" => "food-beverage",
-            "businesspractice.energy" => "energy",
-            "businesspractice.it" => "it",
-            "businesspractice.public" => "public",
-            "businesspractice.ngo" => "ngo"
-        ];
-
         return $this->render('MissionBundle:MissionGenerator:mission_step_two.html.twig', [
-            'form'     => $formStepTwo->createView(),
-            'user'     => $user,
-            'arrayImg' => $arrayImg,
+            'form'      => $formStepTwo->createView(),
+            'user'      => $user,
+            'arrayImg'  => $this->arrayImg,
             'missionId' => $missionId
         ]);
     }
@@ -265,6 +274,12 @@ class MissionGeneratorController extends Controller
                 $em->flush();
 
                 return $this->redirectToRoute('dashboard');
+            }
+
+            if ($newMission->getCurrency()->getCode() !== 'USD') {
+                $price = $newMission->getPrice();
+                $rate = $newMission->getCurrency()->getRate();
+                $newMission->setPrice($price / $rate);
             }
 
             $newMission->setStatusGenerator(Mission::STEP_THREE);
@@ -346,9 +361,10 @@ class MissionGeneratorController extends Controller
         return $this->render('MissionBundle:MissionGenerator:mission_step_four.html.twig', [
             'form'       => $formStepFour->createView(),
             'mission'    => $newMission,
-            'nbAdvisors' => count($missionRepository->getUsersByMission($newMission, false, false)),
+            'nbAdvisors' => count($missionRepository->findUsersByMission($newMission)),
             'user'       => $user,
-            'missionId' => $missionId
+            'missionId'  => $missionId,
+            'arrayImg'   => $this->arrayImg
         ]);
 
     }
