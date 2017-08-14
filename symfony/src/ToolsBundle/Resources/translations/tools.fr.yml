@@ -154,6 +154,23 @@ mission:
                 du pitch aux expert. Vous<br>
                 serez orienté vers un site de<br>
                 payement de ligne.
+            introduction: |
+                Consultants.wantmore.work est une marque BestAdvizor SAS, Societe au capitale de 51.000 euros - RCS Paris <br>
+                815 362 736 - Siège social : 116 Av Felix Faure 75015 Paris Buraux : 18 avenue Franklin D. Roosvelt 75008 <br>
+                Paris
+            person: "Je sousigné "
+            company: "déclare etre habilité a contractualiser pour la société %company autorise BestAdvizor SAS a :"
+            cac: "et avoir déclaré comme commissaires aux comptes :"
+            name: nom
+            ending: |
+                BestAdvizor met en relation une expression de besoin (Pitch) - en accompagnamt le demandeur dans sa formula- <br>
+                tion - et des experts sur la base de la proposition de solution. BestAdvizor n'est pas un cabinet de conseil et son <br>
+                engagement se limite a cette mise en relation qualifiée. Sa responsabilité ne saurait etre engagé sur le delivrable <br>
+                de la <br>
+                mission en lui meme. Clause attributive de competence: tous les litiges relatif a l'application de la présente <br>
+                seront de la compétence exclusive du Tribunal de Commerce de Paris. <br><br>
+                La Société se reserve le droit de faire état des pitches realisés et des noms des clients, de les divulguer a titre de <br>
+                références.
 
     view:
         country: Pays de la mission
@@ -161,7 +178,7 @@ mission:
         draft: Pitch en cours de creation
         price_day: € / jour
         currency_k: 'k€'
-        receive_the_pitch: <span> %nb </span> recevront le pitch
+        receive_the_pitch: <span id='count-match'> %nb </span> recevront le pitch
 
         step_four:
             professional_expertise: DOMAINE FONCTIONNEL
@@ -180,23 +197,6 @@ mission:
             date_range: "%startDate au %endDate"
 
         step_five:
-            introduction: |
-                Consultants.wantmore.work est une marque BestAdvizor SAS, Societe au capitale de 51.000 euros - RCS Paris <br>
-                815 362 736 - Siège social : 116 Av Felix Faure 75015 Paris Buraux : 18 avenue Franklin D. Roosvelt 75008 <br>
-                Paris
-            person: "Je sousigné "
-            company: "déclare etre habilité a contractualiser pour la société %company autorise BestAdvizor SAS a :"
-            cac: "et avoir déclaré comme commissaires aux comptes :"
-            name: nom
-            ending: |
-                BestAdvizor met en relation une expression de besoin (Pitch) - en accompagnamt le demandeur dans sa formula- <br>
-                tion - et des experts sur la base de la proposition de solution. BestAdvizor n'est pas un cabinet de conseil et son <br>
-                engagement se limite a cette mise en relation qualifiée. Sa responsabilité ne saurait etre engagé sur le delivrable <br>
-                de la <br>
-                mission en lui meme. Clause attributive de competence: tous les litiges relatif a l'application de la présente <br>
-                seront de la compétence exclusive du Tribunal de Commerce de Paris. <br><br>
-                La Société se reserve le droit de faire état des pitches realisés et des noms des clients, de les divulguer a titre de <br>
-                références.
 
     registered:
         success: "Mission sauvegardée !"

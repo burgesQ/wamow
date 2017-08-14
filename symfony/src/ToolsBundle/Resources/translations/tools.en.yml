@@ -401,25 +401,54 @@ mission:
             title: The pitch
             subtitle: Let's start with the beginning
             hint: "FIRST STEP : "
+
         step_two:
             title: Mission Details
             subtitle: Tell us more !
             hint: "SECOND STEP : "
+
         step_three:
             title: Mission Kind
             subtitle: Do you know which type of expertise you are looking for ?
             hint: "THIRD STEP : "
+            si_consult: IT Consulting
+            organisation_consult: Conseil en organisation
+
         step_four:
             title: Review
             subtitle: Verify that all information is correct!
             hint: "FOURTH STEP : "
+
         step_five:
             title: Final Step
             subtitle: Let's wrap it up !
             hint: "FINAL STEP : "
+            introduction: |
+                Consultants.Wantmore.Work is a BestAdvizor SAS brand, whose capital worth is 51.000 EUR
+                – RCS Paris 815 362 736 – Company Seat: 18b Avenue de Versailles 75016 Paris Offices: 18
+                Avenue Franklin D. Roosevelt 75008 Paris.
+            person: I, the undersigned
+            company: "hereby declare that I am authorized to contract for %company authorize BestAdvizor SAS to:"
+            cac: "and having declared as a external auditors:"
+            name: name
+            ending: |
+                BestAdvizor connects the expression of a need (Pitch) – by guiding the user through its
+                written draft – to various solution proposals from the experts present on our website.
+                BestAdvizor is not a consulting firm and its liability is limited to this qualified connection. Its
+                responsibility does not lie in the execution of the mission itself. Jurisdiction clause: all
+                disputes arising out of the present shall be submitted to the exclusive jurisdiction of the
+                Tribunal de Commerce de Paris.
+                The corporation reserves the right to cite pitches and clients’ names and divulge them for
+                reference purposes.
+
         form:
             back_resume: Back to review
             save_mod: Save modifications
+            back: BACK
+            share_pitch: Share The pitch
+            share: Distribute the following pitch to the expert community at Consultants.Wantmore.Work
+            reference: Distribute the name of the corporation as a reference
+
 
         label:
             currency: please select the curency
