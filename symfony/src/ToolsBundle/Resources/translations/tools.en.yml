@@ -412,7 +412,7 @@ mission:
             subtitle: Do you know which type of expertise you are looking for ?
             hint: "THIRD STEP : "
             si_consult: IT Consulting
-            organisation_consult: Conseil en organisation
+            organisation_consult: Organisation Consulting
 
         step_four:
             title: Review
