@@ -244,7 +244,7 @@
 
                         <div class="mail-toolbar-title">
                             {% if step.position == 1 %}
-                                Consultant {{ userMission.idForContractor }}
+                                {{ 'footer.advisor' | trans }} {{ userMission.idForContractor }}
                             {% else %}
                                 <a href="{{ path('user_profile_view', { 'missionId' : mission.id, 'userId' : userMission.user.id }) }}">
                                     {{ userMission.user.firstName }} {{ userMission.user.lastName }}

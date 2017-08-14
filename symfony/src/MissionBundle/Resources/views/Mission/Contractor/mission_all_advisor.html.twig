@@ -163,7 +163,7 @@
 
                     <div class="wmw-mission-element wmw-mission-element--shortlist">
                         <div class="element-title">
-                            Advisor {{ userMission.idForContractor }}
+                            {{ 'footer.advisor' | trans }} {{ userMission.idForContractor }}
 
                             <div class="element-title-links">
                                 <a href="{{ path('mission_answer_to_advisor', { 'userMissionId' : userMission.id }) }}"
@@ -174,7 +174,7 @@
 
                         </div>
                         <div class="element-content{% if lastMsg.sender.id == userMission.user.id %} element-content--newmessage{% endif %}">
-                            <div class="element-content-title">Advisor {{ userMission.idForContractor }}</div>
+                            <div class="element-content-title">{{ 'footer.advisor' | trans }} {{ userMission.idForContractor }}</div>
                             {{ lastMsg.body }}
                             <div class="element-content-bottom">
                                 {{ lastMsg.createdAt | date('D d M h\\hm') }}
