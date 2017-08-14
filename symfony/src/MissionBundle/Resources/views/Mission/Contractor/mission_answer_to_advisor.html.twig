@@ -347,7 +347,7 @@
                 </div>
             </div>
 
-            <div class="wmw-mission-sidebar wmw-mission-sidebar--active">
+            <div class="wmw-mission-sidebar {% if step.position == 1 %}wmw-mission-sidebar--active{% endif %}">
                 <div class="sidebar-wrapper">
                     <div class="sidebar-date">
                         {{ 'mission.view.contractor.pitched_at' | trans({ date : mission.updateDate | date('d/m/Y') }) }}
