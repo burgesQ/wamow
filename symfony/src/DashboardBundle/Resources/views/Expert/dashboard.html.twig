@@ -46,11 +46,7 @@
                 <div class="wmw-slider-inner row">
 
                     {% for new in news %}
-                        {% if loop.index == 0 %}
-                            <div class="wmw-slider-element wmw-slider-element--active col-xs-12 col-sm-6 col-md-4">
-                        {% else %}
-                            <div class="wmw-slider-element col-xs-12 col-sm-6 col-md-4">
-                        {% endif %}
+                        <div class="wmw-slider-element col-xs-12 col-sm-6 col-md-4">
 
                         <div class="main-slider-element">
                             <div class="main-slider-element-wrapper">
@@ -88,9 +84,10 @@
                 </div>
 
                 <div class="wmw-slider-navigation">
-                    <a href="#" class="wmw-slider-navigation--prev"></a>
-                    <a href="#" class="wmw-slider-navigation--next"></a>
+                    <a href="#" class="wmw-slider-navigation--prev"><i class="icon icon--arrow"></i></a>
+                    <a href="#" class="wmw-slider-navigation--next"><i class="icon icon--arrow"></i></a>
                 </div>
+
             </div>
 
             {# wip missions #}
