@@ -41,6 +41,7 @@ form:
 
     phone:
         prefix: "Country Code"
+        chooseprefix: Choose a prefix
         number: "Phone"
 
     file:
@@ -92,6 +93,7 @@ error:
     page:
         common: The requested page couldn't be located. Check for any URL misspelling or
     forbidden: You have no access to this page
+    authorized: "Vous n'êtes pas autorisé à créer une mission."
     logged: You're not logged in
     user:
         subscribe: Please Subscribe
@@ -254,8 +256,6 @@ dashboard:
             date: Started on date
             continuebutton: "Continue"
             deletebutton: "Delete"
-    error:
-        logged: "You are not logged in"
 
 ## Registration
 registration:
@@ -338,11 +338,51 @@ user:
         advisor:
             btn_save_change: SAVE CHANGE
 
+# Comapnies
+company:
+    name: "Company"
+    new:
+        name: "Name"
+        size: "Size"
+        choosesize: "Choose the size"
+        small: "Small less than 10 employees"
+        medium: "Medium between 10 and 500 employees"
+        big: "More than 500 employees"
+        logo: "Logo"
+        description: "Description"
+        sector: "Sector"
+        choosesector: "Choose the sector"
+        submit: "OK"
+        registered: "Company name successfully registered"
+        error:
+            onecompany: "You cannot join more than one company"
+            authorized: "You are not authorized"
+            usedname: "The company %name% already exist."
+
+    join:
+        name: "Company"
+        new: "Create a new company"
+        submit: "Join"
+        info : "Your old Company will be replaced"
+        success: "Joined the company"
+        joined: "You joined name company"
+        error:
+            authorized: "You are not authorized"
+            onecompany: "You cannot join more than one company"
+
+    leave:
+        wannaleave: "Do you really want to leave %name% company?"
+        submit: "Yes"
+        leaved: "You left name company"
+        error:
+            authorized: "You are not authorized"
+            nocompany: "You do not belong to any company"
+
 ## Mission
 mission:
     view:
         pitched_at: Pitched at date
-        price_day: / day
+        price_day: "/ day"
         more_info: more details
         less_info: less details
         currency_k: K $
@@ -449,7 +489,6 @@ mission:
             share: Distribute the following pitch to the expert community at Consultants.Wantmore.Work
             reference: Distribute the name of the corporation as a reference
 
-
         label:
             currency: please select the curency
             title: TITLE OF THE PITCH
@@ -498,7 +537,6 @@ mission:
         no_proposition: We didn't find any mission for you but we are still looking for it !
         shortlist_added: You've been added to the shortlist by the Contractor.
 
-
 ## Inbox
 inbox:
     form:
@@ -509,6 +547,7 @@ inbox:
     show: show
     you: you
     new_message: New Message
+
 thread:
     error:
         logged: "Please login to access this page"
@@ -519,8 +558,6 @@ message:
     readReport:
         read: "ReadReport: read"
         receive: "ReadReport: receive"
-
-
 
 ## Business vocabulary
 language:
@@ -822,17 +859,6 @@ workexperience:
     standardimplementation : "Standard Implementation"
     bigdata : "Big Data"
 
-continent:
-    emea:          EMEA
-    south_america: South America
-    north_america: North America
-    asia:          Asia - Pacific
-
-company_size:
-    small:  Small Companies
-    medium: Medium Companies
-    large:  Large Companies
-
 ## Mails template
 mails:
     hello: Hello %f_name %l_name !
@@ -864,7 +890,7 @@ mails:
               Greetings,
               The WantMoreWork team
 
-# Payement template
+# Payment
 payment:
     ok: "Subscription success !"
     ko: "Subscription failed."
@@ -877,78 +903,10 @@ payment:
     card_number: Card Number
     pls_there: Subscribe There Please
 
-# NewsLetter template
+# NewsLetter
 newsletter:
     body_title: THE NEWSLETTER FOR THOSE WHO WANT TO KNOW MORE ABOUT WORK
     read_more: READ MORE
-
-# Notification template
-notification:
-    seeker:
-        mission:
-            create:
-            edit:
-            delete:
-            empty:
-            pitchedbynewuser:
-            takeback:
-            selection:
-            dismiss:
-        company:
-            join:
-            leave:
-
-    expert:
-        mission:
-            pitch:
-            giveup:
-            delete:
-            takeback:
-            selection:
-            dismiss:
-
-# Comapny translation
-company:
-    name: "Company"
-    new:
-        name: "Name"
-        size: "Size"
-        choosesize: "Choose the size"
-        small: "Small less than 10 employees"
-        medium: "Medium between 10 and 500 employees"
-        big: "More than 500 employees"
-        logo: "Logo"
-        description: "Description"
-        sector: "Sector"
-        choosesector: "Choose the sector"
-        submit: "OK"
-        registered: "Company name successfully registered"
-        error:
-            onecompany: "You cannot join more than one company"
-            authorized: "You are not authorized"
-            usedname: "The company %name% already exist."
-
-    join:
-        name: "Company"
-        new: "Create a new company"
-        submit: "Join"
-        info : "Your old Company will be replaced"
-        success: "Joined the company"
-        joined: "You joined name company"
-        error:
-            authorized: "You are not authorized"
-            onecompany: "You cannot join more than one company"
-
-    leave:
-        wannaleave: "Do you really want to leave %name% company?"
-        submit: "Yes"
-        leaved: "You left name company"
-        error:
-            authorized: "You are not authorized"
-            nocompany: "You do not belong to any company"
-
-# newsLetter translation
-newsletter:
     view:
         footer:
             writer: Writed by %writer
@@ -986,3 +944,28 @@ newsletter:
     user:
         notLogged: You must be logged to edit the content of an article
         noRights: You must be the writer or the publisher of an article to edit it
+
+# Notification
+notification:
+    seeker:
+        mission:
+            create:
+            edit:
+            delete:
+            empty:
+            pitchedbynewuser:
+            takeback:
+            selection:
+            dismiss:
+        company:
+            join:
+            leave:
+
+    expert:
+        mission:
+            pitch:
+            giveup:
+            delete:
+            takeback:
+            selection:
+            dismiss:
