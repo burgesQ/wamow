@@ -496,6 +496,7 @@ mission:
     message:
         no_advisor: No advisor accepted your mission yet. We are a matching best profile for you and you'll receive an email as soon as we found him/her
         no_proposition: We didn't find any mission for you but we are still looking for it !
+        shortlist_added: You've been added to the shortlist by the Contractor.
 
 
 ## Inbox
