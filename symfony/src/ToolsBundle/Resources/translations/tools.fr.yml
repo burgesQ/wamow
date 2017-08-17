@@ -75,7 +75,16 @@ footer:
 
 legends:
     title: |
+
+
     content: |
+
+
+
+
+
+
+
     currency:
     currency_day: %price/days
     confirmation:
@@ -183,15 +192,24 @@ dashboard:
             interestedbutton:
         wip:
             title:
-            date:
+            date: Pitched at date
+            in_fact: You are more likely to be selected...
+            get_in_touch: Get in touch
             showmore:
             giveupbutton:
             interested:
             ongoing:
             shortlist:
+            contact:
+            see_the_pitch:
             waiting:
-            selected:
+            answer:
+            mission_status:
+            show_all_pitch:
+            echange:
+            shortlist:
             to_answer:
+            selected:
             finalist:
             giveup:
             dismiss:
@@ -249,6 +267,8 @@ dashboard:
             date:
             continuebutton:
             deletebutton:
+        error:
+            logged:
 
 ## Registration
 registration:
@@ -258,6 +278,12 @@ registration:
             subtitle:
             howtotitle: "85% of pitches find a matching expert within 15 days."
             howtotext:
+
+
+
+
+
+
             linkedinbutton:
             or:
             firstname:
@@ -310,6 +336,19 @@ registration:
             cumuledmonth:
             dailyfees:
             peremption:
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Users
 user:

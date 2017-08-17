@@ -305,6 +305,10 @@ registration:
                 Welcome to Consultants.WantMore.Work, it is important to build an accurate profile in order for us to push towards you pitches. This process is divided in 4 Steps.
                 First Step: indicate the business sector in which you have significant experience.
                 We provide you with 13 sectors to choose from. You may select multiple options.
+
+
+
+
             backbutton: "BACK"
             nextbutton: "NEXT"
         two:
