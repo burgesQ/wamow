@@ -1,0 +1,300 @@
+.wmw-profile{
+
+	.wmw-profile-close{
+		display:block;
+		font-size:10px;
+		text-transform:uppercase;
+		letter-spacing:0.06em;
+		color:$colorgreylight;
+		text-decoration:none;
+		position:relative;
+		z-index:100;
+		position:absolute;
+		top:10px;
+		right:0;
+
+		.icon{
+			font-size:16px;
+			margin:0 6px 0 0;
+		}
+	}
+
+	.wmw-profile-header{
+		padding:30px 15px;
+		white-space:nowrap;
+		position:relative;
+	
+		.wmw-profile-header-picture{
+			display:inline-block;
+			vertical-align:middle;
+			width:80px;
+			height:80px;
+			border-radius:50%;
+			overflow:hidden;
+			margin-right:10px;
+
+			img{
+				display:block;
+				width:100%;
+				height:auto;
+			}
+		}
+
+		.wmw-profile-header-name{
+			display:inline-block;
+			vertical-align:middle;
+			color:$colorpurple;
+			font-size:30px;
+			font-family:$fontdincondreg;
+			letter-spacing:0.014em;
+		}
+
+		.wmw-profile-header-button{
+			text-align:center;
+			padding:10px 0;
+		}
+	}
+	
+	.wmw-profile-tabs{
+
+		a{
+			display:block;
+			width:50%;
+			border:1px solid $colorgreyxlight;
+			text-align:center;
+			font-size:14px;
+			text-decoration:none;
+			text-transform:uppercase;
+			letter-spacing:0.06em;
+			color:$colorgreylight;
+			font-family:$fontdincondreg;
+			padding:8px 0;
+			float:left;
+
+			&.active{
+				border-bottom:none;
+				background:#fdfdfd;
+				color:$colorgreen;
+			}
+
+			&:last-child{
+				border-left:none;
+			}
+		}
+	}
+
+	.wmw-profile-content{
+		padding:30px 15px;
+		background:#fdfdfd;
+		border:1px solid $colorgreyxlight;
+		border-top:none;
+
+		.wmw-switchfield{
+			margin:6px 0 0 10px;
+		}
+
+		.wmw-profile-seelink{
+			display:inline-block;
+			white-space:nowrap;
+			color:$colorgreen;
+			margin:6px 0 0 5px;
+			text-decoration:none;
+			font-size:14px;
+
+			&:hover{
+				text-decoration:underline;
+			}
+		}
+	}
+
+	.wmw-profile-subtitle{
+		position:relative;
+		text-align:center;
+		margin:0 0 30px 0;
+
+		&:before{
+			content:'';
+			display:block;
+			width:100%;
+			height:1px;
+			position:absolute;
+			top:50%;
+			left:0;
+			background:$colorgreyxlight;
+		}
+
+		span{
+			position:relative;
+			display:inline-block;
+			padding:0 10px;
+			background:white;
+			text-transform:uppercase;
+			color:$colorgreylight;
+			font-size:15px;
+			letter-spacing:0.06em;
+			font-family:$fontdincondreg;
+		}
+	}
+
+	.wmw-profile-subscription-plan{
+		display:block;
+		padding:0 0 0 50px;
+		position:relative;
+
+		.plan-icon{
+			display:block;
+			width:50px;
+			height:50px;
+			line-height:50px;
+			text-align:center;
+			color:white;
+			font-size:30px;
+			background:linear-gradient(to right, $colorpurple, $colorgreen);
+			top:0; left:0;
+			position:absolute;
+
+			.icon{
+				vertical-align:baseline;
+			}
+		}
+
+		.plan-label{
+			display:block;
+			padding:0 12px;
+			background:white;
+			border:1px solid $colorgreen;
+			height:50px;
+			line-height:50px;
+			font-size:30px;
+			color:$colorgreen;
+			text-transform:uppercase;
+			font-family:$fontdincondreg;
+			text-align:center;
+			white-space:nowrap;
+		}
+	}
+
+	.wmw-profile-subscription-info{
+		line-height:35px;
+		font-size:16px;
+		margin:15px 0 0 0;
+
+		.icon{
+			font-size:22px;
+			margin:0 5px 0 0;
+		}
+	}
+
+	.wmw-profile-bottom{
+		padding:30px 0 0 0;
+		text-align:center;
+	}
+}
+
+/* ------------------------------------------------------------------------------ */
+/* ----------- SMALL SCREENS ---------------------------------------------------- */
+/* ------------------------------------------------------------------------------ */
+
+@media screen and (min-width: $screen-sm-min){
+
+	.wmw-profile{
+
+		.wmw-profile-close{
+			top:20px;
+		}
+
+		.wmw-profile-header{
+
+			.wmw-profile-header-picture{
+				width:115px;
+				height:115px;
+			}
+
+			.wmw-profile-header-name{
+				font-size:50px;
+			}
+
+			.wmw-profile-header-button{
+				display:inline-block;
+				text-align:left;
+				vertical-align:bottom;
+				margin-left:25px;
+			}
+		}
+
+		.wmw-profile-tabs{
+
+			a{
+				height:50px;
+				line-height:50px;
+				font-size:25px;
+				padding:0;
+			}
+		}
+
+		.wmw-profile-content{
+			padding:40px;
+		}
+
+		.wmw-profile-subtitle{
+
+			span{
+				font-size:25px;
+			}
+		}
+	}
+}
+
+/* ------------------------------------------------------------------------------ */
+/* ----------- LARGE SCREENS ---------------------------------------------------- */
+/* ------------------------------------------------------------------------------ */
+
+@media screen and (min-width: $screen-lg-min){
+
+	.wmw-profile{
+
+		.wmw-profile-close{
+			right:20px;
+		}
+
+		.wmw-profile-header{
+			padding-left:40px;
+			border-left:1px solid $colorgreyxlight;
+			border-right:1px solid $colorgreyxlight;
+		}
+
+		.wmw-profile-tabs{
+			height:1px;
+			border-bottom:1px solid $colorgreyxlight;
+			padding-left:65%;
+			z-index:250;
+			position:relative;
+
+			a{
+				border-bottom:none;
+				border-top:none;
+				margin-top:-49px;
+			
+				&.active{
+					border-top:1px solid $colorgreyxlight;
+				}
+			}
+		}
+
+		.wmw-profile-subscription{
+			text-align:center;
+
+			.wmw-profile-subscription-plan{
+				display:inline-block;
+			}
+
+			.wmw-profile-subscription-info{
+
+				br{
+					display:inline-block;
+					margin:0 15px;
+				}
+			}
+		}
+	}
+}
