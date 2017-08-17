@@ -30,12 +30,12 @@
 	    line-height: 1em;
 
 		.wmw-header-profile-picture{
-			display:inline-block;
+			display:none;
 			vertical-align:middle;
 			width:50px;
 			height:50px;
 			border-radius:50%;
-			margin:0 15px 0 0;
+			margin:-2px 10px 0 0;
 			overflow:hidden;
 
 			img{
@@ -55,12 +55,22 @@
 				.name{
 					display:none;
 				}
+
+				.icon--arrow{
+					display:none !important;
+				}
+
+				.icon--avatar{
+					font-size:30px;
+					vertical-align:middle !important;
+					margin-top: -4px;
+				}
 			}
 
 			.wmw-header-profile-menu{
 				display:block;
 				position:absolute;
-				top:51px;
+				top:53px;
 				right:13px;
 				text-align:center;
 				background:white;
@@ -108,12 +118,70 @@
 		}
 	}
 
-	&.wmw-header--ob{
-		text-align:center;
+	.wmw-header-languages-button{
+		position:relative;
+		display:inline-block;
+		margin-left:5px;
+		border:none;
+		background:none;
 
-		.wmw-header-logo{
-			vertical-align:bottom;
-			margin-left:0;
+		.wmw-button{
+			padding:0 20px;
+		
+			&:before,
+			&:after{
+				border:none;
+			}
+		}
+
+		.wmw-header-languages-menu{
+			display:block;
+			position:absolute;
+			top:53px;
+			right:13px;
+			text-align:center;
+			background:white;
+			border:1px solid $colorgreen;
+			padding:20px 0;
+			width:100%;
+			transform:scaleY(0);
+			transform-origin:top;
+			opacity:0;
+			transition:opacity .3s, transform .3s $easeinout;
+
+			a{
+				display:block;
+				padding:5px 15px;
+				color:$colorgrey;
+				text-transform:uppercase;
+				font-size:14px;
+				font-family:$fontcantarell;
+				text-decoration:none;
+				letter-spacing:0.06em;
+				transition:background .3s, color .3s;
+
+				&:hover{
+					background:$colorgreen;
+					color:white;
+				}
+			}
+		}
+
+		&.wmw-header-languages-button--active{
+
+			.wmw-button{
+				color:white;
+
+				&:before,
+				&:after{
+					background:$colorgreen;
+				}
+			}
+
+			.wmw-header-languages-menu{
+				transform:scale(1);
+				opacity:1;
+			}
 		}
 	}
 }
@@ -137,12 +205,24 @@
 		.wmw-header-profile{
 			top:35px;
 
+			.wmw-header-profile-picture{
+				display:inline-block;
+			}
+
 			.wmw-header-profile-button{
 
 				.wmw-button{
 
 					.name{
 						display:inline;
+					}
+
+					.icon--arrow{
+						display:inline-block !important;
+					}
+
+					.icon--avatar{
+						display:none !important;
 					}
 
 					&:after{
@@ -170,7 +250,7 @@
 				&.wmw-header-profile-button--active{
 
 					.wmw-button{
-						color:$colorpurplelight;
+						color:$colorgreen;
 
 						&:before,
 						&:after{
@@ -182,6 +262,56 @@
 						}
 					}
 				}
+			}
+		}
+
+		.wmw-header-languages-button{
+
+			.wmw-button{
+
+				.name{
+					display:inline;
+				}
+
+				&:after{
+					transition:transform .2s $easeinout, background .3s, border .3s;;
+				}
+			}
+
+			.wmw-header-languages-menu{
+				top:44px;
+				right:0;
+				width:100%;
+				border-top:none;
+				padding-top:0;
+
+				&:before{
+					content:'';
+					background:$colorgreyxlight;
+					width:100%;
+					height:1px;
+					display:block;
+					margin-bottom:20px;
+				}
+			}
+		
+			&.wmw-header-languages-button--active{
+
+				.wmw-button{
+
+					&:after{
+						transform:skew(0deg);
+					}
+				}
+			}
+		}
+
+		&.wmw-header--ob{
+			text-align:center;
+
+			.wmw-header-logo{
+				vertical-align:bottom;
+				margin-left:0;
 			}
 		}
 	}

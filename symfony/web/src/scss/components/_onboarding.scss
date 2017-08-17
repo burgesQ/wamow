@@ -158,7 +158,7 @@
 				position:relative;
 				margin:0 0 10px 0;
 
-				&:before{
+					&:before{
 					content:'';
 					display:block;
 					position:absolute;
@@ -170,27 +170,9 @@
 					margin-top:-4px;
 					background:$colorgrey;
 				}
-			}
 
-			.wmw-onboard-domains-title-right{
-				font-family:$fontcantarell;
-				letter-spacing:0.06em;
-				font-size:14px;
-				padding:0 0 0 30px;
-				position:relative;
-				margin:0 0 10px 0;
-
-				&:before{
-					content:'';
-					display:block;
-					position:absolute;
-					top:50%; left:46%;
-					transition:background .3s;
-					width:20px;
-					height:8px;
-					border-radius:4px;
-					margin-top:-4px;
-					background:$colorgrey;
+				&.wmw-onboard-domains-title--right{
+					margin:0 0 0px 47%;
 				}
 			}
 
@@ -202,17 +184,12 @@
 				.wmw-switchfield{
 					font-style:italic;
 				}
-			}
 
-			.wmw-onboard-domains-subs-right{
-				padding:0 0 0 20px;
-				margin:0 0 0px 48%;
-				border-left:1px solid $colorgreyxlight;
-
-				.wmw-switchfield{
-					font-style:italic;
+				&.wmw-onboard-domains-subs--right{
+					margin:0 0 0px 50%;
 				}
 			}
+
 		}
 
 		.wmw-onboard-blocks{

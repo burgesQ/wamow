@@ -149,6 +149,20 @@
 					}
 				}
 
+				&.wmw-slider-element--empty{
+					display:flex;
+					align-items:center;
+					padding:15px 0;
+					justify-content:center;
+					text-align:center;
+
+					img{
+						display:inline-block;
+						width:200px;
+						height:auto;
+					}
+				}
+
 				.main-slider-element-wrapper{
 					max-height: 100%;
 					padding:20px 20px 0 20px;
@@ -315,6 +329,13 @@
 					}
 				}
 			}
+
+			&.wmw-slider--noarrow{
+
+				.wmw-slider-navigation{
+					display:none;
+				}
+			}
 		}
 
 		.main-missions{
@@ -438,6 +459,11 @@
 						&.infos-el--status{
 							background:#eee9fa;
 
+							.icon{
+								font-size:30px;
+								margin:0;
+							}
+
 							.icon,
 							.status{
 								color:$colorpurple;
@@ -451,6 +477,19 @@
 								font-size:9px;
 								text-transform:uppercase;
 								color:$colorgrey;
+							}
+
+							a{
+								background:$colorred;
+								color:white;
+
+								&:hover{
+									text-decoration:none;
+								}
+							}
+
+							&.infos-el--unread{
+								padding-bottom:20px;
 							}
 						}
 
@@ -480,11 +519,6 @@
 								.icon,
 								.status{
 									color:$colorred;
-								}
-
-								a{
-									background:$colorred;
-									color:white;
 								}
 							}
 						}
@@ -597,6 +631,18 @@
 						}
 					}
 				}
+
+				&.main-missions-el--empty{
+					border:none;
+					padding:15px 0;
+					text-align:center;
+					display:block;
+
+					img{
+						width:200px;
+						height:auto;
+					}
+				}
 			}
 
 			.main-missions-more{
@@ -706,6 +752,13 @@
 		                transform: translate(300%, 0);
 		            }
 		        }
+
+		        &.wmw-slider--noarrowdesktop{
+
+					.wmw-slider-navigation{
+						display:none;
+					}
+				}
 			}
 
 			.main-missions{
