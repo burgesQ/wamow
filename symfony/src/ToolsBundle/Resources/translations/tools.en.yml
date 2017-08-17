@@ -6,7 +6,7 @@ form:
         street_2: "Address 2"
         city: "City"
         zipcode: "Zipcode / Postcode"
-        state: "State"
+        state: "State / Region"
         country: "Country"
         choosecountry: "Choose a country"
         name: "Add a name if required"
@@ -15,8 +15,8 @@ form:
     btn:
         send: send
         save: save
-        upload_proposal: Upload Proposal
-        download_proposal: Download Proposal
+        upload_proposal: Upload File
+        download_proposal: Download File
         save_certif: Save certification
         download_resume: Download User Resume
         cancel_mission: CANCEL MISSION
@@ -50,7 +50,7 @@ form:
     password:
         old: old password
         new: new pasword
-        repeat: repeat new password
+        repeat: confirm new password
 
 ## Base
 header:
@@ -75,25 +75,27 @@ footer:
 
 legends:
     title: |
-        85% OF PITCHES FIND A MATCHING EXPERT
-        WITHIN 15 DAYS.
+        75% OF EXPERTS SHOW THEIR INTEREST FOR A MATCHING PITCH
+        UNDER 5 DAYS.
     content: |
-        A good profile will increase your success at matching,
-        ensure your profile details are accurate and complete.
-        Be aware that the User Agreement of
-        consultants.wantmore.work requires an ID
-        background check.
+        The main mission of Consultants.WantMore.Work is matching corporations in need of consulting with experts presenting the initial proposal for a long-lasting solution.
+        We will give you the opportunity to interact with these corporations and highlight your know-how and expertise through simple and direct dialogue.
+        Please take the 7 minutes necessary to complete the sign up and access a multitude of missions.
+        Creating your profile is simple: you only need your First and Last Name, email address, country of residence, spoken languages and Resume. You can also sign up with LinkedIn.
+        In order for your profile to be 100% complete you must link your Consultants.WantMore.Work account to LinkedIn and upload your Resume. You will not be able to do so once the sign up is complete.
+
+        The more precise you profile is, the higher the chance to be contacted!
     currency: $
     currency_day: $%price/d
     confirmation: Are you shure ?
-    other: other
+    other: Other
 
 ## Common error
 error:
     page:
-        common: The requested page couldn't be located. Check for any URL misspelling or
+        common: The requested page couldn't be located. Check for any URL misspellings or
     forbidden: You have no access to this page
-    authorized: "Vous n'êtes pas autorisé à créer une mission."
+    authorized: You're not allowed to create a mission.
     logged: You're not logged in
     user:
         subscribe: Please Subscribe
@@ -115,7 +117,7 @@ error:
         user_mission: You cannot pitch this mission
         interested_twice: You have already marked yourself as interested
         available: The mission %id is not available.
-        limit_reach: The limit of expert answers was reached for this mission. The mission is closed
+        limit_reach: The limit of expert proposals was reached for this mission. The mission is closed
         wrong_company: You don't belong to the right company
         already: You have already executed this action.
         finalist:
@@ -183,7 +185,7 @@ dashboard:
     advisor:
         fyi:
             title: "Your dashboard:"
-            text: 'Blablabla'
+            text: Here you will be able to view all matching pitches and manage all missions you have marked yourself interested in. Make sure you check this page on a regular basis! Pitches will await you!
         new:
             title: "You may be interested..."
             date: "Pitched at "
@@ -195,8 +197,16 @@ dashboard:
             giveupbutton: "Delete"
             interested: "Interested"
             ongoing: "Ongoing"
+            in_fact: You are more likely to be selected...
+            get_in_touch: Get in touch
+            contact: Contact
+            see_the_pitch: See the pitch
+            waiting: Waiting
+            answer: Answer
+            mission_status: Mission status
+            show_all_pitch: Show all pitches
+            echange: Interact
             shortlist: "Selection"
-            waiting: waiting
             selected: selected
             to_answer: To answer
             finalist: "Chosen"
@@ -230,7 +240,7 @@ dashboard:
             button: "Write pitch"
         fyi:
             title: "Your dashboard:"
-            text: ''
+            text: 'Here you will be able to view and manage all published and drafted pitches. Make sure you check this page on a regular basis! Experts are working to find a solution to your issue!'
         mission:
             title: "Pitch published"
             date: "Pitched on "
@@ -256,15 +266,23 @@ dashboard:
             date: Started on date
             continuebutton: "Continue"
             deletebutton: "Delete"
+    error:
+        logged: "You are not logged in"
 
 ## Registration
 registration:
     advisor:
         zero:
-            title: "First, let's log in."
-            subtitle: "Find a match in just 5 minutes."
-            howtotitle: "85% of pitches find a matching expert within 15 days."
-            howtotext: "A good profile will increase your success at matching, ensure your profile details are accurate and complete. Be aware that the User Agreement of consultants.wantmore.work requires an ID background check."
+            title: "First, let's sign up."
+            subtitle: "Access Consulting missions in 7 minutes."
+            howtotitle: "75% OF EXPERTS SHOW THEIR INTEREST FOR A MATCHING PITCH UNDER 5 DAYS"
+            howtotext: "The main mission of Consultants.WantMore.Work is matching corporations in need of consulting with experts presenting the initial proposal for a long-lasting solution.
+            We will give you the opportunity to interact with these corporations and highlight your know-how and expertise through simple and direct dialogue.
+            Please take the 7 minutes necessary to complete the sign up and access a multitude of missions.
+            Creating your profile is simple: you only need your First and Last Name, email address, country of residence, spoken languages and Resume. You can also sign up with LinkedIn.
+            In order for your profile to be 100% complete you must link your Consultants.WantMore.Work account to LinkedIn and upload your Resume. You will not be able to do so once the sign up is complete.
+
+            The more precise you profile is, the higher the chance to be contacted!"
             linkedinbutton: "Sign Up with LinkedIn"
             or: "or"
             firstname: "First name"
@@ -279,42 +297,51 @@ registration:
             resume: "Upload your Resume"
             nextbutton: "NEXT"
         one:
-            title: "Business practice?"
-            subtitle: "Select industries you've already worked in"
+            title: "Business Sector"
+            subtitle: "In which business sector have you worked? You may select multiple options."
             how_to_label: |
-                85% OF PITCHES FIND A MATCHING EXPERT
-                WITHIN 15 DAYS.
+                FIRST STEP
             how_to_text: |
-                A good profile will increase your success at matching,
-                ensure your profile details are accurate and complete.
-                Be aware that the User Agreement of
-                consultants.wantmore.work requires an ID
-                background check.
-
+                Welcome to Consultants.WantMore.Work, it is important to build an accurate profile in order for us to push towards you pitches. This process is divided in 4 Steps.
+                First Step: indicate the business sector in which you have significant experience.
+                We provide you with 13 sectors to choose from. You may select multiple options.
             backbutton: "BACK"
             nextbutton: "NEXT"
         two:
-            title: "Professional Expertise"
-            subtitle: "Select which type of missions"
+            title: "Professional Experience"
+            subtitle: "In which fields have you gained your professional experience. You may select multiple options."
             howtotitle: "Second step:"
-            howtotext: "We need to understand what you did or experienced as an advisor. What does consultants.wantmore.work mean by type of missions? We have identified 25 different consulting positions or levels. You can select multiple options."
+            howtotext: "Once you have chosen your business sector, please identify the different fields in which you have aquired your experience. On which roles have you built and developped your know-how? We provide you with 22 typical positions to choose from. You may select multiple options."
             backbutton: "BACK"
             nextbutton: "NEXT"
         three:
             title: "Kind of mission"
-            subtitle: "Select your missions"
+            subtitle: "What type of service have you provided in the past? "
             howtotitle: "Third step:"
-            howtotext: "We need to understand what professional expertise you acquired during your previous missions. What does consultants.wantmore.work mean by Professional Expertise? We have identified 22 key functions in organizations. You can select multiple options."
+            howtotext: "Let’s take a step further in the completion of your profile.
+
+            If you have been a consultant, can you clarify what type of consulting service you have provided?
+            If you have never been a consultant: whether while leading an internal project, while carrying out your role or during the provision of your services, you have taken some actions that correspond to one of the services hereunder. Please select those that best describe what you have previously done.
+
+            We provide you with 25 type of possible services to choose from. You may select multiple options. "
             backbutton: "BACK"
             nextbutton: "NEXT"
         four:
-            title: "Valuable Work Experience"
-            subtitle: "Select 1 to 10 items"
+            title: "Profile your experiences "
+            subtitle: " ! this is a very important choice, make sure you read the help menu. You may select a maximum of 5 options. "
             howtotitle: "Fourth step:"
-            howtotext: "To identify your valuable work experience, you need to select between 1 and 10 items. It is important to choose relevant experiences where you can provide proof of to make your profile unique and profitable!"
+            howtotext: "This step will conclude the construction of your profile.
+            Keeping in mind your previous choices (business sector, professional expertise and type of services provided), we have selected a list of potential experiences that you might have previously done. It is important to choose those that represent the best what you would like to do and emphasize your abilities. For each one of these experiences, we will ask you to provide further information related to:
+            - The size of the organization (small, medium, large company or the three)
+            - The cultural context (possibility to make multiple choices)
+            - The total amount of experience in months
+            - Your average daily rate for each one of them. ADR for freelancers or for employees (wage earning): targeted annual salary + social security expenses + other expenses related to the type of activity (i.e. rent, IT…) / total number of worked days per year.
+            - If you have done such activity in the past two years.
+            If you are ready you can start your selection. Please remember you can select a maximum of 5 options.
+            Once you have submitted these last changes you won’t be able to change any of the information concerning your professional background. Your choices will be final!"
             backbutton: "BACK"
             nextbutton: "FINISH"
-            cumuledmonth: "How many cumulated years?"
+            cumuledmonth: "How many cumulated month?"
             dailyfees: "Average daily rate"
             peremption: "Was this performed within the last 2 years?"
 
@@ -325,7 +352,7 @@ user:
         linkedin_stuff: LinkedIn stuff's
         resume_stuff: Resume stuff's
         advisor:
-            link_back_to_board: back to board
+            link_back_to_board: back to dashboard
             link_show_profile: show profile
             link_edit_profile: edit profile
             link_general: My profile
@@ -382,7 +409,7 @@ company:
 mission:
     view:
         pitched_at: Pitched at date
-        price_day: "/ day"
+        price_day: / day
         more_info: more details
         less_info: less details
         currency_k: K $
@@ -393,21 +420,21 @@ mission:
             pitched_at: Pitched at date
             next_mission: Next Mission >
             prev_mission: < Prev Mission
-            status_advisor: all advisors
+            status_advisor: all expert
             status_shortlist: My Selection
             status_finalit: My Choice
             status_interested: interested
             btn_refuse: DECLINE
             btn_proced_to_shortlist: Proceed to My Selection
             btn_contract: contract
-            btn_add_to_shortlist: add to my selection
-            btn_remove_from_shortlist: remove from my selection
+            btn_add_to_shortlist: add to My Selection
+            btn_remove_from_shortlist: remove from My Selection
             finance: |
                 %professionalExpertise<br>
                 <strong>%price</strong><br>
         advisor:
             btn_back_to_mission: back to mission
-            btn_back_to_board: back to board
+            btn_back_to_board: back to dashboard
             btn_back_to_global_view: back to global view
             interested: Interested
             finance: |
@@ -431,33 +458,50 @@ mission:
             <span class="status">Selected</span>
 
     action:
-        add_to_shortlist: User added to my selection !
+        add_to_shortlist: User added to My Selection !
         add_to_contract: User added to contract !
-        remove_from_shortlist: User removed from my selection !
+        remove_from_shortlist: User removed from My Selection !
         refuse_user: User declined.
 
     new:
         step_one:
             title: The pitch
-            subtitle: Let's start with the beginning
-            hint: "FIRST STEP : "
+            subtitle: Describe your need
+            hint: "FIRST STEP
+            In order to present your issue and help you describe your need, we advise you to follow this plan:
+            - describe the context in which your search fits best. It is important for the expert to be able to accurately identify it;
+            - portray what is at stake from your point of view;
+            - establish the objectives and define the scope(s) of the intervention, so that the expert can present you the start of a solution.
+            Please stay focused on the issue while drafting the text of the pitch: the contextual information (budget, dates, etc.) is to be provided in the second step. Before publishing the pitch, you will have the chance to review it in its totality."
 
         step_two:
             title: Mission Details
-            subtitle: Tell us more !
-            hint: "SECOND STEP : "
+            subtitle: Complete your research
+            hint: "SECOND STEP
+            This second step collects the contextual information linked to the organization of the upcoming mission.
+            - Budget: it is a simple estimation at this point. It is purely declarative and it does not hold any contractual engagement. Further into your interaction with the experts, you can determine the method of execution and billing.
+            - Geographical area: it allows us to put you in contact only with those experts having worked in (at least) one of the areas selected. You may select all areas.
+            - Application Deadline: past this date, the consultation will be over and only those experts having answered before the indicated deadline will be up for selection.
+            - Start and End Dates of the mission: they are approximate but it will allow us to select only experts whose availability matches.
+            - Hidden Company Name: we offer you the possibility to hide the name of your company to keep the consultation confidential.
+            - On site presence required (partially): if the option is activated, only the experts available to travel to the location will be selected. "
 
         step_three:
-            title: Mission Kind
+            title: Mission Features
             subtitle: Do you know which type of expertise you are looking for ?
-            hint: "THIRD STEP : "
+            hint: "THIRD STEP
+            - Certification: you have the possibility to enrich your research with different certifications: you can either select one from the list we provide or create a new one.
+            - Languages: this criteria is important in order to make sure we reach out to experts speaking the same language(s) necessary to establish a stable evolution of the mission.
+            - Targeted Expertise: based on the information previously selected, the system offers you examples of documented expertise. Please select the one best fitting your research.
+            Having taken into consideration all the information provided, Consultants.WantMore.Work shows you the number of experts present in our database capable to deal with your issue as well as their average daily rates. You can change this average daily rate by establishing a limit. "
             si_consult: IT Consulting
             organisation_consult: Organisation Consulting
 
         step_four:
             title: Review
             subtitle: Verify that all information is correct!
-            hint: "FOURTH STEP : "
+            hint: "FOURTH STEP
+            Please check the accuracy of the information before publishing the pitch. You may edit the information previously provided during this review process. Once the pitch is published you will no longer be able to edit it. "
 
         step_five:
             title: Final Step
@@ -533,8 +577,10 @@ mission:
                 hint_company: This is a explination of the companies; you can select multiple of them
                 hint_continent: This is a explination of the companies; you can select multiple of them
     message:
-        no_advisor: No advisor accepted your mission yet. We are a matching best profile for you and you'll receive an email as soon as we found him/her
-        no_proposition: We didn't find any mission for you but we are still looking for it !
+        no_advisor: 'Your pitch has been successfully published and will be sent to qualified experts. Once experts start marking themselves interested in the pitch you will receive a notification via email! You will then be able to talk with the experts that have sent you a proposal (up to 5). This first communication stage will be anonymous, up until you select the best solution proposals (up to 3). Only then you gain access to the expert’s contact.
+                            Experts are yet to answer your pitch!'
+        no_proposition: 'Your profile has been successfully registered. The match-making process has started. We will push towards you all missions matching your profile. You can then decide whether or not to send the client a proposition and subscribe to our monthly fees. For each pitch, only the first 5 propositions are initially presented to the counterpart. If you are among these, the latter can then decide to start a conversation with you and exchange information. Please note that during this first step your identity is hidden to the Corporation. It is then up to you to propose the best solution in order to be selected and reveal your identity to your counterpart.
+                                For the moment, there are no missions matching your profile. Please do not forget to activate you email notifications to receive an alert as soon as there are missions for you!'
         shortlist_added: You've been added to the shortlist by the Contractor.
 
 ## Inbox
@@ -542,7 +588,7 @@ inbox:
     form:
         placeholder:
             empty: Write your message here
-        btn_submit_empty_interested: ACCEPT THE PITCH AND SEND
+        btn_submit_empty_interested: SEND PROPOSAL
     read: read
     show: show
     you: you
@@ -863,7 +909,12 @@ workexperience:
 mails:
     hello: Hello %f_name %l_name !
     registration:
-        new_password: "Your new password : %password"
+        new_password: " We confirm the creation of your account.
+        Your password is: %password
+        If you have not done so already, please take the time to complete your profile. That will boost your visibility!
+
+        The team at Consultants.wantmore.work!"
+
     inbox:
         new_message_mission: You've got a new message on the mission %title.
         new_pitcher: You've got a new pitcher on the mission %missionName.
@@ -871,24 +922,25 @@ mails:
         the_team: The team.
         link: "Go check it :"
     subject:
-           new_message: You've got a new message !
+           new_message: New message !
            new_password: Welcome !
-           new_mission: You've got a new potential mission !
+           new_mission: New pitch !
     content:
            new_contractor: |
               Hello fName lName
 
-              We think the new mission missionTitle matches your profile and might interest you.
+
+              We have identified a new pitch you might be interested in: missionTitle
               Log In to our web site to check it.
 
-              Regards, The Team.
+              Regards, The team at Consultants.wantmore.work.
            reset_password: |
               Hello uName !
 
               You may reset your password here
 
               Greetings,
-              The WantMoreWork team
+              The team at Consultants.wantmore.work
 
 # Payment
 payment:
