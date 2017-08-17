@@ -464,6 +464,16 @@ mission:
         refuse_user: User declined.
 
     new:
+        content_resume: |
+            CONTEXT
+
+
+
+            STAKES
+
+
+
+            OBJECTIVES & SCOPE
         step_one:
             title: The pitch
             subtitle: Describe your need

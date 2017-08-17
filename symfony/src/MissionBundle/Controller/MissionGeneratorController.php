@@ -88,6 +88,7 @@ class MissionGeneratorController extends Controller
 
         if ($missionId === null) {
             $newMission = new Mission(3, $user, $user->getCompany());
+            $newMission->setResume($this->get('translator')->trans('mission.new.content_resume', [], 'tools'));
         } elseif (!($newMission = $missionRepository->findOneby([
             'id'      => $missionId,
             'company' => $user->getCompany()]))) {

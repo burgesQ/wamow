@@ -430,6 +430,7 @@ mission:
         refuse_user: User declined.
 
     new:
+        content_resume: |
         step_one:
             title: Le pitch
             subtitle: COMMENCONS PAR LE COMMENCEMENT
