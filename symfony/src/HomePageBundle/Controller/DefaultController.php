@@ -71,4 +71,13 @@ class DefaultController extends Controller
             'form' => $form->createView(),
         ));
     }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function noLocalAction()
+    {
+        // her we'll find a way to define the local of the user
+        return $this->redirectToRoute('home_page_expert', ['_locale' => 'en']);
+    }
 }

@@ -23,4 +23,4 @@ bundles:
 home_page:
     path:      /
     defaults:
-        _controller: HomePageBundle:Default:expert
+        _controller: HomePageBundle:Default:noLocal
