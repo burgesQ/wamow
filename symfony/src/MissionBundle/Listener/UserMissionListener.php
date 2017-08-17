@@ -50,22 +50,42 @@ class UserMissionListener
         if ($event->hasChangedField("status")) {
             if ($event->getOldValue("status") == UserMission::SCORED
                 && $event->getNewValue("status") == UserMission::MATCHED) {
-                /** @var UserMission $userMission */
-                $userMission = $event->getEntity();
-                $advisor     = $userMission->getUser();
-                if ($advisor->getNotification()) {
-                    $message = Swift_Message::newInstance()
-                        ->setSubject($this->trans->trans('mails.subject.new_mission', [], 'tools'))
-                        ->setFrom($this->sender)
-                        ->setTo($advisor->getEmail())
-                        ->setBody($this->trans->trans('mails.content.new_contractor', [
-                            'fName'        => $advisor->getFirstName(),
-                            'lName'        => $advisor->getLastName(),
-                            'missionTitle' => $userMission->getMission()->getTitle()
-                        ], 'tools'), 'text');
-                    $this->mailer->send($message);
-                }
+                $this->sendMailAdvisor($event, 'mails.subject.new_mission', 'mails.content.new_contractor');
+            } elseif ($event->getOldValue("status") == UserMission::MATCHED
+                && $event->getNewValue("status") == UserMission::SHORTLIST) {
+                $this->sendMailAdvisor($event, 'mails.subject.user_shortlisted', 'mails.content.user_shortlisted');
+            } elseif ($event->getOldValue("status") == UserMission::MATCHED
+                && $event->getNewValue("status") == UserMission::DISMISS) {
+                $this->sendMailAdvisor($event, 'mails.subject.response', 'mails.content.no_shortlisted');
+            } elseif ($event->getOldValue("status") == UserMission::SHORTLIST
+                && $event->getNewValue("status") == UserMission::DISMISS) {
+                $this->sendMailAdvisor($event, 'mails.subject.response', 'mails.content.no_finalist');
             }
+
+        }
+    }
+
+    /**
+     * @param \Doctrine\ORM\Event\PreUpdateEventArgs $event
+     * @param string                                 $title
+     * @param string                                 $content
+     */
+    private function sendMailAdvisor(PreUpdateEventArgs $event, string $title, string $content)
+    {
+        /** @var UserMission $userMission */
+        $userMission = $event->getEntity();
+        $advisor     = $userMission->getUser();
+        if ($advisor->getNotification()) {
+            $message = Swift_Message::newInstance()
+                ->setSubject($this->trans->trans($title, [], 'tools'))
+                ->setFrom($this->sender)
+                ->setTo($advisor->getEmail())
+                ->setBody($this->trans->trans($content, [
+                    'fName'        => $advisor->getFirstName(),
+                    'lName'        => $advisor->getLastName(),
+                    'missionTitle' => $userMission->getMission()->getTitle()
+                ], 'tools'), 'text');
+            $this->mailer->send($message);
         }
     }
 }

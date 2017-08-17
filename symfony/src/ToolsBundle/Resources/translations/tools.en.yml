@@ -581,7 +581,9 @@ mission:
                             Experts are yet to answer your pitch!'
         no_proposition: 'Your profile has been successfully registered. The match-making process has started. We will push towards you all missions matching your profile. You can then decide whether or not to send the client a proposition and subscribe to our monthly fees. For each pitch, only the first 5 propositions are initially presented to the counterpart. If you are among these, the latter can then decide to start a conversation with you and exchange information. Please note that during this first step your identity is hidden to the Corporation. It is then up to you to propose the best solution in order to be selected and reveal your identity to your counterpart.
                                 For the moment, there are no missions matching your profile. Please do not forget to activate you email notifications to receive an alert as soon as there are missions for you!'
-        shortlist_added: You've been added to the shortlist by the Contractor.
+        shortlist_added: You are among the 3 best fitting Experts selected to continue the interaction about Title of the Pitch.
+                         The client would like to learn more about your proposal.
+        my_selection_added: You have been chosen by the Corportation for the mission Title of the Pitch. The team at Consultants.wantmore.work send you their most sincere Congratulations  !
 
 ## Inbox
 inbox:
@@ -907,17 +909,26 @@ workexperience:
 
 ## Mails template
 mails:
-    hello: Hello %f_name %l_name !
+    contracot_hello: Hello %f_name %l_name %c_name!
+    advisor_hello: Hello %f_name %l_name !
     registration:
-        new_password: " We confirm the creation of your account.
+        contractor_new_password: " We confirm the creation of your account.
+        Your password is: %password
+        If you have not done so already, please take the time to complete your profile.
+
+        The team at Consultants.wantmore.work!"
+        advisor_new_password: " We confirm the creation of your account.
         Your password is: %password
         If you have not done so already, please take the time to complete your profile. That will boost your visibility!
 
         The team at Consultants.wantmore.work!"
 
     inbox:
-        new_message_mission: You've got a new message on the mission %title.
-        new_pitcher: You've got a new pitcher on the mission %missionName.
+        new_message_mission: Your message has been answerwed on the mission %title.
+        new_pitcher: |
+            An expert answered to your Pitch, %title.
+            Link Log In
+            The team at Consultants.wantmore.work
         link: Click here to check it.
         the_team: The team.
         link: "Go check it :"
@@ -925,22 +936,60 @@ mails:
            new_message: New message !
            new_password: Welcome !
            new_mission: New pitch !
+           user_shortlisted: Selected !
+           user_finalist: Congratulation !
+           response: your Response
+           reset_password: New Password
+
     content:
-           new_contractor: |
-              Hello fName lName
+        new_pitch: |
+            %title. Your pitch has been sent to thousands of experts in this field.
+            Once one of them shows their interest you will be notified. Make sure you have activated your notifications!
+
+            The team at Consultants.wantmore.work
+        new_contractor: |
+            Hello fName lName
 
 
-              We have identified a new pitch you might be interested in: missionTitle
-              Log In to our web site to check it.
+            We have identified a new pitch you might be interested in: missionTitle
+            Log In to our web site to check it.
 
-              Regards, The team at Consultants.wantmore.work.
-           reset_password: |
-              Hello uName !
+            The team at Consultants.wantmore.work.
+        user_shortlisted: |
+            Hello fName lName
 
-              You may reset your password here
 
-              Greetings,
-              The team at Consultants.wantmore.work
+            You are among the 3 best fitting Experts selected to continue the interaction about missionTitle.
+            The client would like to learn more about your proposal.
+            The team at Consultants.wantmore.work
+        user_finalist: |
+            Hello fName, lName,
+
+            You have been chosen by the Corportation for the mission missionTitle.
+            Link Log In
+            The team at Consultants.wantmore.work send you their most sincere Congratulations  !
+        no_shortlist: |
+            Hello fName, lName,
+
+            Your proposal has not been accepted due to its late arrival.
+            This is unfortunate considering its Please be ready for the next pitch that comes you way.
+            Make sure you send your proposal sooner. To help with that, check if your email notifications are turned on.
+
+            The team at Consultants.wantmore.work
+        no_funalist: |
+            Hello fName, lName,
+
+            Unfortunately you have not been chosen to continue working on this mission, despite the quality of your profile.
+            It will be for next time. Stay alert, other pitches might come your way!
+
+            The team at Consultants.wantmore.work
+        reset_password: |
+            Hello uName !
+
+            You may reset your password here
+
+            Greetings,
+            The team at Consultants.wantmore.work
 
 # Payment
 payment:
