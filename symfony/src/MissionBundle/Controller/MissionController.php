@@ -165,30 +165,32 @@ class MissionController extends Controller
                         'userId'       => $userMission->getUser()->getId(),
                         'step'         => $step
                     ]);
-                // user and mission have been [shortlisted|finalisted]
+                // user and mission have been [shortlisted|finalised]
                 case (UserMission::SHORTLIST) :
                 case (UserMission::FINALIST) :
                     $messageService->markAsRead($userMission->getThread()->getLastMessage());
                     $em->flush();
                     $proposal = new Proposal();
                     $form     = $this->createForm(ProposalFromType::class, $proposal)->handleRequest($request);
-                    if ($form->isSubmitted() && $form->isValid()) {
+                    if ($form->isSubmitted() && $form->isValid() && $form->getData()->getFile() !== null) {
+
                         $proposal->setThread($userMission->getThread());
                         $em->persist($proposal);
                         $em->flush();
 
-                        $this->get('inbox.services')->sendProposaleMessage($proposal, $userMission);
+                        $this->get('inbox.services')->sendProposaleMessage($userMission, $user);
 
                         return $this->redirectToRoute('mission_view', ['missionId' => $missionId]);
                     }
+
                     $em->flush();
 
-                        return $this->render('@Mission/Mission/Advisor/mission_to_answer.html.twig', [
-                            'user_mission' => $userMission,
-                            'userId'       => $userMission->getUser()->getId(),
-                            'step'         => $step,
-                            'form'         => $form->createView()
-                        ]);
+                    return $this->render('@Mission/Mission/Advisor/mission_to_answer.html.twig', [
+                        'user_mission' => $userMission,
+                        'userId'       => $userMission->getUser()->getId(),
+                        'step'         => $step,
+                        'form'         => $form->createView()
+                    ]);
                 default :
                     throw $this->createNotFoundException('No view for this UserMission status defined (' .
                         $userMissionStatus . ')');
@@ -311,17 +313,16 @@ class MissionController extends Controller
 
                 $proposal = new Proposal();
                 $form     = $this->createForm(ProposalFromType::class, $proposal)->handleRequest($request);
-                if ($form->isSubmitted() && $form->isValid()) {
+                if ($form->isSubmitted() && $form->isValid() && $form->getData()->getFile() !== null) {
+
                     $proposal->setMission($userMission->getMission());
                     $em->persist($proposal);
                     $em->flush();
 
-                    $this->get('inbox.services')->sendProposaleMessage($proposal, $userMission);
+                    $this->get('inbox.services')->sendProposaleMessage($userMission, $user);
 
                     return $this->redirectToRoute('mission_answer_to_advisor', ['userMissionId' => $userMissionId]);
                 }
-
-
                 return $this->render('@Mission/Mission/Contractor/mission_answer_to_advisor.html.twig', [
                         'userMission' => $userMission,
                         'anonymous'   => $step->getAnonymousMode(),

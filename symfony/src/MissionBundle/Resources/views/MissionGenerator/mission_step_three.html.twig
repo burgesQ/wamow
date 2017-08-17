@@ -19,15 +19,18 @@
                 <div class="wmw-onboard-domains row">
                     <div class="wmw-onboard-domains-col col-xs-12 col-sm-6">
                         {% for key, val in form.missionKinds %}
-                            {% if loop.index0 == 1 %}
+                            {% if loop.index == 1 %}
                                 <div class="wmw-onboard-domains-title">{{ 'mission.new.step_three.si_consult' | trans }}</div>
-                                    <div class="wmw-onboard-domains-subs">
-                            {% elseif loop.index0 == 8 %}
-                                    </div>
+                                <div class="wmw-onboard-domains-subs">
+                            {% elseif loop.index == 8 %}
+                                </div>
                                 <div class="wmw-onboard-domains-title">{{ 'mission.new.step_three.organisation_consult' | trans }}</div>
                                 <div class="wmw-onboard-domains-subs">
-                            {% elseif loop.index0 == 12 %}
-                                    </div>
+                            {% elseif loop.index == 12 %}
+                                </div>
+                                </div>
+                                <div class="wmw-onboard-domains-title wmw-onboard-domains-title--right">{{ 'legends.other' | trans }}</div>
+                                <div class="wmw-onboard-domains-subs wmw-onboard-domains-subs--right">
                             {% endif %}
 
                             <div class="wmw-switchfield wmw-switchfield--small">
@@ -35,8 +38,8 @@
                                 <label for="{{ val.vars.id }}">{{ val.vars.label  |trans }}</label>
                             </div>
 
-                            {% if loop.index == 12 %}
-                                </div>
+                            {% if loop.index == loop.last %}
+                            </div>
                             {% endif %}
                         {% endfor %}
                     {{ form_errors(form.missionKinds) }}

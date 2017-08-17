@@ -1,40 +1,40 @@
 tools:
     phone:
-    digits: 'The phone number can only have between 4 and 10 digits.'
-    prefix: 'You must enter a country code with the phone number.'
+        digits: 'The phone number can only have between 4 and 10 digits.'
+        prefix: 'You must enter a country code with the phone number.'
     prefix:
-    phone: 'You must enter a phone number with the country code.'
+        phone: 'You must enter a phone number with the country code.'
     address:
-    required: 'The address must only contain letters, numbers, dots, commas or dashes.'
-    city: 'The city must  only contain letters or dashes.'
-    state: 'The state must only contain letters or dashes.'
+        required: 'The address must only contain letters, numbers, dots, commas or dashes.'
+        city: 'The city must  only contain letters or dashes.'
+        state: 'The state must only contain letters or dashes.'
     upload:
-    badFormat: "This format is not accepted"
+        badFormat: "This format is not accepted"
     number:
-    reauired: "Please enter a valid number"
+        required: "Please enter a valid number"
 
 user:
     companysize:
-    min: "Please select at least one Company Size"
+        min: "Please select at least one Company Size"
     continent:
-    min: "Please select at least one Area"
+        min: "Please select at least one Area"
     fname:
-    blank: 'Please enter your first name.'
-    short: 'The first name is too short.'
-    long: 'The first name is too long.'
-    illegale: 'This first name contains unauthorized characters'
+        blank: 'Please enter your first name.'
+        short: 'The first name is too short.'
+        long: 'The first name is too long.'
+        illegale: 'This first name contains unauthorized characters'
     lname:
-    blank: 'Please enter your last name.'
-    short: 'The last name is too short.'
-    long: 'The last name is too long.'
-    illegale: 'This last name contains unauthorized characters'
+        blank: 'Please enter your last name.'
+        short: 'The last name is too short.'
+        long: 'The last name is too long.'
+        illegale: 'This last name contains unauthorized characters'
 
 company:
     name:
-    blank: 'Please enter the name of your company.'
-    short: 'Company name is too short'
-    long: 'Company name is too long.'
-    illegale: 'This company name contains unauthorized characters'
+        blank: 'Please enter the name of your company.'
+        short: 'Company name is too short'
+        long: 'Company name is too long.'
+        illegale: 'This company name contains unauthorized characters'
 
 error:
     mission_kind:

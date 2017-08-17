@@ -18,7 +18,7 @@
             </div>
 
             {# head profile#}
-            <div class="wmw-profile-header-name">{{ user.lastName | upper }}<br/>{{ user.firstName }}</div>
+            <div class="wmw-profile-header-name">{{ user.firstName }}<br/>{{ user.lastName | upper }}</div>
 
             <div class="wmw-profile-header-button">
                 <a href="{{ path('user_profile_edit') }}">

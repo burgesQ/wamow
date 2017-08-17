@@ -3,7 +3,6 @@
 **/.DS_Store
 /.idea
 app/cache/
-components/
 .bundle/
 /bin/
 /trans

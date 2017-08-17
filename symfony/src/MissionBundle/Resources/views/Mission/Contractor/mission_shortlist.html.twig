@@ -142,7 +142,7 @@
                         </div>
                     </div>
                     <div class="element-content{% if lastMsg.sender.id == userMission.user.id and lastMsg.metadata[1].isRead == false %} element-content--newmessage{% endif %}">
-                        <div class="element-content-title">Advisor {{ userMission.idForContractor }}</div>
+                        <div class="element-content-title">{{ 'footer.advisor' | trans }} {{ userMission.idForContractor }}</div>
                         {% if lastMsg.sender.id == userMission.user.id %}
                             {% if not read %}
                                 {{ 'inbox.new_message' | trans }}
@@ -175,8 +175,7 @@
                             </span><i></i>
                         </a>
                         <a href="{{ path('user_mission_add_to_contract', { 'userMissionId' : userMission.id }) }}"
-                           class="wmw-button wmw-button--green wmw-button--border wmw-button--small"
-                           onclick="return confirm('{{ 'legends.confirmation' | trans }}')">
+                           class="wmw-button wmw-button--green wmw-button--border wmw-button--small">
                             <i></i><span>
                                 <i class="icon icon--handshake"></i>
                                 {{ 'mission.view.contractor.btn_contract' | trans | upper }}

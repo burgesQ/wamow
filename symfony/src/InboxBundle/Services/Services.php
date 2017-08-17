@@ -149,20 +149,20 @@ class Services
     }
 
     /**
-     * @param \ToolsBundle\Entity\Proposal      $proposal
      * @param \MissionBundle\Entity\UserMission $userMission
+     * @param \UserBundle\Entity\User           $user
      */
-    public function sendProposaleMessage(Proposal $proposal, UserMission $userMission)
+    public function sendProposaleMessage(UserMission $userMission, User $user)
     {
         $composer = $this->container->get('fos_message.composer');
         $sender   = $this->container->get('fos_message.sender');
 
         /** @var \InboxBundle\Entity\Message$message */
         $message = $composer->reply($userMission->getThread())->setSender(
-            $userMission->getUser())->setBody('')->getMessage();
+            $user)->setBody('')->getMessage();
         $message->setUserMissionProposalId($userMission->getId());
         $sender->send($message);
-        $message->setIsReadByParticipant($userMission->getUser(), true);
+        $message->setIsReadByParticipant($user, true);
         $this->em->flush();
 
         $contractor = $userMission->getMission()->getContact();

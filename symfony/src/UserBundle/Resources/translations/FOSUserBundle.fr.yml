@@ -1,3 +1,172 @@
+group:
+    edit:
+        submit:
+    show:
+        name:
+    new:
+        submit:
+    flash:
+        updated:
+        created:
+        deleted:
+
+security:
+    login:
+        username:
+        password:
+        remember_me:
+        reset:
+        submit:
+        email:
+        linkedin:
+
+profile:
+    show:
+        username:
+        email:
+        emergencyEmail:
+        first_name:
+        last_name:
+        gender:
+        birthdate:
+        daily_fees_min:
+        daily_fees_max:
+        label:
+        name:
+        zipcode:
+        address:
+        city:
+        state:
+        country:
+        confidentiality:
+        status:
+        phone:
+        image:
+        resume:
+        newslettertrue:
+        newsletterfalse:
+        company:
+        userResume:
+        professionalExpertise:
+        businessPractice:
+        missionKind:
+        languages:
+        unread:
+        nbLoad:
+        readReportActivate:
+        readReportDesactivate:
+
+    flash:
+        updated:
+
+change_password:
+    submit:
+    flash:
+        success:
+
+registration:
+    linkedin:
+    check_email:
+    confirmed:
+    back:
+    submit:
+    flash:
+        user_created:
+    email:
+        subject:
+        message:
+    step:
+        zero:
+        one:
+        two:
+        three:
+        four:
+        five:
+    cat:
+        zero:
+        one:
+        two:
+        three:
+        four:
+        five:
+    consign:
+        zero:
+        one:
+        two:
+        three:
+        four:
+        five:
+    or:
+
+resetting:
+    password_already_requested:
+    check_email:
+    request:
+        invalid_username:
+        username:
+        submit:
+    reset:
+        submit:
+    flash:
+        success:
+    email:
+        subject:
+        message:
+
 # Global strings
 layout:
-    logged_in_as: "Bonjour %first_name% %last_name%"
+    logout:
+    login:
+    register:
+    logged_in_as:
+    sign_up:
+
+form:
+    group_name:
+    username:
+    firstname:
+    lastname:
+    email:
+    emergencyEmail:
+    current_password:
+    password:
+    password_confirmation:
+    new_password:
+    new_password_confirmation:
+    newsletter:
+    gender:
+        female:
+        male:
+        other:
+        choose:
+        gender:
+    birthdate:
+        month:
+        day:
+        year:
+        birthdate:
+    dailyfees:
+        min:
+        max:
+    userResume:
+    submit:
+    languages:
+    nbLoad:
+    readReport:
+    back:
+    next:
+
+social:
+    sign_in_google:
+    sign_in_linkedin:
+    error:
+        access_denied:
+        authorization_expired:
+        bad_verification_code:
+        consumer_key_rejected:
+        incorrect_client_credentials:
+        invalid_assertion:
+        redirect_uri_mismatch:
+        unauthorized_client:
+        unknown_format:
+        unknown_error:

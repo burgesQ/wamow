@@ -18,7 +18,7 @@
             {{ form_errors(form) }}
 
             <p class="wmw-onboard-mentions">
-                {{ 'mission.view.step_five.introduction' | trans | raw }}
+                {{ 'mission.new.step_five.introduction' | trans | raw }}
             </p>
 
             <p class="wmw-onboard-paragraph">
@@ -27,7 +27,7 @@
                 {{ form_errors(form.firstName) }}
                 {{ form_widget(form.firstName)}}
                 {{ form_errors(form.lastName) }}
-                {{ 'mission.view.step_five.company' | trans({'%company': user.company}) | raw}}
+                {{ 'mission.new.step_five.company' | trans({'%company': user.company}) | raw}}
             </p>
 
             <div class="wmw-onboard-blocks row">
@@ -48,7 +48,7 @@
             </div>
 
             <p class="wmw-onboard-paragraph">
-                {{ 'mission.view.step_five.cac' | trans }}
+                {{ 'mission.new.step_five.cac' | trans }}
             </p>
 
             <div class="wmw-copyfields">
@@ -58,7 +58,7 @@
             </div>
             {{ form_errors(form.inspectors) }}
             <p class="wmw-onboard-mentions">
-                {{ 'mission.view.step_five.ending' | trans | raw }}
+                {{ 'mission.new.step_five.ending' | trans | raw }}
             </p>
 
             <div class="wmw-progressbar">

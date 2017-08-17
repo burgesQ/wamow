@@ -232,8 +232,7 @@
                                     </span><i></i>
                                 </a>
                                 <a href="{{ path('user_mission_add_to_contract', { 'userMissionId' : userMission.id }) }}"
-                                   class="wmw-button wmw-button--green wmw-button--border wmw-button--small"
-                                   onclick="return confirm('{{ 'legends.confirmation' | trans }}')">
+                                   class="wmw-button wmw-button--green wmw-button--border wmw-button--small">
                                     <i></i><span>
                                         <i class="icon icon--handshake"></i>
                                         {{ 'mission.view.contractor.btn_contract' | trans | upper }}
@@ -244,7 +243,7 @@
 
                         <div class="mail-toolbar-title">
                             {% if step.position == 1 %}
-                                Consultant {{ userMission.idForContractor }}
+                                {{ 'footer.advisor' | trans }} {{ userMission.idForContractor }}
                             {% else %}
                                 <a href="{{ path('user_profile_view', { 'missionId' : mission.id, 'userId' : userMission.user.id }) }}">
                                     {{ userMission.user.firstName }} {{ userMission.user.lastName }}
@@ -348,7 +347,7 @@
                 </div>
             </div>
 
-            <div class="wmw-mission-sidebar wmw-mission-sidebar--active">
+            <div class="wmw-mission-sidebar {% if step.position == 1 %}wmw-mission-sidebar--active{% endif %}">
                 <div class="sidebar-wrapper">
                     <div class="sidebar-date">
                         {{ 'mission.view.contractor.pitched_at' | trans({ date : mission.updateDate | date('d/m/Y') }) }}

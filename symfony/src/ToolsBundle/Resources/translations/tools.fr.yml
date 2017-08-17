@@ -1,7 +1,9 @@
 # tools.fr.yml
 form:
     address:
+        address: address
         street: "Adresse"
+        street_2:
         city: "Ville"
         zipcode: "Code Postal"
         state: "État"
@@ -9,6 +11,33 @@ form:
         choosecountry: "Sélectionnez un pays"
         name: "Ajouter un nom si besoin"
         label: "Ajouter un label si besoin"
+
+    btn:
+        send:
+        save:
+        upload_proposal:
+        download_proposal:
+        save_certif:
+        download_resume:
+        cancel_mission:
+        back:
+        next:
+        later:
+        edit:
+        print:
+        send:
+        add: ajouter
+        yes: oui
+        no: non
+        update_password:
+        subscribe:
+        cancel:
+        confirm:
+
+    note:
+        saved:
+        indicator:
+        tooltip:
 
     phone:
         prefix: "Préfix"
@@ -18,81 +47,429 @@ form:
     file:
         file: "Fichier"
 
-    note:
-        saved: Enregistré
+    password:
+        old: ancien mot de passe
+        new: nouveau mot de passe
+        repeat: repeter nouveau mdp
 
-language:
-    title: "Langues"
-    english: "Anglais"
-    french: "Français"
-    german: "Allemand"
-    chinese: "Chinois"
-    spanish: "Espagnol"
-    portuguese: "Portuguais"
-    japanese: "Japanais"
-    arabic: "Arabe"
-    italian: "Italien"
-    korean: "Coréen"
+## Base
+header:
+    news:
+    profile:
+    billing:
+    logout:
 
-dashboard:
+side_bar:
+    email_notification: |
+        email
+        notifications
+    profile: "profile\n"
+
+footer:
+    mission: "Mission"
+    about:
+    advisor: "Expert"
+    agreement:
+    legal:
+    contractor:
+
+legends:
+    title: |
+
+
+    content: |
+
+
+
+
+
+
+
+    currency:
+    currency_day: %price/days
+    confirmation:
+    other:
+
+## Common error
+error:
+    page:
+        common: La page demandé est introuvable. Verrifiez láddress url ou
+    forbidden:
+    authorized: "Vous n'êtes pas autorisé à créer une mission."
+    logged: "Vous n'êtes pas connecté."
+    user:
+        subscribe: Please Subscribe
+        email_in_use: Email already in use.
+    user_mission:
+        not_found: No such userMission entity (%id)
+        cant_giveup: You cannot give up this mission.
+        already_giveup: You already gave up this mission.
+        not_enough: You cannot remove the last expert from the mission.
+    mission:
+        pitch:
+            contractor: A company cannot bid.
+        shortlist:
+            to_much: you have not selected any expert.
+            not_enough: Not enough users selected to proceed to My Selection.
+        step_error: There was an error
+        not_found: The requested mission does not exist
+        available: This mission isn't available
+        user_mission: You cannot pitch this mission
+        interested_twice: You have already marked yourself as interested
+        available: The mission %id is not available.
+        limit_reach: The limit of expert answers was reached for this mission. The mission is closed
+        wrong_company: You don't belong to the right company
+        already: You have already executed this action.
+        finalist:
+            no_advisor: No expert selected for the final step.
+    action:
+        failed: Action failed.
+        shortlist:
+            to_much: You have already selected 3 experts.
+    upload_resume_or_linkedin: Please Upload a resume or link your account to LinkedIn
+    phone:
+        please_fill:
+
+## Home
+home:
+    contractor:
+        login:
+        signup:
+        title:
+        valueproposition:
+            first:
+            second:
+        howdoesitwork:
+        start:
+            text:
+        play:
+            text:
+        improve:
+            text:
+        pay:
+            text:
+        preregister:
+            email:
+            emergency_email:
+            firstname:
+            lastname:
+            company:
+            country:
+            phone:
+            comment:
+            submit:
+            registered:
     advisor:
-        interested:
+        contractorlink:
+        login:
+        signup:
+        seeker:
+        open:
+        title:
+        valueproposition:
+            first:
+            second:
+        howdoesitwork:
+        start:
+            text:
+        play:
+            text:
+        improve:
+            text:
+        pay:
+            text:
 
+## Dashboard
+dashboard:
+    unread:
+    advisor:
+        fyi:
+            title:
+            text:
+        new:
+            title:
+            date:
+            interestedbutton:
+        wip:
+            title:
+            date: Pitched at date
+            in_fact: You are more likely to be selected...
+            get_in_touch: Get in touch
+            showmore:
+            giveupbutton:
+            interested:
+            ongoing:
+            shortlist:
+            contact:
+            see_the_pitch:
+            waiting:
+            answer:
+            mission_status:
+            show_all_pitch:
+            echange:
+            shortlist:
+            to_answer:
+            selected:
+            finalist:
+            giveup:
+            dismiss:
+            delete:
+            ended:
+            full:
+            unread: "{0}No new message|{1}You have %unread% new message|]1,Inf]You have %unread% new messages"
+        close:
+            show_more:
+            title:
+            mission:
+            delete:
+            close:
+        other:
+            none:
+            none_leg:
+            advice:
+            in_fact:
+            get_in_touch:
+            contact:
+            see_the_pitch:
+            waiting:
+            answer:
+            mission_status:
+            show_all_pitch:
+            echange:
+    contractor:
+        new:
+            button:
+        fyi:
+            title:
+            text:
+        mission:
+            title:
+            date:
+            showmore:
+            seethepitchbutton:
+            answerbutton:
+            selectfinalistbutton:
+            contactbutton:
+            deletebutton:
+            interested:
+            selected:
+            proposal:
+            finisher:
+            ongoing:
+            shortlist:
+            waiting:
+            finish:
+            mustbefinish:
+            unread: "{0}No new message|{1}You have %unread% new message|]1,Inf]You have %unread% new messages"
+            proposal:
+        draft:
+            title:
+            date:
+            continuebutton:
+            deletebutton:
+        error:
+            logged:
+
+## Registration
+registration:
+    advisor:
+        zero:
+            title:
+            subtitle:
+            howtotitle: "85% of pitches find a matching expert within 15 days."
+            howtotext:
+
+
+
+
+
+
+            linkedinbutton:
+            or:
+            firstname:
+            lastname:
+            email:
+            country:
+            remote:
+            languages:
+            password:
+            repeatpassord:
+            mismatchpassword:
+            resume:
+            nextbutton:
+        one:
+            title:
+            subtitle:
+            how_to_label: |
+                85% OF PITCHES FIND A MATCHING EXPERT
+                WITHIN 15 DAYS.
+            how_to_text: |
+                A good profile will increase your success at matching,
+                ensure your profile details are accurate and complete.
+                Be aware that the User Agreement of
+                consultants.wantmore.work requires an ID
+                background check.
+
+            backbutton:
+            nextbutton:
+        two:
+            title:
+            subtitle:
+            howtotitle:
+            howtotext:
+            backbutton:
+            nextbutton:
+        three:
+            title:
+            subtitle:
+            howtotitle:
+            howtotext:
+            backbutton:
+            nextbutton:
+        four:
+            title:
+            subtitle:
+            howtotitle:
+            howtotext:
+            backbutton:
+            nextbutton:
+            cumuledmonth:
+            dailyfees:
+            peremption:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Users
+user:
+    profile_show:
+        wait_subscription_plan:
+        linkedin_stuff:
+        resume_stuff:
+        advisor:
+            link_back_to_board:
+            link_show_profile:
+            link_edit_profile:
+            link_general:
+            link_billing:
+            title_algorithm_improvment:
+            title_subscription:
+            email_notification: email<br>notification
+            link_password:
+    profile_edit:
+        advisor:
+            btn_save_change:
+
+# Comapnies
+company:
+    name:
+    new:
+        name:
+        size:
+        choosesize:
+        small: "Small less than 10 employees"
+        medium: "Medium between 10 and 500 employees"
+        big: "More than 500 employees"
+        logo:
+        description:
+        sector:
+        choosesector:
+        submit:
+        registered:
+        error:
+            onecompany:
+            authorized:
+            usedname:
+
+    join:
+        name:
+        new:
+        submit:
+        info :
+        success:
+        joined:
+        error:
+            authorized:
+            onecompany:
+
+    leave:
+        wannaleave:
+        submit:
+        leaved:
+        error:
+            authorized:
+            nocompany:
+
+## Mission
 mission:
-    all_missions:
-        title: "Toutes les missions disponibles"
-        start: "commencer"
-        delete: "supprimer"
-        pitch: "pitch"
-    edit:
-        title: "Edition de la mission"
-        warning: "Vous éditez une mission qui existe déjà."
-        cancel: "Retour à la mission."
-        successEdit: "Mission éditée avec succès."
+    view:
+        pitched_at:
+        price_day: € / jour
+        more_info:
+        less_info:
+        currency_k: 'K €'
+        receive_the_pitch: <span id='count-match'> %nb </span> recevront le pitch
+        cretification:
+        no_certification:
+        contractor:
+            pitched_at:
+            next_mission:
+            prev_mission:
+            status_advisor:
+            status_shortlist:
+            status_finalit:
+            status_interested: interested
+            btn_refuse: DECLINE
+            btn_proced_to_shortlist: Proceed to My Selection
+            btn_contract: contract
+            btn_add_to_shortlist: add to my selection
+            btn_remove_from_shortlist: remove from my selection
+            finance: |
+                %professionalExpertise<br>
+                <strong>%price</strong><br>
+        advisor:
+            btn_back_to_mission: back to mission
+            btn_back_to_board: back to board
+            btn_back_to_global_view: back to global view
+            interested: Interested
+            finance: |
+                %professionalExpertise<br>
+                <strong>%price</strong><br>
+            on_site: On site
+            not_on_site: Not on site
+        to_answer: To Answer
+
+        waiting: |
+          <small>MISSION STATUS</small><br />
+          <span class="status">Waiting</span>
+        interested: |
+          <small>MISSION STATUS</small><br />
+          <span class="status">Select interested advisors</span>
+        shortlisted: |
+            <small>MISSION STATUS</small><br />
+            <span class="status">Shortlist</span>
+        selected: |
+            <small>MISSION STATUS</small><br />
+            <span class="status">Selected</span>
+
+    action:
+        add_to_shortlist: User added to my selection !
+        add_to_contract: User added to contract !
+        remove_from_shortlist: User removed from my selection !
+        refuse_user: User declined.
 
     new:
-        label:
-            step_three:
-                certif: Certification <small> (optionnel) </small>
-                lang: Langue(s) de travaille
-            range: Prix
-        form:
-            back_resume: REVENIR AU RESUME
-            save_mod: APPLIQUER LES MODIFICATIONS
-            later: FINIR PLUS TARD
-            next: NEXT
-            back: BACK
-            print: PRINT
-            edit: edit
-            share_pitch: DIFFUSER LE PITCH
-            title: TITRE DU PITCH
-            resume: DESCRIPTION DU PROJET (500 MOTS)
-            business_practice: Secteur d'activité
-            professional_expertise: DOMAINE FONCTIONNEL
-            budget: BUDGET ESTIMÉ
-            confidentiality: Entreprise anonyme
-            telecommuting: Présence sur site requise
-            country: PAYS
-            applicationEnding: DATE LIMITE DE RÉPONSE AU PITCH
-            missionBeginning: DÉBUT DE MISSION
-            missionEnding: FIN DE MISSION ESTIMÉE
-            north_america: North America
-            south_america: South AMerica
-            emea: EMEA
-            asia: Asia - Pacific
-            range: PRIX
-            language: LANGUE(S) DE TRAVAILLE
-            company: Société
-            share: diffuser le pitch ci-dessous rédigé a la communauté d'expert consultants.wantmore.work
-            reference: diffuser le nom de l'entreprise comme une référence
-            chooseDay: Jours
-            chooseMonth: Mois
-            chooseYear: Annee
-            first_name: Prenom
-            last_name: Nom
-            +: +
-            certification: Cértification / Compétences Spécifique
-
+        content_resume: |
         step_one:
             title: Le pitch
             subtitle: COMMENCONS PAR LE COMMENCEMENT
@@ -135,7 +512,6 @@ mission:
                 BLABLA<br>
             si_consult: Conseil en SI
             organisation_consult: Conseil en organisation
-
         step_four:
             title: Resume
             subtitle: TRES BIEN, FAISONS UN PETIT POINT
@@ -144,9 +520,8 @@ mission:
                 Relisez attentivement les<br>
                 informations avant de confir-<br>
                 mez l'envoi.
-
         step_five:
-            title: Fianl Step
+            title: Final Step
             subtitle: DERNIERE ETAPE ET NOUYS Y SOMMES
             hint: |
                 FINAL STEP:<br><br>
@@ -154,32 +529,6 @@ mission:
                 du pitch aux expert. Vous<br>
                 serez orienté vers un site de<br>
                 payement de ligne.
-
-    view:
-        country: Pays de la mission
-        link: Creer un nouveau Pitch
-        draft: Pitch en cours de creation
-        price_day: € / jour
-        currency_k: 'k€'
-        receive_the_pitch: <span> %nb </span> recevront le pitch
-
-        step_four:
-            professional_expertise: DOMAINE FONCTIONNEL
-            end_pitch: FIN DU PITCH
-            start_mission: DATE DE MISSION
-            mission_kind: TYPOLOGIE
-            telecommuting: SUR SITE
-            confidentiality: ANONYME
-            languages: LANGUES
-            certif: CERTIFICATION
-            budget: BUDGET
-            price: PRIX
-            concerned: CONSULTANT CONCERNÉS
-            languages: LANGUES
-            finance: Finance
-            date_range: "%startDate au %endDate"
-
-        step_five:
             introduction: |
                 Consultants.wantmore.work est une marque BestAdvizor SAS, Societe au capitale de 51.000 euros - RCS Paris <br>
                 815 362 736 - Siège social : 116 Av Felix Faure 75015 Paris Buraux : 18 avenue Franklin D. Roosvelt 75008 <br>
@@ -198,48 +547,151 @@ mission:
                 La Société se reserve le droit de faire état des pitches realisés et des noms des clients, de les divulguer a titre de <br>
                 références.
 
-    registered:
-        success: "Mission sauvegardée !"
-        see: "Voir votre mission"
-        edit: "Editer votre mission"
-        another: "Créer une nouvelle mission"
+        form:
+            back_resume: REVENIR AU RESUME
+            save_mod: APPLIQUER LES MODIFICATIONS
+            back: BACK
+            share_pitch: DIFFUSER LE PITCH
+            share: diffuser le pitch ci-dessous rédigé a la communauté d'expert consultants.wantmore.work
+            reference: diffuser le nom de l'entreprise comme une référence
 
+        label:
+            currency:
+            title: TITRE DU PITCH
+            resume: DESCRIPTION DU PROJET (500 MOTS)
+            later:
+            budget: BUDGET ESTIMÉ
+            confidentiality: Entreprise anonyme
+            telecommuting: Présence sur site requise
+            country: PAYS
+            applicationEnding: DATE LIMITE DE RÉPONSE AU PITCH
+            missionBeginning: DÉBUT DE MISSION
+            missionEnding: FIN DE MISSION ESTIMÉE
+            chooseDay: Jours
+            chooseMonth: Mois
+            chooseYear: Annee
+            certification: Cértification / Compétences Spécifique
+            language: LANGUE(S) DE TRAVAILLE
+            range: PRIX
+            step_three:
+                certif: Certification <small> (optionnel) </small>
+                lang: Langue(s) de travaille
+            step_four:
+                professional_expertise: PROFESSIONAL EXPERTISE
+                end_pitch: END OF PITCH
+                start_mission: START DATE OF THE MISSION
+                mission_kind: MISSION TYPE
+                telecommuting: ON SITE (PARTIALLY)
+                confidentiality: HIDDEN COMPANY NAME
+                languages: LANGUAGES
+                certif: CERTIFICATIONS <small> (opptional) </small>
+                budget: BUDGET
+                price: PRICE
+                concerned: CONSULTANT CONCERNED
+                languages: LANGAUGES
+                finance: Finance
+                date_range: "from %startDate to %endDate"
+                on_site: on site
+                not_on_site: not on site
+                confidential: hidden
+                not_confidential: not hidden
+                price_day: / day
+                hint_company: This is a explination of the companies; you can select multiple of them
+                hint_continent: This is a explination of the companies; you can select multiple of them
+    message:
+        no_advisor: No advisor accepted your mission yet. We are a matching best profile for you and you'll receive an email as soon as we found him/her
+        no_proposition: We didn't find any mission for you but we are still looking for it !
+        shortlist_added: You've been added to the shortlist by the Contractor.
+
+## Inbox
+inbox:
+    form:
+        placeholder:
+            empty:
+        btn_submit_empty_interested:
+    read:
+    show:
+    you:
+    new_message:
+
+thread:
     error:
-        page:
-            common: La page demandé est introuvable. Verrifiez láddress url ou
-        authorized: "Vous n'êtes pas autorisé à créer une mission."
-        logged: "Vous n'êtes pas connecté."
-        contractor: "Seul un expert peut éditer une mission."
-        wrongId: "La misssion %id% n'existe pas."
-        notYourMission: "Vous ne pouvez pas éditer une mission que vous n'avez pas crée."
-        available: "La mission %id% n'est pas disponible."
-        right: "Vous n'avez pas crée cette mission."
-        advisor: "Vous n'avez pas accès à cette page."
-        needCompany: "Veuillez rejoindre une entreprise avant de créer une mission"
-        wrongcompany: "Vous n'appartenez pas à la bonne entreprise"
-    pitch:
-        done: "Vous venez de postuler."
-        twice: "Vous avez déjà postulé à cette mission."
-        contractor: "Vous ne pouvez pas pitcher"
-    selection:
-        choose: "Advisors disponibles :"
-        selected: "Advisors selectionnées :"
-        step: "Étape"
-        delete: "Vous devez garder au moins un advisor."
-        counter: "Vous ne pouvez plus supprimer d'advisor."
-        minimum: "Selectionnez entre un et %limit% advisors."
-        takeBack: "Vous en avez supprimez une par erreur ?"
-        takeBackError: "Vous ne pouvez plus reprendre d'advisor."
-        pick: "Choississez en une de l'étape précédente."
-        finish: "Vous avez choisis l'advisor numero %id%, votre mission peut maintenant commencer."
-        saveButton: "Selectionner"
-        saveButton2: "Reprenez ces advisors"
-        saveButton3: "Prochaine étape"
-        saveButton4: "Supprimer"
-        limit: "%limit% suppression(s) disponible(s)"
-    pitch:
-        title: "Mes pitchs"
-        giveUp: "Abandonner"
+        logged:
+        exist:
+        rights:
+
+message:
+    readReport:
+        read:
+        receive:
+
+## Business vocabulary
+language:
+    title: "Languages"
+    english: "Anglais"
+    french: "Francais"
+    german: "German"
+    spanish: "Spanish"
+    portuguese: "Portuguese"
+    japanese: "Japanese"
+    arabic: "Arabic"
+    italian: "Italian"
+    korean: "Korean"
+    mandarin: "Chinese, Mandarin"
+    bengali: "Bengali"
+    hindi:  "Hindi"
+    russian: "Russian"
+    wu: "Chinese, Wu"
+    javanese: "Javanese"
+    turkish: "Turkish"
+    vietamese: "Vietnamese"
+    telegu: "Telugu"
+    cantonese: "Chinese, Yue(Cantonese)"
+    marathi: "Marathi"
+    tamil: "Tamil"
+    urdu: "Urdu"
+    minman: "Chinese, Min Nan"
+    jinyu: "Chinese, Jinyu"
+    gujarati: "Gujarati"
+    polish: "Polish"
+    ukrainian: "Ukrainian"
+    persian: "Persian"
+    xiang: "Chinese, Xiang"
+    malayalam: "Malayalam"
+    hakka: "Chinese, Hakka"
+    kannada: "Kannada"
+    oriya: "Oriya"
+    panjabi_west: "Panjabi, Western"
+    sunda: "Sunda"
+    panjabi_east: "Panjabi, Eastern"
+    romanian: "Romanian"
+    bhojpuri: "Bhojpuri"
+    azerbaijani: "Azerbaijani, South"
+    maithili: "Maithili"
+    hausa: "Hausa"
+    burmese: "Burmese"
+    serbo: "Serbo-Croatian4"
+    gan: "Chinese, Gan"
+    awadhi: "Awadhi"
+    thai: "Thai"
+    dutch: "Dutch"
+    yoruba: "Yoruba"
+
+continent:
+    emea:          EMEA
+    south_america: South America
+    north_america: North America
+    asia:          Asia - Pacific
+
+company_size:
+    small:  Small Companies
+    medium: Medium Companies
+    large:  Large Companies
+
+experience_shaping:
+    cumuledmonth: How many months in total ?
+    daily_fees:   What was your daily rate for the last mission of this kind ?
+    peremption:   Was the last mission of this kind within the last 2 years ?
 
 businesspractice:
     title: "Secteur d'activité"
@@ -285,7 +737,9 @@ professionalexpertises:
 typemissions:
     title: "Typologie de mission"
     strategic: "Conseil en stratégie"
-
+    execution: "Conseil opérationnel"
+    organisationtransformation: "Conseil en Organisation et Transformation"
+    businessreingeniering: "Conseil en reingeniering"
     csp: "Conseil SI CSP"
     moa: "Conseil SI MOA"
     moe: "Conseil SI MOE"
@@ -293,14 +747,9 @@ typemissions:
     infrastructure: "Conseil SI Infrastructure"
     migration: "Conseil SI Migration"
     implementation: "Conseil SI Implementation"
-
-    execution: "Conseil opérationnel"
-    organisationtransformation: "Conseil en Organisation et Transformation"
-    change: "Conseil en change / accompagnement du changement"
-    businessreingeniering: "Conseil en reingeniering"
-
     interimmanagement: "Interim Management"
     recruitment: "Conseil en recrutement - Chasses de têtes"
+    change: "Conseil en change / accompagnement du changement"
     coaching: "Coaching"
     learning: "Formation"
     audit: "Audit"
@@ -507,7 +956,7 @@ mails:
             Greetings,
             The WantMoreWork team
 
-# Pqyement template
+# Payment
 payment:
     ok: "Inscription activée avec succés !"
     ko: "Inscription annulée."
@@ -517,8 +966,53 @@ payment:
         free: "Accès basique (gratuit)"
     one_year: "1 an"
     ends: "Termine le"
+    card_number:
+    pls_there:
 
-# Notification template
+# NewsLetter
+newsletter:
+    body_title: THE NEWSLETTER FOR THOSE WHO WANT TO KNOW MORE ABOUT WORK
+    read_more: READ MORE
+    view:
+        footer:
+            writer: Writed by %writer
+            poster: Posted by %poster the %postDate
+            updateDate: Last update the %updateDate
+        error:
+            not_found: Their is no such article :(
+        comment:
+            author_email: Email address
+            author_first_name: First Name
+            author_last_name: Last Name
+            content: Content of your comment
+            post: Post your comment
+            intro: 'thought on "%article_title"'
+            meta: Posted by %author_f_name %author_l_name (%author) the %postDate
+            reply: Reply
+        newsletter:
+            link: Click to see the full newsletter
+            what: Newsletters
+
+    edit:
+        save: Save changes
+        cancel: Cancel changes
+        content: Change content of the article
+        link: Edit the content of the article
+
+    new:
+        save: Create article
+        content: Content of the new article
+        title: Title of the new article
+        writedBy: Author of this article
+        url: Link for the new article
+        creationDate: Date of the article's (opptional)
+
+    user:
+        notLogged: You must be logged to edit the content of an article
+        noRights: You must be the writer or the publisher of an article to edit it
+
+
+# Notification
 notification:
     seeker:
         mission:

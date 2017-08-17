@@ -13,13 +13,10 @@ class LoadMissionKind extends AbstractFixture implements OrderedFixtureInterface
     public function load(ObjectManager $manager)
     {
         $names = [
-            'typemissions.strategic',
-
             'typemissions.csp',
             'typemissions.moa',
             'typemissions.moe',
             'typemissions.tma',
-
             'typemissions.infrastructure',
             'typemissions.migration',
             'typemissions.implementation',
@@ -29,6 +26,7 @@ class LoadMissionKind extends AbstractFixture implements OrderedFixtureInterface
             'typemissions.change',
             'typemissions.businessreingeniering',
 
+            'typemissions.strategic',
             'typemissions.interimmanagement',
             'typemissions.recruitment',
             'typemissions.coaching',

@@ -1,0 +1,19 @@
+.autocomplete-suggestions{
+	padding:15px 0;
+	border:1px solid $colorgreyxlight;
+	border-top:none;
+	background:white;
+	font-size:14px;
+
+	.autocomplete-suggestion{
+		display:block;
+		padding:4px 15px;
+		color:$colorgreylight;
+		transition:background .2s, color .2s;
+	}
+
+	.autocomplete-selected{
+		background:$colorpurple;
+		color:white;
+	}
+}

@@ -20,7 +20,7 @@ class StepFiveFormType extends AbstractType
             ->add('lastName', TextType::class, [
                 'translation_domain' => 'tools',
                 'empty_data'         => false,
-                'label'              => 'mission.view.step_five.person'
+                'label'              => 'mission.new.step_five.person'
             ])
             ->add('firstName', TextType::class, [
                 'translation_domain' => 'tools',

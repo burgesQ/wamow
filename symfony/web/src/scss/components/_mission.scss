@@ -1,0 +1,1409 @@
+.wmw-mission{
+	position:relative;
+	border-left:1px solid $colorgreyxlight;
+	border-right:1px solid $colorgreyxlight;
+	border-bottom:1px solid $colorgreyxlight;
+	background:#fdfdfd;
+
+	&:before{
+		content:'';
+		display:block;
+		width:100%;
+		height:3px;
+		background: linear-gradient(to right, $colorpurple, $colorgreen);
+	}
+
+	.wmw-mission-close{
+		display:inline-block;
+		font-size:10px;
+		text-transform:uppercase;
+		letter-spacing:0.06em;
+		color:$colorgreylight;
+		text-decoration:none;
+		margin:15px;
+		position:relative;
+		z-index:100;
+
+		.icon{
+			font-size:16px;
+			margin:0 6px 0 0;
+		}
+	}
+
+	.wmw-mission-breadcrumbs{
+		display:none;
+		font-size:0;
+		border-bottom:1px solid $colorgreyxlight;
+
+		.breadcrumbs-el{
+			display:inline-block;
+			position:relative;
+			line-height:30px;
+			color:#b7b7bc;
+			font-family:$fontdincondmed;	
+			color:$colorgreylight;
+			font-size:10px;	
+			text-decoration:none;
+			text-transform:uppercase;
+			padding:0 12px 0 15px;
+
+			.wmw-button{
+				top:-3px;
+				margin:0 0 0 10px;
+			}
+
+			&:before,
+			&:after{
+				content:'';
+				display:block;
+				border-left:7px solid white;
+				border-top:15px solid transparent;
+				border-bottom:15px solid transparent;
+				position:absolute;
+				top:0; right:-6px;
+				z-index:100;
+			}
+
+			&:before{
+				border-left-color:$colorgreyxlight;
+				right:-7px;
+			}
+
+			&.active{
+				color:white;
+				background:$colorgreen;
+
+				&:after{
+					border-left-color:$colorgreen;
+				}
+			}
+
+			&:last-child{
+
+				&:before,
+				&:after{
+					content:none;
+				}
+			}
+		}
+	}
+
+	.wmw-mission-header{
+		position:relative;
+		
+		h1{
+			font-family:$fontdincondmed;
+			color:$colorgrey;
+			font-size:25px;
+			line-height:1.1em;
+			padding:10px 15px;
+			margin:0;
+			display:block;
+			font-weight:normal;
+			border-top:1px solid $colorgreyxlight;
+			border-bottom:1px solid $colorgreyxlight;
+
+			small{
+				display:block;
+				font-family:$fontcantarell;
+				color:$colorgreylight;
+				font-size:12px;
+				letter-spacing:0;
+				margin-top:0;
+			
+				.icon{
+					font-size:16px;
+				}
+			}
+		}
+
+		.wmw-mission-summarybtn{
+			display:block;
+			border-bottom:1px solid $colorgreyxlight;
+			text-align:center;
+			padding:6px 10px;
+
+			.wmw-button{
+				vertical-align:middle;
+
+				.off{ display:inline; }
+				.on{ display:none; }
+			}
+
+			&.wmw-mission-summarybtn--active{
+
+				.wmw-button{
+
+					.off{ display:none; }
+					.on{ display:inline; }
+				}
+			}
+		}
+
+		.wmw-mission-summary{
+			display:flex;
+			align-items:stretch;
+			flex-wrap:wrap;
+			overflow:hidden;
+			max-height:0;
+			transition:max-height .3s $easeinout;
+
+			&.wmw-mission-summary--active{
+				max-height:500px;
+			}
+
+			.summary-el{
+				position:relative;
+				width:50%;
+				display:flex;
+				align-items:center;
+				justify-content:center;
+				vertical-align:top;
+				border-left:1px solid $colorgreyxlight;
+				border-bottom:1px solid $colorgreyxlight;
+				font-family:$fontcantarell;
+				font-size:10px;
+				letter-spacing:0;
+				text-align:center;
+				padding:10px;
+				text-overflow:ellipsis;
+				overflow:hidden;
+
+
+
+				.icon{
+					font-size:16px;
+					margin-bottom:5px;
+					color:#b8b8bd;
+				}
+
+				&.summary-el--purple{
+					color:$colorpurple;
+
+					.icon{
+						color:$colorpurple;
+					}
+				}
+			
+				&.summary-el--salary{
+					padding:12px 10px;
+					width:100%;
+
+					strong{
+						font-size:25px;
+					}
+				}
+
+				&.summary-el--answer{
+					background:#fdf0ee;
+					color:$colorred;
+					padding:15px 25px;
+					font-size:16px;
+					width:100%;
+
+					.icon{
+						color:$colorred;
+						font-size:35px;
+					}
+				}
+
+				&.summary-el--interested{
+					background:#eee9fa;
+					color:$colorpurple;
+					padding:15px 25px;
+					font-size:16px;
+					width:100%;
+
+					.icon{
+						color:$colorpurple;
+						font-size:35px;
+					}
+				}
+
+				&.summary-el--selected{
+					background:#ebf9f8;
+					color:$colorgreen;
+					padding:12px 25px;
+					font-size:16px;
+					line-height:13px;
+					width:100%;
+
+					.icon{
+						color:$colorgreen;
+						font-size:35px;
+					}
+
+					small{
+						font-size:9px;
+						color:$colorgreylight;
+						text-transform:uppercase;
+					}
+				}
+			}
+		}
+	}
+
+	.wmw-mission-body{
+		position:relative;
+		padding:50px 15px 15px 15px;
+		overflow:hidden;
+
+		.wmw-mission-pagination{
+			display:block;
+			position:absolute;
+			top:13px; right:15px;
+			z-index:100;
+		
+			a{
+				display:inline-block;
+				padding:0 10px;
+				height:20px;
+				line-height:18px;
+				border:1px solid $colorgreylight;
+				color:$colorgreylight;
+				text-align:center;
+				font-size:12px;
+				text-decoration:none;
+
+				&:hover,
+				&.current{
+					background:$colorgreen;
+					color:white;
+					border-color:$colorgreen;
+				}
+			}
+		}
+
+		.wmw-mission-content{
+			overflow-x:auto;
+			white-space:nowrap;
+			padding:0 10px 20px 10px;
+			position:relative;
+		}
+
+		&.wmw-mission-body--mail{
+			padding:0;
+
+			.wmw-mission-content{
+				overflow:hidden;
+				white-space:normal;
+				padding:0;			}
+		}
+
+		.wmw-mission-element{
+			width:100%;
+			margin:0 25px 0 0;
+			display:inline-block;
+			white-space:normal;
+
+			.element-title{
+				display:block;
+				margin-bottom:25px;
+				border:1px solid $colorgreyxlight;
+				background:white;
+				box-shadow:0 0 6px rgba(0,0,0,0.1);
+				padding:10px 15px;
+				min-height:44px;
+				font-size:20px;
+				font-family:$fontdincondmed;
+				text-transform:uppercase;
+				color:$colorgrey;
+
+				a{
+					color:$colorgrey;
+					text-decoration:none;
+				
+					&:hover{
+						text-decoration:underline;
+					}
+				}
+
+				.element-title-links a{
+					color:white;
+
+					&:hover{
+						text-decoration:none;
+						color:$colorgreen;
+					}
+				}
+			}
+
+			.element-content{
+				display:block;
+				margin-bottom:25px;
+				border:1px solid $colorgreyxlight;
+				background:white;
+				box-shadow:0 0 6px rgba(0,0,0,0.1);
+				padding:15px;
+				color:$colorgreylight;
+				position:relative;
+				height:250px;
+				font-size:14px;
+				overflow:auto;
+
+				.element-content-title{
+					display:block;
+					margin:0 0 10px 0;
+					text-transform:uppercase;
+				}
+
+				.element-content-bottom{
+					display:block;
+					padding:15px 0 0 0;
+					width:100%;
+					margin:10px 0 0 0;
+					font-size:10px;
+					text-transform:uppercase;
+					color:$colorgreylight;
+					font-family:$fontcantarell;
+
+					a{
+						float:right;
+						color:$colorgreylight;
+						text-decoration:none;
+
+						.icon{
+							font-size:14px;
+							margin-top:-2px;
+						}
+
+						&:hover{
+							text-decoration:underline;
+						}
+					}
+				}
+
+				&.element-content--newmessage{
+					background:#fdf0ee;
+					border-color:$colorred;
+				
+					.element-content-new{
+						color:$colorred;
+						font-size:11px;
+						font-style:italic;
+						font-weight:bold;
+						position:absolute;
+						top:18px;
+						right:15px;
+					}
+
+					.element-content-title{
+						color:$colorred;
+					}
+				}
+			}
+
+			.element-notes{
+				display:block;
+				margin-bottom:25px;
+				border:1px solid $colorgreyxlight;
+				border-left:none;
+				background:url(../images/mission-notes-bg.png) repeat-y bottom left;
+				box-shadow:0 0 6px rgba(0,0,0,0.01);
+				height:240px;
+				position:relative;
+
+				.element-notes-empty{
+					position:absolute;
+					top:0; left:0;
+					width:100%;
+					height:100%;
+					align-items:center;
+					justify-content:center;
+					display:flex;
+					text-align:center;
+					font-size:38px;
+					color:#b7b7bc;
+					font-family:$fontdincondmed;
+					padding:0 0 0 10px;
+					opacity:0;
+					transition:opacity .3s;
+
+					.icon{
+						font-size:56px;
+						margin:10px 0 0 0;
+					}
+				}
+
+				&.element-notes--empty .element-notes-empty{
+					opacity:1;
+				}
+
+				.element-notes-textarea{
+					background:none;
+					border:none;
+					position:relative;
+					width:100%;
+					height:100%;
+					padding:15px 15px 15px 25px;
+					font-family:$fontcantarell;
+					font-size:14px;
+					color:$colorgrey;
+					letter-spacing:0.06em;
+				}
+
+				.element-notes-status{
+					display:none;
+					position:absolute;
+					text-align:right;
+					color:$colorgreen;
+					font-size:12px;
+					font-style:italic;
+					font-weight:bold;
+					letter-spacing:0;
+					top:-20px; right:0;
+				}
+			}
+
+			.element-buttons{
+				text-align:center;
+
+				.wmw-button{
+					margin: 0 0 5px 0;
+
+					.icon--handshake{
+						font-size:18px;
+						top: 3px;
+					}
+				}
+			}
+
+			&.wmw-mission-element--shortlist{
+
+				.element-title{
+					position:relative;
+					padding:10px 15px 54px 15px;
+
+					.element-title-links{
+						border-top:1px solid $colorgreyxlight;
+						bottom:0; right:0;
+						position:absolute;
+						width:100%;
+						text-align:right;
+					}
+
+					.wmw-simple-button{
+						font-size:16px;
+						vertical-align:top;
+						height:44px;
+						line-height:44px;
+						
+						.icon{
+							font-size:20px;
+						}
+					}
+
+					.element-title-link{
+						display:inline-block;
+						vertical-align:top;
+						line-height:44px;
+						font-size:10px;
+						text-transform:uppercase;
+						text-decoration:none;
+						color:$colorgreylight;
+						margin:0 6px 0 0;
+						font-family:$fontcantarell;
+
+						&:hover{
+							text-decoration:underline;
+						}
+					}
+				}
+			}
+
+			&.wmw-mission-element--empty{
+				display:block;
+				width:100%;
+				text-align:center;
+				padding:15px;
+
+				img{
+					margin:0 0 15px 0;
+					display:inline-block;
+					width:200px;
+					height:auto;
+				}
+			}
+		}
+
+		.wmw-mission-sidebar{
+			display:block;
+			position:absolute;
+			top:3px; left:0;
+			width:80%;
+			height:100%;
+			background:white;
+			border-right:3px solid $colorgreen;
+			z-index:100;
+			transform:translateX(-100%);
+			transition:transform .5s $easeinout;
+			font-size:14px;
+
+			.sidebar-wrapper{
+				display:block;
+				width:100%;
+				height:auto;
+				max-height:100%;
+				overflow:hidden;
+				padding:30px 30px;
+				position:relative;
+				overflow:auto;
+			}
+
+			.sidebar-button{
+				display:block;
+				width: 32px;
+				height: 41px;
+				background:url(../images/mission-sidebar-button.png) no-repeat right;
+				position:absolute;
+				top:0; right:-32px;
+			}
+
+			.sidebar-date{
+				margin:0 0 15px 0;
+				color:#a2a2a2;
+				font-weight:bold;
+			}
+
+			&.wmw-mission-sidebar--active{
+				transform:translateX(0);
+
+				.sidebar-button{
+					background-position:left;
+				}
+			}
+		}
+
+		.wmw-mission-mail{
+			display:block;
+			position:relative;
+			white-space:normal;
+		
+			.mail-toolbar{
+				display:block;
+				padding:15px 20px 45px 20px;
+				position:relative;
+				text-align:center;
+				border-bottom:1px solid $colorgreyxlight;
+
+				.mail-toolbar-buttons{
+					position:absolute;
+					width:100%;
+					bottom:6px;
+    				left: 0;
+				}
+
+				.mail-toolbar-title{
+					text-transform:uppercase;
+					font-size:25px;
+					font-family:$fontdincondmed;
+				}
+			}
+
+			.mail-content{
+				padding:30px 15px;
+				position:relative;
+
+				&.mail-content--nopadding{
+					padding:0;
+				}
+
+				.mail-content-profile{
+					position:relative;
+					background:white;
+					border:1px solid $colorgreyxlight;
+					width:100%;
+					height:auto;
+					padding:30px 20px 80px 20px;
+
+					.mail-content-profile-picture{
+						display:block;
+						width:105px;
+						height:105px;
+						border-radius:50%;
+						background-size:cover;
+						margin:0 auto 10px auto;
+					}
+
+					.mail-content-profile-name{
+						font-family:$fontdincondmed;
+						font-size:30px;
+						color:$colorgrey;
+						letter-spacing:0.06em;
+						text-align:center;
+						text-transform:uppercase;
+						margin:0 0 5px 0;
+					}
+
+					.mail-content-profile-coords{
+						font-size:18px;
+						font-weight:bold;
+						color:$colorgreylight;
+						line-height:1.8em;
+						text-align:center;
+
+						a{
+							color:$colorgreylight;
+							text-decoration:none;
+						}
+					}
+
+					.mail-content-profile-buttons{
+						position:absolute;
+						padding:0 25px 25px 25px;
+						bottom:0; left:0;
+						width:100%;
+
+						a{
+							float:left;
+							&:last-child{ float:right; }
+						}
+					}
+				}
+
+				.mail-content-notes{
+					position:relative;
+					background:white;
+					border:1px solid $colorgreyxlight;
+					padding:60px 0 0 0;
+					width:100%;
+					height:200px;
+
+					&.mail-content-notes--semi{
+						margin-top:30px;
+					}
+
+					label{
+						font-size:35px;
+						font-family:$fontdincondmed;
+						color:#b7b7bc;
+						position:absolute;
+						top:20px; left:20px;
+						letter-spacing:0;
+						font-weight:normal;
+						cursor:pointer;
+
+					}
+
+					textarea{
+						border:0;
+						width:100%;
+						height:100%;
+						padding:20px;
+						color:$colorgrey;
+					}
+
+					#wmw-mission-notes-status{
+						display:none;
+						position:absolute;
+						text-align:right;
+						color:$colorgreen;
+						font-size:12px;
+						font-style:italic;
+						font-weight:bold;
+						letter-spacing:0;
+						top:10px; right:15px;
+					}
+				}
+
+				.mail-content-sidebar{
+					position:relative;
+					width:100%;
+					height:250px;
+					background:white;
+					border-bottom:1px solid $colorgreyxlight;
+
+					.sidebar-date{
+						font-family:$fontcantarell;
+						font-size:13px;
+						color:#a2a2a2;
+						margin:0 0 5px 0;
+						letter-spacing:0;
+						padding:20px 20px 0 20px;
+					}
+
+					.sidebar-title{
+						font-family:$fontdincondreg;
+						font-size:24px;
+						letter-spacing:0.06em;
+						line-height:1em;
+						color:$colorpurple;
+						padding:0 20px 15px 20px;
+						border-bottom:1px solid $colorgreyxlight;
+
+						&.sidebar-title--red{
+							color:$colorred;
+						}
+
+						small{
+							display:block;
+							font-family:$fontcantarell;
+							color:$colorgreylight;
+							font-size:12px;
+							letter-spacing:0;
+							margin-top:0;
+						
+							.icon{
+								font-size:16px;
+							}
+						}
+					}
+
+					.sidebar-content{
+						font-size:14px;
+						color:$colorgrey;
+						line-height:1.2em;
+						margin-bottom:20px;
+						letter-spacing:0.06em;
+						padding:20px;
+
+						p{
+							margin:0 0 15px 0;
+						}
+					}
+
+					.sidebar-mask{
+						display:block;
+						position:absolute;
+						left:0; bottom:0;
+						height:55%;
+						width:100%;
+						background:rgba(238,233,250,0.95);
+						background: linear-gradient(transparent, #eeeafa, #eeeafa, #eeeafa);
+					}
+
+					&.mail-content-sidebar--noscroll{
+						overflow:hidden;
+					}
+				}
+
+				.mail-content-chat{
+					position:relative;
+					min-height:200px;
+					overflow:auto;
+					margin:30px 0;
+					font-size:14px;
+
+					.chatbox{
+						display:block;
+						margin:25px 0 2px 0;
+						width:80%;
+						border:1px solid $colorgreyxlight;
+						padding:20px;
+						background:white;
+
+						&:first-child{
+							margin-top:0;
+						}
+
+						.chatbox-name{
+							font-weight:bold;
+							display:inline;
+						}
+
+						.chatbox-time{
+							display:inline;
+							text-transform:uppercase;
+							font-size:10px;
+							color:#b7b7bc;
+							margin:0 0 0 10px;
+						}
+
+						.chatbox-content{
+							display:block;
+							margin:10px 0 0 0;
+						}
+
+						&.chatbox--a{
+
+							.chatbox-name{
+								color:$colorgreen;
+							}
+						}
+
+						&.chatbox--b{
+							margin-left:20%;
+
+							.chatbox-name{
+								color:$colorpurple;
+							}
+						}
+					}
+
+					&.mail-content-chat--red{
+
+						.chatbox .chatbox-name{
+							color:$colorred;
+						}
+					}
+				}
+
+				.mail-content-answer{
+					position:relative;
+					width:100%;
+					height:100px;
+					margin:30px 0 50px 0;
+
+					textarea{
+						display:block;
+						width:100%;
+						height:100%;
+					}
+
+					button{
+						display:block;
+						height:24px;
+						padding:0 10px;
+						color:white;
+						font-family:$fontcantarell;
+						font-size:11px;
+						text-decoration:none;
+						text-transform:uppercase;
+						position:absolute;
+						bottom:-24px;
+						right:0;
+						background:$colorgreen;
+						border:1px solid $colorgreen;
+						transition:color .3s, background .3s;
+					
+						&:hover{
+							background:transparent;
+							color:$colorgreen;
+						}
+					}
+
+					.mail-content-answer-bottom{
+						position:absolute;
+						top:100%;
+						padding:17px 0 0 0;
+
+						a{
+							display:inline-block;
+							vertical-align:middle;
+						}
+
+						.bottom-proposal{
+							color:$colorgreen;
+							text-decoration:none;
+							margin:0 10px 0 0;
+							font-size:14px;
+
+							.icon{
+								vertical-align:baseline;
+							}
+
+							&:hover{
+								text-decoration:underline;
+							}
+						}
+
+						.bottom-delete{
+							color:$colorgreylight;
+							text-decoration:none;
+							text-transform:uppercase;
+							font-size:11px;
+							margin:0 0 0 10px;
+
+							.icon{
+								vertical-align:baseline;
+							}
+
+							&:hover{
+								text-decoration:underline;
+							}
+						}
+					}
+
+					&.mail-content-answer--red{
+
+						button{
+							background:$colorred;
+							border-color:$colorred;
+
+							&:hover{
+								background:transparent;
+								color:$colorred;
+							}
+						}
+					}
+				}
+
+				&.mail-content--toanswer{
+					padding:0;
+
+					.mail-content-chat{
+						padding:0 15px;
+					}
+
+					.mail-content-answer{
+						padding:0 15px;
+						margin-bottom:80px;
+
+						button{
+							right:15px;
+						}
+					}
+				}
+
+				.mail-content-pitch{
+					width:100%;
+					padding:20px 20px 60px 20px;
+					position:relative;
+
+					.mail-content-pitch-writer{
+						position:relative;
+
+						textarea{
+							width:100%;
+							height:250px;
+						}
+
+						button{
+							display:block;
+							height:24px;
+							padding:0 10px;
+							color:white;
+							font-family:$fontcantarell;
+							font-size:11px;
+							text-decoration:none;
+							text-transform:uppercase;
+							position:absolute;
+							bottom:-24px;
+							right:0;
+							background:$colorpurple;
+							border:1px solid $colorpurple;
+							transition:color .3s, background .3s;
+						
+							&:hover{
+								background:transparent;
+								color:$colorpurple;
+							}
+						}
+					
+						.writer-bottom{
+							position:absolute;
+							top:100%;
+							padding:5px 0 0 0;
+							font-size:11px;
+							text-decoration:underline;
+							color:$colorgreylight;
+							letter-spacing:0;
+
+							.icon{
+								margin-right:6px;
+							}
+						}
+					}
+
+					.mail-content-pitch-payment{
+						display:flex;
+						position:absolute;
+						top:0; left:0;
+						width:100%;
+						height:100%;
+						align-items:center;
+						justify-content:center;
+						background:rgba(238,233,250,0.95);
+						z-index:200;
+						transition:transform .5s $easeinout .2s, opacity .5s linear .2s;
+
+						.payment-box{
+							display:block;
+							width:80%;
+							border:1px solid $colorpurplelight;
+							background:white;
+							padding:20px;
+							text-align:center;
+
+							.payment-box-title{
+								display:block;
+								text-align:center;
+								text-transform:uppercase;
+								font-size:20px;
+								color:$colorpurplelight;
+								margin:0 0 5px 0;
+							}
+
+							.payment-box-desc{
+								text-align:left;
+								font-size:12px;
+								color:$colorgreylight;
+								font-weight:bold;
+								margin:0 0 10px 0;
+							}
+
+							.payment-box-field{
+								margin:0 0 15px 0;
+
+								label{
+									font-size:10px;
+									color:$colorpurplelight;
+									display:block;
+									margin-bottom:3px;
+									text-align:left;
+
+									.icon{
+										vertical-align:baseline;
+										font-size:12px;
+									}
+								}
+
+								input{
+									width:100%;
+								}
+
+								&:nth-child(2){
+									padding-right:7px;
+								}
+								&:last-child{
+									padding-left:7px;
+								}
+							}
+						}
+					}
+				}
+			
+			}
+		}
+	}
+}
+
+/* ------------------------------------------------------------------------------ */
+/* ----------- SMALL SCREENS ---------------------------------------------------- */
+/* ------------------------------------------------------------------------------ */
+
+@media screen and (min-width: $screen-sm-min){
+
+	.wmw-mission{
+
+		.wmw-mission-body{
+
+			&:after{
+				content:'';
+				display: block;
+				position:absolute;
+				top:0; right:10px;
+				width:100px;
+				height:100%;
+				background: linear-gradient(to right, transparent, #fdfdfd); /* Standard syntax */
+			}
+
+			&.wmw-mission-body--mail{
+
+				&:after{
+					content:none;
+				}
+			}
+
+			.wmw-mission-content{
+
+				
+			}
+
+			.wmw-mission-element{
+				width:48%;
+			}
+
+			.wmw-mission-sidebar{
+				width:380px;
+			}
+		}
+	}
+}
+
+/* ------------------------------------------------------------------------------ */
+/* ----------- MEDIUM SCREENS --------------------------------------------------- */
+/* ------------------------------------------------------------------------------ */
+
+@media screen and (min-width: $screen-md-min){
+
+	.wmw-mission{
+
+		.wmw-mission-close{
+			position:absolute;
+			top:17px; right:15px;
+			margin:0;
+		}
+
+		.wmw-mission-breadcrumbs{
+			display:block;
+
+			.breadcrumbs-el{
+				line-height:45px;
+				font-size:20px;	
+				padding:0 12px 0 35px;
+
+				.wmw-button{
+					top:-3px;
+					margin:0 0 0 10px;
+				}
+
+				&:before,
+				&:after{
+					border-left:20px solid white;
+					border-top:22.5px solid transparent;
+					border-bottom:22.5px solid transparent;
+					top:0; right:-19px;
+				}
+
+				&:before{
+					border-left-color:$colorgreyxlight;
+					right:-20px;
+				}
+
+				&.active{
+					color:white;
+					background:$colorgreen;
+
+					&:after{
+						border-left-color:$colorgreen;
+					}
+				}
+			}
+		}
+
+		.wmw-mission-header{
+			border-bottom:1px solid $colorgreyxlight;
+			
+			h1{
+				font-size:35px;
+				padding:10px 35px;
+				border-top:none;
+			
+				small{
+					font-size:14px;
+				
+					.icon{
+						font-size:22px;
+					}
+				}
+			}
+
+			.wmw-mission-summarybtn{
+				display:none !important;
+			}
+
+			.wmw-mission-summary{
+				max-height:none !important;
+
+				.summary-el{
+					font-size:12px;
+					padding:20px 10px;
+					border-bottom:none;
+					width:12%;
+
+					&:first-child{
+						border-left:none;
+					}
+
+					.icon{
+						font-size:30px;
+					}
+				
+					&.summary-el--salary{
+						width:22%;
+					}
+
+					&.summary-el--answer,
+					&.summary-el--selected,
+					&.summary-el--interested{
+						width:18%;
+					}
+				}
+
+				&.wmw-mission-summary--left{
+
+					.summary-el{
+
+						&:first-child{ border-left: none !important; }
+						&:last-child{ border-right: 1px solid $colorgreyxlight !important; }
+					}
+				}
+			}
+		}
+
+		.wmw-mission-body{
+
+			.wmw-mission-element{
+				width:23%;
+
+				&.wmw-mission-element--shortlist{
+					width:48%;
+				}
+
+				.element-content{
+					height:400px;
+				}
+			}
+
+			.wmw-mission-element{
+
+				&.wmw-mission-element--shortlist{
+
+					.element-title{
+						padding:10px 180px 10px 15px;
+
+						.element-title-links{
+							position:absolute;
+							width:auto;
+							height:100%;
+							border:none;
+						
+							a{
+								position:relative;
+								height:100%;
+								display:inline-flex;
+								align-items:center;
+
+								.icon{
+									margin:0 5px 0 0;
+								}
+							}
+						}
+					}
+				}
+			}
+
+			.wmw-mission-mail{
+
+				.mail-toolbar{
+					padding:15px 20px;
+
+					.mail-toolbar-buttons{
+						bottom:auto;
+						top: 17px;
+	    				left: 60px;
+	    				width:auto;
+					}
+				}
+
+				.mail-content{
+					padding:0 0 220px 400px;
+
+					.mail-content-profile{
+						position:absolute;
+						top:60px; left:60px;
+						width:280px;
+						height:calc(50% - 60px);
+						padding:30px 20px;
+						overflow:auto;
+					}
+
+					.mail-content-notes{
+						position:absolute;
+						top:60px; left:60px;
+						width:280px;
+						height:calc(100% - 120px);
+
+						&.mail-content-notes--semi{
+							margin-top:60px;
+							top:50%;
+							height:calc(50% - 120px);
+						}
+					}
+
+					.mail-content-sidebar{
+						width:340px;
+					}
+
+					.mail-content-chat{
+						min-height:300px;
+						padding:60px 60px 0 0;
+						margin:0;
+					}
+
+					.mail-content-answer{
+						position:absolute;
+						bottom:60px;
+						right:60px;
+						width:calc(100% - 460px);
+						margin:0;
+					}
+
+					&.mail-content--toanswer{
+						padding:0 0 220px 400px;
+
+						.mail-content-chat{
+							padding:60px 60px 0 0;
+						}
+
+						.mail-content-answer{
+							padding:0;
+							margin-bottom:0;
+
+							button{
+								right:0;
+							}
+						}
+					}
+
+					.mail-content-sidebar{
+						position:absolute;
+						top:0; left:0;
+						width:300px;
+						height:100%;
+						border-bottom:none;
+						border-right:1px solid $colorgreyxlight;
+
+						.sidebar-mask{
+							height:80%;
+						}
+
+						&.mail-content-sidebar--large{
+							width:60%;
+						}
+					}
+
+					.mail-content-pitch{
+						width:40%;
+						float:right;
+						padding:60px;
+
+						.mail-content-pitch-writer{
+
+							textarea{
+								height:450px;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+/* ------------------------------------------------------------------------------ */
+/* ----------- LARGE SCREENS ---------------------------------------------------- */
+/* ------------------------------------------------------------------------------ */
+
+@media screen and (min-width: $screen-lg-min){
+
+	.wmw-mission{
+
+		.wmw-mission-header{
+			display:flex;
+
+			h1{
+				border-bottom:0;
+			}
+
+			.wmw-mission-summary{
+
+				.summary-el:first-child{
+					border-left:1px solid $colorgreyxlight;
+				}
+			}
+		}
+
+		.wmw-mission-body{
+
+			.wmw-mission-element{
+				width:18%;
+
+				&.wmw-mission-element--shortlist{
+					width:31%;
+				}
+			}
+		}
+	}
+}
