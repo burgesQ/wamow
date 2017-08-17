@@ -1,3 +1,13 @@
+## HWI OAuthBundle routes, Must Be First Import
+hwi_oauth_connect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
+    prefix:   /service/login
+
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /service/login
+
+# BackLog
 easy_admin_bundle:
     resource: "@EasyAdminBundle/Controller/"
     type:     annotation
@@ -8,18 +18,9 @@ bundles:
     resource: "./routing_v1.yml"
     prefix: /{_locale}
     requirements:
-        _local: "%app_locales%"
+        _locale: "%app_locales%"
 
 home_page:
     path:      /
     defaults:
         _controller: HomePageBundle:Default:expert
-
-## HWI OAuthBundle routes, Must Be First Import
-hwi_oauth_connect:
-    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
-    prefix:   /service/login
-
-hwi_oauth_redirect:
-    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
-    prefix:   /service/login
