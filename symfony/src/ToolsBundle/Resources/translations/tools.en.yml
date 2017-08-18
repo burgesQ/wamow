@@ -592,9 +592,9 @@ mission:
                 confidential: hidden
                 not_confidential: not hidden
                 price_day: / day
-                hint_company_small: 1This is a explination of the companies; you can select multiple of them
-                hint_company_medium: 2This is a explination of the companies; you can select multiple of them
-                hint_company_large: 3This is a explination of the companies; you can select multiple of them
+                hint_company_small: between 1 and 50
+                hint_company_medium: between 50 and 500
+                hint_company_large: more than 500
                 hint_continent: This is a explination of the companies; you can select multiple of them
     message:
         no_advisor: 'Your pitch has been successfully published and will be sent to qualified experts. Once experts start marking themselves interested in the pitch you will receive a notification via email! You will then be able to talk with the experts that have sent you a proposal (up to 5). This first communication stage will be anonymous, up until you select the best solution proposals (up to 3). Only then you gain access to the expert’s contact.
