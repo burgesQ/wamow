@@ -91,6 +91,7 @@ legends:
     currency: $
     currency_day: $%price/d
     confirmation: Are you shure ?
+    confirmation_work_experience: Are you shure ? This cannot be redo
     other: Other
 
 ## Common error

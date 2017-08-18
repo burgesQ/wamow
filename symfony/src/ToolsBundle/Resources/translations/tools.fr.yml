@@ -91,6 +91,7 @@ legends:
     currency:
     currency_day: %price/days
     confirmation:
+    confirmation_work_experience:
     other:
 
 ## Common error
