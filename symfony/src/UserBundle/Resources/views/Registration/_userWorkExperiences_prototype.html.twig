@@ -12,8 +12,20 @@
                         <i class="icon icon--company-{{ help[1] }}">
                         </i><br/>
                         {{ form_label(companySize) }}
-                        <a href="#" class="wmw-tip wmw-tip--{% if key == 1 %}left{% elseif key == 2 %}center{% else %}right{% endif %}">?<span
-                                    class="wmw-tip-box">{{ 'mission.new.label.step_four.hint_company' | trans }}</span></a>
+
+                        {% if key == 1 %}
+                            <a href="#" class="wmw-tip wmw-tip--left">?<span class="wmw-tip-box">
+                                    {{ 'mission.new.label.step_four.hint_company_small' | trans }}
+                                </span></a>
+                        {% elseif key == 2 %}
+                            <a href="#" class="wmw-tip wmw-tip--center">?<span class="wmw-tip-box">
+                                    {{ 'mission.new.label.step_four.hint_company_medium' | trans }}
+                                </span></a>
+                        {% else %}
+                            <a href="#" class="wmw-tip wmw-tip--right">?<span class="wmw-tip-box">
+                                    {{ 'mission.new.label.step_four.hint_company_large' | trans }}
+                                </span></a>
+                        {% endif %}
                     </label>
                     <div class="wmw-switchfield">
                         {{ form_widget(companySize, {'attr' : {'class' : "requiredgroup:company-size vv-ggparent"}}) }}
@@ -49,7 +61,7 @@
             </label>
             <div class="wmw-rangefield">
                 {{ form_widget(userWorkExperience.cumuledMonth) }}
-                <div class="wmw-rangefield-value"><span>12</span> months</div>
+                <div class="wmw-rangefield-value"><span>12</span> {{ 'form.work_experience.months' | trans }}</div>
             </div>
         </div>
         <div>
@@ -58,7 +70,7 @@
             </label>
             <div class="wmw-rangefield">
                 {{ form_widget(userWorkExperience.dailyFees) }}
-                <div class="wmw-rangefield-value"><span>1000</span> $</div>
+                <div class="wmw-rangefield-value"><span>1000</span></div>
             </div>
         </div>
         <div>

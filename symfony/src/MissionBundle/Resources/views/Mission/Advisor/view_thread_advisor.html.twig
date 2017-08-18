@@ -4,10 +4,10 @@
 {% for message in thread.messages %}
 {% if message.sender.id == userId %}
 <div class="chatbox chatbox--a">
-                {% else %}
-                <div class="chatbox chatbox--b">
+    {% else %}
+    <div class="chatbox chatbox--b">
         {% endif %}
-                <div class="chatbox-name">
+        <div class="chatbox-name">
             {% if anonymous %}
                 {{ message.sender | e }}
             {% else %}
@@ -31,6 +31,6 @@
                 {{ message.body }}
             {% endif %}
         </div>
-        </div>
+    </div>
     {% endfor %}
-{% endif %}
+    {% endif %}

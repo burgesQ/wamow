@@ -52,6 +52,9 @@ form:
         new: nouveau mot de passe
         repeat: repeter nouveau mdp
 
+    work_experience:
+        months:
+
 ## Base
 header:
     news:
@@ -596,7 +599,9 @@ mission:
                 confidential: hidden
                 not_confidential: not hidden
                 price_day: / day
-                hint_company: This is a explination of the companies; you can select multiple of them
+                hint_company_small: This is a explination of the companies; you can select multiple of them
+                hint_company_medium: This is a explination of the companies; you can select multiple of them
+                hint_company_large: This is a explination of the companies; you can select multiple of them
                 hint_continent: This is a explination of the companies; you can select multiple of them
     message:
         no_advisor: No advisor accepted your mission yet. We are a matching best profile for you and you'll receive an email as soon as we found him/her
@@ -968,6 +973,8 @@ payment:
     ends: "Termine le"
     card_number:
     pls_there:
+    subscribe:
+    help:
 
 # NewsLetter
 newsletter:
