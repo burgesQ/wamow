@@ -524,7 +524,7 @@ mission:
         step_five:
             title: Final Step
             subtitle: Let's wrap it up !
-            hint: "FINAL STEP : "
+            hint: ""
             introduction: |
                 Consultants.Wantmore.Work is a BestAdvizor SAS brand, whose capital worth is 51.000 EUR
                 – RCS Paris 815 362 736 – Company Seat: 18b Avenue de Versailles 75016 Paris Offices: 18

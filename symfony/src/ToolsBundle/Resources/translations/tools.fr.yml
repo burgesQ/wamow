@@ -526,13 +526,8 @@ mission:
                 mez l'envoi.
         step_five:
             title: Final Step
-            subtitle: DERNIERE ETAPE ET NOUYS Y SOMMES
-            hint: |
-                FINAL STEP:<br><br>
-                Derniere étape avant l'envoi<br>
-                du pitch aux expert. Vous<br>
-                serez orienté vers un site de<br>
-                payement de ligne.
+            subtitle: ''
+            hint: ''
             introduction: |
                 Consultants.wantmore.work est une marque BestAdvizor SAS, Societe au capitale de 51.000 euros - RCS Paris <br>
                 815 362 736 - Siège social : 116 Av Felix Faure 75015 Paris Buraux : 18 avenue Franklin D. Roosvelt 75008 <br>
