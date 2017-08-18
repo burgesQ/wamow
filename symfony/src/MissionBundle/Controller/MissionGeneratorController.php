@@ -36,7 +36,7 @@ class MissionGeneratorController extends Controller
         "businesspractice.media" => "media-telco-entertainment",
         "businesspractice.tourism" => "tourisme",
         "businesspractice.construction" => "construction",
-        "businesspractice.realestate" => "finance",
+        "businesspractice.realestate" => "real-estate",
         "businesspractice.hotel" => "hotel",
         "businesspractice.services" => "food-beverage",
         "businesspractice.energy" => "energy",
