@@ -28,6 +28,11 @@ user:
         short: 'The last name is too short.'
         long: 'The last name is too long.'
         illegale: 'This last name contains unauthorized characters'
+    pass:
+        lowercase: Please enter at least a lower case letter
+        uppercase: Please enter at least a upper case letter
+        number: Please enter at least a number
+        spechar: Please enter at least a exotic characteres
 
 company:
     name:
