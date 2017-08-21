@@ -3059,7 +3059,7 @@ var Master = {
 
                     swal({
                       title: '',
-                      text: "Il semble que certains champs n'ont pas été remplis correctement.",
+                      text: translation,
                       type: 'error',
                       confirmButtonText: 'OK',
                       confirmButtonColor: "#362a7e"

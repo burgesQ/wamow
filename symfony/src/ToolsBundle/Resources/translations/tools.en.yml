@@ -140,6 +140,7 @@ error:
     upload_resume_or_linkedin: Please Upload a resume or link your account to LinkedIn
     phone:
         please_fill: Please fill out the phone number fields.
+    generale: Some filed are not filled correctly
 
 ## Home
 home:
