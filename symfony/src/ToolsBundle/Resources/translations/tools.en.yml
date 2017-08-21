@@ -934,6 +934,40 @@ workexperience:
     standardimplementation : "Standard Implementation"
     bigdata : "Big Data"
 
+## Mission titles
+mission_title:
+    title:
+        acquisition: Acquisition
+        go_to_market: Go to market
+        operational_excellence: Operational excellence
+        business_transformation: Business transformtion
+        is_it: IS & IT (Information system and infratructure technology)
+        studies: Studies
+        governace_issues: Governance issues
+        restructuring: Restructuring
+        long_term_finance: Long term finance
+        cash_optimisation: Cash optimisation
+        security_asset: Security Asset
+        other_services: Other services
+    sub_category:
+        external_growth:
+        post_merger_integration:
+        new_teritory:
+        cost_reduction:
+        processed_optimization:
+        organization_organization:
+        new_business_model:
+        digital_innovation:
+        growth_support:
+        globalisation:
+        roadmap_vision:
+        rfi:
+        implementation:
+        parternship:
+        benchmark:
+        market:
+        innovation:
+
 ## Mails template
 mails:
     contracot_hello: Hello %f_name %l_name %c_name!
