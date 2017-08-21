@@ -94,6 +94,13 @@ legends:
     confirmation_work_experience: Are you shure ? This cannot be redo
     other: Other
 
+mouseover:
+    linkedin: In order for your profile to be 100% complete you must link your Consultants.WantMore.Work account to LinkedIn and upload your Resume.
+    country: We need to know your country of residence and your availability to travel to introduce to you the possibility of presence on site and travelling for future missions
+    language: The languages you speak (professionally) for communication and outcome purposes.
+    strenght: In order for your profile to be  100% complete you must upload a profile picture, link your account to LinkedIn and finish the sign up process.
+    first_message: - Reformulate and interpret the client’s professional need (in your own words)  - Wider stakes (reposition, from your point of view, the stakes highlighted by the client in a competitive context that would help his/her evolution, including potential new opportunities) - Offer a point of view that highlights your expertise    - Open the interaction up by asking conclusive questions (showing an in depth-knowledge of the subject) that will guide towards the start of a solution linked to 1.the objectives (they must be clear and precise, potentially ranked if multiple or contradictory) and 2. The scope (eliminate all possible ambiguity with potential questions) as presented.  The objective of the first answer it is not to bring a conclusive solution but to initiate a dialogue leading towards the construction of a common solution.
+
 ## Common error
 error:
     page:

@@ -14,7 +14,7 @@
             {% if user.linkedinId is not null %}
                 {% set ringLevel = ringLevel + 25 %}
             {% endif %}
-            <div class="sidebar-progress sidebar-progress--{% if ringLevel == 50 %}1{% elseif ringLevel == 75 %}2{% else %}3{% endif %}">
+            <div class="sidebar-progress sidebar-progress--{% if ringLevel == 50 %}1{% elseif ringLevel == 75 %}2{% else %}3{% endif %}" title="{{ 'mouseover.strenght' | trans }}">
                 {{ 'header.profile' | trans }}<br/>
                 {{ ringLevel }}%
             </div>

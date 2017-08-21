@@ -192,7 +192,7 @@
                                 {{ form_errors(form.text) }}
                                 {% if user.payment %}
                                     <div class="mail-content-pitch-writer">
-                                        {{ form_widget(form.text) }}
+                                        {{ form_widget(form.text, {'attr' : { 'title' : 'mouseover.first_message' | trans }}) }}
                                         {{ form_row(form.submit) }}
                                         <div class="writer-bottom">
                                             <i class="icon icon--tick"></i>

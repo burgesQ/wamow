@@ -15,7 +15,7 @@
 
     {{ form_widget(form.user.linkedinId) }}
     {% if form.user.linkedinId.vars.value == '' %}
-        <a href="{{ path('hwi_oauth_service_redirect', {'service': 'linkedin' }) }}">
+        <a href="{{ path('hwi_oauth_service_redirect', {'service': 'linkedin' }) }}" title="{{ 'mouseover.linkedin' | trans }}">
             <button type="button" class="wmw-button">
                 <i></i><span>{{ 'registration.advisor.zero.linkedinbutton' | trans }}</span><i></i>
             </button>
@@ -49,7 +49,9 @@
     </div>
 
     <div class="wmw-fieldrow row">
-        {{ form_widget(address.country, {'attr' : {'class': 'col-xs-12 col-sm-6 col-md-5 required'}}) }}
+        {{ form_widget(address.country, {'attr' : {
+            'class' : 'col-xs-12 col-sm-6 col-md-5 required',
+            'title' : 'mouseover.country' | trans }}) }}
         {{ form_errors(address) }}
         {{ form_errors(address.country) }}
     </div>
@@ -64,14 +66,14 @@
         <label for="wmw-ob-language-1"
                class="wmw-label wmw-label--topmobile col-xs-10 col-sm-5">{{ form_label(form.user.languages) }}</label>
         <div class="col-xs-12 col-sm-7">
-            {{ form_widget(form.user.languages) }}
+            {{ form_widget(form.user.languages, { 'attr' : { 'title' : 'mouseover.language' | trans }}) }}
         </div>
         {{ form_errors(form.user.languages) }}
     </div>
 
     <div class="wmw-uploadfield">
         {{ form_widget(form.resume.file) }}
-        <button type="button" class="wmw-button wmw-button--green"><i></i><span>{{ 'registration.advisor.zero.resume' | trans }}</span><i></i></button>
+        <button type="button" class="wmw-button wmw-button--green" title="{{ 'mouseover.linkedin' | trans }}"><i></i><span>{{ 'registration.advisor.zero.resume' | trans }}</span><i></i></button>
         <div class="wmw-uploadfield-val"></div>
     </div>
     {{ form_errors(form.resume.file) }}
