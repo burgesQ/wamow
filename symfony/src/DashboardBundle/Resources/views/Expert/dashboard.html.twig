@@ -51,7 +51,7 @@
                         <div class="main-slider-element">
                             <div class="main-slider-element-wrapper">
                                 <div class="main-slider-date">{{ 'dashboard.advisor.new.date' | trans }} {{ new.mission.creationDate | date("m/d/Y") }}<br></div>
-                                <div class="main-slider-title">{{ new.mission.title }}</div>
+                                <div class="main-slider-title">{{ new.mission.title | trans }}</div>
                                 <div class="main-slider-desc">{{ new.mission.resume | truncate(100, false, '[...]') }}</div>
                                 <div class="main-slider-price">
                                     <strong>{{ new.mission.professionalExpertise.name | trans }}</strong>
@@ -119,7 +119,7 @@
 
                                 <div class="main-missions-el-content col-xs-12 col-md-6">
                                     <div class="content-date">{{ 'dashboard.advisor.wip.date' | trans }} {{ wip.mission.creationDate | date("m/d/Y") }}</div>
-                                    <div class="content-title">{{ wip.mission.title }}</div>
+                                    <div class="content-title">{{ wip.mission.title | trans }}</div>
                                     <div class="content-desc">
                                         {{ wip.mission.resume | truncate(100, false, '[...]') }}<br>
                                         <a href="{{ path('mission_view', {'missionId': wip.mission.id}) }}"
@@ -217,7 +217,7 @@
                         <div class="main-missions-el main-missions-el--closed row">
                             <div class="main-missions-el-content col-xs-12 col-md-10">
                                 <div class="content-title">
-                                    {{ close.mission.title }}
+                                    {{ close.mission.title | trans }}
                                 </div>
                                 <div class="content-links">
                                     <a href="{{ path('mission_view', {'missionId': close.mission.id}) }}" class="content-showmore wmw-tinylink">

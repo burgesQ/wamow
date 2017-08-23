@@ -14,7 +14,7 @@
 
         <div class="wmw-mission-header row">
             <h1 class="col-xs-12 col-lg-5">
-                {{ mission.title }}
+                {{ mission.title.title | trans }}
                 <small><i class="icon icon--certification"></i>
                     {{ 'mission.view.certifications' | trans | humanize }} :
                     {% if mission.certifications.count() > 0 %}

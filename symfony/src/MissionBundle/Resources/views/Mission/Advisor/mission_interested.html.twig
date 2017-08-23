@@ -158,7 +158,7 @@
                                 {{ 'mission.view.pitched_at' | trans({ date :  mission.updateDate | date('d/m/Y') }) }}
                             </div>
                             <div class="sidebar-title">
-                                {{ mission.title }}
+                                {{ mission.title.title | trans }}
                                 <small><i class="icon icon--certification"></i>
                                     {{ 'mission.view.certifications' | trans | humanize }} :
                                     {% if mission.certifications.count() > 0 %}

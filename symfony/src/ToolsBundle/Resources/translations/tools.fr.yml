@@ -934,6 +934,43 @@ workexperience:
     standardimplementation : "Déploiement de normes et certification"
     bigdata : "Big Data / valorisation de l'info"
 
+## Mission titles
+mission_title:
+    title:
+        acquisition:
+        go_to_market:
+        operational_excellence:
+        business_transformation:
+        is_it:
+        studies:
+        governance_issues:
+        restructuring:
+        long_term_finance:
+        cash_optimisation:
+        security_asset:
+        other_services:
+    sub_category:
+        external_growth:
+        post_merger_integration:
+        new_teritory:
+        new_offer:
+        parternship_strategy:
+        best_pra_implem:
+        cost_reduction:
+        processed_optimization:
+        organization_organization:
+        new_business_model:
+        digital_innovation:
+        growth_support:
+        globalisation:
+        roadmap_vision:
+        rfi:
+        implementation:
+        parternship:
+        benchmark:
+        market:
+        innovation:
+
 ## Mails template
 mails:
     hello: Bonjour %f_name %l_name !

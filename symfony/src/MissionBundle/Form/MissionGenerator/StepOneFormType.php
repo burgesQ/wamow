@@ -2,6 +2,9 @@
 
 namespace MissionBundle\Form\MissionGenerator;
 
+use MissionBundle\Entity\MissionTitle;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -14,10 +17,15 @@ class StepOneFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class, [
+            ->add('title', EntityType::class, [
                 'translation_domain' => 'tools',
+                'choice_translation_domain' => 'tools',
+                'class'         => MissionTitle::class,
+                'placeholder'        => 'title',
                 'label'              => 'mission.new.label.title',
-                'required'           => true
+                'required'           => true,
+                'group_by'           => 'category',
+                'multiple' => false
             ])
             ->add('resume', TextareaType::class, [
                 'translation_domain' => 'tools',

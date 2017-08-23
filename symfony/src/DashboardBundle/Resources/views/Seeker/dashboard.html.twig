@@ -90,7 +90,7 @@
                                 {{ 'dashboard.contractor.mission.date' | trans }} {{ mission.creationDate | date("m/d/Y") }}
                             </div>
                             <div class="content-title">
-                                {{ mission.title }}
+                                {{ mission.title.title | trans }}
                             </div>
                             <div class="content-desc">
                                 {{ mission.resume | truncate(100, false, '[...]') }}

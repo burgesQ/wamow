@@ -145,7 +145,7 @@
 
                 <div class="wmw-onboard-resume-content col-xs-12 col-md-8">
                     {{ form_row(form.edit, { 'attr' : { 'class' : 'wmw-button wmw-button--border wmw-button--green wmw-button--small' }, labell : edit }) }}
-                    <h2>{{ mission.title }}</h2>
+                    <h2>{{ mission.title.title | trans }}</h2>
                     {{ mission.resume | nl2br }}
                 </div>
 

@@ -944,30 +944,33 @@ mission_title:
         business_transformation: Business transformtion
         is_it: IS & IT (Information system and infratructure technology)
         studies: Studies
-        governace_issues: Governance issues
+        governance_issues: Governance issues
         restructuring: Restructuring
         long_term_finance: Long term finance
         cash_optimisation: Cash optimisation
         security_asset: Security Asset
         other_services: Other services
     sub_category:
-        external_growth:
-        post_merger_integration:
-        new_teritory:
-        cost_reduction:
-        processed_optimization:
-        organization_organization:
-        new_business_model:
-        digital_innovation:
-        growth_support:
-        globalisation:
-        roadmap_vision:
-        rfi:
-        implementation:
-        parternship:
-        benchmark:
-        market:
-        innovation:
+        external_growth: External Growth
+        post_merger_integration: Post Merger Integration
+        new_teritory: New Territory
+        new_offer: New Offer
+        parternship_strategy: New Channel / Partnership Strategy
+        best_pra_implem: Best Practice Implementation
+        cost_reduction: Cost Reduction
+        processed_optimization: Processed Optimization
+        organization_organization: Organization Optimization
+        new_business_model: New Business Model / Digital
+        digital_innovation: Digital / Innovation
+        growth_support: Growth Support
+        globalisation: Globalisaton / localisation - centralisation / decentralisation
+        roadmap_vision: Roadmap / Vision
+        rfi: RFI (Request for Information) / RFP (Request for Proposal) / Selection
+        implementation: Implementation / project or program management
+        parternship: Partnership Strategy / Partnership Relationship Implementation
+        benchmark: Benchmark
+        market: Market
+        innovation: Innovation opportunities and awareness
 
 ## Mails template
 mails:
