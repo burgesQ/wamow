@@ -152,80 +152,80 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface, Co
 
         $nbMission = count($manager->getRepository('MissionBundle:Mission')->findAll());
         $nbUser    = count($manager->getRepository('UserBundle:User')->findAll());
-        $fake      = 10;
-        $done      = 0;
-
-        while (($nbUser / ($nbMission + $fake)) > 10) {
-            $fake++;
-        }
-
-        while($done < $fake) {
-
-            $oneMissionId     = array_rand($arrayMission);
-            $anotherMissionId = array_rand($arrayMission);
-            $oneMission       = $arrayMission[$oneMissionId];
-            $anotherMission   = $arrayMission[$anotherMissionId];
-            $company         = $manager->getRepository('CompanyBundle:Company')->findOneBy([
-                'name' => $anotherMission['companyName']
-            ]);
-            $mission = new Mission($jsonConfig->nbStep, $contractorOne, $company);
-
-            // set mission datas
-            $mission
-                ->setTelecommuting($oneMission['telecommuting'])
-                ->setStatus(Mission::PUBLISHED)
-                ->setConfidentiality($oneMission['confidentiality'])
-                ->setTitle($titleRepo->findOneBy(['id' => $oneMission['title']]))
-                ->setResume('Faker ' . $done)
-            ;
-
-            // set mission deadLines
-            $mission->setApplicationEnding(new \DateTime($oneMission['applicationEnding']));
-            $mission->setMissionBeginning(new \DateTime($oneMission['missionBeginning']));
-            $mission->setMissionEnding(new \DateTime($oneMission['missionEnding']));
-
-            // set businessPractice
-            $mission->setBusinessPractice($practiceRepo->findOneBy(['name' => $anotherMission['businessPractice']]));
-
-            // set professional Expertise
-            $mission->setProfessionalExpertise($proExpRepo->findOneBy(['name' => $oneMission['professionalExpertise']]));
-
-            // set missionKind
-            foreach ($oneMission['typeMission'] as $oneKind) {
-                $mission->addMissionKind($missionKindRepo->findOneBy(['name' => $oneKind]));
-            }
-
-            // set languages
-            foreach ($anotherMission['languages'] as $lang) {
-                $mission->addLanguage($langRepo->findOneBy(['name' => $lang]));
-            }
-
-            // set budget
-            $mission->setBudget($anotherMission['budget']);
-            $mission->setCurrency($usd);
-            $mission->setPrice($anotherMission['budget'] / 100);
-
-            // set address
-            $mission->setAddress($this->createAddress($manager, $oneMission['address'], true));
-
-            // set area
-            switch ($oneMission) {
-                case $oneMission['northAmerica'] :
-                    $mission->addContinent($northAmerica);
-                case $oneMission['southAmerica'] :
-                    $mission->addContinent($southAmerica);
-                case $oneMission['emea'] :
-                    $mission->addContinent($emea);
-                case $oneMission['asia'] :
-                    $mission->addContinent($asia);
-            }
-
-            // persist mission
-            $this->loadStep($manager, $mission, $jsonConfig);
-            $manager->persist($mission);
-
-            $done++;
-        }
+//        $fake      = 0;
+//        $done      = 0;
+//
+//        while (($nbUser / ($nbMission + $fake)) > 10) {
+//            $fake++;
+//        }
+//
+//        while($done < $fake) {
+//
+//            $oneMissionId     = array_rand($arrayMission);
+//            $anotherMissionId = array_rand($arrayMission);
+//            $oneMission       = $arrayMission[$oneMissionId];
+//            $anotherMission   = $arrayMission[$anotherMissionId];
+//            $company         = $manager->getRepository('CompanyBundle:Company')->findOneBy([
+//                'name' => $anotherMission['companyName']
+//            ]);
+//            $mission = new Mission($jsonConfig->nbStep, $contractorOne, $company);
+//
+//            // set mission datas
+//            $mission
+//                ->setTelecommuting($oneMission['telecommuting'])
+//                ->setStatus(Mission::PUBLISHED)
+//                ->setConfidentiality($oneMission['confidentiality'])
+//                ->setTitle($titleRepo->findOneBy(['id' => $oneMission['title']]))
+//                ->setResume('Faker ' . $done)
+//            ;
+//
+//            // set mission deadLines
+//            $mission->setApplicationEnding(new \DateTime($oneMission['applicationEnding']));
+//            $mission->setMissionBeginning(new \DateTime($oneMission['missionBeginning']));
+//            $mission->setMissionEnding(new \DateTime($oneMission['missionEnding']));
+//
+//            // set businessPractice
+//            $mission->setBusinessPractice($practiceRepo->findOneBy(['name' => $anotherMission['businessPractice']]));
+//
+//            // set professional Expertise
+//            $mission->setProfessionalExpertise($proExpRepo->findOneBy(['name' => $oneMission['professionalExpertise']]));
+//
+//            // set missionKind
+//            foreach ($oneMission['typeMission'] as $oneKind) {
+//                $mission->addMissionKind($missionKindRepo->findOneBy(['name' => $oneKind]));
+//            }
+//
+//            // set languages
+//            foreach ($anotherMission['languages'] as $lang) {
+//                $mission->addLanguage($langRepo->findOneBy(['name' => $lang]));
+//            }
+//
+//            // set budget
+//            $mission->setBudget($anotherMission['budget']);
+//            $mission->setCurrency($usd);
+//            $mission->setPrice($anotherMission['budget'] / 100);
+//
+//            // set address
+//            $mission->setAddress($this->createAddress($manager, $oneMission['address'], true));
+//
+//            // set area
+//            switch ($oneMission) {
+//                case $oneMission['northAmerica'] :
+//                    $mission->addContinent($northAmerica);
+//                case $oneMission['southAmerica'] :
+//                    $mission->addContinent($southAmerica);
+//                case $oneMission['emea'] :
+//                    $mission->addContinent($emea);
+//                case $oneMission['asia'] :
+//                    $mission->addContinent($asia);
+//            }
+//
+//            // persist mission
+//            $this->loadStep($manager, $mission, $jsonConfig);
+//            $manager->persist($mission);
+//
+//            $done++;
+//        }
 
         // save all that shit
         $manager->flush();
