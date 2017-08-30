@@ -65,7 +65,7 @@ class User extends BaseUser implements ParticipantInterface
      * )
      * @Assert\Regex(
      *  pattern="/^(?=.*[A-Z])/",
-     *  message="user.pass.upppercase"
+     *  message="user.pass.uppercase"
      * )
      * @Assert\Regex(
      *  pattern="/^(?=.*\d)/",

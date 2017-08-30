@@ -83,8 +83,9 @@ class UserWorkExperienceType extends AbstractType
                 'label'              => 'registration.advisor.four.dailyfees',
                 'required'           => true,
                 'attr'               => [
-                    'min' => 1,
-                    'max' => 10000,
+                    'min'   => 1,
+                    'max'   => 10000,
+                    'step'  => 100
                 ]
             ])
             ->add('peremption', CheckboxType::class, [

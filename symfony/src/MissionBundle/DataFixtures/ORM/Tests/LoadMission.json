@@ -1,7 +1,7 @@
 {
   "first": {
     "companyName": "Esso",
-    "title": "Valeo",
+    "title": 1,
     "resume": "As a worldwide automotive actor, the company develop innovative powertrain solutions to reduce fuel consumption and CO2 emissions without compromising on the pleasure and dynamics of driving. For one of our business unit, we are looking for consultants to make a Global Analysis and Diagnosis of the Sales function, composed of 170 people on 30 countries (France, Germany, China, Japan, India, South-Korea, USA). The Sales function will have to transform its operating model to face new challenges, Externally (i.e. competitors, new technologies and different client expectations) and Internally (i.e. organization and competences). To adress these challenges, in link with the Business Group growth objectives, we would launch : > an analysis of the strenghts and weaknesses of the function, > an assessment to identify its current and future organization included competences in order to i. define the various targets and goals of the function, ii. identify gap between available and required competences iii. define the relevant organization iv. end up with clear recommendations, including action plans reshaping the organization, the training plan and the talent development at large. We are looking for a professional services firm in capacity to conduct the entire project",
     "businessPractice": "businesspractice.industry",
     "professionalExpertise": "professionalexpertises.salesbusinessdevelopment",
@@ -31,7 +31,7 @@
   },
   "second": {
     "companyName": "Esso",
-    "title": "AFTE",
+    "title": 2,
     "resume": "L’ Association Française des Trésoriers d’Entreprises (AFTE) est une association\n            professionnelle qui fédère les personnes intéressées par la gestion de la trésorerie,\n            le financement et la gestion des risques financiers. Elle compte 1400 membres\n            dont 1000 sont des trésoriers d'entreprises publiques ou privées.\n            Ses principales missions sont : le développement de l’expertise du métier de\n            trésorier, la promotion des intérêts de la profession et sa visibilité.\n            Le Centre de formation de l'AFTE constitue une des principales activités de\n            l’association et propose des formations à la pointe des pratiques animées par des\n            experts en fonction et répondant aux critères qualités reconnus par les autorités de\n            tutelle (qualification OPQF – Certificat FP FFP). Son offre est composée de plus de\n            50 formations présentielles, de 6 certificats professionnels et de formations sur\n            mesure. Plus de 1000 jours de formations sont dispensés par an.\n\n            Confrontée à la digitalisation croissante de l'offre de formation (demande des\n            entreprises, nouvelles générations de trésoriers, 48% du CA des organismes de\n            formation est réalisé en e-learning ou blended-learning), le Centre souhaite\n            accompagner ce mouvement et digitaliser son offre, en s'appuyant sur le catalogue\n            de formations existantes (présentielles) tout en proposant une nouvelle expérience\n            (au niveau de ce qui se fait par la concurrence, en terme d'attraction sur les digital\n            natives, et permettant d'optimiser l'efficacité des formations).\n\n            Nous recherchons un conseil pour mener à bien ce projet en lien avec les équipes\n            internes i. sur la conduite du projet dans son ensemble (budget-timing) ii. sur un\n            exemple de conception de scénario type iii. sur les modalités de transformation\n            d'une formation présentielle pilote iv. enfin sur l'accompagnement des équipes\n            d'AFTE.",
     "businessPractice": "businesspractice.services",
     "professionalExpertise": "professionalexpertises.digital",
@@ -59,7 +59,7 @@
   },
   "third": {
     "companyName": "Esso",
-    "title": "Aeronef",
+    "title": 3,
     "resume": "Société privée du monde aéronautique lance un chantier de refonte de la relation client",
     "businessPractice": "businesspractice.industry",
     "professionalExpertise": "professionalexpertises.salesbusinessdevelopment",
@@ -89,7 +89,7 @@
   },
   "fourth": {
     "companyName": "Esso",
-    "title": "Radio Star",
+    "title": 4,
     "resume": "Comment développer un meilleur engagement de la communauté digitale d'un groupe média et augmenter la vente inter canaux",
     "businessPractice": "businesspractice.media",
     "professionalExpertise": "professionalexpertises.marketinginnovation",
@@ -119,7 +119,7 @@
   },
   "fifth": {
     "companyName": "Esso",
-    "title": "Cosmeto SAS",
+    "title": 5,
     "resume": "Dans le cadre du lancement d'une nouvelle gamme de produits, une société du secteur cosmétique cherche à élaborer un plan marketing digital",
     "businessPractice": "businesspractice.retail",
     "professionalExpertise": "professionalexpertises.marketinginnovation",
@@ -148,7 +148,7 @@
   },
   "sixth": {
     "companyName": "Esso",
-    "title": "AA Conseil",
+    "title": 6,
     "resume": "Groupe de sociétés de conseil, cherche à redéfinir leur axe de développement stratégique à la suite de la fusion de leurs activités",
     "businessPractice": "businesspractice.services",
     "professionalExpertise": "professionalexpertises.businessunitmanager",
@@ -176,7 +176,7 @@
   },
   "seventh": {
     "companyName": "Esso",
-    "title": "Boucherie SanZo",
+    "title": 7,
     "resume": "Société de 1347 personnes, acteur du commerce alimentaire, fruit du rachat successif de plusieurs marques, souhaite développer une identité communication groupe",
     "businessPractice": "businesspractice.retail",
     "professionalExpertise": "professionalexpertises.communication",
@@ -204,7 +204,7 @@
   },
   "eighth": {
     "companyName": "Esso",
-    "title": "Indus Cie",
+    "title": 8,
     "resume": "Groupe industriel en pleine restructuration cherche à redéfinir son périmètre d'investissement et désinvestissement",
     "businessPractice": "businesspractice.industry",
     "professionalExpertise": "professionalexpertises.financeaccounting",
@@ -233,7 +233,7 @@
   },
   "ninth": {
     "companyName": "Esso",
-    "title": "Feuille de choux",
+    "title": 9,
     "resume": "Société de Presse spécialisée cherche à digitaliser ses publications",
     "businessPractice": "businesspractice.media",
     "professionalExpertise": "professionalexpertises.digital",
@@ -263,7 +263,7 @@
   },
   "tenth": {
     "companyName": "Esso",
-    "title": "Service à GoGo",
+    "title": 10,
     "resume": "Société de services de 983 personnes sur 5 sites souhaite implémenter un ERP Finance",
     "businessPractice": "businesspractice.services",
     "professionalExpertise": "professionalexpertises.financeaccounting",
@@ -291,7 +291,7 @@
   },
   "eleventh": {
     "companyName": "Esso",
-    "title": "Test",
+    "title": 11,
     "resume": "Test Test Test",
     "businessPractice": "businesspractice.media",
     "professionalExpertise": "professionalexpertises.businessunitmanager",

@@ -39,9 +39,9 @@ class Mission
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="title", type="string", length=255, nullable=false)
+     * @ORM\ManyToOne(targetEntity="MissionBundle\Entity\MissionTitle",
+     *     cascade={"persist"},
+     *     inversedBy="missions")
      */
     private $title;
 
@@ -402,6 +402,9 @@ class Mission
         }
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->id . ' : ' . $this->title;
@@ -428,10 +431,10 @@ class Mission
     /**
      * Set title
      *
-     * @param string $title
+     * @param \MissionBundle\Entity\MissionTitle $title
      * @return Mission
      */
-    public function setTitle($title)
+    public function setTitle(\MissionBundle\Entity\MissionTitle $title = null)
     {
         $this->title = $title;
 
@@ -441,7 +444,7 @@ class Mission
     /**
      * Get title
      *
-     * @return string
+     * @return \MissionBundle\Entity\MissionTitle
      */
     public function getTitle()
     {

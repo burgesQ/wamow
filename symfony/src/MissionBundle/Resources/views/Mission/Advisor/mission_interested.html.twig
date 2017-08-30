@@ -158,7 +158,7 @@
                                 {{ 'mission.view.pitched_at' | trans({ date :  mission.updateDate | date('d/m/Y') }) }}
                             </div>
                             <div class="sidebar-title">
-                                {{ mission.title }}
+                                {{ mission.title.title | trans }}
                                 <small><i class="icon icon--certification"></i>
                                     {{ 'mission.view.certifications' | trans | humanize }} :
                                     {% if mission.certifications.count() > 0 %}
@@ -192,30 +192,30 @@
                                 {{ form_errors(form.text) }}
                                 {% if user.payment %}
                                     <div class="mail-content-pitch-writer">
-                                        {{ form_widget(form.text) }}
+                                        {{ form_widget(form.text, {'attr' : { 'title' : 'mouseover.first_message' | trans }}) }}
                                         {{ form_row(form.submit) }}
                                         <div class="writer-bottom">
                                             <i class="icon icon--tick"></i>
                                         </div>
                                     {% else %}
-                                        <a href="{{ path('user_profile_edit') }}">Subscribe There Please</a>
+                                        <a href="{{ path('user_profile_edit') }}">{{ 'payment.pls_there' | trans }}</a>
                                         {% endif %}
                                     </div>
                                 {{ form_end(form) }}
                             {% else %}
                                 <div class="mail-content-pitch-writer">
-                                    <textarea class="required" placeholder="Write your message here"></textarea>
+                                    <textarea class="required" placeholder="{{ 'inbox.form.placeholder.empty' | trans }}"></textarea>
                                 </div>
 
                                 <div class="mail-content-pitch-payment">
                                     <form action="{{path('user_pay')}}" method="post" id="payment-form" class="payment-box">
-                                        <div class="payment-box-title">Subscribe</div>
+                                        <div class="payment-box-title">{{ 'payment.subscribe' | trans }}</div>
                                         <div class="payment-box-desc">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                            {{ 'payment.help' | trans }}
                                         </div>
                                         <div class="row">
                                             <div class="payment-box-field col-xs-12">
-                                                <label for="card-element"><i class="icon icon--cb"></i> Card Number</label>
+                                                <label for="card-element"><i class="icon icon--cb"></i> {{ 'payment.card_number' | trans }}</label>
                                                 <div id="card-element">
                                                   <!-- a Stripe Element will be inserted here. -->
                                                 </div>

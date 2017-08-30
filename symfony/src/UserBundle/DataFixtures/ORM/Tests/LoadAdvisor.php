@@ -2876,6 +2876,6 @@ class LoadAdvisor extends AbstractFixture implements OrderedFixtureInterface, Co
      */
     public function getOrder()
     {
-        return 13;
+        return 15;
     }
 }

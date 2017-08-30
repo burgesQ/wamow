@@ -36,6 +36,9 @@
         <script type="text/javascript" src="{{ asset('js/scripts.js') }}"></script>
 
     </head>
+    <script type="text/javascript">
+        var translation = "{{ 'error.generale' | trans([], 'tools') }}";
+    </script>
     <body>
         <div class="wmw-wrapper">
             {% block header %}

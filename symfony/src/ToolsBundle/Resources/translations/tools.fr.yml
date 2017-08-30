@@ -52,6 +52,9 @@ form:
         new: nouveau mot de passe
         repeat: repeter nouveau mdp
 
+    work_experience:
+        months:
+
 ## Base
 header:
     news:
@@ -88,7 +91,15 @@ legends:
     currency:
     currency_day: %price/days
     confirmation:
+    confirmation_work_experience:
     other:
+
+mouseover:
+    linkedin: In order for your profile to be 100% complete you must link your Consultants.WantMore.Work account to LinkedIn and upload your Resume.
+    country: We need to know your country of residence and your availability to travel to introduce to you the possibility of presence on site and travelling for future missions
+    language: The languages you speak (professionally) for communication and outcome purposes.
+    strenght: In order for your profile to be  100% complete you must upload a profile picture, link your account to LinkedIn and finish the sign up process.
+    first_message: - Reformulate and interpret the client’s professional need (in your own words)  - Wider stakes (reposition, from your point of view, the stakes highlighted by the client in a competitive context that would help his/her evolution, including potential new opportunities) - Offer a point of view that highlights your expertise    - Open the interaction up by asking conclusive questions (showing an in depth-knowledge of the subject) that will guide towards the start of a solution linked to 1.the objectives (they must be clear and precise, potentially ranked if multiple or contradictory) and 2. The scope (eliminate all possible ambiguity with potential questions) as presented.  The objective of the first answer it is not to bring a conclusive solution but to initiate a dialogue leading towards the construction of a common solution.
 
 ## Common error
 error:
@@ -129,6 +140,7 @@ error:
     upload_resume_or_linkedin: Please Upload a resume or link your account to LinkedIn
     phone:
         please_fill:
+    generale: Il semble que certains champs n'ont pas été remplis correctement.
 
 ## Home
 home:
@@ -522,13 +534,8 @@ mission:
                 mez l'envoi.
         step_five:
             title: Final Step
-            subtitle: DERNIERE ETAPE ET NOUYS Y SOMMES
-            hint: |
-                FINAL STEP:<br><br>
-                Derniere étape avant l'envoi<br>
-                du pitch aux expert. Vous<br>
-                serez orienté vers un site de<br>
-                payement de ligne.
+            subtitle: ''
+            hint: ''
             introduction: |
                 Consultants.wantmore.work est une marque BestAdvizor SAS, Societe au capitale de 51.000 euros - RCS Paris <br>
                 815 362 736 - Siège social : 116 Av Felix Faure 75015 Paris Buraux : 18 avenue Franklin D. Roosvelt 75008 <br>
@@ -596,7 +603,9 @@ mission:
                 confidential: hidden
                 not_confidential: not hidden
                 price_day: / day
-                hint_company: This is a explination of the companies; you can select multiple of them
+                hint_company_small: This is a explination of the companies; you can select multiple of them
+                hint_company_medium: This is a explination of the companies; you can select multiple of them
+                hint_company_large: This is a explination of the companies; you can select multiple of them
                 hint_continent: This is a explination of the companies; you can select multiple of them
     message:
         no_advisor: No advisor accepted your mission yet. We are a matching best profile for you and you'll receive an email as soon as we found him/her
@@ -925,6 +934,43 @@ workexperience:
     standardimplementation : "Déploiement de normes et certification"
     bigdata : "Big Data / valorisation de l'info"
 
+## Mission titles
+mission_title:
+    title:
+        acquisition:
+        go_to_market:
+        operational_excellence:
+        business_transformation:
+        is_it:
+        studies:
+        governance_issues:
+        restructuring:
+        long_term_finance:
+        cash_optimisation:
+        security_asset:
+        other_services:
+    sub_category:
+        external_growth:
+        post_merger_integration:
+        new_teritory:
+        new_offer:
+        parternship_strategy:
+        best_pra_implem:
+        cost_reduction:
+        processed_optimization:
+        organization_organization:
+        new_business_model:
+        digital_innovation:
+        growth_support:
+        globalisation:
+        roadmap_vision:
+        rfi:
+        implementation:
+        parternship:
+        benchmark:
+        market:
+        innovation:
+
 ## Mails template
 mails:
     hello: Bonjour %f_name %l_name !
@@ -968,6 +1014,8 @@ payment:
     ends: "Termine le"
     card_number:
     pls_there:
+    subscribe:
+    help:
 
 # NewsLetter
 newsletter:

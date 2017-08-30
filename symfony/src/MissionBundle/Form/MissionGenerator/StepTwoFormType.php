@@ -50,7 +50,11 @@ class StepTwoFormType extends AbstractType
             ])
             ->add('budget', IntegerType::class, [
                 'translation_domain' => 'tools',
-                'label'              => 'mission.new.label.budget'
+                'label'              => 'mission.new.label.budget',
+                'required'           => true,
+                'attr' => [
+                    'value' => 1
+                ]
             ])
             ->add('continents', EntityType::class, [
                 'class'                     => 'MissionBundle:Continent',

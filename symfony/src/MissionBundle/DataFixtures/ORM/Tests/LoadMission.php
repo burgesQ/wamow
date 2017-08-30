@@ -58,6 +58,7 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface, Co
         $continentRepo   = $manager->getRepository('MissionBundle:Continent');
         $proExpRepo      = $manager->getRepository('MissionBundle:ProfessionalExpertise');
         $langRepo        = $manager->getRepository('ToolsBundle:Language');
+        $titleRepo       = $manager->getRepository('MissionBundle:MissionTitle');
         $config          = $manager->getRepository('ToolsBundle:Config')->findOneConfig();
 
         $southAmerica   = $continentRepo->findOneBy(['name' => 'continent.south_america']);
@@ -97,7 +98,7 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface, Co
             $mission->setMissionEnding(new \DateTime($oneMission->missionEnding));
 
             // set mission title and content
-            $mission->setTitle($oneMission->title);
+            $mission->setTitle($titleRepo->findOneBy(['id' => $oneMission->title]));
             $mission->setResume($oneMission->resume);
 
             // set businessPractice
@@ -174,7 +175,7 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface, Co
                 ->setTelecommuting($oneMission['telecommuting'])
                 ->setStatus(Mission::PUBLISHED)
                 ->setConfidentiality($oneMission['confidentiality'])
-                ->setTitle('Faker ' . $done)
+                ->setTitle($titleRepo->findOneBy(['id' => $oneMission['title']]))
                 ->setResume('Faker ' . $done)
             ;
 
@@ -303,6 +304,6 @@ class LoadMission extends AbstractFixture implements OrderedFixtureInterface, Co
 
     public function getOrder()
     {
-        return 14;
+        return 16;
     }
 }
