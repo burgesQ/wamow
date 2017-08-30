@@ -65,7 +65,7 @@ class Services
         $composer = $this->container->get('fos_message.composer');
         $sender   = $this->container->get('fos_message.sender');
 
-        $title = $mission->getTitle() . " : " . $advisor->getId();
+        $title = $mission->getTitle() . " : " . $advisor->getId() . rand();
         // create a thread
         /** @var NewThreadMessageBuilder $message */
         $message = $composer->newThread();
