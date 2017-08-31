@@ -91,7 +91,12 @@ legends:
     currency:
     currency_day: %price/days
     confirmation:
-    confirmation_work_experience:
+        refuse_user:
+        add_user:
+        remove_user:
+        proceed:
+        work_experience:
+        delete:
     other:
 
 mouseover:

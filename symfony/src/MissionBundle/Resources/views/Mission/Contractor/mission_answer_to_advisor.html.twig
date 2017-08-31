@@ -27,7 +27,7 @@
                 2. {{ 'mission.view.contractor.status_shortlist' | trans | upper }}
                 {% if step.position == 1 and shortlisted > 0 %}
                     <a href="{{ path('mission_shortlist', { 'missionId' : mission.id }) }}"
-                       onclick="return confirm('{{ 'legends.confirmation' | trans }}')">
+                       onclick="return confirm('{{ 'legends.confirmation.proceed' | trans }}')">
                         <button class="wmw-button wmw-button--black wmw-button--border wmw-button--small">
                         <i></i><span>
                             {{ 'mission.view.contractor.btn_proced_to_shortlist' | trans | upper }}
@@ -191,7 +191,7 @@
 
                                     <a href="{{ path('user_mission_refuse', { 'userMissionId' : userMission.id }) }}"
                                        class="wmw-button wmw-button--red wmw-button--border wmw-button--small"
-                                       onclick="return confirm('{{ 'legends.confirmation' | trans }}')">
+                                       onclick="return confirm('{{ 'legends.confirmation.refuse_user' | trans }}')">
                                         <i></i><span>
                                             <i class="icon icon--cross"></i>
                                             {{ 'mission.view.contractor.btn_refuse' | trans }}
@@ -200,7 +200,7 @@
                                     {% if shortlisted < 3 %}
                                         <a href="{{ path('user_mission_add_to_shortlist', { 'userMissionId' : userMission.id }) }}"
                                            class="wmw-button wmw-button--green wmw-button--border wmw-button--small"
-                                           onclick="return confirm('{{ 'legends.confirmation' | trans }}')">
+                                           onclick="return confirm('{{ 'legends.confirmation.add_user' | trans }}')">
                                             <i></i><span>
                                                 <i class="icon icon--star"></i>
                                                 {{ 'mission.view.contractor.btn_add_to_shortlist' | trans | upper }}
@@ -211,7 +211,7 @@
 
                                     <a href="{{ path('user_mission_remove_from_shortlist', { 'userMissionId' : userMission.id }) }}"
                                        class="wmw-button wmw-button--red wmw-button--border wmw-button--small"
-                                       onclick="return confirm('{{ 'legends.confirmation' | trans }}')">
+                                       onclick="return confirm('{{ 'legends.confirmation.remove_user' | trans }}')">
                                         <i></i><span>
                                             <i class="icon icon--star"></i>
                                             {{ 'mission.view.contractor.btn_remove_from_shortlist' | trans | upper }}
@@ -225,7 +225,7 @@
                             <div class="mail-toolbar-buttons">
                                 <a href="{{ path('user_mission_refuse', { 'userMissionId' : userMission.id }) }}"
                                    class="wmw-button wmw-button--red wmw-button--border wmw-button--small"
-                                   onclick="return confirm('{{ 'legends.confirmation' | trans }}')">
+                                   onclick="return confirm('{{ 'legends.confirmation.refuse_user' | trans }}')">
                                     <i></i><span>
                                         <i class="icon icon--cross"></i>
                                         {{ 'mission.view.contractor.btn_refuse' | trans }}

@@ -90,8 +90,13 @@ legends:
         The more precise you profile is, the higher the chance to be contacted!
     currency: $
     currency_day: $%price/d
-    confirmation: Are you sure ?
-    confirmation_work_experience: Are you shure ? This cannot be redo
+    confirmation:
+        refuse_user: Are you sure that you want to refuse the user ? This cannot be redo
+        add_user: Are you sure that you want to add the user to your shortlist ?
+        remove_user: Are you sure that you want to remove the user from your shortlist ?
+        proceed: Are you sure that you want to proceed to your selection ? This cannot be redo
+        work_experience: Are you sure ? This cannot be redo
+        delete: Are you sure that you want to delete this mission ? This cannot be redo
     other: Other
 
 mouseover:

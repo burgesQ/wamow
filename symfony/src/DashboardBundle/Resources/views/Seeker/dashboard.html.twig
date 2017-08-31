@@ -115,7 +115,7 @@
                                 </a>
                             {% endif %}
 
-                            <a href="{{ path('mission_delete', { 'missionId' : mission.id }) }}" class="content-delete wmw-tinylink" onclick="return confirm('{{ 'legends.confirmation' | trans }}')">
+                            <a href="{{ path('mission_delete', { 'missionId' : mission.id }) }}" class="content-delete wmw-tinylink" onclick="return confirm('{{ 'legends.confirmation.delete' | trans }}')">
                                 <i class="icon icon--trashbin"></i> {{ 'dashboard.advisor.wip.delete' | trans }}
                             </a>
                         </div>
@@ -249,7 +249,7 @@
                                 <a href="{{ path('mission_edit', { 'missionId' : draft.id }) }}" class="wmw-button wmw-button--grey">
                                     <i></i><span>{{ 'dashboard.contractor.draft.continuebutton' | trans }}</span><i></i>
                                 </a>
-                                <btn href="{{ path('mission_delete', {'missionId': draft.id}) }}" class="main-slider-delete wmw-tinylink" onclick="return confirm('{{ 'legends.confirmation' | trans }}')">
+                                <btn href="{{ path('mission_delete', {'missionId': draft.id}) }}" class="main-slider-delete wmw-tinylink" onclick="return confirm('{{ 'legends.confirmation.delete' | trans }}')">
                                     <i class="icon icon--trashbin"></i>{{ 'dashboard.advisor.wip.delete' | trans }}
                                 </btn>
                             </div>
