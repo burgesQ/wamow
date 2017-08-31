@@ -88,8 +88,8 @@ legends:
         In order for your profile to be 100% complete you must link your Consultants.WantMore.Work account to LinkedIn and upload your Resume. You will not be able to do so once the sign up is complete. 
         
         The more precise you profile is, the higher the chance to be contacted!
-    currency: $
-    currency_day: $%price/d
+    currency: 
+    currency_day: %price/d
     confirmation:
         refuse_user: Are you sure that you want to refuse the user ? This cannot be redo
         add_user: Are you sure that you want to add the user to your shortlist ?
