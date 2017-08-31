@@ -533,7 +533,7 @@ mission:
 
         step_five:
             title: Final Step
-            subtitle: Let's wrap it up !
+            subtitle: ''
             hint: ""
             introduction: |
                 Consultants.Wantmore.Work is a BestAdvizor SAS brand, whose capital worth is 51.000 EUR

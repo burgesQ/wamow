@@ -17,9 +17,9 @@
 
             {{ form_errors(form) }}
 
-            <p class="wmw-onboard-mentions">
+            {#<p class="wmw-onboard-mentions">#}
                 {{ 'mission.new.step_five.introduction' | trans | raw }}
-            </p>
+            {#</p>#}
 
             <p class="wmw-onboard-paragraph">
                 {{ form_label(form.lastName)}}
@@ -57,9 +57,10 @@
                 </div>
             </div>
             {{ form_errors(form.inspectors) }}
-            <p class="wmw-onboard-mentions">
+
+            {#<p class="wmw-onboard-mentions">#}
                 {{ 'mission.new.step_five.ending' | trans | raw }}
-            </p>
+            {#</p>#}
 
             <div class="wmw-progressbar">
                 <span class="active"></span>
