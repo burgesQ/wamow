@@ -128,6 +128,15 @@ class MissionGeneratorController extends Controller
                 $newMission->setStatusGenerator(Mission::STEP_ONE);
                 $em->persist($newMission);
             }
+
+            // cat the 3 resume part
+            $trans = $this->get('translator');
+            $resume = '';
+            $resume .=  $trans->trans('mission.new.label.context', [], 'tools') . "\n\n" . $newMission->getContext() . "\n\n";
+            $resume .= $trans->trans('mission.new.label.stack', [], 'tools') . "\n\n" . $newMission->getStack() . "\n\n";
+            $resume .= $trans->trans('mission.new.label.objective', [], 'tools') . "\n\n" . $newMission->getObjective();
+            $newMission->setResume($resume);
+
             $em->flush();
             $newMission->setPublicId(md5(uniqid() . $newMission->getId()));
             $em->flush();

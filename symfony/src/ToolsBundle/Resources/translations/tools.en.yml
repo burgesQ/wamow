@@ -564,6 +564,9 @@ mission:
         label:
             currency: please select the currency
             title: TITLE OF THE PITCH
+            context: CONTEXT OF THE PROJECT
+            stack: STACK OF THE PROJECT
+            objective: OBJECTIVE(S) OF THE PROJECT
             resume: DESCRIPTION OF THE PROJECT
             later: FINISH LATER
             budget: ESTIMATED BUDGET

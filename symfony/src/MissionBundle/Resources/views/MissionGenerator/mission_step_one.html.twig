@@ -23,10 +23,26 @@
 
             <div class="wmw-fieldrow row">
                 <label for="wmw-pitch-desc" class="wmw-label wmw-label--top col-xs-12 col-md-6 col-xl-5">
-                    {{ 'mission.new.label.resume' | trans }}
+                    {{ 'mission.new.label.context' | trans }}
                 </label>
-                {{ form_widget(form.resume) }}
-                {{ form_errors(form.resume) }}
+                {{ form_widget(form.context, { 'attr' : { 'class' : 'textarea--mission' }}) }}
+                {{ form_errors(form.context) }}
+            </div>
+
+            <div class="wmw-fieldrow row">
+                <label for="wmw-pitch-desc" class="wmw-label wmw-label--top col-xs-12 col-md-6 col-xl-5">
+                    {{ 'mission.new.label.stack' | trans }}
+                </label>
+                {{ form_widget(form.stack, { 'attr' : { 'class' : 'textarea--mission' }}) }}
+                {{ form_errors(form.stack) }}
+            </div>
+
+            <div class="wmw-fieldrow row">
+                <label for="wmw-pitch-desc" class="wmw-label wmw-label--top col-xs-12 col-md-6 col-xl-5">
+                    {{ 'mission.new.label.objective' | trans }}
+                </label>
+                {{ form_widget(form.objective, { 'attr' : { 'class' : 'textarea--mission' }}) }}
+                {{ form_errors(form.objective) }}
             </div>
 
         <div class="wmw-progressbar">

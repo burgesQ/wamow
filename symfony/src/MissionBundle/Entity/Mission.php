@@ -331,6 +331,26 @@ class Mission
     private $currency;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="context", type="text", nullable=true)
+     */
+    private $context;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="stack", type="text", nullable=true)
+     */
+    private $stack;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="objective", type="text", nullable=true)
+     */
+    private $objective;
+
+    /**
      * Mission constructor.
      *
      * @param $nbStep
@@ -1537,5 +1557,74 @@ class Mission
     public function getCurrency()
     {
         return $this->currency;
+    }
+
+    /**
+     * Set context
+     *
+     * @param string $context
+     * @return Mission
+     */
+    public function setContext($context)
+    {
+        $this->context = $context;
+
+        return $this;
+    }
+
+    /**
+     * Get context
+     *
+     * @return string 
+     */
+    public function getContext()
+    {
+        return $this->context;
+    }
+
+    /**
+     * Set stack
+     *
+     * @param string $stack
+     * @return Mission
+     */
+    public function setStack($stack)
+    {
+        $this->stack = $stack;
+
+        return $this;
+    }
+
+    /**
+     * Get stack
+     *
+     * @return string 
+     */
+    public function getStack()
+    {
+        return $this->stack;
+    }
+
+    /**
+     * Set objective
+     *
+     * @param string $objective
+     * @return Mission
+     */
+    public function setObjective($objective)
+    {
+        $this->objective = $objective;
+
+        return $this;
+    }
+
+    /**
+     * Get objective
+     *
+     * @return string 
+     */
+    public function getObjective()
+    {
+        return $this->objective;
     }
 }

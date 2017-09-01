@@ -27,11 +27,23 @@ class StepOneFormType extends AbstractType
                 'group_by'           => 'category',
                 'multiple' => false
             ])
-            ->add('resume', TextareaType::class, [
+
+            ->add('context', TextareaType::class, [
                 'translation_domain' => 'tools',
-                'label'              => 'mission.new.label.resume',
+                'label'              => 'mission.new.label.context',
                 'required'           => true
             ])
+            ->add('stack', TextareaType::class, [
+                'translation_domain' => 'tools',
+                'label'              => 'mission.new.label.stack',
+                'required'           => true
+            ])
+            ->add('objective', TextareaType::class, [
+                'translation_domain' => 'tools',
+                'label'              => 'mission.new.label.objective',
+                'required'           => true
+            ])
+
             ->add('forLater', SubmitType::class, [
                 'translation_domain' => 'tools',
                 'validation_groups'  => false,
