@@ -88,10 +88,15 @@ legends:
         In order for your profile to be 100% complete you must link your Consultants.WantMore.Work account to LinkedIn and upload your Resume. You will not be able to do so once the sign up is complete. 
         
         The more precise you profile is, the higher the chance to be contacted!
-    currency: $
-    currency_day: $%price/d
-    confirmation: Are you sure ?
-    confirmation_work_experience: Are you shure ? This cannot be redo
+    currency: 
+    currency_day: %price/d
+    confirmation:
+        refuse_user: Are you sure that you want to refuse the user ? This cannot be redo
+        add_user: Are you sure that you want to add the user to your shortlist ?
+        remove_user: Are you sure that you want to remove the user from your shortlist ?
+        proceed: Are you sure that you want to proceed to your selection ? This cannot be redo
+        work_experience: Are you sure ? This cannot be redo
+        delete: Are you sure that you want to delete this mission ? This cannot be redo
     other: Other
 
 mouseover:
@@ -528,7 +533,7 @@ mission:
 
         step_five:
             title: Final Step
-            subtitle: Let's wrap it up !
+            subtitle: ''
             hint: ""
             introduction: |
                 Consultants.Wantmore.Work is a BestAdvizor SAS brand, whose capital worth is 51.000 EUR
@@ -559,6 +564,9 @@ mission:
         label:
             currency: please select the currency
             title: TITLE OF THE PITCH
+            context: CONTEXT OF THE PROJECT
+            stack: STACK OF THE PROJECT
+            objective: OBJECTIVE(S) OF THE PROJECT
             resume: DESCRIPTION OF THE PROJECT
             later: FINISH LATER
             budget: ESTIMATED BUDGET

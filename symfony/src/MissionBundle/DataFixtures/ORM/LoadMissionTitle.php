@@ -26,13 +26,13 @@ class LoadMissionTitle extends AbstractFixture implements OrderedFixtureInterfac
             [ 'mission_title.title.go_to_market', 'mission_title.sub_category.new_offer'],
             [ 'mission_title.title.go_to_market', 'mission_title.sub_category.parternship_strategy'],
 
-            [ 'mission_title.title.operational_excellence', 'mission_title.title.operqtionql_excellence'],
+            [ 'mission_title.title.operational_excellence', 'mission_title.title.operational_excellence'],
             [ 'mission_title.title.operational_excellence', 'mission_title.sub_category.best_pra_implem'],
             [ 'mission_title.title.operational_excellence', 'mission_title.sub_category.cost_reduction'],
             [ 'mission_title.title.operational_excellence', 'mission_title.sub_category.processed_optimization'],
             [ 'mission_title.title.operational_excellence', 'mission_title.sub_category.organization_organization'],
 
-            [ 'mission_title.title.business_transformation', 'mission_title.title.business_tranformation'],
+            [ 'mission_title.title.business_transformation', 'mission_title.title.business_transformation'],
             [ 'mission_title.title.business_transformation', 'mission_title.sub_category.new_business_model'],
             [ 'mission_title.title.business_transformation', 'mission_title.sub_category.digital_innovation'],
             [ 'mission_title.title.business_transformation', 'mission_title.sub_category.growth_support'],
@@ -44,7 +44,7 @@ class LoadMissionTitle extends AbstractFixture implements OrderedFixtureInterfac
             [ 'mission_title.title.is_it', 'mission_title.sub_category.implementation'],
             [ 'mission_title.title.is_it', 'mission_title.sub_category.parternship'],
 
-            [ 'mission_title.title.studies', 'mission_title.title.studie'],
+            [ 'mission_title.title.studies', 'mission_title.title.studies'],
             [ 'mission_title.title.studies', 'mission_title.sub_category.benchmark'],
             [ 'mission_title.title.studies', 'mission_title.sub_category.market'],
             [ 'mission_title.title.studies', 'mission_title.sub_category.innovation'],

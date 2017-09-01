@@ -48,7 +48,7 @@ class StepFiveFormType extends AbstractType
                 ],
                 'multiple'           => true,
                 'class'              => 'CompanyBundle\Entity\Inspector',
-                'label'              => 'mission.new.form.cac',
+                'label'              => 'mission.new.step_five.cac',
             ])
             ->add('back', SubmitType::class, [
                 'translation_domain' => 'tools',

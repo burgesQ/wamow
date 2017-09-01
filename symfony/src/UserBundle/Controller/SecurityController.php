@@ -20,6 +20,14 @@ class SecurityController extends BaseController
             return $this->redirectToRoute('dashboard');
         }
 
+        /** @var $session Session */
+        $session = $request->getSession();
+        $lastUsername = (null === $session) ? '' : $session->get(Security::LAST_USERNAME);
+        $user = $this->get('fos_user.user_manager')->findUserByEmail($lastUsername);
+        if ($lastUsername && $user && $user->getRoles()[0] == 'ROLE_CONTRACTOR') {
+            return $this->redirectToRoute('fos_user_security_login_contractor');
+        }
+
         return $this->render('@FOSUser/Security/login.html.twig', $this->loginProcessAction($request));
     }
 
