@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'Cantarell-Regular';
+  src: url('Cantarell-Regular.eot');
+  src: url('Cantarell-Regular.woff2') format('woff2'),
+       url('Cantarell-Regular.woff') format('woff'),
+       url('Cantarell-Regular.ttf') format('truetype'),
+       url('Cantarell-Regular.svg#Cantarell-Regular') format('svg'),
+       url('Cantarell-Regular.eot?#iefix') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
