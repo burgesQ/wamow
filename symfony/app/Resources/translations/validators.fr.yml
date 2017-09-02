@@ -1,53 +1,57 @@
 tools:
     phone:
-        digits:
-        prefix:
+        digits: 'The phone number can only have between 4 and 10 digits.'
+        prefix: 'Veuillez indiquer un prefix.'
     prefix:
-        phone:
+        phone: 'Veuillez indiquer un numero de téléphone.'
     address:
-        required:
-        city:
-        state:
+        required: "L'adresse peut contenir que de lettres, numéros, points, virgules et tirés."
+        city: 'La ville peut contenir que de lettres et de tirés.'
+        state: "L'état peut contenir que de lettres et de tirés."
     upload:
-        badFormat:
+        badFormat: "Ce format n'est pas accepté"
     number:
-        required:
+        required: "Veuillez indiquer un numéro valide"
 
 user:
     companysize:
-        min:
+        min: "Veuillez sélectionner une entreprise"
     continent:
-        min:
+        min: "Veuillez sélectionner une zone géographique"
     fname:
-    blank:
-    short:
-    long:
-    illegale:
+        blank: 'Veuillez fournir votre prénom.'
+        short: 'Votre prénom est trop court.'
+        long: 'Votre prénom est trop longue.'
+        illegale: 'Votre prénom contient des caractères qui ne sont pas acceptés'
     lname:
-    blank:
-    short:
-    long:
-    illegale:
+        blank: 'Veuillez fournir votre nom.'
+        short: 'Votre nom est trop court.'
+        long: 'Votre nom est trop longue.'
+        illegale: 'Votre nom contient des caractères qui ne sont pas acceptés'
+    pass:
+        lowercase: Veuillez entrer au moins une lettre majuscule 
+        uppercase: Veuillez entrer au moins une lettre minuscule 
+        number: Veuillez entrer au moins un numéro 
+        spechar: Veuillez entrer au moins un caractère spécial 
 
 company:
     name:
-        blank:
-        short:
-        long:
-        illegale:
+        blank: 'Veuillez entrer le nom de votre entreprise '
+        short: "Le nom de l'entreprise estr trop court"
+        long: "Le nom de l'entreprise estr trop longue."
+        illegale: "Le nom de l'entreprise contient des caractères qui ne sont pas acceptés"
 
 error:
     mission_kind:
-        one:
+        one: Veuillez sélectionner au moins une mission
     language:
-        one:
+        one: Veuillez sélectionner au moins une langue
     resume:
-        max_words:
+        max_words: Votre CV ne peut pas contenir plus de 500 mots.
     date:
-        past_date:
-        after_end_date:
-        before_start_date:
-    wolrd:
-        continent:
-        country:
-    minlanguage:
+        past_date: Vous ne pouvez pas choisir une date passée 
+        after_end_date: La mission ne peut pas commencer après la date de la fin
+        before_start_date: La mission ne peut pas finir avant la date du debut 
+        continent: Veuillez sélectionner au moins un continent
+        country: Veuillez sélectionner au moins un pays
+    minlanguage: "Veuillez sélectionner au moins une langue"

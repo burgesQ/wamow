@@ -156,3 +156,17 @@
 
 {% endblock %}
 
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+            sortSelectOptions('#step_two_form_professionalExpertise', true);
+            sortSelectOptions('#step_two_form_currency', false);
+        });
+
+    </script>
+
+{% endblock %}
