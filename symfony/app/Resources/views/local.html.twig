@@ -13,7 +13,7 @@
     {% endfor %}
     <div class="wmw-header-languages-menu">
     	{% for locale in locales if locale != app.request.locale %}
-        <a href="{{ path(route, params|merge({ _locale: locale })) }}">{{ locale }}</a>
+            <a href="{{ path(route, params|merge({ _locale: locale })) }}">{{ locale }}</a>
         {% endfor %}
     </div>
 </div>
