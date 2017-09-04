@@ -25,7 +25,7 @@
                         <i></i><span>
                             {% if (user.firstName ~ user.LastName) | length < 20 %}
                                 <span class="name">{{ user.firstName }} {{ user.lastName }}</span>
-                    {% else %}
+                            {% else %}
                                 <span class="name">{{ (user.firstName) | truncate(1, false, '.') }} {{ user.lastName | truncate(18, false, '') }}</span>
                             {% endif %}
                             <i class="icon icon--arrow"></i>

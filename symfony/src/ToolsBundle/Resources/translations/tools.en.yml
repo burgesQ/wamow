@@ -182,6 +182,7 @@ home:
         seeker: "Company"
         open: "Open your account"
         title: "Find a match."
+        company_link: "I represent a company."
         valueproposition:
             first: "VALUE YOUR TIME"
             second: "BUILD A WORLD OF OPPORTUNITIES"
