@@ -981,6 +981,7 @@ mission_title:
 
 ## Mails template
 mails:
+    hello: Hello %f_name %l_name !
     contracot_hello: Hello %f_name %l_name %c_name!
     advisor_hello: Hello %f_name %l_name !
     registration:
