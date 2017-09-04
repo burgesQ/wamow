@@ -72,9 +72,8 @@ footer:
     mission: "Mission"
     about: "About"
     advisor: "Expert"
-    agreement: "User agreement"
     legal: "Legal notice"
-    contractor: "Company"
+    help: "Help"
 
 legends:
     title: |

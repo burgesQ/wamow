@@ -88,4 +88,20 @@ class DefaultController extends Controller
     {
         return $this->render('@HomePage/terms.html.twig');
     }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function aboutAction()
+    {
+        return $this->render('@HomePage/about.html.twig');
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function helpAction()
+    {
+        return $this->render('@HomePage/help.html.twig');
+    }
 }

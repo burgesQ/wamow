@@ -1,0 +1,57 @@
+<footer id="footer" class="footer-fixed"><!-- footer -->
+    <div class="container">
+        <div class="footer-content">
+            <div class="col-3-of-12 wrap-logo-footer">
+                <img src="{{ asset('images/footer-logo.png') }}" alt="WMW"/>
+            </div>
+            <div class="col-7-of-12 wrap-navbar-mid">
+                <div class="wrap-links">
+                    <div class="wrap-link">
+                        <a href="#">
+                            NEWSLETTER
+                        </a>
+                        <span>/</span>
+                    </div>
+                    <div class="wrap-link">
+                        <a href="{{ path('home_page_about') }}">
+                            {{ 'footer.about' | trans({}, 'tools') }}
+                        </a>
+                        <span>/</span>
+                    </div>
+                    <div class="wrap-link">
+                        <a href="{{ path('home_page_terms') }}">
+                            {{ 'footer.legal' | trans({}, 'tools') }}
+                        </a>
+                        <span>/</span>
+                    </div>
+                    <div class="wrap-link">
+                        <a href="{{ path('home_page_help') }}">
+                            {{ 'footer.help' | trans({}, 'tools') }}
+                        </a>
+                        <span>/</span>
+                    </div>
+                    <div class="wrap-link">
+                        <a href="#">
+                            PRESS
+                        </a>
+                        <span>/</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2-of-12 social-media-right">
+                <a href="{{ facebook_link }}">
+                    {#<i class="fa fa-facebook" aria-hidden="true"></i>#}
+                    <i class="icon icon--facebook"></i>
+                </a>
+                <a href="{{ twitter_link }}">
+                    {#<i class="fa fa-twitter" aria-hidden="true"></i>#}
+                    <i class="icon icon--twitter"></i>
+                </a>
+                <a href="{{ linkedin_link }}">
+                    {#<i class="fa fa-linkedin" aria-hidden="true"></i>#}
+                    <i class="icon icon--linkedin"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer><!-- End footer -->

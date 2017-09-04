@@ -12,3 +12,13 @@ home_page_terms:
     path: /terms
     defaults:
         _controller: HomePageBundle:Default:terms
+
+home_page_help:
+    path: /help
+    defaults:
+        _controller: HomePageBundle:Default:help
+
+home_page_about:
+    path: /about
+    defaults:
+        _controller: HomePageBundle:Default:about
