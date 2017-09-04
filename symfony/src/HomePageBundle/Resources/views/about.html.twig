@@ -7,7 +7,7 @@
     {% set route_params = app.request.attributes.get('_route_params') %}
     {% set params = route_params|merge(app.request.query.all) %}
 
-    <body class="page-new homepage">
+    <body class="page-new about-us">
 
     <section class="section section-top">
 
@@ -67,97 +67,135 @@
                     </a>
                 </div>
 
-                <h1 class="top-title">{{ 'home.advisor.title' | trans }}</h1>
-                <h2 class="top-subtitle">
-                    {{ 'home.advisor.valueproposition.first' | trans | upper }}<br>
-                    {{ 'home.advisor.valueproposition.second' | trans | upper }}
-                </h2>
+                <h1 class="top-title">About us</h1>
                 <div class="row-no-margins text-center">
-                    <div class="wrap-btn">
-                        <!--<a class="button btn btn-big">I WANT MORE WORK</a>-->
-                        <a href="{{ path('fos_user_registration_register_expert') }}" class="button btn btn-big">
-                            {{ 'home.advisor.signup' | trans | upper }}
-                        </a>
-                    </div>
-                </div>
-                <div class="row-no-margins text-center">
-                    <a href="#footer" class="scroll-bottom">
+                    <a href="#about" class="scroll-bottom">
                         <i class="fa fa-chevron-down"></i>
+                        {# chevron isn't working #}
                     </a>
                 </div>
-                <div class="wrap-parteners">
-                    <a href="#" class="wrap-img-parteners"><!-- Official logo -->
-                        <img src="{{ asset('/images/logos-clients.png') }}" onError="this.style.display='none';"
-                             alt="logo"/>
-                    </a>
-                </div>
+
             </div>
         </div>
     </section>
 
-
     <section class="section section-mid">
-        <div class="container content">
+        <div class="container content content-top">
             <div class="container-content">
-                <h1 class="mid-title">{{ 'home.advisor.howdoesitwork' | trans }}</h1>
                 <div class="row-no-margins row-s text-center">
-                    <div class="wrap-icon-s">
-                        <img src="{{ asset('images/icon1.png') }}" alt="start"/>
-                        <span>start /</span>
-                    </div>
-                    <div class="wrap-text-s">
-                        <div class="text-s">
-                            {{ 'home.advisor.start.text' | trans }}<br>
-                        </div>
-                    </div>
+                    <h2 class="description" id="about">
+                        Independent Workers & Advisors represent an increasingly large segment of the professional
+                        workforce.
+                        Advisory services are expected to continue to grow by 3.7% to 5.8% per year over the next years.
+                        At the same time, automation is expected to transform the way we work, faster than ever before.
+                        Since the 1970s certain types of transactional jobs have declined by more than 50% due to
+                        automation.
+                        There will be fewer jobs. And more of the remaining jobs will shift to digital.
+                    </h2>
                 </div>
-                <div class="row-no-margins row-s text-center">
-                    <div class="wrap-icon-s">
-                        <img src="{{ asset('images/icon2.png') }}" alt="start"/>
-                        <span>play /</span>
-                    </div>
-                    <div class="wrap-text-s">
-                        <div class="text-s">
-                            {{ 'home.advisor.play.text' | trans }}<br>
-                        </div>
-                    </div>
-                </div>
-                <div class="row-no-margins row-s text-center">
-                    <div class="wrap-icon-s">
-                        <img src="{{ asset('images/icon3.png') }}" alt="start"/>
-                        <span>improve /</span>
-                    </div>
-                    <div class="wrap-text-s">
-                        <div class="text-s">
-                            {{ 'home.advisor.improve.text' | trans }}<br>
-                        </div>
-                    </div>
-                </div>
-                <div class="row-no-margins row-s text-center">
-                    <div class="wrap-icon-s">
-                        <img src="{{ asset('images/icon4.png') }}" alt="start"/>
-                        <span>pay /</span>
-                    </div>
-                    <div class="wrap-text-s">
-                        <div class="text-s">
-                            {{ 'home.advisor.pay.text' | trans }}<br>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row-no-margins text-center">
-                <div class="wrap-btn">
-                    <a href="{{ path('fos_user_registration_register_expert') }}" class="button btn btn-big">
-                        {{ 'home.advisor.signup'  | trans }}
-                    </a>
-                </div>
-            </div>
-            <div class="row-no-margins text-center">
-                <a href="{{ path('home_page_seeker') }}" class="bottom-link">
-                    {{ 'home.advisor.company_link' | trans | upper }}
-                </a>
             </div>
         </div>
+        <div class="container content">
+            <div class="container-content">
+                <h1 class="mid-title">Our team</h1>
+                <div class="row-no-margins row-s text-center">
+                    <div class="col-3-of-12 wrap-member">
+                        <img src="{{ asset('images/member1.jpeg') }}" alt=""/>
+                        <div class="about-social-media">
+                            <a href="linkedin.com" class="social-media">
+                                <i class="fa fa-linkedin" aria-hidden="true"></i>
+                            </a>
+                            <a href="mailto:contact@wm.work" target="_top" class="social-media">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-3-of-12 wrap-member">
+                        <img src="{{ asset('images/member2.jpeg') }}" alt=""/>
+                        <div class="about-social-media">
+                            <a href="linkedin.com" class="social-media">
+                                <i class="fa fa-linkedin" aria-hidden="true"></i>
+                            </a>
+                            <a href="mailto:contact@wm.work" target="_top" class="social-media">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-3-of-12 wrap-member">
+                        <img src="{{ asset('images/member3.jpeg') }}" alt=""/>
+                        <div class="about-social-media">
+                            <a href="linkedin.com" class="social-media">
+                                <i class="fa fa-linkedin" aria-hidden="true"></i>
+                            </a>
+                            <a href="mailto:contact@wm.work" target="_top" class="social-media">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-3-of-12 wrap-member">
+                        <img src="{{ asset('images/member4.jpeg') }}" alt=""/>
+                        <div class="about-social-media">
+                            <a href="linkedin.com" class="social-media">
+                                <i class="fa fa-linkedin" aria-hidden="true"></i>
+                            </a>
+                            <a href="mailto:contact@wm.work" target="_top" class="social-media">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-no-margins row-s text-center">
+                    <div class="col-3-of-12 wrap-member">
+                        <img src="{{ asset('images/member5.jpeg') }}" alt=""/>
+                        <div class="about-social-media">
+                            <a href="linkedin.com" class="social-media">
+                                <i class="fa fa-linkedin" aria-hidden="true"></i>
+                            </a>
+                            <a href="mailto:contact@wm.work" target="_top" class="social-media">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-3-of-12 wrap-member">
+                        <img src="{{ asset('images/member2.jpeg') }}" alt=""/>
+                        <div class="about-social-media">
+                            <a href="linkedin.com" class="social-media">
+                                <i class="fa fa-linkedin" aria-hidden="true"></i>
+                            </a>
+                            <a href="mailto:contact@wm.work" target="_top" class="social-media">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-3-of-12 wrap-member">
+                        <img src="{{ asset('images/member3.jpeg') }}" alt=""/>
+                        <div class="about-social-media">
+                            <a href="linkedin.com" class="social-media">
+                                <i class="fa fa-linkedin" aria-hidden="true"></i>
+                            </a>
+                            <a href="mailto:contact@wm.work" target="_top" class="social-media">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-3-of-12 wrap-member">
+                        <img src="{{ asset('images/member4.jpeg') }}" alt=""/>
+                        <div class="about-social-media">
+                            <a href="linkedin.com" class="social-media">
+                                <i class="fa fa-linkedin" aria-hidden="true"></i>
+                            </a>
+                            <a href="mailto:contact@wm.work" target="_top" class="social-media">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-no-margins row-s text-center">
+                    {#stuffs#}
+                </div>
+            </div>
+        </div>
+
     </section>
     </body>
 
