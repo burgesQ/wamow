@@ -41,13 +41,24 @@ class PreregisterType extends AbstractType
                 'translation_domain' => 'tools',
                 'label'              => 'home.contractor.preregister.company'
             ])
-            ->add('country', CountryType::class, [
+//            ->add('country', CountryType::class, [
+//                'required'           => true,
+//                'translation_domain' => 'tools',
+//                'label'              => 'home.contractor.preregister.country'
+//            ])
+//            ->add('phone', new PhoneNumberType(), [
+//                'required' => true,
+//            ])
+            ->add('country', TextType::class, [
                 'required'           => true,
                 'translation_domain' => 'tools',
-                'label'              => 'home.contractor.preregister.country'
+                'label'              => 'home.contractor.preregister.country',
             ])
-            ->add('phone', new PhoneNumberType(), [
-                'required' => true,
+            ->add('phone', TextType::class, [
+                'required'           => true,
+                'translation_domain' => 'tools',
+                'label'              => 'home.contractor.preregister.phone',
+                'mapped' => false
             ])
             ->add('comment', TextType::class, [
                 'required'           => false,

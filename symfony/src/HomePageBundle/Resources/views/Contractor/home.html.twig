@@ -162,19 +162,17 @@
 
                         <div class="group">
                             {{ form_errors(form.country) }}
-                            {{ form_row(form.country) }}
-                            {#<input type="text" hidden>#}
-                            {#<span class="highlight"></span>#}
-                            {#<span class="bar"></span>#}
-                            {#{{ form_label(form.country) }}#}
+                            {{ form_widget(form.country) }}
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            {{ form_label(form.country) }}
                         </div>
                         <div class="group">
                             {{ form_errors(form.phone) }}
                             {{ form_widget(form.phone) }}
-                            {#<input type="text" hidden>#}
-                            {#<span class="highlight"></span>#}
-                            {#<span class="bar"></span>#}
-                            {#{{ form_label(form.phone) }}#}
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            {{ form_label(form.phone) }}
                         </div>
 
                         <div class="group">

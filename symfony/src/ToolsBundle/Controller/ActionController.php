@@ -110,5 +110,4 @@ class ActionController extends Controller
 
         return $response;
     }
-
 }
