@@ -32,6 +32,7 @@ class DefaultController extends Controller
 
         return $this->render('HomePageBundle:Advisor:home.html.twig', [
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+            'home' => 1
         ]);
     }
 
@@ -71,6 +72,7 @@ class DefaultController extends Controller
         }
         return $this->render('HomePageBundle:Contractor:home.html.twig', array(
             'form' => $form->createView(),
+            'home' => 1
         ));
     }
 
@@ -88,7 +90,10 @@ class DefaultController extends Controller
      */
     public function termsAction()
     {
-        return $this->render('@HomePage/terms.html.twig');
+        return $this->render('@HomePage/terms.html.twig', [
+            'user' => $this->getUser(),
+            'home' => 1
+        ]);
     }
 
     /**
@@ -96,7 +101,10 @@ class DefaultController extends Controller
      */
     public function aboutAction()
     {
-        return $this->render('@HomePage/about.html.twig');
+        return $this->render('@HomePage/about.html.twig', [
+            'user' => $this->getUser(),
+            'home' => 1
+        ]);
     }
 
     /**
@@ -104,6 +112,9 @@ class DefaultController extends Controller
      */
     public function helpAction()
     {
-        return $this->render('@HomePage/help.html.twig');
+        return $this->render('@HomePage/help.html.twig', [
+            'user' => $this->getUser(),
+            'home' => 1
+        ]);
     }
 }
