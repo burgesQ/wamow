@@ -3,49 +3,10 @@
 
 {% block body %}
 
-    {% set route = app.request.attributes.get('_route') %}
-    {% set route_params = app.request.attributes.get('_route_params') %}
-    {% set params = route_params|merge(app.request.query.all) %}
-
     <body class="page-new text-page">
     <section class="section section-top">
 
-
-        <header>
-            <div class="container header-content" id="header-c"><!-- header content -->
-                <!-- Navbar -->
-                <nav class="navbar">
-
-                    <div class="navigation" id="navigation">
-                        <div class="col-1-of-3 wrap-navbar-left">
-                        </div>
-
-                        <div class="col-1-of-3 wrap-navbar-mid">
-                            <div class="wrap-links">
-
-                                <a href="{{ path('home_page_advisor') }}" class="wmw-header-logo">
-                                    <img src="{{ asset('images/header-logo.png') }}" alt="WMW"/>
-                                </a>
-                                
-                                {#<div class="wrap-link">#}
-                                    {#<a href="{{ path(route, params|merge({ _locale: 'en' })) }}">EN</a>#}
-                                    {#<span>/</span>#}
-                                    {#<a href="{{ path(route, params|merge({ _locale: 'fr' })) }}">FR</a>#}
-                                {#</div>#}
-                            </div>
-                        </div>
-
-                        <div class="col-1-of-3 wrap-navbar-right">
-                            <a href="{{ path('fos_user_registration_register_expert') }}"
-                               class="button btn btn-right">{{ 'home.advisor.login' | trans }}</a>
-                            <a href="{{ path('fos_user_security_login') }}"
-                               class="button btn btn-right btn-ghost">{{ 'home.advisor.signup' | trans }}</a>
-                        </div>
-
-                    </div>
-                </nav><!-- End Navbar -->
-            </div>
-        </header>
+        {% include '@HomePage/header_second.html.twig' %}
 
         <div class="container text-center">
             <div class="wrap-container-content">
