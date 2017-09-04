@@ -1,12 +1,12 @@
-home_page_expert:
+home_page_advisor:
     path:      /
     defaults:
-        _controller: HomePageBundle:Default:expert
+        _controller: HomePageBundle:Default:advisor
 
-home_page_seeker:
+home_page_contractor:
     path:      /contractor
     defaults:
-        _controller: HomePageBundle:Default:seeker
+        _controller: HomePageBundle:Default:contractor
 
 home_page_terms:
     path: /terms
