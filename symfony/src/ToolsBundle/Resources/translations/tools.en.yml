@@ -384,7 +384,7 @@ user:
         advisor:
             btn_save_change: SAVE CHANGE
 
-# Comapny translation
+## Comapny translation
 company:
     name: "Company"
     new:
@@ -1062,7 +1062,7 @@ mails:
             Greetings,
             The team at Consultants.wantmore.work
 
-# Payement template
+## Payement template
 payment:
     ok: "Subscription success !"
     ko: "Subscription failed."
@@ -1077,7 +1077,7 @@ payment:
     subscribe: Subscribe
     help: I declare having read and agreed to consultants.wantmore.work's User Agreement. I hereby validate my registration by paying the annual fees of 240 euros (20 euroes x 12 months), tax exluded, to BestAdvizor, SAS - consultants.wantmore.work's managing firm. 
 
-# NewsLetter template
+## NewsLetter template
 newsletter:
     body_title: THE NEWSLETTER FOR THOSE WHO WANT TO KNOW MORE ABOUT WORK
     read_more: READ MORE
@@ -1119,7 +1119,7 @@ newsletter:
         notLogged: You must be logged to edit the content of an article
         noRights: You must be the writer or the publisher of an article to edit it
 
-# Notification template
+## Notification template
 notification:
     seeker:
         mission:
@@ -1145,3 +1145,94 @@ notification:
             dismiss: "You have been dismissed (%date%)"
             notselected: "You have not been selected for the next step (%date%)"
             beginselection: "You are now part of the Pitch process"
+
+## About Page
+about:
+    title: About us
+    team: Our team
+    content: "Consultants.WantMore.Work is the first automated business oriented match-making platform that offers the quality of human interaction combined with the power of digital growth. Consultants.WantMore.Work sets new standards to professional matchmaking online solutions oriented towards deal closing.<br>
+        Consultants.WantMore.Work is the best place on the web to present one’s need and the best place to emphasize one’s expertise through the proposal of a solution to the the counterpart’s need. We provide medium and small sized companies access to the same firepower that big groups enjoy.<br>
+        Thanks to its top quality algorithms and more than 30 years of ad hoc experience Consultants.WantMore.Work helps understand and present the key points of your need and find the experts able to guide you through the reformulation and the implementation of your business issue.<br>
+        We are now at the intersection of two worlds, a work environment that changes for the long run, that of long careers within the same firm, that of mono-activity, that also of an income based on returns from the prestige of your degree.<br> We are entering a world made of multi-activities, a world in which technology can be your worst enemy, or your best ally.<br>
+        It is our collective choice to shape such future for the worst or for the best.<br>
+        The three founders, experts in their business sectors, started from this observation. Consultants.WantMore.Work is a SaaS solution thought by the operationals for the operationals. <br>
+        Our algorithms reformulate your issue, identify the most interesting experts and create simple ways of connecting people through an interface centered around parties’ comprehension and straightforwardness. We offer both time saving and financial gain by providing some key functions to the  support for non explicit needs in an environment in which the stakes of interaction are high.<br>
+        No freelancing, just consulting !"
+
+## Help Page
+help:
+    title: "Frequently Asked Questions (FAQs)"
+    adv: "1. EXPERT"
+    ctr: "2. CORPORATION"
+    qa:
+        Question1: "What do I need to Sign Up?"
+        Answer1: "To create your profile you will need:<br>
+                - first and last name;<br>
+                - email address;<br>
+                - LinkedIn profile or resume to upload;<br>
+                - country of residence;<br>
+                - availability to travel, to introduce to you the possibility of presence on site and travelling for future missions;<br>
+                - the languages you speak (professionally), for communication and outcome purposes.<br>
+                The more precise your profile is, the higher the change to be contacted."
+        Question2: "How long is the Sign Up process?"
+        Answer2: "Less than 7 minutes"
+        Question3: "What are the exact Steps to follow?"
+        Answer3: "First Step: know the business sector in which you have significant experience. We offer you 13 industries to chose from.<br>
+                Second Step: Once you have chosen your business sector, please identify the different roles through which you have acquired your experience. In which positions have you developed and built your know-how? We offer you 22 typical positions to chose from.<br>
+                Third Step: let’s take a step further in the completion of your profile.<br>
+                - If you have been a consultant, can you clarify what type of consulting service you have provided? <br>
+                - If you have never been a consultant: whether while leading an internal project, while carrying out your role or during the fulfillment of your services, you have taken some actions that correspond at one of the services hereunder. Please select those that best describe what you have previously done.<br>
+                We have identified 25 types of possible services.<br>
+                Forth and Last Step: this is a crucial step. It will conclude your profiling. Keeping in mind your previous choices (business sector, professional expertise and type of services provided), we have selected a list of potential experiences that you might have acquired.It is important to choose those that represent the best what you would like to do and emphasize your abilities. For each one of these experiences, we will ask you to provide further information related to:<br>
+                - The size of the organization (small, medium, large company or the three)<br>
+                - The cultural context (possibility to make multiple choices)<br>
+                - The total amount of experience in months<br>
+                - Your daily rate for each one of them.<br>
+                - If you have done such activity in the past two years"
+        Question4: "What should I mention to the Corporation in my first message?"
+        Answer4: " - Reformulate and interpret the client’s professional need (in your own words): <br>
+                - Wider stakes (reposition, from your point of view, the stakes highlighted by the client in a competitive context that would help his/her evolution, including potential new opportunities): <br>
+                - Offer a point of view that highlights your expertise; <br>
+                - Open the interaction up by asking conclusive questions (showing an in depth-knowledge of the subject) that will guide towards the start of a solution linked to 1.the objectives (they must be clear and precise, potentially ranked if multiple or contradictory) and 2. The scope (eliminate all possible ambiguity with potential questions) as presented; <br>
+                - The objective of the first answer it is not to bring a conclusive solution but to initiate a dialogue leading towards the construction of a common solution."
+        Question5: "Once I have submitted my profile, can I change the information provided?"
+        Answer5: "No, you cannot. We remind all Experts that once you create your profile, you will no longer to change the information related to your previous experience. You will be, although, able to change your email, phone number, Country of Residence, Languages and Certifications."
+        Question6: "How long do I have to wait for the first mission to be presented to me?"
+        Answer6: "75% of experts registered on Consultants.wantmore.work answer a first mission pitch under 5 days."
+        Question7: "Do I have to Pay?"
+        Answer7: "When you receive the first pitch, you will have to subscribe to a monthly plan with a year long commitment."
+#       corporate qa
+        Question8: "What do I need to Sign Up?"
+        Answer8: "Please pre-register on the Corporation’s Home page. One of our Representatives will contact you in under 48h to Sign you up and help you build your first pitch."
+        Question9: "Do I need to pay in order to gain access to your services?"
+        Answer9: "Yes, you do. Payment is necessary to access Consultants.wantmore.work."
+        Question10: "How does it work ?"
+        Answer10: "	Publish a pitch : we will assist you drafting your search for the perfect expert. The mission will then be presented to experts whose experience matches your search and its context.<br>
+                Check the proposals : you will be notified in real time about proposals from experts (up to 5 at a time). You can then communicate with the experts to better decribe your need and obtain a more detailed proposal.<br>
+                Select a proposal: you can select up to 3 experts and access their profiles. This will allow you to contine your interaction while having more information about your counterpart. This will provide enough material to base your final decision on."
+        Question11: "How do I build my pitch?"
+        Answer11: " Step 1:<br><br>
+                Consultants.wantmore.work identified the main consulting missions for you. Choose the one that better describes your issue. In order to present your issue and help you describe your need, we advise you to follow our plan :<br>
+                - describe the context in which your search fits best. It is important for the expert to be able to accurately identify it<br>
+                - portray what is at stake from your point of view<br>
+                - establish the objectives and define the scope(s) of the intervention, so that the expert can present you the start of a solution. <br>
+                Please stay focused on the issue while drafting the text of the pitch : the contextual information (budget, dates, etc.) is to be provided in the second step. Before publishing the pitch, you will have the chance to review it in its totality.<br><br>
+                Step 2: <br><br>
+                This second step collects the contextual information linked to the organization of the upcoming mission.<br>
+                - Budget : it is a simple estimation at this point. It is purely declarative and it does not hold any contractual engagement. Further into your interaction with the experts, you can determin the method of execution and billing.<br>
+                - Geographical area : it allows us to put you in contact with only those experts having worked in (at least) one of the areas selected. You may select all areas.<br>
+                - Application Deadline : past this date, the consultation will be over and only those experts having answered before the indicated deadline will be up for selection.<br>
+                - Start and End Dates of the mission: they are approximate but it will allow us to select only experts whose availability matches.<br>
+                - Hidden Company Name: we offer you the possibility to hide the name of your company to keep the consultation confidential.<br>
+                - On site presence required (partially) : if the option is activated, only the experts available to travel to the location will be selected.<br><br>
+                Step 3 :<br><br>
+                - Certification : you have the possibility to enrich your research with different certifications - you can either select one from the list we provide or create a new one.<br>
+                - Langues : this criteria is important in order to make sure we reach out to experts speaking the same language(s). This is necessary to establish a stable evolution of the mission.<br>
+                - Desiered Expertise : based on the information previously selected, the system offeres you examples of documented expertise. Please select the one best fitting your research. <br>
+                Having taken into consideration all the information provided, Consultants.wantmore.work shows you the number of experts present in our database capable to deal with your issue as well as their average daily rates. You can change this average daily rate by establishing a limit.<br><br>
+                Step 4:<br><br>
+                - Pitch Review : Please check the accuracy of the inforamtion before publishing the pitch. You may edit the information previously provided during this review process. Once the pitch is published you will no longer be able to edit it.<br><br>
+                Step 5: <br><br>
+                Legal Notice, Confirmation and Publication."
+        Question12: "How long do I have to wait for the first answers to come through?"
+        Answer12: "85% of corporations having published a pitch have received a solution proposal in less than 5 days."

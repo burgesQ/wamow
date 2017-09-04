@@ -67,7 +67,7 @@
                     </a>
                 </div>
 
-                <h1 class="top-title">About us</h1>
+                <h1 class="top-title">{{ 'about.title' | trans }}</h1>
                 <div class="row-no-margins text-center">
                     <a href="#about" class="scroll-bottom">
                         <i class="fa fa-chevron-down"></i>
@@ -84,20 +84,14 @@
             <div class="container-content">
                 <div class="row-no-margins row-s text-center">
                     <h2 class="description" id="about">
-                        Independent Workers & Advisors represent an increasingly large segment of the professional
-                        workforce.
-                        Advisory services are expected to continue to grow by 3.7% to 5.8% per year over the next years.
-                        At the same time, automation is expected to transform the way we work, faster than ever before.
-                        Since the 1970s certain types of transactional jobs have declined by more than 50% due to
-                        automation.
-                        There will be fewer jobs. And more of the remaining jobs will shift to digital.
+                        {{ 'about.content' | trans }}
                     </h2>
                 </div>
             </div>
         </div>
         <div class="container content">
             <div class="container-content">
-                <h1 class="mid-title">Our team</h1>
+                <h1 class="mid-title">{{ 'about.team' | trans }}</h1>
                 <div class="row-no-margins row-s text-center">
                     <div class="col-3-of-12 wrap-member">
                         <img src="{{ asset('images/member1.jpeg') }}" alt=""/>
