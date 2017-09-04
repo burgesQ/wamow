@@ -21,68 +21,43 @@ class PreregisterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', EmailType::class,
-                array(
-                    'required' => true,
-                    'translation_domain' => 'tools',
-                    'label' => false,
-                    'attr' => array(
-                        'placeholder' => 'home.contractor.preregister.email',
-                    )
-            ))
-            ->add('firstname', TextType::class,
-                array(
-                    'required' => true,
-                    'translation_domain' => 'tools',
-                    'label' => false,
-                    'attr' => array(
-                        'placeholder' => 'home.contractor.preregister.firstname',
-                    )
-            ))
-            ->add('lastname', TextType::class,
-                array(
-                    'required' => true,
-                    'translation_domain' => 'tools',
-                    'label' => false,
-                    'attr' => array(
-                        'placeholder' => 'home.contractor.preregister.lastname',
-                    )
-            ))
-            ->add('company', TextType::class,
-                array(
-                    'required' => true,
-                    'translation_domain' => 'tools',
-                    'label' => false,
-                    'attr' => array(
-                        'placeholder' => 'home.contractor.preregister.company',
-                    )
-            ))
-            ->add('country', CountryType::class,
-                array(
-                    'required' => true,
-                    'label'=> false,
-                    'translation_domain' => 'tools',
-                    'attr' => array(
-                        'placeholder' => 'home.contractor.preregister.country',
-                    )
-            ))
-            ->add('phone', new PhoneNumberType(),
-                array(
-                    'required' => true,
-            ))
-            ->add('comment', TextareaType::class,
-                array(
-                    'required' => false,
-                    'label'=> false,
-                    'translation_domain' => 'tools',
-                    'attr' => array(
-                        'placeholder' => 'home.contractor.preregister.comment',
-                    )
-            ))
-            ->add('submit', SubmitType::class, array(
-                'label' => 'home.contractor.preregister.submit',
+            ->add('email', EmailType::class, [
+                'required'           => true,
                 'translation_domain' => 'tools',
-            ));
+                'label'              => 'home.contractor.preregister.email'
+            ])
+            ->add('firstname', TextType::class, [
+                'required'           => true,
+                'translation_domain' => 'tools',
+                'label'              => 'home.contractor.preregister.firstname'
+            ])
+            ->add('lastname', TextType::class, [
+                'required'           => true,
+                'translation_domain' => 'tools',
+                'label'              => 'home.contractor.preregister.lastname'
+            ])
+            ->add('company', TextType::class, [
+                'required'           => true,
+                'translation_domain' => 'tools',
+                'label'              => 'home.contractor.preregister.company'
+            ])
+            ->add('country', CountryType::class, [
+                'required'           => true,
+                'translation_domain' => 'tools',
+                'label'              => 'home.contractor.preregister.country'
+            ])
+            ->add('phone', new PhoneNumberType(), [
+                'required' => true,
+            ])
+            ->add('comment', TextType::class, [
+                'required'           => false,
+                'label'              => 'home.contractor.preregister.comment',
+                'translation_domain' => 'tools',
+            ])
+            ->add('submit', SubmitType::class, [
+                'label'              => 'home.contractor.preregister.submit',
+                'translation_domain' => 'tools',
+            ]);
     }
 
     /**
@@ -90,9 +65,9 @@ class PreregisterType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'ToolsBundle\Entity\Preregister'
-        ));
+        ]);
     }
 
     /**

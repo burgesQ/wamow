@@ -80,4 +80,28 @@ class DefaultController extends Controller
         // her we'll find a way to define the local of the user
         return $this->redirectToRoute('home_page_expert', ['_locale' => 'en']);
     }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function termsAction()
+    {
+        return $this->render('@HomePage/terms.html.twig');
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function aboutAction()
+    {
+        return $this->render('@HomePage/about.html.twig');
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function helpAction()
+    {
+        return $this->render('@HomePage/help.html.twig');
+    }
 }

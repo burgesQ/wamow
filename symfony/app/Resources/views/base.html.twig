@@ -1,91 +1,77 @@
 <!doctype html>
 <html lang="fr">
-    <head>
+<head>
 
-        <meta http-equiv="Content-Type" charset="utf-8">
-        <title>{% block title %}Want More Work{% endblock %}</title>
+    <meta http-equiv="Content-Type" charset="utf-8">
+    <title>{% block title %}Want More Work{% endblock %}</title>
 
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-        <link rel="apple-touch-icon-precomposed" sizes="57x57" href="{{ asset('fav/apple-touch-icon-57x57.png') }}" />
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ asset('fav/apple-touch-icon-114x114.png') }}" />
-        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ asset('fav/apple-touch-icon-72x72.png') }}" />
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ asset('fav/apple-touch-icon-144x144.png') }}" />
-        <link rel="apple-touch-icon-precomposed" sizes="60x60" href="{{ asset('fav/apple-touch-icon-60x60.png') }}" />
-        <link rel="apple-touch-icon-precomposed" sizes="120x120" href="{{ asset('fav/apple-touch-icon-120x120.png') }}" />
-        <link rel="apple-touch-icon-precomposed" sizes="76x76" href="{{ asset('fav/apple-touch-icon-76x76.png') }}" />
-        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="{{ asset('fav/apple-touch-icon-152x152.png') }}" />
-        <link rel="icon" type="image/png" href="{{ asset('fav/favicon-196x196.png') }}" sizes="196x196" />
-        <link rel="icon" type="image/png" href="{{ asset('fav/favicon-96x96.png') }}" sizes="96x96" />
-        <link rel="icon" type="image/png" href="{{ asset('fav/favicon-32x32.png') }}" sizes="32x32" />
-        <link rel="icon" type="image/png" href="{{ asset('fav/favicon-16x16.png') }}" sizes="16x16" />
-        <link rel="icon" type="image/png" href="{{ asset('fav/favicon-128.png') }}" sizes="128x128" />
-        <meta name="application-name" content="&nbsp;"/>
-        <meta name="msapplication-TileColor" content="#FFFFFF" />
-        <meta name="msapplication-TileImage" content="mstile-144x144.png" />
-        <meta name="msapplication-square70x70logo" content="mstile-70x70.png" />
-        <meta name="msapplication-square150x150logo" content="mstile-150x150.png" />
-        <meta name="msapplication-wide310x150logo" content="mstile-310x150.png" />
-        <meta name="msapplication-square310x310logo" content="mstile-310x310.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="{{ asset('fav/apple-touch-icon-57x57.png') }}"/>
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ asset('fav/apple-touch-icon-114x114.png') }}"/>
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ asset('fav/apple-touch-icon-72x72.png') }}"/>
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ asset('fav/apple-touch-icon-144x144.png') }}"/>
+    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="{{ asset('fav/apple-touch-icon-60x60.png') }}"/>
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="{{ asset('fav/apple-touch-icon-120x120.png') }}"/>
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="{{ asset('fav/apple-touch-icon-76x76.png') }}"/>
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="{{ asset('fav/apple-touch-icon-152x152.png') }}"/>
+    <link rel="icon" type="image/png" href="{{ asset('fav/favicon-196x196.png') }}" sizes="196x196"/>
+    <link rel="icon" type="image/png" href="{{ asset('fav/favicon-96x96.png') }}" sizes="96x96"/>
+    <link rel="icon" type="image/png" href="{{ asset('fav/favicon-32x32.png') }}" sizes="32x32"/>
+    <link rel="icon" type="image/png" href="{{ asset('fav/favicon-16x16.png') }}" sizes="16x16"/>
+    <link rel="icon" type="image/png" href="{{ asset('fav/favicon-128.png') }}" sizes="128x128"/>
+    <meta name="application-name" content="&nbsp;"/>
+    <meta name="msapplication-TileColor" content="#FFFFFF"/>
+    <meta name="msapplication-TileImage" content="mstile-144x144.png"/>
+    <meta name="msapplication-square70x70logo" content="mstile-70x70.png"/>
+    <meta name="msapplication-square150x150logo" content="mstile-150x150.png"/>
+    <meta name="msapplication-wide310x150logo" content="mstile-310x150.png"/>
+    <meta name="msapplication-square310x310logo" content="mstile-310x310.png"/>
 
-        <meta name="theme-color" content="#ffffff">
-        {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('css/style.css') }}"/>
-            <link rel="stylesheet" href="{{ asset('css/print.css') }}" media="print"/>
-        {% endblock %}
-        <script type="text/javascript" src="{{ asset('js/scripts.js') }}"></script>
+    <meta name="theme-color" content="#ffffff">
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('css/print.css') }}" media="print"/>
+    {% endblock %}
+    <script type="text/javascript" src="{{ asset('js/scripts.js') }}"></script>
 
-    </head>
-    <script type="text/javascript">
-        var translation = "{{ 'error.generale' | trans([], 'tools') }}";
-    </script>
-    <body>
-        <div class="wmw-wrapper">
-            {% block header %}
-                <header class="wmw-header row{% if user is not defined %} wmw-header--ob{% endif %}">
-                    {% include '@User/Profile/profile_header.html.twig' %}
-                </header>
-            {% endblock %}
-            <main class="wmw-main row">
-                {% block body %}{% endblock %}
-            </main>
+</head>
+<script type="text/javascript">
+    var translation = "{{ 'error.generale' | trans([], 'tools') }}";
+</script>
+<body>
+<div class="wmw-wrapper">
 
-            {% block footer %}
-                <footer class="wmw-footer row">
-                    <a href="#" class="wmw-footer-logo"><img src="{{ asset('images/footer-logo.png') }}" alt="WMW"/></a>
-                    <nav class="wmw-footer-nav">
-                        <a href="#">Mission</a>
-                        <a href="#">About</a>
-                        <a href="#">Contractor</a>
-                        <a href="#">User agreement</a>
-                        <a href="#">Legal Notice</a>
-                    </nav>
-                    <div class="wmw-footer-social">
-                        <a href="#"><i class="icon icon--facebook"></i></a>
-                        <a href="#"><i class="icon icon--twitter"></i></a>
-                        <a href="#"><i class="icon icon--linkedin"></i></a>
-                    </div>
-                </footer>
-            {% endblock %}
+    {% block header %}
+        {% include '@User/Profile/profile_header.html.twig' %}
+    {% endblock %}
 
-            {% for type, messages in app.session.flashBag.all %}
-                {% for message in messages %}
-                <script type="text/javascript">
-                    $(window).on('load', function(){
-                        swal({
-                            type:"{{ type == "notice" ? "success" : type }}",
-                            title: "",
-                            text: "{{ message|trans({}, 'FOSUserBundle') }}",
-                            confirmButtonText: "OK",
-                            confirmButtonColor: "#362a7e"
-                        });
+    <main class="wmw-main row">
+        {% block body %}{% endblock %}
+    </main>
+
+    {% block footer %}
+        {% include  'footer.html.twig' %}
+    {% endblock %}
+
+    {% for type, messages in app.session.flashBag.all %}
+        {% for message in messages %}
+            <script type="text/javascript">
+                $(window).on('load', function () {
+                    swal({
+                        type: "{{ type == "notice" ? "success" : type }}",
+                        title: "",
+                        text: "{{ message|trans({}, 'FOSUserBundle') }}",
+                        confirmButtonText: "OK",
+                        confirmButtonColor: "#362a7e"
                     });
-                </script>
-                {% endfor %}
-            {% endfor %}
+                });
+            </script>
+        {% endfor %}
+    {% endfor %}
 
-            {% block javascripts %}
-            {% endblock %}
-        </div>
-    </body>
+    {% block javascripts %}
+    {% endblock %}
+</div>
+</body>
 </html>

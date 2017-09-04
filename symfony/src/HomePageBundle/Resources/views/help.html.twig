@@ -1,0 +1,127 @@
+{% extends '::base.html.twig' %}
+{% trans_default_domain 'tools' %}
+
+{% block body %}
+
+    {% set route = app.request.attributes.get('_route') %}
+    {% set route_params = app.request.attributes.get('_route_params') %}
+    {% set params = route_params|merge(app.request.query.all) %}
+
+    <body class="page-new text-page">
+    <section class="section section-top">
+
+
+        <header>
+            <div class="container header-content" id="header-c"><!-- header content -->
+                <!-- Navbar -->
+                <nav class="navbar">
+
+                    <div class="navigation" id="navigation">
+                        <div class="col-1-of-3 wrap-navbar-left">
+                        </div>
+
+                        <div class="col-1-of-3 wrap-navbar-mid">
+                            <div class="wrap-links">
+
+                                <a href="{{ path('home_page_expert') }}" class="wmw-header-logo">
+                                    <img src="{{ asset('images/header-logo.png') }}" alt="WMW"/>
+                                </a>
+                                
+                                {#<div class="wrap-link">#}
+                                    {#<a href="{{ path(route, params|merge({ _locale: 'en' })) }}">EN</a>#}
+                                    {#<span>/</span>#}
+                                    {#<a href="{{ path(route, params|merge({ _locale: 'fr' })) }}">FR</a>#}
+                                {#</div>#}
+                            </div>
+                        </div>
+
+                        <div class="col-1-of-3 wrap-navbar-right">
+                            <a href="{{ path('fos_user_registration_register_expert') }}"
+                               class="button btn btn-right">{{ 'home.advisor.login' | trans }}</a>
+                            <a href="{{ path('fos_user_security_login') }}"
+                               class="button btn btn-right btn-ghost">{{ 'home.advisor.signup' | trans }}</a>
+                        </div>
+
+                    </div>
+                </nav><!-- End Navbar -->
+            </div>
+        </header>
+
+        <div class="container text-center">
+            <div class="wrap-container-content">
+                <div class="container-content">
+                    <!--[if lt IE 8]>
+                    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please
+                        <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+                    <![endif]-->
+                    <h1 class="top-title">{{ 'help.title' | trans }}</h1>
+                    <div class="row-no-margins text-center">
+                        <h2 class="subtitle">
+                            {{ 'help.adv' | trans }}
+                        </h2>
+                        <div class="description">
+                            {{ 'help.qa.Question1' | trans }}
+                            <br/>
+                            {{ 'help.qa.Answer1' | trans | raw }}
+                            <br/><br/>
+                            {{ 'help.qa.Question2' | trans }}
+                            <br/>
+                            {{ 'help.qa.Answer2' | trans | raw }}
+                            <br/><br/>
+                            {{ 'help.qa.Question3' | trans }}
+                            <br/>
+                            {{ 'help.qa.Answer3' | trans | raw }}
+                            <br/><br/>
+                            {{ 'help.qa.Question4' | trans }}
+                            <br/>
+                            {{ 'help.qa.Answer4' | trans | raw }}
+                            <br/><br/>
+                            {{ 'help.qa.Question5' | trans }}
+                            <br/>
+                            {{ 'help.qa.Answer5' | trans | raw }}
+                            <br/><br/>
+                            {{ 'help.qa.Question6' | trans }}
+                            <br/>
+                            {{ 'help.qa.Answer6' | trans | raw }}
+                            <br/><br/>
+                            {{ 'help.qa.Question7' | trans }}
+                            <br/>
+                            {{ 'help.qa.Answer7' | trans | raw }}
+                            <br/><br/>
+                        </div>
+                        <h2 class="subtitle">
+                            {{ 'help.ctr' | trans }}
+                        </h2>
+                        <div class="description">
+                            {{ 'help.qa.Question8' | trans }}
+                            <br/>
+                            {{ 'help.qa.Answer8' | trans | raw }}
+                            <br/><br/>
+                            {{ 'help.qa.Question9' | trans }}
+                            <br/>
+                            {{ 'help.qa.Answer9' | trans | raw }}
+                            <br/><br/>
+                            {{ 'help.qa.Question10' | trans }}
+                            <br/>
+                            {{ 'help.qa.Answer10' | trans | raw }}
+                            <br/><br/>
+                            {{ 'help.qa.Question11' | trans }}
+                            <br/>
+                            {{ 'help.qa.Answer11' | trans | raw }}
+                            <br/><br/>
+                            {{ 'help.qa.Question12' | trans }}
+                            <br/>
+                            {{ 'help.qa.Answer12' | trans | raw }}
+                            <br/><br/>
+                            <br/><br/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include "@HomePage/footer_second.html.twig" %}
+
+    </body>
+{% endblock %}

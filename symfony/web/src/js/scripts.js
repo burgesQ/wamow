@@ -3,7 +3,7 @@
 /*include /libs/jquery.scrollbars.js*/
 /*include /libs/jquery.autocomplete.js*/
 /*include /libs/sweetalert2.js*/
-/*include /auditors.js*/
+/*include /libs/modernizr.js*/
 
 // --------------------- MASTER PART -------------------------- //
 // ------------------------------------------------------------ //

@@ -1132,3 +1132,96 @@ notification:
             dismiss: "Vous avez été éliminé (%date%)"
             notselected: "Vous n'avez pas été sélectionné pour la prochaine étape (%date%)"
             beginselection: "Vous faites parti du processus de pitch"
+
+## About page
+about:
+    title: "A propos de nous"
+    team: Notre equipe
+    content: "Consultants.WantMore.Work est la première plate-forme de match-making business automatisée qui offre la qualité de l’intermédiation humaine avec la puissance de la démultiplication numérique. Consultants.WantMore.Work pose de nouveaux standards d’outils web de matchmaking professionnel, orienté business closing.<br>
+        Consultants.WantMore.Work est le meilleur endroit sur la toile pour exprimer sa problématique et le meilleur endroit pour faire valoir ses expertises à travers la solution proposée pour y répondre. Nous permettons aux sociétés ETI et PME d’avoir accès à la même puissance de feu que les plus grands groupes.<br>
+        Grâce à ses algorithmes perfectionnés et à plus de 30 années cumulées d’expertises ad hoc Consultants.WantMore.Work permet, de comprendre et reformuler les points clefs de votre problématique et de trouver en quelques clics les experts en capacité de vous accompagner dans la reformulation et la mise en oeuvre de votre problématique business.<br>
+        Nous sommes en ce moment à la croisée de deux mondes, un monde du travail qui change durablement, celui des carrières longues au sein d’une même entreprise, celui de la mono-activité, celui aussi des rentes héritées des diplômes. Nous entrons dans un monde fait de multi-activités, un monde où la technologie pourra devenir notre pire ennemi, ou notre meilleur allié. <br>
+        Le choix est nôtre de réinventer ce futur pour le pire ou le meilleur.<br>
+        Les trois fondateurs, experts de leurs secteurs, sont partis de ce constat. Consultants.WantMore.Work est une solution SaaS pensée par les opérationnels pour les opérationnels.<br>
+        Nos algorithmes reformule le besoin, identifie les experts les plus intéressants et crée des modalités simples de mise en relation à travers une interface centrée sur la compréhension des partis et la simplicité d’usage. Nous offrons un gain de temps, un gain financier en apportant des fonctionnalités clefs dans l’accompagnement de problématique non explicite en environnement à fort enjeux d’intermédiation.<br>
+        Pas de freelancing uniquement du consulting !"
+
+# Help Page
+help:
+    title: FAQs
+    adv: 1. EXPERT
+    ctr: 2. ENTREPRISE
+    qa:
+        Question1: De quoi ai-je besoin pour m'enregistrer?
+        Answer1: "Pour initialiser votre profil, nous avons besoin de votre:<br>
+                - prénom et nom <br>
+                - adresse mail<br>
+                - votre fiche linkedin, ou un CV à télécharge<br>
+                - votre pays de résidence<br>
+                - votre mobilité éventuelle, afin de pouvoir anticiper les sujets de présence et de déplacements sur les futures missions<br>
+                - les langues que vous maitrisez (professionnellement) pour des raisons évidentes de communication et de réalisation des missions.<br>
+                Plus votre profil sera renseigné, plus vous augmenterez vos chances de contacts."
+        Question2 : Combien de temps prend-elle l'inscription ?
+        Answer2: L'inscription prendra moins de 7 minutes.
+        Question3: Quelles sont les étapes à suivre?
+        Answer3: "Première étape: Dans quel secteur d’activité avez-vous travaillé ? Nous avons identifiés 13 secteurs d'activité principales.<br>
+                Deuxième étape: les secteurs d’activités complétés, il convient d’identifier vos différents domaines d’expertise au sein des organisations dans lesquels vous avez acquis vos expériences. Dans quelles fonctions de l’entreprise avez-vous développé votre savoir faire ? Vous avez le choix entre 22 fonctions types.<br>
+                Troisième étape : allons plus loin dans le détail pour compléter votre profil.<br>
+                - Si vous avez été consultant, pouvez-vous préciser les types de prestations de conseil que vous avez délivrés ?<br>
+                - Si vous n’avez jamais été consultant : qu’il s’agisse du pilotage d’un projet interne ou que ce soit dans le cadre de vos fonctions ou encore dans la réalisation de prestations, vous avez mené des actions qui s’apparentent à l’une ou l’autre de ces prestations. Sélectionnez celles qui se trouvent le mieux décrire ce que vous avez fait.<br>
+                Nous avons identifiés 25 types de prestations possibles. <br>
+                Quatrième et dernière étape : cette étape est cruciale. Elle va conclure votre profilage. En effet, compte tenu de vos précédents choix (secteurs d’activité, expertises fonctionnelles, typologies de missions conduites), nous avons sélectionné une liste d’expériences potentielles que vous avez pu vivre.<br>
+                Il est important de choisir les plus représentatives en lien avec ce que vous souhaiteriez faire et mettre en valeur.<br>
+                Pour chacune de ces expériences, nous allons vous demander de qualifier un certain nombre d’informations :<br>
+                - le type d’organisation (petites, moyennes ou grandes entreprises ou les 3)<br>
+                - le contexte culturel (choix multiples possibles)<br>
+                - la durée cumulée de votre expérience en nombre de mois<br>
+                - le taux journalier moyen de facturation pour chacune d’elle. TJM pour les indépendants ou pour les salariés : salaire annuel souhaité x protection sociale (retenir un coefficient moyen de 1,2) + les frais inhérents à l’activité (loyer, informatique…) / nombre de jours travaillés dans l’année<br>
+                - si vous avez exercé cette activité, il y a moins de deux ans"
+        Question4: Que dois-je mentionner à l'entreprise dans mon premier message?
+        Answer4: " - Reformulation de la problématique (avec ses mots)<br>
+                - Enjeux élargis (repositionner, de votre point de vue, le(s) enjeux exprimé(s) par le client dans le contexte de compétition dans lequel il évolue, y compris nouveaux entrants potentiels)<br>
+                - Proposition d’un angle de résolution mettant en valeur son expertise (ne pas faire une réponse toute faite)<br>
+                - Ouverture en posant des questions probantes (montrant la connaissance pointue du sujet)  permettant d’orienter vers un début de solution en lien avec les 1. objectifs (il faut qu’il soit clairs et précis, éventuellement hiérarchiser si plusieurs ou contradictoires) et 2. le périmètre (éliminer toute ambiguïté par d’éventuelles questions) tels qu’évoqués.<br>
+                L’objectif de la première réponse n’est pas d’apporter une réponse toute faite mais d’initier un dialogue de co-construction de la réponse avec l’entreprise (maïeutique ou accoucher progressivement de la réponse en incluant l’entreprise)."
+        Question5: Une fois que j'ai soumis mon profil, puis-je modifier les informations fournies?
+        Answer5: Non vous ne pouvez pas. Nous rappelons à tous les experts qu'une fois que vous avez créé votre profil, vous ne pourrez plus modifier les informations relatives à votre expérience antérieure. Vous serez toutefois en mesure de modifier votre adresse électronique, votre numéro de téléphone, votre pays de résidence, vos langues et vos certifications.
+        Question6: Combien de temps faut-il attendre pour me présenter la première mission?
+        Answer6: 75% des experts enregistrés sur Consultants.wantmore.work répondent à une première proposition de mission sous 5 jours..
+        Question7: Est-ce que je dois payer?
+        Answer7: Lorsque vous recevez le premier pitch, vous devrez vous abonner à un plan mensuel avec un engagement d'une année.
+#       corporate qa
+        Question8: De quoi ai-je besoin pour m'enregistrer?
+        Answer8: Veuillez completer votre pre-enregistrement sur la page d'accueil. Un de nos Représentants vous contactera sous 48h pour vous inscrire et vous aider à créer votre premier pitch.
+        Question9: Est-ce que je dois payer pour avoir accés à vos services?
+        Answer9: Oui vous devez payer. Le paiement est nécessaire pour accéder à Consultants.wantmore.work.
+        Question10: Comment ça marche ?
+        Answer10: "- Lancer une mission : nous vous aidons à rédiger votre recherche. La mission sera ensuite poussée auprès des experts dont l’expérience a un sens avec votre recherche et son contexte.<br>
+                - Consulter les réponses : vous serez averti en temps réel des propositions de réponses des experts (jusqu`à 5 réponses). Vous pourrez alors dialoguer avec les experts pour affiner votre besoin et préciser leur réponse.<br>
+                - Sélectionner les réponses : vous pourrez sélectionner jusqu’à 3 experts et accéder à leur profil tout en continuant d’échanger pour au final retenir la meilleure proposition."
+        Question11: Comment puis-je construire mon pitch?
+        Answer11: " Première étape:<br><br>
+                Consultants.wantmore.work a pré-sélectionné pour vous des grandes lignes de mission de conseil. Choisissez celle qui correspond le mieux à votre problématique. Pour bien poser votre problématique et aider à qualifier votre besoin, nous vous suggérons de suivre le plan suivant :<br>
+                - décrire le contexte dans lequel votre recherche s’inscrit. C’est important pour l’expert de bien cerner celui-ci<br>
+                - exposer les enjeux tels que vous les percevez<br>
+                - fixer les objectifs et préciser le ou les périmètres d’intervention, de manière à ce que les experts puissent revenir vers vous avec un début de solution.<br>
+                Dans le descriptif il faut rester centré sur la problématique, les informations contextuelles (budget, date…) sont renseignées en deuxième étape.Avant d’envoyer le pitch aux consultants vous aurez accès à une étape de revue globale. <br><br>
+                Deuxième étape: <br><br>
+                Cette deuxième étape recense les données contextuelles liées à l’organisation de la mission future.<br>
+                - Budget : il s’agit d’une pure estimation à ce stade. C’est purement déclaratif et cela ne vaut  pas engagement contractuel. Plus tard dans les interactions avec les experts, vous pourrez déterminer les modalités d’exécution et de facturation.<br>
+                - Zone géographique : permet de ne retenir que les experts ayant opéré dans la ou les zones sélectionnées.<br>
+                - Date de fin de publication : passé ce délai, la consultation sera terminée et seuls les consultants ayant répondu dans le délai imparti pourront être sélectionnés.<br>
+                - Dates de début et de fin de mission : elles sont approximatives mais permettent de ne retenir que les experts dont la disponibilité est compatible.<br>
+                - Anonyme : vous avez la possibilité de ne pas communiquer le nom de votre entreprise pour rester sur une consultation confidentielle.<br>
+                - Présence sur site : si l’option est activée, seuls les experts mobiles ou présents sur le pays seront retenus.<br><br>
+                Troisième étape :<br><br>
+                - Certification : vous avez la possibilité d’enrichir votre recherche de certifications pré-enregistrées ou d’en créer une nouvelle.<br>
+                - Langues : ce critère est important pour être sûr de toucher un consultant parlant la ou les langues nécessaires au bon déroulement de la mission.<br>
+                - Expertise souhaitée : sur la base des informations saisies, le système vous propose des exemple d’expertise recensée. Sélectionnez celle qui ressemblerait le plus à votre recherche.<br>
+                Compte tenu de l’ensemble des informations saisies, Consultants.wantmore.work vous remontent le nombre d’experts ciblés dans la base, en capacité de traiter votre problématique, ainsi que le taux journaliers moyens (TJM). Vous pouvez faire varier ce TJM en fixant une limite maximum.<br><br>
+                Quatrième étape:<br><br>
+                - Vous avez la possibilité en mode édition de reprendre et corriger des informations saisies précédemment.<br><br>
+                Cinquième étape: <br><br>
+                Aspect juridique: Confirmation & Envoi de la consultation."
+        Question12: Combien de temps dois-je attendre pour recevoir les premières réponses?
+        Answer12: 85% des entreprises qui ont posté leur problématique ont reçu des réponses sous 5 jours.

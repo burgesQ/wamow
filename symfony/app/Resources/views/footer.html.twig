@@ -1,0 +1,27 @@
+{% block footer %}
+    <footer class="wmw-footer row">
+        <a href="#" class="wmw-footer-logo"><img src="{{ asset('images/footer-logo.png') }}" alt="WMW"/></a>
+        <nav class="wmw-footer-nav">
+            <a href="#">
+                Mission
+            </a>
+            <a href="{{ path('home_page_about') }}">
+                {{ 'footer.about' | trans({}, 'tools') }}
+            </a>
+            <a href="#">
+                Contractor
+            </a>
+            <a href="{{ path('home_page_terms') }}">
+                {{ 'footer.legal' | trans({}, 'tools') }}
+            </a>
+            <a href="{{ path('home_page_help') }}">
+                {{ 'footer.help' | trans({}, 'tools') }}
+            </a>
+        </nav>
+        <div class="wmw-footer-social">
+            <a href="{{ facebook_link }}"><i class="icon icon--facebook"></i></a>
+            <a href="{{ twitter_link }}"><i class="icon icon--twitter"></i></a>
+            <a href="{{ linkedin_link }}"><i class="icon icon--linkedin"></i></a>
+        </div>
+    </footer>
+{% endblock %}
