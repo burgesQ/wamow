@@ -606,6 +606,8 @@ mission:
             Vous pourrez alors dialoguer avec les consultants qui ont répondu (jusqu'à 5) de manière anonyme puis lorsque vous aurez sélectionné les meilleures réponses (jusqu'à 3), accéder aux coordonnées. Pour le moment aucun expert n’a encore répondu à votre consultation."
         no_proposition: "La publication de votre pitch a pris fin et malheureusement aucun expert n’a répondu à votre annonce. Consultants.wantmore.work va prendre contact avec vous dans les prochains jours pour analyser avec vous les raisons de ce mismatch."
         shortlist_added: Nous vous informons que vous avez été sélectionné en short-list pour la mission.
+        my_selection_added: ""
+        no_mission: "Aucune mission pour le moment ! Creent une !"
 
 ## Inbox
 inbox:

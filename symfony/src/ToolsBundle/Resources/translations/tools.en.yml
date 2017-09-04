@@ -618,6 +618,7 @@ mission:
         shortlist_added: You are among the 3 best fitting Experts selected to continue the interaction about %title.
                          The client would like to learn more about your proposal.
         my_selection_added: You have been chosen by the Corportation for the mission %title. The team at Consultants.wantmore.work send you their most sincere Congratulations  !
+        no_mission: "No mission at the moment ! Creat one of them"
 
 ## Inbox
 inbox:
