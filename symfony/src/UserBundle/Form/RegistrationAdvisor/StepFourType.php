@@ -71,7 +71,10 @@ class StepFourType extends AbstractType
             ])
             ->add('submit', SubmitType::class, [
                 'translation_domain' => 'tools',
-                'label'              => 'registration.advisor.four.nextbutton'
+                'label'              => 'registration.advisor.four.nextbutton',
+                'attr' => [
+                    'class' => 'wmw-button wmw-button--green'
+                ]
             ]);
     }
 

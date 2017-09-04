@@ -70,11 +70,11 @@ side_bar:
 
 footer:
     mission: "Mission"
-    about:
+    about: À Propos 
     advisor: "Expert"
-    agreement:
-    legal:
-    contractor:
+    agreement: CGU
+    legal: 
+    contractor: Entreprise
 
 legends:
     title: |
@@ -94,7 +94,7 @@ legends:
         remove_user: Voulez vous confirmer cette action?
         proceed: Voulez vous confirmer cette action?
         work_experience: Voulez vous confirmer cette action? Une fois soumis cettes information ne sont plus modifiable.
-        delete:
+        delete: Voulez vous confirmer cette action?
     other: Autre
 
 mouseover:
@@ -114,37 +114,37 @@ error:
     authorized: "Vous n'êtes pas autorisé à créer une mission."
     logged: "Vous n'êtes pas connecté."
     user:
-        subscribe: Please Subscribe
-        email_in_use: Email already in use.
+        subscribe: S'il vous plait enregistrer vous.
+        email_in_use: Email deja utilisee.
     user_mission:
-        not_found: No such userMission entity (%id)
-        cant_giveup: You cannot give up this mission.
-        already_giveup: You already gave up this mission.
-        not_enough: You cannot remove the last expert from the mission.
+        not_found: Aucun userMission avec l'id (%id)
+        cant_giveup: Vous ne pouvez pas abandonner cette mission.
+        already_giveup: Vous avez deja abandonez cette mission.
+        not_enough: Vous ne pouvez pas rejeter le dernier expert de cette mission.
     mission:
         pitch:
-            contractor: A company cannot bid.
+            contractor: Une entreprise ne peux pas participer.
         shortlist:
-            to_much: you have not selected any expert.
-            not_enough: Not enough users selected to proceed to My Selection.
-        step_error: There was an error
-        not_found: The requested mission does not exist
-        available: This mission isn't available
-        user_mission: You cannot pitch this mission
-        interested_twice: You have already marked yourself as interested
-        available: The mission %id is not available.
-        limit_reach: The limit of expert answers was reached for this mission. The mission is closed
-        wrong_company: You don't belong to the right company
-        already: You have already executed this action.
+            to_much: Vous n'avez selectionnez aucun expert.
+            not_enough: Vous n'avez pas selectionnez assez d'user pour procedez a votre selection.
+        step_error: Il y a eu une erreur.
+        not_found: La mission demandez n'existe aps.
+        available: La mission n'est pas disponible.
+        user_mission: vous ne pouvez pas pitcher cette mission.
+        interested_twice: Vous vous etes deja manifestez en sur cette mission.
+        available: La mission %id est indisponible.
+        limit_reach: La limite d'expert sur cette mission a ete ateint. La mission est fermer au nouvel proposition.
+        wrong_company: Vous n'a[artenez pas a la bonne netreprise.
+        already: Vous avez deja executer cette action.
         finalist:
-            no_advisor: No expert selected for the final step.
+            no_advisor: Aucun expert selectionnez pour la derniere etape.
     action:
-        failed: Action failed.
+        failed: L'action a echouer.
         shortlist:
-            to_much: You have already selected 3 experts.
-    upload_resume_or_linkedin: Please Upload a resume or link your account to LinkedIn
+            to_much: Vous avez deja selectionnez 3 expert.
+    upload_resume_or_linkedin: S'il vous plait, lieer votre compte a votre linkedin ou upload un CV.
     phone:
-        please_fill:
+        please_fill: Veuillez remplir ce champs.
     generale: Il semble que certains champs n'ont pas été remplis correctement.
 
 ## Home
@@ -255,7 +255,7 @@ dashboard:
             echange: Echanger
     contractor:
         new:
-            button: Lancer une nouvelle mission 	
+            button: Lancer une nouvelle mission
         fyi:
             title: Votre tableau de bord
             text: View and manage all published and drafted pitches. Make sure you check this page on a regular basis! Experts are working to find a solution to your issue!'
@@ -559,8 +559,11 @@ mission:
         label:
             currency:
             title: TITRE DU PITCH
+            context: CONTEXT 
+            stack: ENJEUX
+            objective: OBJECTIFS & PÉRIMÈTRES 
             resume: DESCRIPTION DU PROJET (500 MOTS)
-            later:
+            later: Terminer plus tard 
             budget: BUDGET ESTIMÉ
             confidentiality: Entreprise anonyme
             telecommuting: Présence sur site requise
@@ -976,7 +979,8 @@ mails:
     registration:
         contractor_new_password: " Nous vous confirmons la création de votre compte. 
         Votre mot de passe est : %password
-        Si ce n’est déjà fait pensez à compléter votre profil ! 
+        Si ce n’est déjà fait pensez à compléter votre profil !
+
         L’équipe de Consultants.wantmore.work !"
         advisor_new_password: " Nous vous confirmons la création de votre compte. 
         Votre mot de passe est : %password
