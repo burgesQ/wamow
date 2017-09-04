@@ -15,7 +15,7 @@ class DefaultController extends Controller
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function expertAction()
+    public function advisorAction()
     {
         if ($this->getUser() !== null) {
             return $this->redirectToRoute('dashboard');
@@ -30,7 +30,7 @@ class DefaultController extends Controller
             return $this->redirectToRoute($url);
         }
 
-        return $this->render('HomePageBundle:Expert:home.html.twig', [
+        return $this->render('HomePageBundle:Advisor:home.html.twig', [
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
         ]);
     }
@@ -39,7 +39,7 @@ class DefaultController extends Controller
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function seekerAction(Request $request)
+    public function contractorAction(Request $request)
     {
         $trans       = $this->get('translator');
         $preregister = new Preregister();
@@ -61,13 +61,15 @@ class DefaultController extends Controller
                 ->setTo($this->container->getParameter('email_pre_register'))
                 ->setBody($this->renderView('Emails/new_pre_register.html.twig', [
                     'preRegister'   => $preregister,
+                    'phone' => $form->get('phone')->getData()
+//                    de-mod once form okay
                 ]), 'text/html');
             $this->get('mailer')->send($message);
 
             $request->getSession()->getFlashBag()->add('notice', $trans->trans('home.contractor.preregister.registered', [], 'tools'));
-            return $this->redirectToRoute('home_page_seeker');
+            return $this->redirectToRoute('home_page_contractor');
         }
-        return $this->render('HomePageBundle:Seeker:home.html.twig', array(
+        return $this->render('HomePageBundle:Contractor:home.html.twig', array(
             'form' => $form->createView(),
         ));
     }
@@ -78,7 +80,7 @@ class DefaultController extends Controller
     public function noLocalAction()
     {
         // her we'll find a way to define the local of the user
-        return $this->redirectToRoute('home_page_expert', ['_locale' => 'en']);
+        return $this->redirectToRoute('home_page_advisor', ['_locale' => 'en']);
     }
 
     /**

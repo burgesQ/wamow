@@ -15,10 +15,12 @@
     Company: {{ preRegister.company }}
 </li>
 <li>
-    Country: {{ preRegister.country | countryName}}
+    {#Country: {{ preRegister.country | countryName}}#}
+    Country: {{ preRegister.country }}
 </li>
 <li>
-    Phone: {{ preRegister.phone.prefix.prefix }} {{ preRegister.phone.number }}
+    {#Phone: {{ preRegister.phone.prefix.prefix }} {{ preRegister.phone.number }}#}
+    Phone: {{ phone }}
 </li>
 <li>
     Comment: {{ preRegister.comment }}

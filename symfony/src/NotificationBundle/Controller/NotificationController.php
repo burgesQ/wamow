@@ -15,7 +15,7 @@ class NotificationController extends Controller
         //TODO mettre notif a seen == true
         $trans = $this->get('translator');
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED'))
-            return $this->redirectToRoute('home_page_expert');
+            return $this->redirectToRoute('home_page_advisor');
 
         $user = $this->getUser();
 
