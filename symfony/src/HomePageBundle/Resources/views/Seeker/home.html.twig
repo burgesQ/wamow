@@ -1,64 +1,211 @@
 {% extends '::base.html.twig' %}
 {% trans_default_domain 'tools' %}
+{% form_theme form "form_themes.html.twig" %}
 
-{% block stylesheets %}
-{% endblock %}
 
 {% block body %}
-<br>
-<a href="">{{ 'home.contractor.signup' | trans | upper }}</a><br>
-<a href="{{ path('fos_user_security_login_contractor') }}">{{ 'home.contractor.login' | trans | upper }}</a><br>
-{{ 'home.contractor.title' | trans }}<br>
-{{ 'home.contractor.valueproposition.first' | trans | upper }}<br>
-{{ 'home.contractor.valueproposition.second' | trans | upper }}<br>
 
-{{ 'home.contractor.howdoesitwork' | trans }}<br>
-{{ 'home.contractor.start.text' | trans }}<br>
-{{ 'home.contractor.play.text' | trans }}<br>
-{{ 'home.contractor.improve.text' | trans }}<br>
-{{ 'home.contractor.pay.text' | trans }}<br>
+    {% set route = app.request.attributes.get('_route') %}
+    {% set route_params = app.request.attributes.get('_route_params') %}
+    {% set params = route_params|merge(app.request.query.all) %}
 
-{{ form_start(form, {'attr': {'class': 'form-contact'}}) }}
+    <body class="page-new homepage homepage-consultants">
 
-    {{ form_errors(form.email) }}
-    {{ form_widget(form.email) }}
-    <br>
-    {{ form_errors(form.firstname) }}
-    {{ form_widget(form.firstname) }}
-    <br>
-    {{ form_errors(form.lastname) }}
-    {{ form_widget(form.lastname) }}
-    <br>
-    {{ form_errors(form.company) }}
-    {{ form_widget(form.company) }}
-    <br>
-    {{ form_errors(form.country) }}
-    {{ form_widget(form.country) }}
-    <br>
-    {{ form_errors(form.phone.prefix) }}
-    {{ form_widget(form.phone.prefix) }}
-    <br>
-    {{ form_errors(form.phone.number) }}
-    {{ form_widget(form.phone.number) }}
-    <br>
-    {{ form_errors(form.comment) }}
-    {{ form_widget(form.comment, {'onKeyUp': 'checkPasswordMatch()'}) }}
-    <br>
-    {{ form_widget(form.submit) }}
+    <section class="section section-top section-top-consultants">
 
-{{ form_end(form) }}
+        <header><!-- header -->
+            <div class="container header-content header-content-consultants" id="header-c"><!-- header content -->
+                <!-- Navbar -->
+                <nav class="navbar">
+                    <div class="navigation" id="navigation">
+                        <div class="col-1-of-3 wrap-navbar-left">
+                            <a href="{{ path('home_page_expert') }}" class="button btn btn-left">
+                                {{ 'home.contractor.expert' | trans }}</a>
+                        </div>
+                        <div class="col-1-of-3 wrap-navbar-mid">
+                            <div class="wrap-links">
 
+                                <div class="wrap-link">
+                                    <a href="{{ path(route, params|merge({ _locale: 'en' })) }}">EN</a>
+                                    <span>/</span>
+                                    <a href="{{ path(route, params|merge({ _locale: 'fr' })) }}">FR</a>
+                                </div>
+                                <div class="wrap-link">
+                                    <a href="{{ path('newsletter_list') }}">{{ 'header.news' | trans | upper }}</a>
+                                    <span>/</span>
+                                </div>
 
-<a href="">{{ 'footer.mission' | trans | upper }}/</a><br>
-<a href="">{{ 'footer.about' | trans | upper }}/</a><br>
-<a href="{{ path('home_page_expert') }}">{{ 'footer.advisor' | trans | upper }}/</a><br>
-<a href="">{{ 'footer.agreement' | trans | upper }}/</a><br>
-<a href="">{{ 'footer.legal' | trans | upper }}/</a><br>
-<a href="{{ facebook_link }}">logo facebook</a><br>
-<a href="{{ twitter_link }}">logo twitter</a><br>
-<a href="{{ linkedin_link }}">logo linkedin</a><br>
+                            </div>
+                        </div>
+                        <div class="col-1-of-3 wrap-navbar-right">
 
-{% endblock %}
+                            <a href="{{ path('fos_user_security_login_contractor') }}"
+                               class="button btn btn-right btn-ghost">{{ 'home.contractor.login' | trans }}</a>
 
-{% block javascripts %}
+                        </div>
+                    </div>
+                </nav><!-- End Navbar -->
+            </div>
+        </header><!-- End header -->
+
+        <div class="container text-center">
+            <div class="container-content">
+                <!--[if lt IE 8]>
+                <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please
+                    <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+                <![endif]-->
+
+                <div class="wrap-logo">
+                    <a href="#" class="wrap-logo"><!-- Official logo -->
+                        <img src="{{ asset('images/logo.png') }}" onError="this.style.display='none';" alt="logo"/>
+                    </a>
+                </div>
+
+                <h1 class="top-title">{{ 'home.contractor.title' | trans }}</h1>
+                <h2 class="top-subtitle">{{ 'home.contractor.valueproposition.first' | trans }}<br/>
+                    {{ 'home.contractor.valueproposition.second' | trans }}</h2>
+                <div class="row-no-margins text-center">
+                    {#<div class="wrap-btn">#}
+                        {#<a class="button btn btn-big">SIGN UP</a>#}
+                    {#</div>#}
+                </div>
+                <div class="row-no-margins text-center">
+                    <a href="#" class="scroll-bottom">
+                        <i class="fa fa-chevron-down"></i>
+                        {#chevron bugz#}
+                    </a>
+                </div>
+                <div class="wrap-parteners">
+                    <a href="#" class="wrap-img-parteners"><!-- Official logo -->
+                        <img src="{{ asset('images/logos-clients.png') }}" onError="this.style.display='none';" alt="logo"/>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-mid section-mid-consultants">
+        <div class="container content">
+            <div class="container-content">
+                <h1 class="mid-title">{{ 'home.contractor.howdoesitwork' | trans }}</h1>
+                <div class="row-no-margins row-s text-center">
+                    <div class="wrap-icon-s">
+                        <img src="{{ asset('images/icon1-green.png') }}" alt="start"/>
+                        <span>start /</span>
+                    </div>
+                    <div class="wrap-text-s">
+                        <div class="text-s">
+                            {{ 'home.contractor.start.text' | trans }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row-no-margins row-s text-center">
+                    <div class="wrap-icon-s">
+                        <img src="{{ asset('images/icon2-green.png') }}" alt="start"/>
+                        <span>play /</span>
+                    </div>
+                    <div class="wrap-text-s">
+                        <div class="text-s">
+                            {{ 'home.contractor.play.text' | trans }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row-no-margins row-s text-center">
+                    <div class="wrap-icon-s">
+                        <img src="{{ asset('images/icon3-green.png') }}" alt="start"/>
+                        <span>improve /</span>
+                    </div>
+                    <div class="wrap-text-s">
+                        <div class="text-s">
+                            {{ 'home.contractor.improve.text' | trans }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row-no-margins row-s text-center">
+                    <div class="wrap-icon-s">
+                        <img src="{{ asset('images/icon4-green.png') }}" alt="start"/>
+                        <span>pay /</span>
+                    </div>
+                    <div class="wrap-text-s">
+                        <div class="text-s">
+                            {{ 'home.contractor.pay.text' | trans }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row-no-margins row-s text-center">
+                    <div class="wrap-form">
+
+                        {{ form_start(form, {'attr': {'class': 'form-contact'}}) }}
+
+                        <div class="group">
+                            {{ form_errors(form.firstname) }}
+                            {{ form_widget(form.firstname) }}
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            {{ form_label(form.firstname) }}
+                        </div>
+                        <div class="group">
+                            {{ form_errors(form.lastname) }}
+                            {{ form_widget(form.lastname) }}
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            {{ form_label(form.lastname) }}
+                        </div>
+                        <div class="group">
+                            {{ form_errors(form.company) }}
+                            {{ form_widget(form.company) }}
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            {{ form_label(form.company) }}
+                        </div>
+
+                        <div class="group">
+                            {{ form_errors(form.country) }}
+                            {{ form_row(form.country) }}
+                            {#<input type="text" hidden>#}
+                            {#<span class="highlight"></span>#}
+                            {#<span class="bar"></span>#}
+                            {#{{ form_label(form.country) }}#}
+                        </div>
+                        <div class="group">
+                            {{ form_errors(form.phone) }}
+                            {{ form_widget(form.phone) }}
+                            {#<input type="text" hidden>#}
+                            {#<span class="highlight"></span>#}
+                            {#<span class="bar"></span>#}
+                            {#{{ form_label(form.phone) }}#}
+                        </div>
+
+                        <div class="group">
+                            {{ form_errors(form.email) }}
+                            {{ form_widget(form.email) }}
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            {{ form_label(form.email) }}
+                        </div>
+                        <div class="group">
+                            {{ form_errors(form.comment) }}
+                            {{ form_widget(form.comment, {'onKeyUp': 'checkPasswordMatch()'}) }}
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            {{ form_label(form.comment) }}
+                        </div>
+
+                        <div class="row-no-margins text-center">
+                            <div class="wrap-btn">
+                                {% set submit = '<i></i><span>' ~ form.submit.vars.label | trans ~ '</span><i></i>' %}
+                                {{ form_widget(form.submit, { 'attr' : { class : "wmw-button wmw-button--green"}, 'label' : submit }) }}
+                            </div>
+                        </div>
+
+                        {{ form_end(form) }}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    </body>
+
 {% endblock %}
