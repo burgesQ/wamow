@@ -15,7 +15,6 @@ easy_admin:
                     - { property : 'getScoreDetailsAsString' }
             form:
                 fields:
-                    - { property: 'title', type: 'text' }
                     - { property: 'resume', type: 'textarea' }
                     - { property: 'nbOngoing', type: 'number' }
                     - { property: 'nextUpdateScoring'}
