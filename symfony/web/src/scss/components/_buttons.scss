@@ -343,6 +343,18 @@
 			margin:0 2px;
 		}
 	}
+
+	&.wmw-button--large{
+		height:60px;
+		padding:0 15px;
+		line-height:36px;
+		font-size:15px;
+
+		.icon{
+			font-size:11px;
+			margin:0 2px;
+		}
+	}
 }
 
 .wmw-checkbutton .wmw-button:hover{
