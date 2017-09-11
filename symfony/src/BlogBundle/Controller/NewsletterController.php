@@ -16,7 +16,7 @@ class NewsletterController extends Controller
         /** @var NewsletterRepository $newsletterRepository */
         $newsletterRepository = $this->getDoctrine()->getRepository('BlogBundle:Newsletter');
 
-        return $this->render('BlogBundle:Newsletter:list.html.twig', [
+        return $this->render('@Blog/NewsLetter/list.html.twig', [
             'newsletters' => $newsletterRepository->getAvailableNewsletters()
         ]);
     }
@@ -38,7 +38,7 @@ class NewsletterController extends Controller
                 'newsletter' => $newsletter
             ]);
 
-        return $this->render('BlogBundle:Newsletter:show.html.twig', [
+        return $this->render('@Blog/NewsLetter/show.html.twig', [
                 'newsletter' => $newsletter,
                 'articles'   => $articles
         ]);
