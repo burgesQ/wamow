@@ -344,17 +344,30 @@
 		}
 	}
 
-	&.wmw-button--large{
-		height:60px;
+	&.wmw-button--medium{
+		height:35px;
 		padding:0 15px;
-		line-height:36px;
+		line-height:26px;
 		font-size:15px;
 
 		.icon{
-			font-size:11px;
+			font-size:15px;
 			margin:0 2px;
 		}
 	}
+
+	&.wmw-button--big{
+		height:65px;
+//		padding:0 45px 0 0;
+		line-height:26px;
+		font-size:20px;
+
+		.icon{
+			font-size:15px;
+			margin:0 5px;
+		}
+	}
+
 }
 
 .wmw-checkbutton .wmw-button:hover{

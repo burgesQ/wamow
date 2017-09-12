@@ -19,7 +19,7 @@
                     <div class="navigation" id="navigation">
                         <div class="col-1-of-3 wrap-navbar-left">
                             <button href="{{ path('home_page_contractor') }}"
-                                    type="button" class="wmw-button wmw-button--green">
+                                    type="button" class="wmw-button wmw-button--green wmw-button--medium">
                                 <i></i><span> {{ 'home.advisor.contractorlink' | trans | upper }} </span><i></i>
                             </button>
                         </div>
@@ -80,7 +80,7 @@
                         <!--<a class="button btn btn-big">I WANT MORE WORK</a>-->
 
                         <button href="{{ path('fos_user_registration_register_expert') }}"
-                                type="button" class="wmw-button wmw-button--large">
+                                type="button" class="wmw-button wmw-button--big">
                             <i></i><span> {{ 'home.advisor.signup' | trans | upper }} </span><i></i>
                         </button>
 
@@ -158,10 +158,16 @@
                 </div>
             </div>
             <div class="row-no-margins text-center">
+
+
+
                 <div class="wrap-btn">
-                    <a href="{{ path('fos_user_registration_register_expert') }}" class="button btn btn-big">
-                        {{ 'home.advisor.signup'  | trans }}
-                    </a>
+
+                    <button href="{{ path('fos_user_registration_register_expert') }}"
+                            type="button" class="wmw-button wmw-button--big">
+                        <i></i><span> {{ 'home.advisor.signup' | trans | upper }} </span><i></i>
+                    </button>
+
                 </div>
             </div>
             <div class="row-no-margins text-center">
