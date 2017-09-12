@@ -1,9 +1,9 @@
 # tools.fr.yml
 form:
     address:
-        address: address
+        address: Adresse
         street: "Adresse"
-        street_2:
+        street_2: Adresse 2 
         city: "Ville"
         zipcode: "Code Postal"
         state: "État"
@@ -73,7 +73,7 @@ footer:
     about: À Propos 
     advisor: "Expert"
     agreement: CGU
-    legal: 
+    legal: Légal
     contractor: Entreprise
 
 legends:
@@ -98,12 +98,18 @@ legends:
     other: Autre
 
 mouseover:
-    linkedin: In order for your profile to be 100% complete you must link your Consultants.WantMore.Work account to LinkedIn and upload your Resume.
+    linkedin: Pour que votre profil soit complété à 100%, vous devez relier votre compte Consultants.WantMore.Work à LinkedIn et télécharger votre CV.
     country: Votre pays de résidence et votre mobilité éventuelle, afin de pouvoir anticiper les sujets de présence et de déplacements sur les futures missions
     language: Les langues que vous maitrisez (professionnellement) pour des raisons évidentes de communication et de réalisation des missions.
-    strenght: In order for your profile to be  100% complete you must upload a profile picture, link your account to LinkedIn and finish the sign up process.
-    first_message: "i. Reformulation de la problématique (avec ses mots)    ii. Enjeux élargis (repositionner, de votre point de vue, le(s) enjeux exprimé(s) par le client dans le contexte de compétition dans lequel il évolue, y compris nouveaux entrants potentiels)   iii. Proposition d’un angle de résolution mettant en valeur son expertise (ne pas faire une réponse toute faite)   iv. Ouverture en posant des questions probantes (montrant la connaissance pointue du sujet)  permettant d’orienter vers un début de solution en lien avec les 1. objectifs (il faut qu’il soit clairs et précis, éventuellement hiérarchiser si plusieurs ou contradictoires) et 2. le périmètre (éliminer toute ambiguïté par d’éventuelles questions) tels qu’évoqués.
-        L’objectif de la première réponse n’est pas d’apporter une réponse toute faite mais d’initier un dialogue de co-construction de la réponse avec l’entreprise (maïeutique ou accoucher progressivement de la réponse en incluant l’entreprise)."
+    strenght: Pour que votre profil soit complété à 100%, vous devez télécharger une image de profil, relier votre compte à LinkedIn et terminer le processus d'inscription.
+    first_message: "i. Reformulation de la problématique (avec ses mots)    
+    
+    ii. Enjeux élargis (repositionner, de votre point de vue, le(s) enjeux exprimé(s) par le client dans le contexte de compétition dans lequel il évolue, y compris nouveaux entrants potentiels)   
+    
+    iii. Proposition d’un angle de résolution mettant en valeur son expertise (ne pas faire une réponse toute faite)   
+    
+    iv. Ouverture en posant des questions probantes (montrant la connaissance pointue du sujet)  permettant d’orienter vers un début de solution en lien avec les 1. objectifs (il faut qu’il soit clairs et précis, éventuellement hiérarchiser si plusieurs ou contradictoires) et 2. le périmètre (éliminer toute ambiguïté par d’éventuelles questions) tels qu’évoqués.
+    L’objectif de la première réponse n’est pas d’apporter une réponse toute faite mais d’initier un dialogue de co-construction de la réponse avec l’entreprise (maïeutique ou accoucher progressivement de la réponse en incluant l’entreprise)."
 
 
 ## Common error
@@ -114,42 +120,43 @@ error:
     authorized: "Vous n'êtes pas autorisé à créer une mission."
     logged: "Vous n'êtes pas connecté."
     user:
-        subscribe: S'il vous plait enregistrer vous.
-        email_in_use: Email deja utilisee.
+        subscribe: Veuillez vous abonner
+        email_in_use: Email déjà utilisé
     user_mission:
-        not_found: Aucun userMission avec l'id (%id)
-        cant_giveup: Vous ne pouvez pas abandonner cette mission.
-        already_giveup: Vous avez deja abandonez cette mission.
-        not_enough: Vous ne pouvez pas rejeter le dernier expert de cette mission.
+        not_found: userMission n'existe pas (%id)
+        cant_giveup: Vous ne pouvez pas abandonner à cette mission.
+        already_giveup: Vous avez déjà abandonné cette mission .
+        not_enough: Vous ne pouvez pas supprimer le dernier expert de la mission.
     mission:
         pitch:
-            contractor: Une entreprise ne peux pas participer.
+            contractor: Une entreprise ne peut pas envoyer une proposition.
         shortlist:
-            to_much: Vous n'avez selectionnez aucun expert.
-            not_enough: Vous n'avez pas selectionnez assez d'user pour procedez a votre selection.
-        step_error: Il y a eu une erreur.
-        not_found: La mission demandez n'existe aps.
-        available: La mission n'est pas disponible.
-        user_mission: vous ne pouvez pas pitcher cette mission.
-        interested_twice: Vous vous etes deja manifestez en sur cette mission.
-        available: La mission %id est indisponible.
-        limit_reach: La limite d'expert sur cette mission a ete ateint. La mission est fermer au nouvel proposition.
-        wrong_company: Vous n'a[artenez pas a la bonne netreprise.
-        already: Vous avez deja executer cette action.
+            to_much: Vous n'avez sélectionné aucun expert.
+            not_enough: Pas assez d'utilisateurs sélectionnés pour passer à Ma sélection.
+        step_error: Il y avait une erreur
+        not_found: La mission demandé n'existe pas
+        available: Cette mission n'est pas disponible
+        user_mission: Vous ne pouvez pas repondre à cette mission
+        interested_twice: Vous vous êtes déjà marqué(s) intéressé(e)
+        available: La mission %id n'est pas disponible.
+        limit_reach: La limite des réponses expertes a été attendu pour cette mission. La mission est fermée.
+        wrong_company: Vous ne faites pas partie de la bonne entreprise
+        already: Vous avez déjà fait cette action..
         finalist:
-            no_advisor: Aucun expert selectionnez pour la derniere etape.
+            no_advisor: Aucun expert sélectionné pour la dernière étape.
     action:
-        failed: L'action a echouer.
+        failed: Action échouée.
         shortlist:
-            to_much: Vous avez deja selectionnez 3 expert.
-    upload_resume_or_linkedin: S'il vous plait, lieer votre compte a votre linkedin ou upload un CV.
+            to_much: Vous avez déjà sélectionné 3 experts.
+    upload_resume_or_linkedin: Veuillez télécharger un curriculum vitae ou lier votre compte à LinkedIn
     phone:
-        please_fill: Veuillez remplir ce champs.
+        please_fill:
     generale: Il semble que certains champs n'ont pas été remplis correctement.
 
 ## Home
 home:
     contractor:
+        expert: "expert"
         login: Se connecter
         signup: S'inscrire
         title: "Find a match."
@@ -183,6 +190,7 @@ home:
         seeker: Entreprise
         open: "Open your account"
         title: "Find a match."
+        company_link: " Je représente une entreprise" 
         valueproposition:
             first: "Value your time"
             second: "Build a world of opportunities"
@@ -202,7 +210,7 @@ dashboard:
     advisor: 
         fyi:
             title: Votre tableau de bord
-            text: View all matching pitches and manage all missions you have marked yourself interested in. Make sure you check this page on a regular basis! Pitches will await you!
+            text: Consultez tous les pitches matchés et gérez toutes les missions dont vous vous êtes intéressé. Assurez-vous de consulter cette page régulièrement! Les missions vous attendent!
         new:
             title: Pitches qui peuvent vous intéresser 
             date: Publié le
@@ -210,8 +218,8 @@ dashboard:
         wip:
             title: Mes missions
             date: Publié le 
-            in_fact: You are more likely to be selected...
-            get_in_touch: Get in touch
+            in_fact: Il est plus probable d'être sélectionné...
+            get_in_touch: ÉCHANGÉ
             showmore: Voir plus
             giveupbutton: Supprimer
             interested: Intéressé(e)
@@ -241,11 +249,11 @@ dashboard:
             delete: Supprimer
             close: Fermer
         other:
-            none: No other pitch
-            none_leg: Other pitches will be available soon
-            advice: Advice
-            in_fact: You are more likely to be selected...
-            get_in_touch: Get in touch
+            none: Pas d'autres missions
+            none_leg: D'autres missions seront bientôt disponibles
+            advice: Conseil
+            in_fact: Il est plus probable d'être sélectionné...
+            get_in_touch: ÉCHANGÉ
             contact: Contacter
             see_the_pitch: Voir le pitch
             waiting: En attente 
@@ -255,10 +263,10 @@ dashboard:
             echange: Echanger
     contractor:
         new:
-            button: Lancer une nouvelle mission
+            button: Lancer une nouvelle mission 	
         fyi:
             title: Votre tableau de bord
-            text: View and manage all published and drafted pitches. Make sure you check this page on a regular basis! Experts are working to find a solution to your issue!'
+            text: Afficher et gérer tous les pitches publiés et rédigés. Assurez-vous de vérifier cette page régulièrement! Des experts travaillent pour trouver une solution à votre problème!
         mission:
             title: Missions publiées
             date: Publiée le 
@@ -276,7 +284,7 @@ dashboard:
             shortlist: Ma sélection
             waiting: En attente
             finish: Terminé
-            mustbefinish: "Should be finished"
+            mustbefinish: "Devrait être fini"
             unread: "{0}No new message|{1}You have %unread% new message|]1,Inf]You have %unread% new messages"
             proposal: Proposition
         draft:
@@ -293,7 +301,7 @@ registration:
         zero:
             title: S'enregistrer
             subtitle: Accéder à des missions de conseil en - de 7 minutes
-            howtotitle: 75% des experts enregistrés sur Consultants.wantmore.work répondent à une première proposition de mission sous 5 jours.<br>
+            howtotitle: 75% des experts enregistrés sur Consultants.wantmore.work répondent à une première proposition de mission sous 5 jours.
             howtotext: "Le principe de Consultants.wantmore.work c’est d’organiser la rencontre entre une entreprise qui a un besoin de conseil et un expert qui dispose d’une réponse. Nous allons vous donner l’opportunité d’interagir avec ces entreprises et de faire valoir votre savoir faire et votre expertise, au travers d’un dialogue direct et simple. Pour accéder aux nombreuses missions, il est nécessaire de s’enregistrer au préalable, ce qui prendra moins de 7 minutes.<br> 
             Pour initialiser votre profil, nous avons besoin de votre identité, prénom, nom et mail, ainsi que de votre fiche linkedin, ou un CV à télécharger. Dernier point avant de lancer votre profilage, il nous faut connaître :<br> 
             -	votre pays de résidence et votre mobilité éventuelle,<br>
@@ -399,32 +407,32 @@ company:
         submit: OK
         registered: Le nom de l'entreprise a été enregistré
         error: 
-           onecompany: "You cannot join more than one company"
-           authorized: "You are not authorized"
-           usedname: "The company %name% already exist."
+           onecompany: "Vous ne pouvez pas rejoindre plus d'une entreprise"
+           authorized: "Vous n'êtes pas autorisé(e)"
+           usedname: "Le nom de l'entreprise %name% existe déjà."
     join:
         name: Entreprise
         new: Creer une nouvelle entreprise
         submit: Se joindre
-        info : "Your old Company will be replaced"
-        success: "Joined the company"
-        joined: "You joined name company"
+        info : "Votre ancienne entreprise sera remplacée"
+        success: "vous êtes devenu membre de l'entreprise"
+        joined: "vous êtes devenu membre de l'entreprise"
         error:
-            authorized: "You are not authorized"
-            onecompany: "You cannot join more than one company"
+            authorized: "Vous n'êtes pas autorisé(e)"
+            onecompany: "Vous ne pouvez pas être associé(e) avec plus d'une entreprise"
 
     leave:
-        wannaleave: "Do you really want to leave %name% company?"
-        submit: "Yes"
-        leaved: "You left name company"
+        wannaleave: "Voulez-vous vraiment abandonner %name% entreprise?"
+        submit: "Oui"
+        leaved: "Vous avez laissé, name company"
         error:
-            authorized: "You are not authorized"
-            nocompany: "You do not belong to any company"
+            authorized: "Vous n'êtes pas autorisé(e)"
+            nocompany: "Vous n'appartenez à aucune entreprise"
 
 ## Mission
 mission:
     view:
-        pitched_at: Publié le
+        pitched_at: Publié le date
         price_day: € / jour
         more_info: Plus de détailes
         less_info: Moins de détailes
@@ -433,7 +441,7 @@ mission:
         cretification: Certification(s)
         no_certification: No certification required
         contractor:
-            pitched_at: Publié le
+            pitched_at: Publié le date
             next_mission: Mission suivante
             prev_mission: Mission précédente
             status_advisor: Touts les experts
@@ -451,7 +459,7 @@ mission:
         advisor:
             btn_back_to_mission: Retour à la mission
             btn_back_to_board: Retour au tableau de bord
-            btn_back_to_global_view: Back to global view
+            btn_back_to_global_view: Retour à la vue globale
             interested: Interesé(e)
             finance: |
                 %professionalExpertise<br>
@@ -557,7 +565,7 @@ mission:
             reference: diffuser le nom de l'entreprise comme une référence
 
         label:
-            currency:
+            currency: Veuillez seléctionner la devise
             title: TITRE DU PITCH
             context: CONTEXT 
             stack: ENJEUX
@@ -591,7 +599,7 @@ mission:
                 certif: CERTIFICATIONS <small> (opptional) </small>
                 budget: BUDGET ESTIMÉ
                 price: PRIX
-                concerned: CONSULTANT CONCERNED
+                concerned: CONSULTANT(S) CONCERNÉ(S)
                 languages: LANGUE(S)
                 finance: Finance
                 date_range: "from %startDate to %endDate"
@@ -603,13 +611,13 @@ mission:
                 hint_company_small: Effectif < 250 ou CA < 50 millions d'USD
                 hint_company_medium: Ni Grande, Ni Petite
                 hint_company_large: Effectif > 5000 ou CA > 1,5 milliards d’USD
-                hint_continent: 
+                hint_continent: Plusieurs choix sont possibles
     message:
         no_advisor: "Votre pitch a bien été enregistré et poussé auprès des experts qualifiés. Dès marque d’intérêt d’un expert, vous recevrez une alerte -pensez à activer votre alerte mail ! 
             Vous pourrez alors dialoguer avec les consultants qui ont répondu (jusqu'à 5) de manière anonyme puis lorsque vous aurez sélectionné les meilleures réponses (jusqu'à 3), accéder aux coordonnées. Pour le moment aucun expert n’a encore répondu à votre consultation."
         no_proposition: "La publication de votre pitch a pris fin et malheureusement aucun expert n’a répondu à votre annonce. Consultants.wantmore.work va prendre contact avec vous dans les prochains jours pour analyser avec vous les raisons de ce mismatch."
         shortlist_added: Nous vous informons que vous avez été sélectionné en short-list pour la mission.
-        my_selection_added: ""
+        my_selection_added: "Nous vous informons que vous avez êtes le choix final de l'entreprise"
         no_mission: "Aucune mission pour le moment ! Creent une !"
 
 ## Inbox
@@ -631,8 +639,8 @@ thread:
 
 message:
     readReport:
-        read:
-        receive:
+        read: "ReadReport: read"
+        receive: "ReadReport: receive"
 
 ## Business vocabulary
 language:
@@ -979,12 +987,16 @@ mails:
     registration:
         contractor_new_password: " Nous vous confirmons la création de votre compte. 
         Votre mot de passe est : %password
-        Si ce n’est déjà fait pensez à compléter votre profil !
-
+        
+        Si ce n’est déjà fait pensez à compléter votre profil ! 
+        
         L’équipe de Consultants.wantmore.work !"
         advisor_new_password: " Nous vous confirmons la création de votre compte. 
+        
         Votre mot de passe est : %password
+        
         Si ce n’est déjà fait pensez à compléter votre profil pour améliorer votre visibilité ! 
+        
         L’équipe de Consultants.wantmore.work "
         
 
@@ -992,7 +1004,9 @@ mails:
         new_message_mission: Réponse à votre consultation !
         new_pitcher: |
             "Nous vous informons que vous avez reçu une réponse à votre consultation, %title
-            lien pour se connecter 
+            
+            lien pour se connecter  
+            
             L’équipe de Consultants.wantmore.work 
             
         link: Cliquer ici pour y acceder.
