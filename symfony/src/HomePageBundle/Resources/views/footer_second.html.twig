@@ -8,7 +8,7 @@
                 <div class="wrap-links">
                     <div class="wrap-link">
                         <a href="#">
-                            Mission
+                            NewLetter
                         </a>
                         <span>/</span>
                     </div>
@@ -19,20 +19,20 @@
                         <span>/</span>
                     </div>
                     <div class="wrap-link">
+                        <a href="{{ path('home_page_help') }}">
+                            {{ 'footer.help' | trans({}, 'tools') }}
+                        </a>
+                        <span>/</span>
+                    </div>
+                    <div class="wrap-link">
                         <a href="#">
-                            Contractor
+                            Contact Us
                         </a>
                         <span>/</span>
                     </div>
                     <div class="wrap-link">
                         <a href="{{ path('home_page_terms') }}">
                             {{ 'footer.legal' | trans({}, 'tools') }}
-                        </a>
-                        <span>/</span>
-                    </div>
-                    <div class="wrap-link">
-                        <a href="{{ path('home_page_help') }}">
-                            {{ 'footer.help' | trans({}, 'tools') }}
                         </a>
                         <span>/</span>
                     </div>
