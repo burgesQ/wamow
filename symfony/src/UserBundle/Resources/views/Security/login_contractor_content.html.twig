@@ -28,10 +28,19 @@
         </div>
 
         <div class="wmw-fieldrow row">
+
+            <button type=button id="showPassword" value="show" class="wmw-button wmw-button--small wmw-button--border wmw-button--green"
+                    style="margin-bottom: 2%">
+                <i></i><span>
+                    {{ 'form.btn.show_password' | trans({}, 'tools') }}
+                </span><i></i>
+            </button>
+
             <div class="wmw-switchfield">
                 <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
                 <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
             </div>
+
         </div>
 
         <div class="wmw-onboard-bottom">

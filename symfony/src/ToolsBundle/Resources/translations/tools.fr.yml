@@ -33,6 +33,7 @@ form:
         subscribe: Souscrire
         cancel: Annuler
         confirm: Confirmer
+        show_password: Voir mot de passe
 
     note:
         saved: Enregistré

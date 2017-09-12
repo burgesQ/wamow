@@ -25,6 +25,7 @@
         </div>
 
         <div class="wmw-fieldrow row">
+
             <input type="password" id="password" name="_password" class="required col-xs-7"/>
             <label class="wmw-label wmw-label--right col-xs-5"
                    for="password">{{ 'security.login.password'|trans }}</label>
@@ -33,14 +34,25 @@
                     <li>{{ error.messageKey|trans(error.messageData, 'security') }}</li>
                 </ul>
             {% endif %}
+
         </div>
 
         <div class="wmw-fieldrow row">
+
+            <button type=button id="showPassword" value="show" class="wmw-button wmw-button--small wmw-button--border"
+                    style="margin-bottom: 2%">
+                <i></i><span>
+                    {{ 'form.btn.show_password' | trans({}, 'tools') }}
+                </span><i></i>
+            </button>
+
             <div class="wmw-switchfield">
                 <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
-                <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+                <label for="remember_me">{{ 'security.login.remember_me' | trans }}</label>
             </div>
+
         </div>
+
 
         <div class="wmw-onboard-bottom">
             <button type="submit" id="_submit" name="_submit"

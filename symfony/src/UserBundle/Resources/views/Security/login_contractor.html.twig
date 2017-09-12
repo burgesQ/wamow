@@ -3,3 +3,23 @@
 {% block fos_user_content %}
   {{ include('UserBundle:Security:login_contractor_content.html.twig') }}
 {% endblock fos_user_content %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+  <script type="text/javascript">
+
+      $(document).ready(function () {
+
+          $("#showPassword").click(function () {
+              $('#password').attr('type', 'text');
+              setTimeout(function () {
+                  $('#password').attr('type', 'password');
+              }, 500);
+          });
+
+          $('#password').attr('type', 'password');
+      });
+
+  </script>
+{% endblock %}
