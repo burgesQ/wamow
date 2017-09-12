@@ -703,7 +703,7 @@ language:
 
 continent:
     emea:          EMEA
-    south_america: South America
+    south_america: Latin America
     north_america: North America
     asia:          Asia - Pacific
 
@@ -809,7 +809,7 @@ workexperience:
     outsourcing : "Outsourcing"
     rationalisation : "Rationalization"
     riskmanagement : "Risk Management"
-    changemanagement : "Implementation of Change Management"
+    changemanagement : "Change Management Implementation"
     restructuringplan : "Restructuring Plan"
     performancediagnosis : "Performance Diagnosis"
     operationalprocessredesign : "Operational Process Redesign"
@@ -865,7 +865,7 @@ workexperience:
     itperformanceimprovement : "IT Performance Improvement"
     projectitefficiency : "Project IT Efficiency"
     itpoliciesgovernance : "IT Policies / Governance"
-    implementationofnewtechnologies : "Implementation of New Technologies (Cloud computing, Connected Devices...)"
+    implementationofnewtechnologies : "New Technologies (Cloud computing, Connected Devices...) Implementation"
     auditit : "Audit IT"
     masterplan : "Masterplan"
     alignsolutionandoperationalneeds : "Align Solution and Operational Needs"
@@ -883,7 +883,7 @@ workexperience:
     digitalstrategy : "Digital Strategy"
     e-commercestrategy : "E-Commerce Strategy"
     digitalperformancediagnosis : "Digital Performance Diagnosis"
-    implementationofcollaborativeportalswebsites : "Implementation of Collaborative Portals/Websites"
+    implementationofcollaborativeportalswebsites : "Collaborative Portals/Websites Implementation"
     retaildigitalisation : "Retail Digitalization"
     processdesign : "Process Design"
     reengineeringprocess : "Reengineering Process"
@@ -899,7 +899,7 @@ workexperience:
     institutionalcommunication : "Institutional Communication"
     evenementialcommunication : "Event Communication"
     crisiscommunication : "Crisis Communication"
-    implementcommunicationplan : "Implement Communication Plan"
+    implementcommunicationplan : "Communication Plan Implementation"
     chainvalueoptimization : "Chain Value Optimization"
     packaging : "Packaging"
     redesigntoreducecost : "Redesign to Reduce Cost"
