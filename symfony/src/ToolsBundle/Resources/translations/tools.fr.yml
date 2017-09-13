@@ -171,7 +171,7 @@ home:
         play:
             text: Vous recevez des réponses d’experts anonymes dans un délai de 72 heures. Utilisez Consultants.wantmore.work pour échanger et partager l’information, dans le but d’affiner votre pitch.
         improve:
-            text: Vous sélectionnez les 3 meilleures réponses pour avoir accès à l’identité de leurs auteurs et pouvoir les interviewer afin prendre une décision finale.
+            text: Vous sélectionnez les 3 meilleures réponses pour avoir accès à l’identité de leurs auteurs et pouvoir les interviewer afin de prendre une décision finale.
         pay:
             text: Vous devez réaliser votre paiement avant d’acceder Consultants.wantmore.work.
         preregister:
@@ -200,9 +200,9 @@ home:
         start:
             text: Pour démarrer, vous avez seulement besoin d’une adresse email pour créer votre profil. Suivez ensuite les étapes et mettez en avant votre expertise en sélectionnant les missions que vous avez réalisées.
         play:
-            text: Dès vérification de votre identité, vous recevrez des pitchs ciblés. Si vous êtes intéressés, vous pouvez y répondre, demander des informations complémentaires au Contractor, l’aider à affiner son besoin pour remporter le deal. Donnez le meilleur de vous-même pour être sélectionné!
+            text: Dès vérification de votre identité, vous recevrez des pitchs ciblés. Si vous êtes intéressés, vous pouvez y répondre, demander des informations complémentaires à l'entreprise, l’aider à affiner son besoin pour remporter le deal. Donnez le meilleur de vous-même pour être sélectionné!
         improve:
-            text: Following each mission, the Corporation will provide feedback concerning your expertise, professional competencies, behavioral skills, availability, and the efficiency and sustainability of your delivery. This will help increase your influence and score, improving the success rate of your candidacies to upcoming pitches. 
+            text: A chaque fin de mission, l’entreprise vous fera un retour sur votre expertise, vos compétences, les conditions de déroulement de votre prestation, votre disponibilité, et sur la solution en elle-même tant en termes d’efficacité que de durabilité. Ainsi, vous pouvez améliorer votre impact et votre score afin de mieux réussir vos prochains pitchs. L’entreprise a également la possibilité de vous recommander sur la plateforme contribuant ainsi à votre succès. Vous pouvez trouver sur la plateforme des formations pour progresser et accroître votre niveau de compétences.
         pay:
             text: A la réception du premier pitch, vous souscrivez à un abonnement mensuel avec un an d’engagement. 
 
@@ -585,7 +585,7 @@ mission:
             chooseMonth: Mois
             chooseYear: Annee
             certification: Cértification / Compétences Spécifique
-            language: LANGUE(S) DE TRAVAILLE
+            language: LANGUE(S) DE TRAVAIL
             range: PRIX
             step_three:
                 certif: Certification <small> (optionnel) </small>
@@ -986,22 +986,19 @@ mission_title:
 mails:
     contracot_hello: Bonjour %f_name %l_name %c_name!
     advisor_hello: Bonjour %f_name %l_name !
-    hello: Bonjour %f_name %l_name !
     registration:
         contractor_new_password: " Nous vous confirmons la création de votre compte. 
         Votre mot de passe est : %password
         
-        Si ce n’est déjà fait pensez à compléter votre profil ! 
-        
-        L’équipe de Consultants.wantmore.work !"
+        Si ce n’est déjà fait pensez à compléter votre profil !"
+      
         advisor_new_password: " Nous vous confirmons la création de votre compte. 
         
         Votre mot de passe est : %password
         
-        Si ce n’est déjà fait pensez à compléter votre profil pour améliorer votre visibilité ! 
+        Si ce n’est déjà fait pensez à compléter votre profil pour améliorer votre visibilité !"
         
-        L’équipe de Consultants.wantmore.work "
-        
+                
 
     inbox:
         new_message_mission: Réponse à votre consultation !
