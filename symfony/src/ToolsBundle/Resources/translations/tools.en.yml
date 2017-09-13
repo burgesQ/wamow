@@ -70,6 +70,7 @@ side_bar:
     profile: "profile\n"
 
 footer:
+    new: "Newletter"
     mission: "Mission"
     about: "About"
     advisor: "Expert"
@@ -1108,7 +1109,7 @@ newsletter:
             reply: Reply
         newsletter:
             link: Click to see the full newsletter
-            what: Newsletters
+            what: Newsletter
 
     edit:
         save: Save changes
