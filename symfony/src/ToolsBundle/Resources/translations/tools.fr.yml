@@ -75,8 +75,9 @@ footer:
     about: À Propos 
     advisor: "Expert"
     agreement: CGU
-    legal: Légal
+    legal: CGU
     contractor: Entreprise
+    help: Help
 
 legends:
     title: |
@@ -212,7 +213,7 @@ dashboard:
     advisor: 
         fyi:
             title: Votre tableau de bord
-            text: Consultez tous les pitches matchés et gérez toutes les missions dont vous vous êtes intéressé. Assurez-vous de consulter cette page régulièrement! Les missions vous attendent!
+            text: Consultez tous les pitches matchés et gérez toutes les missions pour lequelles vouz avez manifesté un interêt. Assurez-vous de consulter cette page régulièrement! Les missions vous attendent!
         new:
             title: Pitches qui peuvent vous intéresser 
             date: Publié le
@@ -355,7 +356,8 @@ registration:
             nextbutton: Suivant
         four: 
             title: Profil d’expériences 
-            subtitle: (/!/ choix important voir aide) Sélection de 1 à 10 5
+            subtitle: "(/!/ choix important voir aide) 
+                    Sélection de 1 à 5"
             howtotitle: QUATRIÈME ET DERNIÈRE ÉTAPE
             howtotext: "Cette étape est cruciale. Elle va conclure votre profilage. En effet, compte tenu de vos précédents choix (secteurs d’activité, expertises fonctionnelles, typologies de missions conduites), nous avons sélectionné une liste d’expériences potentielles que vous avez pu vivre. Il est important de choisir les plus représentatives en lien avec ce que vous souhaiteriez faire et mettre en valeur. Pour chacune de ces expériences, nous allons vous demander de qualifier un certain nombre d’informations :<br>
             -	le type d’organisation (petites, moyennes ou grandes entreprises ou les 3)<br> 
@@ -363,7 +365,7 @@ registration:
             -	la durée cumulée de votre expérience en nombre de mois<br> 
             -	le taux journalier moyen de facturation pour chacune d’elle. TJM pour les indépendants ou pour les salariés : salaire annuel souhaité x protection sociale (retenir un coefficient moyen de 1,2) + les frais inhérents à l’activité (loyer, informatique…) / nombre de jours travaillés dans l’année<br>
             -	si vous avez exercé cette activité, il y a moins de deux ans.<br> 
-            Vous êtes prêt, alors vous pouvez commencer votre sélection. Rappelez-vous que vous ne pourrez en choisir que 10 5 maximum.<br> 
+            Vous êtes prêt, alors vous pouvez commencer votre sélection. Rappelez-vous que vous ne pourrez en choisir que 5 maximum.<br> 
             Une fois que vous aurez acté ces choix vous ne pourrez plus revenir en arrière. Vos choix seront définitifs."
             backbutton: Retour
             nextbutton: Suivant
@@ -617,10 +619,10 @@ mission:
     message:
         no_advisor: "Votre pitch a bien été enregistré et poussé auprès des experts qualifiés. Dès marque d’intérêt d’un expert, vous recevrez une alerte -pensez à activer votre alerte mail ! 
             Vous pourrez alors dialoguer avec les consultants qui ont répondu (jusqu'à 5) de manière anonyme puis lorsque vous aurez sélectionné les meilleures réponses (jusqu'à 3), accéder aux coordonnées. Pour le moment aucun expert n’a encore répondu à votre consultation."
-        no_proposition: "La publication de votre pitch a pris fin et malheureusement aucun expert n’a répondu à votre annonce. Consultants.wantmore.work va prendre contact avec vous dans les prochains jours pour analyser avec vous les raisons de ce mismatch."
+        no_proposition: " Votre profil a bien été enregistré. Le processus de matching est enclenché afin de vous remonter une proposition de mission. Vous pourrez alors décider d’y répondre et prendre un abonnement à notre service. Pour chaque pitch, seules les 5 premières réponses sont présentées anonymement à l’entreprise qui pourra alors engager un dialogue avec vous et échanger. A vous alors de proposer la meilleure solution pour être sélectionné et révéler votre identité. Pour le moment aucune mission ne correspond à vos critères. N’oubliez pas d’activer votre alerte mail pour être averti ! "
         shortlist_added: Nous vous informons que vous avez été sélectionné en short-list pour la mission.
         my_selection_added: "Nous vous informons que vous avez êtes le choix final de l'entreprise"
-        no_mission: "Aucune mission pour le moment ! Creent une !"
+        no_mission: "Aucune mission pour le moment ! Créez-en une !"
 
 ## Inbox
 inbox:
