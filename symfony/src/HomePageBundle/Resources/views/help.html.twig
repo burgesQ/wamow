@@ -6,15 +6,18 @@
     <body class="page-new text-page">
     <section class="section section-top">
 
+        {#{% include '@User/Profile/profile_header.html.twig' %}#}
         {% include '@HomePage/header_second.html.twig' %}
 
         <div class="container text-center">
             <div class="wrap-container-content">
                 <div class="container-content">
+
                     <!--[if lt IE 8]>
                     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please
                         <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
                     <![endif]-->
+
                     <h1 class="top-title">{{ 'help.title' | trans }}</h1>
                     <div class="row-no-margins text-center">
                         <h2 class="subtitle">
@@ -82,7 +85,7 @@
         </div>
     </section>
 
-    {% include "@HomePage/footer_second.html.twig" %}
+    {#{% include "@HomePage/footer_second.html.twig" %}#}
 
     </body>
 {% endblock %}

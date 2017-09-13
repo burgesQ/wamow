@@ -13,11 +13,11 @@ class NewsletterController extends Controller
      */
     public function listAction()
     {
-        /** @var NewsletterRepository $newsletterRepository */
-        $newsletterRepository = $this->getDoctrine()->getRepository('BlogBundle:Newsletter');
-
         return $this->render('@Blog/NewsLetter/list.html.twig', [
-            'newsletters' => $newsletterRepository->getAvailableNewsletters()
+            'newsletters' => $this->getDoctrine()->getRepository('BlogBundle:Newsletter')
+                ->getAvailableNewsletters(),
+            'home' => 1,
+            'user' => $this->getUser()
         ]);
     }
 
@@ -34,13 +34,11 @@ class NewsletterController extends Controller
             throw new NotFoundHttpException("No such newsletter");
 
         $articles = $this->getDoctrine()->getRepository('BlogBundle:Article')
-            ->findBy([
-                'newsletter' => $newsletter
-            ]);
+            ->findBy(['newsletter' => $newsletter]);
 
         return $this->render('@Blog/NewsLetter/show.html.twig', [
-                'newsletter' => $newsletter,
-                'articles'   => $articles
+            'newsletter' => $newsletter,
+            'articles'   => $articles
         ]);
     }
 }

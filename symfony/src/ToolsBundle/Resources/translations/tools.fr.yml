@@ -33,6 +33,7 @@ form:
         subscribe: Souscrire
         cancel: Annuler
         confirm: Confirmer
+        show_password: Voir mot de passe
 
     note:
         saved: Enregistré
@@ -69,6 +70,7 @@ side_bar:
     profile: "profil\n"
 
 footer:
+    new: Newletter
     mission: "Mission"
     about: À Propos 
     advisor: "Expert"
@@ -1105,7 +1107,7 @@ newsletter:
             reply: Repondre
         newsletter:
             link: Cliquer pour voir la newsletter entière 
-            what: Newsletters
+            what: Newsletter
 
     edit:
         save: Sauvegarder les modifications

@@ -4,7 +4,7 @@
 
         <header class="wmw-header row wmw-header--ob">
 
-            <a href="{{ path('home_page_advisor') }}" class="wmw-header-logo" style="vertical-align: middle">
+            <a href="{{ path('home_page') }}" class="wmw-header-logo" style="top: 35px">
                 <img src="{{ asset('images/header-logo.png') }}" alt="WMW"/>
             </a>
 
@@ -22,33 +22,56 @@
                             <img src="{{ asset('images/' ~ random(['placeholder-pp-0.png', 'placeholder-pp-1.png', 'placeholder-pp-2.png', 'placeholder-pp-3.png'])) }}"/>
                         </span>
                     {% endif %}
-                {% endif %}
 
-                <div class="wmw-header-profile-button">
-                    {% if user is defined and user is not null %}
+                    <div class="wmw-header-profile-button">
                         <button type="button" class="wmw-button wmw-button--border" id="hide_logout">
                             <i></i><span>
-                        {% if (user.firstName ~ user.LastName) | length < 20 %}
-                            <span class="name">{{ user.firstName }} {{ user.lastName }}</span>
-                            {% else %}
-                            <span class="name">{{ (user.firstName) | truncate(1, false, '.') }} {{ user.lastName | truncate(18, false, '') }}</span>
-                        {% endif %}
+                                {% if (user.firstName ~ user.LastName) | length < 20 %}
+                                    <span class="name">{{ user.firstName }} {{ user.lastName }}</span>
+                                    {% else %}
+                                    <span class="name">{{ (user.firstName) | truncate(1, false, '.') }} {{ user.lastName | truncate(18, false, '') }}</span>
+                                {% endif %}
                                 <i class="icon icon--arrow"></i>
                                 <i class="icon icon--avatar"></i>
                             </span><i></i>
                         </button>
+
                         <div class="wmw-header-profile-menu">
                             <a href="{{ path('user_profile_show') }}">{{ 'header.profile' | trans }}</a>
                             <a href="{{ path('fos_user_security_logout') }}">{{ 'header.logout' | trans }}</a>
                         </div>
-                        {% include '::local.html.twig' %}
+                    </div>
+                {% include 'local.html.twig' %}
 
-                    {% else %}
-                        {% include '::local.html.twig' %}
-                    {% endif %}
+                {% else %}
+
+                <div class="wmw-header-profile-button">
+
+                    {#<a href="{{ path('fos_user_registration_register_expert') }}"#}
+                       {#type="button"#}
+                       {#class="wmw-button wmw-button--border">#}
+                        {#<i></i><span> {{ 'home.advisor.signup' | trans | upper }} </span><i></i>#}
+                    {#</a>#}
+
+                    {#<a href="{{ path('fos_user_security_login') }}"#}
+                       {#type="button"#}
+                       {#class="wmw-button">#}
+                        {#<i></i><span> {{ 'home.advisor.login' | trans | upper }} </span><i></i>#}
+                    {#</a>#}
+
+                    {% include 'local.html.twig' %}
+
+
+                    <div>
+
+                {% endif %}
+
+
+
                 </div>
-            </div>
+
         </header>
+
     {% endif %}
 
 {% endblock header %}

@@ -19,8 +19,13 @@
                 <nav class="navbar">
                     <div class="navigation" id="navigation">
                         <div class="col-1-of-3 wrap-navbar-left">
-                            <a href="{{ path('home_page_advisor') }}" class="button btn btn-left">
-                                {{ 'home.contractor.expert' | trans }}</a>
+                            <a type="button"
+                               href="{{ path('home_page_advisor') }}"
+                               class="wmw-button wmw-button--green wmw-button--medium">
+                                <span><i></i>
+                                    {{ 'home.contractor.expert' | trans }}
+                                </span><i></i>
+                            </a>
                         </div>
                         <div class="col-1-of-3 wrap-navbar-mid">
                             <div class="wrap-links">
@@ -39,8 +44,12 @@
                         </div>
                         <div class="col-1-of-3 wrap-navbar-right">
 
-                            <a href="{{ path('fos_user_security_login_contractor') }}"
-                               class="button btn btn-right btn-ghost">{{ 'home.contractor.login' | trans }}</a>
+                            <a type="button"
+                               href="{{ path('fos_user_security_login_contractor') }}"
+                               class="wmw-button wmw-button--green wmw-button--medium">
+                                <span><i></i>
+                                    {{ 'home.contractor.login' | trans }}
+                                </span><i></i></a>
 
                         </div>
                     </div>

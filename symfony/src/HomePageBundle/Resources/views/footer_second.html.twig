@@ -1,3 +1,4 @@
+{% trans_default_domain 'tools' %}
 <footer id="footer" class="footer-fixed"><!-- footer -->
     <div class="container">
         <div class="footer-content">
@@ -7,32 +8,32 @@
             <div class="col-7-of-12 wrap-navbar-mid">
                 <div class="wrap-links">
                     <div class="wrap-link">
-                        <a href="#">
-                            Mission
+                        <a href="{{ path('newsletter_list') }}">
+                            {{ 'footer.new' | trans() }}
                         </a>
                         <span>/</span>
                     </div>
                     <div class="wrap-link">
                         <a href="{{ path('home_page_about') }}">
-                            {{ 'footer.about' | trans({}, 'tools') }}
-                        </a>
-                        <span>/</span>
-                    </div>
-                    <div class="wrap-link">
-                        <a href="#">
-                            Contractor
-                        </a>
-                        <span>/</span>
-                    </div>
-                    <div class="wrap-link">
-                        <a href="{{ path('home_page_terms') }}">
-                            {{ 'footer.legal' | trans({}, 'tools') }}
+                            {{ 'footer.about' | trans() }}
                         </a>
                         <span>/</span>
                     </div>
                     <div class="wrap-link">
                         <a href="{{ path('home_page_help') }}">
-                            {{ 'footer.help' | trans({}, 'tools') }}
+                            {{ 'footer.help' | trans() }}
+                        </a>
+                        <span>/</span>
+                    </div>
+                    <div class="wrap-link">
+                        <a href="#">
+                            Contact Us
+                        </a>
+                        <span>/</span>
+                    </div>
+                    <div class="wrap-link">
+                        <a href="{{ path('home_page_terms') }}">
+                            {{ 'footer.legal' | trans() }}
                         </a>
                         <span>/</span>
                     </div>

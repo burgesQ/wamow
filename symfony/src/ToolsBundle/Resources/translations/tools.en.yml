@@ -33,6 +33,7 @@ form:
         subscribe: Subscribe
         cancel: Cancel
         confirm: Confirm
+        show_password: Show password
 
     note:
         saved: Saved
@@ -69,10 +70,11 @@ side_bar:
     profile: "profile\n"
 
 footer:
+    new: "Newletter"
     mission: "Mission"
     about: "About"
     advisor: "Expert"
-    legal: "Legal notice"
+    legal: "User Agreement"
     help: "Help"
 
 legends:
@@ -1107,7 +1109,7 @@ newsletter:
             reply: Reply
         newsletter:
             link: Click to see the full newsletter
-            what: Newsletters
+            what: Newsletter
 
     edit:
         save: Save changes
