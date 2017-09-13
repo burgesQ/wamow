@@ -992,6 +992,7 @@ mission_title:
 mails:
     contracot_hello: Hello %f_name %l_name %c_name!
     advisor_hello: Hello %f_name %l_name !
+    hello: Hello %f_name %l_name !
     registration:
         contractor_new_password: " We confirm the creation of your account.
         Your password is: %password
