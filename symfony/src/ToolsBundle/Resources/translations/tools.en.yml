@@ -104,15 +104,17 @@ mouseover:
     country: We need to know your country of residence and your availability to travel to introduce to you the possibility of presence on site and travelling for future missions
     language: The languages you speak (professionally) for communication and outcome purposes.
     strenght: In order for your profile to be  100% complete you must upload a profile picture, link your account to LinkedIn and finish the sign up process.
-    first_message: '- Reformulate and interpret the client’s professional need (in your own words)  
+    first_message: 'The objective of the first answer it is not to bring a conclusive solution but to initiate a dialogue.
+    - Reformulate and interpret the client’s professional need 
     
-    - Wider stakes (reposition, from your point of view, the stakes highlighted by the client in a competitive context that would help his/her evolution, including potential new opportunities) 
+    - Wider stakes (including potential new opportunities) 
     
     - Offer a point of view that highlights your expertise    
     
-    - Open the interaction up by asking conclusive questions (showing an in depth-knowledge of the subject) that will guide towards the start of a solution linked to 1.the objectives (they must be clear and precise, potentially ranked if multiple or contradictory) and 2. The scope (eliminate all possible ambiguity with potential questions) as presented.  
-    The objective of the first answer it is not to bring a conclusive solution but to initiate a dialogue leading towards the construction of a common solution.'
-
+    - Open the interaction up by asking conclusive questions 
+    1.the objectives clear and precise 
+    2. The scope as presented."  
+    
 ## Common error
 error:
     page:
@@ -358,15 +360,16 @@ registration:
             title: "Profile your experiences "
             subtitle: " ! This is a very important choice, make sure you read the help menu. You may select a maximum of 5 options. "
             howtotitle: "FOURTH STEP:"
-            howtotext: "This step will conclude the construction of your profile.<br> 
-            Keeping in mind your previous choices (business sector, professional expertise and type of services provided), we have selected a list of potential experiences that you might have previously done. It is important to choose those that best represent what you would like to do and emphasize your abilities. For each one of these experiences, we will ask you to provide further information related to:<br> 
-            - The size of the organization (small, medium, large company or the three)<br>
+            howtotext: " Keeping in mind your previous choices we have selected a list of potential experiences that you might have previously done. It is important to choose those that best represent what you would like to do and emphasize your abilities. <br> 
+            For each one of these experiences, we will ask you to provide further information related to:<br> 
+            - The size of the organization <br>
             - The cultural context (possibility to make multiple choices)<br> 
             - The total amount of experience in months<br>
-            - Your average daily rate for each one of them. ADR for freelancers or for employees (wage earning): targeted annual salary + social security expenses + other expenses related to the type of activity (i.e. rent, IT…) / total number of worked days per year.<br>
+            - Your average daily rate for each one of them.<br>
+            ADR for freelancers or for employees (wage earning): targeted annual salary + social security expenses + other expenses related to the type of activity (i.e. rent, IT…) / total number of worked days per year.<br>
             - If you have done such activity in the past two years.<br>  
             If you are ready you can start your selection. Please remember you can select a maximum of 5 options.<br> 
-            Once you have submitted these last changes you won’t be able to change any of the information concerning your professional background. Your choices will be final!"
+            Once you have submitted these last changes you won’t be able to edit them any longer."
             backbutton: "BACK"
             nextbutton: "FINISH"
             cumuledmonth: "How many cumulated months?"
@@ -620,10 +623,16 @@ mission:
                 hint_company_large: Staff > 5000 or Turnover >1,5 billion of USD
                 hint_continent: You can select multiple options
     message:
-        no_advisor: 'Your pitch has been successfully published and will be sent to qualified experts. Once experts start marking themselves interested in the pitch you will receive a notification via email! You will then be able to talk with the experts that have sent you a proposal (up to 5). This first communication stage will be anonymous, up until you select the best solution proposals (up to 3). Only then you gain access to the expert’s contact information and resume. 
-        Experts are yet to answer your pitch!'
-        no_proposition: 'Your profile has been successfully registered. The match-making process has started. We will push towards you all missions matching your profile. You can then decide whether or not to send the client a proposition and subscribe to our monthly fees. For each pitch, only the first 5 propositions are initially presented to the counterpart. If you are among these, the latter can then decide to start a conversation with you and exchange information. Please note that during this first step your identity is hidden to the Corporation. It is then up to you to propose the best solution in order to be selected and reveal your identity to your counterpart. 
-        For the moment, there are no missions matching your profile. Please do not forget to activate you email notifications to receive an alert as soon as there are missions for you!'
+        no_advisor: 'Your pitch has been successfully published and will be sent to qualified experts. 
+        Once experts start answering you will be able to interact with them. 
+        This first communication stage will be anonymous, please play by the rules. 
+        When you select the three best proposals, you gain access to the expert’s contact."
+      
+        no_proposition: 'Your profile has been successfully registered. 
+        Missions matching your profile will be pushed your way. 
+        For each pitch, only the first 5 propositions are initially presented to the client. Please note that during this first step your identity is hidden to the Corporation.
+        Do not try to revel your identity and play fairly or you will be kicked-out of the game."
+        
         shortlist_added: You are among the 3 best fitting Experts selected to continue the interaction about %title.
                          The client would like to learn more about your proposal.
         my_selection_added: You have been chosen by the Corportation for the mission %title. The team at Consultants.wantmore.work send you their most sincere Congratulations  !
@@ -725,10 +734,10 @@ businesspractice:
     finance: "Finance"
     retail: "Retail"
     media: "Media-Tel. / Entertainment Business"
-    tourism: "Tourism"
+    tourism: "Tourism & Wellness"
     construction: "Construction"
     realestate: "Real Estate"
-    hotel: "Hospitality & Leisure (Hotel,Restaurant...)"
+    hotel: "Food & Beverage"
     services: "Services (including transport)"
     energy: "Energy"
     it: "Information Technology"
