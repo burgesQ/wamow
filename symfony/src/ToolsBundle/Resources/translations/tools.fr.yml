@@ -105,16 +105,16 @@ mouseover:
     country: Votre pays de résidence et votre mobilité éventuelle, afin de pouvoir anticiper les sujets de présence et de déplacements sur les futures missions
     language: Les langues que vous maitrisez (professionnellement) pour des raisons évidentes de communication et de réalisation des missions.
     strenght: Pour que votre profil soit complété à 100%, vous devez télécharger une image de profil, relier votre compte à LinkedIn et terminer le processus d'inscription.
-    first_message: "i. Reformulation de la problématique (avec ses mots)    
-    
-    ii. Enjeux élargis (repositionner, de votre point de vue, le(s) enjeux exprimé(s) par le client dans le contexte de compétition dans lequel il évolue, y compris nouveaux entrants potentiels)   
-    
-    iii. Proposition d’un angle de résolution mettant en valeur son expertise (ne pas faire une réponse toute faite)   
-    
-    iv. Ouverture en posant des questions probantes (montrant la connaissance pointue du sujet)  permettant d’orienter vers un début de solution en lien avec les 1. objectifs (il faut qu’il soit clairs et précis, éventuellement hiérarchiser si plusieurs ou contradictoires) et 2. le périmètre (éliminer toute ambiguïté par d’éventuelles questions) tels qu’évoqués.
-    L’objectif de la première réponse n’est pas d’apporter une réponse toute faite mais d’initier un dialogue de co-construction de la réponse avec l’entreprise (maïeutique ou accoucher progressivement de la réponse en incluant l’entreprise)."
+    first_message: "L’objectif de la première réponse n’est pas d’apporter une réponse toute faite mais d’initier un dialogue de co-construction de la réponse avec l’entreprise.
+    - Reformulation de la problématique (avec ses mots)
+    - Enjeux élargis (y compris nouveaux entrants potentiels) 
+    - Proposition d’un angle de résolution mettant en valeur son expertise 
+    - Ouverture en posant des questions probantes:
+    1. objectifs clairs et précis 
+    2. le périmètre tels qu’évoqués.
 
-
+    
+    
 ## Common error
 error:
     page:
@@ -359,8 +359,10 @@ registration:
             subtitle: "(/!/ choix important voir aide) 
                     Sélection de 1 à 5"
             howtotitle: QUATRIÈME ET DERNIÈRE ÉTAPE
-            howtotext: "Cette étape est cruciale. Elle va conclure votre profilage. En effet, compte tenu de vos précédents choix (secteurs d’activité, expertises fonctionnelles, typologies de missions conduites), nous avons sélectionné une liste d’expériences potentielles que vous avez pu vivre. Il est important de choisir les plus représentatives en lien avec ce que vous souhaiteriez faire et mettre en valeur. Pour chacune de ces expériences, nous allons vous demander de qualifier un certain nombre d’informations :<br>
-            -	le type d’organisation (petites, moyennes ou grandes entreprises ou les 3)<br> 
+            howtotext: "Compte tenu de vos précédents choix , nous avons sélectionné une liste d’expériences potentielles que vous avez pu vivre.<br> 
+            Il est important de choisir les plus représentatives en lien avec ce que vous souhaiteriez faire et mettre en valeur.<br> 
+            Pour chacune de ces expériences, nous allons vous demander de qualifier un certain nombre d’informations :<br>
+            -	le type d’organisation <br> 
             -	le contexte culturel (choix multiples possibles)<br>
             -	la durée cumulée de votre expérience en nombre de mois<br> 
             -	le taux journalier moyen de facturation pour chacune d’elle. TJM pour les indépendants ou pour les salariés : salaire annuel souhaité x protection sociale (retenir un coefficient moyen de 1,2) + les frais inhérents à l’activité (loyer, informatique…) / nombre de jours travaillés dans l’année<br>
@@ -617,9 +619,17 @@ mission:
                 hint_company_large: Effectif > 5000 ou CA > 1,5 milliards d’USD
                 hint_continent: Plusieurs choix sont possibles
     message:
-        no_advisor: "Votre pitch a bien été enregistré et poussé auprès des experts qualifiés. Dès marque d’intérêt d’un expert, vous recevrez une alerte -pensez à activer votre alerte mail ! 
-            Vous pourrez alors dialoguer avec les consultants qui ont répondu (jusqu'à 5) de manière anonyme puis lorsque vous aurez sélectionné les meilleures réponses (jusqu'à 3), accéder aux coordonnées. Pour le moment aucun expert n’a encore répondu à votre consultation."
-        no_proposition: " Votre profil a bien été enregistré. Le processus de matching est enclenché afin de vous remonter une proposition de mission. Vous pourrez alors décider d’y répondre et prendre un abonnement à notre service. Pour chaque pitch, seules les 5 premières réponses sont présentées anonymement à l’entreprise qui pourra alors engager un dialogue avec vous et échanger. A vous alors de proposer la meilleure solution pour être sélectionné et révéler votre identité. Pour le moment aucune mission ne correspond à vos critères. N’oubliez pas d’activer votre alerte mail pour être averti ! "
+        no_advisor: "Votre pitch a bien été enregistré et poussé auprès des experts qualifiés. 
+        Dès marque d’intérêt d’un expert vous pourrez dialoguer avec les experts qui ont répondu. 
+        La première étape de l’échange est anonyme, veuillez respecter les règles ! 
+        Quand vous sélectionnez les trois meilleures propositions, vous gagnez accès aux infos de l’experts.  
+
+        no_proposition: " Votre profil a bien été enregistré. 
+        On vous remontera de propositions de mission. 
+        Pour chaque pitch, seules les 5 premières réponses sont présentées à l’entreprise. 
+        Veuillez noter que pendant cette première étape votre identité est cachée à l’entreprise.
+        N’essayez pas de dévoiler votre identité et respectez les règles du jeu pour par y être expulsé."
+        
         shortlist_added: Nous vous informons que vous avez été sélectionné en short-list pour la mission.
         my_selection_added: "Nous vous informons que vous avez êtes le choix final de l'entreprise"
         no_mission: "Aucune mission pour le moment ! Créez-en une !"
@@ -720,10 +730,10 @@ businesspractice:
     finance: "Finance - Banque - Assurance"
     retail: "Commerce - Distribution"
     media: "Media - Telecom - Industrie des jeux"
-    tourism: "Tourisme"
+    tourism: "Tourisme et Bien-être"
     construction: "Construction BTP hors immobilier"
     realestate: "Immobilier"
-    hotel: "Hôtellerie - Restauration et Loisirs"
+    hotel: "Restauration et Industrie Alimentaire"
     services: "Services (y compris transports)"
     energy: "Energie"
     it: "Systèmes d’information - IT"
