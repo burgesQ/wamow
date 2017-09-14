@@ -631,7 +631,7 @@ mission:
         no_proposition: 'Your profile has been successfully registered. 
         Missions matching your profile will be pushed your way. 
         For each pitch, only the first 5 propositions are initially presented to the client. Please note that during this first step your identity is hidden to the Corporation.
-        Do not try to revel your identity and play fairly or you will be kicked-out of the game."
+        Do not try to revel your identity and play fairly or you will be kicked-out of the game.'
         
         shortlist_added: You are among the 3 best fitting Experts selected to continue the interaction about %title.
                          The client would like to learn more about your proposal.
