@@ -618,6 +618,8 @@ mission:
                 hint_company_medium: Ni Grande, Ni Petite
                 hint_company_large: Effectif > 5000 ou CA > 1,5 milliards d’USD
                 hint_continent: Plusieurs choix sont possibles
+                hint_password: Password must contain at least one upper case, one lower case, one number and one symbol.
+
     message:
         no_advisor: "Votre pitch a bien été enregistré et poussé auprès des experts qualifiés. 
         Dès marque d’intérêt d’un expert vous pourrez dialoguer avec les experts qui ont répondu. 
