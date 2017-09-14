@@ -717,6 +717,9 @@ continent:
     south_america: Latin America
     north_america: North America
     asia:          Asia - Pacific
+    africa: Africa
+    middle_east: Middle East
+    eurasia: Eurasia
 
 company_size:
     small:  Small Companies
