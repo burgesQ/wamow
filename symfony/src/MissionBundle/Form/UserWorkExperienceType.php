@@ -83,7 +83,7 @@ class UserWorkExperienceType extends AbstractType
                 'label'              => 'registration.advisor.four.dailyfees',
                 'required'           => true,
                 'attr'               => [
-                    'min'   => 1,
+                    'min'   => 0,
                     'max'   => 10000,
                     'step'  => 100
                 ]
