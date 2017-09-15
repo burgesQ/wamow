@@ -337,14 +337,14 @@ registration:
             backbutton: Retour 
             nextbutton: Suivant
         two:
-            title: Dans quels domaines techniques et fonctionnels avez-vous acquis votre expérience ? 
+            title: Dans quels domaines avez-vous acquis votre expérience ? 
             subtitle: Vous pouvez sélectionner plusieurs choix
             howtotitle: DEUXIÈME ÉTAPE
             howtotext: Les secteurs d’activités complétés, il convient d’identifier vos différents domaines d’expertise au sein des organisations dans lesquels vous avez acquis vos expériences. Dans quelles fonctions de l’entreprise avez-vous développé votre savoir faire ? Vous avez le choix entre 22 fonctions types. Plusieurs choix sont possibles.
             backbutton: Retour
             nextbutton: Suivant
         three:
-            title: Quels types de prestations avez-vous délivré ?
+            title: Quels types de prestations avez-vous délivrés ?
             subtitle: vous pouvez sélectionner plusieurs choix
             howtotitle: TROISIÈME ÉTAPE
             howtotext: "Allons plus loin dans le détail pour compléter votre profil.<br> 
@@ -353,9 +353,8 @@ registration:
             backbutton: Retour
             nextbutton: Suivant
         four: 
-            title: Profil d’expériences 
-            subtitle: "(/!/ choix important voir aide) 
-                    Sélection de 1 à 5"
+            title: Quelles sont les expertises que vous charactérisent le mieux ? 
+            subtitle: "Ce choix est important - sélectionnez-en de 1 à 5"                   
             howtotitle: QUATRIÈME ET DERNIÈRE ÉTAPE
             howtotext: "Compte tenu de vos précédents choix , nous avons sélectionné une liste d’expériences potentielles que vous avez pu vivre.<br> 
             Il est important de choisir les plus représentatives en lien avec ce que vous souhaiteriez faire et mettre en valeur.<br> 
