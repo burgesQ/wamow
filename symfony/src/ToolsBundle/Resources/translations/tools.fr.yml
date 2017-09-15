@@ -591,7 +591,7 @@ mission:
             range: PRIX
             step_three:
                 certif: Certification <small> (optionnel) </small>
-                lang: Langue(s) de travaille
+                lang: Langue(s) de travail
             step_four:
                 professional_expertise: PROFESSIONAL EXPERTISE
                 end_pitch: DATE LIMITE DE RÉPONSE AU PITCH
