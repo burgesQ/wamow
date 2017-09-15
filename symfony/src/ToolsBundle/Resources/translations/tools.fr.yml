@@ -70,12 +70,12 @@ side_bar:
     profile: "profil\n"
 
 footer:
-    new: "Newletter"
+    new: "Newsletter"
     about: À Propos
-    help: Help
+    help: Aide
     contact_us: "Contactez nous"
     legal: CGU
-    press: Press
+    press: Presse
 
 legends:
     title: |
