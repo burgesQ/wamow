@@ -70,7 +70,7 @@ side_bar:
     profile: "profile\n"
 
 footer:
-    new: "Newletter"
+    new: "Newsletter"
     about: "About"
     help: "Help"
     contact_us: "Contact us"
@@ -715,7 +715,7 @@ language:
     yoruba: "Yoruba"
 
 continent:
-    emea:          EMEA
+    emea:          Europe
     south_america: Latin America
     north_america: North America
     asia:          Asia - Pacific
