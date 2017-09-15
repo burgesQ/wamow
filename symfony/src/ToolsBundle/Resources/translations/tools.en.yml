@@ -357,8 +357,8 @@ registration:
             backbutton: "BACK"
             nextbutton: "NEXT"
         four:
-            title: "Profile your experiences "
-            subtitle: " ! This is a very important choice, make sure you read the help menu. You may select a maximum of 5 options. "
+            title: "Which expertises characterize you best? "
+            subtitle: " Please choose wisely and select 1 to 5 in that list "
             howtotitle: "FOURTH STEP:"
             howtotext: " Keeping in mind your previous choices we have selected a list of potential experiences that you might have previously done. It is important to choose those that best represent what you would like to do and emphasize your abilities. <br> 
             For each one of these experiences, we will ask you to provide further information related to:<br> 
