@@ -1,22 +1,26 @@
 {% trans_default_domain 'tools' %}
 {% block footer %}
+    {% if footer is not defined %}
     <footer class="wmw-footer row">
         <a href="#" class="wmw-footer-logo"><img src="{{ asset('images/footer-logo.png') }}" alt="WMW"/></a>
         <nav class="wmw-footer-nav">
             <a href="{{ path('newsletter_list') }}">
-                {{ 'footer.new' | trans() }}
+                {{ 'footer.new' | trans }}
             </a>
             <a href="{{ path('home_page_about') }}">
-                {{ 'footer.about' | trans() }}
+                {{ 'footer.about' | trans }}
             </a>
             <a href="{{ path('home_page_help') }}">
-                {{ 'footer.help' | trans() }}
+                {{ 'footer.help' | trans }}
             </a>
             <a href="#">
-                Contact Us
+                {{ 'footer.contact_us' | trans }}
             </a>
             <a href="{{ path('home_page_terms') }}">
-                {{ 'footer.legal' | trans() }}
+                {{ 'footer.legal' | trans }}
+            </a>
+            <a href="#">
+                {{ 'footer.press' | trans }}
             </a>
         </nav>
         <div class="wmw-footer-social">
@@ -25,4 +29,6 @@
             <a href="{{ linkedin_link }}"><i class="icon icon--linkedin"></i></a>
         </div>
     </footer>
+
+    {% endif %}
 {% endblock %}

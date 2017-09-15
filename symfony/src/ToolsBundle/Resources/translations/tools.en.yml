@@ -71,11 +71,11 @@ side_bar:
 
 footer:
     new: "Newletter"
-    mission: "Mission"
     about: "About"
-    advisor: "Expert"
-    legal: "User Agreement"
     help: "Help"
+    contact_us: "Contact us"
+    legal: "User Agreement"
+    press: "Press"
 
 legends:
     title: |
@@ -622,6 +622,8 @@ mission:
                 hint_company_medium: Not Big, not Small
                 hint_company_large: Staff > 5000 or Turnover >1,5 billion of USD
                 hint_continent: You can select multiple options
+                hint_password: Password must contain at least one upper case, one lower case, one number and one symbol.
+
     message:
         no_advisor: 'Your pitch has been successfully published and will be sent to qualified experts. 
         Once experts start answering you will be able to interact with them. 
@@ -717,6 +719,9 @@ continent:
     south_america: Latin America
     north_america: North America
     asia:          Asia - Pacific
+    africa: Africa
+    middle_east: Middle East
+    eurasia: Eurasia
 
 company_size:
     small:  Small Companies

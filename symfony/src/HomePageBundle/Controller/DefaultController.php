@@ -114,7 +114,8 @@ class DefaultController extends Controller
     {
         return $this->render('@HomePage/help.html.twig', [
             'user' => $this->getUser(),
-            'home' => 1
+            'home' => 1,
+            'footer' => 1
         ]);
     }
 }
