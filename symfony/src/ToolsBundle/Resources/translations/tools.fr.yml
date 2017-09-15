@@ -70,14 +70,12 @@ side_bar:
     profile: "profil\n"
 
 footer:
-    new: Newletter
-    mission: "Mission"
-    about: À Propos 
-    advisor: "Expert"
-    agreement: CGU
-    legal: CGU
-    contractor: Entreprise
+    new: "Newletter"
+    about: À Propos
     help: Help
+    contact_us: "Contactez nous"
+    legal: CGU
+    press: Press
 
 legends:
     title: |

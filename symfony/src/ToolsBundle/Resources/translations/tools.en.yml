@@ -71,11 +71,11 @@ side_bar:
 
 footer:
     new: "Newletter"
-    mission: "Mission"
     about: "About"
-    advisor: "Expert"
-    legal: "User Agreement"
     help: "Help"
+    contact_us: "Contact us"
+    legal: "User Agreement"
+    press: "Press"
 
 legends:
     title: |
