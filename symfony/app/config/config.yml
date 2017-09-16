@@ -48,7 +48,8 @@ twig:
         facebook_link: "%facebook_link%"
         twitter_link: "%twitter_link%"
         linkedin_link: "%linkedin_link%"
-        locales: %app_locales_array%
+        locales: "%app_locales_array%"
+        email_contact: "%email_contact%"
 
 services:
     twig.extension.text:
