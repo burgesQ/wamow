@@ -33,6 +33,8 @@ user:
         uppercase: Please enter at least a upper case letter
         number: Please enter at least a number
         spechar: Please enter at least a exotic characteres
+    languages:
+        min: 'Please select at least one language.'
 
 company:
     name:
