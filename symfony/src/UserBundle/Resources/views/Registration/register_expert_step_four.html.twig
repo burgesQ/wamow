@@ -44,13 +44,16 @@
         </div>
     </div>
 
+
+
     <div class="wmw-onboard-bottom">
         <a href="{{ path('expert_registration_step_three') }}" class="wmw-button wmw-button--border">
             <i></i><span>{{ 'form.btn.back' | trans }}</span><i></i>
         </a>
 
+
         {% set next = '<i></i><span>' ~ form.submit.vars.label | trans ~ '</span><i></i>' %}
-        {{ form_widget(form.submit, {'attr': {'class': 'wmw-button wmw-button--green'}, 'label': next }) }}
+        {{ form_widget(form.submit, {'attr': {'class': 'wmw-button wmw-button--green'}, 'label': next, onclick: "alert()"}) }}
 
         {{ form_widget(form._token) }}
     </div>
@@ -70,3 +73,31 @@
     </div>
 {% endblock %}
 
+{% block javascripts %}
+
+    {{ parent() }}
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#app_user_profile_submit').click(function (e, params) {
+                e.preventDefault();
+
+                swal({
+                    title: "{{ 'user_agreement.title' | trans }}",
+
+                    html: "<div style='overflow-y: scroll'>"
+                    + "{{ 'user_agreement.content' | trans }}"
+                    + "</div>",
+                    showCancelButton: true,
+                    confirmButtonColor: '#DD6B55',
+                    confirmButtonText: "{{ 'user_agreement.accept' | trans }}",
+                    cancelButtonText: "{{ 'user_agreement.delcine' | trans }}"
+                }).then((value) => {
+                    if(value == true){
+                        $("#wmw-form-ob-4").submit();
+                    }
+                })
+            });
+        });
+    </script>
+{% endblock %}

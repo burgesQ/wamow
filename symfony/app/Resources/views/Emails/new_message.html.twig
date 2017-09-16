@@ -1,7 +1,7 @@
 {% trans_default_domain 'tools' %}
 <h3>{{ 'mails.hello' | trans({ '%f_name': f_name, '%l_name': l_name }, 'tools') }}</h3>
 
-{{ 'mails.inbox.new_message_mission' | trans({ '%title': title }, 'tools') }}<br>
+{{ 'mails.inbox.new_message_mission' | trans({ '%title': title | trans }, 'tools') }}<br>
 
 {% if roles == 'ROLE_ADVISOR '%}
     <a href="{{ absolute_url(path('mission_answer_to_advisor', { 'userMissionId': userMissionId })) }}">

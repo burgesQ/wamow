@@ -363,6 +363,13 @@ class User extends BaseUser implements ParticipantInterface
     private $planPaymentProvider;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="user_agreement", type="boolean", nullable=false)
+     */
+    private $userAgreement;
+
+    /**
      * User constructor.
      */
     public function __construct()
@@ -394,6 +401,7 @@ class User extends BaseUser implements ParticipantInterface
         $this->dailyFeesMax          = 0;
         $this->dailyFeesMin          = 0;
         $this->publicId              = md5(uniqid() . time());
+        $this->userAgreement         = false;
     }
 
     /**
@@ -1446,5 +1454,28 @@ class User extends BaseUser implements ParticipantInterface
     public function getPlanPaymentProvider()
     {
         return $this->planPaymentProvider;
+    }
+
+    /**
+     * Set userAgreement
+     *
+     * @param  $userAgreement
+     * @return User
+     */
+    public function setUserAgreement($userAgreement)
+    {
+        $this->userAgreement = $userAgreement;
+
+        return $this;
+    }
+
+    /**
+     * Get userAgreement
+     *
+     * @return boolean
+     */
+    public function getUserAgreement()
+    {
+        return $this->userAgreement;
     }
 }

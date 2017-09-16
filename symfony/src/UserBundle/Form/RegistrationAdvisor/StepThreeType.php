@@ -30,7 +30,12 @@ class StepThreeType extends AbstractType
                 'constraints'               => new Count([
                     'min' => 1,
                     'minMessage' => 'user.kindfomission.min',
-                ])
+                ]),
+                'query_builder' => function(EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->orderBy('u.name', 'ASC');
+                },
+
             ])
             ->add('submit', SubmitType::class, [
                     'translation_domain' => 'tools',

@@ -34,9 +34,10 @@ parameters:
     twitter_link:  "https://twitter.com/WantMoreWork/"
     linkedin_link: "https://www.linkedin.com/groups/7052605/"
 
-    # Email Sneder
+    # Email Sender
     email_sender:       want@more.work
     email_pre_register: want@more.work
+    email_contact:      contact@wantmore.work
 
     # Stripe
     stripe_publishable_key: pk_test_6pRNASCoBOKtIshFeQd4XMUh

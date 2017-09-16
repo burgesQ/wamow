@@ -259,7 +259,7 @@ class RegistrationAdvisorController extends Controller
         /** @var \Symfony\Component\Form\Form $form */
         $form = $this->createForm(new StepFourType(), $user)->setData($user);
         if ($form->handleRequest($request)->isSubmitted() && $form->isValid()) {
-
+            
             $workExpRepo     = $em->getRepository('MissionBundle:WorkExperience');
             $companySizeRepo = $em->getRepository('MissionBundle:CompanySize');
             $continentRepo   = $em->getRepository('MissionBundle:Continent');

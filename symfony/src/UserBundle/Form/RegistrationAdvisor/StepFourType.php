@@ -46,7 +46,7 @@ class StepFourType extends AbstractType
                         ->setParameter('proExp', $user->getProfessionalExpertise()->toArray())
                         ->setParameter('missionKinds', $user->getMissionKind()->toArray())
                         ->setParameter('businessPra', $user->getBusinessPractice()->toArray())
-                        ->orderBy('u.id', 'ASC');
+                        ->orderBy('u.name', 'ASC');
                 },
                 'property'                  => 'name',
                 'multiple'                  => true,
@@ -73,7 +73,7 @@ class StepFourType extends AbstractType
                 'translation_domain' => 'tools',
                 'label'              => 'registration.advisor.four.nextbutton',
                 'attr' => [
-                    'class' => 'wmw-button wmw-button--green'
+//                    'onclick' => 'return lilFunc()'
                 ]
             ]);
     }

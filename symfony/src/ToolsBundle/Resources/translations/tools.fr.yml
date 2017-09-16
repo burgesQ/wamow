@@ -152,7 +152,7 @@ error:
     upload_resume_or_linkedin: Veuillez télécharger un curriculum vitae ou lier votre compte à LinkedIn
     phone:
         please_fill:
-    generale: Il semble que certains champs n'ont pas été remplis correctement.
+    generale: Il semble que certains champs ne sont pas remplis correctement.
 
 ## Home
 home:
@@ -1000,6 +1000,7 @@ mission_title:
 mails:
     contracot_hello: Bonjour %f_name %l_name %c_name!
     advisor_hello: Bonjour %f_name %l_name !
+    hello: Bonjour %f_name %l_name !
     registration:
         contractor_new_password: " Nous vous confirmons la création de votre compte. 
         Votre mot de passe est : %password

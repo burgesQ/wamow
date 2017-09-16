@@ -56,6 +56,13 @@ form:
     work_experience:
         months: months
 
+## UserAgreement
+user_agreement:
+    title: User Agreement
+    content: ""
+    accept: "I have read and I accept the user agreement"
+    delcine: "I have read and I decline the user agreement"
+
 ## Base
 header:
     news: "News"

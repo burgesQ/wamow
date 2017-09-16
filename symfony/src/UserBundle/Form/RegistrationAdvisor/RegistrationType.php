@@ -47,7 +47,6 @@ class RegistrationType extends AbstractType
                 'required'                  => false,
                 'label'                     => 'registration.advisor.zero.remote',
             ])
-
             ->add('languages', Select2EntityType::class, [
                 'translation_domain' => 'tools',
                 'text_property' => 'name',

@@ -32,7 +32,9 @@ user:
         lowercase: Veuillez entrer au moins une lettre majuscule 
         uppercase: Veuillez entrer au moins une lettre minuscule 
         number: Veuillez entrer au moins un numéro 
-        spechar: Veuillez entrer au moins un caractère spécial 
+        spechar: Veuillez entrer au moins un caractère spécial
+    languages:
+        min: 'Veuillez selectioner au moins un language.'
 
 company:
     name:
