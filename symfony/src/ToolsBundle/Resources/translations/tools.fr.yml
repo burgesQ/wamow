@@ -152,7 +152,7 @@ error:
     upload_resume_or_linkedin: Veuillez télécharger un curriculum vitae ou lier votre compte à LinkedIn
     phone:
         please_fill:
-    generale: Il semble que certains champs n'ont pas été remplis correctement.
+    generale: Il semble que certains champs ne sont pas remplis correctement.
 
 ## Home
 home:
