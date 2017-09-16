@@ -21,7 +21,7 @@ class StepOneFormType extends AbstractType
                 'translation_domain' => 'tools',
                 'choice_translation_domain' => 'tools',
                 'class'         => MissionTitle::class,
-                'placeholder'        => 'title',
+                'placeholder'        => 'mission.new.label.title_placeholder',
                 'label'              => 'mission.new.label.title',
                 'required'           => true,
                 'group_by'           => 'category',

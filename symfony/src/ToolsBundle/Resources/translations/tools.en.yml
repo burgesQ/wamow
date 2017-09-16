@@ -584,6 +584,7 @@ mission:
         label:
             currency: please select the currency
             title: TITLE OF THE PITCH
+            title_placeholder: Title
             context: CONTEXT 
             stack: ISSUE
             objective: TARGET & AREA
