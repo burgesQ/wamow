@@ -24,7 +24,7 @@ class ResettingController extends BaseController
         $user     = $userRepo->findOneBy(['username' => $userName]);
 
         return $this->render('UserBundle:Resetting:check_email.html.twig', [
-            'email' => $user->getEmail()
+            'email' => $userName
         ]);
     }
 }
