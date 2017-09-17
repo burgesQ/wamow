@@ -13,12 +13,14 @@ class NewsletterController extends Controller
      */
     public function listAction()
     {
-        return $this->render('@Blog/NewsLetter/list.html.twig', [
-            'newsletters' => $this->getDoctrine()->getRepository('BlogBundle:Newsletter')
-                ->getAvailableNewsletters(),
-            'home' => 1,
-            'user' => $this->getUser()
-        ]);
+        return $this->redirect($this->container->getParameter('news_url') . 'archives');
+
+//        return $this->render('@Blog/NewsLetter/list.html.twig', [
+//            'newsletters' => $this->getDoctrine()->getRepository('BlogBundle:Newsletter')
+//                ->getAvailableNewsletters(),
+//            'home' => 1,
+//            'user' => $this->getUser()
+//        ]);
     }
 
     /**
@@ -28,17 +30,19 @@ class NewsletterController extends Controller
      */
     public function showAction($id)
     {
-        if (!($newsletter = $this->getDoctrine()->getRepository('BlogBundle:Newsletter')
-                ->findOneBy(['number' => $id])) ||
-            $newsletter->getPublishedDate > new \DateTime())
-            throw new NotFoundHttpException("No such newsletter");
+        return $this->redirect($this->container->getParameter('news_url') . 'newsletters/' . $id . '/index.html');
 
-        $articles = $this->getDoctrine()->getRepository('BlogBundle:Article')
-            ->findBy(['newsletter' => $newsletter]);
-
-        return $this->render('@Blog/NewsLetter/show.html.twig', [
-            'newsletter' => $newsletter,
-            'articles'   => $articles
-        ]);
+//        if (!($newsletter = $this->getDoctrine()->getRepository('BlogBundle:Newsletter')
+//                ->findOneBy(['number' => $id])) ||
+//            $newsletter->getPublishedDate > new \DateTime())
+//            throw new NotFoundHttpException("No such newsletter");
+//
+//        $articles = $this->getDoctrine()->getRepository('BlogBundle:Article')
+//            ->findBy(['newsletter' => $newsletter]);
+//
+//        return $this->render('@Blog/NewsLetter/show.html.twig', [
+//            'newsletter' => $newsletter,
+//            'articles'   => $articles
+//        ]);
     }
 }

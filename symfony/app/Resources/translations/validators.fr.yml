@@ -57,3 +57,4 @@ error:
         continent: Veuillez sélectionner au moins un continent
         country: Veuillez sélectionner au moins un pays
     minlanguage: "Veuillez sélectionner au moins une langue"
+    professional_expertise: "Veuillez selectionner une expertise professionelle"

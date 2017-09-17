@@ -58,3 +58,4 @@ error:
         continent: Please select at least one continent
         country: Please select at least one country
     minlanguage: "Please select at least one language"
+    professional_expertise: "Please select a professional expertise"
