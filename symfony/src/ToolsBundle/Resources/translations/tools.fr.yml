@@ -103,13 +103,17 @@ mouseover:
     country: Votre pays de résidence et votre mobilité éventuelle, afin de pouvoir anticiper les sujets de présence et de déplacements sur les futures missions
     language: Les langues que vous maitrisez (professionnellement) pour des raisons évidentes de communication et de réalisation des missions.
     strenght: Pour que votre profil soit complété à 100%, vous devez télécharger une image de profil, relier votre compte à LinkedIn et terminer le processus d'inscription.
-    first_message: "L’objectif de la première réponse n’est pas d’apporter une réponse toute faite mais d’initier un dialogue de co-construction de la réponse avec l’entreprise.
-    - Reformulation de la problématique (avec ses mots)
-    - Enjeux élargis (y compris nouveaux entrants potentiels) 
-    - Proposition d’un angle de résolution mettant en valeur son expertise 
-    - Ouverture en posant des questions probantes:
-    1. objectifs clairs et précis 
-    2. le périmètre tels qu’évoqués."
+    first_message: |
+        "L’objectif de la première réponse n’est pas d’apporter une réponse toute faite mais d’initier un dialogue de co-construction de la réponse avec l’entreprise.
+            - Reformulation de la problématique (avec ses mots)
+
+            - Enjeux élargis (y compris nouveaux entrants potentiels)
+
+            - Proposition d’un angle de résolution mettant en valeur son expertise
+
+            - Ouverture en posant des questions probantes:
+                1. objectifs clairs et précis
+                2. le périmètre tels qu’évoqués."
 
     
     

@@ -111,17 +111,18 @@ mouseover:
     country: We need to know your country of residence and your availability to travel to introduce to you the possibility of presence on site and travelling for future missions
     language: The languages you speak (professionally) for communication and outcome purposes.
     strenght: In order for your profile to be  100% complete you must upload a profile picture, link your account to LinkedIn and finish the sign up process.
-    first_message: 'The objective of the first answer it is not to bring a conclusive solution but to initiate a dialogue.
-    - Reformulate and interpret the client’s professional need 
+    first_message: |
+        The objective of the first answer it is not to bring a conclusive solution but to initiate a dialogue.
+        - Reformulate and interpret the client’s professional need
     
-    - Wider stakes (including potential new opportunities) 
-    
-    - Offer a point of view that highlights your expertise    
-    
-    - Open the interaction up by asking conclusive questions 
-    1.the objectives clear and precise 
-    2. The scope as presented.'  
-    
+        - Wider stakes (including potential new opportunities)
+
+        - Offer a point of view that highlights your expertise
+
+        - Open the interaction up by asking conclusive questions
+            1 .The objectives clear and precise
+            2. The scope as presented.
+
 ## Common error
 error:
     page:
