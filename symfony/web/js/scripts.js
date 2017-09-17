@@ -4500,8 +4500,8 @@ var Master = {
     	});
 
     	$('.wmw-uploadfield input[type=file]').on('change', function(){
-    		var val = $(this).val();
-    		$(this).parent().find('.wmw-uploadfield-val').text( val );
+    		var fileName = $(this).val().split("\\")[2];
+    		$(this).parent().find('.wmw-uploadfield-val').text( fileName );
     	});
 
         $('.wmw-rangefield input[type=range]').on('change input', function(){

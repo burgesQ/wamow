@@ -36,7 +36,9 @@
                                     <a href="{{ path(route, params|merge({ _locale: 'fr' })) }}">FR</a>
                                 </div>
                                 <div class="wrap-link">
-                                    <a href="{{ path('newsletter_list') }}">{{ 'header.news' | trans | upper }}</a>
+                                    <a href="{{ path('newsletter_list') }}">
+                                        {#<a href="{{ news_url }}archives">#}
+                                        {{ 'header.news' | trans | upper }}</a>
                                     <span>/</span>
                                 </div>
 
