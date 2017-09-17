@@ -38,3 +38,12 @@
   font-weight: normal;
   font-style: normal;
 }
+
+@font-face {
+  font-family: 'FontAwesome';
+  font-style: normal;
+  src: url('../fonts/FontAwesome/fontawesome-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/FontAwesome/fontawesome-webfont.woff') format('woff'),
+       url('../fonts/FontAwesome/fontawesome-webfont.ttf') format('truetype'),
+       url('../fonts/FontAwesome/fontawesome-webfont.svg') format('svg'); /* Legacy iOS */
+}
