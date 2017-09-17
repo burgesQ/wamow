@@ -395,7 +395,12 @@ class Mission
                 $missionEnding = $this->getMissionEnding();
                 $applicationEnding = $this->getApplicationEnding();
                 $today = new \DateTime();
-                if ($missionBeginning <= $today || $missionEnding <= $today || $applicationEnding <= $today) {
+                if ($this->getProfessionalExpertise() == null) {
+                  $context
+                      ->buildViolation('error.professional_expertise')
+                      ->atPath('professionalExpertise')->addViolation()
+                  ;
+                } elseif ($missionBeginning <= $today || $missionEnding <= $today || $applicationEnding <= $today) {
                     $context
                         ->buildViolation('error.date.past_date')
                         ->atPath('missionBeginning')->addViolation()

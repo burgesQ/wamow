@@ -50,6 +50,7 @@ twig:
         linkedin_link: "%linkedin_link%"
         locales: "%app_locales_array%"
         email_contact: "%email_contact%"
+        news_url: "%news_url%"
 
 services:
     twig.extension.text:

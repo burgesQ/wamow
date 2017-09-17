@@ -18,6 +18,7 @@ the whole project.
 @import "partials/animations";
 @import "partials/scrollbars";
 @import "partials/alerts";
+@import "partials/font-awesome";
 
 /*********************
 IMPORTING MODULES
@@ -61,8 +62,6 @@ sense to print at the bottom. Things like nav, ads, and forms should
 be set to display none.
 *********************/
 @media print {
-
 	// styles in print.scss
 	@import "partials/print";
-
 }
