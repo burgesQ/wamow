@@ -13,14 +13,14 @@ class NewsletterController extends Controller
      */
     public function listAction()
     {
-        return $this->redirect($this->container->getParameter('news_url') . 'archives');
+//        return $this->redirect($this->container->getParameter('news_url') . 'archives');
 
-//        return $this->render('@Blog/NewsLetter/list.html.twig', [
-//            'newsletters' => $this->getDoctrine()->getRepository('BlogBundle:Newsletter')
-//                ->getAvailableNewsletters(),
-//            'home' => 1,
-//            'user' => $this->getUser()
-//        ]);
+        return $this->render('@Blog/NewsLetter/list.html.twig', [
+            'newsletters' => $this->getDoctrine()->getRepository('BlogBundle:Newsletter')
+                ->getAvailableNewsletters(),
+            'home' => 1,
+            'user' => $this->getUser()
+        ]);
     }
 
     /**

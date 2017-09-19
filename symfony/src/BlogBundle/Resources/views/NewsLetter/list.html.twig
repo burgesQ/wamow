@@ -70,8 +70,14 @@
                                     </h2>
                                     {% set article = oneNewsletter.articles | first %}
                                     {#<a href="{{ path('newsletter_show', {'id': oneNewsletter.number}) }}" class="wrap-preview-newsletter">#}
-                                    <a href="http://consultants.wantmore.work/newsletters/{{ oneNewsletter.number }}/index.html" class="wrap-preview-newsletter">
-                                        <img src={{ article.urlCover }} alt={{ oneNewsletter.title }} class="newsletter-left-img">
+                                    {#<a href="http://consultants.wantmore.work/newsletters/{{ oneNewsletter.number }}/index.html" class="wrap-preview-newsletter">#}
+                                    <a href="/newsletters/{{ oneNewsletter.number }}/index.html" class="wrap-preview-newsletter">
+                                        {% if article != false %}
+                                            <img src={{ article.urlCover }} alt={{ oneNewsletter.title }} class="newsletter-left-img">
+                                        {% else %}
+                                            <img src={{ oneNewsletter.urlCover }} alt={{ oneNewsletter.title }} class="newsletter-left-img">
+                                            {#{{ oneNewsletter.urlCover }}#}
+                                        {% endif %}
                                     </a>
                                 </div>
                             {% endfor %}
