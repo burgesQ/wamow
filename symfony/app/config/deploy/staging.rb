@@ -22,5 +22,5 @@ set :deploy_to, "/home/app/www/staging/"
 set :current_stage, "staging"
 set :url_base,      "http://staging.consultants.wantmore.work"
 
-#Git production branch
-set :branch, "master"
+#Git stagging branch
+set :branch, "preprod"
