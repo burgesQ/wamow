@@ -856,6 +856,12 @@
 				width: 75%;
 				margin-left: 25%;
 				float: left;
+				.preview-newsletter {
+					min-height: 60em;
+					min-width:  75%;
+					max-height: 70em;
+					max-width:  95%;
+				}
 			}
 			.wrap-newsletter-left-title {
 				border-bottom: 1px solid $border-botoom;
