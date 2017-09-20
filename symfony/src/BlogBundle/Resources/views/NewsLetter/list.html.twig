@@ -84,7 +84,6 @@
                         <div class="col-3-of-4 col-newsletter-right">
                             <a href="#" class="wrap-preview-newsletter" id="preview-newsletter">
                                 <iframe id="preview-newsletter" src="/newsletters/1/index.html" class="preview-newsletter">
-
                                 </iframe>
 
                             </a>
@@ -106,8 +105,7 @@
     <script type="text/javascript">
 
         function actuNews(idNews)  {
-            let url = "/newsletters/" + idNews + "/index.html";
-            $("iframe.preview-newsletter").attr('src', url);
+            $("iframe.preview-newsletter").attr('src', "/newsletters/" + idNews + "/index.html");
         }
 
     </script>
