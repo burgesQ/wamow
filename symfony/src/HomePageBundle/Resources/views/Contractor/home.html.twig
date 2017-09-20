@@ -81,9 +81,8 @@
                     {#</div>#}
                 </div>
                 <div class="row-no-margins text-center">
-                    <a href="#" class="scroll-bottom">
+                    <a class="scroll-bottom" onclick="smoothScroll()">
                         <i class="fa fa-chevron-down"></i>
-                        {#chevron bugz#}
                     </a>
                 </div>
                 <div class="wrap-parteners">
@@ -95,7 +94,7 @@
         </div>
     </section>
 
-    <section class="section section-mid section-mid-consultants">
+    <section class="section section-mid section-mid-consultants" id="there">
         <div class="container content">
             <div class="container-content">
                 <h1 class="mid-title">{{ 'home.contractor.howdoesitwork' | trans }}</h1>
@@ -217,4 +216,19 @@
     </section>
     </body>
 
+{% endblock %}
+
+
+{% block javascripts %}
+
+    {{ parent() }}
+    <script type="text/javascript">
+
+        function smoothScroll() {
+            $('html, body').animate({
+                scrollTop: $("#there").offset().top
+            }, 1500);
+        }
+
+    </script>
 {% endblock %}
