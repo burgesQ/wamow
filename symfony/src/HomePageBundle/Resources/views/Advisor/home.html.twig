@@ -98,13 +98,13 @@
                     </div>
                 </div>
                 <div class="row-no-margins text-center">
-                    <a href="#footer" class="scroll-bottom">
+                    <a class="scroll-bottom" onclick="smoothScroll()">
                         <i class="fa fa-chevron-down"></i>
                     </a>
                 </div>
                 <div class="wrap-parteners">
                     <a href="#" class="wrap-img-parteners"><!-- Official logo -->
-                        <img src="{{ asset('/images/logos-clients.png') }}" onError="this.style.display='none';"
+                        <img src="{{ asset('images/logos-clients.png') }}" onError="this.style.display='none';"
                              alt="logo"/>
                     </a>
                 </div>
@@ -113,7 +113,7 @@
     </section>
 
 
-    <section class="section section-mid">
+    <section class="section section-mid" id="there">
         <div class="container content">
             <div class="container-content">
                 <h1 class="mid-title">{{ 'home.advisor.howdoesitwork' | trans }}</h1>
@@ -187,4 +187,18 @@
     </section>
     </body>
 
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+    <script type="text/javascript">
+
+        function smoothScroll() {
+            $('html, body').animate({
+                scrollTop: $("#there").offset().top
+            }, 1500);
+        }
+
+    </script>
 {% endblock %}

@@ -51,6 +51,7 @@ twig:
         locales: "%app_locales_array%"
         email_contact: "%email_contact%"
         news_url: "%news_url%"
+        email_press: "%email_press%"
 
 services:
     twig.extension.text:

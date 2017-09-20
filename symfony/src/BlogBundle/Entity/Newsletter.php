@@ -60,9 +60,9 @@ class Newsletter
     private $publishedDate;
 
     /**
-     * @var int
+     * @var float
      *
-     * @ORM\Column(name="number", type="integer", nullable=false)
+     * @ORM\Column(name="number", type="float", nullable=false)
      */
     private $number;
 
@@ -243,7 +243,7 @@ class Newsletter
 
     /**
      * Get number
-     * @return integer
+     * @return float
      */
     public function getNumber()
     {
@@ -253,7 +253,7 @@ class Newsletter
     /**
      * Set number
      *
-     * @param integer $number
+     * @param float $number
      *
      * @return Newsletter
      */
