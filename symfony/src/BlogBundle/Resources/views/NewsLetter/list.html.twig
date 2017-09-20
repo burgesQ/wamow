@@ -29,12 +29,10 @@
                         </div>
 
                         <div class="col-1-of-3 wrap-navbar-right">
-
                             {#<a href="{{ path('fos_user_security_login') }}"#}
                                {#class="button btn btn-right">{{ 'home.advisor.login' | trans }}</a>#}
                             {#<a href="{{ path('fos_user_registration_register_expert') }}"#}
                                {#class="button btn btn-right btn-ghost">{{ 'home.advisor.signup' | trans }}</a>#}
-
                         </div>
                     </div>
                 </nav><!-- End Navbar -->
@@ -68,14 +66,8 @@
                                         {{ oneNewsletter.number }}. {{ oneNewsletter.preTitle }}
                                     </h2>
                                     {% set article = oneNewsletter.articles | first %}
-                                    {#<a href="{{ path('newsletter_show', {'id': oneNewsletter.number}) }}" class="wrap-preview-newsletter">#}
-                                    {#<a href="http://consultants.wantmore.work/newsletters/{{ oneNewsletter.number }}/index.html" class="wrap-preview-newsletter">#}
                                     <a href="/newsletters/{{ oneNewsletter.number }}/index.html" class="wrap-preview-newsletter">
-                                        {% if article != false %}
-                                            <img src={{ article.urlCover }} alt={{ oneNewsletter.title }} class="newsletter-left-img">
-                                        {% else %}
                                             <img src={{ oneNewsletter.urlCover }} alt={{ oneNewsletter.title }} class="newsletter-left-img">
-                                        {% endif %}
                                     </a>
                                 </div>
                             {% endfor %}

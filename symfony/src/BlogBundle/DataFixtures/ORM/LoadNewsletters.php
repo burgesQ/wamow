@@ -51,12 +51,9 @@ class LoadNewsletters extends AbstractFixture implements OrderedFixtureInterface
      */
     private function createNewsletterFromJson($manager, $oneNews)
     {
-        // init the number for the newsletter
-        static $i = 1;
-
         // create a newsletter from json
         $newNews = new Newsletter(
-            $i,
+            $oneNews->number,
             $oneNews->preTitle,
             $oneNews->title,
             new \DateTime($oneNews->postDate),
@@ -71,9 +68,6 @@ class LoadNewsletters extends AbstractFixture implements OrderedFixtureInterface
         foreach ($oneNews->articles as $oneArticle) {
             $this->createArticleFromJson($manager, $oneArticle, $newNews);
         }
-
-        // increase the id for next newsletter
-        $i += 1;
     }
 
     /**
