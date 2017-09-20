@@ -23,7 +23,7 @@
 
                 <h1 class="top-title">{{ 'about.title' | trans }}</h1>
                 <div class="row-no-margins text-center">
-                    <a href="#about" class="scroll-bottom">
+                    <a class="scroll-bottom" onclick="smoothScroll()">
                         <i class="fa fa-chevron-down"></i>
                         {# chevron isn't working #}
                     </a>
@@ -44,14 +44,14 @@
             </div>
         </div>
         <div class="container content">
-            <div class="container-content">
+            <div class="container-content" id="the_team">
                 <h1 class="mid-title">{{ 'about.team' | trans }}</h1>
                 <div class="row-no-margins row-s text-center">
 
                     <div class="col-3-of-12 wrap-member">
                         <img src="{{ asset('images/David.jpg') }}" alt=""/>
                         <div class="about-social-media">
-                            <h4>David Melki Co-Founder - CEO</h4>
+                            <h4>David Melki <br>Co-Founder - CEO</h4>
                             {#<a href="linkedin.com" class="social-media">#}
                                 {#<i class="fa fa-linkedin" aria-hidden="true"></i>#}
                             {#</a>#}
@@ -125,9 +125,9 @@
                             {#<a href="linkedin.com" class="social-media">#}
                                 {#<i class="fa fa-linkedin" aria-hidden="true"></i>#}
                             {#</a>#}
-                            {#<a href="mailto:contact@wm.work" target="_top" class="social-media">#}
-                                {#<i class="fa fa-envelope" aria-hidden="true"></i>#}
-                            {#</a>#}
+                            <a href="mailto:alexandre@wantmore.work" target="_top" class="social-media">
+                                <i class="icon icon--email" aria-hidden="true"></i>
+                            </a>
                         </div>
                     </div>
 
@@ -138,9 +138,9 @@
                             {#<a href="linkedin.com" class="social-media">#}
                                 {#<i class="fa fa-linkedin" aria-hidden="true"></i>#}
                             {#</a>#}
-                            {#<a href="mailto:contact@wm.work" target="_top" class="social-media">#}
-                                {#<i class="fa fa-envelope" aria-hidden="true"></i>#}
-                            {#</a>#}
+                            <a href="mailto:julien@wantmore.work" target="_top" class="social-media">
+                                <i class="icon icon--email" aria-hidden="true"></i>
+                            </a>
                         </div>
                     </div>
 
@@ -156,4 +156,19 @@
     </section>
     </body>
 
+{% endblock %}
+
+
+{% block javascripts %}
+
+    {{ parent() }}
+    <script type="text/javascript">
+
+        function smoothScroll() {
+            $('html, body').animate({
+                scrollTop: $("#the_team").offset().top
+            }, 1500);
+        }
+
+    </script>
 {% endblock %}
