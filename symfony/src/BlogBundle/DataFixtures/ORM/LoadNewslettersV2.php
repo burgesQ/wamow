@@ -10,7 +10,7 @@ use BlogBundle\Entity\Newsletter;
 use BlogBundle\Entity\Article;
 use BlogBundle\Entity\Comment;
 
-class LoadNewsletters extends AbstractFixture implements OrderedFixtureInterface
+class LoadNewslettersV2 extends AbstractFixture implements OrderedFixtureInterface
 {
     /**
      * @param ObjectManager $manager

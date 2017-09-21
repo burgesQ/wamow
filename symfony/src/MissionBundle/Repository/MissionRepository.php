@@ -158,7 +158,7 @@ class MissionRepository extends EntityRepository
         ;
 
 //        debug country selection
-//        dump($subQb->getQuery()->getResult());
+//        dump($subQb->getQuery());
 //        die;
 
 
@@ -176,9 +176,6 @@ class MissionRepository extends EntityRepository
             ->andWhere("pe = :professionalExpertise OR bp = :businessPractice")
             ->andWhere("((u.dailyFeesMin + u.dailyFeesMax)/2.0) <= :missionBudget")
         ;
-        if ($mission->getTelecommuting()) {
-            $qb->andWhere("u.remoteWork = 1 OR :missionCountry = (" . $subQb . ")");
-        }
 
         $parameters = [
             "userRoles" => "a:1:{i:0;s:12:\"ROLE_ADVISOR\";}",
@@ -186,9 +183,17 @@ class MissionRepository extends EntityRepository
             "professionalExpertise" => $mission->getProfessionalExpertise(),
             "businessPractice" => $mission->getBusinessPractice(),
             "missionBudget" => $mission->getPrice(),
-            "userStatus" => User::REGISTER_NO_STEP,
-            "missionCountry" => $mission->getAddress()->getCountry()
+            "userStatus" => User::REGISTER_NO_STEP
         ];
+
+
+        if ($mission->getTelecommuting()) {
+            $qb->andWhere("u.remoteWork = 1 OR :missionCountry = (" . $subQb . ")");
+            $parameters += ["missionCountry" => $mission->getAddress()->getCountry()];
+        }
+
+//        debug parameters
+//        dump($parameters);
 
         $qb->setParameters($parameters);
         $qb->groupBy("u.id");
