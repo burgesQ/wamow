@@ -141,8 +141,28 @@ class MissionRepository extends EntityRepository
         return $query->getResult();
     }
 
-    public function findUsersByMission($mission)
+    /**
+     * @param Mission $mission
+     * @return array
+     */
+    public function findUsersByMission(Mission $mission)
     {
+
+//        query for the country
+        $subQb = $this->_em->createQueryBuilder()
+            ->select('a.country')
+            ->from('ToolsBundle:Address', 'a')
+            ->where('a.user = u.id')
+            ->orderBy('a.id', 'desc')
+            ->setMaxResults(1)
+        ;
+
+//        debug country selection
+//        dump($subQb->getQuery()->getResult());
+//        die;
+
+
+//      main query
         $qb = $this->_em->createQueryBuilder()
             ->select('u')
             ->from('UserBundle:User', 'u')
@@ -157,20 +177,26 @@ class MissionRepository extends EntityRepository
             ->andWhere("((u.dailyFeesMin + u.dailyFeesMax)/2.0) <= :missionBudget")
         ;
         if ($mission->getTelecommuting()) {
-            $qb->andWhere("u.remoteWork = 1");
+            $qb->andWhere("u.remoteWork = 1 OR :missionCountry = (" . $subQb . ")");
         }
 
-        $parameters = array(
+        $parameters = [
             "userRoles" => "a:1:{i:0;s:12:\"ROLE_ADVISOR\";}",
             "languageIds" => $mission->getLanguages()->toArray(),
             "professionalExpertise" => $mission->getProfessionalExpertise(),
             "businessPractice" => $mission->getBusinessPractice(),
             "missionBudget" => $mission->getPrice(),
-            "userStatus" => User::REGISTER_NO_STEP
-        );
+            "userStatus" => User::REGISTER_NO_STEP,
+            "missionCountry" => $mission->getAddress()->getCountry()
+        ];
+
         $qb->setParameters($parameters);
         $qb->groupBy("u.id");
         $qb->orderBy("u.id", "asc");
+
+//        debug query
+//        dump($qb->getQuery()->getResult());
+//        die;
 
         return $qb->getQuery()->getResult();
     }

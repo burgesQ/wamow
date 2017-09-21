@@ -67,7 +67,7 @@ class ProfileController extends Controller
         ) {
             return $this->redirectToRoute($url);
         }
-
+        $trans     = $this->get('translator');
         $em        = $this->getDoctrine()->getManager();
         $image     = new ProfilePicture();
         $arrayData = [
@@ -89,6 +89,9 @@ class ProfileController extends Controller
 
         if ($form->handleRequest($request)->isSubmitted() && $form->isValid()) {
 
+            if ($form->get('user')->get('phone')->get('number')->getData() === null) {
+                $form->get('user')->get('phone')->addError(new FormError($trans->trans('error.phone.please_fill', [], 'tools')));
+            } else {
                 $user->setFirstName(ucwords($user->getFirstName()));
                 $user->setLastName(ucwords($user->getLastName()));
 
@@ -103,6 +106,7 @@ class ProfileController extends Controller
 
                 return $this->redirectToRoute('user_profile_show');
             }
+        }
 
         return $this->render('UserBundle:Profile:edit.html.twig', [
             'form' => $form->createView(),
