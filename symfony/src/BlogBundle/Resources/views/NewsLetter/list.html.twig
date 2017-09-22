@@ -29,12 +29,10 @@
                         </div>
 
                         <div class="col-1-of-3 wrap-navbar-right">
-
                             {#<a href="{{ path('fos_user_security_login') }}"#}
                                {#class="button btn btn-right">{{ 'home.advisor.login' | trans }}</a>#}
                             {#<a href="{{ path('fos_user_registration_register_expert') }}"#}
                                {#class="button btn btn-right btn-ghost">{{ 'home.advisor.signup' | trans }}</a>#}
-
                         </div>
                     </div>
                 </nav><!-- End Navbar -->
@@ -50,13 +48,12 @@
                         <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
                     <![endif]-->
 
-                    <div class="row-no-margins">
+                    <div class="row-no-margins" style="overflow: hidden">
 
                         <div class="col-1-of-4 col-newsletter-left">
                             <div class="wrap-newsletter-left-title">
                                 <h1 class="newsletter-left-title">
                                     Newletter
-                                    {# Don't know why #}
                                     {#{{ 'newsletter.view.newsletter.what'|trans({}, "tools") }}#}
                                 </h1>
                             </div>
@@ -65,28 +62,22 @@
                                     <h4>
                                         {{ oneNewsletter.publishedDate|date('m/d/Y') }}
                                     </h4>
-                                    <h2>
-                                        {{ loop.index }}. {{ oneNewsletter.preTitle }}
+                                    <h2 onclick="actuNews('{{ oneNewsletter.number }}')">
+                                        {{ oneNewsletter.number }}. {{ oneNewsletter.preTitle }}
                                     </h2>
                                     {% set article = oneNewsletter.articles | first %}
-                                    {#<a href="{{ path('newsletter_show', {'id': oneNewsletter.number}) }}" class="wrap-preview-newsletter">#}
-                                    {#<a href="http://consultants.wantmore.work/newsletters/{{ oneNewsletter.number }}/index.html" class="wrap-preview-newsletter">#}
                                     <a href="/newsletters/{{ oneNewsletter.number }}/index.html" class="wrap-preview-newsletter">
-                                        {% if article != false %}
-                                            <img src={{ article.urlCover }} alt={{ oneNewsletter.title }} class="newsletter-left-img">
-                                        {% else %}
                                             <img src={{ oneNewsletter.urlCover }} alt={{ oneNewsletter.title }} class="newsletter-left-img">
-                                            {#{{ oneNewsletter.urlCover }}#}
-                                        {% endif %}
                                     </a>
                                 </div>
                             {% endfor %}
                         </div>
 
                         <div class="col-3-of-4 col-newsletter-right">
-                            <a href="#" class="wrap-preview-newsletter" id="newsletter-1"><!-- Official logo -->
-                                <img src="{{ asset('images/preview-newsletter1.png') }}" onError="this.style.display='none';"
-                                     alt="preview newsletter" class="preview-newsletter"/>
+                            <a href="#" class="wrap-preview-newsletter" id="preview-newsletter">
+                                <iframe id="preview-newsletter" src="/newsletters/1/index.html" class="preview-newsletter">
+                                </iframe>
+
                             </a>
                         </div>
 
@@ -98,4 +89,17 @@
 
     </section>
     </body>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+
+        function actuNews(idNews)  {
+            $("iframe.preview-newsletter").attr('src', "/newsletters/" + idNews + "/index.html");
+        }
+
+    </script>
+
 {% endblock %}

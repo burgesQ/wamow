@@ -15,7 +15,11 @@ class LoadContinent extends AbstractFixture implements OrderedFixtureInterface
             'continent.emea',
             'continent.south_america',
             'continent.north_america',
-            'continent.asia'
+            'continent.asia',
+            'continent.africa',
+            'continent.eurasia',
+            'continent.middle_east'
+
         ];
 
         foreach ($names as $name) {
