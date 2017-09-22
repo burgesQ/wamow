@@ -30,8 +30,7 @@ class NewsletterController extends Controller
      */
     public function showAction($id)
     {
-        return $this->redirect($this->container->getParameter('news_url') . 'newsletters/' . $id . '/index.html');
-
+//        return $this->redirect($this->container->getParameter('news_url') . 'newsletters/' . $id . '/index.html');
 //        if (!($newsletter = $this->getDoctrine()->getRepository('BlogBundle:Newsletter')
 //                ->findOneBy(['number' => $id])) ||
 //            $newsletter->getPublishedDate > new \DateTime())
@@ -40,7 +39,7 @@ class NewsletterController extends Controller
 //        $articles = $this->getDoctrine()->getRepository('BlogBundle:Article')
 //            ->findBy(['newsletter' => $newsletter]);
 //
-//        return $this->render('@Blog/NewsLetter/show.html.twig', [
+//      return $this->render('@Blog/NewsLetter/show.html.twig', [
 //            'newsletter' => $newsletter,
 //            'articles'   => $articles
 //        ]);
