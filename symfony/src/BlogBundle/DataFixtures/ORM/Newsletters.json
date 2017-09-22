@@ -1,9 +1,10 @@
 {
   "first": {
+    "number": 1,
     "postDate": "06/08/2016",
     "preTitle": "End Of Full-Time Contract?",
     "title": "THE END OF FULL-TIME CONTRACT?",
-    "urlCover": "http://consultants.wantmore.work/wp-content/uploads/2016/05/1-150x150.png",
+    "urlCover": "http://consultants.wantmore.work/newsletters/1/csltnts/1/edito.png",
     "articles": {
       "one": {
         "url": "platforms-an-amazing-opportunity-for-the-creative-class",
@@ -79,10 +80,11 @@
   },
 
   "second": {
+    "number": 2,
     "postDate": "06/21/2016",
     "preTitle": "Evolution Of Consulting",
     "title": "THE EVOLUTION OF CONSULTING",
-    "urlCover": "http://consultants.wantmore.work/wp-content/uploads/2016/05/2-150x150.png",
+    "urlCover": "http://consultants.wantmore.work/newsletters/2/csltnts/2/edito.png",
     "articles": {
       "one": {
         "url": "consulting-will-never-be-the-same-again",
@@ -158,10 +160,11 @@
   },
 
   "third": {
+    "number": 3,
     "postDate": "06/27/2016",
     "preTitle": "Grandpas Unchained!",
     "title": "GRANDPAS UNCHAINED!",
-    "urlCover": "http://consultants.wantmore.work/wp-content/uploads/2016/05/3-150x150.png",
+    "urlCover": "http://consultants.wantmore.work/newsletters/3/csltnts/3/carfoc.png",
     "articles": {
       "one": {
         "url": "people-over-45-will-soon-have-their-revenge",
@@ -245,10 +248,11 @@
   },
 
   "fourth": {
+    "number": 4,
     "postDate": "07/05/2016",
     "preTitle": "Tune Up Your School!",
     "title": "TUNE UP YOUR SCHOOL!",
-    "urlCover": "http://consultants.wantmore.work/wp-content/uploads/2016/05/4-150x150.png",
+    "urlCover": "http://consultants.wantmore.work/newsletters/4/csltnts/4/edito.png",
     "articles": {
       "one": {
         "url": "lets-have-a-look-on-schools-2-0",
@@ -324,10 +328,11 @@
   },
 
   "fifth": {
+    "number": 5,
     "postDate": "07/12/2016",
     "preTitle": "Please Yourself!",
     "title": "PLEASE YOURSELF!",
-    "urlCover": "http://consultants.wantmore.work/wp-content/uploads/2016/05/5-150x150.png",
+    "urlCover": "http://consultants.wantmore.work/newsletters/5/csltnts/5/edito.png",
     "articles": {
       "one": {
         "url": "stop-being-swamped",
@@ -425,10 +430,11 @@
   },
 
   "sixth": {
+    "number": 6,
     "postDate": "07/19/2016",
     "preTitle": "Nomadism 2.0 Part1",
     "title": "NOMADISM 2.0 PART1: KEEP MOVING!<br>Part 2 will be released in october, stay tuned!",
-    "urlCover": "http://consultants.wantmore.work/wp-content/uploads/2016/05/6-150x150.png",
+    "urlCover": "http://consultants.wantmore.work/newsletters/6/csltnts/6/edito.png",
     "articles": {
       "one": {
         "url": "is-it-really-possible-to-work-from-everywhere",
@@ -504,10 +510,11 @@
   },
 
   "seventh": {
+    "number": 7,
     "postDate": "07/26/2016",
     "preTitle": "Tune Up Yourself",
     "title": "TUNE UP YOURSELF!",
-    "urlCover": "http://consultants.wantmore.work/wp-content/uploads/2016/05/7-150x150.png",
+    "urlCover": "http://consultants.wantmore.work/newsletters/7/csltnts/7/edito.png",
     "articles": {
       "one": {
         "url": "lets-have-a-look-at-new-trainings",
@@ -583,10 +590,11 @@
   },
 
   "eighth": {
+    "number": 8,
     "postDate": "08/02/2016",
     "preTitle": "Unplug!",
     "title": "UNPLUG!",
-    "urlCover": "http://consultants.wantmore.work/wp-content/uploads/2016/05/8-150x150.png",
+    "urlCover": "http://consultants.wantmore.work/newsletters/8/csltnts/8/edito.png",
     "articles": {
       "one": {
         "url": "how-to-unplug-from-work-this-summer",
@@ -662,10 +670,11 @@
   },
 
   "ninth": {
+    "number":  9,
     "postDate": "08/30/2016",
     "preTitle": "Opportunity Of Platforms",
     "title": "THE OPPORTUNITY OF PLATFORMS",
-    "urlCover": "http://consultants.wantmore.work/wp-content/uploads/2016/05/9-150x150.png",
+    "urlCover": "http://consultants.wantmore.work/newsletters/9/csltnts/9/edito.png",
     "articles": {
       "one": {
         "url": "platforms-an-amazing-opportunity-for-the-creative-class",
@@ -741,10 +750,11 @@
   },
 
   "tenth": {
+    "number":  10,
     "postDate": "09/13/2016",
     "preTitle": "Into The Void",
     "title": "INTO THE VOID",
-    "urlCover": "http://consultants.wantmore.work/wp-content/uploads/2016/05/10-150x150.png",
+    "urlCover": "http://consultants.wantmore.work/newsletters/10/csltnts/10/edito.png",
     "articles": {
       "one": {
         "url": "the-fertile-void",
@@ -820,10 +830,11 @@
   },
 
   "eleventh": {
+    "number":  11,
     "postDate": "09/27/2016",
     "preTitle": "Go Back To Work!",
     "title": "GO BACK TO WORK!",
-    "urlCover": "http://consultants.wantmore.work/wp-content/uploads/2016/05/11-150x150.png",
+    "urlCover": "http://consultants.wantmore.work/newsletters/11/csltnts/11/edito.png",
     "articles": {
       "one": {
         "url": "how-to-deal-with-post-vacation-email",
@@ -899,10 +910,11 @@
   },
 
   "twelfth": {
+    "number":  12,
     "postDate": "10/08/2016",
     "preTitle": "Get Connected",
     "title": "GE TCONNECTED!",
-    "urlCover": "http://consultants.wantmore.work/wp-content/uploads/2016/05/13-150x150.png",
+    "urlCover": "http://consultants.wantmore.work/newsletters/12/csltnts/12/edito.png",
     "articles": {
       "one": {
         "url": "the-transformation-of-online-networks",
@@ -978,10 +990,11 @@
   },
 
   "thirteenth": {
+    "number":  13,
     "postDate": "10/25/2016",
     "preTitle": "Female Dynamics!",
     "title": "HAVE A LOOK AT FEMALE DYNAMICS!",
-    "urlCover": "http://consultants.wantmore.work/wp-content/uploads/2016/05/13-150x150.png",
+    "urlCover": "http://consultants.wantmore.work/newsletters/13/csltnts/13/edito.png",
     "articles": {
       "one": {
         "url": "female-dynamics",
@@ -1057,10 +1070,11 @@
   },
 
   "fourteenth": {
+    "number":  14,
     "postDate": "11/08/2016",
     "preTitle": "Young People",
     "title": "YOUNG PEOPLE ARE COMING!",
-    "urlCover": "http://consultants.wantmore.work/wp-content/uploads/2016/11/14-150x150.png",
+    "urlCover": "http://consultants.wantmore.work/newsletters/14/csltnts/14/edito.png",
     "articles": {
       "one": {
         "url": "youth-and-companies",
@@ -1136,10 +1150,11 @@
   },
 
   "fifteenth": {
+    "number":  15,
     "postDate": "01/24/2017",
     "preTitle": "Break the Wall!",
     "title": "BREAK THE WALL!",
-    "urlCover": "http://consultants.wantmore.work/wp-content/uploads/2016/05/15-150x150.png",
+    "urlCover": "http://consultants.wantmore.work/newsletters/15/csltnts/15/edito.png",
     "articles": {
       "one": {
         "url": "will-new-technology-organizations-and-culture-really-bring-down-the-hr-department",
@@ -1215,10 +1230,11 @@
   },
 
   "sixteenth": {
+    "number":  16,
     "postDate": "02/07/2017",
     "preTitle": "Content is King",
     "title": "CONTENT IS KING",
-    "urlCover": "http://consultants.wantmore.work/wp-content/uploads/2016/05/16-150x150.png",
+    "urlCover": "http://consultants.wantmore.work/newsletters/17/csltnts/17/edito.png",
     "articles": {
       "one": {
         "url": "content-is-king-a-guide-to-understanding-content-marketing",
@@ -1294,10 +1310,11 @@
   },
 
   "seventeenth": {
+    "number":  17,
     "postDate": "02/29/2017",
     "preTitle": "Slow Down",
     "title": "SLOW DOWN AND GET INSPIRED",
-    "urlCover": "http://consultants.wantmore.work/wp-content/uploads/2016/05/17-150x150.png",
+    "urlCover": "http://consultants.wantmore.work/newsletters/17/csltnts/17/edito.png",
     "articles": {
       "one": {
         "url": "the-new-american-working-class-a-source-of-inspiration-for-all-digital-labourers",
@@ -1373,10 +1390,11 @@
   },
 
   "eighteenth": {
+    "number":  18,
     "postDate": "03/28/2017",
     "preTitle": "Crossing Cultural Bridges",
     "title": "CROSSING CULTURAL BRIDGES",
-    "urlCover": "http://consultants.wantmore.work/wp-content/uploads/2016/05/18-150x150.png",
+    "urlCover": "http://consultants.wantmore.work/newsletters/18/csltnts/18/edito.png",
     "articles": {
       "one": {
         "url": "cultures-in-business-clash-or-asset",
@@ -1449,7 +1467,66 @@
         "comments": { }
       }
     }
-  }
+  },
 
+  "nineteenth": {
+    "number": 19,
+    "postDate": "04/26/2017",
+    "preTitle": "Make Business Make Art",
+    "title": "MAKE BUSINESS MAKE ART",
+    "urlCover": "http://consultants.wantmore.work/newsletters/19/csltnts/19/edito.png",
+    "articles": {
+    }
+  },
+
+  "twentieth": {
+    "number": 20,
+    "postDate": "05/24/2017",
+    "preTitle": "Of Artificial Intelligence: 2017 – a business Odissey",
+    "title": "OF ARTIFICIAL INTELLIGENCE - 2017: A BUSINESS ODISSEY",
+    "urlCover": "http://consultants.wantmore.work/newsletters/20/csltnts/20/edito.png",
+    "articles": {
+    }
+  },
+
+  "twenty-first": {
+    "number": 20.2,
+    "postDate": "06/07/2017",
+    "preTitle": "Of Artificial Intelligence: 2017 – a business Odissey",
+    "title": "OF ARTIFICIAL INTELLIGENCE - 2017: A BUSINESS ODISSEY",
+    "urlCover": "http://consultants.wantmore.work/wp-content/uploads/2017/06/image001-1.png",
+    "articles": {
+    }
+  },
+
+  "twenty-two": {
+    "number": 21,
+    "postDate": "07/05/2017",
+    "preTitle": "Here are the Craftsmen! Craftsmanship as a way of work",
+    "title": "HERE ARE THE CRAFTSMEN! CRAFTMANSHIP AS A WAY OF WORK",
+    "urlCover": "http://consultants.wantmore.work/newsletters/21/csltnts/21/edito.png",
+    "articles": {
+    }
+  },
+
+  "twenty-three": {
+    "number": 21.2,
+    "postDate": "07/18/2017",
+    "preTitle": "Here are the Craftsmen! Craftsmanship as a way of work",
+    "title": "HERE ARE THE CRAFTSMEN! CRAFTSMANSHIP AS A WAY OF WORK",
+    "urlCover": "http://consultants.wantmore.work/wp-content/uploads/2017/07/header.jpg",
+    "articles": {
+    }
+  },
+
+  "twenty-four": {
+    "number": 22,
+    "postDate": "08/01/2017",
+    "preTitle": "Season’s Picks",
+    "title": "WANTMORE.WORK'S MEDLEY",
+    "urlCover": "http://consultants.wantmore.work/newsletters/22/csltnts/22/edito.png",
+    "articles": {
+    }
+  }
 
 }
