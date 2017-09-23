@@ -83,10 +83,10 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: "%mailer_transport%"
-#    host:      "%mailer_host%" # uncomment if you wanna use something else than google
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
+#    transport: "%mailer_transport%"
+    host:      "%mailer_host%" # uncomment if you wanna use something else than google
+#    username:  "%mailer_user%"
+#    password:  "%mailer_password%"
     spool:     { type: memory }
 
 # FOS UserBundle Configuration
@@ -110,10 +110,10 @@ fos_user:
         email:
             template:   UserBundle:Reset:password_resetting.email.twig
             from_email:
-                address:        server@mail.com # put a valid mail address
+                address:        "%email_sender"
                 sender_name:    Reset link
     from_email:
-        address:        server@mail.com # put a valid mail address
+        address:        "%email_sender%" # put a valid mail address
         sender_name:    Activation link
 
 

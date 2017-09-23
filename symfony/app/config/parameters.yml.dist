@@ -37,8 +37,8 @@ parameters:
     # Email Sender
     email_sender:       want@more.work
     email_pre_register: want@more.work
-    email_contact:      contact@wantmore.work
-    email_press:        press@wantmore.work
+    email_contact:      contact@wamow.co
+    email_press:        press@wamow.co
 
     # Stripe
     stripe_publishable_key: pk_test_6pRNASCoBOKtIshFeQd4XMUh
