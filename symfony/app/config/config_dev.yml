@@ -11,12 +11,12 @@ web_profiler:
     toolbar: true
     intercept_redirects: false
 
-# swiftmailer:
-#    disable_delivery: true
+swiftmailer:
+    disable_delivery: true
 # Swif conf for use w/ gmail in local
 #     transport: gmail
-#     username:  qutn.burgess@gmail.com
-#     password:  galaxysIII
+#     username:  @ddress
+#     password:  password
 
 monolog:
     handlers:
