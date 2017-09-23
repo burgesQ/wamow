@@ -88,11 +88,11 @@ legends:
     title: |
         75% des experts enregistrés sur Consultants.wantmore.work répondent à une première proposition de mission sous 5 jours.
     content: |
-        The main mission of Consultants.WantMore.Work is matching corporations in need of consulting with experts presenting the initial proposal for a long-lasting solution. 
+        The main mission of wamow.co is matching corporations in need of consulting with experts presenting the initial proposal for a long-lasting solution.
         We will give you the opportunity to interact with these corporations and highlight your know-how and expertise through simple and direct dialogue. 
         Please take the 7 minutes necessary to complete the sign up and access a multitude of missions.
         Creating your profile is simple: you only need your First and Last Name, email address, country of residence, spoken languages and Resume. You can also sign up with LinkedIn. 
-        In order for your profile to be 100% complete you must link your Consultants.WantMore.Work account to LinkedIn and upload your Resume. You will not be able to do so once the sign up is complete. 
+        In order for your profile to be 100% complete you must link your wamow.co account to LinkedIn and upload your Resume. You will not be able to do so once the sign up is complete.
         
         The more precise you profile is, the higher the chance to be contacted!
     currency: ''
@@ -107,7 +107,7 @@ legends:
     other: Other
 
 mouseover:
-    linkedin: In order for your profile to be 100% complete you must link your Consultants.WantMore.Work account to LinkedIn and upload your Resume.
+    linkedin: In order for your profile to be 100% complete you must link your wamow.co account to LinkedIn and upload your Resume.
     country: We need to know your country of residence and your availability to travel to introduce to you the possibility of presence on site and travelling for future missions
     language: The languages you speak (professionally) for communication and outcome purposes.
     strenght: In order for your profile to be  100% complete you must upload a profile picture, link your account to LinkedIn and finish the sign up process.
@@ -176,13 +176,13 @@ home:
             second: "Build a world of opportunities"
         howdoesitwork: "How does it work?"
         start:
-            text: "Describe your issue and tell us about your project. If you wish, we’ll assist you defining your professional need. Consultants.wantmore.work will push your pitch to the best fitting experts."
+            text: "Describe your issue and tell us about your project. If you wish, we’ll assist you defining your professional need. wamow.co will push your pitch to the best fitting experts."
         play:
-            text: "You receive (initially) anonymous answers from experts in 72 hours. Use Consultants.wantmore.work to discuss and share information, in order to refine your pitch."
+            text: "You receive (initially) anonymous answers from experts in 72 hours. Use wamow.co to discuss and share information, in order to refine your pitch."
         improve:
             text: "Select the best 3 answers to gain access to the Experts’ identity. You can interview them in order to make a final choice. "
         pay:
-            text: "Payment is necessary to access Consultants.wantmore.work. "
+            text: "Payment is necessary to access wamow.co. "
         preregister:
             email: "Email"
             emergency_email: "Secondary email"
@@ -316,7 +316,7 @@ registration:
             Interact with your counter-part and highlight your know-how and expertise thanks to our simple and direct communication tool. 
             It takes 7 minutes to complete the sign up and access a multitude of missions.
             Creating your profile is simple: you only need your First and Last Name, email address, country of residence, spoken languages and Resume.<br>  
-            In order for your profile to be 100% complete you must link your Consultants.WantMore.Work account to LinkedIn. You will not be able to do so once the sign up is complete.
+            In order for your profile to be 100% complete you must link your wamow.co account to LinkedIn. You will not be able to do so once the sign up is complete.
             
             The more precise you profile is, the higher the chance to be contacted!"
             linkedinbutton: "Sign Up with LinkedIn"
@@ -338,7 +338,7 @@ registration:
             how_to_label: |
                 FIRST STEP
             how_to_text: |
-                Welcome to Consultants.WantMore.Work! 
+                Welcome to wamow.co!
                 It is important to build an accurate profile in order for us to push towards you pitches. This process is divided in 4 Steps. 
                 First Step: indicate the business sector(s) in which you have significant experience.
                 We provide you with 13 sectors to choose from. You may select multiple options.
@@ -542,7 +542,7 @@ mission:
             - Certification: you have the possibility to enrich your research with different certifications: you can either select one from the list we provide or create a new one.<br> 
             - Languages: this criteria is important in order to make sure we reach out to experts speaking the same language(s) necessary to establish a stable evolution of the mission.<br> 
             - Targeted Expertise: based on the information previously selected, the system offers you examples of documented expertise. Please select the one best fitting your research.<br> 
-            Having taken into consideration all the information provided, Consultants.WantMore.Work shows you the number of experts present in our database capable to deal with your issue as well as their average daily rates. You can change this average daily rate by establishing a limit. "
+            Having taken into consideration all the information provided, wamow.co shows you the number of experts present in our database capable to deal with your issue as well as their average daily rates. You can change this average daily rate by establishing a limit. "
             si_consult: IT Consulting
             organisation_consult: Organisation Consulting
 
@@ -557,7 +557,7 @@ mission:
             subtitle: ''
             hint: ""
             introduction: |
-                Consultants.Wantmore.Work is a BestAdvizor SAS brand, whose capital worth is 51.000 EUR
+                wamow.co is a BestAdvizor SAS brand, whose capital worth is 51.000 EUR
                 – RCS Paris 815 362 736 – Company Seat: 18b Avenue de Versailles 75016 Paris Offices: 18
                 Avenue Franklin D. Roosevelt 75008 Paris.
             person: I, the undersigned
@@ -579,7 +579,7 @@ mission:
             save_mod: Save modifications
             back: BACK
             share_pitch: Share The pitch
-            share: Distribute the following pitch to the expert community at Consultants.Wantmore.Work
+            share: Distribute the following pitch to the expert community at wamow.co
             reference: Distribute the name of the corporation as a reference
 
         label:
@@ -646,7 +646,7 @@ mission:
         
         shortlist_added: You are among the 3 best fitting Experts selected to continue the interaction about %title.
                          The client would like to learn more about your proposal.
-        my_selection_added: You have been chosen by the Corportation for the mission %title. The team at Consultants.wantmore.work send you their most sincere Congratulations  !
+        my_selection_added: You have been chosen by the Corportation for the mission %title. The team at wamow.co send you their most sincere Congratulations  !
         no_mission: "You have not published any mission yet! Create your first pitch!"
 
 ## Inbox
@@ -1021,19 +1021,19 @@ mails:
         Your password is: %password
         If you have not done so already, please take the time to complete your profile.
 
-        The team at Consultants.wantmore.work!"
+        The team at wamow.co!"
         advisor_new_password: " We confirm the creation of your account.
         Your password is: %password
         If you have not done so already, please take the time to complete your profile. That will boost your visibility!
 
-        The team at Consultants.wantmore.work!"
+        The team at wamow.co!"
 
     inbox:
         new_message_mission: Your message has been answerwed on the mission %title.
         new_pitcher: |
             An expert answered to your Pitch, %title.
             Link Log In
-            The team at Consultants.wantmore.work
+            The team at wamow.co
         link: Click here to check it.
         the_team: The team.
         link: "Go check it :"
@@ -1051,7 +1051,7 @@ mails:
             %title. Your pitch has been sent to thousands of experts in this field.
             Once one of them shows their interest you will be notified. Make sure you have activated your notifications!
 
-            The team at Consultants.wantmore.work
+            The team at wamow.co
         new_contractor: |
             Hello fName lName
 
@@ -1059,20 +1059,20 @@ mails:
             We have identified a new pitch you might be interested in: missionTitle
             Log In to our web site to check it.
 
-            The team at Consultants.wantmore.work.
+            The team at wamow.co.
         user_shortlisted: |
             Hello fName lName
 
 
             You are among the 3 best fitting Experts selected to continue the interaction about missionTitle.
             The client would like to learn more about your proposal.
-            The team at Consultants.wantmore.work
+            The team at wamow.co
         user_finalist: |
             Hello fName, lName,
 
             You have been chosen by the Corportation for the mission missionTitle.
             Link Log In
-            The team at Consultants.wantmore.work send you their most sincere Congratulations  !
+            The team at wamow.co send you their most sincere Congratulations  !
         no_shortlist: |
             Hello fName, lName,
 
@@ -1080,21 +1080,21 @@ mails:
             This is unfortunate considering its Please be ready for the next pitch that comes you way.
             Make sure you send your proposal sooner. To help with that, check if your email notifications are turned on.
 
-            The team at Consultants.wantmore.work
+            The team at wamow.co
         no_funalist: |
             Hello fName, lName,
 
             Unfortunately you have not been chosen to continue working on this mission, despite the quality of your profile.
             It will be for next time. Stay alert, other pitches might come your way!
 
-            The team at Consultants.wantmore.work
+            The team at wamow.co
         reset_password: |
             Hello uName !
 
             You may reset your password here
 
             Greetings,
-            The team at Consultants.wantmore.work
+            The team at wamow.co
 
 ## Payement template
 payment:
@@ -1109,7 +1109,7 @@ payment:
     card_number: Card Number
     pls_there: Subscribe There Please
     subscribe: Subscribe
-    help: I declare having read and agreed to consultants.wantmore.work's User Agreement. I hereby validate my registration by paying the annual fees of 240 euros (20 euroes x 12 months), tax exluded, to BestAdvizor, SAS - consultants.wantmore.work's managing firm. 
+    help: I declare having read and agreed to wamow.co's User Agreement. I hereby validate my registration by paying the annual fees of 240 euros (20 euroes x 12 months), tax exluded, to BestAdvizor, SAS - wamow.co's managing firm.
 
 ## NewsLetter template
 newsletter:
@@ -1184,12 +1184,12 @@ notification:
 about:
     title: About us
     team: Our team
-    content: "Consultants.WantMore.Work is the first automated business oriented match-making platform that offers the quality of human interaction combined with the power of digital growth. Consultants.WantMore.Work sets new standards to professional matchmaking online solutions oriented towards deal closing.<br>
-        Consultants.WantMore.Work is the best place on the web to present one’s need and the best place to emphasize one’s expertise through the proposal of a solution to the the counterpart’s need. We provide medium and small sized companies access to the same firepower that big groups enjoy.<br>
-        Thanks to its top quality algorithms and more than 30 years of ad hoc experience Consultants.WantMore.Work helps understand and present the key points of your need and find the experts able to guide you through the reformulation and the implementation of your business issue.<br>
+    content: "wamow.co is the first automated business oriented match-making platform that offers the quality of human interaction combined with the power of digital growth. wamow.co sets new standards to professional matchmaking online solutions oriented towards deal closing.<br>
+        wamow.co is the best place on the web to present one’s need and the best place to emphasize one’s expertise through the proposal of a solution to the the counterpart’s need. We provide medium and small sized companies access to the same firepower that big groups enjoy.<br>
+        Thanks to its top quality algorithms and more than 30 years of ad hoc experience wamow.co helps understand and present the key points of your need and find the experts able to guide you through the reformulation and the implementation of your business issue.<br>
         We are now at the intersection of two worlds, a work environment that changes for the long run, that of long careers within the same firm, that of mono-activity, that also of an income based on returns from the prestige of your degree.<br> We are entering a world made of multi-activities, a world in which technology can be your worst enemy, or your best ally.<br>
         It is our collective choice to shape such future for the worst or for the best.<br>
-        The three founders, experts in their business sectors, started from this observation. Consultants.WantMore.Work is a SaaS solution thought by the operationals for the operationals. <br>
+        The three founders, experts in their business sectors, started from this observation. wamow.co is a SaaS solution thought by the operationals for the operationals. <br>
         Our algorithms reformulate your issue, identify the most interesting experts and create simple ways of connecting people through an interface centered around parties’ comprehension and straightforwardness. We offer both time saving and financial gain by providing some key functions to the  support for non explicit needs in an environment in which the stakes of interaction are high.<br>
         No freelancing, just consulting !"
 
@@ -1232,20 +1232,20 @@ help:
         Question5: "Once I have submitted my profile, can I change the information provided?"
         Answer5: "No, you cannot. We remind all Experts that once you create your profile, you will no longer to change the information related to your previous experience. You will be, although, able to change your email, phone number, Country of Residence, Languages and Certifications."
         Question6: "How long do I have to wait for the first mission to be presented to me?"
-        Answer6: "75% of experts registered on Consultants.wantmore.work answer a first mission pitch under 5 days."
+        Answer6: "75% of experts registered on wamow.co answer a first mission pitch under 5 days."
         Question7: "Do I have to Pay?"
         Answer7: "When you receive the first pitch, you will have to subscribe to a monthly plan with a year long commitment."
         Question8: "What do I need to Sign Up?"
         Answer8: "Please pre-register on the Corporation’s Home page. One of our Representatives will contact you in under 48h to Sign you up and help you build your first pitch."
         Question9: "Do I need to pay in order to gain access to your services?"
-        Answer9: "Yes, you do. Payment is necessary to access Consultants.wantmore.work."
+        Answer9: "Yes, you do. Payment is necessary to access wamow.co."
         Question10: "How does it work ?"
         Answer10: "	Publish a pitch : we will assist you drafting your search for the perfect expert. The mission will then be presented to experts whose experience matches your search and its context.<br>
                 Check the proposals : you will be notified in real time about proposals from experts (up to 5 at a time). You can then communicate with the experts to better decribe your need and obtain a more detailed proposal.<br>
                 Select a proposal: you can select up to 3 experts and access their profiles. This will allow you to contine your interaction while having more information about your counterpart. This will provide enough material to base your final decision on."
         Question11: "How do I build my pitch?"
         Answer11: " Step 1:<br><br>
-                Consultants.wantmore.work identified the main consulting missions for you. Choose the one that better describes your issue. In order to present your issue and help you describe your need, we advise you to follow our plan :<br>
+                wamow.co identified the main consulting missions for you. Choose the one that better describes your issue. In order to present your issue and help you describe your need, we advise you to follow our plan :<br>
                 - describe the context in which your search fits best. It is important for the expert to be able to accurately identify it<br>
                 - portray what is at stake from your point of view<br>
                 - establish the objectives and define the scope(s) of the intervention, so that the expert can present you the start of a solution. <br>
@@ -1262,7 +1262,7 @@ help:
                 - Certification : you have the possibility to enrich your research with different certifications - you can either select one from the list we provide or create a new one.<br>
                 - Langues : this criteria is important in order to make sure we reach out to experts speaking the same language(s). This is necessary to establish a stable evolution of the mission.<br>
                 - Desiered Expertise : based on the information previously selected, the system offeres you examples of documented expertise. Please select the one best fitting your research. <br>
-                Having taken into consideration all the information provided, Consultants.wantmore.work shows you the number of experts present in our database capable to deal with your issue as well as their average daily rates. You can change this average daily rate by establishing a limit.<br><br>
+                Having taken into consideration all the information provided, wamow.co shows you the number of experts present in our database capable to deal with your issue as well as their average daily rates. You can change this average daily rate by establishing a limit.<br><br>
                 Step 4:<br><br>
                 - Pitch Review : Please check the accuracy of the inforamtion before publishing the pitch. You may edit the information previously provided during this review process. Once the pitch is published you will no longer be able to edit it.<br><br>
                 Step 5: <br><br>
