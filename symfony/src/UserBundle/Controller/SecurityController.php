@@ -22,11 +22,11 @@ class SecurityController extends BaseController
 
         /** @var $session Session */
         $session = $request->getSession();
-        $lastUsername = (null === $session) ? '' : $session->get(Security::LAST_USERNAME);
-        $user = $this->get('fos_user.user_manager')->findUserByEmail($lastUsername);
-        if ($lastUsername && $user && $user->getRoles()[0] == 'ROLE_CONTRACTOR') {
+
+        if ($session->getBag("attributes")->get('role') == "CONTRACTOR") {
             return $this->redirectToRoute('fos_user_security_login_contractor');
         }
+
 
         return $this->render('@FOSUser/Security/login.html.twig', $this->loginProcessAction($request));
     }
@@ -41,6 +41,10 @@ class SecurityController extends BaseController
         if ($this->getUser() !== null) {
             return $this->redirectToRoute('dashboard');
         }
+
+        /** @var $session Session */
+        $session = $request->getSession();
+        $session->getBag("attributes")->set('role', 'CONTRACTOR');
 
         return $this->render('@User/Security/login_contractor.html.twig', $this->loginProcessAction($request));
     }
@@ -58,7 +62,7 @@ class SecurityController extends BaseController
 
         $authErrorKey    = Security::AUTHENTICATION_ERROR;
         $lastUsernameKey = Security::LAST_USERNAME;
-
+        
         // get the error if any (works with forward and redirect -- see below)
         if ($request->attributes->has($authErrorKey)) {
             $error = $request->attributes->get($authErrorKey);

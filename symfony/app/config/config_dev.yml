@@ -9,9 +9,9 @@ framework:
 
 web_profiler:
     toolbar: true
-    intercept_redirects: true
+    intercept_redirects: false
 
-#swiftmailer:
+# swiftmailer:
 #    disable_delivery: true
 # Swif conf for use w/ gmail in local
 #     transport: gmail
