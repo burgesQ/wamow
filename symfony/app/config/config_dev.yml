@@ -13,6 +13,10 @@ web_profiler:
 
 swiftmailer:
     disable_delivery: true
+# Swif conf for use w/ gmail in local
+#     transport: gmail
+#     username:  qutn.burgess@gmail.com
+#     password:  galaxysIII
 
 monolog:
     handlers:
@@ -32,12 +36,6 @@ monolog:
         #chromephp:
         #    type:   chromephp
         #    level:  info
-
-# Swif conf for use w/ gmail in local
-# swiftmailer:
-#     transport: gmail
-#     username:  a gmail account
-#     password:  the password of the gmail
 
 twig:
     cache: false
