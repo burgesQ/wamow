@@ -11,8 +11,14 @@ hwi_oauth_redirect:
 easy_admin_bundle:
     resource: "@EasyAdminBundle/Controller/"
     type:     annotation
-    prefix:   /admin
-    
+    prefix:   /wamow-manager
+
+# BackLog
+easy_admin_bundle:
+    resource: "@EasyAdminBundle/Controller/"
+    type:     annotation
+    prefix:   /master-manager
+
 ## Local import
 bundles:
     resource: "./routing_v1.yml"

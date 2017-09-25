@@ -17,9 +17,13 @@ security:
         in_memory:
             memory:
                 users:
-                    admin:
-                        password: adminpass
+                    manager:
+                        password: "Q#457SFGR@FHI'wrt;swreye"
                         roles: 'ROLE_ADMIN'
+                    masterMind:
+                        password: "qeHCRTh%#^ghszdg0834534e"
+                        roles: 'ROLE_SUPER_ADMIN'
+
         fos_userbundle:
             id: fos_user.user_provider.username_email
 
@@ -29,8 +33,12 @@ security:
             security: false
 
         admin:
-            pattern: ^/admin
-            security: false
+            pattern: ^/wamow-manager
+            http_basic: ~
+
+        master_admin:
+            pattern: ^/master-manager
+            http_basic: ~
 
         main:
             pattern:                  ^/
@@ -66,4 +74,5 @@ security:
                 domain: ~ # Defaults to the current domain from $_SERVER
 
     access_control:
-        - { path: ^/admin }
+        - { path: ^/wamow-manager, roles: ROLE_ADMIN }
+        - { path: ^/master-manager, roles: ROLE_SUPER_ADMIN }
