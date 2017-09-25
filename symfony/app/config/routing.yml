@@ -14,7 +14,7 @@ easy_admin_bundle:
     prefix:   /wamow-manager
 
 # BackLog
-easy_admin_bundle:
+easy_admin_bundle_master:
     resource: "@EasyAdminBundle/Controller/"
     type:     annotation
     prefix:   /master-manager
