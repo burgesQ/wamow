@@ -19,7 +19,7 @@ security:
                 users:
                     manager:
                         password: "Q#457SFGR@FHI'wrt;swreye"
-                        roles: 'ROLE_ADMIN'
+                        roles: 'ROLE_SUPER_ADMIN'
                     masterMind:
                         password: "qeHCRTh%#^ghszdg0834534e"
                         roles: 'ROLE_SUPER_ADMIN'
@@ -34,8 +34,7 @@ security:
 
         admin:
             pattern: ^/wamow-manager
-#            http_basic: ~
-            security: false
+            http_basic: ~
 
         main:
             pattern:                  ^/
@@ -71,4 +70,4 @@ security:
                 domain: ~ # Defaults to the current domain from $_SERVER
 
     access_control:
-        - { path: ^/wamow-manager }
+        - { path: ^/wamow-manager, roles: "ROLE_SUPER_ADMIN" }
