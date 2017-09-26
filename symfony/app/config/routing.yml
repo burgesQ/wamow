@@ -13,12 +13,6 @@ easy_admin_bundle:
     type:     annotation
     prefix:   /wamow-manager
 
-# BackLog
-easy_admin_bundle_master:
-    resource: "@EasyAdminBundle/Controller/"
-    type:     annotation
-    prefix:   /master-manager
-
 ## Local import
 bundles:
     resource: "./routing_v1.yml"
