@@ -97,6 +97,9 @@ legends:
         work_experience: Voulez vous confirmer cette action? Une fois soumis cettes information ne sont plus modifiable.
         delete: Voulez vous confirmer cette action?
     other: Autre
+    pop_up:
+        check_spam: Un e-mail vous a ete envoye contenant votre mot de passe. Verifiez votre boite de reception et votre boite spam.
+        check_spam_title: Attention !
 
 mouseover:
     linkedin: Pour que votre profil soit complété à 100%, vous devez relier votre compte wamow.co à LinkedIn et télécharger votre CV.
