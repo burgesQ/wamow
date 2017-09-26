@@ -68,3 +68,18 @@
     </div>
 
 {% endblock %}
+
+
+{% block javascripts %}
+
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            swal({
+                title: "{{ 'legends.pop_up.check_spam_title' | trans }}",
+                text: "{{ 'legends.pop_up.check_spam' | trans }}"
+            });
+        });
+    </script>
+
+{% endblock %}
