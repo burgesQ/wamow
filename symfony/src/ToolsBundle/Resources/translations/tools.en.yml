@@ -538,6 +538,8 @@ mouseover:
 
 ## Common error
 error:
+    message:
+        url: You cannot send url
     page:
         common: The requested page couldn't be located. Check for any URL misspellings or
     forbidden: You have no access to this page

@@ -130,6 +130,8 @@ mouseover:
     
 ## Common error
 error:
+    message:
+        url: Vous ne pouvez pas envoyer d'addresse url.
     page:
         common: La page demandé est introuvable. Verrifiez láddress url ou
     forbidden: Vous n'avez pas accès à cette page
