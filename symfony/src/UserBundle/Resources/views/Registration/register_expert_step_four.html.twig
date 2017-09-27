@@ -79,14 +79,15 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
+
             $('#app_user_profile_submit').click(function (e, params) {
                 e.preventDefault();
 
                 swal({
                     title: "{{ 'user_agreement.title' | trans }}",
 
-                    html: "<div style='overflow-y: scroll'>"
-                    + "{{ 'user_agreement.content' | trans }}"
+                    html: "<div style='overflow-y: scroll; max-height: 500px; min-height: 300px;'>"
+                    + "{{ 'user_agreement.content' | trans | nl2br }}"
                     + "</div>",
                     showCancelButton: true,
                     confirmButtonColor: '#DD6B55',
