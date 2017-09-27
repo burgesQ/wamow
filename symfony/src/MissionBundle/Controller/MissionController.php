@@ -54,11 +54,12 @@ class MissionController extends Controller
             switch ($step->getPosition()) {
                 // if mission is step 1
                 case (1) :
-                    $userMissions = $userMissionRepo->findAllAtLeastThan($mission, UserMission::ONGOING);
+
+                    $userMissions = $userMissionRepo->findAllAtLeastThan($mission, UserMission::ONGOING, 5);
 
                     return $this->render('@Mission/Mission/Contractor/mission_all_advisor.html.twig', [
                         'mission'      => $mission,
-                        'interested'   => count($userMissions),
+                        'interested'   => count($userMissionRepo->findAllAtLeastThan($mission, UserMission::ONGOING)),
                         'shortlisted'  => count($userMissionRepo->findAllAtLeastThan($mission, UserMission::SHORTLIST)),
                         'userMissions' => $userMissions,
                         'prevMission'  => $prevMission,

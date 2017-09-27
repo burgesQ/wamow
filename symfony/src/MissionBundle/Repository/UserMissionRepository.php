@@ -81,7 +81,7 @@ class UserMissionRepository extends EntityRepository
      * @param $status
      * @return array
      */
-    public function findAllAtLeastThan($mission, $status)
+    public function findAllAtLeastThan($mission, $status, $lim = 0)
     {
         $qb = $this->_em->createQueryBuilder();
 
@@ -93,6 +93,11 @@ class UserMissionRepository extends EntityRepository
             ->andWhere('um.status >= :status')
             ->setParameter('status', $status)
         ;
+
+        if ($lim) {
+            $qb->orderBy('um.interestedAt', "ASC")
+                ->setMaxResults($lim);
+        }
 
         return $qb->getQuery()->getResult();
     }
