@@ -148,7 +148,7 @@
 
                         <div class="mail-content-answer mail-content-answer--red">
 
-                            <textarea id="inbox_input_message" name="inbox[inout_message]"></textarea>
+                            <textarea id="inbox_input_message" name="inbox[input_message]"></textarea>
                             <button id="submit_text" value="{{ 'form.btn.send' | trans | upper }}">
                                 {{ 'form.btn.send' | trans }}</button>
 
@@ -179,19 +179,35 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $('#submit_text').click(function(e) {
+
                 if ($('textarea#inbox_input_message').val()) {
-                    $.ajax({
-                        url: "{{ path('send_message_to_contractor') }}",
-                        method: "post",
-                        data: {
-                            id: {{ user_mission.id }},
-                            message: $('textarea#inbox_input_message').val()
+                    var msg = $('textarea#inbox_input_message').val();
+                    var arrayWords = msg.split(' ');
+                    var ok = true;
+                    var re = new RegExp("(https?:\\/\\/(www\\.)?)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)");
+
+                    for (var i = 0; i < arrayWords.length; i++) {
+                        if (re.test(msg)) {
+                            ok = false;
                         }
-                    }).done(function (msg) {
-                        $('textarea#inbox_input_message').val('');
-                        $('#thread_message').html(msg);
-                        $(".mail-content-chat").stop().animate({ scrollTop: $(".mail-content-chat")[0].scrollHeight}, 1000);
-                    });
+                    }
+
+                    if (ok) {
+                        $.ajax({
+                            url: "{{ path('send_message_to_contractor') }}",
+                            method: "post",
+                            data: {
+                                id: {{ user_mission.id }},
+                                message: $('textarea#inbox_input_message').val()
+                            }
+                        }).done(function (msg) {
+                            $('textarea#inbox_input_message').val('');
+                            $('#thread_message').html(msg);
+                            $(".mail-content-chat").stop().animate({scrollTop: $(".mail-content-chat")[0].scrollHeight}, 1000);
+                        });
+                    } else {
+                        alert("You cannot send url");
+                    }
                 }
             });
         });
