@@ -6,6 +6,10 @@
 	position:relative;
 	z-index:400;
 
+	&.wmw-header--newsletter{
+		position: initial;
+	}
+
 	.wmw-header-logo{
 		display:inline-block;
 		height:35px;

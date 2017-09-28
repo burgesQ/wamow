@@ -69,6 +69,8 @@ header:
     profile: Profil
     billing: Payment
     logout: Déconnexion
+    login: Connexion
+    home: Home
 
 side_bar:
     email_notification: |
@@ -409,7 +411,10 @@ user:
             link_password: Changer le mot de passe
     profile_edit:
         advisor:
-            btn_save_change: Sauvegarder les modifications 
+            btn_save_change: Sauvegarder les modifications
+        contractor:
+            siret_label: Numeros de SIRET
+
 # Comapnies
 company:
     name: Entreprise
@@ -633,6 +638,7 @@ mission:
                 hint_company_large: Effectif > 5000 ou CA > 1,5 milliards d’USD
                 hint_continent: Plusieurs choix sont possibles
                 hint_password: Le mot de passe doit contenir au moins une majuscule, un minuscule, un numéro et un symbole.
+                hint_siret: Numeros de siret
 
     message:
         no_advisor: "Votre pitch a bien été enregistré et poussé auprès des experts qualifiés. 
@@ -1117,6 +1123,7 @@ payment:
 
 # NewsLetter
 newsletter:
+    subscribe: S'inscrire
     body_title: THE NEWSLETTER FOR THOSE WHO WANT TO KNOW MORE ABOUT WORK
     read_more: LIRE PLUS
     view:
