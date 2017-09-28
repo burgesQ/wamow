@@ -478,6 +478,9 @@ header:
     profile: Profile
     billing: Billing
     logout: Log Out
+    login: Log In
+    register: Register
+    home: Home
 
 side_bar:
     email_notification: |

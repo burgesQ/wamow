@@ -69,6 +69,8 @@ header:
     profile: Profil
     billing: Payment
     logout: Déconnexion
+    login: Connexion
+    home: Home
 
 side_bar:
     email_notification: |
