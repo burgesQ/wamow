@@ -53,8 +53,11 @@ class StepTwoFormType extends AbstractType
                 'label'              => 'mission.new.label.budget',
                 'required'           => true,
                 'attr' => [
-                    'value' => 1
-                ]
+                    'value' => 1,
+                    'max_value' => (PHP_INT_MAX - 1)
+                ],
+
+
             ])
             ->add('continents', EntityType::class, [
                 'class'                     => 'MissionBundle:Continent',
