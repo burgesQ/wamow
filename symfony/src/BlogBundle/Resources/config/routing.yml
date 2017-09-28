@@ -1,5 +1,5 @@
 newsletter_list:
-    path:      /newsletter
+    path:      /newsletters
     defaults:
         _controller: BlogBundle:Newsletter:list
 #

@@ -90,8 +90,10 @@
                         <div class="col-1-of-4 col-newsletter-left">
                             <div class="wrap-newsletter-left-title">
                                 <h1 class="newsletter-left-title">
-                                    Newletter
-                                    {#{{ 'newsletter.view.newsletter.what'|trans({}, "tools") }}#}
+                                    <a type="button" id="subscribe"
+                                       class="wmw-button wmw-button--medium wmw-button--green">
+                                        <i></i><span> {{ 'newsletter.subscribe' | trans }} </span><i></i>
+                                    </a>
                                 </h1>
                             </div>
                             {% for oneNewsletter in newsletters %}
@@ -117,9 +119,10 @@
                                 <iframe id="preview-newsletter" src="/newsletters/1/index.html"
                                         class="preview-newsletter">
                                 </iframe>
-
                             </a>
                         </div>
+
+
 
                     </div>
 
@@ -139,6 +142,12 @@
         function actuNews(idNews) {
             $("iframe.preview-newsletter").attr('src', "/newsletters/" + idNews + "/index.html");
         }
+
+        $(button="#subscribe").click(function() {
+            swal({
+                html: "<iframe style=\"display: block; margin-left: auto; margin-right: auto; background-color: white;\"src=\"https://my.sendinblue.com/users/subscribe/js_id/2h6et/id/1\" width=\"500\" height=\"191\" frameborder=\"0\"scrolling=\"auto\"allowfullscreen=\"allowfullscreen\"></iframe>"
+            });
+        });
 
     </script>
 

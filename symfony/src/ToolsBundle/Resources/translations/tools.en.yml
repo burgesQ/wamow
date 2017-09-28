@@ -1534,6 +1534,7 @@ payment:
 
 ## NewsLetter template
 newsletter:
+    subscribe: Subscribe
     body_title: THE NEWSLETTER FOR THOSE WHO WANT TO KNOW MORE ABOUT WORK
     read_more: READ MORE
     view:

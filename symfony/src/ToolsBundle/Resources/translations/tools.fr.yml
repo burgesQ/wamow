@@ -1123,6 +1123,7 @@ payment:
 
 # NewsLetter
 newsletter:
+    subscribe: S'inscrire
     body_title: THE NEWSLETTER FOR THOSE WHO WANT TO KNOW MORE ABOUT WORK
     read_more: LIRE PLUS
     view:
