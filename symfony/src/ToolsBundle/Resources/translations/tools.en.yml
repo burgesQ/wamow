@@ -818,6 +818,8 @@ user:
     profile_edit:
         advisor:
             btn_save_change: SAVE CHANGE
+        contractor:
+            siret_label: Company Registration Number
 
 ## Comapny translation
 company:
@@ -1047,6 +1049,7 @@ mission:
                 hint_company_large: Staff > 5000 or Turnover >1,5 billion of USD
                 hint_continent: You can select multiple options
                 hint_password: Password must contain at least one upper case, one lower case, one number and one symbol.
+                hint_siret: This is your company id
 
     message:
         no_advisor: 'Your pitch has been successfully published and will be sent to qualified experts. 

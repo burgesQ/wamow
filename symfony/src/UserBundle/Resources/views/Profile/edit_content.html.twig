@@ -116,11 +116,29 @@
                         </div>
 
                         <div class="wmw-bgfield col-xs-12">
-                            <label for="profile-languages">{{ 'mission.new.label.certification' | trans }}</label>
+                            <label for="profile-certification">{{ 'mission.new.label.certification' | trans }}</label>
                             {{ form_widget(form.user.certifications) }}
-                            <div class="wmw-bgfield-bg"><i class="icon icon--language"></i></div>
+                            <div class="wmw-bgfield-bg"><i class="icon icon--certification"></i></div>
                             {{ form_errors(form.user.certifications) }}
                         </div>
+
+                        <div class="wmw-bgfield col-xs-12">
+
+                            <label for="profile-siret">{{ 'user.profile_edit.contractor.siret_label' | trans }}
+
+                                <a href="#" class="wmw-tip">
+                                    ?
+                                    <span class="wmw-tip-box">
+                                        {{ 'mission.new.label.step_four.hint_siret' | trans }}
+                                    </span>
+                                </a>
+                            </label>
+
+                            {{ form_widget(form.user.siret) }}
+                            <div class="wmw-bgfield-bg"><i class="icon icon--business-real-estate"></i></div>
+                            {{ form_errors(form.user.siret) }}
+                        </div>
+
                     {% endif %}
 
                     {{ form_errors(form) }}

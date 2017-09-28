@@ -67,6 +67,38 @@
                             <div class="wmw-bgfield-bg"><i class="icon icon--email"></i></div>
                         {% endif %}
                     </div>
+
+                    {# phone number #}
+                    <div class="wmw-bgfield col-xs-10">
+                        <label for="profile-phone">Phone number</label>
+                        <input type="text" id="profile-phone" name="profile-phone"
+                                {% if user.phone %}
+                                    value="({{ user.phone.prefix.prefix }}){{ user.phone.number }}"
+                                {% endif %}
+                               class="required" disabled="true"/>
+                        {% if user.phone %}
+                            <div class="wmw-bgfield-bg"><i class="icon icon--phone"></i></div>
+                        {% endif %}
+                    </div>
+
+                    {# spoken language#}
+                    <div class="wmw-bgfield col-xs-12 col-sm-10">
+                        {% set languages = '' %}
+                        {% for language in user.languages %}
+                            {% if loop.last %}
+                                {% set languages = languages ~ language.name | trans | upper %}
+                            {% else %}
+                                {% set languages = languages ~ language.name | trans | upper ~ ', ' %}
+                            {% endif %}
+                        {% endfor %}
+                        <input type="text" id="profile-languages" name="profile-languages" value="{{ languages }}"
+                               class="required" disabled="true"/>
+                        {% if user.languages is not empty %}
+                            <div class="wmw-bgfield-bg"><i class="icon icon--language"></i></div>
+                        {% endif %}
+                    </div>
+
+
                 </div>
 
                 <div class="col-xs-12 col-sm-5 col-sm-offset-2">
@@ -84,6 +116,18 @@
                             {{ form_end(form) }}
                         </div>
 
+
+                        <div class="wmw-bgfield">
+                            <label for="profile-country">Country</label>
+                            <select id="profile-country" name="profile-country" class="required" disabled="true">
+                                <option value="{{ user.siret }}">{{ user.siret }}</option>
+                            </select>
+                            {% if user.siret %}
+                                <div class="wmw-bgfield-bg"><i class="icon icon--business-real-estate"></i></div>
+                            {% endif %}
+                        </div>
+
+
                     {% else %}
                         {# company #}
                         <div class="wmw-bgfield col-xs-10">
@@ -94,36 +138,10 @@
                     {% endif %}
                 </div>
 
-                {# phone number #}
                 <div class="row">
-                    <div class="wmw-bgfield col-xs-12 col-xs-10">
-                        <label for="profile-phone">Phone number</label>
-                        <input type="text" id="profile-phone" name="profile-phone"
-                                {% if user.phone %}
-                                    value="({{ user.phone.prefix.prefix }}){{ user.phone.number }}"
-                                {% endif %}
-                               class="required" disabled="true"/>
-                        {% if user.phone %}
-                            <div class="wmw-bgfield-bg"><i class="icon icon--phone"></i></div>
-                        {% endif %}
-                    </div>
-                    {# languages #}
-                    {#<div class="col-xs-12 col-sm-5 col-sm-offset-2">#}
-                    <div class="wmw-bgfield col-xs-12 col-xs-10">
-                        {% set languages = '' %}
-                        {% for language in user.languages %}
-                            {% if loop.last %}
-                                {% set languages = languages ~ language.name | trans | upper %}
-                            {% else %}
-                                {% set languages = languages ~ language.name | trans | upper ~ ', ' %}
-                            {% endif %}
-                        {% endfor %}
-                        <input type="text" id="profile-languages" name="profile-languages" value="{{ languages }}"
-                               class="required" disabled="true"/>
-                        {% if user.languages is not empty %}
-                            <div class="wmw-bgfield-bg"><i class="icon icon--language"></i></div>
-                        {% endif %}
-                    </div>
+
+
+
                 </div>
 
                 {# address #}

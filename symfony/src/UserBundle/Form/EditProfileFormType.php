@@ -3,6 +3,7 @@
 namespace UserBundle\Form;
 
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Tetranz\Select2EntityBundle\Form\Type\Select2EntityType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -35,39 +36,43 @@ class EditProfileFormType extends AbstractType
                 'entry_type'   => AddressType::class,
                 'allow_add'    => false,
                 'required'     => true
-            ])
-        ;
+            ]);
 
         if (!strcmp($options['role'], 'ROLE_ADVISOR')) {
             $builder
                 ->add('languages', Select2EntityType::class, [
                     'translation_domain' => 'tools',
-                    'text_property' => 'name',
-                    'remote_route'  => 'languages_autocomplete',
-                    'primary_key'   => 'id',
-                    'allow_add'     => [
-                        'enabled'        => false
+                    'text_property'      => 'name',
+                    'remote_route'       => 'languages_autocomplete',
+                    'primary_key'        => 'id',
+                    'allow_add'          => [
+                        'enabled' => false
                     ],
-                    'multiple'      => true,
-                    'required'      => true,
-                    'class'         => 'ToolsBundle\Entity\Language',
-                    'label'         => 'mission.new.label.language'
+                    'multiple'           => true,
+                    'required'           => true,
+                    'class'              => 'ToolsBundle\Entity\Language',
+                    'label'              => 'mission.new.label.language'
                 ])
-
                 ->add('certifications', Select2EntityType::class, [
                     'translation_domain' => 'tools',
-                    'text_property' => 'name',
-                    'remote_route'  => 'certifications_autocomplete',
-                    'primary_key'   => 'id',
-                    'allow_add'     => [
+                    'text_property'      => 'name',
+                    'remote_route'       => 'certifications_autocomplete',
+                    'primary_key'        => 'id',
+                    'allow_add'          => [
                         'enabled'        => true,
                         'new_tag_text'   => ' (NEW)',
                         'new_tag_prefix' => '__',
                         'tag_separators' => '[""]'
                     ],
-                    'multiple'      => true,
-                    'class'         => 'MissionBundle\Entity\Certification',
-                    'label'         => 'mission.new.form.certification'
+                    'multiple'           => true,
+                    'class'              => 'MissionBundle\Entity\Certification',
+                    'label'              => 'mission.new.form.certification'
+                ])
+                ->add('siret', TextType::class, [
+                    'translation_domain' => 'tools',
+                    'required'           => false,
+                    'label'              => false,
+                    'max_length'         => 35
                 ]);
         }
     }
