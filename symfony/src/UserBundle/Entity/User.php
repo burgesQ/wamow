@@ -370,6 +370,13 @@ class User extends BaseUser implements ParticipantInterface
     private $userAgreement;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="siret", type="string", nullable=true)
+     */
+    private $siret;
+
+    /**
      * User constructor.
      */
     public function __construct()
@@ -1477,5 +1484,28 @@ class User extends BaseUser implements ParticipantInterface
     public function getUserAgreement()
     {
         return $this->userAgreement;
+    }
+
+    /**
+     * Set siret
+     *
+     * @param string $siret
+     * @return User
+     */
+    public function setSiret(string $siret)
+    {
+        $this->siret = $siret;
+
+        return $this;
+    }
+
+    /**
+     * Get siret
+     *
+     * @return string 
+     */
+    public function getSiret()
+    {
+        return $this->siret;
     }
 }
