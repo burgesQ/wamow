@@ -97,16 +97,15 @@
                                 </h1>
                             </div>
                             {% for oneNewsletter in newsletters %}
-                                <div class="newsletter-left">
+                                <div class="newsletter-left" onclick="actuNews('{{ oneNewsletter.number }}')">
                                     <h4>
                                         {{ oneNewsletter.publishedDate|date('m/d/Y') }}
                                     </h4>
-                                    <h2 onclick="actuNews('{{ oneNewsletter.number }}')">
+                                    <h2 >
                                         {{ oneNewsletter.number }}. {{ oneNewsletter.preTitle }}
                                     </h2>
                                     {% set article = oneNewsletter.articles | first %}
-                                    <a href="/newsletters/{{ oneNewsletter.number }}/index.html"
-                                       class="wrap-preview-newsletter">
+                                    <a class="wrap-preview-newsletter">
                                         <img src={{ oneNewsletter.urlCover }} alt={{ oneNewsletter.title }}
                                              class="newsletter-left-img">
                                     </a>
@@ -140,6 +139,7 @@
     <script type="text/javascript">
 
         function actuNews(idNews) {
+//            could go get them on consultant in fact :(
             $("iframe.preview-newsletter").attr('src', "/newsletters/" + idNews + "/index.html");
         }
 
