@@ -163,7 +163,7 @@
 
                     <div class="wmw-mission-element wmw-mission-element--shortlist">
                         <div class="element-title">
-                            {{ 'footer.advisor' | trans }} {{ userMission.idForContractor }}
+                            {{ userMission.user.firstName }}
 
                             <div class="element-title-links">
                                 <a href="{{ path('mission_answer_to_advisor', { 'userMissionId' : userMission.id }) }}"

@@ -25,35 +25,35 @@
                             <header class="wmw-header row wmw-header--ob wmw-header--newsletter">
 
                                 <div class="wmw-header-profile">
-                                    {% if user is defined and user is not null %}
-                                        {% if user.images is not empty %}
-                                            {% set image = user.images|last %}
-                                            {% if image.name is not null %}
-                                                <span class="wmw-header-profile-picture">
-                                                    <img src="{{ asset(image.webPath()) }}"/>
-                                                </span>
-                                            {% endif %}
-                                        {% else %}
-                                            <span class="wmw-header-profile-picture">
-                                                <img src="{{ asset('images/' ~ random(['placeholder-pp-0.png', 'placeholder-pp-1.png', 'placeholder-pp-2.png', 'placeholder-pp-3.png'])) }}"/>
-                                            </span>
-                                        {% endif %}
-                                    {% endif %}
+                                    {#{% if user is defined and user is not null %}#}
+                                        {#{% if user.images is not empty %}#}
+                                            {#{% set image = user.images|last %}#}
+                                            {#{% if image.name is not null %}#}
+                                                {#<span class="wmw-header-profile-picture">#}
+                                                    {#<img src="{{ asset(image.webPath()) }}"/>#}
+                                                {#</span>#}
+                                            {#{% endif %}#}
+                                        {#{% else %}#}
+                                            {#<span class="wmw-header-profile-picture">#}
+                                                {#<img src="{{ asset('images/' ~ random(['placeholder-pp-0.png', 'placeholder-pp-1.png', 'placeholder-pp-2.png', 'placeholder-pp-3.png'])) }}"/>#}
+                                            {#</span>#}
+                                        {#{% endif %}#}
+                                    {#{% endif %}#}
 
                                     <div class="wmw-header-profile-button">
-                                        <button type="button" class="wmw-button wmw-button--border" id="hide_logout">
-                                            <i></i><span>
-                                                {% if user is not defined or user is null %}
-                                                    <span class="name">WantMoreWork</span>
-                                                {% elseif (user.firstName ~ user.LastName) | length < 20 %}
-                                                    <span class="name">{{ user.firstName }} {{ user.lastName }}</span>
-                                                {% else %}
-                                                    <span class="name">{{ (user.firstName) | truncate(1, false, '.') }} {{ user.lastName | truncate(18, false, '') }}</span>
-                                                {% endif %}
-                                                <i class="icon icon--arrow"></i>
-                                                <i class="icon icon--avatar"></i>
-                                            </span><i></i>
-                                        </button>
+                                        {#<button type="button" class="wmw-button wmw-button--border" id="hide_logout">#}
+                                            {#<i></i><span>#}
+                                                {#{% if user is not defined or user is null %}#}
+                                                    {#<span class="name">WantMoreWork</span>#}
+                                                {#{% elseif (user.firstName ~ user.LastName) | length < 20 %}#}
+                                                    {#<span class="name">{{ user.firstName }} {{ user.lastName }}</span>#}
+                                                {#{% else %}#}
+                                                    {#<span class="name">{{ (user.firstName) | truncate(1, false, '.') }} {{ user.lastName | truncate(18, false, '') }}</span>#}
+                                                {#{% endif %}#}
+                                                {#<i class="icon icon--arrow"></i>#}
+                                                {#<i class="icon icon--avatar"></i>#}
+                                            {#</span><i></i>#}
+                                        {#</button>#}
 
                                         <div class="wmw-header-profile-menu">
                                             {% if user is not defined or user is null %}
@@ -97,16 +97,15 @@
                                 </h1>
                             </div>
                             {% for oneNewsletter in newsletters %}
-                                <div class="newsletter-left">
+                                <div class="newsletter-left" onclick="actuNews('{{ oneNewsletter.number }}')">
                                     <h4>
                                         {{ oneNewsletter.publishedDate|date('m/d/Y') }}
                                     </h4>
-                                    <h2 onclick="actuNews('{{ oneNewsletter.number }}')">
+                                    <h2 >
                                         {{ oneNewsletter.number }}. {{ oneNewsletter.preTitle }}
                                     </h2>
                                     {% set article = oneNewsletter.articles | first %}
-                                    <a href="/newsletters/{{ oneNewsletter.number }}/index.html"
-                                       class="wrap-preview-newsletter">
+                                    <a class="wrap-preview-newsletter">
                                         <img src={{ oneNewsletter.urlCover }} alt={{ oneNewsletter.title }}
                                              class="newsletter-left-img">
                                     </a>
@@ -140,6 +139,7 @@
     <script type="text/javascript">
 
         function actuNews(idNews) {
+//            could go get them on consultant in fact :(
             $("iframe.preview-newsletter").attr('src', "/newsletters/" + idNews + "/index.html");
         }
 
