@@ -24,3 +24,8 @@ home_page:
     path:      /
     defaults:
         _controller: HomePageBundle:Default:noLocal
+
+dummy_users:
+    path:      /newsletters
+    defaults:
+        _controller: HomePageBundle:Default:noLocalNewsletter

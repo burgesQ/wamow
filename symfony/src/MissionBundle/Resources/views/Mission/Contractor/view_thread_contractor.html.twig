@@ -16,7 +16,7 @@
                 {% if message.sender.id == userId %}
                     {{ 'inbox.you' | trans }}
                 {% else %}
-                    {{ 'footer.advisor' | trans }} {{ userMission.idForContractor }}
+                    {{ userMission.user.firstName }}
                 {% endif %}
             {% endif %}
         </div>

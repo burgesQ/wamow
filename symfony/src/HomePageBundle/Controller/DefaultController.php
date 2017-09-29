@@ -86,6 +86,15 @@ class DefaultController extends Controller
     }
 
     /**
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function noLocalNewsletterAction()
+    {
+        // her we'll find a way to define the local of the user
+        return $this->redirectToRoute('newsletter_list', ['_locale' => 'en']);
+    }
+
+    /**
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function termsAction()
