@@ -214,6 +214,7 @@ class MissionGeneratorController extends Controller
 
             if ($newMission->getCurrency()->getCode() !== 'USD') {
                 $budget = $newMission->getBudget();
+  //              $newMission->setOriginalBudget($budget);
                 $rate = $newMission->getCurrency()->getRate();
                 $newMission->setBudget($budget / $rate);
             }
@@ -288,6 +289,7 @@ class MissionGeneratorController extends Controller
 
             if ($newMission->getCurrency()->getCode() !== 'USD') {
                 $price = $newMission->getPrice();
+//                $newMission->setOriginalPrice($price);
                 $rate = $newMission->getCurrency()->getRate();
                 $newMission->setPrice($price / $rate);
             }

@@ -55,7 +55,7 @@
                                 <div class="main-slider-desc">{{ new.mission.resume | truncate(100, false, '[...]') }}</div>
                                 <div class="main-slider-price">
                                     <strong>{{ new.mission.professionalExpertise.name | trans }}</strong>
-                                    {{ new.mission.price | currency_convert_format(new.mission.currency.code, false, true, 'USD') }}
+                                    {{ new.mission.originalPrice | currency_convert_format(new.mission.currency.code, false, true, new.mission.currency.code) }}
                                     {{ 'mission.view.price_day' | trans }}
                                     <small>{{ new.mission.businessPractice.name | trans }}</small>
                                 </div>
@@ -153,7 +153,7 @@
                                 <div class="main-missions-el-price col-xs-12 col-md-3">
                                     <span>
                                         <strong>{{ wip.mission.professionalExpertise.name | trans }}</strong>
-                                        {{ wip.mission.price | currency_convert_format(wip.mission.currency.code, false, true, 'USD') }}
+                                        {{ wip.mission.originalPrice| currency_convert_format(wip.mission.currency.code, false, true, wip.mission.currency.code)  }}
                                         {{ 'mission.view.price_day' | trans }}
                                         <small>{{ wip.mission.businessPractice.name | trans }}</small>
                                     </span>

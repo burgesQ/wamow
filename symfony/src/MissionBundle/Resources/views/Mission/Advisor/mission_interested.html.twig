@@ -102,7 +102,7 @@
                 </span>
                 <span class="summary-el summary-el--salary">
                     <span>
-                        {{ 'mission.view.advisor.finance' | trans({ '%price': mission.price | currency_convert_format(mission.currency.code, false, true, 'USD'), '%professionalExpertise': mission.professionalExpertise.name | trans }, 'tools') | raw }}
+                        {{ 'mission.view.advisor.finance' | trans({ '%price': mission.originalPrice | currency_convert_format(mission.currency.code, false, true, mission.currency.code), '%professionalExpertise': mission.professionalExpertise.name | trans }, 'tools') | raw }}
                     </span>
                 </span>
                 <span class="summary-el">
