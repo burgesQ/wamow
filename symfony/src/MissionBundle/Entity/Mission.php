@@ -140,6 +140,14 @@ class Mission
     private $budget;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="original_budget", type="integer", nullable=true)
+     * @Assert\Range(min = 1)
+     */
+    private $originalBudget;
+
+    /**
      * @ORM\ManyToOne(targetEntity="MissionBundle\Entity\CompanySize")
      * @ORM\JoinColumn(nullable=true)
      */
@@ -202,6 +210,14 @@ class Mission
      * @Assert\Range(min = 1)
      */
     private $price;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="original_price", type="integer", nullable=true)
+     * @Assert\Range(min = 1)
+     */
+    private $originalPrice;
 
     /**
      * @var string
@@ -822,6 +838,9 @@ class Mission
      */
     public function setBudget($budget)
     {
+        if ($this->originalBudget == null) {
+            $this->originalBudget = $budget;
+        }
         $this->budget = $budget;
 
         return $this;
@@ -1088,6 +1107,9 @@ class Mission
      */
     public function setPrice($price)
     {
+        if ($this->getOriginalPrice() == null) {
+            $this->originalPrice = $price;
+        }
         $this->price = $price;
 
         return $this;
@@ -1631,5 +1653,51 @@ class Mission
     public function getObjective()
     {
         return $this->objective;
+    }
+
+    /**
+     * Set originalPrice
+     *
+     * @param integer $originalPrice
+     * @return Mission
+     */
+    public function setOriginalPrice($originalPrice)
+    {
+        $this->originalPrice = $originalPrice;
+
+        return $this;
+    }
+
+    /**
+     * Get originalPrice
+     *
+     * @return integer 
+     */
+    public function getOriginalPrice()
+    {
+        return $this->originalPrice;
+    }
+
+    /**
+     * Set originalBudget
+     *
+     * @param integer $originalBudget
+     * @return Mission
+     */
+    public function setOriginalBudget($originalBudget)
+    {
+        $this->originalBudget = $originalBudget;
+
+        return $this;
+    }
+
+    /**
+     * Get originalBudget
+     *
+     * @return integer 
+     */
+    public function getOriginalBudget()
+    {
+        return $this->originalBudget;
     }
 }

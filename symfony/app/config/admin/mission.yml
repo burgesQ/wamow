@@ -12,6 +12,8 @@ easy_admin:
                     - { property: 'creationDate', type: 'date' }
                     - 'statusTrans'
                     - 'nbOngoing'
+#                    - 'originalPrice'
+#                    - 'originalBudget'
                     - { property : 'getScoreDetailsAsString' }
             form:
                 fields:
@@ -19,3 +21,7 @@ easy_admin:
                     - { property: 'nbOngoing', type: 'number' }
                     - { property: 'nextUpdateScoring'}
                     - { property: 'scoreDetailsAsString' }
+                    - { property: 'originalPrice'}
+                    - { property: 'originalBudget' }
+                    - { property: 'price'}
+                    - { property: 'budget' }
