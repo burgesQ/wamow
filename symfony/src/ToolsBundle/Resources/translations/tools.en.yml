@@ -546,35 +546,35 @@ error:
     page:
         common: The requested page couldn't be located. Check for any URL misspellings or
     forbidden: You have no access to this page
-    authorized: You're not allowed to create a mission.
+    authorized: You're not allowed to create a mission
     logged: You're not logged in
     user:
         subscribe: Please Subscribe
-        email_in_use: Email already in use.
+        email_in_use: Email already in use
     user_mission:
         not_found: No such userMission entity (%id)
-        cant_giveup: You cannot give up this mission.
-        already_giveup: You already gave up this mission.
-        not_enough: You cannot remove the last expert from the mission.
+        cant_giveup: You cannot give up this mission
+        already_giveup: You already gave up this mission
+        not_enough: You cannot remove the last expert from the mission
     mission:
         pitch:
-            contractor: A company cannot bid.
+            contractor: A company cannot bid
         shortlist:
-            to_much: you have not selected any expert.
+            to_much: you have not selected any expert
             not_enough: Not enough users selected to proceed to My Selection.
         step_error: There was an error
         not_found: The requested mission does not exist
         available: This mission isn't available
         user_mission: You cannot pitch this mission
         interested_twice: You have already marked yourself as interested
-        available: The mission %id is not available.
+        available: The mission %id is not available
         limit_reach: The limit of expert proposals was reached for this mission. The mission is closed
         wrong_company: You don't belong to the right company
-        already: You have already executed this action.
+        already: You have already executed this action
         finalist:
             no_advisor: No expert selected for the final step.
     action:
-        failed: Action failed.
+        failed: Action failed
         shortlist:
             to_much: You have already selected 3 experts.
     upload_resume_or_linkedin: Please Upload a resume or link your account to LinkedIn
@@ -588,7 +588,7 @@ home:
         expert: 'expert'
         login: "Log In"
         signup: "Sign Up"
-        title: "Get matched."
+        title: "Get matched"
         valueproposition:
             first: "Value your time"
             second: "Build a world of opportunities"
@@ -618,8 +618,8 @@ home:
         signup: "Sign Up"
         seeker: "Company"
         open: "Open your account"
-        title: "Find a match."
-        company_link: "I represent a company."
+        title: "Find a match"
+        company_link: "I represent a company"
         valueproposition:
             first: "VALUE YOUR TIME"
             second: "BUILD A WORLD OF OPPORTUNITIES"
@@ -727,7 +727,7 @@ dashboard:
 registration:
     advisor:
         zero:
-            title: "First, let's sign up."
+            title: "First, let's sign up"
             subtitle: "Access Consulting missions in 7 minutes."
             howtotitle: "75% OF EXPERTS SHOW THEIR INTEREST FOR A MATCHING PITCH UNDER 5 DAYS"
             howtotext: "Our mission is to match corporations presenting a need with experts proposing a long-lasting solution. 
@@ -920,7 +920,7 @@ mission:
         add_to_shortlist: 'User added to My Selection !'
         add_to_contract: 'User added to contract !'
         remove_from_shortlist: 'User removed from My Selection !'
-        refuse_user: 'User declined.'
+        refuse_user: 'User decline.'
 
     new:
         content_resume: |

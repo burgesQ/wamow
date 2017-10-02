@@ -122,7 +122,7 @@
 
                         <div class="main-missions-el-price col-xs-12 col-md-3">
                             <strong>{% if mission.professionalExpertise %}{{ mission.professionalExpertise.name | trans }}{% endif %}</strong>
-                             {{ mission.price | currency_convert_format(mission.currency.code, false, true, 'USD') }}
+                             {{ mission.originalPrice | currency_convert_format(mission.currency.code, false, true, mission.currency.code) }}
                              {{ 'mission.view.price_day' | trans }}
                             <small>{{ mission.businessPractice.name | trans }}</small>
                         </div>
