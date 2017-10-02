@@ -1124,6 +1124,7 @@ payment:
 # NewsLetter
 newsletter:
     subscribe: S'inscrire
+    enter_email: Veuillez entrez une addresse email
     body_title: THE NEWSLETTER FOR THOSE WHO WANT TO KNOW MORE ABOUT WORK
     read_more: LIRE PLUS
     view:
