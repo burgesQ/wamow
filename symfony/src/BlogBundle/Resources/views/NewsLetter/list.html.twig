@@ -88,14 +88,69 @@
                     <div class="row-no-margins" style="overflow: hidden">
 
                         <div class="col-1-of-4 col-newsletter-left">
-                            <div class="wrap-newsletter-left-title">
-                                <h1 class="newsletter-left-title">
-                                    <a type="button" id="subscribe"
-                                       class="wmw-button wmw-button--medium wmw-button--green">
-                                        <i></i><span> {{ 'newsletter.subscribe' | trans }} </span><i></i>
-                                    </a>
-                                </h1>
+                            <div class="wrap-newsletter-left-title" style="margin-top: -10%">
+
+                                <form id="theform" name="theform" method="post"
+                                      style="padding:0px; margin:0px;text-align:center; border:none 0;"
+                                      action="https://my.sendinblue.com/users/subscribe/js_id/2h6et/id/1">
+
+                                    <input type="hidden" name="js_id" id="js_id" value="2h6et" style="font-size: 13px;">
+                                    <input type="hidden" name="listid" id="listid" value="14" style="font-size: 13px;">
+                                    <input type="hidden" name="from_url" id="from_url" value="yes"
+                                           style="font-size: 13px;">
+                                    <input type="hidden" name="hdn_email_txt" id="hdn_email_txt" value="1506948296508"
+                                           style="font-size: 13px;">
+
+                                    <div style="border-radius: 4px; position: relative; margin: 0px; text-align: left;
+                                    background: rgb(255, 255, 255); padding: 40px 20px 20px; line-height: 150%;
+                                     border-width: 0px !important; border-color: transparent !important;
+                                     color: rgb(52, 52, 52);">
+                                        <input type="hidden" name="req_hid" id="req_hid" value=""
+                                               style="font-size: 13px;">
+                                        <div class="header" style="padding:0 20px;">
+                                            <h1 data-editfield="newsletter_name"
+                                                contenteditable="false"
+                                                style="font-weight: normal; text-align: left; font-size: 45px;
+                                                 margin-bottom: 2px; padding: 0px;
+                                                  margin-top: 0px; color: rgb(35, 35, 35); display: none; line-height: 50px;"></h1>
+                                            <h3 id="company-name" contenteditable="false"
+                                                style="font-weight: normal; text-align: left; font-size: 25px;
+                                                margin-bottom: 12px; padding: 0px; margin-top: 0px;
+                                                color: rgb(52, 52, 52); display: none;"></h3>
+                                        </div>
+                                        <div data-editfield="newsletter_description"
+                                             contenteditable="false"
+                                             style="padding: 0px 20px 15px; border-bottom-width: 1px;
+                                             border-bottom-style: solid; border-bottom-color: rgb(204, 204, 204);
+                                             color: rgb(52, 52, 52); font-size: 17px; display: none;"></div>
+                                        <div style=" margin:5px 0;"></div>
+                                        <!-- an email as primary -->
+                                        <div style="">
+                                            <div style="padding: 10px 20px; position: relative; color: rgb(52, 52, 52); font-size: 17px;">
+                                                <input type="text" name="email" id="email" placeholder="{{ 'newsletter.entrer_email' | trans }}"
+                                                       style="padding: 10px 2%; width: 100%; min-width: auto; font-size: 13px; box-sizing: border-box;">
+                                                <div style="clear:both;"></div>
+
+                                            </div>
+                                        </div>
+                                        <!-- end of primary -->
+                                        <div class="byline" style="font-size: 17px; text-align: center;">
+                                            <button class="wmw-button" type="submit" data-editfield="subscribe"
+                                                    contenteditable="false">
+                                                <i></i><span> {{ 'newsletter.subscribe' | trans | upper }} </span><i></i>
+                                            </button>
+                                        </div>
+                                        <div style="clear:both;"></div>
+                                    </div>
+                                </form>
+
+                                <div class="wmw-footer-social">
+                                    <a href="{{ facebook_link }}"><i class="icon icon--facebook"></i></a>
+                                    <a href="{{ twitter_link }}"><i class="icon icon--twitter"></i></a>
+                                    <a href="{{ linkedin_link }}"><i class="icon icon--linkedin"></i></a>
+                                </div>
                             </div>
+
                             {% for oneNewsletter in newsletters %}
                                 <div class="newsletter-left" onclick="actuNews('{{ oneNewsletter.number }}')">
                                     <h4>
@@ -142,12 +197,6 @@
 //            could go get them on consultant in fact :(
             $("iframe.preview-newsletter").attr('src', "/newsletters/" + idNews + "/index.html");
         }
-
-        $(button="#subscribe").click(function() {
-            swal({
-                html: "<iframe style=\"display: block; margin-left: auto; margin-right: auto; background-color: white;\"src=\"https://my.sendinblue.com/users/subscribe/js_id/2h6et/id/1\" width=\"500\" height=\"191\" frameborder=\"0\"scrolling=\"auto\"allowfullscreen=\"allowfullscreen\"></iframe>"
-            });
-        });
 
     </script>
 
