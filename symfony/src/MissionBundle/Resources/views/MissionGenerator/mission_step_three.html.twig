@@ -127,6 +127,8 @@
 
      <script type="text/javascript">
          $(document).ready(function () {
+
+             sortSelectOptions('#step_three_form_workExperience', true);
              $.ajax({
                  url: "{{path("mission_count_match", {'missionId': mission.id})}}",
                  type: 'post',
@@ -136,6 +138,7 @@
                      $("#count-match").text(data['matches']);
                  },
              });
+
              $("#step_three_form_price").change(function() {
                  $.ajax({
                      url: "{{path("mission_count_match", {'missionId': mission.id})}}",
@@ -157,7 +160,6 @@
                      dataType: 'json',
                      data: $("form[name='step_three_form']").serialize(),
                      success: function(data) {
-                         //console.log(data['work_experiences']);
 
                          var $el = $("#step_three_form_workExperience");
                          $el.empty(); // remove old options
@@ -165,12 +167,10 @@
                              $el.append($("<option></option>")
                                  .attr("value", val).text(key));
                          });
+                         sortSelectOptions('#step_three_form_workExperience', true);
                      }
                  });
              });
-
-
-             sortSelectOptions('#step_three_form_workExperience', true);
 
          });
      </script>
