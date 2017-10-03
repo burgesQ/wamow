@@ -3,6 +3,7 @@
 namespace MissionBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use MissionBundle\Entity\Mission;
 
 /**
  * WorkExperienceRepository
@@ -11,5 +12,29 @@ use Doctrine\ORM\EntityRepository;
  * repository methods below.
  */
 class WorkExperienceRepository extends EntityRepository
-{    
+{
+    /**
+     * @param \MissionBundle\Entity\Mission $mission
+     * @return array
+     */
+    public function findWorkExp(Mission $mission)
+    {
+        $qb = $this->_em->createQueryBuilder();
+
+        $qb->select('u')
+            ->from('MissionBundle:WorkExperience', 'u')
+            ->join('u.missionKinds', 'm')
+            ->join('u.professionalExpertises', 'p')
+            ->join('u.businessPractices', 'b')
+            ->where('u.name != :create')
+            ->andWhere('b  = :businessPra OR p = :proExp OR m.id IN (:missionKinds)')
+            ->setParameter('proExp', $mission->getProfessionalExpertise())
+            ->setParameter('missionKinds', $mission->getMissionKinds()->toArray())
+            ->setParameter('businessPra', $mission->getBusinessPractice())
+            ->setParameter('create', 'workexperience.create')
+            ->orderBy('u.id', 'ASC')
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
 }

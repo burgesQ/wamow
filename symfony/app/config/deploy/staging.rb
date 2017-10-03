@@ -11,16 +11,16 @@
 set :application, "WantMoreWork-Plateform"
 set :app_path,    "app"
 # Server conf
-set :domain,      "app@staging.consultants.wantmore.work"
+set :domain,      "app@188.165.205.83"
 set :use_sudo,    false
 
 role :web,        domain                         # Your HTTP server, Apache/etc
 role :app,        domain, :primary => true       # This may be the same as your `Web` server
 role :db,         domain, :primary => true       # This is where Rails migrations will run
 
-set :deploy_to, "/home/app/www/staging/"
+set :deploy_to,     "/home/app/www/staging/"
 set :current_stage, "staging"
-set :url_base,      "http://staging.consultants.wantmore.work"
+set :url_base,      "188.165.205.83"
 
 #Git stagging branch
 set :branch, "preprod"

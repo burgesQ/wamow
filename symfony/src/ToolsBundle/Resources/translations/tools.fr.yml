@@ -108,7 +108,7 @@ legends:
         delete: Voulez vous confirmer cette action?
     other: Autre
     pop_up:
-        check_spam: Un e-mail vous a ete envoye contenant votre mot de passe. Verifiez votre boite de reception et votre boite spam.
+        check_spam: Un e-mail vous a été envoyé contenant votre mot de passe. Vérifiez votre boite de réception et votre boite spam.
         check_spam_title: Attention !
 
 mouseover:
@@ -1124,7 +1124,7 @@ payment:
 # NewsLetter
 newsletter:
     subscribe: S'inscrire
-    enter_email: Veuillez entrez une addresse email
+    enter_email: Veuillez entrer une addresse email
     body_title: THE NEWSLETTER FOR THOSE WHO WANT TO KNOW MORE ABOUT WORK
     read_more: LIRE PLUS
     view:
