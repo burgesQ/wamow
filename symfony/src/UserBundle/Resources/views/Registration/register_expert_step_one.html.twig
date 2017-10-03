@@ -24,7 +24,6 @@
                     {{ form_widget(businessPractice, {'attr' : {
                         class : 'requiredgroup:businesses vv-gparent',
                         name  : "businesses[]",
-                        id    : "business-" ~ businessPractice.vars.id
                     }}) }}
 
                     <label for="{{ businessPractice.vars.id }}">
@@ -79,6 +78,10 @@
                 title: "{{ 'legends.pop_up.check_spam_title' | trans }}",
                 text: "{{ 'legends.pop_up.check_spam' | trans }}"
             });
+
+            sortUnorderedList("list", false);
+
+
         });
     </script>
 
