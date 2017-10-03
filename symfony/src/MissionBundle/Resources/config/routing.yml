@@ -99,3 +99,8 @@ mission_count_match:
     path:            /mission/{missionId}/countMatch
     defaults:
         _controller: MissionBundle:Action:getNbMatch
+
+mission_get_work_experiences:
+    path:            /mission/{missionId}/workExp
+    defaults:
+        _controller: MissionBundle:Action:getWorkExp

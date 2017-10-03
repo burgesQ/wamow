@@ -128,25 +128,47 @@
      <script type="text/javascript">
          $(document).ready(function () {
              $.ajax({
-                    url: "{{path("mission_count_match", {'missionId': mission.id})}}",
-                    type: 'post',
-                    dataType: 'json',
-                    data: $("form[name='step_three_form']").serialize(),
-                    success: function(data) {
-                        $("#count-match").text(data['matches']);
-                    },
-            });
+                 url: "{{path("mission_count_match", {'missionId': mission.id})}}",
+                 type: 'post',
+                 dataType: 'json',
+                 data: $("form[name='step_three_form']").serialize(),
+                 success: function(data) {
+                     $("#count-match").text(data['matches']);
+                 },
+             });
              $("#step_three_form_price").change(function() {
                  $.ajax({
-                        url: "{{path("mission_count_match", {'missionId': mission.id})}}",
-                        type: 'post',
-                        dataType: 'json',
+                     url: "{{path("mission_count_match", {'missionId': mission.id})}}",
+                     type: 'post',
+                     dataType: 'json',
                         data: $("form[name='step_three_form']").serialize(),
-                        success: function(data) {
-                            $("#count-match").text(data['matches']);
-                        },
+                     success: function(data) {
+                         $("#count-match").text(data['matches']);
+                         console.log(data['work_experiences']);
+                         //$("#work-exp").option(data['work_exp']);
+                     },
                 });
              });
+
+             $("input[id^='step_three_form_missionKinds_']").click(function() {
+                 $.ajax({
+                     url: "{{path("mission_get_work_experiences", {'missionId': mission.id})}}",
+                     type: 'post',
+                     dataType: 'json',
+                     data: $("form[name='step_three_form']").serialize(),
+                     success: function(data) {
+                         //console.log(data['work_experiences']);
+
+                         var $el = $("#step_three_form_workExperience");
+                         $el.empty(); // remove old options
+                         $.each(data['work_experiences'], function(val, key) {
+                             $el.append($("<option></option>")
+                                 .attr("value", val).text(key));
+                         });
+                     }
+                 });
+             });
+
 
              sortSelectOptions('#step_three_form_workExperience', true);
 
