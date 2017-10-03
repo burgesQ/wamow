@@ -4417,6 +4417,26 @@ function sortSelectOptions(selector, skip_first) {
     });
 }
 
+function sortUnorderedList(ul, sortDescending) {
+    if (typeof ul == "string") ul = document.getElementById('names');
+
+    var lis = $("label");
+    var vals = [];
+
+    
+    for (var i = 0, l = lis.length; i < l; i++)
+        vals.push(lis[i].parentNode.innerHTML);
+
+    vals.sort(function(a, b) {
+        return $(a).text().toUpperCase()
+          .localeCompare( $(b).text().toUpperCase());
+    });
+
+    if (sortDescending) vals.reverse();
+    for (var i = 0, l = lis.length; i < l; i++)
+        lis[i].parentNode.innerHTML = vals[i];
+}
+
 (function($) {
 
     $.fn.deserialize = function (serializedString)
