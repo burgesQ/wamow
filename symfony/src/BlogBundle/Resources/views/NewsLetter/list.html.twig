@@ -161,7 +161,7 @@
                                     </h2>
                                     {% set article = oneNewsletter.articles | first %}
                                     <a class="wrap-preview-newsletter">
-                                        <img src={{ oneNewsletter.urlCover }} alt={{ oneNewsletter.title }}
+                                        <img src={{ asset(oneNewsletter.urlCover) }} alt={{ oneNewsletter.title }}
                                              class="newsletter-left-img">
                                     </a>
                                 </div>
