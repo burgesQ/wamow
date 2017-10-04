@@ -34,7 +34,7 @@ set :user,                   "configurator"
 namespace :Wmw do
     task :mail do
         transaction do
-            # run "echo 'Deploiement en #{stage} realise' | mail -s 'WMW > Deploiement realise' david@wantmore.work kzerbib@gmail.com qutn.burgess@gmail.com"
+            run "echo 'Deploiement en #{stage} realise' | mail -s 'WMW > Deploiement realise' david@wantmore.work kzerbib@gmail.com qutn.burgess@gmail.com"
         end
     end
     task :Composer do
