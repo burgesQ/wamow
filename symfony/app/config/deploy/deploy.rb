@@ -24,7 +24,7 @@ set :shared_files,           ["symfony/app/config/parameters.yml", "symfony/app/
 set :symfony_console,        "symfony/app/console"
 set :use_composer,           false
 
-set :writable_dirs,          [app_path + "/cache", app_path + "/logs", web_path + "/uploads", app_path + "/sessions", app_path +  "/exports", web_path + "/newsletters"]
+set :writable_dirs,          [app_path + "/cache", app_path + "/logs", web_path + "/uploads", app_path + "/sessions", app_path +  "/exports", web_path + "/newsletters", web_path + "/wp-content"]
 set :webserver_user,         "www-data"
 set :file_permissions_users, ["www-data"]
 set :permission_method,      :acl
