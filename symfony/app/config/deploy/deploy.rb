@@ -18,13 +18,13 @@ set :log_level, :error
 
 #SF
 set :model_manager,          "doctrine"
-set :shared_children,        [app_path + "/logs", app_path + "/sessions", web_path + "/uploads", "symfony/vendor", app_path +  "/exports", web_path + "/newsletters"]
+set :shared_children,        [app_path + "/logs", app_path + "/sessions", web_path + "/uploads", "symfony/vendor", app_path +  "/exports", web_path + "/newsletters", web_path + "/wp-content"]
 set :dump_assetic_assets,    false
 set :shared_files,           ["symfony/app/config/parameters.yml", "symfony/app/config/config_prod.yml"]
 set :symfony_console,        "symfony/app/console"
 set :use_composer,           false
 
-set :writable_dirs,          [app_path + "/cache", app_path + "/logs", web_path + "/uploads", app_path + "/sessions", app_path +  "/exports", web_path + "/newsletters", web_path + "/wp-content"]
+set :writable_dirs,          [app_path + "/cache", app_path + "/logs", web_path + "/uploads", app_path + "/sessions", app_path +  "/exports", web_path + "/newsletters"]
 set :webserver_user,         "www-data"
 set :file_permissions_users, ["www-data"]
 set :permission_method,      :acl
@@ -34,7 +34,7 @@ set :user,                   "configurator"
 namespace :Wmw do
     task :mail do
         transaction do
-            run "echo 'Deploiement en #{stage} realise' | mail -s 'WMW > Deploiement realise' david@wantmore.work kzerbib@gmail.com qutn.burgess@gmail.com"
+            # run "echo 'Deploiement en #{stage} realise' | mail -s 'WMW > Deploiement realise' david@wantmore.work kzerbib@gmail.com qutn.burgess@gmail.com"
         end
     end
     task :Composer do
