@@ -36,7 +36,7 @@ parameters:
 
     # Email Sender
     email_sender:       want@more.work
-    email_pre_register: want@more.work
+    email_pre_register: arnaud@wantmore.work
     email_contact:      contact@wamow.co
     email_press:        press@wamow.co
 
