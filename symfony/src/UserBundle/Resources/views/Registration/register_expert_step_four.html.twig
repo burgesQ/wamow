@@ -81,26 +81,27 @@
             $('#app_user_profile_submit').click(function (e, params) {
                 e.preventDefault();
                 swal({
-                    title: "{{ 'user_agreement.title' | trans }}",
-                    html: "<div style='overflow-y: scroll; max-height: 500px; min-height: 300px;'>"
-                    + "{{ 'user_agreement.content' | trans | raw }}"
-                    + "</div>",
+
+                    text: "{{ 'legends.confirmation.work_experience' | trans }}",
+                    type: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3cc3b7',
                     cancelButtonColor: '#362a7e',
-                    confirmButtonText: "{{ 'user_agreement.accept' | trans }}",
-                    cancelButtonText: "{{ 'user_agreement.delcine' | trans }}"
+                    confirmButtonText: "{{ 'user_agreement.confirm' | trans }}",
+                    cancelButtonText: "{{ 'user_agreement.wait_a_few' | trans }}"
                 }).then(
                     function (value) {
                         if (value == true) {
                             swal({
-                                text: "{{ 'legends.confirmation.work_experience' | trans }}",
-                                type: 'warning',
+                                title: "{{ 'user_agreement.title' | trans }}",
+                                html: "<div style='overflow-y: scroll; max-height: 500px; min-height: 300px;'>"
+                                + "{{ 'user_agreement.content' | trans | raw }}"
+                                + "</div>",
                                 showCancelButton: true,
                                 confirmButtonColor: '#3cc3b7',
                                 cancelButtonColor: '#362a7e',
-                                confirmButtonText: "{{ 'user_agreement.confirm' | trans }}",
-                                cancelButtonText: "{{ 'user_agreement.wait_a_few' | trans }}"
+                                confirmButtonText: "{{ 'user_agreement.accept' | trans }}",
+                                cancelButtonText: "{{ 'user_agreement.delcine' | trans }}"
                             }).then(
                                 function (value) {
                                     if (value == true) {
