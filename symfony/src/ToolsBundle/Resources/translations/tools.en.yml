@@ -475,6 +475,9 @@ user_agreement:
 
     accept: "I have read and I accept the user agreement"
     delcine: "I have read and I decline the user agreement"
+    confirm: "Let's do it"
+    wait_a_few: "Edit my information"
+    it_s_over: "Once submitted and until the v2, you cannot edit those information"
 
 ## Base
 header:
