@@ -74,32 +74,27 @@
                 {{ form_errors(form.continents) }}
             </div>
 
-            <div class="wmw-fieldrow wmw-selectrow row">
+
+            <div class="wmw-fieldrow row">
                 <label class="wmw-label wmw-label--topmobile col-xs-12 col-sm-5">{{ 'mission.new.label.applicationEnding' | trans }}</label>
                 <div class="col-xs-12 col-md-6 row">
-                    {% for key, val in form.applicationEnding | reverse %}
-                        {{ form_widget(val, { 'attr' : { 'class' : 'col-xs-4 required' }}) }}
-                    {% endfor %}
+                    {{ form_widget(form.applicationEnding, {'attr': { 'class': ' col-xs-12 col-md-6'}}) }}
                 </div>
                 {{ form_errors(form.applicationEnding) }}
             </div>
 
-            <div class="wmw-fieldrow wmw-selectrow row">
+            <div class="wmw-fieldrow row">
                 <label class="wmw-label wmw-label--topmobile col-xs-12 col-sm-5">{{ 'mission.new.label.missionBeginning' | trans }}</label>
                 <div class="col-xs-12 col-md-6 row">
-                    {% for key, val in form.missionBeginning | reverse %}
-                        {{ form_widget(val, { 'attr' : { 'class' : 'col-xs-4 required' }}) }}
-                    {% endfor %}
+                    {{ form_widget(form.missionBeginning, {'attr': { 'class': ' col-xs-12 col-md-6'}}) }}
                 </div>
                 {{ form_errors(form.missionBeginning) }}
             </div>
 
-            <div class="wmw-fieldrow wmw-selectrow row">
+            <div class="wmw-fieldrow row">
                 <label class="wmw-label wmw-label--topmobile col-xs-12 col-sm-5">{{ 'mission.new.label.missionEnding' | trans }}</label>
                 <div class="col-xs-12 col-md-6 row">
-                    {% for key, val in form.missionEnding | reverse %}
-                        {{ form_widget(val, { 'attr' : { 'class' : 'col-xs-4 required'}}) }}
-                    {% endfor %}
+                    {{ form_widget(form.missionEnding, {'attr': { 'class': ' col-xs-12 col-md-6'}}) }}
                 </div>
                 {{ form_errors(form.missionEnding) }}
             </div>
@@ -163,9 +158,67 @@
     <script type="text/javascript">
 
         $(document).ready(function() {
+
             sortSelectOptions('#step_two_form_professionalExpertise', true);
             sortSelectOptions('#step_two_form_currency', false);
+
+            $( ".myDatePicker" ).datepicker({
+                defaultDate: "+1w",
+                changeMonth: true,
+                numberOfMonths: 2
+            });
+
+            var dateFormat = "mm/dd/yy",
+                from = $( "#step_two_form_applicationEnding" )
+                    .datepicker({
+                        defaultDate: "+1w",
+                        changeMonth: true,
+                        numberOfMonths: 2
+                    })
+                    .on( "change", function() {
+                        var date = getDate( this );
+
+                        to.datepicker( "option", "minDate", getDate( this ));
+                        date.setDate(getDate( this ).getDate() + 1);
+                        to.datepicker( "setDate", date );
+
+                        end.datepicker( "option", "minDate", getDate( this ));
+                        date.setDate(getDate( this ).getDate() + 2);
+                        end.datepicker( "setDate", date );
+
+                        from.removeClass("invalid");
+
+                    }),
+                to = $( "#step_two_form_missionBeginning" )
+                    .datepicker({
+                        changeMonth: true,
+                        numberOfMonths: 2
+                    })
+                    .on( "change", function() {
+                        var date = getDate( this );
+
+                        end.datepicker( "option", "minDate", getDate( this ));
+                        date.setDate(getDate( this ).getDate() + 1);
+                        end.datepicker( "setDate", date );
+                    }),
+                end = $( "#step_two_form_missionEnding" )
+                    .datepicker({
+                        changeMonth: true,
+                        numberOfMonths: 2
+                    });
+
+            function getDate( element ) {
+                var date;
+                try {
+                    date = $.datepicker.parseDate( dateFormat, element.value );
+                } catch( error ) {
+                    date = null;
+                }
+
+                return date;
+            }
         });
+
 
     </script>
 
