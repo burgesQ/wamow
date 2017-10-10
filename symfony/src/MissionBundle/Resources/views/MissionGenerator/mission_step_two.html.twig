@@ -162,19 +162,18 @@
             sortSelectOptions('#step_two_form_professionalExpertise', true);
             sortSelectOptions('#step_two_form_currency', false);
 
-            $( ".myDatePicker" ).datepicker({
+            var arrayOpt = {
                 defaultDate: "+1w",
                 changeMonth: true,
+                changeYear: true,
                 numberOfMonths: 2
-            });
+            };
+
+            $( ".myDatePicker" ).datepicker(arrayOpt);
 
             var dateFormat = "mm/dd/yy",
                 from = $( "#step_two_form_applicationEnding" )
-                    .datepicker({
-                        defaultDate: "+1w",
-                        changeMonth: true,
-                        numberOfMonths: 2
-                    })
+                    .datepicker(arrayOpt)
                     .on( "change", function() {
                         var date = getDate( this );
 
@@ -190,10 +189,7 @@
 
                     }),
                 to = $( "#step_two_form_missionBeginning" )
-                    .datepicker({
-                        changeMonth: true,
-                        numberOfMonths: 2
-                    })
+                    .datepicker(arrayOpt)
                     .on( "change", function() {
                         var date = getDate( this );
 
@@ -202,10 +198,7 @@
                         end.datepicker( "setDate", date );
                     }),
                 end = $( "#step_two_form_missionEnding" )
-                    .datepicker({
-                        changeMonth: true,
-                        numberOfMonths: 2
-                    });
+                    .datepicker(arrayOpt);
 
             function getDate( element ) {
                 var date;
