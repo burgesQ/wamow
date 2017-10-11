@@ -94,7 +94,7 @@ footer:
 
 legends:
     title: |
-        75% des experts enregistrés sur Consultants.wantmore.work répondent à une première proposition de mission sous 5 jours.
+        75% des experts enregistrés sur wamow.co répondent à une première proposition de mission sous 5 jours.
     content: |
         The main mission of wamow.co is matching corporations in need of consulting with experts presenting the initial proposal for a long-lasting solution.
         We will give you the opportunity to interact with these corporations and highlight your know-how and expertise through simple and direct dialogue. 
@@ -189,7 +189,7 @@ home:
             second: "Build a world of opportunities"
         howdoesitwork: "How does it work?"
         start:
-            text: "Describe your issue and tell us about your project. If you wish, we’ll assist you defining your professional need. wamow.co will push your pitch to the best fitting experts."
+            text: "Describe your issue and tell us about your project. If you wish, we’ll assist you defining your professional need. Wamow.co will push your pitch to the best fitting experts."
         play:
             text: "You receive (initially) anonymous answers from experts in 72 hours. Use wamow.co to discuss and share information, in order to refine your pitch."
         improve:
@@ -572,7 +572,7 @@ mission:
             subtitle: ''
             hint: ""
             introduction: |
-                wamow.co is a BestAdvizor SAS brand, whose capital worth is 51.000 EUR
+                Wamow.co is a BestAdvizor SAS brand, whose capital worth is 51.000 EUR
                 – RCS Paris 815 362 736 – Company Seat: 18b Avenue de Versailles 75016 Paris Offices: 18
                 Avenue Franklin D. Roosevelt 75008 Paris.
             person: I, the undersigned
@@ -662,7 +662,7 @@ mission:
         
         shortlist_added: You are among the 3 best fitting Experts selected to continue the interaction about %title.
                          The client would like to learn more about your proposal.
-        my_selection_added: You have been chosen by the Corportation for the mission %title. The team at wamow.co send you their most sincere Congratulations  !
+        my_selection_added: You have been chosen by the Corportation for the mission %title. The team at wamow.co sends you their most sincere Congratulations  !
         no_mission: "You have not published any mission yet! Create your first pitch!"
 
 ## Inbox
@@ -1202,7 +1202,7 @@ notification:
 about:
     title: About us
     team: Our team
-    content: "wamow.co is the first automated business oriented match-making platform that offers the quality of human interaction combined with the power of digital growth. wamow.co sets new standards to professional matchmaking online solutions oriented towards deal closing.<br>
+    content: "Wamow.co is the first automated business oriented match-making platform that offers the quality of human interaction combined with the power of digital growth. Wamow.co sets new standards to professional matchmaking online solutions oriented towards deal closing.<br>
         wamow.co is the best place on the web to present one’s need and the best place to emphasize one’s expertise through the proposal of a solution to the the counterpart’s need. We provide medium and small sized companies access to the same firepower that big groups enjoy.<br>
         Thanks to its top quality algorithms and more than 30 years of ad hoc experience wamow.co helps understand and present the key points of your need and find the experts able to guide you through the reformulation and the implementation of your business issue.<br>
         We are now at the intersection of two worlds, a work environment that changes for the long run, that of long careers within the same firm, that of mono-activity, that also of an income based on returns from the prestige of your degree.<br> We are entering a world made of multi-activities, a world in which technology can be your worst enemy, or your best ally.<br>
