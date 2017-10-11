@@ -381,6 +381,11 @@
 				max-width: 100%;
 				margin: 95px auto 25px auto;
 			}
+			&.wrap-img-parteners--advisor {
+				img {
+					margin: 0px auto 25px auto;
+				}
+			}
 		}
 		.top-title {
 			font-family: $font-family-secondary;
