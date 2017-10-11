@@ -74,13 +74,14 @@
     {{ parent() }}
     <script type="text/javascript">
         $(document).ready(function(){
-            swal({
-                title: "{{ 'legends.pop_up.check_spam_title' | trans }}",
-                text: "{{ 'legends.pop_up.check_spam' | trans }}"
-            });
 
             sortUnorderedList("list", false);
 
+            swal({
+                text: "{{ 'legends.pop_up.check_spam' | trans }}",
+                type: 'success',
+                confirmButtonColor: '#3cc3b7'
+            });
 
         });
     </script>

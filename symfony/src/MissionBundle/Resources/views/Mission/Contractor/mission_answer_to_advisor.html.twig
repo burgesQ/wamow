@@ -27,7 +27,8 @@
                 2. {{ 'mission.view.contractor.status_shortlist' | trans | upper }}
                 {% if step.position == 1 and shortlisted > 0 %}
                     <a href="{{ path('mission_shortlist', { 'missionId' : mission.id }) }}"
-                       onclick="return confirm('{{ 'legends.confirmation.proceed' | trans }}')">
+                       {#onclick="return confirm('{{ 'legends.confirmation.proceed' | trans }}')"#}
+                    >
                         <button class="wmw-button wmw-button--black wmw-button--border wmw-button--small">
                         <i></i><span>
                             {{ 'mission.view.contractor.btn_proced_to_shortlist' | trans | upper }}

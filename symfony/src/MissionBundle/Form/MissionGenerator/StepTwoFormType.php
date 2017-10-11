@@ -73,42 +73,35 @@ class StepTwoFormType extends AbstractType
                     'minMessage' => 'user.continent.min',
                 ])
             ])
+
+            ->add('applicationEnding', DateType::class, [
+                'translation_domain' => 'tools',
+                'format'             => 'MM/dd/yyyy',
+                'label'              => 'mission.new.label.applicationEnding',
+                'widget' => 'single_text',
+                'attr' => [
+                    'class' => 'myDatePicker'
+                ]
+            ])
             ->add('missionBeginning', DateType::class, [
                 'translation_domain' => 'tools',
-                'placeholder'        => [
-                    'month' => 'mission.new.label.chooseMonth',
-                    'year'  => 'mission.new.label.chooseYear',
-                    'day'   => 'mission.new.label.chooseDay'
-                ],
-                'pattern'            => "{{ month }}/{{ day }}/{{ year }}",
-                'format'             => 'MMddyyyy',
+                'format'             => 'MM/dd/yyyy',
                 'label'              => 'mission.new.label.missionBeginning',
-                'years'              => range(date('Y'), date('Y') + 5)
+                'widget' => 'single_text',
+                'attr' => [
+                    'class' => 'myDatePicker'
+                ]
             ])
             ->add('missionEnding', DateType::class, [
                 'translation_domain' => 'tools',
-                'placeholder'        => [
-                    'month' => 'mission.new.label.chooseMonth',
-                    'year'  => 'mission.new.label.chooseYear',
-                    'day'   => 'mission.new.label.chooseDay'
-                ],
-                'pattern'            => "{{ month }}/{{ day }}/{{ year }}",
-                'format'             => 'MMddyyyy',
+                'format'             => 'MM/dd/yyyy',
                 'label'              => 'mission.new.label.missionEnding',
-                'years'              => range(date('Y'), date('Y') + 5)
+                'widget' => 'single_text',
+                'attr' => [
+                    'class' => 'myDatePicker'
+                ]
             ])
-            ->add('applicationEnding', DateType::class, [
-                'translation_domain' => 'tools',
-                'placeholder'        => [
-                    'month' => 'mission.new.label.chooseMonth',
-                    'year'  => 'mission.new.label.chooseYear',
-                    'day'   => 'mission.new.label.chooseDay'
-                ],
-                'pattern'            => "{{ month }}/{{ day }}/{{ year }}",
-                'format'             => 'MMddyyyy',
-                'label'              => 'mission.new.label.applicationEnding',
-                'years'              => range(date('Y'), date('Y') + 5)
-            ])
+
             ->add('confidentiality', CheckboxType::class, [
                 'required' => false,
                 'label'    => false,
