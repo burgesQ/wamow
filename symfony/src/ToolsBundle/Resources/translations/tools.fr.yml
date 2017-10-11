@@ -34,6 +34,8 @@ form:
         cancel: Annuler
         confirm: Confirmer
         show_password: Voir mot de passe
+        ok: "Ok"
+        decline: Refuser
 
     note:
         saved: Enregistré
@@ -109,6 +111,7 @@ legends:
         proceed: Voulez vous confirmer cette action?
         work_experience: Voulez vous confirmer cette action? Une fois soumis cettes information ne sont plus modifiable.
         delete: Voulez vous confirmer cette action?
+        enter_your_card: Payer n'engage pas le fait que vous soyez contacter part une entreprise.
     other: Autre
     pop_up:
         check_spam: Un e-mail vous a été envoyé contenant votre mot de passe. Vérifiez votre boite de réception et votre boite spam.

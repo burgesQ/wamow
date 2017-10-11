@@ -75,6 +75,25 @@
           // Submit the form
           form.submit();
         }
+        {% if matched > 9 %}
+        $("#submit_card").click(function (e, params) {
+            e.preventDefault();
+            swal({
+                text: "{{ 'legends.confirmation.enter_your_card' | trans }}",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3cc3b7',
+                cancelButtonColor: '#362a7e',
+                confirmButtonText: "{{ 'form.btn.ok' | trans }}",
+                cancelButtonText: "{{ 'form.btn.decline' | trans }}"
+            }).then(
+                function (value) {
+                    if (value == true) {
+                        $("#payment-form").submit()
+                    }
+                });
+        });
+        {% endif %}
         {% endif %}
     </script>
 {% endblock %}
@@ -229,7 +248,7 @@
                                             <div id="card-errors" role="alert"></div>
 
                                         </div>
-                                        <button type="submit" class="wmw-button wmw-button--grey"><i></i><span>{{ 'form.btn.subscribe' | trans }}</span><i></i></button>
+                                        <button id="submit_card" type="submit" class="wmw-button wmw-button--grey"><i></i><span>{{ 'form.btn.subscribe' | trans }}</span><i></i></button>
                                     </form>
                                 </div>
                             {% endif %}
