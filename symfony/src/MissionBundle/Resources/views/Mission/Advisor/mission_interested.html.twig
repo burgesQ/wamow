@@ -40,7 +40,23 @@
             card.addEventListener('change', function(event) {
               var displayError = document.getElementById('card-errors');
               if (event.error) {
-                displayError.textContent = event.error.message;
+
+                  var errorMessages = {
+                      incorrect_number: "{{ 'payment.error.incorrect_number' | trans }}",
+                      invalid_number: "{{ 'payment.error.invalid_number' | trans }}",
+                      invalid_expiry_month: "{{ 'payment.error.invalid_expiry_month' | trans }}",
+                      invalid_expiry_year: "{{ 'payment.error.invalid_expiry_year' | trans }}",
+                      invalid_cvc: "{{ 'payment.error.invalid_cvc' | trans }}",
+                      expired_card: "{{ 'payment.error.expired_card' | trans }}",
+                      incorrect_cvc: "{{ 'payment.error.incorrect_cvc' | trans }}",
+                      incorrect_zip: "{{ 'payment.error.incorrect_zip' | trans }}",
+                      card_declined: "{{ 'payment.error.card_declined' | trans }}",
+                      missing: "{{ 'payment.error.missing' | trans }}",
+                      processing_error: "{{ 'payment.error.processing_error' | trans }}",
+                      rate_limit: "{{ 'payment.error.rate_limit' | trans }}"
+                  };
+
+                  displayError.textContent = errorMessages[event.error.code];
               } else {
                 displayError.textContent = '';
               }
