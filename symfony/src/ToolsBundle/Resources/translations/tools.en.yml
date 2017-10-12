@@ -1038,14 +1038,10 @@ mails:
     registration:
         contractor_new_password: " We confirm the creation of your account.
         Your password is: %password
-        If you have not done so already, please take the time to complete your profile.
-
-        The team at wamow.co!"
+        If you have not done so already, please take the time to complete your profile."
         advisor_new_password: " We confirm the creation of your account.
         Your password is: %password
-        If you have not done so already, please take the time to complete your profile. That will boost your visibility!
-
-        The team at wamow.co!"
+        If you have not done so already, please take the time to complete your profile. That will boost your visibility!"
 
     inbox:
         new_message_mission: Your message has been answerwed on the mission %title.
@@ -1054,7 +1050,7 @@ mails:
             Link Log In
             The team at wamow.co
         link: Click here to check it.
-        the_team: The team.
+        the_team: The team at wamow.co!
         link: "Go check it :"
     subject:
            new_message: New message !
