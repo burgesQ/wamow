@@ -36,6 +36,7 @@ form:
         show_password: Show password
         ok: ok
         decline: decline
+        upload_pic: Upload picture
 
     note:
         saved: Saved

@@ -14,13 +14,24 @@
                         <img src="{{ asset(image.webPath()) }}"/>
                     {% endif %}
                 {% else %}
-                    <img src="{{ asset('images/' ~ random(['placeholder-pp-0.png', 'placeholder-pp-1.png', 'placeholder-pp-2.png', 'placeholder-pp-3.png'])) }}"/>
+                    <img src="{{ asset('images/' ~
+                    random(['placeholder-pp-0.png', 'placeholder-pp-1.png',
+                    'placeholder-pp-2.png', 'placeholder-pp-3.png'])) }}"/>
                 {% endif %}
             </div>
-            {{ form_widget(form.image.file) }}
-            {{ form_errors(form.image.file) }}
+            
+            <div class="wmw-uploadfield row">
+                <a type="button" href="#"  class="wmw-button wmw-button--small"
+                   onclick="document.getElementById('upload_input').click(); return false;">
+                    <span><i></i>
+                        {{ 'form.btn.upload_pic' | trans }}
+                    </span><i></i>
+                </a>
+                <div class="wmw-uploadfield-val"></div>
+                {{ form_widget(form.image.file, { id : "upload_input", attr : { style: "visibility: hidden;" } }) }}
+                {{ form_errors(form.image.file) }}
 
-            {# head profile#}
+            </div>
             <div class="wmw-profile-header-name">{{ user.firstName }}<br/>{{ user.lastName | upper }}</div>
 
             <div class="wmw-profile-header-button">

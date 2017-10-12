@@ -36,6 +36,7 @@ form:
         show_password: Voir mot de passe
         ok: "Ok"
         decline: Refuser
+        upload_pic: Selectionner une photo
 
     note:
         saved: Enregistré
