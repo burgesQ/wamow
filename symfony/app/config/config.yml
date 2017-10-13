@@ -110,7 +110,7 @@ fos_user:
         email:
             template:   UserBundle:Reset:password_resetting.email.twig
             from_email:
-                address:        "%email_sender"
+                address:        "%email_sender%"
                 sender_name:    Reset link
     from_email:
         address:        "%email_sender%" # put a valid mail address

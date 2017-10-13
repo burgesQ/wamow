@@ -151,7 +151,9 @@ class MissionController extends Controller
                     return $this->render('@Mission/Mission/Advisor/mission_interested.html.twig', [
                         'user_mission'         => $userMission,
                         'form'                 => $form->createView(),
-                        'stripePublishableKey' => $this->container->getParameter("stripe_publishable_key")
+                        'stripePublishableKey' => $this->container->getParameter("stripe_publishable_key"),
+                        'matched'              => count($userMissionRepo->findAllAtLeastThan($mission,
+                            UserMission::ONGOING))
                     ]);
                 // user have subscribe, he can send a message
                 case ($userMissionStatus === UserMission::MATCHED && $user->getPayment()) :
@@ -548,7 +550,9 @@ class MissionController extends Controller
             }
 
             $this->get('inbox.services')->sendMessage($user,
-                $trans->trans('mission.message.selected', [], 'tools'), $userMission->getThread());
+                $trans->trans('mission.message.my_selection_added', ['%title' => $trans->trans(
+                    $mission->getTitle(), [], 'tools'
+                )], 'tools'), $userMission->getThread());
             $userMission->setStatus(UserMission::FINALIST);
             $mission->setNbOngoing(1);
             $nStep->setStatus(1);
@@ -603,7 +607,10 @@ class MissionController extends Controller
             && count($userMissionRepo->findAllAtLeastThan($mission, UserMission::SHORTLIST)) < $nStep->getNbMaxUser()) {
 
             $this->get('inbox.services')->sendMessage($user,
-                $trans->trans('mission.message.shortlist_added', [], 'tools'), $userMission->getThread());
+                $trans->trans('mission.message.shortlist_added', ['%title' => $trans->trans(
+                    $mission->getTitle(), [], 'tools'
+                )], 'tools'),
+                $userMission->getThread());
             $userMission->setStatus(UserMission::SHORTLIST);
             $em->flush();
 

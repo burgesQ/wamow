@@ -4,6 +4,8 @@
 /*include /libs/jquery.autocomplete.js*/
 /*include /libs/sweetalert2.js*/
 /*include /libs/modernizr.js*/
+/*include /libs/jquery-ui.js*/
+
 
 // --------------------- MASTER PART -------------------------- //
 // ------------------------------------------------------------ //

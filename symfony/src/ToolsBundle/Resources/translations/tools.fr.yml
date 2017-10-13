@@ -34,6 +34,9 @@ form:
         cancel: Annuler
         confirm: Confirmer
         show_password: Voir mot de passe
+        ok: "Ok"
+        decline: Refuser
+        upload_pic: Selectionner une photo
 
     note:
         saved: Enregistré
@@ -109,6 +112,7 @@ legends:
         proceed: Voulez vous confirmer cette action?
         work_experience: Voulez vous confirmer cette action? Une fois soumis cettes information ne sont plus modifiable.
         delete: Voulez vous confirmer cette action?
+        enter_your_card: Payer n'engage pas le fait que vous soyez contacter part une entreprise.
     other: Autre
     pop_up:
         check_spam: Un e-mail vous a été envoyé contenant votre mot de passe. Vérifiez votre boite de réception et votre boite spam.
@@ -1123,6 +1127,19 @@ payment:
     pls_there: Souscrire 
     subscribe: Souscrire
     help: Je confirme avoir pris connaissance des CGU de wamow.co et les accepter. Je valide mon inscription au site en réglant l’abonnement annuel pour un montant de 240 euros (20 euros x 12 mois) H.T. auprès de la société BestAdvizor SAS qui exploite le site wamow.co
+    error:
+        incorrect_number: "Le numeros de carte est is incorrect."
+        invalid_number: "Le numeros de carte ne correspond a aucune carte valide."
+        invalid_expiry_month: "Le mois d'expiration de la carte est invalide."
+        invalid_expiry_year: "L'annee d'expiration de la carte est invalide."
+        invalid_cvc: "Le code de securitee de la carte est invalide."
+        expired_card: "La carte a expiree."
+        incorrect_cvc: "Le numeros de securitee est incorrect."
+        incorrect_zip: "Echec de la validation du ZIP code."
+        card_declined: "La carte a ete declinee."
+        missing: "There is no card on a customer that is being charged."
+        processing_error: "Une erreure est survenue lors du traitement de votre demande."
+        rate_limit:  "An error occurred due to requests hitting the API too quickly. Please let us know if you're consistently running into this error."
 
 # NewsLetter
 newsletter:
