@@ -62,21 +62,49 @@
               }
             });
 
+            {% if matched > 5 %}
+            $("#submit_card").click(function (e, params) {
+                e.preventDefault();
+                swal({
+                    text: "{{ 'legends.confirmation.enter_your_card' | trans }}",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3cc3b7',
+                    cancelButtonColor: '#362a7e',
+                    confirmButtonText: "{{ 'form.btn.ok' | trans }}",
+                    cancelButtonText: "{{ 'form.btn.decline' | trans }}"
+                }).then(
+                    function (value) {
+                        if (value == true) {
+                            stripe.createToken(card).then(function(result) {
+                                if (result.error) {
+                                    // Inform the user if there was an error
+                                    var errorElement = document.getElementById('card-errors');
+                                    errorElement.textContent = result.error.message;
+                                } else {
+                                    // Send the token to your server
+                                    stripeTokenHandler(result.token);
+                                }
+                            });
+                        }
+                    });
+            });
+            {% endif %}
+
             // Create a token or display an error when the form is submitted.
             var form = document.getElementById('payment-form');
             form.addEventListener('submit', function(event) {
               event.preventDefault();
-
-              stripe.createToken(card).then(function(result) {
-                if (result.error) {
-                  // Inform the user if there was an error
-                  var errorElement = document.getElementById('card-errors');
-                  errorElement.textContent = result.error.message;
-                } else {
-                  // Send the token to your server
-                  stripeTokenHandler(result.token);
-                }
-              });
+                stripe.createToken(card).then(function(result) {
+                    if (result.error) {
+                        // Inform the user if there was an error
+                        var errorElement = document.getElementById('card-errors');
+                        errorElement.textContent = result.error.message;
+                    } else {
+                        // Send the token to your server
+                        stripeTokenHandler(result.token);
+                    }
+                });
             });
         });
         function stripeTokenHandler(token) {
@@ -91,25 +119,6 @@
           // Submit the form
           form.submit();
         }
-        {% if matched > 9 %}
-        $("#submit_card").click(function (e, params) {
-            e.preventDefault();
-            swal({
-                text: "{{ 'legends.confirmation.enter_your_card' | trans }}",
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3cc3b7',
-                cancelButtonColor: '#362a7e',
-                confirmButtonText: "{{ 'form.btn.ok' | trans }}",
-                cancelButtonText: "{{ 'form.btn.decline' | trans }}"
-            }).then(
-                function (value) {
-                    if (value == true) {
-                        $("#payment-form").submit()
-                    }
-                });
-        });
-        {% endif %}
         {% endif %}
     </script>
 {% endblock %}
