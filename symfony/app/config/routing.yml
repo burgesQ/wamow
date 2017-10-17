@@ -29,3 +29,15 @@ dummy_users:
     path:      /newsletters
     defaults:
         _controller: HomePageBundle:Default:noLocalNewsletter
+
+# Those are WP stuffs.. They'll be removed in the futur
+
+dummy_sign_up:
+    path:      /sign-up/
+    defaults:
+        _controller: HomePageBundle:Default:dummySignUp
+
+dummy_contact:
+    path:      /contact/
+    defaults:
+        _controller: HomePageBundle:Default:dummyContact
