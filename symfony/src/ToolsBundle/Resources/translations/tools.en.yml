@@ -1033,23 +1033,16 @@ mission_title:
 
 ## Mails template
 mails:
-    contracot_hello: Hello %f_name %l_name %c_name!
-    advisor_hello: Hello %f_name %l_name !
-    hello: Hello %f_name %l_name !
+    contracot_hello: "Hello %f_name %l_name %c_name!"
+    advisor_hello: "Hello %f_name %l_name !"
+    hello: "Hello %f_name %l_name !"
     registration:
-        contractor_new_password: " We confirm the creation of your account.
-        Your password is: %password
-        If you have not done so already, please take the time to complete your profile."
-        advisor_new_password: " We confirm the creation of your account.
-        Your password is: %password
-        If you have not done so already, please take the time to complete your profile. That will boost your visibility!"
+        contractor_new_password: " We confirm the creation of your account.\nYour password is: %password .\n\nIf you have not done so already, please take the time to complete your profile."
+        advisor_new_password: " We confirm the creation of your account.\nYour password is: %password .\n\nIf you have not done so already, please take the time to complete your profile. That will boost your visibility!"
 
     inbox:
-        new_message_mission: Your message has been answerwed on the mission %title.
-        new_pitcher: |
-            An expert answered to your Pitch, %title.
-            Link Log In
-            The team at wamow.co
+        new_message_mission: "Your message has been answered on the mission %title."
+        new_pitcher: "An expert answered to your Pitch, %title.\nLink Log In\nThe team at wamow.co\n"
         link: Click here to check it.
         the_team: The team at wamow.co!
         link: "Go check it :"
