@@ -1028,32 +1028,19 @@ mission_title:
 
 ## Mails template
 mails:
-    contracot_hello: Bonjour %f_name %l_name %c_name!
-    advisor_hello: Bonjour %f_name %l_name !
-    hello: Bonjour %f_name %l_name !
+    contracot_hello: "Bonjour %f_name %l_name %c_name!"
+    advisor_hello: "Bonjour %f_name %l_name !"
+    hello: "Bonjour %f_name %l_name !"
     registration:
-        contractor_new_password: " Nous vous confirmons la création de votre compte. 
-        Votre mot de passe est : %password
-        
-        Si ce n’est déjà fait pensez à compléter votre profil !"
+        contractor_new_password: " Nous vous confirmons la création de votre compte.\nVotre mot de passe est : %password .\n\nSi ce n’est déjà fait pensez à compléter votre profil !"
       
-        advisor_new_password: " Nous vous confirmons la création de votre compte. 
-        
-        Votre mot de passe est : %password
-        
-        Si ce n’est déjà fait pensez à compléter votre profil pour améliorer votre visibilité !"
+        advisor_new_password: " Nous vous confirmons la création de votre compte.\nVotre mot de passe est : %password .\n\nSi ce n’est déjà fait pensez à compléter votre profil pour améliorer votre visibilité !"
         
                 
 
     inbox:
-        new_message_mission: Réponse à votre consultation !
-        new_pitcher: |
-            "Nous vous informons que vous avez reçu une réponse à votre consultation, %title
-            
-            lien pour se connecter  
-            
-            L’équipe de wamow.co
-            
+        new_message_mission: "Réponse à votre consultation !"
+        new_pitcher: "Nous vous informons que vous avez reçu une réponse à votre consultation, %title\nlien pour se connecter.\nL’équipe de wamow.co"
         link: Cliquer ici pour y acceder.
         the_team: L’équipe de wamow.co.
         link: "Go check it :"

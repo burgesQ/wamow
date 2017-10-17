@@ -206,7 +206,12 @@
                             $(".mail-content-chat").stop().animate({scrollTop: $(".mail-content-chat")[0].scrollHeight}, 1000);
                         });
                     } else {
-                        alert("You cannot send url");
+                        swal({
+                            text: "{{ 'error.message.url' | trans }}",
+                            type: 'warning',
+                            confirmButtonColor: '#3cc3b7',
+                            confirmButtonText: "{{ 'form.btn.ok' | trans }}"
+                        });
                     }
                 }
             });

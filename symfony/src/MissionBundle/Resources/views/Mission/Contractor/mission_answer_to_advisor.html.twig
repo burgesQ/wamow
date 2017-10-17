@@ -27,7 +27,6 @@
                 2. {{ 'mission.view.contractor.status_shortlist' | trans | upper }}
                 {% if step.position == 1 and shortlisted > 0 %}
                     <a href="{{ path('mission_shortlist', { 'missionId' : mission.id }) }}"
-                       {#onclick="return confirm('{{ 'legends.confirmation.proceed' | trans }}')"#}
                     >
                         <button class="wmw-button wmw-button--black wmw-button--border wmw-button--small">
                         <i></i><span>
@@ -190,18 +189,18 @@
 
                                 {% if userMission.status != constant('SHORTLIST', userMission) %}
 
-                                    <a href="{{ path('user_mission_refuse', { 'userMissionId' : userMission.id }) }}"
-                                       class="wmw-button wmw-button--red wmw-button--border wmw-button--small"
-                                       onclick="return confirm('{{ 'legends.confirmation.refuse_user' | trans }}')">
+                                    <a class="wmw-button wmw-button--red wmw-button--border wmw-button--small"
+                                       onclick="return swalConfirm('{{ 'legends.confirmation.refuse_user' | trans }}',
+                                         '{{ path('user_mission_refuse', { 'userMissionId' : userMission.id }) }}' )">
                                         <i></i><span>
                                             <i class="icon icon--cross"></i>
                                             {{ 'mission.view.contractor.btn_refuse' | trans }}
                                         </span><i></i>
                                     </a>
                                     {% if shortlisted < 3 %}
-                                        <a href="{{ path('user_mission_add_to_shortlist', { 'userMissionId' : userMission.id }) }}"
-                                           class="wmw-button wmw-button--green wmw-button--border wmw-button--small"
-                                           onclick="return confirm('{{ 'legends.confirmation.add_user' | trans }}')">
+                                        <a class="wmw-button wmw-button--green wmw-button--border wmw-button--small"
+                                           onclick="return swalConfirm('{{ 'legends.confirmation.add_user' | trans }}',
+                                                   '{{ path('user_mission_add_to_shortlist', { 'userMissionId' : userMission.id }) }}')">
                                             <i></i><span>
                                                 <i class="icon icon--star"></i>
                                                 {{ 'mission.view.contractor.btn_add_to_shortlist' | trans | upper }}
@@ -210,9 +209,9 @@
                                     {% endif %}
                                 {% else %}
 
-                                    <a href="{{ path('user_mission_remove_from_shortlist', { 'userMissionId' : userMission.id }) }}"
-                                       class="wmw-button wmw-button--red wmw-button--border wmw-button--small"
-                                       onclick="return confirm('{{ 'legends.confirmation.remove_user' | trans }}')">
+                                    <a class="wmw-button wmw-button--red wmw-button--border wmw-button--small"
+                                       onclick="return swalConfirm('{{ 'legends.confirmation.remove_user' | trans }}',
+                                               '{{ path('user_mission_remove_from_shortlist', { 'userMissionId' : userMission.id }) }}')">
                                         <i></i><span>
                                             <i class="icon icon--star"></i>
                                             {{ 'mission.view.contractor.btn_remove_from_shortlist' | trans | upper }}
@@ -224,9 +223,9 @@
                     </div>
                         {% elseif step.position == 2 %}
                             <div class="mail-toolbar-buttons">
-                                <a href="{{ path('user_mission_refuse', { 'userMissionId' : userMission.id }) }}"
-                                   class="wmw-button wmw-button--red wmw-button--border wmw-button--small"
-                                   onclick="return confirm('{{ 'legends.confirmation.refuse_user' | trans }}')">
+                                <a class="wmw-button wmw-button--red wmw-button--border wmw-button--small"
+                                   onclick="return swalConfirm('{{ 'legends.confirmation.refuse_user' | trans }}',
+                                           '{{ path('user_mission_refuse', { 'userMissionId' : userMission.id }) }}')">
                                     <i></i><span>
                                         <i class="icon icon--cross"></i>
                                         {{ 'mission.view.contractor.btn_refuse' | trans }}
@@ -396,7 +395,12 @@
                         $(".mail-content-chat").stop().animate({scrollTop: $(".mail-content-chat")[0].scrollHeight}, 1000);
                     });
                 } else {
-                    alert("You cannot send url.");
+                    swal({
+                        text: "{{ 'error.message.url' | trans }}",
+                        type: 'warning',
+                        confirmButtonColor: '#3cc3b7',
+                        confirmButtonText: "{{ 'form.btn.ok' | trans }}"
+                    });
                 }
             }
         }
