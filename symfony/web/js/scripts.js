@@ -23269,6 +23269,23 @@ window.Modernizr = (function( window, document, undefined ) {
 // --------------------- MASTER PART -------------------------- //
 // ------------------------------------------------------------ //
 
+
+function swalConfirm(msg, url) {
+    swal({
+        text: msg,
+        showCancelButton: true,
+        type: 'warning',
+        confirmButtonColor: '#3cc3b7',
+        confirmButtonText: "OK",
+        cancelButtonText: "KO"
+    }).then(
+        function (value) {
+            window.location.href = url;
+            return value;
+        }
+    );
+}
+
 function sortSelectOptions(selector, skip_first) {
 
     var options = (skip_first) ? $(selector + ' option:not(:first)') : $(selector + ' option');

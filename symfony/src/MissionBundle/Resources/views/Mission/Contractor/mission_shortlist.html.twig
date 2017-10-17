@@ -127,24 +127,6 @@
 
                 <div class="wmw-mission-element wmw-mission-element--shortlist">
 
-                    {#<div class="element-buttons">#}
-                        {#<a href="{{ path('user_mission_refuse', { 'userMissionId' : userMission.id }) }}"#}
-                           {#class="wmw-button wmw-button--red wmw-button--border wmw-button--small"#}
-                           {#onclick="return confirm('{{ 'legends.confirmation.refuse_user' | trans }}')">#}
-                            {#<i></i><span>#}
-                                {#<i class="icon icon--cross"></i>#}
-                                {#{{ 'mission.view.contractor.btn_refuse' | trans }}#}
-                            {#</span><i></i>#}
-                        {#</a>#}
-                        {#<a href="{{ path('user_mission_add_to_contract', { 'userMissionId' : userMission.id }) }}"#}
-                           {#class="wmw-button wmw-button--green wmw-button--border wmw-button--small">#}
-                            {#<i></i><span>#}
-                                {#<i class="icon icon--handshake"></i>#}
-                                {#{{ 'mission.view.contractor.btn_contract' | trans | upper }}#}
-                            {#</span><i></i>#}
-                        {#</a>#}
-                    {#</div>#}
-                    
                     <div class="element-title">
                         <a href="{{ path('user_profile_view', { 'missionId' : mission.id, 'userId' : userMission.user.id }) }}">
                             {{ userMission.user.firstName }} {{ userMission.user.lastName }}
@@ -186,9 +168,9 @@
                     </div>
 
                     <div class="element-buttons">
-                        <a href="{{ path('user_mission_refuse', { 'userMissionId' : userMission.id }) }}"
-                           class="wmw-button wmw-button--red wmw-button--border wmw-button--small"
-                           onclick="return confirm('{{ 'legends.confirmation.refuse_user' | trans }}')">
+                        <a class="wmw-button wmw-button--red wmw-button--border wmw-button--small"
+                           onclick="return swalConfirm('{{ 'legends.confirmation.refuse_user' | trans }}',
+                                   '{{ path('user_mission_refuse', { 'userMissionId' : userMission.id }) }}')">
                             <i></i><span>
                                 <i class="icon icon--cross"></i>
                                 {{ 'mission.view.contractor.btn_refuse' | trans }}
