@@ -9,7 +9,6 @@ use Doctrine\ORM\EntityManager;
 use InboxBundle\Entity\Thread;
 use UserBundle\Entity\User;
 use Swift_Message;
-use Swift_Image;
 
 class Services
 {
@@ -160,9 +159,8 @@ class Services
 
         if ($contractor->getNotification()) {
             $trans = $this->container->get('translator');
-            $mail = Swift_Message::newInstance();
-            $imageSrc = $mail->embed(Swift_Image::fromPath('/images/footer-logo.png'));
-            $mail->setSubject($trans->trans('mails.subject.new_message', [], 'tools'))
+            $mail = Swift_Message::newInstance()
+                ->setSubject($trans->trans('mails.subject.new_message', [], 'tools'))
                 ->setFrom($this->container->getParameter('email_sender'))
                 ->setTo($contractor->getEmail())/* put a valid email address there to test */
                 ->setBody($this->container->get('templating')->render('Emails/new_message.html.twig', [
@@ -172,7 +170,6 @@ class Services
                     'roles'         => 'ROLE_CONTRACTOR',
                     'missionId'     => $userMission->getMission()->getId(),
                     'userMissionId' => $userMission->getId(),
-                    'image_src'     => $imageSrc
                 ]), 'text/html');
 
 

@@ -2,8 +2,6 @@
 
 namespace UserBundle\Controller;
 
-use MissionBundle\Entity\UserWorkExperience;
-use Swift_Image;
 use Symfony\Component\HttpFoundation\Session\Storage\PhpBridgeSessionStorage;
 use UserBundle\Form\RegistrationAdvisor\MergedFormRegistrationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -16,6 +14,7 @@ use UserBundle\Form\RegistrationAdvisor\StepTwoType;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
 use Symfony\Component\HttpFoundation\Request;
+use MissionBundle\Entity\UserWorkExperience;
 use Symfony\Component\Form\FormError;
 use ToolsBundle\Entity\UploadResume;
 use FOS\UserBundle\Event\FormEvent;
@@ -108,16 +107,14 @@ class RegistrationAdvisorController extends Controller
                 $em->persist($resume);
                 $em->flush();
 
-                $message = Swift_Message::newInstance();
-                $imageSrc = $message->embed(Swift_Image::fromPath('/images/footer-logo.png'));
-                $message->setSubject($trans->trans('mails.subject.new_password', [], 'tools'))
+                $message = Swift_Message::newInstance()
+                    ->setSubject($trans->trans('mails.subject.new_password', [], 'tools'))
                     ->setFrom($this->container->getParameter('email_sender'))
                     ->setTo($user->getEmail())/* put a valid email address there to test */
                     ->setBody($this->renderView('Emails/new_password.html.twig', [
                         'f_name'   => $user->getFirstName(),
                         'l_name'   => $user->getLastName(),
-                        'password' => $password,
-                        'image_src' => $imageSrc
+                        'password' => $password
                     ]), 'text/html')
                 ;
                 $this->get('mailer')->send($message);
