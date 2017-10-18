@@ -1040,7 +1040,7 @@ mails:
     hello: "Hello %f_name %l_name !"
     registration:
         contractor_new_password: " We confirm the creation of your account.\nYour password is: %password .\n\nIf you have not done so already, please take the time to complete your profile."
-        advisor_new_password: " We confirm the creation of your account.\nYour password is: %password .\n\n1If you have not done so already, please take the time to complete your profile. That will boost your visibility!"
+        advisor_new_password: " We confirm the creation of your account.\nYour password is: %password .\n\nIf you have not done so already, please take the time to complete your profile. That will boost your visibility!"
 
     inbox:
         new_message_mission: "Your message has been answered on the mission %title."
