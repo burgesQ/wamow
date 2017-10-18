@@ -45,7 +45,7 @@ services:
 
     app.user_mission_listener:
         class: MissionBundle\Listener\UserMissionListener
-        arguments: [ '@mailer', '@translator', %email_sender%' ]
+        arguments: [ '@mailer', '@translator', '%email_sender%', '@templating' ]
         tags:
             - { name: doctrine.event_listener, event: preUpdate, method: preUpdate, entity_manager: default  }
 

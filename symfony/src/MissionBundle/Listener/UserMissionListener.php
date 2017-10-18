@@ -4,6 +4,7 @@ namespace MissionBundle\Listener;
 
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use MissionBundle\Entity\UserMission;
+use Swift_Image;
 use Swift_Message;
 
 /**
@@ -29,17 +30,24 @@ class UserMissionListener
     protected $sender;
 
     /**
+     * @var \Symfony\Bundle\TwigBundle\TwigEngine $templating
+     */
+    protected $templating;
+
+    /**
      * UserMissionListener constructor.
      *
      * @param \Swift_Mailer                             $mailer
      * @param \Symfony\Component\Translation\Translator $translator
      * @param string                                    $sender
+     * @param \Symfony\Bundle\TwigBundle\TwigEngine     $templating
      */
-    public function __construct($mailer, $translator, $sender)
+    public function __construct($mailer, $translator, $sender, $templating)
     {
-        $this->mailer = $mailer;
-        $this->trans  = $translator;
-        $this->sender = $sender;
+        $this->mailer     = $mailer;
+        $this->trans      = $translator;
+        $this->sender     = $sender;
+        $this->templating = $templating;
     }
 
     /**
@@ -61,7 +69,6 @@ class UserMissionListener
                 && $event->getNewValue("status") == UserMission::DISMISS) {
                 $this->sendMailAdvisor($event, 'mails.subject.response', 'mails.content.no_finalist');
             }
-
         }
     }
 
@@ -76,15 +83,19 @@ class UserMissionListener
         $userMission = $event->getEntity();
         $advisor     = $userMission->getUser();
         if ($advisor->getNotification()) {
-            $message = Swift_Message::newInstance()
-                ->setSubject($this->trans->trans($title, [], 'tools'))
+            $message = Swift_Message::newInstance();
+            $imageSrc = $message->embed(Swift_Image::fromPath('/images/footer-logo.png'));
+            $message->setSubject($this->trans->trans($title, [], 'tools'))
                 ->setFrom($this->sender)
                 ->setTo($advisor->getEmail())
-                ->setBody($this->trans->trans($content, [
-                    'fName'        => $advisor->getFirstName(),
-                    'lName'        => $advisor->getLastName(),
-                    'missionTitle' => $userMission->getMission()->getTitle()
-                ], 'tools'), 'text');
+                ->setBody($this->templating->render('Emails/classic.html.twig', [
+                    'content' => $this->trans->trans($content, [
+                        'fName'        => $advisor->getFirstName(),
+                        'lName'        => $advisor->getLastName(),
+                        'missionTitle' => $userMission->getMission()->getTitle()
+                    ], 'tools'),
+                    'image_src'     => $imageSrc
+                ]), 'text/html');
             $this->mailer->send($message);
         }
     }
