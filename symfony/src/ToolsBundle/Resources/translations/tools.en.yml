@@ -669,6 +669,7 @@ mission:
         my_selection_added: You have been chosen by the Corportation for the mission %title. The team at wamow.co sends you their most sincere Congratulations  !
         no_mission: "You have not published any mission yet! Create your first pitch!"
         not_enough_messages: "Please continue your conversation - take your time to evaluate the Expert"
+        pls_more_messages: "Please take the time to reply to the Expert's first message. Don't miss out on new possinilities!"
 
 ## Inbox
 inbox:
