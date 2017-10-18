@@ -1034,9 +1034,9 @@ mails:
     advisor_hello: "Bonjour %f_name %l_name !"
     hello: "Bonjour %f_name %l_name !"
     registration:
-        contractor_new_password: "Nous vous confirmons la création de votre compte.<br />Votre mot de passe est : %password .<br /><br />Si ce n’est déjà fait pensez à compléter votre profil !"
+        contractor_new_password: "Nous vous confirmons la création de votre compte.\nVotre mot de passe est : %password .\n\nSi ce n’est déjà fait pensez à compléter votre profil !"
       
-        advisor_new_password: "Nous vous confirmons la création de votre compte.<br />Votre mot de passe est : %password .<br /><br />Si ce n’est déjà fait pensez à compléter votre profil pour améliorer votre visibilité !"
+        advisor_new_password: "Nous vous confirmons la création de votre compte.\nVotre mot de passe est : %password .\n\nSi ce n’est déjà fait pensez à compléter votre profil pour améliorer votre visibilité !"
         
                 
 
