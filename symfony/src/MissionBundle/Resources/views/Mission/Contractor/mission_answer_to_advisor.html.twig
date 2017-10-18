@@ -5,6 +5,7 @@
 
     {% set mission = userMission.mission %}
     {% set user    = userMission.user %}
+    {% set msgCount = (userMission.thread.messages|length) %}
     {% set step = null %}
     {% for oneStep in mission.steps %}
         {% if oneStep.status == 1 %}
@@ -26,8 +27,7 @@
             <span class="breadcrumbs-el{% if step.position > 1 %} active{% endif %}">
                 2. {{ 'mission.view.contractor.status_shortlist' | trans | upper }}
                 {% if step.position == 1 and shortlisted > 0 %}
-                    <a href="{{ path('mission_shortlist', { 'missionId' : mission.id }) }}"
-                    >
+                    <a href="{{ path('mission_shortlist', { 'missionId' : mission.id }) }}">
                         <button class="wmw-button wmw-button--black wmw-button--border wmw-button--small">
                         <i></i><span>
                             {{ 'mission.view.contractor.btn_proced_to_shortlist' | trans | upper }}
@@ -198,14 +198,26 @@
                                         </span><i></i>
                                     </a>
                                     {% if shortlisted < 3 %}
-                                        <a class="wmw-button wmw-button--green wmw-button--border wmw-button--small"
-                                           onclick="return swalConfirm('{{ 'legends.confirmation.add_user' | trans }}',
-                                                   '{{ path('user_mission_add_to_shortlist', { 'userMissionId' : userMission.id }) }}')">
-                                            <i></i><span>
-                                                <i class="icon icon--star"></i>
-                                                {{ 'mission.view.contractor.btn_add_to_shortlist' | trans | upper }}
-                                            </span><i></i>
-                                        </a>
+
+                                        {% if msgCount < 3 %}
+                                            <a class="wmw-button wmw-button--green wmw-button--border wmw-button--small"
+                                               onclick="noup()">
+                                                <i></i><span>
+                                            <i class="icon icon--star"></i>
+                                                    {{ 'mission.view.contractor.btn_add_to_shortlist' | trans | upper }}
+                                        </span><i></i>
+                                            </a>
+                                        {% else %}
+                                            <a class="wmw-button wmw-button--green wmw-button--border wmw-button--small"
+                                               onclick="return swalConfirm('{{ 'legends.confirmation.add_user' | trans }}',
+                                                       '{{ path('user_mission_add_to_shortlist', { 'userMissionId' : userMission.id }) }}')">
+                                                <i></i><span>
+                                            <i class="icon icon--star"></i>
+                                                    {{ 'mission.view.contractor.btn_add_to_shortlist' | trans | upper }}
+                                        </span><i></i>
+                                            </a>
+                                        {% endif%}
+
                                     {% endif %}
                                 {% else %}
 
@@ -365,6 +377,14 @@
     {{ parent() }}
 
     <script type="text/javascript">
+
+        function noup() {
+            swal({
+                text: "{{ 'mission.message.not_enough_messages' | trans }}",
+                type: 'warning',
+                confirmButtonColor: '#3cc3b7'
+            });
+        }
 
 //        AJAX SEND / UPDATE MESSAGE
         function sendMessage() {
