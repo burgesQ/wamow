@@ -30,9 +30,9 @@ class UserMissionListener
     protected $sender;
 
     /**
-     * @var \Symfony\Bundle\TwigBundle\TwigEngine $templating
+     * @var \Symfony\Component\DependencyInjection\Container $container
      */
-    protected $templating;
+    protected $container;
 
     /**
      * UserMissionListener constructor.
@@ -40,14 +40,14 @@ class UserMissionListener
      * @param \Swift_Mailer                             $mailer
      * @param \Symfony\Component\Translation\Translator $translator
      * @param string                                    $sender
-     * @param \Symfony\Bundle\TwigBundle\TwigEngine     $templating
+     * @param $container
      */
-    public function __construct($mailer, $translator, $sender, $templating)
+    public function __construct($mailer, $translator, $sender, $container)
     {
         $this->mailer     = $mailer;
         $this->trans      = $translator;
         $this->sender     = $sender;
-        $this->templating = $templating;
+        $this->container = $container;
     }
 
     /**
@@ -88,7 +88,7 @@ class UserMissionListener
             $message->setSubject($this->trans->trans($title, [], 'tools'))
                 ->setFrom($this->sender)
                 ->setTo($advisor->getEmail())
-                ->setBody($this->templating->render('Emails/classic.html.twig', [
+                ->setBody($this->container->get('templating')->render('Emails/classic.html.twig', [
                     'content' => $this->trans->trans($content, [
                         'fName'        => $advisor->getFirstName(),
                         'lName'        => $advisor->getLastName(),
