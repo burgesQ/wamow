@@ -4,7 +4,6 @@ namespace MissionBundle\Listener;
 
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use MissionBundle\Entity\UserMission;
-use Swift_Image;
 use Swift_Message;
 
 /**
@@ -83,9 +82,8 @@ class UserMissionListener
         $userMission = $event->getEntity();
         $advisor     = $userMission->getUser();
         if ($advisor->getNotification()) {
-            $message = Swift_Message::newInstance();
-            $imageSrc = $message->embed(Swift_Image::fromPath('/images/footer-logo.png'));
-            $message->setSubject($this->trans->trans($title, [], 'tools'))
+            $message = Swift_Message::newInstance()
+                ->setSubject($this->trans->trans($title, [], 'tools'))
                 ->setFrom($this->sender)
                 ->setTo($advisor->getEmail())
                 ->setBody($this->container->get('templating')->render('Emails/classic.html.twig', [
@@ -93,8 +91,7 @@ class UserMissionListener
                         'fName'        => $advisor->getFirstName(),
                         'lName'        => $advisor->getLastName(),
                         'missionTitle' => $userMission->getMission()->getTitle()
-                    ], 'tools'),
-                    'image_src'     => $imageSrc
+                    ], 'tools')
                 ]), 'text/html');
             $this->mailer->send($message);
         }

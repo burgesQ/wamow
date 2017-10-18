@@ -7,7 +7,6 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Swift_Message;
-use Swift_Image;
 
 class ActionController extends Controller
 {
@@ -44,9 +43,8 @@ class ActionController extends Controller
         /** @var \UserBundle\Entity\User $contractor */
         $contractor = $userMission->getMission()->getContact();
         if ($contractor->getNotification()) {
-            $message = Swift_Message::newInstance();
-            $imageSrc = $message->embed(Swift_Image::fromPath('/images/footer-logo.png'));
-            $message->setSubject($trans->trans('mails.subject.new_message', [], 'tools'))
+            $message = Swift_Message::newInstance()
+                ->setSubject($trans->trans('mails.subject.new_message', [], 'tools'))
                 ->setFrom($this->container->getParameter('email_sender'))
                 ->setTo($contractor->getEmail())
                 ->setBody($this->renderView('Emails/new_message.html.twig', [
@@ -56,7 +54,6 @@ class ActionController extends Controller
                     'roles'         => 'ROLE_CONTRACTOR',
                     'missionId'     => $userMission->getMission()->getId(),
                     'userMissionId' => $userMission->getId(),
-                    'image_src'     => $imageSrc
                 ]), 'text/html');
             $this->get('mailer')->send($message);
         }
@@ -109,9 +106,8 @@ class ActionController extends Controller
         $advisor = $userMission->getUser();
 
         if ($advisor->getNotification()) {
-            $message = Swift_Message::newInstance();
-            $imageSrc = $message->embed(Swift_Image::fromPath('/images/footer-logo.png'));
-            $message->setSubject($trans->trans('mails.subject.new_message', [], 'tools'))
+            $message = Swift_Message::newInstance()
+                ->setSubject($trans->trans('mails.subject.new_message', [], 'tools'))
                 ->setFrom($this->container->getParameter('email_sender'))
                 ->setTo($advisor->getEmail())
                 ->setBody($this->renderView('Emails/new_message.html.twig', [
@@ -121,7 +117,6 @@ class ActionController extends Controller
                     'roles'         => 'ROLE_CONTRACTOR',
                     'missionId'     => $userMission->getMission()->getId(),
                     'userMissionId' => $userMission->getId(),
-                    'image_src'     => $imageSrc
                 ]), 'text/html');
 
             $this->get('mailer')->send($message);
