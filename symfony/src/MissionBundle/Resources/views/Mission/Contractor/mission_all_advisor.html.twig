@@ -159,6 +159,7 @@
 
                 {% for userMission in userMissions %}
                     {% set lastMsg = userMission.thread.messages | last %}
+                    {% set msgCount = (userMission.thread.messages|length) %}
 
                     <div class="wmw-mission-element wmw-mission-element--shortlist">
                         <div class="element-title">
@@ -191,8 +192,14 @@
                         <div class="element-buttons">
                             {% if userMission.status != constant('SHORTLIST', userMission) %}
                                 <a class="wmw-button wmw-button--red wmw-button--border wmw-button--small"
-                                   onclick="return swalConfirm('{{ 'legends.confirmation.refuse_user' | trans }}',
-                                           '{{ path('user_mission_refuse', { 'userMissionId' : userMission.id }) }}')">
+                                   onclick="
+                                   {% if msgCount > 1 %}
+                                           return swalConfirm('{{ 'legends.confirmation.refuse_user' | trans }}',
+                                           '{{ path('user_mission_refuse', { 'userMissionId' : userMission.id }) }}')
+                                   {% else %}
+                                           renoup()
+                                   {% endif %}
+                                           ">
                                     <i></i><span>
                                         <i class="icon icon--cross"></i>
                                         {{ 'mission.view.contractor.btn_refuse' | trans }}
@@ -203,12 +210,18 @@
                             {% endif %}
                             {% if userMission.status != constant('SHORTLIST', userMission) and shortlisted < 3 %}
                                 <a class="wmw-button wmw-button--green wmw-button--border wmw-button--small"
-                                   onclick="return swalConfirm('{{ 'legends.confirmation.add_user' | trans }}',
-                                           '{{ path('user_mission_add_to_shortlist', { 'userMissionId' : userMission.id }) }}')">
+                                   onclick="
+                                   {% if msgCount > 2 %}
+                                           return swalConfirm('{{ 'legends.confirmation.add_user' | trans }}',
+                                           '{{ path('user_mission_add_to_shortlist', { 'userMissionId' : userMission.id }) }}')
+                                   {% else %}
+                                           noup()
+                                   {% endif%}
+                                           ">
                                     <i></i><span>
-                                        <i class="icon icon--star"></i>
+                                            <i class="icon icon--star"></i>
                                         {{ 'mission.view.contractor.btn_add_to_shortlist' | trans | upper }}
-                                    </span><i></i>
+                                        </span><i></i>
                                 </a>
                             {% elseif userMission.status == constant('SHORTLIST', userMission) %}
                                 <a class="wmw-button wmw-button--red wmw-button--border wmw-button--small"
@@ -250,4 +263,26 @@
 {% endblock %}
 
 {% block javascripts %}
+
+    {{ parent() }}
+    <script type="text/javascript">
+
+        function noup() {
+            swal({
+                text: "{{ 'mission.message.not_enough_messages' | trans }}",
+                type: 'warning',
+                confirmButtonColor: '#3cc3b7'
+            });
+        }
+
+        function renoup() {
+            swal({
+                text: "{{ 'mission.message.not_enough_messages' | trans }}",
+                type: 'warning',
+                confirmButtonColor: '#3cc3b7'
+            });
+        }
+
+    </script>
+
 {% endblock %}

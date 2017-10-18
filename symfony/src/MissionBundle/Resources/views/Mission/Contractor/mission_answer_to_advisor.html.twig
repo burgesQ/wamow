@@ -5,6 +5,7 @@
 
     {% set mission = userMission.mission %}
     {% set user    = userMission.user %}
+    {% set msgCount = (userMission.thread.messages|length) %}
     {% set step = null %}
     {% for oneStep in mission.steps %}
         {% if oneStep.status == 1 %}
@@ -26,8 +27,7 @@
             <span class="breadcrumbs-el{% if step.position > 1 %} active{% endif %}">
                 2. {{ 'mission.view.contractor.status_shortlist' | trans | upper }}
                 {% if step.position == 1 and shortlisted > 0 %}
-                    <a href="{{ path('mission_shortlist', { 'missionId' : mission.id }) }}"
-                    >
+                    <a href="{{ path('mission_shortlist', { 'missionId' : mission.id }) }}">
                         <button class="wmw-button wmw-button--black wmw-button--border wmw-button--small">
                         <i></i><span>
                             {{ 'mission.view.contractor.btn_proced_to_shortlist' | trans | upper }}
@@ -188,10 +188,15 @@
                             <div class="mail-toolbar-buttons">
 
                                 {% if userMission.status != constant('SHORTLIST', userMission) %}
-
                                     <a class="wmw-button wmw-button--red wmw-button--border wmw-button--small"
-                                       onclick="return swalConfirm('{{ 'legends.confirmation.refuse_user' | trans }}',
-                                         '{{ path('user_mission_refuse', { 'userMissionId' : userMission.id }) }}' )">
+                                       onclick="
+                                       {% if msgCount > 1 %}
+                                               return swalConfirm('{{ 'legends.confirmation.refuse_user' | trans }}',
+                                               '{{ path('user_mission_refuse', { 'userMissionId' : userMission.id }) }}')
+                                       {% else %}
+                                               renoup()
+                                       {% endif %}
+                                               ">
                                         <i></i><span>
                                             <i class="icon icon--cross"></i>
                                             {{ 'mission.view.contractor.btn_refuse' | trans }}
@@ -199,8 +204,14 @@
                                     </a>
                                     {% if shortlisted < 3 %}
                                         <a class="wmw-button wmw-button--green wmw-button--border wmw-button--small"
-                                           onclick="return swalConfirm('{{ 'legends.confirmation.add_user' | trans }}',
-                                                   '{{ path('user_mission_add_to_shortlist', { 'userMissionId' : userMission.id }) }}')">
+                                           onclick="
+                                           {% if msgCount > 2 %}
+                                                   return swalConfirm('{{ 'legends.confirmation.add_user' | trans }}',
+                                                   '{{ path('user_mission_add_to_shortlist', { 'userMissionId' : userMission.id }) }}')
+                                           {% else %}
+                                                   noup()
+                                           {% endif%}
+                                                   ">
                                             <i></i><span>
                                                 <i class="icon icon--star"></i>
                                                 {{ 'mission.view.contractor.btn_add_to_shortlist' | trans | upper }}
@@ -366,7 +377,23 @@
 
     <script type="text/javascript">
 
-//        AJAX SEND / UPDATE MESSAGE
+        function noup() {
+            swal({
+                text: "{{ 'mission.message.not_enough_messages' | trans }}",
+                type: 'warning',
+                confirmButtonColor: '#3cc3b7'
+            });
+        }
+
+        function renoup() {
+            swal({
+                text: "{{ 'mission.message.not_enough_messages' | trans }}",
+                type: 'warning',
+                confirmButtonColor: '#3cc3b7'
+            });
+        }
+
+        //        AJAX SEND / UPDATE MESSAGE
         function sendMessage() {
             if ($('textarea#inbox_input_message').val()) {
 

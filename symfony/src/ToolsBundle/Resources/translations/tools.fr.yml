@@ -662,6 +662,8 @@ mission:
         shortlist_added: Nous vous informons que vous avez été sélectionné en short-list pour la mission.
         my_selection_added: "Nous vous informons que vous avez êtes le choix final de l'entreprise"
         no_mission: "Aucune mission pour le moment ! Créez-en une !"
+        not_enough_messages: "S`il vous plait veuillez continuer votre conversation - prenez le temps d`evaluer l`Expert"
+        pls_more_messages: "S`il vous plait prenez le temps de repondre au premier message. Ne ratez pqs une nouvelle ocasion !"
 
 ## Inbox
 inbox:
