@@ -14,6 +14,7 @@ easy_admin:
                     - 'nbOngoing'
 #                    - 'originalPrice'
 #                    - 'originalBudget'
+#                    - 'applicationDEadline'
                     - { property : 'getScoreDetailsAsString' }
             form:
                 fields:
@@ -25,3 +26,4 @@ easy_admin:
                     - { property: 'originalBudget' }
                     - { property: 'price'}
                     - { property: 'budget' }
+                    - { property: 'applicationEnding' }
