@@ -112,10 +112,10 @@ legends:
         proceed: Voulez vous confirmer cette action?
         work_experience: Voulez vous confirmer cette action? Une fois soumis cettes information ne sont plus modifiable.
         delete: Voulez vous confirmer cette action?
-        enter_your_card: Bravo, vous avez désormais accès à l’intégralité des pitchs qui vous seront présentés durant une année !
+        enter_your_card: "Bravo, vous avez désormais accès à l’intégralité des pitchs qui vous seront présentés durant une année !
         Par ailleurs vous avez postulé pour échanger de manière anonyme avec l’entreprise cliente sur ce pitch. 
         Pour rappel les 5 premières propositions sont présentées dans un premier temps. 
-        Les 5 suivantes sont placées en liste additionnelle et présentées pour remplacer les premières éliminations. Confirmez-vous le paiement de l’abonnement ?
+        Les 5 suivantes sont placées en liste additionnelle et présentées pour remplacer les premières éliminations. Confirmez-vous le paiement de l’abonnement ?"
     other: Autre
     pop_up:
         check_spam: Un e-mail vous a été envoyé contenant votre mot de passe. Vérifiez votre boite de réception et votre boite spam.
