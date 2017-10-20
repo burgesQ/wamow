@@ -158,8 +158,18 @@
             <div class="wmw-mission-content row">
 
                 {% for userMission in userMissions %}
-                    {% set lastMsg = userMission.thread.messages | last %}
+                    {% set lastMsg  = userMission.thread.messages | last %}
                     {% set msgCount = (userMission.thread.messages|length) %}
+                    {% set advMsg   = 0 %}
+                    {% set ctrMsg   = 0 %}
+
+                    {% for message in userMission.thread.messages %}
+                        {% if message.sender == userMission.user %}
+                            {% set advMsg = advMsg + 1 %}
+                        {% else %}
+                            {% set ctrMsg = ctrMsg + 1 %}
+                        {% endif %}
+                    {% endfor %}
 
                     <div class="wmw-mission-element wmw-mission-element--shortlist">
                         <div class="element-title">
@@ -205,13 +215,11 @@
                                         {{ 'mission.view.contractor.btn_refuse' | trans }}
                                     </span><i></i>
                                 </a>
-                            {% else %}
-                                <br>
                             {% endif %}
                             {% if userMission.status != constant('SHORTLIST', userMission) and shortlisted < 3 %}
                                 <a class="wmw-button wmw-button--green wmw-button--border wmw-button--small"
                                    onclick="
-                                   {% if msgCount > 2 %}
+                                   {% if advMsg > 2 and ctrMsg > 2%}
                                            return swalConfirm('{{ 'legends.confirmation.add_user' | trans }}',
                                            '{{ path('user_mission_add_to_shortlist', { 'userMissionId' : userMission.id }) }}')
                                    {% else %}
