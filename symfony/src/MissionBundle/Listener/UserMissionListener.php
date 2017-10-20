@@ -46,7 +46,7 @@ class UserMissionListener
         $this->mailer     = $mailer;
         $this->trans      = $translator;
         $this->sender     = $sender;
-        $this->container = $container;
+        $this->container  = $container;
     }
 
     /**
@@ -63,7 +63,7 @@ class UserMissionListener
                 $this->sendMailAdvisor($event, 'mails.subject.user_shortlisted', 'mails.content.user_shortlisted');
             } elseif ($event->getOldValue("status") == UserMission::MATCHED
                 && $event->getNewValue("status") == UserMission::DISMISS) {
-                $this->sendMailAdvisor($event, 'mails.subject.response', 'mails.content.no_shortlisted');
+                $this->sendMailAdvisor($event, 'mails.subject.response', 'mails.content.no_shortlist');
             } elseif ($event->getOldValue("status") == UserMission::SHORTLIST
                 && $event->getNewValue("status") == UserMission::DISMISS) {
                 $this->sendMailAdvisor($event, 'mails.subject.response', 'mails.content.no_finalist');
