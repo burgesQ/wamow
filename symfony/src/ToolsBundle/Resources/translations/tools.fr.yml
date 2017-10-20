@@ -1058,14 +1058,14 @@ mails:
     content:
         new_pitch: |
             %title. Nous vous confirmons le lancement de votre consultation, Titre de la mission. Votre pitch a été poussé auprès des meilleurs experts de la place. Dès marque d’intérêt de l’un d’entre eux, vous recevrez une alerte. Avez-vous pensé à activer vos notifications email dans votre profil ?
-            L’équipe de wamow.co
+            
 
             
         new_contractor: |
             Bonjour fName lName
 
             Nous vous informons que vous avez été identifié pour répondre à une mission %title.
-            L’équipe de wamow.co
+            
         user_shortlisted: |
             Bonjour fName lName
 
@@ -1098,7 +1098,7 @@ mails:
             Vous pouvez changer votre mot de passe en cliquant sur ce lien: 
 
             Cordialement,
-            L’équipe de wamow.co
+            
 
 
 
