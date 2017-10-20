@@ -173,7 +173,8 @@ class RegistrationAdvisorController extends Controller
             "businesspractice.energy" => "energy",
             "businesspractice.it" => "it",
             "businesspractice.public" => "public",
-            "businesspractice.ngo" => "ngo"
+            "businesspractice.ngo" => "ngo",
+            "businesspractice.agriculture" => "agriculture"
         ];
 
         return $this->render('UserBundle:Registration:register_expert_step_one.html.twig', [

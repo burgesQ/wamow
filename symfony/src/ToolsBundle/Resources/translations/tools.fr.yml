@@ -776,6 +776,7 @@ businesspractice:
     it: "Systèmes d’information - IT"
     public: "Administration et opérateurs publics"
     ngo: "Association et organisation non gouvernementale (ONG)"
+    agriculture: "Agriculture & Secteur Primaire"
 
 professionalexpertises:
     title: "Expériences Techniques"

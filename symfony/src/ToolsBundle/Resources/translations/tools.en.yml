@@ -779,6 +779,7 @@ businesspractice:
     it: "Information Technology"
     public: "Public"
     ngo: "Non Governmental Organization"
+    agriculture: "Agriculture & Primary Sector"
 
 professionalexpertises:
     title: "Professional Expertise"
