@@ -8,6 +8,7 @@ tools:
         required: 'The address must only contain letters, numbers, dots, commas or dashes.'
         city: 'The city must  only contain letters or dashes.'
         state: 'The state must only contain letters or dashes.'
+        street: 'Please provide a street.'
     upload:
         badFormat: "This format is not accepted"
     number:
