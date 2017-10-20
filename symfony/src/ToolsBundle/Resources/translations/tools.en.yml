@@ -1062,7 +1062,7 @@ mails:
             %title. Your pitch has been sent to thousands of experts in this field.
             Once one of them shows their interest you will be notified. Make sure you have activated your notifications!
 
-            The team at wamow.co
+            
         new_contractor: |
             Hello fName lName
 
@@ -1070,14 +1070,14 @@ mails:
             We have identified a new pitch you might be interested in: missionTitle
             Log In to our web site to check it.
 
-            The team at wamow.co.
+            
         user_shortlisted: |
             Hello fName lName
 
 
             You are among the 3 best fitting Experts selected to continue the interaction about missionTitle.
             The client would like to learn more about your proposal.
-            The team at wamow.co
+            
         user_finalist: |
             Hello fName, lName,
 
@@ -1105,7 +1105,7 @@ mails:
             You may reset your password here
 
             Greetings,
-            The team at wamow.co
+            
 
 ## Payement template
 payment:
