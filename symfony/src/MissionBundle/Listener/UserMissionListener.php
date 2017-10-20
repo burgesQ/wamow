@@ -90,7 +90,7 @@ class UserMissionListener
                     'content' => $this->trans->trans($content, [
                         'fName'        => $advisor->getFirstName(),
                         'lName'        => $advisor->getLastName(),
-                        'missionTitle' => $userMission->getMission()->getTitle()
+                        'missionTitle' => $this->trans->trans($userMission->getMission()->getTitle(), [], 'tools')
                     ], 'tools')
                 ]), 'text/html');
             $this->mailer->send($message);
