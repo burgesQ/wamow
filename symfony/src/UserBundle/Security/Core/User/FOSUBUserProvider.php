@@ -85,7 +85,9 @@ class FOSUBUserProvider extends BaseClass
             $user
                 ->setEmail($username)
                 ->setEnabled(true)
-                ->setPassword('password')
+                ->setPassword($this->container->get('hackzilla.password_generator.computer')
+                    ->setLowercase()->setUppercase()->setNumbers()->setSymbols()
+                    ->setAvoidSimilar()->setLength(10)->generatePassword())
                 ->setRoles(['ROLE_ADVISOR'])
             ;
 
