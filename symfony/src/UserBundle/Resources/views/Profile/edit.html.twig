@@ -20,6 +20,25 @@
                 method: "put"
             });
         }
+
+        $(function(){
+            var fileInput = $('#merged_form_registration_resume_file');
+            var maxSize = fileInput.data('max-size');
+            $('#merged_form_registration_save').click(function(e){
+                if(fileInput.get(0).files.length){
+                    var fileSize = fileInput.get(0).files[0].size; // in bytes
+                    if(fileSize > maxSize){
+                        swal({
+                            text: "{{ 'form.file.error.max_size' | trans({}, 'tools') }}",
+                            type: 'error',
+                            confirmButtonColor: '#3cc3b7'
+                        });
+                        return false;
+                    }
+                }
+            });
+        });
+
     </script>
 {% endblock %}
 

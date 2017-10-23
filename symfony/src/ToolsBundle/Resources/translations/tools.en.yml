@@ -50,6 +50,8 @@ form:
 
     file:
         file: "File"
+        error:
+            max_size: "The file exced the max size. Please choose a file that less than 5M."
 
     password:
         old: old password

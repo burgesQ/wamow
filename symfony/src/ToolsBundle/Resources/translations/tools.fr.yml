@@ -50,6 +50,8 @@ form:
 
     file:
         file: "Fichier"
+        error:
+            max_size: "Le taille du fichier exceed la limite. Veuillew choisire un fichier de moin de 5M."
 
     password:
         old: ancien mot de passe

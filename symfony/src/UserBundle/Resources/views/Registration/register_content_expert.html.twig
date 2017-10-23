@@ -72,8 +72,8 @@
     </div>
 
     <div class="wmw-uploadfield">
-        {{ form_widget(form.resume.file) }}
-        <button type="button" class="wmw-button wmw-button--green" title="{{ 'mouseover.linkedin' | trans }}"><i></i><span>{{ 'registration.advisor.zero.resume' | trans }}</span><i></i></button>
+        {{ form_widget(form.resume.file, { 'attr' : { 'data-max-size' : "5000000" } }) }}
+        <button type="button" id="submit-file" class="wmw-button wmw-button--green" title="{{ 'mouseover.linkedin' | trans }}"><i></i><span>{{ 'registration.advisor.zero.resume' | trans }}</span><i></i></button>
         <div class="wmw-uploadfield-val"></div>
     </div>
     {{ form_errors(form.resume.file) }}
