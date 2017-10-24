@@ -1047,9 +1047,11 @@ mails:
     hello: "Bonjour %f_name %l_name !"
     registration:
         contractor_new_password: "Nous vous confirmons la création de votre compte.\nVotre mot de passe est : %password .\n\nSi ce n’est déjà fait pensez à compléter votre profil !"
-      
-        advisor_new_password: "Nous vous confirmons la création de votre compte.\nVotre mot de passe est : %password .\n\nSi ce n’est déjà fait pensez à compléter votre profil pour améliorer votre visibilité !"
-        
+
+        advisor_new_password: "Nouso vous confirmons la création de votre compte.\nVotre mot de passe est : %password .\n\nSi ce n’est déjà fait pensez à compléter votre profil pour améliorer votre visibilité !"
+
+        reset_password: "Vous pouvez re-configurer votre mot de passe a l'address suivante : %url .\n\nSi ce n’est déjà fait pensez à compléter votre profil pour améliorer votre visibilité !"
+
                 
 
     inbox:

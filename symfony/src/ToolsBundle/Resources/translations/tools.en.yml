@@ -1049,6 +1049,7 @@ mails:
     registration:
         contractor_new_password: "We confirm the creation of your account.\nYour password is: %password .\n\nIf you have not done so already, please take the time to complete your profile."
         advisor_new_password: "We confirm the creation of your account.\nYour password is: %password .\n\nIf you have not done so already, please take the time to complete your profile. That will boost your visibility!"
+        reset_password: "You can reset your password by acceding this address : %url .\n\nIf you have not done so already, please take the time to complete your profile. That will boost your visibility!"
 
     inbox:
         new_message_mission: "Your message has been answered on the mission %title."
@@ -1113,7 +1114,6 @@ mails:
             You may reset your password here
 
             Greetings,
-            
 
 ## Payement template
 payment:
