@@ -1057,7 +1057,7 @@ mails:
            new_mission: New pitch !
            user_shortlisted: Selected !
            user_finalist: Congratulation !
-           response: your Response
+           response: Your Answer
            reset_password: New Password
 
     content:
@@ -1090,7 +1090,7 @@ mails:
         no_shortlist: |
             Hello fName, lName,
 
-            Your proposal has not been accepted due to its late arrival.
+            Your proposal has not been accepted by the Corporation.
             Please be ready for the next pitch that comes your way.
             Make sure you send your proposals sooner. To help with that, check if your email notifications are turned on.
 
