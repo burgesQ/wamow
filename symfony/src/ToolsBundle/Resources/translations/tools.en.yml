@@ -182,7 +182,9 @@ error:
     upload_resume_or_linkedin: Please Upload a resume or link your account to LinkedIn
     phone:
         please_fill: Please fill out the phone number fields.
-    generale: Some fields have not been filled 
+    generale: Some fields have not been filled
+    valuableworkexperience:
+        max: "Please don`t select more than 5 userWorkExperience."
 
 ## Home
 home:

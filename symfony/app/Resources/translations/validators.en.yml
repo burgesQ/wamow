@@ -38,7 +38,7 @@ user:
         min: 'Please select at least one language.'
     valuableworkexperience:
         min: Please select at least one userWorkEXperience
-        max: Please don't select more than 10 userWorkExperience.
+        max: Please don't select more than 5 userWorkExperience.
 
 company:
     name:

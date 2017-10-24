@@ -185,6 +185,9 @@ error:
     phone:
         please_fill:
     generale: Il semble que certains champs ne sont pas remplis correctement.
+    valuableworkexperience:
+        max: "Veuillez selectioner moins de 5 experience-mission."
+
 
 ## Home
 home:

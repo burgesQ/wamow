@@ -38,7 +38,7 @@ user:
         min: 'Veuillez selectioner au moins un language.'
     valuableworkexperience:
         min: 'Veuillez selectioner au moins une experience mission.'
-        max: 'Veuillez selectioner moins de 10 experience-mission.'
+        max: 'Veuillez selectioner moins de 5 experience-mission.'
 
 company:
     name:
