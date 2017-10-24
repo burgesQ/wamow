@@ -816,18 +816,24 @@
 
 						&.chatbox--a{
 							margin-left:20%;
-
 							.chatbox-name{
 								color:$colorgreen;
 							}
 						}
 
 						&.chatbox--b{
-
 							.chatbox-name{
 								color:$colorpurple;
 							}
 						}
+
+						&.chatbox--c{
+							margin-left:20%;
+							.chatbox-name{
+								color:$colorred;
+							}
+						}
+
 					}
 
 					&.mail-content-chat--red{

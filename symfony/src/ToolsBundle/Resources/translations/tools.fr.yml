@@ -677,9 +677,11 @@ inbox:
         placeholder:
             empty: Ecrivez ici votre message
         btn_submit_empty_interested: Envoyer proposition
-    read: Lire
-    show: Montrer
-    you: Vous
+    read: 'lire'
+    show: 'montrer'
+    you: 'vous'
+    them: 'eux'
+    bot: 'Ana de wamow.co'
     new_message: Nouveau message
 
 thread:

@@ -2,7 +2,9 @@
 
 {% if thread != null %}
     {% for message in thread.messages %}
-        {% if message.sender.id == userId %}
+        {% if message.sender.firstName == "WantMoreWork" %}
+            <div class="chatbox chatbox--c">
+        {% elseif message.sender.id == userId %}
             <div class="chatbox chatbox--a">
         {% else %}
             <div class="chatbox chatbox--b">
@@ -12,10 +14,12 @@
             {% if anonymous %}
                 {{ message.sender | e }}
             {% else %}
-                {% if message.sender.id == userId %}
+                {% if message.sender.firstName == "WantMoreWork" %}
+                    {{ 'inbox.bot' | trans }}
+                {% elseif message.sender.id == userId %}
                     {{ 'inbox.you' | trans }}
                 {% else %}
-                    Contractor
+                    {{ 'inbox.them' | trans }}
                 {% endif %}
             {% endif %}
         </div>

@@ -680,9 +680,11 @@ inbox:
         placeholder:
             empty: Write your message here
         btn_submit_empty_interested: SEND PROPOSAL
-    read: read
-    show: show
-    you: you
+    read: 'read'
+    show: 'show'
+    you: 'you'
+    them: 'them'
+    bot: 'Ana form wamow.co'
     new_message: New Message
 
 thread:
