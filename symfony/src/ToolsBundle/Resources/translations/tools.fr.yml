@@ -108,6 +108,7 @@ legends:
     currency: ''
     currency_day: %price/days
     confirmation:
+        proceed_shortlist: "Dés que vous accédez à votre sélection, vous n’aurez plus accès à la liste complete des Experts. Assurez vous d’avoir sélectionné les bons Experts! Voulez vous confirmer cette action?"
         refuse_user: Voulez vous confirmer cette action?
         add_user: Voulez vous confirmer cette action?
         remove_user: Voulez vous confirmer cette action?

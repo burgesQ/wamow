@@ -36,7 +36,9 @@
             <span class="breadcrumbs-el{% if step.position > 1 %} active{% endif %}">
                 2. {{ 'mission.view.contractor.status_shortlist' | trans | upper }}
                 {% if step.position == 1 and shortlisted > 0 %}
-                    <a href="{{ path('mission_shortlist', { 'missionId' : mission.id }) }}">
+                    <a onclick="return swalConfirm('{{ 'legends.confirmation.proceed_shortlist' | trans }}',
+                            '{{ path('mission_shortlist', { 'missionId' : mission.id }) }}')"
+                    >
                         <button class="wmw-button wmw-button--black wmw-button--border wmw-button--small">
                         <i></i><span>
                             {{ 'mission.view.contractor.btn_proced_to_shortlist' | trans | upper }}

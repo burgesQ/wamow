@@ -111,6 +111,7 @@ legends:
     currency: ''
     currency_day: %price/d
     confirmation:
+        proceed_shortlist: "Once proceeded to your selection you won`t have access to the full list of Experts anymore. Make sure you have selected the best fitting Experts. Do you wish to continue?"
         refuse_user: Are you sure you want to dismiss this user ? You cannot undo this action.
         add_user: Are you sure you want to add the user to your shortlist ?
         remove_user: Are you sure you want to remove the user from your shortlist ?

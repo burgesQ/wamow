@@ -25,10 +25,10 @@
             {{ message.createdAt | date }}
         </div>
         <div class="messenger_thread_message_body chatbox-content" id="message_{{ message.id }}">
-           {% if message.userMissionProposalId %}
-               {{ 'mails.new.proposal' |
-               trans({ '%link_start%' : '<a href="'~path('download_proposal', { id : message.userMissionProposalId })~'">',
-                   '%link_end%' : '</a>'}) | raw }}
+            {% if message.userMissionProposalId %}
+                {{ 'mails.new.proposal' |
+                trans({ '%link_start%' : '<a href="'~path('download_proposal', { id : message.userMissionProposalId })~'">',
+                    '%link_end%' : '</a>'}) | raw }}
             {% else %}
                 {{ message.body }}
             {% endif %}

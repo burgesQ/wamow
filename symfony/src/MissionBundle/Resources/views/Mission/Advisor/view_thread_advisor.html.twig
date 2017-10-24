@@ -1,12 +1,13 @@
 {% trans_default_domain "tools" %}
 
 {% if thread != null %}
-{% for message in thread.messages %}
-{% if message.sender.id == userId %}
-<div class="chatbox chatbox--a">
-    {% else %}
-    <div class="chatbox chatbox--b">
+    {% for message in thread.messages %}
+        {% if message.sender.id == userId %}
+            <div class="chatbox chatbox--a">
+        {% else %}
+            <div class="chatbox chatbox--b">
         {% endif %}
+
         <div class="chatbox-name">
             {% if anonymous %}
                 {{ message.sender | e }}
@@ -18,10 +19,10 @@
                 {% endif %}
             {% endif %}
         </div>
+
         <div class="chatbox-time">
             {{ message.createdAt | date }}
         </div>
-
         <div class="messenger_thread_message_body chatbox-content" id="message_{{ message.id }}">
             {% if message.userMissionProposalId %}
                 {{ 'mails.new.proposal' |
@@ -31,6 +32,6 @@
                 {{ message.body }}
             {% endif %}
         </div>
-    </div>
+        </div>
     {% endfor %}
-    {% endif %}
+{% endif %}

@@ -19,7 +19,11 @@
             <span class="breadcrumbs-el active">1. {{ 'mission.view.contractor.status_advisor' | trans | upper }}</span>
             <span class="breadcrumbs-el">2. {{ 'mission.view.contractor.status_shortlist' | trans | upper }}
                 {% if selected > 0 %}
-                    <a href="{{ path('mission_shortlist', { 'missionId' : mission.id }) }}">
+                    <a onclick="return swalConfirm(
+                            '{{ 'legends.confirmation.proceed_shortlist' | trans }}',
+                            '{{ path('mission_shortlist', { 'missionId' : mission.id }) }}'
+                            )"
+                    >
                         <button class="wmw-button wmw-button--black wmw-button--border wmw-button--small">
                             <i></i><span>
                                 {{ 'mission.view.contractor.btn_proced_to_shortlist' | trans | upper }}
