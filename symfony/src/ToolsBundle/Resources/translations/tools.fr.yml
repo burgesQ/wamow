@@ -1088,7 +1088,7 @@ mails:
         no_shortlist: |
             Bonjour fName, lName,
 
-            Votre réponse n’a pu être retenue en raison de délais trop tardifs. C’est dommage au regard de sa qualité. Pour une prochaine fois, pensez à réagir plus rapidement. Avez-vous activé la notification par email sur votre profil ? 
+            Votre réponse n’a pu être retenue par l'entreprise. C’est dommage au regard de sa qualité. Pour une prochaine fois, pensez à réagir plus rapidement. Avez-vous activé la notification par email sur votre profil ? 
             
             L’équipe de wamow.co
         no_finalist: |
