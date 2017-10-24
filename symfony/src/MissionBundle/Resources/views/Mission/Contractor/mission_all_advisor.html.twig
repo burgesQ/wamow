@@ -187,7 +187,8 @@
                             </div>
 
                         </div>
-                        <div class="element-content{% if lastMsg.sender.id == userMission.user.id %} element-content--newmessage{% endif %}">
+
+                        <div class="element-content{% if lastMsg.sender.id == userMission.user.id and lastMsg.metadata[1].isRead == false %} element-content--newmessage{% endif %}">
                             <div class="element-content-title">{{ 'footer.advisor' | trans }} {{ userMission.idForContractor }}</div>
                             {{ lastMsg.body }}
                             <div class="element-content-bottom">
