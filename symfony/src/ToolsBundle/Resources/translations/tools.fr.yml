@@ -186,7 +186,7 @@ error:
         please_fill:
     generale: Il semble que certains champs ne sont pas remplis correctement.
     valuableworkexperience:
-        max: "Veuillez selectioner moins de 5 experience-mission."
+        max: "Veuillez sélectioner un maximum de 5 options."
 
 
 ## Home
