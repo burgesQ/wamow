@@ -1043,19 +1043,23 @@ mission_title:
 
 ## Mails template
 mails:
+    sign:
+        ana_sign: 'Ana at wamow.co'
+        emma_sign: 'Emma at wamow.co'
     contracot_hello: "Hello %f_name %l_name %c_name!"
     advisor_hello: "Hello %f_name %l_name !"
     hello: "Hello %f_name %l_name !"
     registration:
         contractor_new_password: "We confirm the creation of your account.\nYour password is: %password .\n\nIf you have not done so already, please take the time to complete your profile."
-        advisor_new_password: "We confirm the creation of your account.\nYour password is: %password .\n\nIf you have not done so already, please take the time to complete your profile. That will boost your visibility!"
-        reset_password: "You can reset your password by acceding this address : %url .\n\nIf you have not done so already, please take the time to complete your profile. That will boost your visibility!"
+        advisor_new_password: "We confirm the creation of your account.\nYour password is: <strong>%password</strong>.\n\nIf you have not done so already, please take the time to complete your profile. That will boost your visibility!"
+        reset_password: "You can reset your password by acceding this address : <strong> %url </ strong>.\n\nIf you have not done so already, please take the time to complete your profile. That will boost your visibility!"
 
     inbox:
         new_message_mission: "Your message has been answered on the mission %title."
         new_pitcher: "An expert answered to your Pitch, %title.\nLink Log In\nThe team at wamow.co\n"
         link: Click here to check it.
         the_team: The team at wamow.co!
+
         link: "Go check it :"
     subject:
            new_message: New message !

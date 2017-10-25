@@ -8,7 +8,6 @@ use MissionBundle\Entity\UserMission;
 use Doctrine\ORM\EntityManager;
 use InboxBundle\Entity\Thread;
 use UserBundle\Entity\User;
-use Swift_Message;
 
 class Services
 {
@@ -158,22 +157,17 @@ class Services
         $contractor = $userMission->getMission()->getContact();
 
         if ($contractor->getNotification()) {
-            $trans = $this->container->get('translator');
-            $mail = Swift_Message::newInstance()
-                ->setSubject($trans->trans('mails.subject.new_message', [], 'tools'))
-                ->setFrom($this->container->getParameter('email_sender'))
-                ->setTo($contractor->getEmail())/* put a valid email address there to test */
-                ->setBody($this->container->get('templating')->render('Emails/new_message.html.twig', [
-                    'f_name'        => $contractor->getFirstName(),
-                    'l_name'        => $contractor->getLastName(),
-                    'title'         => $userMission->getMission()->getTitle(),
-                    'roles'         => 'ROLE_CONTRACTOR',
-                    'missionId'     => $userMission->getMission()->getId(),
-                    'userMissionId' => $userMission->getId(),
-                ]), 'text/html');
-
-
-            $this->container->get('mailer')->send($mail);
+            $this->container->get('wamow.mailer')->sendWamowMails(
+                'mails.subject.new_message',
+                $contractor->getEmail(),
+                'Emails/new_message.html.twig', [
+                'f_name'        => $contractor->getFirstName(),
+                'l_name'        => $contractor->getLastName(),
+                'title'         => $userMission->getMission()->getTitle(),
+                'roles'         => 'ROLE_CONTRACTOR',
+                'missionId'     => $userMission->getMission()->getId(),
+                'userMissionId' => $userMission->getId(),
+            ]);
         }
     }
 }

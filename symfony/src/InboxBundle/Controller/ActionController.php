@@ -6,7 +6,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Swift_Message;
 
 class ActionController extends Controller
 {
@@ -43,19 +42,19 @@ class ActionController extends Controller
         /** @var \UserBundle\Entity\User $contractor */
         $contractor = $userMission->getMission()->getContact();
         if ($contractor->getNotification()) {
-            $message = Swift_Message::newInstance()
-                ->setSubject($trans->trans('mails.subject.new_message', [], 'tools'))
-                ->setFrom($this->container->getParameter('email_sender'))
-                ->setTo($contractor->getEmail())
-                ->setBody($this->renderView('Emails/new_message.html.twig', [
-                    'f_name'        => $contractor->getFirstName(),
-                    'l_name'        => $contractor->getLastName(),
-                    'title'         => $userMission->getMission()->getTitle(),
-                    'roles'         => 'ROLE_CONTRACTOR',
-                    'missionId'     => $userMission->getMission()->getId(),
-                    'userMissionId' => $userMission->getId(),
-                ]), 'text/html');
-            $this->get('mailer')->send($message);
+
+            $this->get('wamow.mailer')->sendWamowMails(
+                'mails.subject.new_message',
+                $contractor->getEmail(),
+                'Emails/new_message.html.twig', [
+                'f_name'        => $contractor->getFirstName(),
+                'l_name'        => $contractor->getLastName(),
+                'title'         => $userMission->getMission()->getTitle(),
+                'roles'         => 'ROLE_CONTRACTOR',
+                'missionId'     => $userMission->getMission()->getId(),
+                'userMissionId' => $userMission->getId(),
+            ]);
+
         }
         if (!($step = $this->getDoctrine()->getRepository('MissionBundle:Step')->findOneBy([
             'mission' => $userMission->getMission(),
@@ -106,20 +105,17 @@ class ActionController extends Controller
         $advisor = $userMission->getUser();
 
         if ($advisor->getNotification()) {
-            $message = Swift_Message::newInstance()
-                ->setSubject($trans->trans('mails.subject.new_message', [], 'tools'))
-                ->setFrom($this->container->getParameter('email_sender'))
-                ->setTo($advisor->getEmail())
-                ->setBody($this->renderView('Emails/new_message.html.twig', [
-                    'f_name'        => $advisor->getFirstName(),
-                    'l_name'        => $advisor->getLastName(),
-                    'title'         => $userMission->getMission()->getTitle(),
-                    'roles'         => 'ROLE_CONTRACTOR',
-                    'missionId'     => $userMission->getMission()->getId(),
-                    'userMissionId' => $userMission->getId(),
-                ]), 'text/html');
-
-            $this->get('mailer')->send($message);
+            $this->get('wamow.mailer')->sendWamowMails(
+                'mails.subject.new_message',
+                $advisor->getEmail(),
+                'Emails/new_message.html.twig', [
+                'f_name'        => $advisor->getFirstName(),
+                'l_name'        => $advisor->getLastName(),
+                'title'         => $userMission->getMission()->getTitle(),
+                'roles'         => 'ROLE_CONTRACTOR',
+                'missionId'     => $userMission->getMission()->getId(),
+                'userMissionId' => $userMission->getId(),
+            ]);
         }
 
         if (!($step = $this->getDoctrine()->getRepository('MissionBundle:Step')->findOneBy([

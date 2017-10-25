@@ -21,7 +21,6 @@ use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\FOSUserEvents;
 use ToolsBundle\Entity\Address;
 use UserBundle\Entity\User;
-use Swift_Message;
 
 class RegistrationAdvisorController extends Controller
 {
@@ -107,17 +106,14 @@ class RegistrationAdvisorController extends Controller
                 $em->persist($resume);
                 $em->flush();
 
-                $message = Swift_Message::newInstance()
-                    ->setSubject($trans->trans('mails.subject.new_password', [], 'tools'))
-                    ->setFrom($this->container->getParameter('email_sender'))
-                    ->setTo($user->getEmail())/* put a valid email address there to test */
-                    ->setBody($this->renderView('Emails/new_password.html.twig', [
-                        'f_name'   => $user->getFirstName(),
-                        'l_name'   => $user->getLastName(),
-                        'password' => $password
-                    ]), 'text/html')
-                ;
-                $this->get('mailer')->send($message);
+                $this->get('wamow.mailer')->sendWamowMails(
+                    'mails.subject.new_password',
+                    $user->getEmail(),
+                    'Emails/new_password.html.twig', [
+                    'f_name'   => $user->getFirstName(),
+                    'l_name'   => $user->getLastName(),
+                    'password' => $password
+                ]);
 
                 if (null === $response = $event->getResponse()) {
                     $response = new RedirectResponse($this->generateUrl('expert_registration_step_one'));
@@ -273,8 +269,8 @@ class RegistrationAdvisorController extends Controller
             $northAmerica = $continentRepo->findOneBy(['name' => 'continent.north_america']);
             $asia         = $continentRepo->findOneBy(['name' => 'continent.asia']);
             $emea         = $continentRepo->findOneBy(['name' => 'continent.emea']);
-            $usd          = $currencyRepo->findOneByCode('USD');
-            $eur          = $currencyRepo->findOneByCode('EUR');
+            $usd          = $currencyRepo->findOneBy([ 'code' => 'USD']);
+            $eur          = $currencyRepo->findOneBy([ 'code' => 'EUR']);
 
             foreach ($form->get('userWorkExpSerialized')->getData() as $key => $val) {
                 if ($val) {

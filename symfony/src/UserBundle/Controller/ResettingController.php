@@ -3,25 +3,18 @@
 namespace UserBundle\Controller;
 
 use FOS\UserBundle\Controller\ResettingController as BaseController;
-use Swift_Message;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Request;
-
-
-use FOS\UserBundle\Event\FilterUserResponseEvent;
-use FOS\UserBundle\Event\FormEvent;
-use FOS\UserBundle\Event\GetResponseNullableUserEvent;
-use FOS\UserBundle\Event\GetResponseUserEvent;
-use FOS\UserBundle\FOSUserEvents;
-use FOS\UserBundle\Model\UserInterface;
-use FOS\UserBundle\Util\TokenGeneratorInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use FOS\UserBundle\Event\GetResponseNullableUserEvent;
+use FOS\UserBundle\Event\FilterUserResponseEvent;
+use FOS\UserBundle\Util\TokenGeneratorInterface;
+use FOS\UserBundle\Event\GetResponseUserEvent;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+use FOS\UserBundle\Event\FormEvent;
+use FOS\UserBundle\FOSUserEvents;
 
 class ResettingController extends BaseController
 {
@@ -61,7 +54,7 @@ class ResettingController extends BaseController
     {
         $username = $request->request->get('username');
 
-        /** @var $user UserInterface */
+        /** @var $user \UserBundle\Entity\User */
         $user = $this->get('fos_user.user_manager')->findUserByUsernameOrEmail($username);
         /** @var $dispatcher EventDispatcherInterface */
         $dispatcher = $this->get('event_dispatcher');
@@ -98,25 +91,17 @@ class ResettingController extends BaseController
                 return $event->getResponse();
             }
 
-//            $this->get('fos_user.mailer')->sendResettingEmailMessage($user);
-
-            $url =  $this->getParameter('url_site') . $this->get('router')->generate('fos_user_resetting_reset', [
-                'token' => $user->getConfirmationToken(),
-                UrlGeneratorInterface::ABSOLUTE_URL
+            $this->get('wamow.mailer')->sendWamowMails(
+                'mails.subject.reset_password',
+                $user->getEmail(),
+                'Emails/reset_password.html.twig', [
+                'f_name' => $user->getFirstName(),
+                'l_name' => $user->getLastName(),
+                'url'    => 'https://wamow.co/' . $this->get('router')->generate('fos_user_resetting_reset', [
+                        'token' => $user->getConfirmationToken(),
+                        UrlGeneratorInterface::ABSOLUTE_URL
+                    ])
             ]);
-
-            $message = Swift_Message::newInstance()
-                ->setSubject($this->get('translator')->trans('mails.subject.reset_password', [], 'tools'))
-                ->setFrom($this->container->getParameter('email_sender'))
-                ->setTo($user->getEmail())/* put a valid email address there to test */
-                ->setBody($this->renderView('Emails/reset_password.html.twig', [
-                    'f_name'   => $user->getFirstName(),
-                    'l_name'   => $user->getLastName(),
-                    'url'      => $url
-                ]), 'text/html')
-            ;
-            $this->get('mailer')->send($message);
-
 
             $user->setPasswordRequestedAt(new \DateTime());
             $this->get('fos_user.user_manager')->updateUser($user);
@@ -130,7 +115,7 @@ class ResettingController extends BaseController
             }
         }
 
-        return new RedirectResponse($this->generateUrl('fos_user_resetting_check_email', array('username' => $username)));
+        return new RedirectResponse($this->generateUrl('fos_user_resetting_check_email', ['username' => $username]));
     }
 
     /**
@@ -175,7 +160,7 @@ class ResettingController extends BaseController
             $userManager->updateUser($user);
 
             if (null === $response = $event->getResponse()) {
-                $url = $this->generateUrl('fos_user_profile_show');
+                $url      = $this->generateUrl('fos_user_profile_show');
                 $response = new RedirectResponse($url);
             }
 
@@ -187,12 +172,11 @@ class ResettingController extends BaseController
             return $response;
         }
 
-        return $this->render('@FOSUser/Resetting/reset.html.twig', array(
+        return $this->render('@FOSUser/Resetting/reset.html.twig', [
             'token' => $token,
-            'form' => $form->createView(),
-        ));
+            'form'  => $form->createView(),
+        ]);
     }
-
 
 
 }

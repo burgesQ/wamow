@@ -2,7 +2,6 @@
 
 namespace HomePageBundle\Controller;
 
-use Swift_Message;
 use Symfony\Component\HttpFoundation\Session\Storage\PhpBridgeSessionStorage;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -55,17 +54,13 @@ class DefaultController extends Controller
             $em->persist($preregister);
             $em->flush();
 
-            $trans = $this->get('translator');
-            $message = Swift_Message::newInstance()
-                ->setSubject('New Contractor Pre-Registred')
-                ->setFrom($this->container->getParameter('email_sender'))
-                ->setTo($this->container->getParameter('email_pre_register'))
-                ->setBody($this->renderView('Emails/new_pre_register.html.twig', [
-                    'preRegister'   => $preregister,
-                    'phone' => $form->get('phone')->getData()
-//                    de-mod once form okay
-                ]), 'text/html');
-            $this->get('mailer')->send($message);
+            $this->get('wamow.mailer')->sendWAmowMail(
+                'New Contractor Pre-Registred',
+                $this->getParameter('email_pre_register'),
+                'Emails/new_pre_register.html.twig', [
+                'preRegister' => $preregister,
+                'phone'       => $form->get('phone')->getData()
+            ]);
 
             $request->getSession()->getFlashBag()->add('notice', $trans->trans('home.contractor.preregister.registered', [], 'tools'));
             return $this->redirectToRoute('home_page_contractor');
