@@ -1071,53 +1071,16 @@ mails:
            reset_password: New Password
 
     content:
-        new_pitch: |
-            %title. Your pitch has been sent to thousands of experts in this field.
-            Once one of them shows their interest you will be notified. Make sure you have activated your notifications!
-
+        new_pitch: "%title. Your pitch has been sent to thousands of experts in this field.
+            Once one of them shows their interest you will be notified. Make sure you have activated your notifications!"
             
-        new_contractor: |
-            Hello fName lName
-
-
-            We have identified a new pitch you might be interested in: missionTitle
-            Log In to our web site to check it.
-
+        new_contractor: "We have identified a new pitch you might be interested in: missionTitle\nLog In to our web site to check it."
             
-        user_shortlisted: |
-            Hello fName lName
-
-
-            You are among the 3 best fitting Experts selected to continue the interaction about missionTitle.
-            The client would like to learn more about your proposal.
+        user_shortlisted: "You are among the 3 best fitting Experts selected to continue the interaction about missionTitle.\nThe client would like to learn more about your proposal."
             
-        user_finalist: |
-            Hello fName, lName,
-
-            You have been chosen by the Corporation for the mission missionTitle.
-            Link Log In
-            The team at wamow.co send you their most sincere Congratulations  !
-        no_shortlist: |
-            Hello fName, lName,
-
-            The Corporation has completed its selection of Experts. We regret to inform you that you have not been selected. 
-            Get ready for the next pitch that comes your way!
-            Make sure you send your proposals sooner. To help with that, check if your email notifications are turned on.
-
-            The team at wamow.co
-        no_finalist: |
-            Hello fName, lName,
-
-            Unfortunately you have not been chosen to continue working on this mission, despite the quality of your profile.
-            It will be for next time. Stay alert, other pitches might come your way!
-
-            The team at wamow.co
-        reset_password: |
-            Hello uName !
-
-            You may reset your password here
-
-            Greetings,
+        no_shortlist: "Your proposal has not been accepted by the Corporation.\nPlease be ready for the next pitch that comes your way.\nMake sure you send your proposals sooner. To help with that, check if your email notifications are turned on.\n"
+        no_finalist: "Unfortunately you have not been chosen to continue working on this mission, despite the quality of your profile.\nIt will be for next time. Stay alert, other pitches might come your way!"
+>>>>>>> d61e5ac... gs
 
 ## Payement template
 payment:

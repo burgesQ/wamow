@@ -1,7 +1,8 @@
 {% trans_default_domain 'tools' %}
 
+<h3>{{ 'mails.hello' | trans({ '%f_name': f_name, '%l_name': l_name }, 'tools') }}</h3>
+<br />
 {{ content | nl2br }}
-
 <br />
 {{ signature | trans }}
 <br />
