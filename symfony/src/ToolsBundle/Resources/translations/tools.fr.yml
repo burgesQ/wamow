@@ -1073,54 +1073,14 @@ mails:
            reset_password: Nouveau mot de passe!
 
     content:
-        new_pitch: |
-            %title. Nous vous confirmons le lancement de votre consultation, Titre de la mission. Votre pitch a été poussé auprès des meilleurs experts de la place. Dès marque d’intérêt de l’un d’entre eux, vous recevrez une alerte. Avez-vous pensé à activer vos notifications email dans votre profil ?
-            
+        new_pitch: "%title. Nous vous confirmons le lancement de votre consultation, Titre de la mission. Votre pitch a été poussé auprès des meilleurs experts de la place. Dès marque d’intérêt de l’un d’entre eux, vous recevrez une alerte. Avez-vous pensé à activer vos notifications email dans votre profil ?"
+>>>>>>> c887fa0... redo mails
 
-            
-        new_contractor: |
-            Bonjour fName lName
-
-            Nous vous informons que vous avez été identifié pour répondre à une mission %title.
-            
-        user_shortlisted: |
-            Bonjour fName lName
-
-
-            Nous vous informons que vous avez été sélectionné en short-list pour la mission %title.
-           
-            
-        user_finalist: |
-            Bonjour fName, lName,
-
-            Nous vous informons que vous avez été retenu par l’entreprise pour la mission %title.
-
-            L’équipe de wamow.co vous adresse toutes ses félicitations !
-        no_shortlist: |
-            Bonjour fName, lName,
-
-            L’entreprise a completé sa sélection d’experts. Malheureusement, vous n’avez pas eu l’occasion de participer à la compétition cette fois-ci.
-            Peut-être la mission proposée n’était-elle en adéquation avec vos attentes. Dans ce cas nous serions ravi d’en discuter avec vous. Envoyez nous un email à contact@wamow.co et nous ferons le maximum pour vous contacter rapidement.
-            Avez-vous pensé à activer la notification par e-mail sur votre profil ? 
-            Ainsi vous recevrez les prochaines propositions d’accompagnement en temps réel. 
-            
-          
-        no_finalist: |
-            Bonjour fName, lName,
-
-            Malheureusement votre profil n’a pas été retenu par l’entreprise malgré sa qualité. Ce sera pour une prochaine fois. Restez attentif, d’autres pitchs peuvent tomber !
-           
-            
-            
-        reset_password: |
-            Bonjour uName !
-
-            Vous pouvez changer votre mot de passe en cliquant sur ce lien: 
-
-            Cordialement,
-            
-
-
+        new_contractor: "Nous vous informons que vous avez été identifié pour répondre à une mission %title."
+        user_shortlisted: "Nous vous informons que vous avez été sélectionné en short-list pour la mission %title."
+        user_finalist: "Nous vous informons que vous avez été retenu par l’entreprise pour la mission %title."
+        no_shortlist: "Votre réponse n’a pu être retenue par l'entreprise. C’est dommage au regard de sa qualité. Pour une prochaine fois, pensez à réagir plus rapidement. Avez-vous activé la notification par email sur votre profil ?"
+        no_finalist: "Malheureusement votre profil n’a pas été retenu par l’entreprise malgré sa qualité. Ce sera pour une prochaine fois. Restez attentif, d’autres pitchs peuvent tomber !"
 
 # Payment
 payment:
