@@ -103,7 +103,7 @@ class ResettingController extends BaseController
 
 //            $this->get('fos_user.mailer')->sendResettingEmailMessage($user);
 
-            $url = 'https://wamow.co/' . $this->get('router')->generate('fos_user_resetting_reset', [
+            $url =  $this->getParameter('url_site') . $this->get('router')->generate('fos_user_resetting_reset', [
                 'token' => $user->getConfirmationToken(),
                 UrlGeneratorInterface::ABSOLUTE_URL
             ]);

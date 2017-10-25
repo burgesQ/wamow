@@ -49,3 +49,6 @@ parameters:
 
     # Newsletter url
     news_url: http://consultants.wantmore.work/
+
+    # Reset Pswd
+    url_site: https://wamow.co
