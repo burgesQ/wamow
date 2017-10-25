@@ -51,7 +51,7 @@ form:
     file:
         file: "File"
         error:
-            max_size: "The file exceeds the max size. Please choose a file that less than 5M."
+            max_size: "The file you are trying to upload is too large. Please select a file that does not exceed 5Mb."
 
     password:
         old: old password
