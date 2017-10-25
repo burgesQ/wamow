@@ -686,7 +686,7 @@ inbox:
     show: 'show'
     you: 'you'
     them: 'them'
-    bot: 'Ana form wamow.co'
+    bot: 'Ana at wamow.co'
     new_message: New Message
 
 thread:
