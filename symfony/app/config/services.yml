@@ -43,9 +43,13 @@ services:
             - '%scoring_weight.work_experience%'
             - '%scoring_match_min%'
 
+    wamow.mailer:
+        class: ToolsBundle\Service\WamowMailerService
+        arguments: ['@mailer', '@translator', '@twig']
+
     app.user_mission_listener:
         class: MissionBundle\Listener\UserMissionListener
-        arguments: [ '@mailer', '@translator', '%email_sender%', '@service_container' ]
+        arguments: [ '@wamow.mailer', '@translator' ]
         tags:
             - { name: doctrine.event_listener, event: preUpdate, method: preUpdate, entity_manager: default  }
 
