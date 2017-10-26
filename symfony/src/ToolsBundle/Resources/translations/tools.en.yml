@@ -1080,7 +1080,6 @@ mails:
             
         no_shortlist: "Your proposal has not been accepted by the Corporation.\nPlease be ready for the next pitch that comes your way.\nMake sure you send your proposals sooner. To help with that, check if your email notifications are turned on.\n"
         no_finalist: "Unfortunately you have not been chosen to continue working on this mission, despite the quality of your profile.\nIt will be for next time. Stay alert, other pitches might come your way!"
->>>>>>> d61e5ac... gs
 
 ## Payement template
 payment:
