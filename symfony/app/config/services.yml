@@ -45,7 +45,7 @@ services:
 
     wamow.mailer:
         class: ToolsBundle\Service\WamowMailerService
-        arguments: ['@mailer', '@translator', '@twig']
+        arguments: ['@mailer', '@translator', '@service_container']
 
     app.user_mission_listener:
         class: MissionBundle\Listener\UserMissionListener

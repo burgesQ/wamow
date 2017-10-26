@@ -3,6 +3,7 @@
 namespace ToolsBundle\Service;
 
 use Swift_Message;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class WamowMailerService
@@ -22,9 +23,9 @@ class WamowMailerService
     private $translator;
 
     /**
-     * @var \Twig_Environment
+     * @var ContainerInterface
      */
-    private $twig;
+    private $container;
 
     /**
      * @var array
@@ -36,14 +37,14 @@ class WamowMailerService
      *
      * @param \Swift_Mailer                             $mailer
      * @param \Symfony\Component\Translation\Translator $translator
-     * @param \Twig_Environment                         $twig
+     * @param ContainerInterface                        $container
      */
-    public function __construct($mailer, $translator, $twig)
+    public function __construct($mailer, $translator, $container)
     {
 
         $this->mailer     = $mailer;
         $this->translator = $translator;
-        $this->twig       = $twig;
+        $this->container  = $container;
         $this->senders    = [
             ['ana@wamow.co', 'mails.inbox.sign.ana_sign'],
             ['emmaexpert@wamow.co', 'mails.sign.ana_sign']
@@ -63,7 +64,7 @@ class WamowMailerService
         $sender = $this->getSenderSignature();
 
         $data += [
-          'signature' => $sender[1]
+            'signature' => $sender[1]
         ];
 
         $message = Swift_Message::newInstance()
@@ -95,7 +96,7 @@ class WamowMailerService
      */
     public function renderTemplate($view, $data)
     {
-        return $this->twig->render($view, $data);
+        return $this->container->get('twig')->render($view, $data);
     }
 
 }
