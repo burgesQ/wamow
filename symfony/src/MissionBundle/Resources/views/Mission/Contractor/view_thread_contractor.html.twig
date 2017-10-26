@@ -3,7 +3,9 @@
 {% if userMission.thread != null %}
     {% set thread = userMission.thread %}
     {% for message in thread.messages %}
-        {% if message.sender.id == userId %}
+        {% if message.sender.firstName == "WantMoreWork" %}
+            <div class="chatbox chatbox--c">
+        {% elseif message.sender.id == userId %}
             <div class="chatbox chatbox--a">
         {% else %}
             <div class="chatbox chatbox--b">
@@ -13,7 +15,9 @@
             {% if anonymous %}
                 {{ message.sender | e }}
             {% else %}
-                {% if message.sender.id == userId %}
+                {% if message.sender.firstName == "WantMoreWork" %}
+                    {{ 'inbox.bot' | trans }}
+                {% elseif message.sender.id == userId %}
                     {{ 'inbox.you' | trans }}
                 {% else %}
                     {{ userMission.user.firstName }}
@@ -25,10 +29,10 @@
             {{ message.createdAt | date }}
         </div>
         <div class="messenger_thread_message_body chatbox-content" id="message_{{ message.id }}">
-           {% if message.userMissionProposalId %}
-               {{ 'mails.new.proposal' |
-               trans({ '%link_start%' : '<a href="'~path('download_proposal', { id : message.userMissionProposalId })~'">',
-                   '%link_end%' : '</a>'}) | raw }}
+            {% if message.userMissionProposalId %}
+                {{ 'mails.new.proposal' |
+                trans({ '%link_start%' : '<a href="'~path('download_proposal', { id : message.userMissionProposalId })~'">',
+                    '%link_end%' : '</a>'}) | raw }}
             {% else %}
                 {{ message.body }}
             {% endif %}

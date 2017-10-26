@@ -85,7 +85,9 @@ class FOSUBUserProvider extends BaseClass
             $user
                 ->setEmail($username)
                 ->setEnabled(true)
-                ->setPassword('password')
+                ->setPassword($this->container->get('hackzilla.password_generator.computer')
+                    ->setLowercase()->setUppercase()->setNumbers()->setSymbols()
+                    ->setAvoidSimilar()->setLength(10)->generatePassword())
                 ->setRoles(['ROLE_ADVISOR'])
             ;
 
@@ -102,7 +104,7 @@ class FOSUBUserProvider extends BaseClass
                 $this->container->get('doctrine')->getManager()->persist($address);
                 $user->addAddress($address);
             }
-            $user->setLinkedinData($data);
+//            $user->setLinkedinData($data);
             $dispatcher = $this->container->get('event_dispatcher');
             $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, null);
         } else {

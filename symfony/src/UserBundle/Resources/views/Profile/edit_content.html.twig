@@ -28,7 +28,7 @@
                     </span><i></i>
                 </a>
                 <div class="wmw-uploadfield-val"></div>
-                {{ form_widget(form.image.file, { id : "upload_input", attr : { style: "visibility: hidden;" } }) }}
+                {{ form_widget(form.image.file, { id : "upload_input", attr : { style: "visibility: hidden;", 'data-max-size': "5000000" } }) }}
                 {{ form_errors(form.image.file) }}
 
             </div>

@@ -46,14 +46,14 @@ class ActionController extends Controller
             $message = Swift_Message::newInstance()
                 ->setSubject($trans->trans('mails.subject.new_message', [], 'tools'))
                 ->setFrom($this->container->getParameter('email_sender'))
-                ->setTo($contractor->getEmail())/* put a valid email address there to test */
+                ->setTo($contractor->getEmail())
                 ->setBody($this->renderView('Emails/new_message.html.twig', [
                     'f_name'        => $contractor->getFirstName(),
                     'l_name'        => $contractor->getLastName(),
                     'title'         => $userMission->getMission()->getTitle(),
                     'roles'         => 'ROLE_CONTRACTOR',
                     'missionId'     => $userMission->getMission()->getId(),
-                    'userMissionId' => $userMission->getId()
+                    'userMissionId' => $userMission->getId(),
                 ]), 'text/html');
             $this->get('mailer')->send($message);
         }
@@ -108,15 +108,15 @@ class ActionController extends Controller
         if ($advisor->getNotification()) {
             $message = Swift_Message::newInstance()
                 ->setSubject($trans->trans('mails.subject.new_message', [], 'tools'))
-                ->setFrom('want@more.work')
-                ->setTo($advisor->getEmail())/* put a valid email address there to test */
-                ->setBody($this->renderView(':Emails:new_message.html.twig', [
+                ->setFrom($this->container->getParameter('email_sender'))
+                ->setTo($advisor->getEmail())
+                ->setBody($this->renderView('Emails/new_message.html.twig', [
                     'f_name'        => $advisor->getFirstName(),
                     'l_name'        => $advisor->getLastName(),
                     'title'         => $userMission->getMission()->getTitle(),
                     'roles'         => 'ROLE_CONTRACTOR',
                     'missionId'     => $userMission->getMission()->getId(),
-                    'userMissionId' => $userMission->getId()
+                    'userMissionId' => $userMission->getId(),
                 ]), 'text/html');
 
             $this->get('mailer')->send($message);

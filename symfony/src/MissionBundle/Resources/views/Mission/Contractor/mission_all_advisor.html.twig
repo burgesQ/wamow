@@ -19,7 +19,11 @@
             <span class="breadcrumbs-el active">1. {{ 'mission.view.contractor.status_advisor' | trans | upper }}</span>
             <span class="breadcrumbs-el">2. {{ 'mission.view.contractor.status_shortlist' | trans | upper }}
                 {% if selected > 0 %}
-                    <a href="{{ path('mission_shortlist', { 'missionId' : mission.id }) }}">
+                    <a onclick="return swalConfirm(
+                            '{{ 'legends.confirmation.proceed_shortlist' | trans }}',
+                            '{{ path('mission_shortlist', { 'missionId' : mission.id }) }}'
+                            )"
+                    >
                         <button class="wmw-button wmw-button--black wmw-button--border wmw-button--small">
                             <i></i><span>
                                 {{ 'mission.view.contractor.btn_proced_to_shortlist' | trans | upper }}
@@ -158,7 +162,18 @@
             <div class="wmw-mission-content row">
 
                 {% for userMission in userMissions %}
-                    {% set lastMsg = userMission.thread.messages | last %}
+                    {% set lastMsg  = userMission.thread.messages | last %}
+                    {% set msgCount = (userMission.thread.messages|length) %}
+                    {% set advMsg   = 0 %}
+                    {% set ctrMsg   = 0 %}
+
+                    {% for message in userMission.thread.messages %}
+                        {% if message.sender == userMission.user %}
+                            {% set advMsg = advMsg + 1 %}
+                        {% else %}
+                            {% set ctrMsg = ctrMsg + 1 %}
+                        {% endif %}
+                    {% endfor %}
 
                     <div class="wmw-mission-element wmw-mission-element--shortlist">
                         <div class="element-title">
@@ -172,7 +187,8 @@
                             </div>
 
                         </div>
-                        <div class="element-content{% if lastMsg.sender.id == userMission.user.id %} element-content--newmessage{% endif %}">
+
+                        <div class="element-content{% if lastMsg.sender.id == userMission.user.id and lastMsg.metadata[1].isRead == false %} element-content--newmessage{% endif %}">
                             <div class="element-content-title">{{ 'footer.advisor' | trans }} {{ userMission.idForContractor }}</div>
                             {{ lastMsg.body }}
                             <div class="element-content-bottom">
@@ -191,24 +207,34 @@
                         <div class="element-buttons">
                             {% if userMission.status != constant('SHORTLIST', userMission) %}
                                 <a class="wmw-button wmw-button--red wmw-button--border wmw-button--small"
-                                   onclick="return swalConfirm('{{ 'legends.confirmation.refuse_user' | trans }}',
-                                           '{{ path('user_mission_refuse', { 'userMissionId' : userMission.id }) }}')">
+                                   onclick="
+                                   {% if msgCount > 1 %}
+                                           return swalConfirm('{{ 'legends.confirmation.refuse_user' | trans }}',
+                                           '{{ path('user_mission_refuse', { 'userMissionId' : userMission.id }) }}')
+                                   {% else %}
+                                           renoup()
+                                   {% endif %}
+                                           ">
                                     <i></i><span>
                                         <i class="icon icon--cross"></i>
                                         {{ 'mission.view.contractor.btn_refuse' | trans }}
                                     </span><i></i>
                                 </a>
-                            {% else %}
-                                <br>
                             {% endif %}
                             {% if userMission.status != constant('SHORTLIST', userMission) and shortlisted < 3 %}
                                 <a class="wmw-button wmw-button--green wmw-button--border wmw-button--small"
-                                   onclick="return swalConfirm('{{ 'legends.confirmation.add_user' | trans }}',
-                                           '{{ path('user_mission_add_to_shortlist', { 'userMissionId' : userMission.id }) }}')">
+                                   onclick="
+                                   {% if advMsg > 2 and ctrMsg > 2%}
+                                           return swalConfirm('{{ 'legends.confirmation.add_user' | trans }}',
+                                           '{{ path('user_mission_add_to_shortlist', { 'userMissionId' : userMission.id }) }}')
+                                   {% else %}
+                                           noup()
+                                   {% endif%}
+                                           ">
                                     <i></i><span>
-                                        <i class="icon icon--star"></i>
+                                            <i class="icon icon--star"></i>
                                         {{ 'mission.view.contractor.btn_add_to_shortlist' | trans | upper }}
-                                    </span><i></i>
+                                        </span><i></i>
                                 </a>
                             {% elseif userMission.status == constant('SHORTLIST', userMission) %}
                                 <a class="wmw-button wmw-button--red wmw-button--border wmw-button--small"
@@ -250,4 +276,26 @@
 {% endblock %}
 
 {% block javascripts %}
+
+    {{ parent() }}
+    <script type="text/javascript">
+
+        function noup() {
+            swal({
+                text: "{{ 'mission.message.not_enough_messages' | trans }}",
+                type: 'warning',
+                confirmButtonColor: '#3cc3b7'
+            });
+        }
+
+        function renoup() {
+            swal({
+                text: "{{ 'mission.message.not_enough_messages' | trans }}",
+                type: 'warning',
+                confirmButtonColor: '#3cc3b7'
+            });
+        }
+
+    </script>
+
 {% endblock %}

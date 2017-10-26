@@ -1,8 +1,0 @@
-{% trans_default_domain 'tools' %}
-<h3>{{ 'mails.hello' | trans({ '%f_name': f_name, '%l_name': l_name }, 'tools') }}</h3>
-
-{{ 'mails.inbox.new_pitcher' | trans({ '%%missionName': missionName | trans }, 'tools') | nl2br }}<br>
-
-<a href="{{ path('mission_view', {'missionId': missionId}) }}">{{ 'mails.inbox.link' | trans }}</a><br>
-
-{{ 'mails.inbox.the_team' | trans }}

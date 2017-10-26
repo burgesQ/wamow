@@ -10,15 +10,14 @@
 // --------------------- MASTER PART -------------------------- //
 // ------------------------------------------------------------ //
 
-
 function swalConfirm(msg, url) {
     swal({
         text: msg,
         showCancelButton: true,
         type: 'warning',
         confirmButtonColor: '#3cc3b7',
-        confirmButtonText: "OK",
-        cancelButtonText: "KO"
+        confirmButtonText: ok,
+        cancelButtonText: ko
     }).then(
         function (value) {
             window.location.href = url;

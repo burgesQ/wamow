@@ -37,9 +37,6 @@ class ResettingController extends BaseController
             return new RedirectResponse($this->generateUrl('fos_user_resetting_request'));
         }
 
-        $userRepo = $this->getDoctrine()->getRepository('UserBundle:User');
-        $user     = $userRepo->findOneBy(['username' => $userName]);
-
         return $this->render('UserBundle:Resetting:check_email.html.twig', [
             'email' => $userName
         ]);

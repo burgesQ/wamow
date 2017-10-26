@@ -50,6 +50,8 @@ form:
 
     file:
         file: "Fichier"
+        error:
+            max_size: "La taille du fichier excède la limite autorisée. Merci de choisir un fichier de 5 Mo maximum."
 
     password:
         old: ancien mot de passe
@@ -106,13 +108,17 @@ legends:
     currency: ''
     currency_day: %price/days
     confirmation:
+        proceed_shortlist: "Dés que vous accédez à votre sélection, vous n’aurez plus accès à la liste complete des Experts. Assurez vous d’avoir sélectionné les bons Experts! Voulez vous confirmer cette action?"
         refuse_user: Voulez vous confirmer cette action?
         add_user: Voulez vous confirmer cette action?
         remove_user: Voulez vous confirmer cette action?
         proceed: Voulez vous confirmer cette action?
         work_experience: Voulez vous confirmer cette action? Une fois soumis cettes information ne sont plus modifiable.
         delete: Voulez vous confirmer cette action?
-        enter_your_card: Payer n'engage pas le fait que vous soyez contacter part une entreprise.
+        enter_your_card: "Bravo, vous avez désormais accès à l’intégralité des pitchs qui vous seront présentés durant une année !
+        Par ailleurs vous avez postulé pour échanger de manière anonyme avec l’entreprise cliente sur ce pitch. 
+        Pour rappel les 5 premières propositions sont présentées dans un premier temps. 
+        Les 5 suivantes sont placées en liste additionnelle et présentées pour remplacer les premières éliminations. Confirmez-vous le paiement de l’abonnement ?"
     other: Autre
     pop_up:
         check_spam: Un e-mail vous a été envoyé contenant votre mot de passe. Vérifiez votre boite de réception et votre boite spam.
@@ -179,6 +185,9 @@ error:
     phone:
         please_fill:
     generale: Il semble que certains champs ne sont pas remplis correctement.
+    valuableworkexperience:
+        max: "Veuillez sélectioner un maximum de 5 options."
+
 
 ## Home
 home:
@@ -662,6 +671,8 @@ mission:
         shortlist_added: Nous vous informons que vous avez été sélectionné en short-list pour la mission.
         my_selection_added: "Nous vous informons que vous avez êtes le choix final de l'entreprise"
         no_mission: "Aucune mission pour le moment ! Créez-en une !"
+        not_enough_messages: "S`il vous plait veuillez continuer votre conversation - prenez le temps d`evaluer l`Expert"
+        pls_more_messages: "S`il vous plait prenez le temps de repondre au premier message. Ne ratez pqs une nouvelle ocasion !"
 
 ## Inbox
 inbox:
@@ -669,9 +680,11 @@ inbox:
         placeholder:
             empty: Ecrivez ici votre message
         btn_submit_empty_interested: Envoyer proposition
-    read: Lire
-    show: Montrer
-    you: Vous
+    read: 'lire'
+    show: 'montrer'
+    you: 'vous'
+    them: 'eux'
+    bot: 'Ana de wamow.co'
     new_message: Nouveau message
 
 thread:
@@ -771,6 +784,7 @@ businesspractice:
     it: "Systèmes d’information - IT"
     public: "Administration et opérateurs publics"
     ngo: "Association et organisation non gouvernementale (ONG)"
+    agriculture: "Secteur Primaire (hors Énergie)"
 
 professionalexpertises:
     title: "Expériences Techniques"
@@ -1038,7 +1052,6 @@ mails:
 
         reset_password: "Vous pouvez re-configurer votre mot de passe a l'address suivante : %url .\n\nSi ce n’est déjà fait pensez à compléter votre profil pour améliorer votre visibilité !"
 
-
     inbox:
         new_message_mission: "Réponse à votre consultation !"
         new_pitcher: "Nous vous informons que vous avez reçu une réponse à votre consultation, %title\nlien pour se connecter.\nL’équipe de wamow.co"
@@ -1057,14 +1070,14 @@ mails:
     content:
         new_pitch: |
             %title. Nous vous confirmons le lancement de votre consultation, Titre de la mission. Votre pitch a été poussé auprès des meilleurs experts de la place. Dès marque d’intérêt de l’un d’entre eux, vous recevrez une alerte. Avez-vous pensé à activer vos notifications email dans votre profil ?
-            L’équipe de wamow.co
+            
 
             
         new_contractor: |
             Bonjour fName lName
 
             Nous vous informons que vous avez été identifié pour répondre à une mission %title.
-            L’équipe de wamow.co
+            
         user_shortlisted: |
             Bonjour fName lName
 
@@ -1081,10 +1094,10 @@ mails:
         no_shortlist: |
             Bonjour fName, lName,
 
-            Votre réponse n’a pu être retenue en raison de délais trop tardifs. C’est dommage au regard de sa qualité. Pour une prochaine fois, pensez à réagir plus rapidement. Avez-vous activé la notification par email sur votre profil ? 
+            Votre réponse n’a pu être retenue par l'entreprise. C’est dommage au regard de sa qualité. Pour une prochaine fois, pensez à réagir plus rapidement. Avez-vous activé la notification par email sur votre profil ? 
             
             L’équipe de wamow.co
-        no_funalist: |
+        no_finalist: |
             Bonjour fName, lName,
 
             Malheureusement votre profil n’a pas été retenu par l’entreprise malgré sa qualité. Ce sera pour une prochaine fois. Restez attentif, d’autres pitchs peuvent tomber !
@@ -1097,7 +1110,7 @@ mails:
             Vous pouvez changer votre mot de passe en cliquant sur ce lien: 
 
             Cordialement,
-            L’équipe de wamow.co
+            
 
 
 

@@ -29,17 +29,24 @@ class UserMissionListener
     protected $sender;
 
     /**
+     * @var \Symfony\Component\DependencyInjection\Container $container
+     */
+    protected $container;
+
+    /**
      * UserMissionListener constructor.
      *
      * @param \Swift_Mailer                             $mailer
      * @param \Symfony\Component\Translation\Translator $translator
      * @param string                                    $sender
+     * @param $container
      */
-    public function __construct($mailer, $translator, $sender)
+    public function __construct($mailer, $translator, $sender, $container)
     {
-        $this->mailer = $mailer;
-        $this->trans  = $translator;
-        $this->sender = $sender;
+        $this->mailer     = $mailer;
+        $this->trans      = $translator;
+        $this->sender     = $sender;
+        $this->container  = $container;
     }
 
     /**
@@ -56,12 +63,11 @@ class UserMissionListener
                 $this->sendMailAdvisor($event, 'mails.subject.user_shortlisted', 'mails.content.user_shortlisted');
             } elseif ($event->getOldValue("status") == UserMission::MATCHED
                 && $event->getNewValue("status") == UserMission::DISMISS) {
-                $this->sendMailAdvisor($event, 'mails.subject.response', 'mails.content.no_shortlisted');
+                $this->sendMailAdvisor($event, 'mails.subject.response', 'mails.content.no_shortlist');
             } elseif ($event->getOldValue("status") == UserMission::SHORTLIST
                 && $event->getNewValue("status") == UserMission::DISMISS) {
                 $this->sendMailAdvisor($event, 'mails.subject.response', 'mails.content.no_finalist');
             }
-
         }
     }
 
@@ -80,11 +86,13 @@ class UserMissionListener
                 ->setSubject($this->trans->trans($title, [], 'tools'))
                 ->setFrom($this->sender)
                 ->setTo($advisor->getEmail())
-                ->setBody($this->trans->trans($content, [
-                    'fName'        => $advisor->getFirstName(),
-                    'lName'        => $advisor->getLastName(),
-                    'missionTitle' => $userMission->getMission()->getTitle()
-                ], 'tools'), 'text');
+                ->setBody($this->container->get('templating')->render('Emails/classic.html.twig', [
+                    'content' => $this->trans->trans($content, [
+                        'fName'        => $advisor->getFirstName(),
+                        'lName'        => $advisor->getLastName(),
+                        'missionTitle' => $this->trans->trans($userMission->getMission()->getTitle(), [], 'tools')
+                    ], 'tools')
+                ]), 'text/html');
             $this->mailer->send($message);
         }
     }

@@ -3,22 +3,12 @@
 namespace InboxBundle\Services;
 
 use FOS\MessageBundle\MessageBuilder\NewThreadMessageBuilder;
-use Swift_Message;
 use Symfony\Component\DependencyInjection\Container;
-use FOS\MessageBundle\FormType\ReplyMessageFormType;
-use InboxBundle\Repository\MessageRepository;
-use InboxBundle\Repository\ThreadRepository;
-use MissionBundle\Form\ThreadMissionType;
-use Symfony\Component\Form\FormInterface;
-use InboxBundle\Entity\MessageMetadata;
 use MissionBundle\Entity\UserMission;
-use MissionBundle\Entity\Mission;
-use Symfony\Component\Form\Form;
 use Doctrine\ORM\EntityManager;
-use InboxBundle\Entity\Message;
 use InboxBundle\Entity\Thread;
-use ToolsBundle\Entity\Proposal;
 use UserBundle\Entity\User;
+use Swift_Message;
 
 class Services
 {
@@ -169,7 +159,7 @@ class Services
 
         if ($contractor->getNotification()) {
             $trans = $this->container->get('translator');
-            $message = Swift_Message::newInstance()
+            $mail = Swift_Message::newInstance()
                 ->setSubject($trans->trans('mails.subject.new_message', [], 'tools'))
                 ->setFrom($this->container->getParameter('email_sender'))
                 ->setTo($contractor->getEmail())/* put a valid email address there to test */
@@ -179,9 +169,11 @@ class Services
                     'title'         => $userMission->getMission()->getTitle(),
                     'roles'         => 'ROLE_CONTRACTOR',
                     'missionId'     => $userMission->getMission()->getId(),
-                    'userMissionId' => $userMission->getId()
+                    'userMissionId' => $userMission->getId(),
                 ]), 'text/html');
-            $this->container->get('mailer')->send($message);
+
+
+            $this->container->get('mailer')->send($mail);
         }
     }
 }

@@ -8,6 +8,7 @@ tools:
         required: 'The address must only contain letters, numbers, dots, commas or dashes.'
         city: 'The city must  only contain letters or dashes.'
         state: 'The state must only contain letters or dashes.'
+        street: 'Please provide a street.'
     upload:
         badFormat: "This format is not accepted"
     number:
@@ -35,6 +36,9 @@ user:
         spechar: Please enter at least a exotic characteres
     languages:
         min: 'Please select at least one language.'
+    valuableworkexperience:
+        min: Please select at least one userWorkEXperience
+        max: Please don't select more than 5 userWorkExperience.
 
 company:
     name:

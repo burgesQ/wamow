@@ -8,6 +8,7 @@ tools:
         required: "L'adresse peut contenir que de lettres, numéros, points, virgules et tirés."
         city: 'La ville peut contenir que de lettres et de tirés.'
         state: "L'état peut contenir que de lettres et de tirés."
+        street: "Veuillez fournir une rue."
     upload:
         badFormat: "Ce format n'est pas accepté"
     number:
@@ -35,6 +36,9 @@ user:
         spechar: Veuillez entrer au moins un caractère spécial
     languages:
         min: 'Veuillez selectioner au moins un language.'
+    valuableworkexperience:
+        min: 'Veuillez selectioner au moins une experience mission.'
+        max: 'Veuillez selectioner moins de 5 experience-mission.'
 
 company:
     name:

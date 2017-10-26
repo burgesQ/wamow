@@ -49,7 +49,7 @@ logger.level = Logger::MAX_LEVEL
 
 before "symfony:cache:warmup", "Wmw:Composer"
 # Run migrations before warming the cache
-# before "symfony:cache:warmup", "symfony:doctrine:migrations:migrate"
+before "symfony:cache:warmup", "symfony:doctrine:migrations:migrate"
 
 after "deploy:update", "Wmw:mail"             #Mail alerte
 after "deploy:update", "deploy:cleanup"

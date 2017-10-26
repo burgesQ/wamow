@@ -42,7 +42,8 @@ class MissionGeneratorController extends Controller
         "businesspractice.energy" => "energy",
         "businesspractice.it" => "it",
         "businesspractice.public" => "public",
-        "businesspractice.ngo" => "ngo"
+        "businesspractice.ngo" => "ngo",
+        "businesspractice.agriculture" => "agriculture"
     ];
 
     /**

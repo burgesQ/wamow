@@ -2,7 +2,6 @@
 
 namespace UserBundle\Controller;
 
-use MissionBundle\Entity\UserWorkExperience;
 use Symfony\Component\HttpFoundation\Session\Storage\PhpBridgeSessionStorage;
 use UserBundle\Form\RegistrationAdvisor\MergedFormRegistrationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -15,6 +14,7 @@ use UserBundle\Form\RegistrationAdvisor\StepTwoType;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
 use Symfony\Component\HttpFoundation\Request;
+use MissionBundle\Entity\UserWorkExperience;
 use Symfony\Component\Form\FormError;
 use ToolsBundle\Entity\UploadResume;
 use FOS\UserBundle\Event\FormEvent;
@@ -173,7 +173,8 @@ class RegistrationAdvisorController extends Controller
             "businesspractice.energy" => "energy",
             "businesspractice.it" => "it",
             "businesspractice.public" => "public",
-            "businesspractice.ngo" => "ngo"
+            "businesspractice.ngo" => "ngo",
+            "businesspractice.agriculture" => "agriculture"
         ];
 
         return $this->render('UserBundle:Registration:register_expert_step_one.html.twig', [

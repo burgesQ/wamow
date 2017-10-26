@@ -170,7 +170,7 @@ class Mission
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="applicationEnding", type="datetime", nullable=true)
+     * @ORM\Column(name="application_ending", type="datetime", nullable=true)
      */
     private $applicationEnding;
 
