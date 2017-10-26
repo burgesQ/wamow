@@ -1072,7 +1072,6 @@ mails:
 
     content:
         new_pitch: "%title. Nous vous confirmons le lancement de votre consultation, Titre de la mission. Votre pitch a été poussé auprès des meilleurs experts de la place. Dès marque d’intérêt de l’un d’entre eux, vous recevrez une alerte. Avez-vous pensé à activer vos notifications email dans votre profil ?"
->>>>>>> c887fa0... redo mails
 
         new_contractor: "Nous vous informons que vous avez été identifié pour répondre à une mission %title."
         user_shortlisted: "Nous vous informons que vous avez été sélectionné en short-list pour la mission %title."
