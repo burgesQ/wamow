@@ -1084,7 +1084,7 @@ mails:
 
             Nous vous informons que vous avez été sélectionné en short-list pour la mission %title.
            
-            L’équipe de wamow.co
+            
         user_finalist: |
             Bonjour fName, lName,
 
@@ -1094,15 +1094,18 @@ mails:
         no_shortlist: |
             Bonjour fName, lName,
 
-            Votre réponse n’a pu être retenue par l'entreprise. C’est dommage au regard de sa qualité. Pour une prochaine fois, pensez à réagir plus rapidement. Avez-vous activé la notification par email sur votre profil ? 
+            L’entreprise a completé sa sélection d’experts. Malheureusement, vous n’avez pas eu l’occasion de participer à la compétition cette fois-ci.
+            Peut-être la mission proposée n’était-elle en adéquation avec vos attentes. Dans ce cas nous serions ravi d’en discuter avec vous. Envoyez nous un email à contact@wamow.co et nous ferons le maximum pour vous contacter rapidement.
+            Avez-vous pensé à activer la notification par e-mail sur votre profil ? 
+            Ainsi vous recevrez les prochaines propositions d’accompagnement en temps réel. 
             
-            L’équipe de wamow.co
+          
         no_finalist: |
             Bonjour fName, lName,
 
             Malheureusement votre profil n’a pas été retenu par l’entreprise malgré sa qualité. Ce sera pour une prochaine fois. Restez attentif, d’autres pitchs peuvent tomber !
            
-            L’équipe de wamow.co
+            
             
         reset_password: |
             Bonjour uName !
