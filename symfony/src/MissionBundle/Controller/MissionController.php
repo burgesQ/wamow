@@ -299,7 +299,10 @@ class MissionController extends Controller
             case (1) :
             case (2) :
             case (3) :
-                $messageService->markAsRead($userMission->getThread()->getLastMessage());
+                foreach ($userMission->getThread()->getMetadata() as $meta)
+                    if ($user == $meta->getParticipant())
+                        $messageService->markAsRead($userMission->getThread()->getLastMessage());
+
                 $this->getDoctrine()->getManager()->flush();
                 $userMissions =
                     $this->getDoctrine()
