@@ -79,15 +79,22 @@
 
             var nbWorkExp = 0;
 
-            $('#plus_one').click(function() {
-                nbWorkExp += 1
+            $('#wmw-overlay-ob-4').on('submit', function() {
+
+                if($(this).find('.invalid').get().length == 0) {
+
+                    nbWorkExp += 1;
+                }
+                console.log(nbWorkExp);
+
+                return false;
             });
 
             $('#app_user_profile_submit').click(function (e, params) {
 
                 e.preventDefault();
 
-                if (nbWorkExp > 6) {
+                if (nbWorkExp > 5) {
 
                     swal({
                         text: "{{ 'error.valuableworkexperience.max' | trans({}, 'tools') }}",
