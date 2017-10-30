@@ -1,0 +1,13 @@
+{% trans_default_domain 'tools' %}
+
+<h3>New Contact !</h3>
+
+<li>
+    From: {{ contact.address }}
+</li>
+<li>
+    Content: {{ contact.content }}
+</li>
+<li>
+    Date : {{ contact.date | date }}
+</li>

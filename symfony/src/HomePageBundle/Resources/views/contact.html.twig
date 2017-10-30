@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme form "form_themes.html.twig" %}
+
+{% trans_default_domain 'tools' %}
+
+{% block body %}
+
+    <div class="wmw-onboard col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 col-xl-4 col-xl-offset-4">
+        <div class="wmw-onboard-body">
+
+            {{ form_start(form) }}
+
+            <h2>Contact Us !</h2>
+
+            <div class="wmw-fieldrow row">
+                <label class="wmw-label wmw-label--top" for="{{ form.content.vars.id }}">
+                    {{ form_label(form.content) }}
+                </label>
+                {{ form_widget(form.content, { 'attr' : { 'class' : 'textarea--mission required' }}) }}
+                {{ form_errors(form.content) }}
+            </div>
+
+            <div class="wmw-fieldrow row">
+                <label class="wmw-label col-xs-5" for="{{ form.address.vars.id }}">
+                    {{ form_label(form.address) }}
+                </label>
+                {{ form_widget(form.address, {'attr' : {'class': 'required email col-xs-7'}}) }}
+                {{ form_errors(form.address) }}
+            </div>
+
+            {% set sub = '<i></i><span>' ~ 'form.btn.contact' | trans ~ '</span><i></i>' %}
+            {{ form_widget(form.submit, {attr: { class: 'wmw-button wmw-button--green wmw-button--border' }, label: sub }) }}
+
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+
+{% endblock %}

@@ -6,6 +6,8 @@ use Symfony\Component\HttpFoundation\Session\Storage\PhpBridgeSessionStorage;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
+use ToolsBundle\Entity\Contact;
+use ToolsBundle\Form\ContactType;
 use ToolsBundle\Form\PreregisterType;
 use ToolsBundle\Entity\Preregister;
 
@@ -30,8 +32,8 @@ class DefaultController extends Controller
         }
 
         return $this->render('HomePageBundle:Advisor:home.html.twig', [
-            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-            'home' => 1
+            'base_dir' => realpath($this->container->getParameter('kernel.root_dir') . '/..'),
+            'home'     => 1
         ]);
     }
 
@@ -62,13 +64,17 @@ class DefaultController extends Controller
                 'phone'       => $form->get('phone')->getData()
             ]);
 
-            $request->getSession()->getFlashBag()->add('notice', $trans->trans('home.contractor.preregister.registered', [], 'tools'));
+            $request->getSession()
+                ->getFlashBag()
+                ->add('notice', $trans->trans('home.contractor.preregister.registered', [], 'tools'));
+
             return $this->redirectToRoute('home_page_contractor');
         }
-        return $this->render('HomePageBundle:Contractor:home.html.twig', array(
+
+        return $this->render('HomePageBundle:Contractor:home.html.twig', [
             'form' => $form->createView(),
             'home' => 1
-        ));
+        ]);
     }
 
     /**
@@ -103,8 +109,7 @@ class DefaultController extends Controller
      */
     public function dummyContactAction()
     {
-        // her we'll find a way to define the local of the user
-        return $this->redirectToRoute('home_page_advisor', ['_locale' => 'en']);
+        return $this->redirectToRoute('home_page_contact');
     }
 
     /**
@@ -130,14 +135,46 @@ class DefaultController extends Controller
     }
 
     /**
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function helpAction()
     {
         return $this->render('@HomePage/help.html.twig', [
-            'user' => $this->getUser(),
-            'home' => 1,
+            'user'   => $this->getUser(),
+            'home'   => 1,
             'footer' => 1
+        ]);
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function contactAction(Request $request)
+    {
+        $contact = new Contact();
+        $form    = $this->createForm(ContactType::class, $contact);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->persist($contact);
+            $this->getDoctrine()->getManager()->flush();
+
+            $this->get('wamow.mailer')->sendWamowMails(
+                'New contact',
+                $form->get('address')->getData(),
+                'Emails/new_contact.html.twig', [
+                'contact' => $contact
+            ]);
+
+            return $this->redirectToRoute('home_page');
+        }
+
+        return $this->render('@HomePage/contact.html.twig', [
+            'user' => $this->getUser(),
+            'form' => $form->createView()
         ]);
     }
 }
