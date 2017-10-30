@@ -358,6 +358,7 @@ registration:
             mismatchpassword: Password does not match
             resume: Charger mon CV
             nextbutton: Suivant
+            confirm: Veuillez confirmer les infromations suivante.
         one:
             title: Dans quel secteur d’activité avez-vous travaillé ? 
             subtitle: Vous pouvez sélectionner plusieurs choix
