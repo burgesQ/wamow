@@ -4,7 +4,7 @@ home_page_advisor:
         _controller: HomePageBundle:Default:advisor
 
 home_page_contractor:
-    path:      /contractor
+    path:      /corporation
     defaults:
         _controller: HomePageBundle:Default:contractor
 
