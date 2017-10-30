@@ -79,17 +79,13 @@
 
             var nbWorkExp = 0;
 
-            $('#wmw-overlay-ob-4').on('submit', function() {
-
-                if($(this).find('.invalid').get().length == 0) {
-
+            $(":checkbox[id^='app_user_profile_workExperience_']").change(function () {
+                if (this.checked)
                     nbWorkExp += 1;
-                }
-                console.log(nbWorkExp);
-
-                return false;
+                else
+                    nbWorkExp -= 1;
             });
-
+            
             $('#app_user_profile_submit').click(function (e, params) {
 
                 e.preventDefault();
