@@ -79,15 +79,18 @@
 
             var nbWorkExp = 0;
 
-            $('#plus_one').click(function() {
-                nbWorkExp += 1
+            $(":checkbox[id^='app_user_profile_workExperience_']").change(function () {
+                if (this.checked)
+                    nbWorkExp += 1;
+                else
+                    nbWorkExp -= 1;
             });
-
+            
             $('#app_user_profile_submit').click(function (e, params) {
 
                 e.preventDefault();
 
-                if (nbWorkExp > 6) {
+                if (nbWorkExp > 5) {
 
                     swal({
                         text: "{{ 'error.valuableworkexperience.max' | trans({}, 'tools') }}",
