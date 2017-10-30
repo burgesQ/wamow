@@ -46,7 +46,7 @@ class WamowMailerService
         $this->translator = $translator;
         $this->container  = $container;
         $this->senders    = [
-            ['ana@wamow.co', 'mails.sign.ana_sign'],
+            ['anaexpert@wamow.co', 'mails.sign.ana_sign'],
             ['emmaexpert@wamow.co', 'mails.sign.emma_sign']
         ];
     }
