@@ -22,3 +22,8 @@ home_page_about:
     path: /about
     defaults:
         _controller: HomePageBundle:Default:about
+
+home_page_contact:
+    path: /contact
+    defaults:
+        _controller: HomePageBundle:Default:contact
