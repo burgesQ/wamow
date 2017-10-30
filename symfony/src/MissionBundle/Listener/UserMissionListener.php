@@ -69,8 +69,8 @@ class UserMissionListener
                 $title,
                 $advisor->getEmail(),
                 'Emails/classic.html.twig', [
-                'fName'        => $advisor->getFirstName(),
-                'lName'        => $advisor->getLastName(),
+                'f_name'        => $advisor->getFirstName(),
+                'l_name'        => $advisor->getLastName(),
                 'content' => $this->trans->trans($content, [
                     'missionTitle' => $this->trans->trans($userMission->getMission()->getTitle(), [], 'tools')
                 ], 'tools')
