@@ -37,6 +37,7 @@ form:
         ok: ok
         decline: decline
         upload_pic: Upload picture
+        contact: Contact
 
     note:
         saved: Saved
@@ -60,6 +61,10 @@ form:
 
     work_experience:
         months: months
+
+    contact:
+        content: Content
+        address: Email Address
 
 ## UserAgreement
 user_agreement:
@@ -354,6 +359,7 @@ registration:
             mismatchpassword: "Password does not match"
             resume: "Upload your Resume"
             nextbutton: "NEXT"
+            confirm: "Please confirm the following information."
         one:
             title: "Business Sector"
             subtitle: "In which business sector(s) have you worked? You may select multiple options."
@@ -1043,19 +1049,23 @@ mission_title:
 
 ## Mails template
 mails:
+    sign:
+        ana_sign: 'Ana at wamow.co'
+        emma_sign: 'Emma at wamow.co'
     contracot_hello: "Hello %f_name %l_name %c_name!"
     advisor_hello: "Hello %f_name %l_name !"
     hello: "Hello %f_name %l_name !"
     registration:
         contractor_new_password: "We confirm the creation of your account.\nYour password is: %password .\n\nIf you have not done so already, please take the time to complete your profile."
-        advisor_new_password: "We confirm the creation of your account.\nYour password is: %password .\n\nIf you have not done so already, please take the time to complete your profile. That will boost your visibility!"
-        reset_password: "You can reset your password by acceding this address : %url .\n\nIf you have not done so already, please take the time to complete your profile. That will boost your visibility!"
+        advisor_new_password: "We confirm the creation of your account.\nYour password is: <strong>%password</strong>.\n\nIf you have not done so already, please take the time to complete your profile. That will boost your visibility!"
+        reset_password: "You can reset your password by acceding this address : <strong> %url </ strong>.\n\nIf you have not done so already, please take the time to complete your profile. That will boost your visibility!"
 
     inbox:
         new_message_mission: "Your message has been answered on the mission %title."
         new_pitcher: "An expert answered to your Pitch, %title.\nLink Log In\nThe team at wamow.co\n"
         link: Click here to check it.
         the_team: The team at wamow.co!
+
         link: "Go check it :"
     subject:
            new_message: New message !
@@ -1067,53 +1077,15 @@ mails:
            reset_password: New Password
 
     content:
-        new_pitch: |
-            %title. Your pitch has been sent to thousands of experts in this field.
-            Once one of them shows their interest you will be notified. Make sure you have activated your notifications!
-
+        new_pitch: "%title. Your pitch has been sent to thousands of experts in this field.
+            Once one of them shows their interest you will be notified. Make sure you have activated your notifications!"
             
-        new_contractor: |
-            Hello fName lName
-
-
-            We have identified a new pitch you might be interested in: missionTitle
-            Log In to our web site to check it.
-
+        new_contractor: "We have identified a new pitch you might be interested in: missionTitle\nLog In to our web site to check it."
             
-        user_shortlisted: |
-            Hello fName lName
-
-
-            You are among the 3 best fitting Experts selected to continue the interaction about missionTitle.
-            The client would like to learn more about your proposal.
+        user_shortlisted: "You are among the 3 best fitting Experts selected to continue the interaction about missionTitle.\nThe client would like to learn more about your proposal."
             
-        user_finalist: |
-            Hello fName, lName,
-
-            You have been chosen by the Corporation for the mission missionTitle.
-            Link Log In
-            The team at wamow.co send you their most sincere Congratulations  !
-        no_shortlist: |
-            Hello fName, lName,
-
-            The Corporation has completed its selection of Experts. We regret to inform you that you have not been selected. 
-            Get ready for the next pitch that comes your way!
-            Make sure you send your proposals sooner. To help with that, check if your email notifications are turned on.
-
-            The team at wamow.co
-        no_finalist: |
-            Hello fName, lName,
-
-            Unfortunately you have not been chosen to continue working on this mission, despite the quality of your profile.
-            It will be for next time. Stay alert, other pitches might come your way!
-
-            The team at wamow.co
-        reset_password: |
-            Hello uName !
-
-            You may reset your password here
-
-            Greetings,
+        no_shortlist: "Your proposal has not been accepted by the Corporation.\nPlease be ready for the next pitch that comes your way.\nMake sure you send your proposals sooner. To help with that, check if your email notifications are turned on.\n"
+        no_finalist: "Unfortunately you have not been chosen to continue working on this mission, despite the quality of your profile.\nIt will be for next time. Stay alert, other pitches might come your way!"
 
 ## Payement template
 payment:

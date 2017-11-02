@@ -1,0 +1,20 @@
+easy_admin:
+    entities:
+        Contact:
+            class: ToolsBundle\Entity\Contact
+            label: 'Contact'
+            list:
+                title: "Contacts"
+                fields:
+                    - 'id'
+                    - 'address'
+                    - 'date'
+
+            form:
+                fields:
+                    - { property: 'address', type: 'text' }
+                    - { property: 'content', type: 'text' }
+
+            disabled_actions:
+                - 'delete'
+                - 'new'

@@ -639,7 +639,7 @@ var Master = {
         $overlay.attr('data-num', '');
         $overlay[0].reset();
         Master.close_overlay( $overlay );
-    },
+     },
 
     // Fonction d'initialisation de slider
     // slider (str) le sélecteur du slider

@@ -1,8 +1,9 @@
 {% trans_default_domain 'tools' %}
 
-{{ content | nl2br }}
-
+<h3>{{ 'mails.hello' | trans({ '%f_name': f_name, '%l_name': l_name }, 'tools') }}</h3>
 <br />
-{{ 'mails.inbox.the_team' | trans }}
+{{ content | nl2br }}
+<br />
+{{ signature | trans }}
 <br />
 <img src="https://wamow.co/images/mail.png" alt="wamow" />

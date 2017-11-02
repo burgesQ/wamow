@@ -4,7 +4,6 @@ namespace MissionBundle\Listener;
 
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use MissionBundle\Entity\UserMission;
-use Swift_Message;
 
 /**
  * Class UserMissionListener
@@ -14,39 +13,22 @@ use Swift_Message;
 class UserMissionListener
 {
     /**
-     * @var \Swift_Mailer $mailer
+     * @var \ToolsBundle\Service\WamowMailerService
      */
-    protected $mailer;
+    protected $wamowMailer;
 
-    /**
-     * @var \Symfony\Component\Translation\Translator $trans
-     */
     protected $trans;
-
-    /**
-     * @var string $sender
-     */
-    protected $sender;
-
-    /**
-     * @var \Symfony\Component\DependencyInjection\Container $container
-     */
-    protected $container;
 
     /**
      * UserMissionListener constructor.
      *
-     * @param \Swift_Mailer                             $mailer
+     * @param \ToolsBundle\Service\WamowMailerService   $wamowMailer
      * @param \Symfony\Component\Translation\Translator $translator
-     * @param string                                    $sender
-     * @param $container
      */
-    public function __construct($mailer, $translator, $sender, $container)
+    public function __construct($wamowMailer, $translator)
     {
-        $this->mailer     = $mailer;
-        $this->trans      = $translator;
-        $this->sender     = $sender;
-        $this->container  = $container;
+        $this->wamowMailer = $wamowMailer;
+        $this->trans       = $translator;
     }
 
     /**
@@ -82,18 +64,18 @@ class UserMissionListener
         $userMission = $event->getEntity();
         $advisor     = $userMission->getUser();
         if ($advisor->getNotification()) {
-            $message = Swift_Message::newInstance()
-                ->setSubject($this->trans->trans($title, [], 'tools'))
-                ->setFrom($this->sender)
-                ->setTo($advisor->getEmail())
-                ->setBody($this->container->get('templating')->render('Emails/classic.html.twig', [
-                    'content' => $this->trans->trans($content, [
-                        'fName'        => $advisor->getFirstName(),
-                        'lName'        => $advisor->getLastName(),
-                        'missionTitle' => $this->trans->trans($userMission->getMission()->getTitle(), [], 'tools')
-                    ], 'tools')
-                ]), 'text/html');
-            $this->mailer->send($message);
+
+            $this->wamowMailer->sendWamowMails(
+                $title,
+                $advisor->getEmail(),
+                'Emails/classic.html.twig', [
+                'f_name'        => $advisor->getFirstName(),
+                'l_name'        => $advisor->getLastName(),
+                'content' => $this->trans->trans($content, [
+                    'missionTitle' => $this->trans->trans($userMission->getMission()->getTitle(), [], 'tools')
+                ], 'tools')
+            ]);
+
         }
     }
 }
