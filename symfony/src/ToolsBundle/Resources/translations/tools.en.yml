@@ -359,7 +359,7 @@ registration:
             mismatchpassword: "Password does not match"
             resume: "Upload your Resume"
             nextbutton: "NEXT"
-            confirm: "Please confirm the following informations."
+            confirm: "Please confirm the following information."
         one:
             title: "Business Sector"
             subtitle: "In which business sector(s) have you worked? You may select multiple options."
