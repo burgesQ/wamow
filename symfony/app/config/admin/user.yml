@@ -1,8 +1,40 @@
 easy_admin:
     entities:
-        User:
+
+        Contractor:
             class: UserBundle\Entity\User
-            label: 'User'
+            label: 'Contractor'
+            list:
+                dql_filter: 'entity.company > 0'
+                title: "Users"
+                fields:
+                    - 'id'
+                    - 'firstname'
+                    - 'lastname'
+                    - 'email'
+                    - 'roles'
+                    - 'company'
+                    - 'enabled'
+                    - 'planExpiresAt'
+            form:
+                fields:
+                    - { property: 'firstname', type: 'text' }
+                    - { property: 'lastname', type: 'text' }
+                    - { property: 'email', type: 'email' }
+                    - { property: 'status', type: 'choice', type_options: { required: true, multiple: false, expanded: false, choices: { 0 : 'STEP_ZERO', 1 : 'STEP_ONE',  2 : 'STEP_TWO', 3 : 'STEP_THREE', 4 : 'STEP_FOUR', 5 : 'NO_STEP' } } }
+                    - { property: 'languages', type: 'easyadmin_autocomplete', type_options: { by_reference: false } }
+                    - { property: 'enabled' }
+            new:
+               fields:
+                    - { property: 'roles', type: 'choice', type_options: { required: true, multiple: true, expanded: true, choices: { 'ROLE_ADVISOR': 'ROLE_ADVISOR', 'ROLE_CONTRACTOR': 'ROLE_CONTRACTOR' }, data : { 'ROLE_CONTRACTOR': 'ROLE_CONTRACTOR' } } }
+                    - { property: 'plainPassword', type: 'password' }
+                    - { property: 'company', type: 'easyadmin_autocomplete', type_options: { by_reference: false } }
+            disabled_actions:
+                - 'delete'
+
+        Advisor:
+            class: UserBundle\Entity\User
+            label: 'Advisor'
             list:
                 title: "Users"
                 fields:
@@ -22,13 +54,11 @@ easy_admin:
                     - { property: 'status', type: 'choice', type_options: { required: true, multiple: false, expanded: false, choices: { 0 : 'STEP_ZERO', 1 : 'STEP_ONE',  2 : 'STEP_TWO', 3 : 'STEP_THREE', 4 : 'STEP_FOUR', 5 : 'NO_STEP' } } }
                     - { property: 'languages', type: 'easyadmin_autocomplete', type_options: { by_reference: false } }
                     - { property: 'enabled' }
-
             new:
                fields:
                     - { property: 'roles', type: 'choice', type_options: { required: true, multiple: true, expanded: true, choices: { 'ROLE_ADVISOR': 'ROLE_ADVISOR', 'ROLE_CONTRACTOR': 'ROLE_CONTRACTOR' }, data : { 'ROLE_CONTRACTOR': 'ROLE_CONTRACTOR' } } }
                     - { property: 'plainPassword', type: 'password' }
                     - { property: 'company', type: 'easyadmin_autocomplete', type_options: { by_reference: false } }
-
             disabled_actions:
                 - 'delete'
 
