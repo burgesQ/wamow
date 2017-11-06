@@ -20,7 +20,14 @@ class AddressCountryFormType extends AbstractType
                 'translation_domain' => 'tools',
                 'placeholder'        => 'form.address.country',
                 'required'           => true,
-                'label'              => false
+                'label'              => false,
+                'preferred_choices'  => [
+                    'FR',
+                    'US',
+                    'GB',
+                    'DE',
+                    'ES'
+                ]
             ]);
     }
 
