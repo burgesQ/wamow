@@ -36,6 +36,7 @@ easy_admin:
             class: UserBundle\Entity\User
             label: 'Advisor'
             list:
+                dql_filter: 'entity.company IS NULL'
                 title: "Users"
                 fields:
                     - 'id'
