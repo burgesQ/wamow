@@ -1058,7 +1058,7 @@ mails:
     registration:
         contractor_new_password: "We confirm the creation of your account.\nYour password is: %password .\n\nIf you have not done so already, please take the time to complete your profile."
         advisor_new_password: "We confirm the creation of your account.\nYour password is: <strong>%password</strong>.\n\nIf you have not done so already, please take the time to complete your profile. That will boost your visibility!"
-        reset_password: "You can reset your password by acceding this address : <strong> %url </ strong>.\n\nIf you have not done so already, please take the time to complete your profile. That will boost your visibility!"
+        reset_password: "You can reset your password by acceding this address : <strong> %url </ strong>\n\nIf you have not done so already, please take the time to complete your profile. That will boost your visibility!"
 
     inbox:
         new_message_mission: "Your message has been answered on the mission %title."
