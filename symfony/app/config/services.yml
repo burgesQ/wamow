@@ -62,3 +62,7 @@ services:
     fos_user.listener.flash:
         class: UserBundle\EventListener\FlashListener
         arguments: ['@session', '@translator']
+
+    translated_language:
+        class: ToolsBundle\Repository\LanguageRepository
+        factory: ['ToolsBundle\Repository\LanguageRepository', findAutocompleteCertification]
