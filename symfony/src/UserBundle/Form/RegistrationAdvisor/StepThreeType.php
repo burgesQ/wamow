@@ -31,11 +31,10 @@ class StepThreeType extends AbstractType
                     'min' => 1,
                     'minMessage' => 'user.kindfomission.min',
                 ]),
-                'query_builder' => function(EntityRepository $er) {
-                    return $er->createQueryBuilder('u')
-                        ->orderBy('u.name', 'ASC');
+                'query_builder'             => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('e')
+                        ->orderBy('e.id', 'ASC');
                 },
-
             ])
             ->add('submit', SubmitType::class, [
                     'translation_domain' => 'tools',
