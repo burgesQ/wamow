@@ -97,7 +97,7 @@ class ResettingController extends BaseController
                 'Emails/reset_password.html.twig', [
                 'f_name' => $user->getFirstName(),
                 'l_name' => $user->getLastName(),
-                'url'    => 'https://wamow.co/' . $this->get('router')->generate('fos_user_resetting_reset', [
+                'url'    => $this->getParameter('url_site') . $this->get('router')->generate('fos_user_resetting_reset', [
                         'token' => $user->getConfirmationToken(),
                         UrlGeneratorInterface::ABSOLUTE_URL
                     ])
