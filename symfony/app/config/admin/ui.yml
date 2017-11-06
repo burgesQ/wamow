@@ -11,7 +11,8 @@ easy_admin:
             - { entity: 'Company', label: 'Companies', icon: square }
             - { entity: 'Inspector', label: 'Inspectors', icon: square }
             - { entity: 'Mission', label: 'Missions', icon: square }
-            - { entity: 'User', label: 'Users', icon: square }
+            - { entity: 'Contractor', label: 'Contractors', icon: square }
+            - { entity: 'Advisor', label: 'Advisors', icon: square }
             - { entity: 'WorkExp', label: 'Work Experience', icon: square }
             - { entity: 'UserMission', label: 'User Mission', icon: square }
             - { entity: 'Contact', label: 'Contact', icon: square }
