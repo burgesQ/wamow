@@ -428,7 +428,8 @@ class User extends BaseUser implements ParticipantInterface
         if ($this->getPhone() != NULL) {
             $this->getPhone()->isValidate($context);
         }
-        if (!$this->getAddresses()->isEmpty() && $this->status == self::REGISTER_NO_STEP) {
+        if (!$this->getAddresses()->isEmpty() && $this->status == self::REGISTER_NO_STEP &&
+            $this->getConfirmationToken() == NULL) {
             $this->getAddresses()->last()->isValidate($context);
         }
     }
