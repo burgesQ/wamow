@@ -24,8 +24,7 @@ class AdvisorMatchingCommand extends ContainerAwareCommand
         $this
             ->setName('advisor:matching')
             ->setDescription('Match advisors with missions.')
-            ->setHelp('This command select all missions needing to be re-match (using nextUpdateScoring date), re-match them, update scores, and finally update activated')
-        ;
+            ->setHelp('This command select all missions needing to be re-match (using nextUpdateScoring date), re-match them, update scores, and finally update activated');
     }
 
     /**
@@ -45,13 +44,17 @@ class AdvisorMatchingCommand extends ContainerAwareCommand
         $missions = $em->getRepository("MissionBundle:Mission")->getMissionsToScore();
         $progress = new ProgressBar($output, count($missions));
         $progress->start();
-        $nbUserMissions = 0;
+
+        $nbUserMissions    = 0;
         $nbNewUserMissions = 0;
+
         // TODO (?) : clear previous UserMissions (can a matching change..? should we remove "obsolete" ones..?)
+
         foreach ($missions as $mission) {
             $progress->advance();
             $nbNewUserMissions += $this->getContainer()->get("scoring")->updateUserMissions($mission);
         }
+
         $progress->finish();
         $em->flush();
 
@@ -67,7 +70,7 @@ class AdvisorMatchingCommand extends ContainerAwareCommand
 
         $io->newLine(2);
         $io->section('Update Activated');
-        $progress = new ProgressBar($output, count($missions));
+        $progress  = new ProgressBar($output, count($missions));
         $nbMatched = 0;
         foreach ($missions as $mission) {
             $progress->advance();
@@ -77,7 +80,12 @@ class AdvisorMatchingCommand extends ContainerAwareCommand
         $em->flush();
 
         $io->newLine(2);
-        $io->success(count($missions).' Missions mises à jour, avec '.$nbMatched.' nouveaux matchs et '.$nbNewUserMissions.' UserMissions créés');
+        $io->success(count($missions) .
+            ' Missions mises à jour, avec ' .
+            $nbMatched .
+            ' nouveaux matchs et ' .
+            $nbNewUserMissions .
+            ' UserMissions créés');
 
     }
 
