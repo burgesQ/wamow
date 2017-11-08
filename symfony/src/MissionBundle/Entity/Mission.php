@@ -981,11 +981,10 @@ class Mission
 
     public function getActualStep()
     {
-        foreach ($this->steps as $step) {
-            if ($step->getStatus() === 1) {
+        foreach ($this->steps as $step)
+            if ($step->getStatus() === 1)
                 return $step;
-            }
-        }
+
         return null;
     }
 

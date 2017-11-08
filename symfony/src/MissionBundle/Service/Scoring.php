@@ -46,27 +46,32 @@ class Scoring
      */
     public function updateActivated($mission)
     {
-        $scoringHistory = $mission->getScoringHistory();
-        $scoringStep    = $this->getScoringStep($mission);
-        $scoringRules   = $this->scoringRules;
-        // $matchedUserMissions = $this->em->getRepository("MissionBundle:UserMission")->findBy("mission" => $mission, "status" => UserMission::MATCHED);
+        if ($mission->getStatusGenerator() === \MissionBundle\Entity\Mission::DONE) {
 
-        $userMissions =
-            $this->em->getRepository("MissionBundle:UserMission")
-                ->findOrderedByMission($mission, $scoringRules[$scoringStep][1], $this->scoringMin);
-        // for JSON
-        $scoringHistory[$scoringStep] = [];
-        $scorings                     = [];
-        foreach ($userMissions as $userMission) {
-            $userMission->setStatus(UserMission::MATCHED);
-            $scorings[$userMission->getUser()->getId()] = $userMission->getScore();
+            $scoringHistory = $mission->getScoringHistory();
+            $scoringStep    = $this->getScoringStep($mission);
+            $scoringRules   = $this->scoringRules;
+            // $matchedUserMissions = $this->em->getRepository("MissionBundle:UserMission")->findBy("mission" => $mission, "status" => UserMission::MATCHED);
+
+            $userMissions =
+                $this->em->getRepository("MissionBundle:UserMission")
+                    ->findOrderedByMission($mission, $scoringRules[$scoringStep][1], $this->scoringMin);
+            // for JSON
+            $scoringHistory[$scoringStep] = [];
+            $scorings                     = [];
+            foreach ($userMissions as $userMission) {
+                $userMission->setStatus(UserMission::MATCHED);
+                $scorings[$userMission->getUser()->getId()] = $userMission->getScore();
+            }
+            $scoringHistory[$scoringStep] = $scorings;
+            $this->updateNextScoring($mission);
+            $mission->setScoringHistory($scoringHistory);
+            $this->em->flush();
+
+            return count($userMissions);
         }
-        $scoringHistory[$scoringStep] = $scorings;
-        $this->updateNextScoring($mission);
-        $mission->setScoringHistory($scoringHistory);
-        $this->em->flush();
 
-        return count($userMissions);
+        return 0;
     }
 
     /**
