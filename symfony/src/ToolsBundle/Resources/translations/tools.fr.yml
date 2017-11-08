@@ -68,7 +68,7 @@ user_agreement:
     accept: "J'ai lut et j'accepte les terms d'utilisation"
     delcine: "Je refuse les terms d'utilisation"
     confirm: "C'est parti"
-    wait_a_few: "J'edit mes informations"
+    wait_a_few: "Je modifie mes informations"
     it_s_over: "Une fois soumis et jusqu`à la v2, vous ne pourrez pas editer ces informations"
 
 ## Base
@@ -380,11 +380,11 @@ registration:
             backbutton: Retour
             nextbutton: Suivant
         three:
-            title: Quels types de prestations avez-vous délivrés ?
+            title: Quels types de prestations avez-vous délivré ?
             subtitle: vous pouvez sélectionner plusieurs choix
             howtotitle: TROISIÈME ÉTAPE
             howtotext: "Allons plus loin dans le détail pour compléter votre profil.<br> 
-            Si vous avez été consultant, pouvez-vous préciser les types de prestations de conseil que vous avez délivrés ?<br> 
+            Si vous avez été consultant, pouvez-vous préciser les types de prestations de conseil que vous avez délivré ?<br> 
             Si vous n’avez jamais été consultant : qu’il s’agisse du pilotage d’un projet interne ou que ce soit dans le cadre de vos fonctions ou encore dans la réalisation de prestations, vous avez mené des actions qui s’apparentent à l’une ou l’autre de ces prestations. Sélectionnez celles qui se trouvent le mieux décrire ce que vous avez fait. Nous avons identifiés 25 types de prestations possibles. Plusieurs choix sont possibles."
             backbutton: Retour
             nextbutton: Suivant
@@ -1052,7 +1052,6 @@ mails:
     registration:
         contractor_new_password: "Nous vous confirmons la création de votre compte.\nVotre mot de passe est : %password .\n\nSi ce n’est déjà fait pensez à compléter votre profil !"
 
-        advisor_new_password: "Nouso vous confirmons la création de votre compte.\nVotre mot de passe est : <strong>%password</strong>.\n\nSi ce n’est déjà fait pensez à compléter votre profil pour améliorer votre visibilité !"
 
         reset_password: "Vous pouvez re-configurer votre mot de passe a l'address suivante : <strong>%url</strong>\n\nSi ce n’est déjà fait pensez à compléter votre profil pour améliorer votre visibilité !"
 
@@ -1214,7 +1213,7 @@ help:
         Answer3: "Première étape: Dans quel secteur d’activité avez-vous travaillé ? Nous avons identifiés 13 secteurs d'activité principales.<br>
                 Deuxième étape: les secteurs d’activités complétés, il convient d’identifier vos différents domaines d’expertise au sein des organisations dans lesquels vous avez acquis vos expériences. Dans quelles fonctions de l’entreprise avez-vous développé votre savoir faire ? Vous avez le choix entre 22 fonctions types.<br>
                 Troisième étape : allons plus loin dans le détail pour compléter votre profil.<br>
-                - Si vous avez été consultant, pouvez-vous préciser les types de prestations de conseil que vous avez délivrés ?<br>
+                - Si vous avez été consultant, pouvez-vous préciser les types de prestations de conseil que vous avez délivré ?<br>
                 - Si vous n’avez jamais été consultant : qu’il s’agisse du pilotage d’un projet interne ou que ce soit dans le cadre de vos fonctions ou encore dans la réalisation de prestations, vous avez mené des actions qui s’apparentent à l’une ou l’autre de ces prestations. Sélectionnez celles qui se trouvent le mieux décrire ce que vous avez fait.<br>
                 Nous avons identifiés 25 types de prestations possibles. <br>
                 Quatrième et dernière étape : cette étape est cruciale. Elle va conclure votre profilage. En effet, compte tenu de vos précédents choix (secteurs d’activité, expertises fonctionnelles, typologies de missions conduites), nous avons sélectionné une liste d’expériences potentielles que vous avez pu vivre.<br>
