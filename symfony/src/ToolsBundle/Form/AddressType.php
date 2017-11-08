@@ -42,7 +42,7 @@ class AddressType extends AbstractType
             ])
             ->add('zipcode', null, [
                 'translation_domain' => 'tools',
-                'required'           => false,M
+                'required'           => false,
                 'label'              => 'form.address.zipcode',
                 'attr'               => [
                     'placeholder' => 'form.address.zipcode'
