@@ -18,6 +18,7 @@ class MissionListener
     {
         $entity = $args->getEntity();
         $entityManager = $args->getEntityManager();
+
         if ($entity instanceof Mission) {
             $this->scoringService->updateUserMissions($entity);
             $entityManager->flush();

@@ -54,4 +54,4 @@ namespace MissionBundle\Service;
                     ->add('success', $translator->trans('mission.selection.counter', array(), 'MissionBundle'));
         }
     }
-}
+ }

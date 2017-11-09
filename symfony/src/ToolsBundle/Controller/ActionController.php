@@ -17,22 +17,21 @@ class ActionController extends Controller
      */
     public function languagesAutocompleteAction(Request $request)
     {
-        $trans = $this->get('translator');
-        $paginator = $this->getDoctrine()->getRepository('ToolsBundle:Language')
-            ->findAutocompleteCertification(
-                $request->get('q'),
-                $request->get('page'),
-                $request->get('page_limit'))
-        ;
-        $data      = ['results' => []];
-        /** @var \ToolsBundle\Entity\Language $languages */
-        foreach ($paginator as $languages) {
-            $data['results'][] = [
-                'id'   => $languages->getId(),
-                'text' => $trans->trans($languages->__toString(), [], 'tools')
-            ];
+        $trans     = $this->get('translator');
+        $languages = $this->getDoctrine()
+            ->getRepository('ToolsBundle:Language')->findAll();
+
+        $data = ['results' => []];
+        /** @var \ToolsBundle\Entity\Language $language */
+        foreach ($languages as $language) {
+            if (stristr($trans->trans($language->__toString(), [], 'tools'),
+                    $request->get('q')) != false) {
+                $data['results'][] = [
+                    'id'   => $language->getId(),
+                    'text' => $trans->trans($language->__toString(), [], 'tools')
+                ];
+            }
         }
-        $data['more'] = $paginator->count() < $request->get('page_limit') ? false : true;
 
         return new JsonResponse($data);
     }
@@ -41,12 +40,13 @@ class ActionController extends Controller
      * @param $id
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
      */
-    public function downloadProposalAction($id)
+    public
+    function downloadProposalAction($id)
     {
         if (!($user = $this->getUser())) {
             throw $this->createNotFoundException('Not logged');
         } elseif ((!($userMission = $this->getDoctrine()->getRepository('MissionBundle:UserMission')
-            ->findOneBy([ 'id' => $id])))) {
+            ->findOneBy(['id' => $id])))) {
             throw $this->createNotFoundException('No such userMission');
         } elseif ($userMission->getStatus() < UserMission::SHORTLIST
             || ($user !== $userMission->getUser()
@@ -57,7 +57,8 @@ class ActionController extends Controller
         $proposal = $userMission->getThread()->getProposals()->last();
 
         $response = new BinaryFileResponse($proposal->getWebPath());
-        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT,'proposale.pdf');
+        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, 'proposale.pdf');
+
         return $response;
     }
 
@@ -65,12 +66,13 @@ class ActionController extends Controller
      * @param $id
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
      */
-    public function downloadProposalAdvisorAction($id)
+    public
+    function downloadProposalAdvisorAction($id)
     {
         if (!($user = $this->getUser())) {
             throw $this->createNotFoundException('Not logged');
         } elseif ((!($mission = $this->getDoctrine()->getRepository('MissionBundle:Mission')
-            ->findOneBy(['id' => $id]))) ||
+                ->findOneBy(['id' => $id]))) ||
             !($userMission = $this->getDoctrine()->getRepository('MissionBundle:UserMission')->findOneBy([
                 'mission' => $mission,
                 'user'    => $user
@@ -83,7 +85,8 @@ class ActionController extends Controller
         $proposal = $userMission->getMission()->getProposals()->last();
 
         $response = new BinaryFileResponse($proposal->getWebPath());
-        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT,'proposale.pdf');
+        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, 'proposale.pdf');
+
         return $response;
     }
 
@@ -91,12 +94,13 @@ class ActionController extends Controller
      * @param $id
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
      */
-    public function downloadResumeAction($id)
+    public
+    function downloadResumeAction($id)
     {
         if (!($user = $this->getUser()) || !$this->isGranted('ROLE_CONTRACTOR')) {
             throw $this->createNotFoundException('Not logged');
         } elseif ((!($userMission = $this->getDoctrine()->getRepository('MissionBundle:UserMission')
-            ->findOneBy([ 'id' => $id])))) {
+            ->findOneBy(['id' => $id])))) {
             throw $this->createNotFoundException('No such userMission');
         } elseif ($userMission->getStatus() < UserMission::SHORTLIST
             || $userMission->getMission()->getCompany() !== $user->getCompany()

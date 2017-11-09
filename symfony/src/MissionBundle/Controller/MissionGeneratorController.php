@@ -422,6 +422,7 @@ class MissionGeneratorController extends Controller
             }
 
             $newMission->setStatus(Mission::PUBLISHED)->setStatusGenerator(Mission::DONE);
+            $newMission->setNextUpdateScoring(new \DateTime('2016-01-23'));
 
             $jsonConfig = json_decode($em->getRepository('ToolsBundle:Config')->findOneConfig()->getValue());
             $i          = 0;
