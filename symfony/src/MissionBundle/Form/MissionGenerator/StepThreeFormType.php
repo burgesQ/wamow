@@ -80,12 +80,14 @@ class StepThreeFormType extends AbstractType
                         ->join('u.missionKinds', 'm')
                         ->join('u.professionalExpertises', 'p')
                         ->join('u.businessPractices', 'b')
+                        ->join('u.missionTitles', 't')
                         ->where('u.name != :create')
                             ->setParameter('create', 'workexperience.create')
-                        ->andWhere('b  = :businessPra OR p = :proExp OR m.id IN (:missionKinds)')
+                        ->andWhere('b  = :businessPra OR p = :proExp OR m.id IN (:missionKinds) OR t IN (:title)')
                             ->setParameter('proExp', $mission->getProfessionalExpertise())
                             ->setParameter('missionKinds', $mission->getMissionKinds()->toArray())
                             ->setParameter('businessPra', $mission->getBusinessPractice())
+                            ->setParameter('title', $mission->getTitle())
                         ->orderBy('u.id', 'ASC');
                 },
             ])
