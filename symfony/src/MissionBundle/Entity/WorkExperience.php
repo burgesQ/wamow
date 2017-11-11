@@ -4,7 +4,6 @@ namespace MissionBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\JoinTable;
 
 /**
  * WorkExperience
@@ -78,15 +77,23 @@ class WorkExperience
     private $missions;
 
     /**
+     * @var ArrayCollection
+     *
+     ** @ORM\ManyToMany(targetEntity="MissionBundle\Entity\MissionTitle",
+     *     inversedBy="workExperiences")
+     */
+    private $missionTitles;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
-        $this->users                  = new ArrayCollection();
         $this->businessPractices      = new ArrayCollection();
         $this->professionalExpertises = new ArrayCollection();
         $this->missionKinds           = new ArrayCollection();
         $this->missions               = new ArrayCollection();
+        $this->missionTitles          = new ArrayCollection();
     }
 
     /**
@@ -128,39 +135,6 @@ class WorkExperience
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Get users
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getUsers()
-    {
-        return $this->users;
-    }
-
-    /**
-     * Add users
-     *
-     * @param \MissionBundle\Entity\UserWorkExperience $users
-     * @return WorkExperience
-     */
-    public function addUser($users)
-    {
-        $this->users[] = $users;
-
-        return $this;
-    }
-
-    /**
-     * Remove users
-     *
-     * @param \MissionBundle\Entity\UserWorkExperience $users
-     */
-    public function removeUser($users)
-    {
-        $this->users->removeElement($users);
     }
 
     /**
@@ -332,5 +306,38 @@ class WorkExperience
     public function getMissions()
     {
         return $this->missions;
+    }
+
+    /**
+     * Add missionTitles
+     *
+     * @param \MissionBundle\Entity\MissionTitle $missionTitles
+     * @return WorkExperience
+     */
+    public function addMissionTitle(\MissionBundle\Entity\MissionTitle $missionTitles)
+    {
+        $this->missionTitles[] = $missionTitles;
+
+        return $this;
+    }
+
+    /**
+     * Remove missionTitles
+     *
+     * @param \MissionBundle\Entity\MissionTitle $missionTitles
+     */
+    public function removeMissionTitle(\MissionBundle\Entity\MissionTitle $missionTitles)
+    {
+        $this->missionTitles->removeElement($missionTitles);
+    }
+
+    /**
+     * Get missionTitles
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMissionTitles()
+    {
+        return $this->missionTitles;
     }
 }
