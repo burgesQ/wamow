@@ -78,6 +78,14 @@ class WorkExperience
     private $missions;
 
     /**
+     ** @ORM\ManyToOne(
+     *     targetEntity="MissionBundle\Entity\MissionTitle",
+     *     inversedBy="workExperiences"
+     * )
+     */
+    private $missionTitle;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -332,5 +340,28 @@ class WorkExperience
     public function getMissions()
     {
         return $this->missions;
+    }
+
+    /**
+     * Set missionTitle
+     *
+     * @param \MissionBundle\Entity\MissionTitle $missionTitle
+     * @return WorkExperience
+     */
+    public function setMissionTitle(\MissionBundle\Entity\MissionTitle $missionTitle = null)
+    {
+        $this->missionTitle = $missionTitle;
+
+        return $this;
+    }
+
+    /**
+     * Get missionTitle
+     *
+     * @return \MissionBundle\Entity\MissionTitle 
+     */
+    public function getMissionTitle()
+    {
+        return $this->missionTitle;
     }
 }

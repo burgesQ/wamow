@@ -43,6 +43,15 @@ class MissionTitle
     private $missions;
 
     /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="MissionBundle\Entity\WorkExperience",
+     *     cascade={"persist"},
+     *     mappedBy="missionTitle")
+     */
+    private $workExperiences;
+
+    /**
      * @return string
      */
     public function __toString()
@@ -144,5 +153,38 @@ class MissionTitle
     public function getMissions()
     {
         return $this->missions;
+    }
+
+    /**
+     * Add workExperiences
+     *
+     * @param \MissionBundle\Entity\WorkExperience $workExperiences
+     * @return MissionTitle
+     */
+    public function addWorkExperience(\MissionBundle\Entity\WorkExperience $workExperiences)
+    {
+        $this->workExperiences[] = $workExperiences;
+
+        return $this;
+    }
+
+    /**
+     * Remove workExperiences
+     *
+     * @param \MissionBundle\Entity\WorkExperience $workExperiences
+     */
+    public function removeWorkExperience(\MissionBundle\Entity\WorkExperience $workExperiences)
+    {
+        $this->workExperiences->removeElement($workExperiences);
+    }
+
+    /**
+     * Get workExperiences
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getWorkExperiences()
+    {
+        return $this->workExperiences;
     }
 }
