@@ -56,7 +56,7 @@ class DefaultController extends Controller
             $em->persist($preregister);
             $em->flush();
 
-            $this->get('wamow.mailer')->sendWAmowMail(
+            $this->get('wamow.mailer')->sendWAmowMails(
                 'New Contractor Pre-Registred',
                 $this->getParameter('email_pre_register'),
                 'Emails/new_pre_register.html.twig', [
