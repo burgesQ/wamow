@@ -45,51 +45,36 @@ class MissionTitle
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="MissionBundle\Entity\WorkExperience",
-     *     cascade={"persist"},
-     *     mappedBy="missionTitle")
+     * @ORM\ManyToMany(targetEntity="MissionBundle\Entity\WorkExperience",
+     *     mappedBy="missionTitles")
      */
     private $workExperiences;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->missions        = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->workExperiences = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * @return string
      */
     public function __toString()
     {
-     return $this->getTitle();
+        return $this->getTitle();
     }
 
     /**
-     * Get id
+     * Get title
      *
-     * @return integer 
+     * @return string
      */
-    public function getId()
+    public function getTitle()
     {
-        return $this->id;
-    }
-
-    /**
-     * Set category
-     *
-     * @param string $category
-     * @return MissionTitle
-     */
-    public function setCategory($category)
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
-    /**
-     * Get category
-     *
-     * @return string 
-     */
-    public function getCategory()
-    {
-        return $this->category;
+        return $this->title;
     }
 
     /**
@@ -106,20 +91,36 @@ class MissionTitle
     }
 
     /**
-     * Get title
+     * Get id
      *
-     * @return string 
+     * @return integer
      */
-    public function getTitle()
+    public function getId()
     {
-        return $this->title;
+        return $this->id;
     }
+
     /**
-     * Constructor
+     * Get category
+     *
+     * @return string
      */
-    public function __construct()
+    public function getCategory()
     {
-        $this->missions = new \Doctrine\Common\Collections\ArrayCollection();
+        return $this->category;
+    }
+
+    /**
+     * Set category
+     *
+     * @param string $category
+     * @return MissionTitle
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+
+        return $this;
     }
 
     /**
@@ -148,12 +149,13 @@ class MissionTitle
     /**
      * Get missions
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getMissions()
     {
         return $this->missions;
     }
+
 
     /**
      * Add workExperiences
