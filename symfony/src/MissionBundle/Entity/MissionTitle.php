@@ -2,6 +2,7 @@
 
 namespace MissionBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,6 +37,8 @@ class MissionTitle
     private $title;
 
     /**
+     * @var ArrayCollection
+     *
      * @ORM\OneToMany(targetEntity="MissionBundle\Entity\Mission",
      *     cascade={"persist"},
      *     mappedBy="title")
@@ -43,7 +46,7 @@ class MissionTitle
     private $missions;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @var ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="MissionBundle\Entity\WorkExperience",
      *     mappedBy="missionTitles")
@@ -55,8 +58,8 @@ class MissionTitle
      */
     public function __construct()
     {
-        $this->missions        = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->workExperiences = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->missions        = new ArrayCollection();
+        $this->workExperiences = new ArrayCollection();
     }
 
     /**

@@ -726,10 +726,9 @@ class MigrationToBubbleV2Command extends ContainerAwareCommand
 
         $em = $this->getContainer()->get('doctrine')->getManager();
 
-        $workExperiences    = $em->getRepository("MissionBundle:WorkExperience")->findAll();
         $missionTitleRepo   = $em->getRepository('MissionBundle:MissionTitle');
         $workExperienceRepo = $em->getRepository('MissionBundle:WorkExperience');
-        $progress           = new ProgressBar($output, count($workExperiences));
+        $progress           = new ProgressBar($output, count($this->newValues));
         $progress->start();
 
         $io->section('Update Values');
@@ -741,41 +740,35 @@ class MigrationToBubbleV2Command extends ContainerAwareCommand
          */
         foreach ($this->newValues as $key => $val) {
 
-//            dump($key);
-//            dump($val[1]);
             if ($workExperience = $workExperienceRepo->findOneBy(['name' => $key])) {
 
                 if (!$val[1]) { // if workExp is to delete
 
-                    $io->section('Update UserWorkExp of ' . $workExperience->getName());
-
                     $userWorkExp = $workExperience->getUserWorkExperiences();
-                    $subProgress = new ProgressBar($output, count($userWorkExp));
-                    $subProgress->start();
 
                     /**
                      * @var \MissionBundle\Entity\UserWorkExperience $oneUserWorkExp
                      */
-                    foreach ($userWorkExp as $oneUserWorkExp) {
-                        $subProgress->advance();
+                    foreach ($userWorkExp as $oneUserWorkExp)
                         $oneUserWorkExp->setWorkExperience($last);
-                    }
-                    $subProgress->finish();
-                    $em->remove($workExperience);
 
+                    $em->remove($workExperience);
                 } else {
 
                     // link title <-> workExp
                     foreach ($val[0] as $oneTitle) {
-//                    dump($oneTitle);
-                        $missionTitleRepo->findOneBy(['title' => $oneTitle])->addWorkExperience($workExperience);
-                    }
 
+                        /** @var \MissionBundle\Entity\MissionTitle $title */
+                        if (($title = $missionTitleRepo->findOneBy(['title' => $oneTitle])))
+                            if (!$workExperience->getMissionTitles()->contains($title))
+                                $workExperience->addMissionTitle($title);
+
+                    }
                     $last = $workExperience;
                 }
 
-                //          dump("done");
-            }
+            } else
+                dump("not found :(");
 
             $progress->advance();
         }

@@ -4,7 +4,6 @@ namespace MissionBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\JoinTable;
 
 /**
  * WorkExperience
@@ -78,10 +77,10 @@ class WorkExperience
     private $missions;
 
     /**
-     ** @ORM\ManyToMany(
-     *     targetEntity="MissionBundle\Entity\MissionTitle",
-     *     inversedBy="workExperiences"
-     * )
+     * @var ArrayCollection
+     *
+     ** @ORM\ManyToMany(targetEntity="MissionBundle\Entity\MissionTitle",
+     *     inversedBy="workExperiences")
      */
     private $missionTitles;
 
@@ -318,7 +317,6 @@ class WorkExperience
     public function addMissionTitle(\MissionBundle\Entity\MissionTitle $missionTitles)
     {
         $this->missionTitles[] = $missionTitles;
-        $missionTitles->addWorkExperience($this);
 
         return $this;
     }
@@ -331,7 +329,6 @@ class WorkExperience
     public function removeMissionTitle(\MissionBundle\Entity\MissionTitle $missionTitles)
     {
         $this->missionTitles->removeElement($missionTitles);
-        $missionTitles->removeWorkExperience($this);
     }
 
     /**
