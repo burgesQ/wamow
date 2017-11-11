@@ -15,9 +15,9 @@ class WorkExperienceRepository extends EntityRepository
 {
     /**
      * @param \MissionBundle\Entity\Mission $mission
-     * @return array
+     * @return \Doctrine\ORM\QueryBuilder
      */
-    public function findWorkExp(Mission $mission)
+    public function queryWorkExp(Mission $mission)
     {
         $qb = $this->_em->createQueryBuilder();
 
@@ -26,15 +26,26 @@ class WorkExperienceRepository extends EntityRepository
             ->join('u.missionKinds', 'm')
             ->join('u.professionalExpertises', 'p')
             ->join('u.businessPractices', 'b')
+            ->join('u.missionTitles', 't')
+
             ->where('u.name != :create')
-            ->andWhere('b  = :businessPra OR p = :proExp OR m.id IN (:missionKinds)')
+            ->andWhere('b  = :businessPra OR p = :proExp OR m.id IN (:missionKinds) OR t in (:title)')
+
             ->setParameter('proExp', $mission->getProfessionalExpertise())
             ->setParameter('missionKinds', $mission->getMissionKinds()->toArray())
             ->setParameter('businessPra', $mission->getBusinessPractice())
             ->setParameter('create', 'workexperience.create')
+            ->setParameter('title', $mission->getTitle())
+
+
             ->orderBy('u.id', 'ASC')
         ;
 
-        return $qb->getQuery()->getResult();
+        return $qb;
+    }
+
+    public function findWorkExp($mission)
+    {
+        return $this->queryWorkExp($mission)->getQuery()->getResult();
     }
 }
