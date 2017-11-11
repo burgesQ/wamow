@@ -749,8 +749,20 @@ class MigrationToBubbleV2Command extends ContainerAwareCommand
                     /**
                      * @var \MissionBundle\Entity\UserWorkExperience $oneUserWorkExp
                      */
-                    foreach ($userWorkExp as $oneUserWorkExp)
+                    foreach ($userWorkExp as $oneUserWorkExp) {
                         $oneUserWorkExp->setWorkExperience($last);
+//                        $em->remove($oneUserWorkExp);
+                    }
+
+                    /**
+                     * @var \MissionBundle\Entity\Mission $oneMission
+                     */
+                    foreach ($workExperience->getMissions() as $oneMission) {
+                        $oneMission->setWorkExperience($last);
+                        //                        $em->remove($oneUserWorkExp);
+                    }
+
+
 
                     $em->remove($workExperience);
                 } else {
