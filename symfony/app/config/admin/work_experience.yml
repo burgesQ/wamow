@@ -1,5 +1,6 @@
 easy_admin:
     entities:
+
         WorkExp:
             class: MissionBundle\Entity\WorkExperience
             label: 'Work Experiences'
@@ -11,14 +12,20 @@ easy_admin:
                     - 'businessPractices'
                     - 'professionalExpertises'
                     - 'missionKinds'
+                    - 'missionTitles'
             form:
                 fields:
                     - { property: 'name', type: 'text' }
                     - { property: 'businessPractices', type: 'easyadmin_autocomplete', type_options: { by_reference: false } }
                     - { property: 'professionalExpertises', type: 'easyadmin_autocomplete', type_options: { by_reference: false } }
                     - { property: 'missionKinds', type: 'easyadmin_autocomplete', type_options: { by_reference: false } }
+                    - { property: 'missionTitles', type: 'easyadmin_autocomplete', type_options: { by_reference: false } }
+
+            disabled_actions:
+                - 'delete'
+
         BusinessPra:
-            class: MissionBundle\Entity\BusinessPractice
+            class: 'MissionBundle\Entity\BusinessPractice'
             label: 'Business Practice'
             list:
                 title: "Business Practice"
@@ -27,7 +34,7 @@ easy_admin:
                     - 'name'
                     - 'workExperiences'
         ProExp:
-            class: MissionBundle\Entity\ProfessionalExpertise
+            class: 'MissionBundle\Entity\ProfessionalExpertise'
             label: 'Professional Expertise'
             list:
                 title: "Professional Expertise"
@@ -36,7 +43,7 @@ easy_admin:
                     - 'name'
                     - 'workExperiences'
         MissionKind:
-            class: MissionBundle\Entity\MissionKind
+            class: 'MissionBundle\Entity\MissionKind'
             label: 'Mission Kind'
             list:
                 title: "Mission Kind"
@@ -44,3 +51,12 @@ easy_admin:
                     - 'id'
                     - 'name'
                     - 'workExperiences'
+        MissionTitle:
+            class: 'MissionBundle\Entity\MissionTitle'
+            label: 'Mission Title'
+            list:
+                title: "Mission Title"
+                fields:
+                    - 'id'
+                    - 'category'
+                    - 'title'

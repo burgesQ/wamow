@@ -45,7 +45,7 @@ class User extends BaseUser implements ParticipantInterface
     protected $linkedin_access_token;
 
     /**
-     * @ORM\Column(name="linkedin_data", type="array", nullable=true)
+     * @ORM\Column(name="linkedin_data", type="json_array", nullable=true)
      */
     protected $linkedinData;
 
@@ -403,7 +403,6 @@ class User extends BaseUser implements ParticipantInterface
         $this->company               = null;
         $this->giveUpCount           = 0;
         $this->secretMail            = [];
-        $this->linkedinData          = [];
         $this->scoringBonus          = 5;
         $this->dailyFeesMax          = 0;
         $this->dailyFeesMin          = 0;
@@ -1222,7 +1221,7 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * Set linkedinData
      *
-     * @param array $linkedinData
+     * @param  $linkedinData
      * @return User
      */
     public function setLinkedinData($linkedinData)
@@ -1235,7 +1234,7 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * Get LinkedinData
      *
-     * @return array
+     * @return
      */
     public function getLinkedinData()
     {

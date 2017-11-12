@@ -104,7 +104,7 @@ class FOSUBUserProvider extends BaseClass
                 $this->container->get('doctrine')->getManager()->persist($address);
                 $user->addAddress($address);
             }
-//            $user->setLinkedinData($data);
+            $user->setLinkedinData($data);
             $dispatcher = $this->container->get('event_dispatcher');
             $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, null);
         } else {
