@@ -3,10 +3,10 @@
 namespace MissionBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Helper\ProgressBar;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 class MigrationToBubbleV2Command extends ContainerAwareCommand
 {
@@ -27,12 +27,18 @@ class MigrationToBubbleV2Command extends ContainerAwareCommand
         'workexperience.businessrequirements'        => [['mission_title.title.is_it'], false],
         'workexperience.statementofwork'             => [['mission_title.title.is_it'], false],
 
-        'workexperience.institutionalcommunication' => [['mission_title.title.operational_excellence'], true],
+        'workexperience.institutionalcommunication' => [
+            ['mission_title.title.operational_excellence'],
+            true
+        ],
         'workexperience.evenementialcommunication'  => [['mission_title.title.'], false],
         'workexperience.crisiscommunication'        => [['mission_title.title.'], false],
         'workexperience.implementcommunicationplan' => [['mission_title.title.'], false],
 
-        'workexperience.internalcommunication'        => [['mission_title.title.operational_excellence'], true],
+        'workexperience.internalcommunication'        => [
+            ['mission_title.title.operational_excellence'],
+            true
+        ],
         'workexperience.humanressourcescommunication' => [['mission_title.title.'], false],
 
         'workexperience.coremodel'                                    => [
@@ -46,7 +52,10 @@ class MigrationToBubbleV2Command extends ContainerAwareCommand
         'workexperience.implementationofnewtechnologies'              => [['mission_title.title.'], false],
         'workexperience.implementationofcollaborativeportalswebsites' => [['mission_title.title.'], false],
 
-        'workexperience.performancediagnosis'  => [['mission_title.title.operational_excellence'], true],
+        'workexperience.performancediagnosis'  => [
+            ['mission_title.title.operational_excellence'],
+            true
+        ],
         'workexperience.decisionmakingprocess' => [['mission_title.title.'], false],
 
         'workexperience.digitalperformancediagnosis' => [
@@ -62,70 +71,48 @@ class MigrationToBubbleV2Command extends ContainerAwareCommand
             ['mission_title.title.go_to_market'],
             true
         ],
-        'workexperience.salesdistributionefficiency' => [
-            ['mission_title.title.'],
-            false
-        ],
+        'workexperience.salesdistributionefficiency' => [['mission_title.title.'], false],
 
         'workexperience.economicmodelisations'        => [
-            ['mission_title.title.studies'],
+            [
+                'mission_title.title.studies',
+                'mission_title.title.operational_excellence',
+                'mission_title.title.go_to_market'
+            ],
             true
         ],
-        'workexperience.studies'                      => [
-            ['mission_title.title.'],
-            false
-        ],
-        'workexperience.bestpracticesbenchmark'       => [
-            ['mission_title.title.'],
-            false
-        ],
-        'workexperience.competitorsbenchmarkanalysis' => [
-            ['mission_title.title.'],
-            false
-        ],
+        'workexperience.studies'                      => [['mission_title.title.'], false],
+        'workexperience.bestpracticesbenchmark'       => [['mission_title.title.'], false],
+        'workexperience.competitorsbenchmarkanalysis' => [['mission_title.title.'], false],
 
         'workexperience.customerknowledge'              => [
-            ['mission_title.title.go_to_market'],
+            [
+                'mission_title.title.go_to_market',
+                'mission_title.title.operational_excellence'
+            ],
             true
         ],
-        'workexperience.customerexperience'             => [
-            ['mission_title.title.'],
-            false
-        ],
-        'workexperience.customerrelationshipmanagement' => [
-            ['mission_title.title.'],
-            false
-        ],
-        'workexperience.satisfactionsurvey'             => [
-            ['mission_title.title.'],
-            false
-        ],
-        'workexperience.qualitymanagementcallcenter'    => [
-            ['mission_title.title.'],
-            false
-        ],
+        'workexperience.customerexperience'             => [['mission_title.title.'], false],
+        'workexperience.customerrelationshipmanagement' => [['mission_title.title.'], false],
+        'workexperience.satisfactionsurvey'             => [['mission_title.title.'], false],
+        'workexperience.qualitymanagementcallcenter'    => [['mission_title.title.'], false],
 
         'workexperience.managementseminar' => [
             ['mission_title.title.operational_excellence'],
             true
         ],
-        'workexperience.learningprogram'   => [
-            ['mission_title.title.'],
-            false
-        ],
+        'workexperience.learningprogram'   => [['mission_title.title.'], false],
 
         'workexperience.administration'                     => [
-            ['mission_title.title.operational_excellence'],
+            [
+                'mission_title.title.operational_excellence',
+                'mission_title.title.cash_optimisation',
+                'mission_title.title.security_asset'
+            ],
             true
         ],
-        'workexperience.compensationbenefitsplanmanagement' => [
-            ['mission_title.title.'],
-            false
-        ],
-        'workexperience.payrolloptimisation'                => [
-            ['mission_title.title.'],
-            false
-        ],
+        'workexperience.compensationbenefitsplanmanagement' => [['mission_title.title.'], false],
+        'workexperience.payrolloptimisation'                => [['mission_title.title.'], false],
 
         'workexperience.payroll'                  => [
             [
@@ -135,47 +122,20 @@ class MigrationToBubbleV2Command extends ContainerAwareCommand
             ],
             true
         ],
-        'workexperience.aligncompensation'        => [
-            ['mission_title.title.'],
-            false
-        ],
-        'workexperience.reward'                   => [
-            ['mission_title.title.'],
-            false
-        ],
-        'workexperience.compensationbenefitsplan' => [
-            ['mission_title.title.'],
-            false
-        ],
+        'workexperience.aligncompensation'        => [['mission_title.title.'], false],
+        'workexperience.reward'                   => [['mission_title.title.'], false],
+        'workexperience.compensationbenefitsplan' => [['mission_title.title.'], false],
 
         'workexperience.talentmanagement'      => [
             ['mission_title.title.operational_excellence'],
             true
         ],
-        'workexperience.successionplan'        => [
-            ['mission_title.title.'],
-            false
-        ],
-        'workexperience.talentevaluation'      => [
-            ['mission_title.title.'],
-            false
-        ],
-        'workexperience.talentdevelopment'     => [
-            ['mission_title.title.'],
-            false
-        ],
-        'workexperience.prospectivetalent'     => [
-            ['mission_title.title.'],
-            false
-        ],
-        'workexperience.internalmobility'      => [
-            ['mission_title.title.'],
-            false
-        ],
-        'workexperience.processimplementation' => [
-            ['mission_title.title.'],
-            false
-        ],
+        'workexperience.successionplan'        => [['mission_title.title.'], false],
+        'workexperience.talentevaluation'      => [['mission_title.title.'], false],
+        'workexperience.talentdevelopment'     => [['mission_title.title.'], false],
+        'workexperience.prospectivetalent'     => [['mission_title.title.'], false],
+        'workexperience.internalmobility'      => [['mission_title.title.'], false],
+        'workexperience.processimplementation' => [['mission_title.title.'], false],
 
         'workexperience.portfoliovaluation'          => [
             [
@@ -185,14 +145,8 @@ class MigrationToBubbleV2Command extends ContainerAwareCommand
             ],
             true
         ],
-        'workexperience.cashandinvestmentmanagement' => [
-            ['mission_title.title.'],
-            false
-        ],
-        'workexperience.assetallocation'             => [
-            ['mission_title.title.'],
-            false
-        ],
+        'workexperience.cashandinvestmentmanagement' => [['mission_title.title.'], false],
+        'workexperience.assetallocation'             => [['mission_title.title.'], false],
 
         'workexperience.developmentroadmap' => [
             [
@@ -201,40 +155,21 @@ class MigrationToBubbleV2Command extends ContainerAwareCommand
                 'mission_title.title.business_transformation',
                 'mission_title.title.is_it',
                 'mission_title.title.acquisition',
-                'mission_title.title.restructuring',
-                'mission_title.title.cash_optimisation',
+                'mission_title.title.restructuring'
             ],
             true
         ],
-        'workexperience.actionplan'         => [
-            ['mission_title.title.'],
-            false
-        ],
-        'workexperience.transitionplan'     => [
-            ['mission_title.title.'],
-            false
-        ],
-        'workexperience.costtransformation' => [
-            ['mission_title.title.'],
-            false
-        ],
+        'workexperience.actionplan'         => [['mission_title.title.'], false],
+        'workexperience.transitionplan'     => [['mission_title.title.'], false],
+        'workexperience.costtransformation' => [['mission_title.title.'], false],
 
         'workexperience.standardization'            => [
             ['mission_title.title.operational_excellence'],
             true
         ],
-        'workexperience.operationalprocessredesign' => [
-            ['mission_title.title.'],
-            false
-        ],
-        'workexperience.processdesign'              => [
-            ['mission_title.title.'],
-            false
-        ],
-        'workexperience.reengineeringprocess'       => [
-            ['mission_title.title.'],
-            false
-        ],
+        'workexperience.operationalprocessredesign' => [['mission_title.title.'], false],
+        'workexperience.processdesign'              => [['mission_title.title.'], false],
+        'workexperience.reengineeringprocess'       => [['mission_title.title.'], false],
 
         'workexperience.redesigntoreducecost'              => [
             [
@@ -244,36 +179,20 @@ class MigrationToBubbleV2Command extends ContainerAwareCommand
             true
         ],
         'workexperience.procurementmanagementoptimisation' => [['mission_title.title.'], false],
-        //        'workexperience.costkilling'                       => [
-        //            [''],
-        //            false
-        //        ],
 
-        'workexperience.auditit'                  => [
-            ['mission_title.title.is_it'],
-            true
-        ],
-        'workexperience.itperformanceimprovement' => [
-            ['mission_title.title.'],
-            false
-        ],
+        'workexperience.auditit'                  => [['mission_title.title.is_it'], true],
+        'workexperience.itperformanceimprovement' => [['mission_title.title.'], false],
 
         'workexperience.stockoptimisation'            => [
-            ['mission_title.title.operational_excellence'],
+            [
+                'mission_title.title.operational_excellence',
+                'mission_title.title.go_to_market'
+            ],
             true
         ],
-        'workexperience.deliveryoptimisation'         => [
-            ['mission_title.title.'],
-            false
-        ],
-        'workexperience.ergonomicstandardofwarehouse' => [
-            ['mission_title.title.'],
-            false
-        ],
-        'workexperience.complexityreduction'          => [
-            ['mission_title.title.'],
-            false
-        ],
+        'workexperience.deliveryoptimisation'         => [['mission_title.title.'], false],
+        'workexperience.ergonomicstandardofwarehouse' => [['mission_title.title.'], false],
+        'workexperience.complexityreduction'          => [['mission_title.title.'], false],
 
         'workexperience.conceptionofbudgetprocessandimplementationofbudgettools' => [
             [
@@ -282,26 +201,11 @@ class MigrationToBubbleV2Command extends ContainerAwareCommand
             ],
             true
         ],
-        'workexperience.buildinganalyticalmodel'                                 => [
-            ['mission_title.title.'],
-            false
-        ],
-        'workexperience.abcmethod'                                               => [
-            ['mission_title.title.'],
-            false
-        ],
-        'workexperience.abmmethod'                                               => [
-            ['mission_title.title.'],
-            false
-        ],
-        'workexperience.budgetplan'                                              => [
-            ['mission_title.title.'],
-            false
-        ],
-        'workexperience.budgetprocessredesign'                                   => [
-            ['mission_title.title.'],
-            false
-        ],
+        'workexperience.buildinganalyticalmodel'                                 => [['mission_title.title.'], false],
+        'workexperience.abcmethod'                                               => [['mission_title.title.'], false],
+        'workexperience.abmmethod'                                               => [['mission_title.title.'], false],
+        'workexperience.budgetplan'                                              => [['mission_title.title.'], false],
+        'workexperience.budgetprocessredesign'                                   => [['mission_title.title.'], false],
 
         'workexperience.riskmanagement'           => [
             [
@@ -312,22 +216,10 @@ class MigrationToBubbleV2Command extends ContainerAwareCommand
             ],
             true
         ],
-        'workexperience.iriskmanagement'          => [
-            ['mission_title.title.'],
-            false
-        ],
-        'workexperience.audit'                    => [
-            ['mission_title.title.'],
-            false
-        ],
-        'workexperience.itriskmanagement'         => [
-            ['mission_title.title.'],
-            false
-        ],
-        'workexperience.activitycontinuationplan' => [
-            ['mission_title.title.'],
-            false
-        ],
+        'workexperience.iriskmanagement'          => [['mission_title.title.'], false],
+        'workexperience.audit'                    => [['mission_title.title.'], false],
+        'workexperience.itriskmanagement'         => [['mission_title.title.'], false],
+        'workexperience.activitycontinuationplan' => [['mission_title.title.'], false],
 
         'workexperience.reducingreportingprocess'   => [
             [
@@ -336,10 +228,7 @@ class MigrationToBubbleV2Command extends ContainerAwareCommand
             ],
             true
         ],
-        'workexperience.reducingaccountableprocess' => [
-            ['mission_title.title.'],
-            false
-        ],
+        'workexperience.reducingaccountableprocess' => [['mission_title.title.'], false],
 
         'workexperience.worklife'     => [
             [
@@ -349,19 +238,13 @@ class MigrationToBubbleV2Command extends ContainerAwareCommand
             ],
             true
         ],
-        'workexperience.psychosocial' => [
-            ['mission_title.title.'],
-            false
-        ],
+        'workexperience.psychosocial' => [['mission_title.title.'], false],
 
         'workexperience.recruitment'      => [
             ['mission_title.title.operational_excellence'],
             true
         ],
-        'workexperience.employerbranding' => [
-            ['mission_title.title.'],
-            false
-        ],
+        'workexperience.employerbranding' => [['mission_title.title.'], false],
 
         'workexperience.bankregulatorycompliance'      => [
             [
@@ -370,10 +253,7 @@ class MigrationToBubbleV2Command extends ContainerAwareCommand
             ],
             true
         ],
-        'workexperience.insuranceregulatorycompliance' => [
-            ['mission_title.title.'],
-            false
-        ],
+        'workexperience.insuranceregulatorycompliance' => [['mission_title.title.'], false],
 
         'workexperience.restructuringplan'    => [
             [
@@ -382,59 +262,33 @@ class MigrationToBubbleV2Command extends ContainerAwareCommand
             ],
             true
         ],
-        'workexperience.employmentprotection' => [
-            ['mission_title.title.'],
-            false
-        ],
+        'workexperience.employmentprotection' => [['mission_title.title.'], false],
 
         'workexperience.marketsegmentation' => [
             ['mission_title.title.governance_issues'],
             true
         ],
-        'workexperience.brandstrategy'      => [
-            ['mission_title.title.'],
-            false
-        ],
+        'workexperience.brandstrategy'      => [['mission_title.title.'], false],
 
         'workexperience.growthdevelopment'                                 => [
             [
                 'mission_title.title.acquisition',
-                'mission_title.title.governance_issues'
+                'mission_title.title.go_to_market',
+                'mission_title.title.operational_excellence',
+                'mission_title.title.studies',
+                'mission_title.title.restructuring',
+                'mission_title.title.long_term_finance'
             ],
             true
         ],
-        'workexperience.potentialsynergies'                                => [
-            ['mission_title.title.'],
-            false
-        ],
-        'workexperience.swap'                                              => [
-            ['mission_title.title.'],
-            false
-        ],
-        'workexperience.acquisitionstrategyandexternalgrowthopportunities' => [
-            ['mission_title.title.'],
-            false
-        ],
-        'workexperience.targetanalysis'                                    => [
-            ['mission_title.title.'],
-            false
-        ],
-        'workexperience.transfertoperationalmanagement'                    => [
-            ['mission_title.title.'],
-            false
-        ],
-        'workexperience.cessionsstrategy'                                  => [
-            ['mission_title.title.'],
-            false
-        ],
-        'workexperience.fundmanagementstrategy'                            => [
-            ['mission_title.title.'],
-            false
-        ],
-        'workexperience.investmentstrategy'                                => [
-            ['mission_title.title.'],
-            false
-        ],
+        'workexperience.potentialsynergies'                                => [['mission_title.title.'], false],
+        'workexperience.swap'                                              => [['mission_title.title.'], false],
+        'workexperience.acquisitionstrategyandexternalgrowthopportunities' => [['mission_title.title.'], false],
+        'workexperience.targetanalysis'                                    => [['mission_title.title.'], false],
+        'workexperience.transfertoperationalmanagement'                    => [['mission_title.title.'], false],
+        'workexperience.cessionsstrategy'                                  => [['mission_title.title.'], false],
+        'workexperience.fundmanagementstrategy'                            => [['mission_title.title.'], false],
+        'workexperience.investmentstrategy'                                => [['mission_title.title.'], false],
 
         'workexperience.digitalstrategy'    => [
             [
@@ -444,29 +298,26 @@ class MigrationToBubbleV2Command extends ContainerAwareCommand
             ],
             true
         ],
-        'workexperience.e-commercestrategy' => [
-            ['mission_title.title.'],
-            false
-        ],
+        'workexperience.e-commercestrategy' => [['mission_title.title.'], false],
 
         'workexperience.itstrategy'           => [
             ['mission_title.title.is_it'],
             true
         ],
-        'workexperience.itpoliciesgovernance' => [
-            ['mission_title.title.'],
-            false
-        ],
-        'workexperience.masterplan'           => [
-            ['mission_title.title.'],
-            false
-        ],
+        'workexperience.itpoliciesgovernance' => [['mission_title.title.'], false],
+        'workexperience.masterplan'           => [['mission_title.title.'], false],
 
-        'workexperience.businessdevelopmentpriorities' => [['mission_title.title.go_to_market'], true],
+        'workexperience.businessdevelopmentpriorities' => [
+            ['mission_title.title.go_to_market'],
+            true
+        ],
         'workexperience.strategicmarketingplan'        => [['mission_title.title.'], false],
         'workexperience.salesgotomarketstrategy'       => [['mission_title.title.'], false],
 
-        'workexperience.strategyorganization'  => [['mission_title.title.operational_excellence'], true],
+        'workexperience.strategyorganization'  => [
+            ['mission_title.title.operational_excellence'],
+            true
+        ],
         'workexperience.functionimprovement'   => [['mission_title.title.'], false],
         'workexperience.efficiencyimprovement' => [['mission_title.title.'], false],
 
@@ -751,7 +602,6 @@ class MigrationToBubbleV2Command extends ContainerAwareCommand
                      */
                     foreach ($userWorkExp as $oneUserWorkExp) {
                         $oneUserWorkExp->setWorkExperience($last);
-//                        $em->remove($oneUserWorkExp);
                     }
 
                     /**
@@ -759,9 +609,7 @@ class MigrationToBubbleV2Command extends ContainerAwareCommand
                      */
                     foreach ($workExperience->getMissions() as $oneMission) {
                         $oneMission->setWorkExperience($last);
-                        //                        $em->remove($oneUserWorkExp);
                     }
-
 
 
                     $em->remove($workExperience);
@@ -771,16 +619,17 @@ class MigrationToBubbleV2Command extends ContainerAwareCommand
                     foreach ($val[0] as $oneTitle) {
 
                         /** @var \MissionBundle\Entity\MissionTitle $title */
-                        if (($title = $missionTitleRepo->findOneBy(['title' => $oneTitle])))
-                            if (!$workExperience->getMissionTitles()->contains($title))
-                                $workExperience->addMissionTitle($title);
+                        if (($title = $missionTitleRepo->findOneBy(['title' => $oneTitle])) and
+                            (!$workExperience->getMissionTitles()->contains($title))) {
+                            $workExperience->addMissionTitle($title);
+                        }
+
 
                     }
                     $last = $workExperience;
                 }
 
-            } else
-                dump("not found :(");
+            }
 
             $progress->advance();
         }
