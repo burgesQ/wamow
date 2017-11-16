@@ -34,14 +34,14 @@
 
         <div class="wmw-dashboard-sidebar col-xs-12 col-lg-2">
             {% if roleAdvisor == true %}
-                {% set ringLevel = 50 %}
+                {% set ringLevel = 33 %}
                 {% if user.images is not empty %}
-                    {% set ringLevel = ringLevel + 25 %}
+                    {% set ringLevel = ringLevel + 33 %}
                 {% endif %}
                 {% if user.linkedinId is not null %}
-                    {% set ringLevel = ringLevel + 25 %}
+                    {% set ringLevel = ringLevel + 33 %}
                 {% endif %}
-                <div class="sidebar-progress sidebar-progress--{% if ringLevel == 50 %}1{% elseif ringLevel == 75 %}2{% else %}3{% endif %}">
+                <div class="sidebar-progress sidebar-progress--{% if ringLevel == 33 %}1{% elseif ringLevel == 66 %}2{% else %}3{% endif %}">
                     {{ 'side_bar.profile' | trans | capitalize | nl2br }}
                     {{ ringLevel }}%
                 </div>
