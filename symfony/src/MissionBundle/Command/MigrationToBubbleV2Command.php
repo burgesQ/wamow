@@ -590,45 +590,27 @@ class MigrationToBubbleV2Command extends ContainerAwareCommand
          * @var \MissionBundle\Entity\WorkExperience $workExperience
          */
         foreach ($this->newValues as $key => $val) {
+            if (($workExperience = $workExperienceRepo->findOneBy(['name' => $key])) and
+                (!$val[1])) { // if workExp is to delete
+                $userWorkExp = $workExperience->getUserWorkExperiences();
+                /** @var \MissionBundle\Entity\UserWorkExperience $oneUserWorkExp */
+                foreach ($userWorkExp as $oneUserWorkExp)
+                    $oneUserWorkExp->setWorkExperience($last);
 
-            if ($workExperience = $workExperienceRepo->findOneBy(['name' => $key])) {
-
-                if (!$val[1]) { // if workExp is to delete
-
-                    $userWorkExp = $workExperience->getUserWorkExperiences();
-
-                    /**
-                     * @var \MissionBundle\Entity\UserWorkExperience $oneUserWorkExp
-                     */
-                    foreach ($userWorkExp as $oneUserWorkExp) {
-                        $oneUserWorkExp->setWorkExperience($last);
-                    }
-
-                    /**
-                     * @var \MissionBundle\Entity\Mission $oneMission
-                     */
-                    foreach ($workExperience->getMissions() as $oneMission) {
+                /** @var \MissionBundle\Entity\Mission $oneMission */
+                foreach ($workExperience->getMissions() as $oneMission)
                         $oneMission->setWorkExperience($last);
-                    }
 
+                $em->remove($workExperience);
+            } elseif ($workExperience) {
+                // link title <-> workExp
+                foreach ($val[0] as $oneTitle)
+                    /** @var \MissionBundle\Entity\MissionTitle $title */
+                    if (($title = $missionTitleRepo->findOneBy(['title' => $oneTitle])) and
+                        (!$workExperience->getMissionTitles()->contains($title)))
+                        $workExperience->addMissionTitle($title);
 
-                    $em->remove($workExperience);
-                } else {
-
-                    // link title <-> workExp
-                    foreach ($val[0] as $oneTitle) {
-
-                        /** @var \MissionBundle\Entity\MissionTitle $title */
-                        if (($title = $missionTitleRepo->findOneBy(['title' => $oneTitle])) and
-                            (!$workExperience->getMissionTitles()->contains($title))) {
-                            $workExperience->addMissionTitle($title);
-                        }
-
-
-                    }
-                    $last = $workExperience;
-                }
-
+                $last = $workExperience;
             }
 
             $progress->advance();
