@@ -6,6 +6,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractType;
+use ToolsBundle\Entity\PrefixNumber;
 
 class PhoneNumberType extends AbstractType
 {
@@ -24,6 +25,9 @@ class PhoneNumberType extends AbstractType
                 'label'              => false,
                 'translation_domain' => 'tools',
                 'required'           => true,
+                'preferred_choices' => function(PrefixNumber $prefix) {
+                    return in_array($prefix->getCountry(), ["FR", "DE", "US", "GB", "ES"]);
+                }
             ])
             ->add('number', null, [
                 'required'           => true,
