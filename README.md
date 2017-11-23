@@ -2,6 +2,8 @@
 
 ## Installation
 
+### The following installation is in the docker way; scroll down for the native one.
+
 1. In the docker-compose file, indicate where's your Symfony project
 
     ```yml
@@ -18,6 +20,17 @@
     $ docker-compose up -d
     ```
 
+### The following step is for q instqllqtion without docker
+
+1. See step 2
+2. Just run the default symfony command
+
+    ```bash
+    $ pwd 
+    ~/platefromewantmorework/symfony
+    $ php app/console server:start
+    ```
+
 3. (Optionnal) Dans le cas d'un dev local
 
     Get the ip from the nginx container then edit the file /etc/hosts to add the new dns. Her is a exemple :
@@ -27,7 +40,7 @@
     # equal to
     sudo echo "172.17.100.1 symfony.dev" >> /etc/hosts
     ```
-
+    
 4. Dev mod
 
     Comment the app_dev.php file as follow to active the dev mod :

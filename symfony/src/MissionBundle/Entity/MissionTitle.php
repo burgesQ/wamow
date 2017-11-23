@@ -2,6 +2,7 @@
 
 namespace MissionBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,6 +37,8 @@ class MissionTitle
     private $title;
 
     /**
+     * @var ArrayCollection
+     *
      * @ORM\OneToMany(targetEntity="MissionBundle\Entity\Mission",
      *     cascade={"persist"},
      *     mappedBy="title")
@@ -43,44 +46,38 @@ class MissionTitle
     private $missions;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="MissionBundle\Entity\WorkExperience",
+     *     mappedBy="missionTitles")
+     */
+    private $workExperiences;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->missions        = new ArrayCollection();
+        $this->workExperiences = new ArrayCollection();
+    }
+
+    /**
      * @return string
      */
     public function __toString()
     {
-     return $this->getTitle();
+        return $this->getTitle();
     }
 
     /**
-     * Get id
+     * Get title
      *
-     * @return integer 
+     * @return string
      */
-    public function getId()
+    public function getTitle()
     {
-        return $this->id;
-    }
-
-    /**
-     * Set category
-     *
-     * @param string $category
-     * @return MissionTitle
-     */
-    public function setCategory($category)
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
-    /**
-     * Get category
-     *
-     * @return string 
-     */
-    public function getCategory()
-    {
-        return $this->category;
+        return $this->title;
     }
 
     /**
@@ -97,20 +94,36 @@ class MissionTitle
     }
 
     /**
-     * Get title
+     * Get id
      *
-     * @return string 
+     * @return integer
      */
-    public function getTitle()
+    public function getId()
     {
-        return $this->title;
+        return $this->id;
     }
+
     /**
-     * Constructor
+     * Get category
+     *
+     * @return string
      */
-    public function __construct()
+    public function getCategory()
     {
-        $this->missions = new \Doctrine\Common\Collections\ArrayCollection();
+        return $this->category;
+    }
+
+    /**
+     * Set category
+     *
+     * @param string $category
+     * @return MissionTitle
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+
+        return $this;
     }
 
     /**
@@ -139,10 +152,44 @@ class MissionTitle
     /**
      * Get missions
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getMissions()
     {
         return $this->missions;
+    }
+
+
+    /**
+     * Add workExperiences
+     *
+     * @param \MissionBundle\Entity\WorkExperience $workExperiences
+     * @return MissionTitle
+     */
+    public function addWorkExperience(\MissionBundle\Entity\WorkExperience $workExperiences)
+    {
+        $this->workExperiences[] = $workExperiences;
+
+        return $this;
+    }
+
+    /**
+     * Remove workExperiences
+     *
+     * @param \MissionBundle\Entity\WorkExperience $workExperiences
+     */
+    public function removeWorkExperience(\MissionBundle\Entity\WorkExperience $workExperiences)
+    {
+        $this->workExperiences->removeElement($workExperiences);
+    }
+
+    /**
+     * Get workExperiences
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getWorkExperiences()
+    {
+        return $this->workExperiences;
     }
 }
