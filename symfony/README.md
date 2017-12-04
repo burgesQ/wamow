@@ -1,18 +1,13 @@
 Symfony Standard Edition
 ========================
 
-Welcome to the Symfony Standard Edition - a fully-functional Symfony
-application that you can use as the skeleton for your new applications.
-
-For details on how to download and get started with Symfony, see the
-[Installation][1] chapter of the Symfony Documentation.
+Welcome to the WaMoW Symfony Edition - a fully-functional WaMoW
+application.
 
 What's inside?
 --------------
 
-The Symfony Standard Edition is configured with the following defaults:
-
-  * An AppBundle you can use to start coding;
+The WaMoW Symfony Edition is configured with the following defaults:
 
   * Twig as the only configured template engine;
 
@@ -53,6 +48,16 @@ It comes pre-configured with the following bundles:
   * **DebugBundle** (in dev/test env) - Adds Debug and VarDumper component
     integration
 
+  * [**FOSUserBundle**][14] - For a quick and eay user management.
+
+  * [**HWIOAuthBundle**][15] - For a easy connection with the Linkedin API
+
+  * [**TertranzSelect2EntityBundle**][16] - For a easy use of select2 in symfony
+
+  * [**JavierGuiluzEasyAdminBundle**][17] - For a easy backlog
+
+  * [**LexikCurrencyBundle**][18] - Easy tracking/update of different currencies
+
 All libraries and bundles included in the Symfony Standard Edition are
 released under the MIT or BSD license.
 
@@ -66,3 +71,8 @@ Enjoy!
 [10]: https://symfony.com/doc/2.8/cookbook/email.html
 [11]: https://symfony.com/doc/2.8/cookbook/logging/monolog.html
 [13]: https://symfony.com/doc/2.8/bundles/SensioGeneratorBundle/index.html
+[14]: https://github.com/FriendsOfSymfony/FOSUserBundle
+[15]: https://github.com/hwi/HWIOAuthBundle
+[16]: https://github.com/tetranz/select2entity-bundle
+[17]: https://www.google.de/search?q=easyadmin+github&oq=easyadmin+github&aqs=chrome..69i57j69i60.2258j0j4&sourceid=chrome&ie=UTF-8
+[18]: https://github.com/lexik/LexikCurrencyBundle

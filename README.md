@@ -1,10 +1,12 @@
-# Docker Symfony (PHP7-FPM - NGINX - MySQL - ELK - REDIS)
+# Docker Symfony (PHP7-FPM - NGINX - MySQL - ELK - PMA)
 
 ## Installation
 
-### The following installation is in the docker way; scroll down for the native one.
+1. Setup
 
-1. In the docker-compose file, indicate where's your Symfony project
+Please download (docker)[https://store.docker.com/editions/community/docker-ce-server-ubuntu]((mac version)[https://docs.docker.com/docker-for-mac/install/#download-docker-for-mac]) and (docker-compose)[https://docs.docker.com/compose/install/] before any start.
+
+2. In the docker-compose file, indicate where's your Symfony project
 
     ```yml
     services:
@@ -13,25 +15,14 @@
                 - path/to/your/symfony-project:/var/www/symfony
     ```
 
-2. Build containers with (with and without detached mode)
+3. Build containers with (with and without detached mode)
 
     ```bash
     $ docker-compose up
     $ docker-compose up -d
     ```
 
-### The following step is for q instqllqtion without docker
-
-1. See step 2
-2. Just run the default symfony command
-
-    ```bash
-    $ pwd 
-    ~/platefromewantmorework/symfony
-    $ php app/console server:start
-    ```
-
-3. (Optionnal) Dans le cas d'un dev local
+4. (Optionnal) Dans le cas d'un dev local
 
     Get the ip from the nginx container then edit the file /etc/hosts to add the new dns. Her is a exemple :
 
@@ -40,8 +31,8 @@
     # equal to
     sudo echo "172.17.100.1 symfony.dev" >> /etc/hosts
     ```
-    
-4. Dev mod
+
+5. Dev mod
 
     Comment the app_dev.php file as follow to active the dev mod :
 
@@ -70,7 +61,7 @@
     - Go to the web dir and install dependency
         ```bash
         $ cd ./symfony/web
-        $ npm -i # may take some time
+        $ npm install # may take some time
         ```
 
 6. Usage front dependency
@@ -93,6 +84,7 @@
     $ sf assetic:install --symlink
     $ sf assetic:dump web/
     ```
+
 8. Alternatively you can run the genDb script
 
     ```bash
@@ -109,6 +101,7 @@ Just run `docker-compose -d`, then:
 * Symfony app: visit [symfony.dev](http://symfony.dev)  
 * Symfony dev mode: visit [symfony.dev/app_dev.php](http://symfony.dev/app_dev.php)  
 * Logs (Kibana): [symfony.dev:81](http://symfony.dev:81)
+* phpMyAdmin: [symfony.dev:8080](http://symfony.dev:8080)
 * Logs (files location): logs/nginx and logs/symfony
 
 ## How it works?
@@ -170,28 +163,3 @@ If it's at a non-standard location, specify the URL with the DOCKER_HOST environ
 Run `docker-compose up -d` instead.
 
 * Permission problem? See [this doc (Setting up Permission)](http://symfony.com/doc/current/book/installation.html#checking-symfony-application-configuration-and-setup)
-
-* How I can add PHPMyAdmin?  
-Simply add this: (then go to [symfony.dev:8080](http://symfony.dev:8080))
-
-    ```
-    phpmyadmin:
-       image: corbinu/docker-phpmyadmin
-       ports :
-        - "8080:80"
-       environment:
-        - MYSQL_USERNAME=root
-        - MYSQL_PASSWORD=root
-       links:
-        - db:mysql
-    ```
-
-        * Test Fixtures order  :
-            sf doctrine:database:drop --force
-            sf doctrine:database:create
-            sf doctrine:migrations:migrate
-            sf doctrine:fixtures:load --no-interaction
-
-        * Assets Installation order for JS/CSS  :
-            sf assets:install web --symlink
-            sf assetic:dump web
