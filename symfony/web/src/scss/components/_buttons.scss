@@ -77,12 +77,12 @@
 
 		&:first-child{
 			bottom:0; 
-			left:0;
+			left:1px;
 		}
 
 		&:last-child{
 			top:0; 
-			right:0;
+			right:1px;
 		}
 	}
 
