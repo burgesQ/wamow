@@ -27,7 +27,8 @@
 		margin:0 auto;
 		background:white;
 		box-shadow:0 0 10px rgba(0,0,0,0.25);
-		max-height:calc(80% - 100px);
+		max-height:calc(94% - 50px);
+		top:0;
 		float:none;
 		overflow:hidden;
 		transform:translateY(25%);
@@ -58,7 +59,7 @@
 		font-family:$fontroboto;
 		font-weight:bold;
 		color:$colorpurple;
-		padding:18px 0;
+		padding:10px 0;
 		border-bottom:1px solid $colorgreyxlight;
 	}
 
@@ -84,8 +85,8 @@
 		}
 
 		.wmw-switchfield{
-			margin-top:8px;
-			margin-bottom:15px;
+			margin-top:3px;
+			margin-bottom:7px;
 		}
 	}
 

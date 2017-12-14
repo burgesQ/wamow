@@ -8,7 +8,13 @@
 					Kind of Mission
 					<small>Select your mission</small>
 				</h1>
-
+				<div class="wmw-progressbar">
+					<span class="active"></span>
+					<span class="active"></span>
+					<span class="active"></span>
+					<span></span>
+					<span></span>
+				</div>
 				<div class="wmw-onboard-switches">
 
 					<div class="wmw-onboard-switches-el">
@@ -61,14 +67,6 @@
 						</div>
 					</div>
 
-				</div>
-
-				<div class="wmw-progressbar">
-					<span class="active"></span>
-					<span class="active"></span>
-					<span class="active"></span>
-					<span></span>
-					<span></span>
 				</div>
 
 			</div>
