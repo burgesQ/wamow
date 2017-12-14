@@ -17,7 +17,13 @@
             {{ 'registration.advisor.four.title' | trans }}
             <small>{{ 'registration.advisor.four.subtitle' | trans | upper }}</small>
         </h1>
-
+        <div class="wmw-progressbar">
+            <span class="active"></span>
+            <span class="active"></span>
+            <span class="active"></span>
+            <span class="active"></span>
+            <span class="active"></span>
+        </div>
         <div class="wmw-onboard-switches">
             {% for key, workExperience in form.workExperience %}
                 <div class="wmw-onboard-switches-el" data-num="{{ key }}">
@@ -33,14 +39,6 @@
                     </div>
                 </div>
             {% endfor %}
-        </div>
-
-        <div class="wmw-progressbar">
-            <span class="active"></span>
-            <span class="active"></span>
-            <span class="active"></span>
-            <span class="active"></span>
-            <span class="active"></span>
         </div>
     </div>
 

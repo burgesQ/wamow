@@ -14,7 +14,13 @@
             {{ 'registration.advisor.three.title' | trans }}
             <small>{{ 'registration.advisor.three.subtitle' | trans | upper }}</small>
         </h1>
-
+        <div class="wmw-progressbar">
+            <span class="active"></span>
+            <span class="active"></span>
+            <span class="active"></span>
+            <span class="active"></span>
+            <span></span>
+        </div>
         {{ form_errors(form.missionKind) }}
         <div class="wmw-onboard-switches">
             {% for key, missionKind in form.missionKind %}
@@ -26,14 +32,6 @@
                     </div>
                 </div>
             {% endfor %}
-        </div>
-
-        <div class="wmw-progressbar">
-            <span class="active"></span>
-            <span class="active"></span>
-            <span class="active"></span>
-            <span class="active"></span>
-            <span></span>
         </div>
     </div>
 
