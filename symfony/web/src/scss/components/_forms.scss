@@ -52,7 +52,6 @@ input[type="password"]{
 	display:inline-block;
 	vertical-align:middle;
 	height:32px;
-	border:none;
 	background:white;
 	padding:0 15px;
 	border:1px solid $colorgreyxlight;
@@ -66,7 +65,10 @@ input[type="password"]{
 		color:$colorinvalid;
 	}
 }
-
+.wmw-bgfield div.wmw-bgfield-txt{
+	height: auto;
+	min-height: 32px;
+}
 select{
 	display:inline-block;
 	vertical-align:middle;
@@ -643,7 +645,10 @@ input[type=range]::-ms-thumb {
 	.wmw-bgfield-txt{
 		line-height:32px;
 	}
-
+	div.wmw-bgfield-txt{
+		min-height:32px;
+		height: auto;
+	}
 	.wmw-bgfield-txt,
 	input[type="text"],
 	input[type="email"],
@@ -708,10 +713,11 @@ input[type=range]::-ms-thumb {
 }
 
 .wmw-bgfields--readonly{
-
 	.wmw-bgfield:not(.wmw-bgfield--persistent){
 		border:none;
 		margin:0 0 20px 0;
+		height: auto;
+		min-height: 30px;
 
 		label{
 			display:none;

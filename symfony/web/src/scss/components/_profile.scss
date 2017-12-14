@@ -219,6 +219,8 @@
 				text-align:left;
 				vertical-align:bottom;
 				margin-left:25px;
+				padding: 30px 0;
+				float: right;
 			}
 		}
 
@@ -274,7 +276,7 @@
 				border-bottom:none;
 				border-top:none;
 				margin-top:-49px;
-			
+				letter-spacing:-0.3px;
 				&.active{
 					border-top:1px solid $colorgreyxlight;
 				}
