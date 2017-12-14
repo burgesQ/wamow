@@ -14,7 +14,13 @@
             {{ 'registration.advisor.two.title' | trans }}
             <small>{{ 'registration.advisor.two.subtitle' | trans }}</small>
         </h1>
-
+        <div class="wmw-progressbar">
+            <span class="active"></span>
+            <span class="active"></span>
+            <span class="active"></span>
+            <span></span>
+            <span></span>
+        </div>
         {{ form_errors(form.professionalExpertise) }}
         <div class="wmw-onboard-switches">
             {% for key, professionalExpertise in form.professionalExpertise %}
@@ -26,14 +32,6 @@
                     </div>
                 </div>
             {% endfor %}
-        </div>
-
-        <div class="wmw-progressbar">
-            <span class="active"></span>
-            <span class="active"></span>
-            <span class="active"></span>
-            <span></span>
-            <span></span>
         </div>
     </div>
 

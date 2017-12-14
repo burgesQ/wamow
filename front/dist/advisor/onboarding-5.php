@@ -8,7 +8,13 @@
 					Valuable Work Expertise
 					<small>Select 5 or 10 items</small>
 				</h1>
-
+				<div class="wmw-progressbar">
+					<span class="active"></span>
+					<span class="active"></span>
+					<span class="active"></span>
+					<span class="active"></span>
+					<span class="active"></span>
+				</div>
 				<div class="wmw-onboard-switches">
 
 					<div class="wmw-onboard-switches-el" data-num="1">
@@ -68,14 +74,6 @@
 						</div>
 					</div>
 
-				</div>
-
-				<div class="wmw-progressbar">
-					<span class="active"></span>
-					<span class="active"></span>
-					<span class="active"></span>
-					<span class="active"></span>
-					<span class="active"></span>
 				</div>
 
 			</div>
