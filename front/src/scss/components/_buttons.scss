@@ -52,7 +52,7 @@
 	}
 
 	&:before{
-		top:0;
+		top:1px;
 		left:0;
 		transform-origin:bottom right;
 		border-top:1px solid $colorpurple;
@@ -60,7 +60,7 @@
 	}
 
 	&:after{
-		bottom:0;
+		bottom:1px;
 		right:0;
 		transform-origin:top right;
 		border-bottom:1px solid $colorpurple;
