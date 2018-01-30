@@ -14,7 +14,13 @@
             {{ 'registration.advisor.one.title' | trans }}
             <small>{{ 'registration.advisor.one.subtitle' | trans | upper }}</small>
         </h1>
-
+        <div class="wmw-progressbar">
+            <span class="active"></span>
+            <span class="active"></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
         {{ form_errors(form) }}
         {{ form_errors(form.businessPractice) }}
         <div class="wmw-onboard-businesses row">
@@ -34,14 +40,6 @@
                     </label>
                 </div>
             {% endfor %}
-        </div>
-
-        <div class="wmw-progressbar">
-            <span class="active"></span>
-            <span class="active"></span>
-            <span></span>
-            <span></span>
-            <span></span>
         </div>
     </div>
 

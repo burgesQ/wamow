@@ -8,7 +8,13 @@
 					Professional Expertises
 					<small>Select which type of missions</small>
 				</h1>
-
+				<div class="wmw-progressbar">
+					<span class="active"></span>
+					<span class="active"></span>
+					<span class="active"></span>
+					<span class="active"></span>
+					<span></span>
+				</div>
 				<div class="wmw-onboard-switches">
 
 					<div class="wmw-onboard-switches-el">
@@ -63,13 +69,6 @@
 
 				</div>
 
-				<div class="wmw-progressbar">
-					<span class="active"></span>
-					<span class="active"></span>
-					<span class="active"></span>
-					<span class="active"></span>
-					<span></span>
-				</div>
 
 			</div>
 

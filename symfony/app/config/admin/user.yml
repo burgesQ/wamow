@@ -29,8 +29,6 @@ easy_admin:
                     - { property: 'roles', type: 'choice', type_options: { required: true, multiple: true, expanded: true, choices: { 'ROLE_ADVISOR': 'ROLE_ADVISOR', 'ROLE_CONTRACTOR': 'ROLE_CONTRACTOR' }, data : { 'ROLE_CONTRACTOR': 'ROLE_CONTRACTOR' } } }
                     - { property: 'plainPassword', type: 'password' }
                     - { property: 'company', type: 'easyadmin_autocomplete', type_options: { by_reference: false } }
-            disabled_actions:
-                - 'delete'
 
         Advisor:
             class: UserBundle\Entity\User
@@ -60,8 +58,6 @@ easy_admin:
                     - { property: 'roles', type: 'choice', type_options: { required: true, multiple: true, expanded: true, choices: { 'ROLE_ADVISOR': 'ROLE_ADVISOR', 'ROLE_CONTRACTOR': 'ROLE_CONTRACTOR' }, data : { 'ROLE_CONTRACTOR': 'ROLE_CONTRACTOR' } } }
                     - { property: 'plainPassword', type: 'password' }
                     - { property: 'company', type: 'easyadmin_autocomplete', type_options: { by_reference: false } }
-            disabled_actions:
-                - 'delete'
 
         Language:
             class: ToolsBundle\Entity\Language

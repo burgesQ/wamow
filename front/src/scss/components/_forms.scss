@@ -51,13 +51,11 @@ input[type="tel"],
 input[type="password"]{
 	display:inline-block;
 	vertical-align:middle;
-	height:32px;
-	border:none;
+	min-height:32px;
 	background:white;
 	padding:0 15px;
 	border:1px solid $colorgreyxlight;
 	color:$colorgreylight;
-	//float:none !important;
 	font-size:14px;
 	transition:border .3s; 
 
@@ -104,7 +102,6 @@ textarea{
 	display:block;
 	height:320px;
 	width:100%;
-	border:none;
 	background:white;
 	padding:15px;
 	border:1px solid $colorgreyxlight;

@@ -7,6 +7,4 @@ app/cache/
 /bin/
 /trans
 /trans.zip
-/docker-compose.yml
-/php7-fpm/Dockerfile
 /symfony/composer-setup.php

@@ -8,7 +8,13 @@
 					Business practice ?
 					<small>Select industry you've already worked on</small>
 				</h1>
-
+				<div class="wmw-progressbar">
+					<span class="active"></span>
+					<span class="active"></span>
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
 				<div class="wmw-onboard-businesses row">
 
 					<div class="wmw-iconfield col-xs-6 col-sm-4">
@@ -102,14 +108,6 @@
 						</label>
 					</div>
 
-				</div>
-
-				<div class="wmw-progressbar">
-					<span class="active"></span>
-					<span class="active"></span>
-					<span></span>
-					<span></span>
-					<span></span>
 				</div>
 
 			</div>

@@ -24,9 +24,9 @@
 	position:relative;
 	display:inline-block;
 	text-align:center;
-	height:45px;
+	height:46px;
 	padding:0 25px;
-	line-height:45px;
+	line-height:46px;
 	color:white;
 	overflow:hidden;
 	border:none;
@@ -44,15 +44,15 @@
 		content:'';
 		display:block;
 		position:absolute;
-		height:50%;
-		width:125%;
+		height:48%;
+		width:105%;
 		background:$colorpurple;
 		transform:skewX(-30deg);
-		transition:background .3s, border .3s;
+		transition:background .2s, border .2s;
 	}
 
 	&:before{
-		top:0;
+		top:1px;
 		left:0;
 		transform-origin:bottom right;
 		border-top:1px solid $colorpurple;
@@ -60,7 +60,7 @@
 	}
 
 	&:after{
-		bottom:0;
+		bottom:1px;
 		right:0;
 		transform-origin:top right;
 		border-bottom:1px solid $colorpurple;
@@ -77,12 +77,12 @@
 
 		&:first-child{
 			bottom:0; 
-			left:0;
+			left:1px;
 		}
 
 		&:last-child{
 			top:0; 
-			right:0;
+			right:1px;
 		}
 	}
 
