@@ -12,6 +12,7 @@
 /composer.phar
 /web/app_dev.php
 /genData.sh
+/unitTest.sh
 /web/assetic
 /web/uploads
 /web/node_modules
