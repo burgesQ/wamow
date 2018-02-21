@@ -107,11 +107,10 @@ class WamowTestCase extends WebTestCase
         $username = null,
         $password = null
     ) {
-        $token = null;
         if ($username != null)
             $this->doLogin($username, $password);
-
-        $this->client = static::createClient([]);
+        else
+            $this->client = static::createClient([]);
 
         return $this->client->request(
             $method,
