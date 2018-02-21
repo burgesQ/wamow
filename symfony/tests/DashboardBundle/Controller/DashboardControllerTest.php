@@ -20,9 +20,8 @@ class DashboardControllerTest extends WamowTestCase
         );
 
         $crawler = $this->doLogin("contractor@one.com", "password");
-        // follow / to /dash
-        $crawler = $this->client->followRedirect();
-        // follow /dash to /en/dash
+        // follow / to /dash ; follow /dash to /en/dash
+        $this->client->followRedirect();
         $crawler = $this->client->followRedirect();
 
         self::assertEquals(
@@ -30,9 +29,9 @@ class DashboardControllerTest extends WamowTestCase
             $crawler->filter("a.sidebar-progress-button")->count()
         );
 
-        $crawler = $this->doLogin("fake-vanessa.albek@gt-executive.com", "password");
+        $this->doLogin("fake-vanessa.albek@gt-executive.com", "password");
         // follow / to /dash
-        $crawler = $this->client->followRedirect();
+        $this->client->followRedirect();
         // follow /dash to /en/dash
         $crawler = $this->client->followRedirect();
 

@@ -15,23 +15,16 @@ class ActionControllerTest extends WamowTestCase
         $this->performClientRequest(
             'GET',
             "en/language/autocomplete?_=1519213039122&page=1&page_limit=10&q=en",
-            [],
-            "fake-vanessa.albeck@gmail.com",
-            "password"
+            []
         );
-        $response_en = $this->client->getResponse();
+        $values_en = json_decode($this->client->getResponse()->getContent());
 
         $this->performClientRequest(
             'GET',
             "fr/language/autocomplete?_=1519213039122&page=1&page_limit=10&q=an",
-            [],
-            "fake-vanessa.albeck@gmail.com",
-            "password"
+            []
         );
-        $response_fr = $this->client->getResponse();
-
-        $values_en = json_decode($response_en->getContent());
-        $values_fr = json_decode($response_fr->getContent());
+        $values_fr = json_decode($this->client->getResponse()->getContent());
 
         $val_en = [];
         $val_fr = [];
