@@ -10,11 +10,11 @@ class NewsletterControllerTest extends WamowTestCase
     {
         $client = static::createClient();
 
-        $crawler = $client->request('GET', '/en/newsletter');
+        $crawler = $client->request('GET', '/en/newsletters');
 
-        $this->assertEquals(
+        self::assertGreaterThan(
             0,
-            $crawler->filter("newsletter-left")->count()
+            $crawler->filter("div.newsletter-left")->count()
         );
     }
 }

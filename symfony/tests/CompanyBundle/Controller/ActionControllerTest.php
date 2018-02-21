@@ -12,14 +12,14 @@ class ActionControllerTest extends WamowTestCase
      */
     public function testInspectorAutocompleteAction()
     {
-        $response = $this->performClientRequest(
+        $this->performClientRequest(
             'GET',
             "en/inspectors/autocomplete?_=1519216101731&page=1&page_limit=10&q=gr",
             [],
-            "vanessa.albeck@gmail.com",
+            "fake-vanessa.albeck@gmail.com",
             "password"
         );
-        $values = json_decode($response->getContent());
+        $values = json_decode($this->client->getResponse()->getContent());
         $haystack = [];
 
         foreach ($values->results as $oneVal)

@@ -12,21 +12,23 @@ class ActionControllerTest extends WamowTestCase
      */
     public function testLanguagesAutocompleteAction()
     {
-        $response_en = $this->performClientRequest(
+        $this->performClientRequest(
             'GET',
             "en/language/autocomplete?_=1519213039122&page=1&page_limit=10&q=en",
             [],
-            "vanessa.albeck@gmail.com",
+            "fake-vanessa.albeck@gmail.com",
             "password"
         );
+        $response_en = $this->client->getResponse();
 
-        $response_fr = $this->performClientRequest(
+        $this->performClientRequest(
             'GET',
             "fr/language/autocomplete?_=1519213039122&page=1&page_limit=10&q=an",
             [],
-            "vanessa.albeck@gmail.com",
+            "fake-vanessa.albeck@gmail.com",
             "password"
         );
+        $response_fr = $this->client->getResponse();
 
         $values_en = json_decode($response_en->getContent());
         $values_fr = json_decode($response_fr->getContent());
@@ -54,11 +56,13 @@ class ActionControllerTest extends WamowTestCase
      */
     public function testDownloadProposalAction()
     {
-        $response = $this->performClientRequest(
+        $this->performClientRequest(
             'GET',
             "fr/proposal/download/1",
             []
         );
+
+        $response = $this->client->getResponse();
 
         self::assertTrue($response->isClientError());
 
@@ -72,11 +76,13 @@ class ActionControllerTest extends WamowTestCase
      */
     public function testDownloadProposalAdvisorAction()
     {
-        $response = $this->performClientRequest(
+        $this->performClientRequest(
             'GET',
             "fr/proposal/download/1",
             []
         );
+
+        $response = $this->client->getResponse();
 
         self::assertTrue($response->isClientError());
 
@@ -91,21 +97,25 @@ class ActionControllerTest extends WamowTestCase
      */
     public function testDownloadResumeAction()
     {
-        $response = $this->performClientRequest(
+        $this->performClientRequest(
             'GET',
             "fr/proposal/download/1",
             []
         );
 
+        $response = $this->client->getResponse();
+
         self::assertTrue($response->isClientError());
 
-        $response = $this->performClientRequest(
+        $this->performClientRequest(
             'GET',
             "fr/proposal/download/1",
             [],
-            "vanessa.albeck@gmail.com",
+            "fake-vanessa.albeck@gmail.com",
             "password"
         );
+
+        $response = $this->client->getResponse();
 
         self::assertTrue($response->isClientError());
 
