@@ -22,7 +22,7 @@ class CommentRepository extends EntityRepository
             ->where('c.article = :article')
             ->setParameter('article', $article)
             ->andWhere('c.status = 1')
-            ;
+        ;
 
         return $qb->getQuery()->getResult();
     }

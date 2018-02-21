@@ -2,6 +2,7 @@
 
 namespace MissionBundle\Command;
 
+use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use MissionBundle\Entity\Mission;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -34,8 +35,8 @@ class UpdateMissionStatusCommand extends ContainerAwareCommand
             $this->getContainer()->get('doctrine.orm.entity_manager')->getRepository('MissionBundle:Step');
         $userMissionRepo =
             $this->getContainer()
-                ->get('doctrine.orm.entity_manager')
-                ->getRepository('MissionBundle:UserMission');
+                 ->get('doctrine.orm.entity_manager')
+                 ->getRepository('MissionBundle:UserMission');
         $now             = new \DateTime();
 
         $progress = new ProgressBar($output, count($missions));

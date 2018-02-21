@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Company
  *
  * @ORM\Table(name="company")
- * @ORM\Entity(repositoryClass="CompanyBundle\Repository\CompanyRepository")
+ * @ORM\Entity()
  * @ORM\HasLifecycleCallbacks()
  */
 class Company
