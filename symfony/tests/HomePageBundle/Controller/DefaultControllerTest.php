@@ -38,8 +38,8 @@ class DefaultControllerTest extends WamowTestCase
         );
 
         self::assertEquals(
-            Response::HTTP_FOUND,
-            $this->client->getResponse()->getStatusCode()
+            "/en/dashboard",
+            $this->client->getResponse()->headers->get("location")
         );
     }
 
@@ -52,7 +52,7 @@ class DefaultControllerTest extends WamowTestCase
 
         self::assertEquals(
             1,
-            $crawler->filter('button:contains("LET\'S START")')->count()
+            $crawler->filter('button:contains("Let\'s start")')->count()
         );
 
         // should test form
@@ -66,13 +66,60 @@ class DefaultControllerTest extends WamowTestCase
         );
 
         self::assertEquals(
-            Response::HTTP_FOUND,
-            $this->client->getResponse()->getStatusCode()
+            "/en/dashboard",
+            $this->client->getResponse()->headers->get("location")
         );
     }
 
-    public function testNoLocalAction(){}
-    public function testNoLocalNewsletterAction(){}
-    public function testDummySignUpAction(){}
-    public function testContactAction(){}
+    public function testNoLocalAction()
+    {
+        $this->performClientRequest(
+            ' GET',
+            '/'
+        );
+
+        self::assertEquals(
+            "/en/",
+            $this->client->getResponse()->headers->get("location")
+        );
+    }
+
+    public function testNoLocalNewsletterAction()
+    {
+        $this->performClientRequest(
+            ' GET',
+            '/newsletters'
+        );
+
+        self::assertEquals(
+            "/en/newsletters",
+            $this->client->getResponse()->headers->get("location")
+        );
+    }
+
+    public function testDummySignUpAction()
+    {
+        $this->performClientRequest(
+            ' GET',
+            '/sign-up/'
+        );
+
+        self::assertEquals(
+            "/en/newsletters",
+            $this->client->getResponse()->headers->get("location")
+        );
+    }
+
+    public function testContactAction()
+    {
+        $this->performClientRequest(
+            ' GET',
+            '/contact/'
+        );
+
+        self::assertEquals(
+            "/en/contact",
+            $this->client->getResponse()->headers->get("location")
+        );
+    }
 }
