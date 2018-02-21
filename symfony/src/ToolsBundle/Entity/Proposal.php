@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Proposal
  *
  * @ORM\Table(name="proposal")
- * @ORM\Entity(repositoryClass="ToolsBundle\Repository\ProposalRepository")
+ * @ORM\Entity()
  */
 class Proposal extends Upload
 {
@@ -123,7 +123,7 @@ class Proposal extends Upload
     /**
      * Get mission
      *
-     * @return \MissionBundle\Entity\Mission 
+     * @return \MissionBundle\Entity\Mission
      */
     public function getMission()
     {

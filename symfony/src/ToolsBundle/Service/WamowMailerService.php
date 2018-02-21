@@ -83,7 +83,7 @@ class WamowMailerService
      *
      * @return array
      */
-    private function getSenderSignature()
+    public function getSenderSignature()
     {
         return $this->senders[rand(0, count($this->senders) - 1)];
     }

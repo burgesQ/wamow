@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Preregister
  *
  * @ORM\Table(name="preregister")
- * @ORM\Entity(repositoryClass="ToolsBundle\Repository\PreregisterRepository")
+ * @ORM\Entity()
  */
 class Preregister
 {

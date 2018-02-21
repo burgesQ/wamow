@@ -10,7 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Language
  *
  * @ORM\Table(name="language")
- * @ORM\Entity(repositoryClass="ToolsBundle\Repository\LanguageRepository")
+ * @ORM\Entity()
  */
 class Language
 {

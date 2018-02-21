@@ -28,7 +28,7 @@ class ProfileController extends Controller
      */
     public function showAction(Request $request)
     {
-        if (!is_object(($user = $this->getUser())) || !$user instanceof UserInterface) {
+        if (!is_object(($user = $this-> getUser())) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         } elseif ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADVISOR')) {
             if ($url = $this->get('signed_up')->checkIfSignedUp($user->getStatus())) {

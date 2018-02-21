@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * PrefixNumber
  *
  * @ORM\Table(name="prefix_number")
- * @ORM\Entity(repositoryClass="ToolsBundle\Repository\PrefixNumberRepository")
+ * @ORM\Entity()
  */
 class PrefixNumber
 {

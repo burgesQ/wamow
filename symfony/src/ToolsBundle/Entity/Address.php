@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  * Address
  *
  * @ORM\Table(name="address")
- * @ORM\Entity(repositoryClass="ToolsBundle\Repository\AddressRepository")
+ * @ORM\Entity()
  * @ORM\HasLifecycleCallbacks()
  */
 class Address

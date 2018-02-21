@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="upload")
  * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="ToolsBundle\Repository\UploadRepository")
+ * @ORM\Entity()
  */
 class Upload
 {
@@ -134,7 +134,7 @@ class Upload
             $this->getUploadRootDir(),
             $this->name);
     }
-    
+
     public function getUploadDir()
     {
         return 'uploads/';
@@ -311,7 +311,7 @@ class Upload
     {
         return $this->kind;
     }
-    
+
     /**
      * Set file
      *
@@ -364,7 +364,7 @@ class Upload
     /**
      * Get downloadName
      *
-     * @return string 
+     * @return string
      */
     public function getDownloadName()
     {

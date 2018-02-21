@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  * PhoneNumber
  *
  * @ORM\Table(name="phone_number")
- * @ORM\Entity(repositoryClass="ToolsBundle\Repository\PhoneNumberRepository")
+ * @ORM\Entity()
  * @ORM\HasLifecycleCallbacks()
  */
 class PhoneNumber
