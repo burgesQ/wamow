@@ -81,6 +81,8 @@ class WamowTestCase extends WebTestCase
 
     public function doLogin($username, $password)
     {
+        $this->client = static::createClient([], []);
+
         $crawler = $this->client->request('GET', '/en/login');
 
         $form = $crawler
@@ -90,11 +92,12 @@ class WamowTestCase extends WebTestCase
                        '_password'  => $password
                    ]
             );
+
         $this->client->submit($form);
 
-        $this->assertTrue($this->client->getResponse()->isRedirect());
+        self::assertTrue($this->client->getResponse()->isRedirect());
 
-        $crawler = $this->client->followRedirect();
+        return $this->client->followRedirect();
     }
 
     public function performClientRequest(
@@ -104,15 +107,13 @@ class WamowTestCase extends WebTestCase
         $username = null,
         $password = null
     ) {
-
-        $this->client = static::createClient([], []);
-
         $token = null;
         if ($username != null)
             $this->doLogin($username, $password);
 
         $this->client = static::createClient([]);
-        $this->client->request(
+
+        return $this->client->request(
             $method,
             $urlPath,
             [],
@@ -120,7 +121,5 @@ class WamowTestCase extends WebTestCase
             [],
             $rawRequestBody
         );
-
-        return $this->client->getResponse();
     }
 }
