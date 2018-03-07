@@ -40,6 +40,8 @@ class Services
      * @param string      $content
      *
      * @return \InboxBundle\Entity\Thread|object
+     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \Exception
      */
     public function createThreadPitch($userMission, $content = null)
     {

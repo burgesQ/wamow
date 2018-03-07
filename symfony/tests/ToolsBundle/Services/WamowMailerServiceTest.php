@@ -1,6 +1,6 @@
 <?php
 
-namespace ToolsBundle\Tests\Service;
+namespace ToolsBundle\Tests\Services;
 
 use ToolsBundle\Service\WamowMailerService;
 use ToolsBundle\Tests\WamowTestCase;
