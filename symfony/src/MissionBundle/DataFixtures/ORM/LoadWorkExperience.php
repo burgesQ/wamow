@@ -8,6 +8,7 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use MissionBundle\Entity\WorkExperience;
 
+// TODO : update to new value
 class LoadWorkExperience extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)

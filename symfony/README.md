@@ -76,11 +76,17 @@ Enjoy!
     - [ ] Controller
   - [ ] InboxBundle
   - [ ] MissionBundle
+    - [ ] create mission
+    - [ ] match user
+    - [ ] test passing step all possible case 
   - [ ] NotificationBundle
   - [x] ToolsBundle
     - [x] Controller
     - [x] Service
   - [ ] UserBundle
+    - [ ] register user 
+    - [ ] edit data
+    
 
 [1]:  https://symfony.com/doc/2.8/book/installation.html
 [6]:  https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/index.html
